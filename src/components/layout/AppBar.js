@@ -3,15 +3,11 @@
 import { Button }                     from "components/forms/Button"
 import { IconButton }                 from "components/forms/IconButton"
 import { FlexBlock, PaddedFlexBlock } from "components/layout/FlexBlock"
-import { Container }                  from "components/layout/Container"
 import { H3 }                         from "components/text/Header"
 import { useObserver }                from "mobx-react"
 import React                          from "react"
-import { useRouter }                  from "router/Router"
-import { useStores }                  from "stores/useStores"
 import { COLORS }                     from "styles/colors"
 import styled                         from "styled-components"
-import { Env }                        from "config/env"
 import { mdiArrowLeft }               from "@mdi/js"
 import { SPACINGS }                   from "styles/spacings"
 
@@ -26,26 +22,41 @@ const ActionContainer = styled(FlexBlock)`
   justify-content: flex-end;
 `
 
-export const AppBar = () => {
-    const { auth } = useStores()
-    const router   = useRouter()
+export type Action = {
+    name :string,
+    onClick :() => void,
+}
+
+type Props = {
+    title :string,
+    actions :Array<Action>,
+    showBackButton :boolean,
+    onBackClicked :() => void
+}
+
+export const AppBar = ({
+                           title,
+                           actions,
+                           showBackButton,
+                           onBackClicked,
+                       } :Props) => {
 
     return useObserver(() => (
         <PaddedFlexBlock spacing={SPACINGS.SM}>
             {
-                router.hasHistory
+                showBackButton
                 ? <IconButton icon={mdiArrowLeft}
                               flat
-                              onClick={router.goBack} />
+                              onClick={onBackClicked} />
                 : null
             }
 
-            <Header>{Env.appName()}</Header>
+            <Header>{title}</Header>
             <ActionContainer>
                 {
-                    auth.isUserAuthenticated
-                    ? <Button flat onClick={auth.logOut}>Log Out</Button>
-                    : null
+                    actions.map(({name, onClick} :Action) => {
+                        return <Button flat onClick={onClick}>{name}</Button>
+                    })
                 }
             </ActionContainer>
         </PaddedFlexBlock>
