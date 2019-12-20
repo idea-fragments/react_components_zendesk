@@ -1,12 +1,10 @@
 // @flow
 
-import { FlexBlock }   from "components/layout/FlexBlock"
-import styled          from "styled-components"
-import { deviseSizes } from "styles/deviceSizes"
-import {
-    rem,
-    mediaQueries,
-}                      from "styles/mediaQueries"
+import { FlexBlock }          from "components/layout/FlexBlock"
+import styled                 from "styled-components"
+import { deviseSizes }        from "styles/deviceSizes"
+import { mediaQueries, unit } from "styles/mediaQueries"
+import {css} from "styled-components"
 
 const {
           forLargeComputers,
@@ -20,6 +18,20 @@ const {
           smallComputerSize,
       } = deviseSizes(true)
 
+const deviceSettings = css`
+  ${forLargeTabletsAndUp(`
+      width: ${unit(tabletSize + 1)};
+  `)}
+
+  ${forSmallComputersAndUp(`
+      width: ${unit(largeTabletSize + 1)};
+      min-width: ${unit(tabletSize + 1)};
+  `)}
+
+  ${forLargeComputers(`
+      width: ${unit(smallComputerSize + 1)};
+  `)}
+`
 export const Container = styled(FlexBlock).attrs({
     withRows: true,
 })`
@@ -28,18 +40,7 @@ export const Container = styled(FlexBlock).attrs({
   width: 100%;
   padding: 0 1rem;
 
-  ${forLargeTabletsAndUp(`
-      width: ${rem(tabletSize - 10)};
-  `)}
-
-  ${forSmallComputersAndUp(`
-      width: ${rem(largeTabletSize - 10)};
-      min-width: ${rem(tabletSize - 10)};
-  `)}
-
-  ${forLargeComputers(`
-      width: ${rem(smallComputerSize - 10)};
-  `)}
+  ${({fluid}) => fluid ? "" : deviceSettings}
 `
 
 // $FlowFixMe

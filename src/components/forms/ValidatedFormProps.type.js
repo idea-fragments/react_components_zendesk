@@ -1,5 +1,5 @@
 // @flow
 
 export type ValidatedFormProps = {
-    invalidFields: Set<string>
+    invalidFields :{ [string] :Array<string> }
 }

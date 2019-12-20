@@ -6,6 +6,8 @@ const LG   = "2rem"
 const XL   = "2.5rem"
 const XXL  = "3rem" // h1
 const XXXL = "4rem"
+const XXXXL = "5rem"
+const XXXXXL = "6rem"
 
 const THIN    = "100"
 const LIGHT   = "300"
@@ -29,7 +31,7 @@ export const FONT_TAGS = Object.freeze({
 })
 
 export const FONT_SIZES = Object.freeze({
-    XS, SM, MD, LG, XL, XXL, XXXL,
+    XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL
 })
 
 export const FONT_WEIGHTS = Object.freeze({

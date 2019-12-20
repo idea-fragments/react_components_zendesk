@@ -7,7 +7,7 @@ import type { StyledProps }                from "components/StyledProps.type"
 import React, { forwardRef, type Ref }     from "react"
 import { Button as SButton }               from "@zendeskgarden/react-buttons"
 import type { Alignment }                  from "styles/alignments"
-import { COLORS, dark, light }             from "styles/colors"
+import { dark, light }                     from "styles/colors"
 import { SPACINGS }                        from "styles/spacings"
 import type { ColorProps, ContainerProps } from "styles/types"
 import styled, { css }                     from "styled-components"
@@ -61,6 +61,7 @@ export type Props = {
     size? :ButtonSize,
 } & ColorProps & ContainerProps
 
+// eslint-disable-next-line no-use-before-define
 export const Button = styled(forwardRef<Props, typeof Button>((
     {
         children,

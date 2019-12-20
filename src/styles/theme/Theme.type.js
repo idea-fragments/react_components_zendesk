@@ -12,7 +12,7 @@ export type Theme = {
 
         footer: {
             background: string
-        }
+        },
 
         overlayBackground :string,
         pageBackground :string,

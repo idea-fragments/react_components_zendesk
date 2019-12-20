@@ -28,20 +28,22 @@ export const Loader = ({ forceVisibility, delay } :Props) => {
     const { ui } = useStores()
     const theme  = useContext<Theme>(ThemeContext)
 
-    if (!ui.isLoaderVisible && !forceVisibility) {
-        return null
-    }
+    return useObserver(() => {
+        if (!ui.isLoaderVisible && !forceVisibility) {
+            return null
+        }
 
-    return useObserver(() => (
-        <Container justify={"center"}
-                   alignItems={"center"}>
-            <Dots data-component-name={`${Loader.COMPONENT_NAME}`}
-                  color={theme.styles.colorPrimary}
-                  size={FONT_SIZES.XXL}
-                  delayMS={delay}
-                  velocity={-.25} />
-        </Container>
-    ))
+        return (
+            <Container justify={"center"}
+                       alignItems={"center"}>
+                <Dots data-component-name={`${Loader.COMPONENT_NAME}`}
+                      color={theme.styles.colorPrimary}
+                      size={FONT_SIZES.XXL}
+                      delayMS={delay}
+                      velocity={-.25} />
+            </Container>
+        )
+    })
 }
 
 Loader.defaultProps   = {

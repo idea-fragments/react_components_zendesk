@@ -6,7 +6,7 @@ import { useState }                from "react"
 import * as React                  from "react"
 import type { SelectorProps }      from "components/forms/selectors/types"
 import { SPACINGS }                from "styles/spacings"
-import { isEmpty, isNotEmpty }     from "utils/arrayHelpers"
+import { isNotEmpty }              from "utils/arrayHelpers"
 import { DO_NOTHING }              from "utils/functionHelpers"
 import {
     Field,
@@ -58,7 +58,7 @@ export const Dropdown = (props :Props) => {
               label, options, keyField, valueField,
               hint, selectedKey, onChange, children, onStateChange,
               useRawOptions, trigger, menuCSS, maxMenuHeight, returnItemOnChange,
-              placement, async, fluid, validation, menuItemComponent
+              placement, async, fluid, validation, menuItemComponent,
           } = props
 
     let { message }   = props
@@ -184,11 +184,11 @@ const getItemType = (o) => {
 
 const createOptions = (options, key, value, menuItemComponent) => (
     options.map((o) => {
-        const ItemType = getItemType(o)
+        const ItemType  = getItemType(o)
         const Component = menuItemComponent
 
         return <ItemType key={o[key]} value={o} disabled={o.disabled}>
-            {menuItemComponent ? <Component {...o}/> : o[value]}
+            {menuItemComponent ? <Component {...o} /> : o[value]}
         </ItemType>
     })
 )

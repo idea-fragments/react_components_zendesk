@@ -4,9 +4,11 @@ import type { TextFieldProps }                from "components/forms/formField.t
 import { Field, Label, Hint, Input, Message } from "@zendeskgarden/react-forms"
 import { VALIDATION_STATES }                  from "components/forms/validationStates"
 import { FlexBlock }                          from "components/layout/FlexBlock"
+import type { StyledProps }                   from "components/StyledProps.type"
 import * as React                             from "react"
 import { useObserver }                        from "mobx-react"
-import styled                                 from "styled-components"
+import styled         from "styled-components"
+import { dark, fade } from "styles/colors"
 
 const Wrapper = styled(Field)`
   width: ${({ compact } :TextFieldProps<>) => compact ? "auto" : "100%"};
@@ -30,13 +32,13 @@ export const TextField = ({
             <Wrapper compact={compact}>
                 {label ? <Label>{label}</Label> : null}
                 {hint ? <Hint>{hint}</Hint> : null}
-                <Input value={value}
+                <ThemedInput value={value}
                        type={type}
                        placeholder={emptyState}
                        onChange={onChange}
                        validation={validation.validation}
                        autoComplete={autoComplete} />
-                {message ? <Message>{message}</Message> : null}
+                {message ? <Message validation={validation.validation}>{message}</Message> : null}
             </Wrapper>
         </FlexBlock>
     ))
@@ -47,3 +49,16 @@ TextField.defaultProps   = {
     validation: { validation: VALIDATION_STATES.NONE }
 }
 TextField.COMPONENT_NAME = "TextField"
+
+const ThemedInput = styled(Input)`
+  &&&& {
+    :hover {
+      border-color: ${({ theme } :StyledProps<>) => theme.styles.colorPrimary};
+    }
+    
+    :focus {
+      border-color: ${({ theme } :StyledProps<>) => dark(theme.styles.colorPrimary)};
+      box-shadow:${({ theme } :StyledProps<>) => `0 0 0 3px ${fade(theme.styles.colorPrimary)}`};
+    }
+  }
+`

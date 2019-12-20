@@ -2,22 +2,21 @@
 
 import React, { useEffect } from "react"
 import { useStores }        from "stores/useStores"
-import { loggable }         from "utils/logging/loggable"
-import type { LoggerI }     from "utils/logging/Logger.type"
+import { Logger }           from "utils/logging/Logger"
 
+const logger = new Logger("ErrorBoundary")
 
 type Props = {
     children :any,
-    logger? :LoggerI,
+    autoReload :boolean,
 }
 
 type State = {
     error :Error,
 }
 
-@loggable
 export class ErrorBoundary extends React.Component<Props, State> {
-    static defaultProps   = {}
+    static defaultProps   = { autoReload: false }
     static COMPONENT_NAME = "ErrorBoundary"
     state                 = { error: null }
 
@@ -27,12 +26,13 @@ export class ErrorBoundary extends React.Component<Props, State> {
     }
 
     componentDidCatch(error :Error, errorInfo) :void {
-        this.props.logger.writeInfo("componentDidCatch", error, errorInfo)
+        logger.writeInfo("componentDidCatch", error, errorInfo)
     }
 
     render() {
         return (
-            <ErrorHandler error={this.state.error} autoReload={this.props.autoReload}>
+            <ErrorHandler error={this.state.error}
+                          autoReload={this.props.autoReload}>
                 {this.props.children}
             </ErrorHandler>
         )
@@ -45,7 +45,7 @@ const ErrorHandler = ({ error, children, autoReload } :{ error :Error }) => {
     useEffect(() => {
         if (!error) return
         errorStore.addUnknown(error)
-    }, [error, children])
+    }, [error, children, errorStore])
 
     if (error && !autoReload) return <h1>Something went wrong.</h1>
 
