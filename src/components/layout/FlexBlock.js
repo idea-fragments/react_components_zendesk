@@ -30,7 +30,7 @@ export type Props = {
      flex-direction: column;
      `
      */
-    spacing? :string,
+    spacing? :string | null,
 }
 
 const getFlexDirection = ({ withRows } :Props) => {
