@@ -39,9 +39,10 @@ export let Loadable = ({ children, showSpinner, className }) => {
 
     return <Container justify={"center"}
                       spacing={null}
-                      className={className}
                       alignItems={"center"}>
-        <ChildrenContainer showSpinner={showingSpinner}>
+        <ChildrenContainer spacing={null}
+                           className={className}
+                           showSpinner={showingSpinner}>
             {children}
         </ChildrenContainer>
 

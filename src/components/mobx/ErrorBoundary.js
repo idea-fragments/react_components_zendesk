@@ -32,14 +32,12 @@ export class ErrorBoundary extends React.Component<Props, State> {
     render() {
         return (
             <ErrorHandler error={this.state.error}
-                          autoReload={this.props.autoReload}>
-                {this.props.children}
-            </ErrorHandler>
+                          {...this.props} />
         )
     }
 }
 
-const ErrorHandler = ({ error, children, autoReload } :{ error :Error }) => {
+const ErrorHandler = ({ error, children, autoReload, fallback } :{ error :Error }) => {
     const { errorStore } = useStores()
 
     useEffect(() => {
@@ -47,7 +45,9 @@ const ErrorHandler = ({ error, children, autoReload } :{ error :Error }) => {
         errorStore.addUnknown(error)
     }, [error, children, errorStore])
 
-    if (error && !autoReload) return <h1>Something went wrong.</h1>
+    if (error && !autoReload) {
+        return fallback ? fallback : <h1>Something went wrong.</h1>
+    }
 
     return children
 }

@@ -131,7 +131,7 @@ export const Dropdown = (props :Props) => {
                   popperModifiers={getPopperModifiers(fluid)}>
                 {
                     async
-                    ? <Loadable css={`padding: ${SPACINGS.SM} 0`}
+                    ? <Loadable css={`flex-direction: column; min-height: 50px`}
                                 showSpinner={controlledState.isOpen && !optionsLoaded}>
                         {optionNodes}
                     </Loadable>
@@ -192,12 +192,3 @@ const createOptions = (options, key, value, menuItemComponent) => (
         </ItemType>
     })
 )
-//
-// const Spinner = ({ children: optionNodes }) => (
-//     <Loadable css={`padding: ${SPACINGS.SM} 0`}
-//               loaded={optionNodes && isNotEmpty(optionNodes)}>
-//         {optionNodes}
-//     </Loadable>
-// )
-//
-// const Spinner = styled(Loadable)
