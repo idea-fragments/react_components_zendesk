@@ -1,10 +1,15 @@
 // @flow
 
+import * as React   from "react"
 import styled       from "styled-components"
 import { SPACINGS } from "styles/spacings"
-import * as React   from "react"
 
 const COMPONENT_NAME = "FlexBlock"
+
+type ResponsiveProps = {
+    mediaQueryFunc :Function,
+    props :Props
+}
 
 export type Props = {
     compactAxis? :boolean,
@@ -31,6 +36,7 @@ export type Props = {
      `
      */
     spacing? :string | null,
+    responsivePropsList :Array<ResponsiveProps>
 }
 
 const getFlexDirection = ({ withRows } :Props) => {
@@ -46,7 +52,40 @@ const getDisplay = ({ compact, hidden } :Props) => {
     return compact ? "inline-flex" : "flex"
 }
 
-export const FlexBlock :React.ComponentType<Props> = styled.div.attrs(({spacing}) => ({
+const getSpacing = ({ spacing, ...props } :Props) => {
+    if (!spacing) return ""
+
+    return `& > *:not(:last-child) {
+      ${getSpacingDirection(getFlexDirection(props))}: ${spacing};
+    }`
+}
+
+const responsiveStyles = ({ responsivePropsList, ...originalProps } :Props) => (
+    responsivePropsList.map(({
+                                 mediaQueryFunc,
+                                 props: rProps,
+                             } :ResponsiveProps) :string => {
+        const props = { ...originalProps, ...rProps }
+        const {
+                  alignItems,
+                  justify,
+                  compactAxis,
+                  fluid,
+              }     = props
+
+        return mediaQueryFunc(`
+              display: ${getDisplay(props)};
+              justify-content: ${justify || "initial"};
+              align-items: ${alignItems ? alignItems : "initial"}; 
+              // align-self: ${compactAxis ? "initial" : "stretch"};
+              flex-direction: ${getFlexDirection(props)};
+              flex: ${fluid ? 1 : "unset"};
+              ${getSpacing(props)}
+          `).join("")
+    })
+)
+
+export const FlexBlock :React.ComponentType<Props> = styled.div.attrs(({ spacing }) => ({
     "data-component-name": COMPONENT_NAME,
     spacing              : spacing === undefined ? SPACINGS.SM : spacing,
 }))`
@@ -56,22 +95,18 @@ export const FlexBlock :React.ComponentType<Props> = styled.div.attrs(({spacing}
   // align-self: ${({ compactAxis }) => compactAxis ? "initial" : "stretch"};
   flex-direction: ${getFlexDirection};
   flex: ${({ fluid } :Props) => fluid ? 1 : "unset"};
+  ${getSpacing}
   
-  ${({ spacing, ...props } :Props) => {
-    if (!spacing) return ""
-
-    return `& > *:not(:last-child) {
-      ${getSpacingDirection(getFlexDirection(props))}: ${spacing};
-    }`
-}}
+  ${responsiveStyles}
 `
 
 FlexBlock.COMPONENT_NAME = COMPONENT_NAME
 
 FlexBlock.defaultProps = {
-    compactAxis: false,
-    compact    : false,
-    withRows   : false,
+    compactAxis        : false,
+    compact            : false,
+    withRows           : false,
+    responsivePropsList: [],
 }
 
 export const PaddedFlexBlock   = styled(FlexBlock).attrs(() => ({

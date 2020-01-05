@@ -7,6 +7,8 @@ type DeviseSizes = {
     smallComputerSize:number,
 }
 
+/* Size key name represents all devices with a pixel width up to the number
+specified */
 const REGULAR_SIZES = {
     phoneSize        : 575,
     tabletSize       : 767,
