@@ -8,6 +8,7 @@ const COMPONENT_NAME = "FlexBlock"
 
 type ResponsiveProps = {
     mediaQueryFunc :Function,
+    // eslint-disable-next-line no-use-before-define
     props :Props
 }
 

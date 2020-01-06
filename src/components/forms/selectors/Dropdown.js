@@ -5,7 +5,6 @@ import { Loadable }                from "components/loaders/Loadable"
 import { useState }                from "react"
 import * as React                  from "react"
 import type { SelectorProps }      from "components/forms/selectors/types"
-import { SPACINGS }                from "styles/spacings"
 import { isNotEmpty }              from "utils/arrayHelpers"
 import { DO_NOTHING }              from "utils/functionHelpers"
 import {
