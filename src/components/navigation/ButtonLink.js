@@ -11,21 +11,23 @@ import { DO_NOTHING }                      from "utils/functionHelpers"
 
 type Props = {
     to :any,
+    external :boolean,
     LinkComponent :ComponentType<{ className :string, to :any } & *>
 } & ButtonProps & ColorProps & ContainerProps
 
 export const ButtonLink = ({
                                LinkComponent,
+                               external,
                                icon,
                                iconPosition,
                                children,
                                ...otherProps
                            } :Props) => {
-    console.log("Icon", icon)
     return (
         <Button {...otherProps}
                 flat={otherProps.inline !== true}
-                as={LinkComponent}>
+                as={LinkComponent}
+                {...external ? { target: "_blank" } : {}}>
             {icon ? (
                 <FlexBlock spacing={SPACINGS.XS}
                            justify={"center"}
@@ -48,5 +50,6 @@ ButtonLink.defaultProps   = {
     primary      : false,
     onClick      : DO_NOTHING,
     LinkComponent: "a",
-    iconPosition: "left",
+    external     : false,
+    iconPosition : "left",
 }
