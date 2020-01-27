@@ -1,33 +1,52 @@
 // @flow
 
 
-import React                               from "react"
-import { Button }                          from "components/forms/Button"
-import type { Path }                       from "router/Route.type"
-import { useRouter }                       from "router/Router"
+import { Icon }                            from "components/Icon"
+import { FlexBlock }                       from "components/layout/FlexBlock"
+import React, { type ComponentType }       from "react"
+import { Button, Props as ButtonProps }    from "components/forms/Button"
+import { SPACINGS }                        from "styles/spacings"
 import type { ColorProps, ContainerProps } from "styles/types"
-
+import { DO_NOTHING }                      from "utils/functionHelpers"
 
 type Props = {
-    to :Path,
-    children :string,
-} & ColorProps & ContainerProps
+    to :any,
+    LinkComponent :ComponentType<{ className :string, to :any } & *>
+} & ButtonProps & ColorProps & ContainerProps
 
-export const ButtonLink = ({ to, children, ...otherProps } :Props) => {
-    const router = useRouter()
-
+export const ButtonLink = ({
+                               LinkComponent,
+                               icon,
+                               iconPosition,
+                               children,
+                               ...otherProps
+                           } :Props) => {
+    console.log("Icon", icon)
     return (
         <Button {...otherProps}
-                flat
-                // as={MyLink}
-                onClick={() => router.navigateTo(to)}
-                to={to}>
-            {children}
+                flat={otherProps.inline !== true}
+                as={LinkComponent}>
+            {icon ? (
+                <FlexBlock spacing={SPACINGS.XS}
+                           justify={"center"}
+                           alignItems={"center"}>
+                    {iconPosition === "left" &&
+                     <Icon color={"currentColor"} svg={icon} />}
+                    {children ? <span>{children}</span> : undefined}
+                    {iconPosition === "right" &&
+                     <Icon color={"currentColor"} svg={icon} />}
+                </FlexBlock>
+            ) : (
+                 <span>{children}</span>
+             )}
         </Button>
     )
 }
 
 ButtonLink.COMPONENT_NAME = "ButtonLink"
 ButtonLink.defaultProps   = {
-    primary: false,
+    primary      : false,
+    onClick      : DO_NOTHING,
+    LinkComponent: "a",
+    iconPosition: "left",
 }

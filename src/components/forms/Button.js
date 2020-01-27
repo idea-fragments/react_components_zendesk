@@ -1,6 +1,9 @@
 // @flow
 
-import { textColorForButton }              from "components/forms/buttonMixins"
+import {
+    getInlineStyling,
+    textColorForButton,
+} from "components/forms/buttonMixins"
 import { Icon }                            from "components/Icon"
 import { FlexBlock }                       from "components/layout/FlexBlock"
 import type { StyledProps }                from "components/StyledProps.type"
@@ -15,9 +18,10 @@ import styled, { css }                     from "styled-components"
 const fitContent   = css`width: fit-content;`
 const fitContainer = css`width: 100%;`
 const colors       = css`
-    background: ${({ flat, primary, color }) => flat || !primary ? "transparent" : color};
-    border-color: ${({ flat, primary, color }) => !flat && !primary ? color : "transparent"};
+    background: ${({ flat, primary, inline, color }) => flat || !primary || inline ? "transparent" : color};
+    border-color: ${({ flat, primary, inline, color }) => !flat && !primary && !inline ? color : "transparent"};
     
+    ${getInlineStyling}
     ${textColorForButton}
     
     :hover {

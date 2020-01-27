@@ -10,7 +10,9 @@ export const getInlineStyling = css`
 
 export const inlineWithText = css`
   padding: 0;
-  width: unset;
+  //width: unset;
+  min-width: auto;
+  line-height: normal;
 `
 
 export const textColorForButton = css`
@@ -19,7 +21,7 @@ export const textColorForButton = css`
 
 export const textColorForFlatButton = css`
   ${textWithColor}
-  ${({ flat, primary }) => flat || !primary ? flatButtonStates : inlineButtonStates}
+  ${({ inline }) => inline ? inlineButtonStates : flatButtonStates}
 `
 
 const flatButtonStates = css`

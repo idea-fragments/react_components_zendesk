@@ -14,6 +14,7 @@ type Props = {
 
 const COMPONENT_NAME = "InlineButton"
 
+// @deprecated ...use <Button inline /> or change this component to do that
 export const InlineButton = styled(Button).attrs(() => ({
     fluid                : false,
     primary              : false,
