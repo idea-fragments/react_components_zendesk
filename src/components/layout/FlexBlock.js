@@ -37,7 +37,7 @@ export type Props = {
      `
      */
     spacing? :string | null,
-    responsivePropsList :Array<ResponsiveProps>
+    responsivePropsList? :Array<ResponsiveProps>
 }
 
 const getFlexDirection = ({ withRows } :Props) => {
