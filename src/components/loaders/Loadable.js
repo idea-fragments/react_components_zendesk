@@ -22,10 +22,13 @@ const LoaderContainer = styled(FlexBlock)`
 
 const ChildrenContainer = styled(FlexBlock)`
   width: 100%;
-  opacity: ${({ showSpinner }) => showSpinner ? ".3" : "1"};
+  opacity: ${({ showSpinner, opaqueSpinner }) => {
+      if(!showSpinner) return "1"
+      return opaqueSpinner ? "0" : ".3" 
+  }};
 `
 
-export let Loadable = ({ children, showSpinner, className }) => {
+export let Loadable = ({ children, showSpinner, className, opaqueSpinner }) => {
     const theme                               = useContext<Theme>(ThemeContext)
     const [canHideSpinner, setCanHideSpinner] = useState<boolean>(true)
 
@@ -42,6 +45,7 @@ export let Loadable = ({ children, showSpinner, className }) => {
                       alignItems={"center"}>
         <ChildrenContainer spacing={null}
                            className={className}
+                           opaqueSpinner={opaqueSpinner}
                            showSpinner={showingSpinner}>
             {children}
         </ChildrenContainer>

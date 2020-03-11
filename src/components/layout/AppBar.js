@@ -15,7 +15,7 @@ import { DO_NOTHING }                 from "utils/functionHelpers"
 import { css }                        from "styled-components"
 
 const Header = styled(H3)`
-  color: ${COLORS.BLUE} !important;
+  color: ${({theme}) => theme.styles.colorPrimary } !important;
   margin: 0;
 `
 
@@ -49,7 +49,7 @@ export const AppBar = ({
 
     return <Container>
         <PaddedFlexBlock spacing={SPACINGS.SM}
-                         css={!fluid ? css`padding-left: 0; padding-right: 0;` : ""}
+                         css={!fluid ? css`padding-left: 0; padding-right: 0; align-items: center` : css`align-items: center`}
         >
             {
                 showBackButton
