@@ -15,7 +15,7 @@ import { DO_NOTHING }                 from "utils/functionHelpers"
 import { css }                        from "styled-components"
 
 const Header = styled(H3)`
-  color: ${({theme}) => theme.styles.colorPrimary } !important;
+  color: ${({ theme }) => theme.styles.colorPrimary} !important;
   margin: 0;
 `
 
@@ -35,6 +35,7 @@ type Props = {
     actions :Array<Action>,
     showBackButton :boolean,
     onBackClicked :() => void,
+    onLogoClicked :() => void,
     logo? :ElementType
 } & ContainerProps
 
@@ -43,6 +44,7 @@ export const AppBar = ({
                            actions,
                            showBackButton,
                            onBackClicked,
+                           onLogoClicked,
                            fluid,
                            logo,
                        } :Props) => {
@@ -59,9 +61,13 @@ export const AppBar = ({
                 : null
             }
 
-            {logo ? logo : null}
+            <FlexBlock alignItems={"center"}
+                       onClick={onLogoClicked}
+                       css={`cursor: pointer;`}>
+                {logo ? logo : null}
+                <Header>{title}</Header>
+            </FlexBlock>
 
-            <Header>{title}</Header>
             <ActionContainer>
                 {
                     actions.map(({ name, onClick } :Action) => {
@@ -77,6 +83,7 @@ AppBar.defaultProps = {
     actions       : [],
     showBackButton: false,
     onBackClicked : DO_NOTHING,
+    onLogoClicked : DO_NOTHING,
 }
 
 AppBar.COMPONENT_NAME = "AppBar"
