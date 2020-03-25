@@ -71,7 +71,11 @@ export const AppBar = ({
             <ActionContainer>
                 {
                     actions.map(({ name, onClick } :Action) => {
-                        return <Button flat onClick={onClick}>{name}</Button>
+                        return <Button flat
+                                       key={name}
+                                       onClick={onClick}>
+                            {name}
+                        </Button>
                     })
                 }
             </ActionContainer>

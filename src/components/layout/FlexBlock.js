@@ -86,8 +86,8 @@ const responsiveStyles = ({ responsivePropsList, ...originalProps } :Props) => (
     })
 )
 
-export const FlexBlock :React.ComponentType<Props> = styled.div.attrs(({ spacing }) => ({
-    "data-component-name": COMPONENT_NAME,
+export const FlexBlock :React.ComponentType<Props> = styled.div.attrs(({ spacing, ...rest }) => ({
+    "data-component-name": rest["data-component-name"] || COMPONENT_NAME,
     spacing              : spacing === undefined ? SPACINGS.SM : spacing,
 }))`
   display: ${getDisplay};
@@ -110,8 +110,8 @@ FlexBlock.defaultProps = {
     responsivePropsList: [],
 }
 
-export const PaddedFlexBlock   = styled(FlexBlock).attrs(() => ({
-    "data-component-name": "PaddedFlexBlock",
+export const PaddedFlexBlock   = styled(FlexBlock).attrs((props) => ({
+    "data-component-name": props["data-component-name"] || "PaddedFlexBlock",
 }))`
   padding: ${SPACINGS.SM};
 `
