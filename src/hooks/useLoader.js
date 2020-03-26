@@ -5,6 +5,7 @@ import { observable }         from "mobx"
 import { actionAsync, task }  from "mobx-utils"
 import { Observer }           from "mobx-react"
 import React, { useRef }      from "react"
+import styled                 from "styled-components"
 import { returnAfterMinimum } from "utils/dateTimeHelpers"
 import type { PromiseFunc }   from "utils/function.types"
 
@@ -26,11 +27,12 @@ export const useLoader = () => {
     if (!Loader.current || !withLoading.current) {
         const id = nextId()
 
-        Loader.current = ({ children }) => {
+        Loader.current = ({ cssStyles, ...props }) => {
             return <Observer>{() =>
-                <Loadable showSpinner={visibleLoaderIds.has(id)}>
-                    {children}
-                </Loadable>
+                <Loadable showSpinner={visibleLoaderIds.has(id)}
+                          {...props}
+                          css={cssStyles}
+                />
             }</Observer>
         }
 
