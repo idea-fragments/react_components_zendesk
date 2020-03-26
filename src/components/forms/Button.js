@@ -75,14 +75,13 @@ export const Button = styled(forwardRef<Props, typeof Button>((
         icon,
         iconPosition,
         primary,
+        innerAs,
         ...props
     } :Props,
     ref :Ref,
 ) => {
     return (
-        <SButton fluid={fluid}
-                 basic={flat}
-                 primary={flat ? false : primary}
+        <SButton as={innerAs}
                  ref={ref}
                  {...props}>
             {icon ? (

@@ -26,7 +26,7 @@ export const ButtonLink = ({
     return (
         <Button {...otherProps}
                 flat={otherProps.inline !== true}
-                as={LinkComponent}
+                innerAs={LinkComponent}
                 {...external ? { target: "_blank" } : {}}>
             {icon ? (
                 <FlexBlock spacing={SPACINGS.XS}
