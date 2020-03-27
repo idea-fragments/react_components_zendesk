@@ -65,7 +65,7 @@ export const AppBar = ({
                        onClick={onLogoClicked}
                        css={`cursor: pointer;`}>
                 {logo ? logo : null}
-                <Header>{title}</Header>
+                {title}
             </FlexBlock>
 
             <ActionContainer>
