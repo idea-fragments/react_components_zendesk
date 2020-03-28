@@ -57,6 +57,7 @@ const getSpacing = ({ spacing, ...props } :Props) => {
     if (!spacing) return ""
 
     return `& > *:not(:last-child) {
+      margin: 0;
       ${getSpacingDirection(getFlexDirection(props))}: ${spacing};
     }`
 }

@@ -14,25 +14,15 @@ import type { ContainerProps }        from "styles/types"
 import { DO_NOTHING }                 from "utils/functionHelpers"
 import { css }                        from "styled-components"
 
-const Header = styled(H3)`
-  color: ${({ theme }) => theme.styles.colorPrimary} !important;
-  margin: 0;
-`
-
 const ActionContainer = styled(FlexBlock)`
   padding: 0;
   flex: 1;
   justify-content: flex-end;
 `
 
-export type Action = {
-    name :string,
-    onClick :() => void,
-}
-
 type Props = {
     title :string,
-    actions :Array<Action>,
+    actions :Array<React.Node>,
     showBackButton :boolean,
     onBackClicked :() => void,
     onLogoClicked :() => void,
@@ -40,18 +30,21 @@ type Props = {
 } & ContainerProps
 
 export const AppBar = ({
-                           title,
-                           actions,
-                           showBackButton,
-                           onBackClicked,
-                           onLogoClicked,
-                           fluid,
-                           logo,
-                       } :Props) => {
+                         actions,
+                         className,
+                         fluid,
+                         logo,
+                         onBackClicked,
+                         onLogoClicked,
+                         showBackButton,
+                         title,
+                     } :Props) => {
 
-    return <Container>
+    const content = (
         <PaddedFlexBlock spacing={SPACINGS.SM}
-                         css={!fluid ? css`padding-left: 0; padding-right: 0; align-items: center` : css`align-items: center`}
+                         css={!fluid
+                              ? css`padding-left: 0; padding-right: 0; align-items: center`
+                              : css`align-items: center`}
         >
             {
                 showBackButton
@@ -68,19 +61,15 @@ export const AppBar = ({
                 {title}
             </FlexBlock>
 
-            <ActionContainer>
-                {
-                    actions.map(({ name, onClick } :Action) => {
-                        return <Button flat
-                                       key={name}
-                                       onClick={onClick}>
-                            {name}
-                        </Button>
-                    })
-                }
+            <ActionContainer alignItems={"center"}>
+                {actions}
             </ActionContainer>
         </PaddedFlexBlock>
-    </Container>
+    )
+
+    return fluid
+           ? <>{content}</>
+           : <Container className={className}>{content}</Container>
 }
 
 AppBar.defaultProps = {
