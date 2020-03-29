@@ -51,14 +51,14 @@ export let Alert = ({
         setTimeout(handleClose, 8000)
     }, [isVisible, handleClose])
 
+    if (!isVisible) return null
+    if (!alertContent) throw new Error("Alert found null alert content")
+
     const {
               title,
               body,
               type = ALERT_TYPES.INFO,
           } :AlertContent = alertContent
-
-    if (!isVisible) return null
-    if (!alertContent) throw new Error("Alert found null alert content")
 
     return (
         <AbsoluteContainer>
