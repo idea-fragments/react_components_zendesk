@@ -2,7 +2,7 @@
 
 import { FlexBlock }                 from "components/layout/FlexBlock"
 import type { StyledComponentProps } from "components/StyledComponentProps.type"
-import { useEffect }                 from "react"
+import { useCallback, useEffect }    from "react"
 import * as React                    from "react"
 import {
     Alert as ZenAlert,
@@ -11,18 +11,14 @@ import {
 }                                    from "@zendeskgarden/react-notifications"
 import styled                        from "styled-components"
 
-type Props = {
-    isVisible :boolean,
-    closeAlert :() => void,
-    alertContent :?AlertContent,
-} & StyledComponentProps
-
 export const ALERT_TYPES = Object.freeze({
     INFO   : "info",
     SUCCESS: "success",
     ERROR  : "error",
     WARNING: "warning",
 })
+
+export type AlertType = $Values<typeof ALERT_TYPES>
 
 export type AlertContent = {
     title? :string,
@@ -31,7 +27,11 @@ export type AlertContent = {
     type :AlertType,
 }
 
-export type AlertType = $Values<typeof ALERT_TYPES>
+type Props = {
+    isVisible :boolean,
+    closeAlert :() => void,
+    alertContent :?AlertContent,
+} & StyledComponentProps
 
 export let Alert = ({
                         isVisible,
@@ -39,26 +39,26 @@ export let Alert = ({
                         alertContent,
                         className,
                     } :Props) => {
+
+    const handleClose = useCallback(() => {
+        closeAlert()
+        if (alertContent.onClose) alertContent.onClose()
+    }, [alertContent, closeAlert])
+
     useEffect(() => {
         if (!isVisible) return
 
         setTimeout(handleClose, 8000)
-    }, [isVisible])
-
-    if (!isVisible) return null
-    if (!alertContent) throw new Error("Alert found null alert content")
+    }, [isVisible, handleClose])
 
     const {
               title,
               body,
-              onClose,
               type = ALERT_TYPES.INFO,
           } :AlertContent = alertContent
 
-    const handleClose = () => {
-        closeAlert()
-        if (onClose) onClose()
-    }
+    if (!isVisible) return null
+    if (!alertContent) throw new Error("Alert found null alert content")
 
     return (
         <AbsoluteContainer>

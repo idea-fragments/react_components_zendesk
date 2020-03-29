@@ -1,12 +1,9 @@
 // @flow
 
-import { Button }                     from "components/forms/Button"
 import { IconButton }                 from "components/forms/IconButton"
 import { Container }                  from "components/layout/Container"
 import { FlexBlock, PaddedFlexBlock } from "components/layout/FlexBlock"
-import { H3 }                         from "components/text/Header"
 import React, { ElementType }         from "react"
-import { COLORS }                     from "styles/colors"
 import styled                         from "styled-components"
 import { mdiArrowLeft }               from "@mdi/js"
 import { SPACINGS }                   from "styles/spacings"
@@ -30,15 +27,15 @@ type Props = {
 } & ContainerProps
 
 export const AppBar = ({
-                         actions,
-                         className,
-                         fluid,
-                         logo,
-                         onBackClicked,
-                         onLogoClicked,
-                         showBackButton,
-                         title,
-                     } :Props) => {
+                           actions,
+                           className,
+                           fluid,
+                           logo,
+                           onBackClicked,
+                           onLogoClicked,
+                           showBackButton,
+                           title,
+                       } :Props) => {
 
     const content = (
         <PaddedFlexBlock spacing={SPACINGS.SM}

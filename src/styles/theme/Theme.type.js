@@ -1,7 +1,5 @@
 // @flow
 
-import { COLORS } from "styles/colors"
-
 export type Theme = {
     isDark :boolean,
     styles :{
