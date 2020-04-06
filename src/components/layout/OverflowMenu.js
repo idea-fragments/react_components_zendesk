@@ -1,11 +1,12 @@
 // @flow
 
-import { InlineButton }           from "components/forms/InlineButton"
-import type { MenuPlacement }     from "components/forms/selectors/Dropdown"
-import { Dropdown }               from "components/forms/selectors/Dropdown"
-import * as React                 from "react"
-import { COLORS, darker }         from "styles/colors"
-import styled                     from "styled-components"
+import { Button }             from "components/forms/Button"
+import type { MenuPlacement } from "components/forms/selectors/Dropdown"
+import { Dropdown }           from "components/forms/selectors/Dropdown"
+import * as React             from "react"
+import { COLORS, darker }     from "styles/colors"
+import styled                 from "styled-components"
+import {mdiDotsVertical}              from "@mdi/js"
 
 const COMPONENT_NAME = "OverflowMenu"
 
@@ -19,11 +20,12 @@ type Props = {
     actions :Array<OverflowMenuItem>
 }
 
-const OverflowButton = styled(InlineButton).attrs({
-    icon                 : "more-vertical-outline",
+const OverflowButton = styled(Button).attrs({
+    icon                 : mdiDotsVertical,
     "data-component-name": COMPONENT_NAME,
     color                : darker(COLORS.GREY),
     "aria-label"         : "Row actions",
+    inline: true,
 })`
   display: flex;
   flex-direction: column;

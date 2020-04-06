@@ -5,13 +5,20 @@ import * as React    from "react"
 
 type Props = {
     alertView :React.Node,
+    drawerView :React.Node,
     appBar :React.Node,
     content :React.Node,
     className? :string,
 }
 
 
-export const AppBarLayout = ({ className, appBar, content, alertView } :Props) => (
+export const AppBarLayout = ({
+                                 alertView,
+                                 appBar,
+                                 className,
+                                 content,
+                                 drawerView,
+                             } :Props) => (
     <FlexBlock data-component-name={AppBarLayout.COMPONENT_NAME}
                withRows
                alignSelf={"center"}
@@ -23,6 +30,7 @@ export const AppBarLayout = ({ className, appBar, content, alertView } :Props) =
             {content}
             {alertView}
         </FlexBlock>
+        {drawerView}
     </FlexBlock>
 )
 

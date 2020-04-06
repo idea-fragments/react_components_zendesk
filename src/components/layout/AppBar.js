@@ -1,21 +1,21 @@
 // @flow
 
-import { IconButton }                 from "components/forms/IconButton"
-import { Container }                  from "components/layout/Container"
-import { FlexBlock, PaddedFlexBlock } from "components/layout/FlexBlock"
-import React, { ElementType }         from "react"
-import styled                         from "styled-components"
-import { mdiArrowLeft }               from "@mdi/js"
-import { SPACINGS }                   from "styles/spacings"
-import type { ContainerProps }        from "styles/types"
-import { DO_NOTHING }                 from "utils/functionHelpers"
-import { css }                        from "styled-components"
+import { IconButton }            from "components/forms/IconButton"
+import { Container }             from "components/layout/Container"
+import {
+    FlexBlock,
+    PaddedFlexBlock,
+}                                from "components/layout/FlexBlock"
+import React, { ElementType }    from "react"
+import { useStores }             from "stores/useStores"
+import styled, { css }           from "styled-components"
+import { mdiArrowLeft, mdiMenu } from "@mdi/js"
+import { SPACINGS }              from "styles/spacings"
+import type { ContainerProps }   from "styles/types"
+import { DO_NOTHING }            from "utils/functionHelpers"
+import { mediaQueries }          from "styles/mediaQueries"
 
-const ActionContainer = styled(FlexBlock)`
-  padding: 0;
-  flex: 1;
-  justify-content: flex-end;
-`
+const { forLargeTabletsAndUp } = mediaQueries()
 
 type Props = {
     title :string,
@@ -37,8 +37,22 @@ export const AppBar = ({
                            title,
                        } :Props) => {
 
+    // TODO this should not use MobX...switch to react context
+    const { ui } = useStores()
+
+    const openNavDrawer = () => {
+        ui.openDrawerWith({
+            body: <FlexBlock withRows>
+                {actions.map((a :React.Node, i :number) => (
+                    <DrawerItem key={i}>{a}</DrawerItem>
+                ))}
+            </FlexBlock>,
+        })
+    }
+
     const content = (
         <PaddedFlexBlock spacing={SPACINGS.SM}
+                         justify={"space-between"}
                          css={!fluid
                               ? css`padding-left: 0; padding-right: 0; align-items: center`
                               : css`align-items: center`}
@@ -57,13 +71,13 @@ export const AppBar = ({
                 {logo ? logo : null}
                 {title}
             </FlexBlock>
-
-            <ActionContainer alignItems={"center"}>
+            <DesktopNav alignItems={"center"}>
                 {actions}
-            </ActionContainer>
+            </DesktopNav>
+            <MobileNav onClick={openNavDrawer} />
+
         </PaddedFlexBlock>
     )
-
     return fluid
            ? <>{content}</>
            : <Container className={className}>{content}</Container>
@@ -77,3 +91,25 @@ AppBar.defaultProps = {
 }
 
 AppBar.COMPONENT_NAME = "AppBar"
+
+const DesktopNav = styled(FlexBlock)`
+  && {
+    display: none;
+    ${forLargeTabletsAndUp(css`
+      display: flex;
+    `)}
+  }
+`
+
+const MobileNav = styled(IconButton).attrs({ flat: true, icon: mdiMenu })`
+  && {
+    ${forLargeTabletsAndUp(css`
+      display: none;
+    `)} 
+  }
+`
+
+const DrawerItem = styled(FlexBlock)`
+  width: 100%;
+  padding: 0 1rem;
+`

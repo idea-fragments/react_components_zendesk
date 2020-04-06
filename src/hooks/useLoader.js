@@ -1,21 +1,15 @@
 // @flow
 
-import { Loadable }           from "components/loaders/Loadable"
-import { observable }         from "mobx"
-import { actionAsync, task }  from "mobx-utils"
-import { Observer }           from "mobx-react"
-import React, { useRef }      from "react"
-import { returnAfterMinimum } from "utils/dateTimeHelpers"
-import type { PromiseFunc }   from "utils/function.types"
-
-export function* newIdGenerator() {
-    let id = 0
-    while (true) { yield id++ }
-}
+import { Loadable }               from "components/loaders/Loadable"
+import { observable }             from "mobx"
+import { actionAsync, task }      from "mobx-utils"
+import { Observer }               from "mobx-react"
+import React, { useRef }          from "react"
+import { returnAfterMinimum }     from "utils/dateTimeHelpers"
+import type { PromiseFunc }       from "utils/function.types"
+import { newIdGenerator, nextId } from "utils/idGenerator"
 
 const gen = newIdGenerator()
-
-export const nextId = () :number => gen.next().value
 
 const visibleLoaderIds = observable(new Set<number>())
 
@@ -24,7 +18,7 @@ export const useLoader = () => {
     const withLoading = useRef(null)
 
     if (!Loader.current || !withLoading.current) {
-        const id = nextId()
+        const id = nextId(gen)
 
         Loader.current = ({ cssStyles, ...props }) => {
             return <Observer>{() =>

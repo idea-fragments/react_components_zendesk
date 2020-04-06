@@ -10,13 +10,13 @@ const {
           forLargeComputers,
           forLargeTabletsAndUp,
           forSmallComputersAndUp,
-      } = mediaQueries(true)
+      } = mediaQueries()
 
 const {
           tabletSize,
           largeTabletSize,
           smallComputerSize,
-      } = deviseSizes(true)
+      } = deviseSizes()
 
 const deviceSettings = css`
   ${forLargeTabletsAndUp(`

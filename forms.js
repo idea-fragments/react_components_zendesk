@@ -20,7 +20,6 @@ export * from "./src/components/forms/textfields/TextField"
  * BUTTONS
  * ============================= */
 export * from "./src/components/forms/Button"
-export * from "./src/components/forms/InlineButton"
 export * from "./src/components/forms/IconButton"
 
 

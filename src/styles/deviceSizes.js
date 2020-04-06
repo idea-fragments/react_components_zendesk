@@ -23,6 +23,6 @@ const WIDE_SIZES = {
     smallComputerSize: 1350,
 }
 
-export const deviseSizes = (wide = false) :DeviseSizes => {
-    return wide ? WIDE_SIZES : REGULAR_SIZES
+export const deviseSizes = (wideLayout = false) :DeviseSizes => {
+    return wideLayout ? WIDE_SIZES : REGULAR_SIZES
 }

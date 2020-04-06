@@ -18,7 +18,7 @@ export const forTablets = (styles :string) :string => `
     }
 `
 
-export interface MediaQueriesI {
+export type MediaQueriesI = {
     forPhones :(styles :string) => string,
     forTablets :(styles :string) => string,
     forTabletsAndUp :(styles :string) => string,
@@ -27,13 +27,13 @@ export interface MediaQueriesI {
     forLargeComputers :(styles :string) => string,
 }
 
-export const mediaQueries = (wide = false) :MediaQueriesI => {
+export const mediaQueries = (wideLayout?: boolean) :MediaQueriesI => {
     const {
               phoneSize,
               tabletSize,
               largeTabletSize,
               smallComputerSize,
-          } = deviseSizes(wide)
+          } = deviseSizes(wideLayout)
 
     return {
         forPhones: (styles :string) :string => css`

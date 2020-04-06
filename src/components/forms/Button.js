@@ -115,7 +115,6 @@ export const Button = styled(forwardRef<Props, typeof Button>((
 Button.COMPONENT_NAME = "Button"
 
 Button.defaultProps = {
-    children    : "Button",
     fluid       : false,
     flat        : false,
     iconPosition: "right",
