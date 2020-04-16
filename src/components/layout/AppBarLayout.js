@@ -21,12 +21,12 @@ export const AppBarLayout = ({
                              } :Props) => (
     <FlexBlock data-component-name={AppBarLayout.COMPONENT_NAME}
                withRows
+               spacing={null}
                alignSelf={"center"}
                className={className}>
-        <FlexBlock withRows>
-            {appBar}
-        </FlexBlock>
-        <FlexBlock spacing={null} withRows fluid>
+        {appBar}
+        <FlexBlock css={`min-height: calc(100vh - 87px);`} spacing={null}
+                   withRows fluid>
             {content}
             {alertView}
         </FlexBlock>
