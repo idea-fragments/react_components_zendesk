@@ -2,10 +2,7 @@
 
 import { IconButton }            from "components/forms/IconButton"
 import { Container }             from "components/layout/Container"
-import {
-    FlexBlock,
-    PaddedFlexBlock,
-}                                from "components/layout/FlexBlock"
+import { FlexBlock }             from "components/layout/FlexBlock"
 import React, { ElementType }    from "react"
 import { useStores }             from "stores/useStores"
 import styled, { css }           from "styled-components"
@@ -20,6 +17,7 @@ const { forLargeTabletsAndUp } = mediaQueries()
 type Props = {
     title :string,
     actions :Array<React.Node>,
+    height :string,
     showBackButton :boolean,
     onBackClicked :() => void,
     onLogoClicked :() => void,
@@ -31,6 +29,7 @@ export const AppBar = ({
                            className,
                            fluid,
                            logo,
+                           height,
                            onBackClicked,
                            onLogoClicked,
                            showBackButton,
@@ -50,12 +49,14 @@ export const AppBar = ({
         })
     }
 
+    const baseContainerStyles = `height: ${height}; align-items: center`
+
     const content = (
-        <PaddedFlexBlock spacing={SPACINGS.SM}
-                         justify={"space-between"}
-                         css={!fluid
-                              ? css`padding-left: 0; padding-right: 0; align-items: center`
-                              : css`align-items: center`}
+        <FlexBlock spacing={SPACINGS.SM}
+                   justify={"space-between"}
+                   css={fluid
+                        ? css`padding: 0 1rem; ${baseContainerStyles}`
+                        : css`${baseContainerStyles}`}
         >
             {
                 showBackButton
@@ -76,7 +77,7 @@ export const AppBar = ({
             </DesktopNav>
             <MobileNav onClick={openNavDrawer} />
 
-        </PaddedFlexBlock>
+        </FlexBlock>
     )
     return fluid
            ? <>{content}</>
@@ -85,6 +86,7 @@ export const AppBar = ({
 
 AppBar.defaultProps = {
     actions       : [],
+    height        : "auto",
     showBackButton: false,
     onBackClicked : DO_NOTHING,
     onLogoClicked : DO_NOTHING,
