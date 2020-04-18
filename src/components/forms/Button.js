@@ -15,7 +15,10 @@ import { SPACINGS }                        from "styles/spacings"
 import type { ColorProps, ContainerProps } from "styles/types"
 import styled, { css }                     from "styled-components"
 
-const fitContent   = css`width: fit-content;`
+const fitContent   = css`
+  width: fit-content;
+  ${({ compact }) => compact ? "min-width: fit-content; padding: 0 1em;" : ""}
+`
 const fitContainer = css`width: 100%;`
 const colors       = css`
     background: ${({ flat, primary, inline, color }) => flat || !primary || inline ? "transparent" : color};

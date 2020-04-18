@@ -10,7 +10,8 @@ import type { ColorProps, ContainerProps } from "styles/types"
 import { DO_NOTHING }                      from "utils/functionHelpers"
 
 type Props = {
-    to :any,
+    to? :any,
+    href? :string,
     external :boolean,
     LinkComponent :ComponentType<{ className :string, to :any } & *>
 } & ButtonProps & ColorProps & ContainerProps
