@@ -1,11 +1,9 @@
 // @flow
 
-import { FlexBlock }                                from "components/layout/FlexBlock"
-import { useEffect, useState, useRef, useCallback } from "react"
-import * as React                                   from "react"
-import { NavBarScrollWatcher }                      from "utils/NavBarScrollWatcher"
-
-type ScrollPassedNavBarListener = (boolean) => void
+import { FlexBlock }           from "components/layout/FlexBlock"
+import { useEffect, useRef }   from "react"
+import * as React              from "react"
+import { NavBarScrollWatcher } from "utils/NavBarScrollWatcher"
 
 type Props = {
     alertView :React.Node,
