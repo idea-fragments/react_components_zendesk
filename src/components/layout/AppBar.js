@@ -95,7 +95,7 @@ AppBar.defaultProps = {
 
 AppBar.COMPONENT_NAME = "AppBar"
 
-const BarWrapper = styled.div`
+const BarWrapper = styled.header`
   background: ${({ color }) => color ? color : "transparent"};
   position: ${({ fixed }) => fixed ? "fixed" : "unset"};
   top: ${({ fixed }) => fixed ? "0" : "unset"};
@@ -113,7 +113,9 @@ const Content = styled(Container).attrs({
   height: ${({ height }) => height ? height : "fit-content"};
 `
 
-const DesktopNav = styled(FlexBlock)`
+const DesktopNav = styled(FlexBlock).attrs({
+    as: "nav"
+})`
   && {
     display: none;
     ${forLargeTabletsAndUp(css`

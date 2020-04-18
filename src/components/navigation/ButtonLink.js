@@ -19,6 +19,7 @@ type Props = {
 export const ButtonLink = ({
                                LinkComponent,
                                external,
+                               flat,
                                icon,
                                iconPosition,
                                children,
@@ -26,7 +27,7 @@ export const ButtonLink = ({
                            } :Props) => {
     return (
         <Button {...otherProps}
-                flat={otherProps.inline !== true}
+                flat={flat != null ? flat : otherProps.inline !== true}
                 innerAs={LinkComponent}
                 {...external ? { target: "_blank" } : {}}>
             {icon ? (
