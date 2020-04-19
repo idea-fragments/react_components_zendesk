@@ -6,6 +6,8 @@ export type Styles = {
     colorDanger :string,
     colorSuccess :string,
 
+    container :{ horizontalPadding :string },
+
     nav :{
         linkColor :string,
     },
