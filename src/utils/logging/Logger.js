@@ -30,4 +30,6 @@ export class Logger implements LoggerI {
     writeWarning = this.#log("warning")
 }
 
-window.DEBUG_MODULES = new Set()
+if (typeof window !== `undefined`) {
+    window.DEBUG_MODULES = new Set()
+}
