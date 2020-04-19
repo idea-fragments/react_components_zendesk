@@ -3,6 +3,7 @@
 import { FlexBlock }           from "components/layout/FlexBlock"
 import { useEffect, useRef }   from "react"
 import * as React              from "react"
+import styled                  from "styled-components"
 import { NavBarScrollWatcher } from "utils/NavBarScrollWatcher"
 
 type Props = {
@@ -43,9 +44,15 @@ export const AppBarLayout = ({
                 {content}
                 {alertView}
             </FlexBlock>
-            {drawerView}
+            <DrawerWrapper>
+                {drawerView}
+            </DrawerWrapper>
         </FlexBlock>
     )
 }
 
 AppBarLayout.COMPONENT_NAME = "AppBarLayout"
+
+const DrawerWrapper = styled.div`
+  z-index: ${({theme}) => theme.styles.sidebar.zIndex};
+`

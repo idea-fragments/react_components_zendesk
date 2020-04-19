@@ -101,7 +101,7 @@ const BarWrapper = styled.header`
   top: ${({ fixed }) => fixed ? "0" : "unset"};
   left: ${({ fixed }) => fixed ? "0" : "unset"};
   width: 100%;
-  z-index: 10000;
+  z-index: ${({ theme }) => theme.styles.appBar.zIndex};
 `
 
 const Content = styled(Container).attrs({
@@ -114,7 +114,7 @@ const Content = styled(Container).attrs({
 `
 
 const DesktopNav = styled(FlexBlock).attrs({
-    as: "nav"
+    as: "nav",
 })`
   && {
     display: none;
