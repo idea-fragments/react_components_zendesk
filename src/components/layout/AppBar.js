@@ -45,9 +45,9 @@ export const AppBar = ({
 
     const openNavDrawer = () => {
         ui.openDrawerWith({
-            body: <FlexBlock withRows>
+            body: <FlexBlock withRows alignItems={"flex-start"}>
                 {actions.map((a :React.Node, i :number) => (
-                    <DrawerItem key={i}>{a}</DrawerItem>
+                    <DrawerItem key={i} onClick={ui.closeDrawer}>{a}</DrawerItem>
                 ))}
             </FlexBlock>,
         })
@@ -125,8 +125,8 @@ const DesktopNav = styled(FlexBlock).attrs({
 `
 
 const DrawerItem = styled(FlexBlock)`
-  width: 100%;
-  padding: 0 1rem;
+  //width: 100%;
+  //padding: 0 1rem;
 `
 
 const FixedPlaceHolder = styled.div`
