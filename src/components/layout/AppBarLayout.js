@@ -1,37 +1,58 @@
 // @flow
 
-import { FlexBlock } from "components/layout/FlexBlock"
-import * as React    from "react"
+import { FlexBlock }           from "components/layout/FlexBlock"
+import { useEffect, useRef }   from "react"
+import * as React              from "react"
+import styled                  from "styled-components"
+import { NavBarScrollWatcher } from "utils/NavBarScrollWatcher"
 
 type Props = {
     alertView :React.Node,
-    drawerView :React.Node,
     appBar :React.Node,
-    content :React.Node,
+    appBarHeight :string,
     className? :string,
+    content :React.Node,
+    drawerView :React.Node,
 }
-
 
 export const AppBarLayout = ({
                                  alertView,
                                  appBar,
+                                 appBarHeight,
                                  className,
                                  content,
                                  drawerView,
-                             } :Props) => (
-    <FlexBlock data-component-name={AppBarLayout.COMPONENT_NAME}
-               withRows
-               spacing={null}
-               alignSelf={"center"}
-               className={className}>
-        {appBar}
-        <FlexBlock css={`min-height: calc(100vh - 87px);`} spacing={null}
-                   withRows fluid>
-            {content}
-            {alertView}
+                             } :Props) => {
+
+    const appBarRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        NavBarScrollWatcher.setNavBar(appBarRef.current)
+    }, [])
+
+    return (
+        <FlexBlock data-component-name={AppBarLayout.COMPONENT_NAME}
+                   withRows
+                   spacing={null}
+                   alignSelf={"center"}
+                   className={className}>
+            <div ref={appBarRef}>{appBar}</div>
+            <FlexBlock css={`min-height: calc(100vh - ${appBarHeight});`}
+                       spacing={null}
+                       withRows
+                       fluid>
+                {content}
+                {alertView}
+            </FlexBlock>
+            <DrawerWrapper>
+                {drawerView}
+            </DrawerWrapper>
         </FlexBlock>
-        {drawerView}
-    </FlexBlock>
-)
+    )
+}
 
 AppBarLayout.COMPONENT_NAME = "AppBarLayout"
+
+const DrawerWrapper = styled.div`
+  z-index: ${({theme}) => theme.styles.sidebar.zIndex};
+`

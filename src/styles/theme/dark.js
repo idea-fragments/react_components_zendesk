@@ -24,6 +24,7 @@ export const dark :Theme = {
             trackColor: "#ffffff33",
         },
         sidebar               : {
+            ...base.sidebar,
             background: COLORS.MIDNIGHT_BLUE,
         },
         textColorDark         : COLORS.MIDNIGHT_PURPLE,

@@ -2,26 +2,10 @@
 
 import type { LoggerI } from "utils/logging/Logger.type"
 
-const writeInfo    = (moduleName, ...args) => {
-    console.log(
-        `%c${moduleName}`,
-        "background: #499cc8; color: white; padding: 2px 6px;",
-        ...args,
-    )
-}
-const writeError   = (moduleName, ...args) => {
-    console.error(
-        `%c${moduleName}`,
-        "background: #c14a4f; color: white; padding: 2px 6px;",
-        ...args,
-    )
-}
-const writeWarning = (moduleName, ...args) => {
-    console.warn(
-        `%c${moduleName}`,
-        "background: #e0a270; color: black; padding: 2px 6px;",
-        ...args,
-    )
+const LEVEL_STYLES = {
+    info   : "background: #499cc8; color: white;",
+    error  : "background: #c14a4f; color: white;",
+    warning: "background: #e0a270; color: black;",
 }
 
 export class Logger implements LoggerI {
@@ -31,21 +15,19 @@ export class Logger implements LoggerI {
         this.moduleName = moduleName
     }
 
-    writeInfo    = (...args) => { writeInfo(this.moduleName, ...args) }
-    writeError   = (...args) => { writeError(this.moduleName, ...args) }
-    writeWarning = (...args) => { writeWarning(this.moduleName, ...args) }
+    #log = (level) => (...args) => {
+        if (!window.DEBUG_MODULES.has(this.moduleName)) return
+
+        console[level](
+            `%c${this.moduleName}`,
+            `${LEVEL_STYLES[level]} padding: 2px 6px;`,
+            ...args,
+        )
+    }
+
+    writeInfo    = this.#log("info")
+    writeError   = this.#log("error")
+    writeWarning = this.#log("warning")
 }
 
-export const loggerStub :LoggerI = (() => {
-    const stub = new Logger("Stub")
-    const log  = (method) => (...args) => {
-        stub.writeWarning("Invalid use of Stub Logger")
-        stub[method](...args)
-    }
-
-    return {
-        writeInfo   : log("writeInfo"),
-        writeError  : log("writeError"),
-        writeWarning: log("writeWarning"),
-    }
-})()
+window.DEBUG_MODULES = new Set()

@@ -10,7 +10,8 @@ export type ColorProps = {
 }
 
 export type ContainerProps = {
-    fluid? :boolean,
+    color? :string,
     compact? :boolean,
+    fluid? :boolean,
     className? :any,
 }

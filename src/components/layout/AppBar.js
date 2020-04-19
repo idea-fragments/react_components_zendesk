@@ -8,6 +8,7 @@ import { useStores }             from "stores/useStores"
 import styled, { css }           from "styled-components"
 import { mdiArrowLeft, mdiMenu } from "@mdi/js"
 import { SPACINGS }              from "styles/spacings"
+import { useTheme }              from "styles/theme/useTheme"
 import type { ContainerProps }   from "styles/types"
 import { DO_NOTHING }            from "utils/functionHelpers"
 import { mediaQueries }          from "styles/mediaQueries"
@@ -15,18 +16,20 @@ import { mediaQueries }          from "styles/mediaQueries"
 const { forLargeTabletsAndUp } = mediaQueries()
 
 type Props = {
-    title :string,
     actions :Array<React.Node>,
+    fixed? :boolean,
     height :string,
-    showBackButton :boolean,
+    logo? :ElementType,
     onBackClicked :() => void,
     onLogoClicked :() => void,
-    logo? :ElementType
+    showBackButton :boolean,
+    title :string,
 } & ContainerProps
 
 export const AppBar = ({
                            actions,
-                           className,
+                           color,
+                           fixed,
                            fluid,
                            logo,
                            height,
@@ -38,6 +41,7 @@ export const AppBar = ({
 
     // TODO this should not use MobX...switch to react context
     const { ui } = useStores()
+    const theme  = useTheme()
 
     const openNavDrawer = () => {
         ui.openDrawerWith({
@@ -49,39 +53,36 @@ export const AppBar = ({
         })
     }
 
-    const baseContainerStyles = `height: ${height}; align-items: center`
+    return <>
+        {fixed ? <FixedPlaceHolder height={height} /> : null}
+        <BarWrapper color={color} fixed>
+            <Content height={height} fluid={fluid}>
+                {
+                    showBackButton
+                    ? <IconButton icon={mdiArrowLeft}
+                                  flat
+                                  onClick={onBackClicked} />
+                    : null
+                }
 
-    const content = (
-        <FlexBlock spacing={SPACINGS.SM}
-                   justify={"space-between"}
-                   css={fluid
-                        ? css`padding: 0 1rem; ${baseContainerStyles}`
-                        : css`${baseContainerStyles}`}
-        >
-            {
-                showBackButton
-                ? <IconButton icon={mdiArrowLeft}
-                              flat
-                              onClick={onBackClicked} />
-                : null
-            }
-
-            <FlexBlock alignItems={"center"}
-                       onClick={onLogoClicked}
-                       css={`cursor: pointer;`}>
-                {logo ? logo : null}
-                {title}
-            </FlexBlock>
-            <DesktopNav alignItems={"center"}>
-                {actions}
-            </DesktopNav>
-            <MobileNav onClick={openNavDrawer} />
-
-        </FlexBlock>
-    )
-    return fluid
-           ? <>{content}</>
-           : <Container className={className}>{content}</Container>
+                <FlexBlock alignItems={"center"}
+                           onClick={onLogoClicked}
+                           css={`cursor: pointer;`}>
+                    {logo ? logo : null}
+                    {title}
+                </FlexBlock>
+                <DesktopNav alignItems={"center"}>
+                    {actions}
+                </DesktopNav>
+                <MobileNav
+                    color={theme.styles.getTextColorForBackground({
+                        color,
+                        theme,
+                    })}
+                    onClick={openNavDrawer} />
+            </Content>
+        </BarWrapper>
+    </>
 }
 
 AppBar.defaultProps = {
@@ -94,7 +95,27 @@ AppBar.defaultProps = {
 
 AppBar.COMPONENT_NAME = "AppBar"
 
-const DesktopNav = styled(FlexBlock)`
+const BarWrapper = styled.header`
+  background: ${({ color }) => color ? color : "transparent"};
+  position: ${({ fixed }) => fixed ? "fixed" : "unset"};
+  top: ${({ fixed }) => fixed ? "0" : "unset"};
+  left: ${({ fixed }) => fixed ? "0" : "unset"};
+  width: 100%;
+  z-index: ${({ theme }) => theme.styles.appBar.zIndex};
+`
+
+const Content = styled(Container).attrs({
+    withRows  : false,
+    spacing   : SPACINGS.SM,
+    justify   : "space-between",
+    alignItems: "center",
+})`
+  height: ${({ height }) => height ? height : "fit-content"};
+`
+
+const DesktopNav = styled(FlexBlock).attrs({
+    as: "nav",
+})`
   && {
     display: none;
     ${forLargeTabletsAndUp(css`
@@ -103,7 +124,19 @@ const DesktopNav = styled(FlexBlock)`
   }
 `
 
-const MobileNav = styled(IconButton).attrs({ flat: true, icon: mdiMenu })`
+const DrawerItem = styled(FlexBlock)`
+  width: 100%;
+  padding: 0 1rem;
+`
+
+const FixedPlaceHolder = styled.div`
+  height: ${({ height }) => height};
+`
+
+const MobileNav = styled(IconButton).attrs({
+    flat: true,
+    icon: mdiMenu,
+})`
   && {
     ${forLargeTabletsAndUp(css`
       display: none;
@@ -111,7 +144,3 @@ const MobileNav = styled(IconButton).attrs({ flat: true, icon: mdiMenu })`
   }
 `
 
-const DrawerItem = styled(FlexBlock)`
-  width: 100%;
-  padding: 0 1rem;
-`

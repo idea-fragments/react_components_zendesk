@@ -10,7 +10,8 @@ import type { ColorProps, ContainerProps } from "styles/types"
 import { DO_NOTHING }                      from "utils/functionHelpers"
 
 type Props = {
-    to :any,
+    to? :any,
+    href? :string,
     external :boolean,
     LinkComponent :ComponentType<{ className :string, to :any } & *>
 } & ButtonProps & ColorProps & ContainerProps
@@ -18,6 +19,7 @@ type Props = {
 export const ButtonLink = ({
                                LinkComponent,
                                external,
+                               flat,
                                icon,
                                iconPosition,
                                children,
@@ -25,7 +27,7 @@ export const ButtonLink = ({
                            } :Props) => {
     return (
         <Button {...otherProps}
-                flat={otherProps.inline !== true}
+                flat={flat != null ? flat : otherProps.inline !== true}
                 innerAs={LinkComponent}
                 {...external ? { target: "_blank" } : {}}>
             {icon ? (
