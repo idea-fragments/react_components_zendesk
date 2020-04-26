@@ -1,5 +1,4 @@
 // @flow
-/* eslint no-use-before-define: 0 */
 
 import styled, { css }            from "styled-components"
 import { textColorForBackground } from "styles/mixins"
@@ -32,7 +31,7 @@ export const Section = styled.section`
     margin-top: 0;
   }
   
-  & > ${Section} & {
+  & > section {
     padding-bottom: 0;
   }
 `
