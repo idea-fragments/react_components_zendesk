@@ -1,12 +1,11 @@
-
-const XS   = ".8rem"
-const SM   = "1rem"
-const MD   = "1.5rem"
-const LG   = "2rem"
-const XL   = "2.5rem"
-const XXL  = "3rem" // h1
-const XXXL = "4rem"
-const XXXXL = "5rem"
+const XS     = ".8rem"
+const SM     = "1rem"
+const MD     = "1.3rem"
+const LG     = "1.7rem"
+const XL     = "2.3rem"
+const XXL    = "3.3rem" // h1
+const XXXL   = "4rem"
+const XXXXL  = "5rem"
 const XXXXXL = "6rem"
 
 const THIN    = "100"
@@ -31,7 +30,7 @@ export const FONT_TAGS = Object.freeze({
 })
 
 export const FONT_SIZES = Object.freeze({
-    XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL
+    XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL,
 })
 
 export const FONT_WEIGHTS = Object.freeze({
@@ -44,8 +43,9 @@ export type FontTag = H1 | H2 | H3 | H4 | H5 | H6 | P | SPAN | DIV
 export type TextAlignment = "center" | "left" | "right"
 
 export type TextProps = {
+    align? :TextAlignment,
+    as? :FontTag,
+    hasSubText? :boolean,
     size? :FontSize,
     weight? :FontWeight,
-    as? :FontTag,
-    align? :TextAlignment
 }

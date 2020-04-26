@@ -5,6 +5,7 @@ import { observable }             from "mobx"
 import { actionAsync, task }      from "mobx-utils"
 import { Observer }               from "mobx-react"
 import React, { useRef }          from "react"
+import type { ComponentType }          from "react"
 import { returnAfterMinimum }     from "utils/dateTimeHelpers"
 import type { PromiseFunc }       from "utils/function.types"
 import { newIdGenerator, nextId } from "utils/idGenerator"
@@ -13,9 +14,16 @@ const gen = newIdGenerator()
 
 const visibleLoaderIds = observable(new Set<number>())
 
-export const useLoader = () => {
-    const Loader      = useRef(null)
-    const withLoading = useRef(null)
+type LoadingFunc<T> = (PromiseFunc<*, T>) => PromiseFunc<*, T>
+
+type Return<T> = {
+    withLoading: LoadingFunc<T>,
+    Loader     : ComponentType<any>,
+}
+
+export const useLoader = <T>() :Return<T> => {
+    const Loader    = useRef<?ComponentType<any>>(null)
+    const withLoading = useRef<?LoadingFunc<T>>(null)
 
     if (!Loader.current || !withLoading.current) {
         const id = nextId(gen)
@@ -29,7 +37,7 @@ export const useLoader = () => {
             }</Observer>
         }
 
-        withLoading.current = <T>(f :PromiseFunc<*, T>) :PromiseFunc<*, T> => (
+        withLoading.current = (f :PromiseFunc<*, T>) :PromiseFunc<*, T> => (
             actionAsync(async () :Promise<T> => {
                 visibleLoaderIds.add(id)
                 let val
