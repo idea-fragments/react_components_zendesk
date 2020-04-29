@@ -28,7 +28,6 @@ type Props = {
 
 export const AppBar = ({
                            actions,
-                           color,
                            fixed,
                            fluid,
                            logo,
@@ -55,7 +54,7 @@ export const AppBar = ({
 
     return <>
         {fixed ? <FixedPlaceHolder height={height} /> : null}
-        <BarWrapper color={color} fixed>
+        <BarWrapper fixed={fixed}>
             <Content height={height} fluid={fluid}>
                 {
                     showBackButton
@@ -76,7 +75,7 @@ export const AppBar = ({
                 </DesktopNav>
                 <MobileNav
                     color={theme.styles.getTextColorForBackground({
-                        color,
+                        color: theme.styles.appBar.background,
                         theme,
                     })}
                     onClick={openNavDrawer} />
@@ -96,7 +95,7 @@ AppBar.defaultProps = {
 AppBar.COMPONENT_NAME = "AppBar"
 
 const BarWrapper = styled.header`
-  background: ${({ color }) => color ? color : "transparent"};
+  background: ${({ theme }) => theme.styles.appBar.background};
   position: ${({ fixed }) => fixed ? "fixed" : "unset"};
   top: ${({ fixed }) => fixed ? "0" : "unset"};
   left: ${({ fixed }) => fixed ? "0" : "unset"};

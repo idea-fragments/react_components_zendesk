@@ -1,7 +1,10 @@
 // @flow
 
 export type Styles = {
-    appBar :{ zIndex :number },
+    appBar :{
+        background :string,
+        zIndex :number,
+    },
     colorAccent :string,
     colorPrimary :string,
     colorDanger :string,
@@ -9,6 +12,9 @@ export type Styles = {
     container :{ horizontalPadding :string },
     footer :{
         background :string
+    },
+    infoPanel :{
+        background :string,
     },
     nav :{
         linkColor :string,
@@ -21,7 +27,7 @@ export type Styles = {
     },
     sidebar :{
         background :string,
-        zIndex :9000
+        zIndex :number
     },
     textColorPrimary :string,
     textColorOverPrimaryBg :string,
