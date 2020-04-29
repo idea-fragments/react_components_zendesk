@@ -7,14 +7,17 @@ import { UiStore }                   from "stores/UiStore"
 import { useStores }                 from "stores/useStores"
 import { useObserver }               from "mobx-react"
 import styled, { css }               from "styled-components"
+import { mediaQueries }               from "styles/mediaQueries"
 
-const fluidStyles = css`
-  &&& {
-    left: 0;
-    width: unset;
-    margin: 1rem;
-    right: 0;
-  }
+const { forLargeTabletsAndUp } = mediaQueries()
+
+const stylesForDevices = css`
+  ${mediaQueries().forLargeTabletsAndUp(`
+    width: 544px;
+    margin: 0;
+    left: unset;
+    right: unset;
+  `)}
 `
 
 export let Modal = ({ className } :StyledComponentProps) => {
@@ -36,7 +39,13 @@ export let Modal = ({ className } :StyledComponentProps) => {
 }
 
 Modal = styled(Modal)`
-  ${({ fluid }) => fluid ? fluidStyles : ""}
+  &&& {
+    left: 0;
+    width: unset;
+    margin: 1rem;
+    right: 0;
+    ${({ fluid }) => fluid ? "" : stylesForDevices}
+  }
 `
 
 Modal.COMPONENT_NAME = "Modal"
