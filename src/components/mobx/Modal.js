@@ -9,8 +9,6 @@ import { useObserver }               from "mobx-react"
 import styled, { css }               from "styled-components"
 import { mediaQueries }               from "styles/mediaQueries"
 
-const { forLargeTabletsAndUp } = mediaQueries()
-
 const stylesForDevices = css`
   ${mediaQueries().forLargeTabletsAndUp(`
     width: 544px;
