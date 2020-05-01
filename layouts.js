@@ -3,6 +3,7 @@
 export * from "./src/components/layout/AppBar"
 export * from "./src/components/layout/AppBarLayout"
 export * from "./src/components/layout/Container"
+export * from "./src/components/Drawer"
 export * from "./src/components/layout/FlexBlock"
 export * from "./src/components/layout/Line"
 export * from "./src/components/layout/OpacityTransition"
