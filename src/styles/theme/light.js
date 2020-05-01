@@ -10,12 +10,19 @@ export const light :Theme = {
     isDark: false,
     styles: {
         ...base,
+        appBar                : {
+            ...base.appBar,
+            background: "transparent",
+        },
         navBackground         : COLORS.GREY_NOT_QUITE_BLUE,
         nav                   : {
             linkColor: COLORS.MIDNIGHT_PURPLE,
         },
         footer                : {
             background: COLORS.MIDNIGHT_BLUE,
+        },
+        infoPanel             : {
+            background: COLORS.VERY_LIGHT_GREY,
         },
         pageBackground        : COLORS.VERY_LIGHT_GREY,
         overlayBackground     : fade(COLORS.LIGHT_GREY),
