@@ -24,7 +24,7 @@ export type AlertContent = {
     title? :string,
     body :any,
     onClose? :() => void,
-    type :AlertType,
+    type? :AlertType,
 }
 
 type Props = {

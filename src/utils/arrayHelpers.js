@@ -1,6 +1,8 @@
 // @flow
 
 import { IObservableArray } from "mobx"
+import {flatten as ldFlatten} from "lodash"
+
 
 export type ArrayLike<T> = Array<T> | IObservableArray<T>
 export type Matrix<T> = Array<Array<T>>
@@ -31,3 +33,5 @@ export const arrayOfSizeN = (n :number) :Array<0> => {
     }
     return arr
 }
+
+export const flatten = <T>(m :Matrix<T>) :Array<T> => ldFlatten(m)

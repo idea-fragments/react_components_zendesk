@@ -20,7 +20,7 @@ export type SelectorProps = {
     emptyState? :string,
     hint? :string,
     onChange? :OnItemSelectedFunc<>,
-    onStateChange :() => void,
+    onStateChange :(state) => void,
     invalidOnNoSelection? :boolean,
     validation :Validation,
     flat? :boolean,
