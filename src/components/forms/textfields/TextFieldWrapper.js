@@ -26,7 +26,7 @@ const Field = styled(ZField)`
 export let TextFieldWrapper = ({
                                    compact,
                                    emptyState,
-    fluid,
+                                   fluid,
                                    hint,
                                    label,
                                    message,
@@ -77,5 +77,5 @@ TextFieldWrapper = styled(TextFieldWrapper)`
 `
 
 const Container = styled(FlexBlock)`
-  ${({fluid}) => fluid ? "width: 100%;" : ""}
+  ${({ fluid }) => fluid ? "width: 100%;" : ""}
 `
