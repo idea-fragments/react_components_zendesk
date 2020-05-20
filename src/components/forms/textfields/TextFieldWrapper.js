@@ -26,6 +26,7 @@ const Field = styled(ZField)`
 export let TextFieldWrapper = ({
                                    compact,
                                    emptyState,
+    fluid,
                                    hint,
                                    label,
                                    message,
@@ -35,7 +36,7 @@ export let TextFieldWrapper = ({
                                } :Props) => {
     message = validation.message || message
     return useObserver(() => (
-        <FlexBlock withRows spacing={0}>
+        <Container withRows spacing={0} fluid={fluid}>
             <Field compact={compact}>
                 {label ? <Label>{label}</Label> : null}
                 {hint ? <Hint>{hint}</Hint> : null}
@@ -51,7 +52,7 @@ export let TextFieldWrapper = ({
                      validation={validation.validation}>{message}</Message>
                  : null}
             </Field>
-        </FlexBlock>
+        </Container>
     ))
 }
 
@@ -63,6 +64,7 @@ TextFieldWrapper.COMPONENT_NAME = "TextFieldWrapper"
 
 TextFieldWrapper = styled(TextFieldWrapper)`
   &&&& {
+    font-size: inherit;
     :hover {
       border-color: ${({ theme } :StyledProps<>) => theme.styles.colorPrimary};
     }
@@ -72,4 +74,8 @@ TextFieldWrapper = styled(TextFieldWrapper)`
       box-shadow:${({ theme } :StyledProps<>) => `0 0 0 3px ${fade(theme.styles.colorPrimary)}`};
     }
   }
+`
+
+const Container = styled(FlexBlock)`
+  ${({fluid}) => fluid ? "width: 100%;" : ""}
 `

@@ -3,7 +3,7 @@
 import { COLORS, hasGoodContrast } from "styles/colors"
 
 export const base = {
-    appBar      : { zIndex: 9000 },
+    appBar      : { zIndex: 399 }, // modal backdrop zindex is 400
     colorAccent : COLORS.BLUE,
     colorPrimary: COLORS.HUB_SPOT_ORANGE,
     colorDanger : COLORS.RED,

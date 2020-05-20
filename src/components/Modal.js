@@ -120,6 +120,10 @@ export let Modal = ({
 
 }
 
-Modal                = styled(Modal)``
+Modal                = styled(Modal)`
+    ${Body} {
+      font-size: inherit;
+    }
+`
 Modal.COMPONENT_NAME = "Modal"
 Modal.defaultProps   = {}

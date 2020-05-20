@@ -17,6 +17,7 @@ export * from "./src/components/forms/textfields/EmailTextField"
 export * from "./src/components/forms/textfields/PasswordTextField"
 export * from "./src/components/forms/textfields/TextField"
 export * from "./src/components/forms/textfields/TextArea"
+export * from "./src/components/forms/textfields/TextFieldWrapper"
 
 /* =============================
  * BUTTONS
