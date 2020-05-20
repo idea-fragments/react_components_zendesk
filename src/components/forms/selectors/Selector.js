@@ -1,18 +1,32 @@
 // @flow
 
-import { Dropdown, Select }          from "components/forms/selectors/Dropdown"
-import * as React                    from "react"
-import type { RefinedSelectorProps } from "components/forms/selectors/types"
-import { VALIDATION_STATES }         from "components/forms/validationStates"
+import { Dropdown, Select }  from "components/forms/selectors/Dropdown"
+import * as React            from "react"
+import type {
+    RefinedSelectorProps,
+    SelectorOption,
+}                            from "components/forms/selectors/types"
+import { VALIDATION_STATES } from "components/forms/validationStates"
 
 export let Selector = (props :RefinedSelectorProps) => {
-    const {
-              optionsKeyMap,
-              emptyState,
-              selectedKey,
-              valueField,
-              validation,
-          } = props
+    let {
+            keyField,
+            options,
+            optionsKeyMap,
+            emptyState,
+            selectedKey,
+            valueField,
+            validation,
+        } = props
+
+    if (optionsKeyMap == null && options != null) {
+        optionsKeyMap = options.reduce(
+            (m :{ [string] :SelectorOption }, o :SelectorOption) => {
+                m[o[keyField]] = o
+                return m
+            }, {},
+        )
+    }
 
     // TODO validation
     // const getValidation = () => (
@@ -23,7 +37,9 @@ export let Selector = (props :RefinedSelectorProps) => {
     return (
         <Dropdown {...props}>
             <Select validation={validation.validation}>
-                {selectedKey ? optionsKeyMap[selectedKey][valueField] : emptyState}
+                {selectedKey
+                 ? optionsKeyMap[selectedKey][valueField]
+                 : emptyState}
             </Select>
         </Dropdown>
     )
