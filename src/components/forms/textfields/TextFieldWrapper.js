@@ -78,4 +78,7 @@ TextFieldWrapper = styled(TextFieldWrapper)`
 
 const Container = styled(FlexBlock)`
   ${({ fluid }) => fluid ? "width: 100%;" : ""}
+  && * {
+    font-size: inherit;
+  }
 `

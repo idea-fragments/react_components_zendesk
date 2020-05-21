@@ -1,12 +1,13 @@
 // @flow
 
-import { VALIDATION_STATES }       from "components/forms/validationStates"
-import { Loadable }                from "components/loaders/Loadable"
-import { useState }                from "react"
-import * as React                  from "react"
-import type { SelectorProps }      from "components/forms/selectors/types"
-import { isNotEmpty }              from "utils/arrayHelpers"
-import { DO_NOTHING }              from "utils/functionHelpers"
+import { VALIDATION_STATES }  from "components/forms/validationStates"
+import { Loadable }           from "components/loaders/Loadable"
+import { useState }           from "react"
+import * as React             from "react"
+import type { SelectorProps } from "components/forms/selectors/types"
+import styled, { css }        from "styled-components"
+import { isNotEmpty }         from "utils/arrayHelpers"
+import { DO_NOTHING }         from "utils/functionHelpers"
 import {
     Field,
     Label,
@@ -21,7 +22,7 @@ import {
     Select as ZenSelect,
     Autocomplete as ZenAutocomplete,
     Trigger,
-}                                  from "@zendeskgarden/react-dropdowns"
+}                             from "@zendeskgarden/react-dropdowns"
 import type { StateChangeOptions } from "@zendeskgarden/react-dropdowns"
 
 export type MenuPlacement =
@@ -49,7 +50,15 @@ type Props = SelectorProps & {
     useRawOptions :boolean,
 }
 
-export const Dropdown = (props :Props) => {
+const menuStyles = (extraStyles) => css`
+  width: 100%;
+  &&, && * {
+    font-size: inherit;
+  }
+  ${extraStyles}
+`
+
+export let Dropdown = (props :Props) => {
     const [state, setState] = useState({ isOpen: false })
     const controlledState   = { ...state, ...props }
 
@@ -120,11 +129,9 @@ export const Dropdown = (props :Props) => {
                     {messageNode}
                     {children}
                 </Field>
-
             }
 
-            <Menu style={{ width: "100%" }}
-                  css={menuCSS}
+            <Menu css={menuStyles(menuCSS)}
                   maxHeight={maxMenuHeight}
                   placement={placement}
                   popperModifiers={getPopperModifiers(fluid)}>
@@ -158,6 +165,12 @@ const getPopperModifiers = (fluid) => {
         },
     }
 }
+
+Dropdown = styled(Dropdown)`
+  && * {
+    font-size: inherit;
+  }
+`
 
 // $FlowFixMe
 Dropdown.defaultProps = {
