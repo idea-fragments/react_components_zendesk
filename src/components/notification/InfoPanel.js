@@ -10,10 +10,14 @@ import styled               from "styled-components"
 type Props = {
     children :Node,
     className? :string,
+    iconVerticalAlignment? :"center"
 }
 
-export let InfoPanel = ({ children, className } :Props) => {
-    return <Container className={className}>
+export let InfoPanel = ({ children, className, iconVerticalAlignment } :Props) => {
+    const alignItems = iconVerticalAlignment === "center"
+                       ? "center" : undefined
+    return <Container alignItems={alignItems}
+                      className={className}>
         <Icon svg={mdiInformation} color={COLORS.LIGHT_BLUE} />
         <div css={`flex: 1`}>
             {children}

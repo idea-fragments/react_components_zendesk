@@ -82,6 +82,6 @@ const AbsoluteContainer = styled(FlexBlock).attrs({
     justify   : "center",
     alignItems: "center",
 })`
-  position: absolute;
+  position: fixed;
   width: 100%;
 `

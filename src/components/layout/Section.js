@@ -34,4 +34,7 @@ export const Section = styled.section`
   & > section {
     padding-bottom: 0;
   }
+  & + section {
+    padding-top: 0;
+  }
 `
