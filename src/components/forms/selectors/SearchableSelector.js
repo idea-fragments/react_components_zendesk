@@ -24,7 +24,7 @@ type Props = {
 /*
 * If we need this full width, maybe add a Block wrapper here
 * */
-export let SearchableSelector :React.ComponentType<Props> = (props :Props) => {
+export let SearchableSelector = (props :Props) => {
     const {
               emptyState, className, compact,
               selectedKey, keyField, valueField, onChange, options,

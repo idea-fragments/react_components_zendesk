@@ -6,12 +6,13 @@ import { Dropdown, Select }    from "components/forms/selectors/Dropdown"
 import moment, { type Moment } from "moment"
 import { useState }            from "react"
 import * as React              from "react"
+import { formatMonthDateYear } from "utils/dateTimeHelpers"
 import { DO_NOTHING }          from "utils/functionHelpers"
 
 type Props = {
     minimumDate? :Moment,
     disabledDates :Array<Moment>,
-} & TextFieldProps<string, Moment>
+} & TextFieldProps<?string, ?Moment>
 
 type State = {
     isOpen :boolean
@@ -54,11 +55,11 @@ export const DatePickerSelector = (props :Props) => {
                                     padded
                                     key={"CalendarPanel"}
                                     minDate={minimumDate}
-                                    disabledDates={disabledDates} />
+                                    disabledDates={disabledDates} />,
                   ]}
                   menuCSS={`width: auto !important;`}>
             <Select disabled={disabled}>
-                {value ? value : emptyState}
+                {value ? formatMonthDateYear(value) : emptyState}
             </Select>
         </Dropdown>
     )

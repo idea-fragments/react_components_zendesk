@@ -8,6 +8,7 @@ export * from "./src/components/forms/selectors/BooleanSelector"
 export * from "./src/components/forms/selectors/DatePickerSelector"
 export * from "./src/components/forms/selectors/Dropdown"
 export * from "./src/components/forms/selectors/Selector"
+export * from "./src/components/forms/selectors/MultiSelector"
 export * from "./src/components/forms/selectors/SearchableSelector"
 export * from "./src/components/forms/selectors/MonthYearSelector"
 

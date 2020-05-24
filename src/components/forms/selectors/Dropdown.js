@@ -1,13 +1,18 @@
 // @flow
 
-import { VALIDATION_STATES }  from "components/forms/validationStates"
-import { Loadable }           from "components/loaders/Loadable"
-import { useState }           from "react"
-import * as React             from "react"
-import type { SelectorProps } from "components/forms/selectors/types"
-import styled, { css }        from "styled-components"
-import { isNotEmpty }         from "utils/arrayHelpers"
-import { DO_NOTHING }         from "utils/functionHelpers"
+import { VALIDATION_STATES }           from "components/forms/validationStates"
+import { Loadable }                    from "components/loaders/Loadable"
+import { debounce }                    from "lodash"
+import { useState, useEffect, useRef } from "react"
+import * as React                      from "react"
+import type {
+    SelectorItemKey,
+    SelectorOption,
+    SelectorProps,
+}                                      from "components/forms/selectors/types"
+import styled, { css }                 from "styled-components"
+import { isEmpty, isNotEmpty }         from "utils/arrayHelpers"
+import { DO_NOTHING }                  from "utils/functionHelpers"
 import {
     Field,
     Label,
@@ -20,10 +25,13 @@ import {
     Dropdown as ZenDropdown,
     Menu,
     Select as ZenSelect,
+    Multiselect as ZenMultiSelect,
     Autocomplete as ZenAutocomplete,
     Trigger,
-}                             from "@zendeskgarden/react-dropdowns"
-import type { StateChangeOptions } from "@zendeskgarden/react-dropdowns"
+}                                      from "@zendeskgarden/react-dropdowns"
+
+import type { StateChangeOptions }     from "@zendeskgarden/react-dropdowns"
+import { isArray, isNumber, isString } from "utils/typeCheckers"
 
 export type MenuPlacement =
     "start"
@@ -42,6 +50,7 @@ export type MenuPlacement =
 
 type Props = SelectorProps & {
     async :boolean,
+    filterOption :boolean,
     maxMenuHeight? :string,
     menuCSS? :string,
     placement? :MenuPlacement,
@@ -59,32 +68,100 @@ const menuStyles = (extraStyles) => css`
 `
 
 export let Dropdown = (props :Props) => {
-    const [state, setState] = useState({ isOpen: false })
-    const controlledState   = { ...state, ...props }
+    const [
+              state,
+              setState,
+          ]               = useState({ isOpen: false })
+    const [
+              filteringOptions,
+              setFilteringOptionsTo,
+          ]               = useState<boolean>(false)
+    const [
+              filteredOptions,
+              setFilteredOptions,
+          ]               = useState<SelectorOption[]>(props.options)
+    const [
+              searchFilter,
+              setSearchFilter,
+          ]               = useState<string>("")
+    const controlledState = { ...state, ...props }
 
     const {
               label, options, keyField, valueField,
-              hint, selectedKey, onChange, children, onStateChange,
+              hint, selectedKey, selectedKeys, onChange, children, onStateChange,
               useRawOptions, trigger, menuCSS, maxMenuHeight, returnItemOnChange,
               placement, async, fluid, validation, menuItemComponent,
+              filterOptions,
           } = props
+
+    const filterMatchingOptionsRef = useRef(
+        debounce(value => {
+            const matchingOptions = options.filter(option => {
+                return (
+                    option[valueField]
+                        .trim()
+                        .toLowerCase()
+                        .indexOf(value.trim().toLowerCase()) !== -1
+                )
+            })
+
+            setFilteredOptions(matchingOptions)
+            setFilteringOptionsTo(false)
+        }, 300),
+    )
+
+    useEffect(() => {
+        if (!filterOptions) return
+
+        setFilteringOptionsTo(true)
+        filterMatchingOptionsRef.current(searchFilter)
+    }, [searchFilter, filterOptions])
+
 
     let { message }   = props
     const optionNodes = useRawOptions ? options : createOptions(
-        options,
+        filterOptions ? filteredOptions : options,
         keyField,
         valueField,
         menuItemComponent,
+        filteringOptions,
     )
     message           = validation.message || message
     const messageNode = message ? <Message>{message}</Message> : null
     const hintNode    = hint ? <Hint>{hint}</Hint> : null
     const labelNode   = label ? <Label>{label}</Label> : null
 
-    const handleChange = (item) => {
-        onChange(
-            useRawOptions || returnItemOnChange ? item : item[keyField],
-        )
+    const handleChange = (item :SelectorOption | SelectorOption[]) => {
+        if (isArray(item)) {
+            // $FlowFixMe
+            handleMultiSelectChange(item)
+            return
+        }
+
+        if (useRawOptions || returnItemOnChange) {
+            onChange(item)
+            return
+        }
+
+        onChange(item[keyField])
+    }
+
+    const handleMultiSelectChange = (items :Array<SelectorItemKey | SelectorOption>) => {
+        if (useRawOptions || returnItemOnChange) {
+            onChange([...new Set(items)])
+            return
+        }
+        // When using the Dropdown with a MultiSelector, the dropdown
+        // spits back the item keys its given and will append the SelectorOption
+        // item to the end of the list. So we need to transform the last item
+        // into the SelectorItemKey
+        const changes = items.map((i :SelectorItemKey | SelectorOption) => {
+            if (isNumber(i) || isString(i)) return i
+            // $FlowFixMe
+            return i[keyField]
+        })
+
+        onChange([...new Set(changes)])
     }
 
     const handleStateChange = (
@@ -95,30 +172,33 @@ export let Dropdown = (props :Props) => {
 
         if (changes.hasOwnProperty("isOpen")) {
             if (useRawOptions) {
-                setState(changes)
+                setState({ ...state, ...changes })
                 return
             }
 
             const item = changes.selectedItem || {}
             setState({
+                ...state,
                 isOpen: item.isNextItem || item.isBackItem || changes.isOpen,
             })
             return
         }
 
         if (changes.hasOwnProperty("inputValue")) {
-            setState(changes)
+            setSearchFilter(changes.inputValue)
         }
     }
 
     const optionsLoaded = optionNodes && isNotEmpty(optionNodes)
 
     return (
-        <ZenDropdown selectedItem={selectedKey}
-                     isOpen={controlledState.isOpen}
-                     onSelect={handleChange}
-                     onStateChange={handleStateChange}
-                     downshiftProps={{ itemToString: item => item }}
+        <ZenDropdown
+            selectedItem={selectedKey}
+            selectedItems={[...new Set(selectedKeys)]}
+            isOpen={controlledState.isOpen}
+            onSelect={handleChange}
+            onStateChange={handleStateChange}
+            downshiftProps={{ itemToString: item => item }}
         >
             {
                 trigger
@@ -134,7 +214,8 @@ export let Dropdown = (props :Props) => {
             <Menu css={menuStyles(menuCSS)}
                   maxHeight={maxMenuHeight}
                   placement={placement}
-                  popperModifiers={getPopperModifiers(fluid)}>
+                // popperModifiers={getPopperModifiers(fluid)}
+            >
                 {
                     async
                     ? <Loadable css={`flex-direction: column; min-height: 50px`}
@@ -167,7 +248,10 @@ const getPopperModifiers = (fluid) => {
 }
 
 Dropdown = styled(Dropdown)`
-  && * {
+  && {
+    ${({ fluid }) => fluid ? "width: 100%;" : ""}
+  }
+  &&, && * {
     font-size: inherit;
   }
 `
@@ -186,6 +270,7 @@ Dropdown.defaultProps = {
 
 export const Autocomplete = ZenAutocomplete
 export const Select       = ZenSelect
+export const MultiSelect  = ZenMultiSelect
 
 const getItemType = (o) => {
     if (o.isNextItem) return NextItem
@@ -194,8 +279,13 @@ const getItemType = (o) => {
     return Item
 }
 
-const createOptions = (options, key, value, menuItemComponent) => (
-    options.map((o) => {
+const createOptions = (
+    options, key, value, menuItemComponent, isFilteringOptions,
+) => {
+    if (isFilteringOptions) return <Item disabled>Loading items...</Item>
+    if (isEmpty(options)) return <Item disabled>No matches found</Item>
+
+    return options.map((o) => {
         const ItemType  = getItemType(o)
         const Component = menuItemComponent
 
@@ -203,4 +293,5 @@ const createOptions = (options, key, value, menuItemComponent) => (
             {menuItemComponent ? <Component {...o} /> : o[value]}
         </ItemType>
     })
-)
+
+}
