@@ -96,14 +96,19 @@ export let Dropdown = (props :Props) => {
 
     const filterMatchingOptionsRef = useRef(
         debounce(value => {
-            const matchingOptions = options.filter(option => {
-                return (
-                    option[valueField]
-                        .trim()
-                        .toLowerCase()
-                        .indexOf(value.trim().toLowerCase()) !== -1
-                )
-            })
+            const searchText    = value.trim().toLowerCase()
+            let matchingOptions = options
+
+            if (searchText !== "") {
+                matchingOptions = options.filter(option => {
+                    return (
+                        option[valueField]
+                            .trim()
+                            .toLowerCase()
+                            .indexOf(value.trim().toLowerCase()) !== -1
+                    )
+                })
+            }
 
             setFilteredOptions(matchingOptions)
             setFilteringOptionsTo(false)
@@ -194,7 +199,9 @@ export let Dropdown = (props :Props) => {
     return (
         <ZenDropdown
             selectedItem={selectedKey}
-            selectedItems={[...new Set(selectedKeys)]}
+            selectedItems={selectedKeys
+                           ? [...new Set(selectedKeys)]
+                           : undefined}
             isOpen={controlledState.isOpen}
             onSelect={handleChange}
             onStateChange={handleStateChange}

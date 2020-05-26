@@ -46,7 +46,9 @@ export let Loadable = ({ children, showSpinner, className, opaqueSpinner }) => {
         <ChildrenContainer spacing={null}
                            className={className}
                            opaqueSpinner={opaqueSpinner}
-                           showSpinner={showingSpinner}>
+                           showSpinner={showingSpinner}
+                           withRows
+        >
             {children}
         </ChildrenContainer>
 

@@ -1,22 +1,23 @@
 // @flow
 
-import type { FormFieldProps } from "components/forms/formField.types"
+import type { FormFieldProps }     from "components/forms/formField.types"
+import { VALIDATION_STATES }       from "components/forms/validationStates"
+import { FlexBlock }               from "components/layout/FlexBlock"
+import type { StyledProps }        from "components/StyledProps.type"
+import React, { useState, useRef } from "react"
+import type { ComponentType }      from "react"
+import { useObserver }             from "mobx-react"
+import styled                      from "styled-components"
+import { dark, fade }              from "styles/colors"
 import {
     Field as ZField,
     Label,
     Hint,
     Message,
-}                              from "@zendeskgarden/react-forms"
-import { VALIDATION_STATES }   from "components/forms/validationStates"
-import { FlexBlock }           from "components/layout/FlexBlock"
-import type { StyledProps }    from "components/StyledProps.type"
-import * as React              from "react"
-import { useObserver }         from "mobx-react"
-import styled                  from "styled-components"
-import { dark, fade }          from "styles/colors"
+}                                  from "@zendeskgarden/react-forms"
 
 type Props = FormFieldProps & {
-    WrappedComponent :React.ComponentType<>,
+    WrappedComponent :ComponentType<>,
 } & *
 
 const Field = styled(ZField)`
@@ -31,12 +32,28 @@ export let TextFieldWrapper = ({
                                    label,
                                    message,
                                    validation,
+                                   value: propValue,
                                    WrappedComponent,
+                                   onChange,
                                    ...props
                                } :Props) => {
+    const [value, setValue] = useState<string>("")
+    const isNotControlled   = useRef<boolean>(propValue == null)
+
+    const handleChange = (e :SyntheticInputEvent<>) => {
+        if (isNotControlled.current) {
+            const textValue = e.target.value
+            setValue(textValue)
+            if (onChange) onChange(textValue)
+            return
+        }
+
+        onChange(e)
+    }
+
     message = validation.message || message
     return useObserver(() => (
-        <Container withRows spacing={0} fluid={fluid}>
+        <Container withRows spacing={null} fluid={fluid}>
             <Field compact={compact}>
                 {label ? <Label>{label}</Label> : null}
                 {hint ? <Hint>{hint}</Hint> : null}
@@ -46,6 +63,8 @@ export let TextFieldWrapper = ({
                     {...props}
                     isResizable={true}
                     resizable={true}
+                    value={isNotControlled.current ? value : propValue}
+                    onChange={handleChange}
                 />
                 {message
                  ? <Message
