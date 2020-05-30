@@ -87,8 +87,8 @@ const responsiveStyles = ({ responsivePropsList, ...originalProps } :Props) => (
     })
 )
 
-export const FlexBlock :React.ComponentType<Props> = styled.div.attrs(({ spacing, ...rest }) => ({
-    "data-component-name": rest["data-component-name"] || COMPONENT_NAME,
+export const FlexBlock :React.ComponentType<Props> = styled.div.attrs(({ spacing, "data-component-name": dataComponentName,}) => ({
+    "data-component-name": dataComponentName || COMPONENT_NAME,
     spacing              : spacing === undefined ? SPACINGS.SM : spacing,
 }))`
   display: ${getDisplay};

@@ -3,7 +3,7 @@
 import {
     getInlineStyling,
     textColorForButton,
-} from "components/forms/buttonMixins"
+}                                          from "components/forms/buttonMixins"
 import { Icon }                            from "components/Icon"
 import { FlexBlock }                       from "components/layout/FlexBlock"
 import type { StyledProps }                from "components/StyledProps.type"
@@ -14,6 +14,7 @@ import { dark, light }                     from "styles/colors"
 import { SPACINGS }                        from "styles/spacings"
 import type { ColorProps, ContainerProps } from "styles/types"
 import styled, { css }                     from "styled-components"
+import { DO_NOTHING }                      from "utils/functionHelpers"
 
 const fitContent   = css`
   width: fit-content;
@@ -41,6 +42,10 @@ const colors       = css`
 `
 const alignment    = ({ alignSelf }) => (
     alignSelf ? css`align-self: ${alignSelf};` : ""
+)
+
+const casing    = ({ uppercase }) => (
+    uppercase ? css`text-transform: uppercase;` : ""
 )
 
 const baseColor = ({ color, success, danger, theme } :Props & StyledProps) => {
@@ -83,6 +88,7 @@ export const Button = styled(forwardRef<Props, typeof Button>((
     } :Props,
     ref :Ref,
 ) => {
+
     return (
         <SButton as={innerAs}
                  ref={ref}
@@ -111,6 +117,7 @@ export const Button = styled(forwardRef<Props, typeof Button>((
     font-weight: bold;
     ${({ fluid }) => !fluid ? fitContent : fitContainer}
     ${alignment}
+    ${casing}
     ${({ disabled }) => !disabled ? colors : ""}
   }
 `

@@ -7,6 +7,7 @@ export const base = {
     colorAccent : COLORS.BLUE,
     colorPrimary: COLORS.HUB_SPOT_ORANGE,
     colorDanger : COLORS.RED,
+    colorWarning : COLORS.YELLOW,
     colorSuccess: COLORS.GREEN,
     container   : { horizontalPadding: "1rem" },
     sidebar     : { zIndex: 10000 },

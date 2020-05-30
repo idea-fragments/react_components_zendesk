@@ -7,6 +7,7 @@ export type Styles = {
     },
     colorAccent :string,
     colorPrimary :string,
+    colorWarning :string,
     colorDanger :string,
     colorSuccess :string,
     container :{ horizontalPadding :string },

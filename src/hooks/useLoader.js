@@ -41,11 +41,11 @@ export const useLoader = <T>() :Return<T> => {
 
         withLoading.current = (f :PromiseFunc<*, T>) :PromiseFunc<*, T> => {
             return (
-                actionAsync(async () :Promise<T> => {
+                actionAsync(async (...args) :Promise<T> => {
                     visibleLoaderIds.add(id)
                     let val
                     try {
-                        val = await task(returnAfterMinimum(500, f))
+                        val = await task(returnAfterMinimum(500, f, ...args))
                     } finally {
                         visibleLoaderIds.delete(id)
                     }

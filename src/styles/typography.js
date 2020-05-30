@@ -33,9 +33,9 @@ export const FONT_SIZES = Object.freeze({
     XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL,
 })
 
-export const FONT_WEIGHTS = Object.freeze({
+export const FONT_WEIGHTS = {
     THIN, LIGHT, REGULAR, MEDIUM, BOLD, BLACK,
-})
+}
 
 export type FontSize = XS | SM | MD | LG | XL | XXL | XXXL
 export type FontWeight = THIN | LIGHT | REGULAR | MEDIUM | BOLD | BLACK

@@ -17,7 +17,7 @@ type Common = {
     valueField :string,
     message? :string,
     emptyState? :string,
-    hint? :string,
+    hint? :string | React.Element,
     onChange? :OnItemSelectedFunc<>,
     onStateChange? :(state) => void,
     invalidOnNoSelection? :boolean,

@@ -19,6 +19,7 @@ const createButtons = (
     buttons :Array<React.Node>,
     closeModal :() => void,
     shouldDisable :boolean,
+    autoClose :boolean,
 ) => (
     // $FlowFixMe
     buttons.map((b :React.Element<{ +props :{ disableable :boolean } & ButtonProps }>) => {
@@ -28,9 +29,9 @@ const createButtons = (
                 {React.cloneElement(
                     b,
                     {
-                        onClick : () => {
-                            onClick()
-                            closeModal()
+                        onClick : async () => {
+                            await onClick()
+                            if(autoClose) closeModal()
                         },
                         disabled: disableable ? shouldDisable : disabled,
                     },
@@ -59,6 +60,7 @@ export let Modal = ({
     if (!modalContent) throw new Error("Modal found null modal content")
 
     const {
+              autoClose,
               title,
               body,
               buttons,
@@ -76,7 +78,7 @@ export let Modal = ({
 
     const footerItems = () => (
         buttons
-        ? createButtons(buttons, handleClose, disableActions)
+        ? createButtons(buttons, handleClose, disableActions, autoClose)
         : <FooterItem>
             <Button onClick={handleClose}
                     primary
