@@ -12,6 +12,7 @@ import { Button as SButton }               from "@zendeskgarden/react-buttons"
 import type { Alignment }                  from "styles/alignments"
 import { dark, light }                     from "styles/colors"
 import { SPACINGS }                        from "styles/spacings"
+import type { Theme }                      from "styles/theme/Theme.type"
 import type { ColorProps, ContainerProps } from "styles/types"
 import styled, { css }                     from "styled-components"
 import { DO_NOTHING }                      from "utils/functionHelpers"
@@ -22,8 +23,12 @@ const fitContent   = css`
 `
 const fitContainer = css`width: 100%;`
 const colors       = css`
-    background: ${({ flat, primary, inline, color }) => flat || !primary || inline ? "transparent" : color};
-    border-color: ${({ flat, primary, inline, color }) => !flat && !primary && !inline ? color : "transparent"};
+    background: ${({ flat, primary, inline, color }) => flat || !primary || inline
+                                                        ? "transparent"
+                                                        : color};
+    border-color: ${({ flat, primary, inline, color }) => !flat && !primary && !inline
+                                                          ? color
+                                                          : "transparent"};
     
     ${getInlineStyling}
     ${textColorForButton}
@@ -44,9 +49,10 @@ const alignment    = ({ alignSelf }) => (
     alignSelf ? css`align-self: ${alignSelf};` : ""
 )
 
-const casing    = ({ uppercase }) => (
-    uppercase ? css`text-transform: uppercase;` : ""
-)
+const casing = ({ theme } :{ theme :Theme }) => {
+    const casing = theme.styles.buttons.textTransform
+    return casing ? css`text-transform: ${casing};` : ""
+}
 
 const baseColor = ({ color, success, danger, theme } :Props & StyledProps) => {
     if (color) return color

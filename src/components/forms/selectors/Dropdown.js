@@ -60,7 +60,7 @@ type Props = SelectorProps & {
 }
 
 const menuStyles = (extraStyles) => css`
-  width: 100%;
+  && { width: 100%; }
   &&, && * {
     font-size: inherit;
   }

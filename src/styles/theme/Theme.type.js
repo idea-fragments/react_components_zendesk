@@ -5,6 +5,9 @@ export type Styles = {
         background :string,
         zIndex :number,
     },
+    buttons: {
+        textTransform: string,
+    },
     colorAccent :string,
     colorPrimary :string,
     colorWarning :string,
