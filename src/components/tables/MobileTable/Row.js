@@ -1,17 +1,18 @@
 // @flow
 
-import { Button }                     from "components/forms/Button"
-import { FlexBlock, PaddedFlexBlock } from "components/layout/FlexBlock"
-import { OverflowMenu }               from "components/layout/OverflowMenu"
-import type { ColumnConfig, Item }    from "components/tables/Table"
-import { Text }                       from "components/text/Text"
-import * as React                     from "react"
-import styled                         from "styled-components"
-import { COLORS, veryLight }          from "styles/colors"
-import { SPACINGS }                   from "styles/spacings"
-import { FONT_SIZES, FONT_WEIGHTS }   from "styles/typography"
-import { Checkbox, Label }            from "@zendeskgarden/react-forms"
-import {mdiChevronDown, mdiChevronUp} from "@mdi/js"
+import { Button }                       from "components/forms/Button"
+import { FlexBlock, PaddedFlexBlock }   from "components/layout/FlexBlock"
+import { Grid, Row as GridRow, Col }    from "components/layout/Grid"
+import { OverflowMenu }                 from "components/layout/OverflowMenu"
+import type { ColumnConfig, Item }      from "components/tables/Table"
+import { Text }                         from "components/text/Text"
+import * as React                       from "react"
+import styled, { css }                  from "styled-components"
+import { COLORS, veryLight }            from "styles/colors"
+import { SPACINGS }                     from "styles/spacings"
+import { FONT_SIZES, FONT_WEIGHTS }     from "styles/typography"
+import { Checkbox, Label }              from "@zendeskgarden/react-forms"
+import { mdiChevronDown, mdiChevronUp } from "@mdi/js"
 
 
 type Props = {
@@ -42,44 +43,65 @@ export const Row = ({
 
     return (
         <Container css={containerStyles || {}} onClick={() => onClick(key)}>
-            {checkable ? (
-                <Checkbox checked={checked} onChange={handleCheckChange}>
-                    <Label hidden>Select Job to Apply</Label>
-                </Checkbox>
-            ) : null}
-            <FlexBlock withRows fluid spacing={SPACINGS.XS}>
-                {columnConfigs.map((c :ColumnConfig) => {
-                    const { name, collapsible, important } = c
-                    const { MEDIUM, REGULAR, BOLD }        = FONT_WEIGHTS
+            <PaddedFlexBlock css={`background: white; 
+                                   width: 100%;
+                                   border-radius: .3rem;`}>
+                {checkable ? (
+                    <Checkbox checked={checked} onChange={handleCheckChange}>
+                        <Label hidden>Select</Label>
+                    </Checkbox>
+                ) : null}
 
-                    const titleWeight = important ? BOLD : MEDIUM
-                    const valueWeight = important ? BOLD : REGULAR
+                <FlexBlock withRows fluid spacing={SPACINGS.SM}>
+                    <Grid>
+                        {columnConfigs.map((c :ColumnConfig) => {
+                            const { name, collapsible, important } = c
+                            const { MEDIUM, REGULAR, BOLD }        = FONT_WEIGHTS
 
-                    return (
-                        <FlexBlock key={`${key}-${c.name}`}
-                                   justify={"space-between"}
-                                   hidden={collapsible ? isCollapsed : false}>
-                            <Text weight={titleWeight} size={FONT_SIZES.SM}>
-                                {name}:
-                            </Text>
-                            <Text weight={valueWeight} size={FONT_SIZES.SM}>
-                                {item[name]}
-                            </Text>
-                        </FlexBlock>
-                    )
-                })}
+                            const titleWeight = important ? BOLD : MEDIUM
+                            const valueWeight = important ? MEDIUM : REGULAR
 
-                <ButtonContainer spacing={SPACINGS.SM}>
-                    <Button inline icon={
-                        isCollapsed ? mdiChevronDown
+                            const cssStyles = collapsible && isCollapsed
+                                              ? css`&& { display: none; }`
+                                              : ""
+
+                            return (
+                                <GridRow key={`${key}-${c.name}`}
+                                         css={cssStyles}>
+                                    <Col md={5} sm={12}>
+                                        <Text
+                                            css={`font-weight: ${titleWeight};`}>
+                                            {name}:
+                                        </Text>
+                                    </Col>
+
+                                    <Col md={7} sm={12}>
+                                        <Text
+                                            css={`font-weight: ${valueWeight};
+                                                  font-size: ${FONT_SIZES.XS};`}>
+                                            {item[name]}
+                                        </Text>
+                                    </Col>
+                                </GridRow>
+                            )
+                        })}
+                    </Grid>
+
+                    <ButtonContainer spacing={SPACINGS.SM}>
+                        <Button fluid
+                                icon={
+                                    isCollapsed
+                                    ? mdiChevronDown
                                     : mdiChevronUp
-                    }
-                            onClick={toggleCollapse}>
-                        Show {isCollapsed ? "More" : "Less"}
-                    </Button>
-                </ButtonContainer>
-            </FlexBlock>
-            {actions ? <div><OverflowMenu actions={actions} /></div> : null}
+                                }
+                                size={"small"}
+                                onClick={toggleCollapse}>
+                            Show {isCollapsed ? "More" : "Less"}
+                        </Button>
+                    </ButtonContainer>
+                </FlexBlock>
+                {actions ? <div><OverflowMenu actions={actions} /></div> : null}
+            </PaddedFlexBlock>
         </Container>
     )
 }
@@ -93,10 +115,12 @@ const Container = styled(PaddedFlexBlock).attrs(() => ({
 }))`
   background: ${veryLight(COLORS.GREY)};
   height: auto;
+  border-radius: .3rem;
+  padding: .5rem;
 `
 
 const ButtonContainer = styled(FlexBlock)`
-  justify-content: flex-end;
+  justify-content: center;
 `
 
 // css={"align-self: flex-start;"}

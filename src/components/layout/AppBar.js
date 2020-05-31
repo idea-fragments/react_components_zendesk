@@ -70,15 +70,15 @@ export const AppBar = ({
                     {logo ? logo : null}
                     {title}
                 </FlexBlock>
-                <DesktopNav alignItems={"center"}>
-                    {actions}
-                </DesktopNav>
                 <MobileNav
                     color={theme.styles.getTextColorForBackground({
                         color: theme.styles.appBar.background,
                         theme,
                     })}
                     onClick={openNavDrawer} />
+                <DesktopNav alignItems={"center"}>
+                    {actions}
+                </DesktopNav>
             </Content>
         </BarWrapper>
     </>
@@ -137,6 +137,7 @@ const MobileNav = styled(IconButton).attrs({
     icon: mdiMenu,
 })`
   && {
+    margin-right: 0;
     ${forLargeTabletsAndUp(css`
       display: none;
     `)} 

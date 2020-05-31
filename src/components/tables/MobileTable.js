@@ -44,7 +44,9 @@ export const MobileTable = ({
                    withRows
                    spacing={SPACINGS.SM}>
             <FlexBlock alignAxis={"center"}
-                       spacing={SPACINGS.XS}>
+                       justify={"space-between"}
+                       css={`flex-wrap: wrap;`}
+                       spacing={SPACINGS.SM}>
 
                 <Title>
                     {title}
