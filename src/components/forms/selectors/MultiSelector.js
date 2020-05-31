@@ -14,10 +14,11 @@ import { VALIDATION_STATES }       from "components/forms/validationStates"
 import { debounce }                from "lodash"
 
 type Props = {
+    maxItems: 2,
     selectedKeys :Array<SelectorItemKey>,
 } & RefinedMultiSelectorProps
 
-export let MultiSelector = (props :Props) => {
+export let MultiSelector = ({maxItems, ...props} :Props) => {
     let {
             keyField,
             options,
@@ -39,10 +40,11 @@ export let MultiSelector = (props :Props) => {
     return (
         <Dropdown {...props} filterOptions>
             <MultiSelect
+                maxItems={maxItems}
                 validation={validation.validation}
                 renderItem={({ value, removeValue }) => (
                     <Tag size="large">
-                        {optionsKeyMap[value][valueField]}
+                        <span>{optionsKeyMap[value][valueField]}</span>
                         <Close onClick={() => removeValue()} />
                     </Tag>
                 )}
@@ -56,3 +58,4 @@ MultiSelector.defaultProps = {
     validation          : { validation: VALIDATION_STATES.NONE },
     optionNodes         : [],
 }
+

@@ -11,6 +11,7 @@ import type {
     SelectorProps,
 }                                      from "components/forms/selectors/types"
 import styled, { css }                 from "styled-components"
+import { FONT_SIZES }                  from "styles/typography"
 import { isEmpty, isNotEmpty }         from "utils/arrayHelpers"
 import { DO_NOTHING }                  from "utils/functionHelpers"
 import {
@@ -132,7 +133,11 @@ export let Dropdown = (props :Props) => {
         filteringOptions,
     )
     message           = validation.message || message
-    const messageNode = message ? <Message>{message}</Message> : null
+    const messageNode = message
+                        ? <Message validation={validation.validation}>
+                            {message}
+                        </Message>
+                        : null
     const hintNode    = hint ? <Hint>{hint}</Hint> : null
     const labelNode   = label ? <Label>{label}</Label> : null
 
@@ -190,7 +195,7 @@ export let Dropdown = (props :Props) => {
         }
 
         if (changes.hasOwnProperty("inputValue")) {
-            setSearchFilter(changes.inputValue)
+            setSearchFilter(changes.inputValue || "")
         }
     }
 
@@ -213,8 +218,8 @@ export let Dropdown = (props :Props) => {
                 : <Field className={props.className}>
                     {labelNode}
                     {hintNode}
-                    {messageNode}
                     {children}
+                    {messageNode}
                 </Field>
             }
 
@@ -255,11 +260,14 @@ const getPopperModifiers = (fluid) => {
 }
 
 Dropdown = styled(Dropdown)`
-  && {
-    ${({ fluid }) => fluid ? "width: 100%;" : ""}
-  }
   &&, && * {
     font-size: inherit;
+  }
+  && {
+    ${({ fluid }) => fluid ? "width: 100%;" : ""}
+    ${Message} {
+      font-size: ${FONT_SIZES.XS};
+    }
   }
 `
 
@@ -277,7 +285,11 @@ Dropdown.defaultProps = {
 
 export const Autocomplete = ZenAutocomplete
 export const Select       = ZenSelect
-export const MultiSelect  = ZenMultiSelect
+export const MultiSelect  = styled(ZenMultiSelect)`
+  && {
+    div { max-width: 100%; }
+  }
+`
 
 const getItemType = (o) => {
     if (o.isNextItem) return NextItem

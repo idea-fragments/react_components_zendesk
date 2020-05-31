@@ -58,7 +58,8 @@ export const DatePickerSelector = (props :Props) => {
                                     disabledDates={disabledDates} />,
                   ]}
                   menuCSS={`width: auto !important;`}>
-            <Select disabled={disabled}>
+            <Select validation={props.validation.validation}
+                    disabled={disabled}>
                 {value ? formatMonthDateYear(value) : emptyState}
             </Select>
         </Dropdown>

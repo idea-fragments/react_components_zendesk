@@ -11,9 +11,20 @@ import {
     FooterItem,
     Close,
 }                                            from "@zendeskgarden/react-modals"
-import type { ModalContent }                 from "stores/UiStore"
 import styled                                from "styled-components"
 
+export type ModalContent = {
+    autoClose? :boolean,
+    blocking? :boolean,
+    title? :string,
+    body :any,
+    buttons? :Array<{ +props :{ disableable :boolean } & ButtonProps }>,
+    withCancelButton? :boolean,
+    withNoActions? :boolean,
+    isSuccess? :boolean,
+    isDanger? :boolean,
+    onClose? :() => void,
+}
 
 const createButtons = (
     buttons :Array<React.Node>,
@@ -60,7 +71,7 @@ export let Modal = ({
     if (!modalContent) throw new Error("Modal found null modal content")
 
     const {
-              autoClose,
+              autoClose = true,
               title,
               body,
               buttons,

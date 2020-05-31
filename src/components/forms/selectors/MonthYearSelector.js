@@ -43,7 +43,8 @@ export const MonthYearSelector = (props :Props) => {
                      useRawOptions
                      options={[]}
                      menuCSS={`width: auto !important;`}>
-        <Select disabled={disabled}>
+        <Select validation={props.validation.validation}
+                disabled={disabled}>
             {value ? value : emptyState}
         </Select>
     </Dropdown>

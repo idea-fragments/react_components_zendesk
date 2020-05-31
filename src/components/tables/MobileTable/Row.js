@@ -11,6 +11,7 @@ import { COLORS, veryLight }          from "styles/colors"
 import { SPACINGS }                   from "styles/spacings"
 import { FONT_SIZES, FONT_WEIGHTS }   from "styles/typography"
 import { Checkbox, Label }            from "@zendeskgarden/react-forms"
+import {mdiChevronDown, mdiChevronUp} from "@mdi/js"
 
 
 type Props = {
@@ -70,8 +71,8 @@ export const Row = ({
 
                 <ButtonContainer spacing={SPACINGS.SM}>
                     <Button inline icon={
-                        isCollapsed ? "arrow-ios-downward-outline"
-                                    : "arrow-ios-upward-outline"
+                        isCollapsed ? mdiChevronDown
+                                    : mdiChevronUp
                     }
                             onClick={toggleCollapse}>
                         Show {isCollapsed ? "More" : "Less"}
