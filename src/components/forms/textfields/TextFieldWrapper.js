@@ -32,25 +32,11 @@ export let TextFieldWrapper = ({
                                    label,
                                    message,
                                    validation,
-                                   value: propValue,
+                                   value,
                                    WrappedComponent,
                                    onChange,
                                    ...props
                                } :Props) => {
-    const [value, setValue] = useState<string>("")
-    const isNotControlled   = useRef<boolean>(propValue == null)
-
-    const handleChange = (e :SyntheticInputEvent<>) => {
-        if (isNotControlled.current) {
-            const textValue = e.target.value
-            setValue(textValue)
-            if (onChange) onChange(textValue)
-            return
-        }
-
-        onChange(e)
-    }
-
     message = validation.message || message
     return useObserver(() => (
         <Container withRows spacing={null} fluid={fluid}>
@@ -63,8 +49,8 @@ export let TextFieldWrapper = ({
                     {...props}
                     isResizable={true}
                     resizable={true}
-                    value={isNotControlled.current ? value : propValue}
-                    onChange={handleChange}
+                    value={value}
+                    onChange={onChange}
                 />
                 {message
                  ? <Message
