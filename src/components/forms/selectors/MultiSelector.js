@@ -1,17 +1,14 @@
 // @flow
 
-import type { StateChangeOptions } from "@zendeskgarden/react-dropdowns"
 import { Dropdown, MultiSelect }   from "components/forms/selectors/Dropdown"
 import { Tag, Close }              from "components/tags/Tag"
-import React, { useState, useRef } from "react"
+import React from "react"
 import type {
-    OnMultiSelectItemRemoveFunc,
     RefinedMultiSelectorProps,
     SelectorItemKey,
     SelectorOption,
 }                                  from "components/forms/selectors/types"
 import { VALIDATION_STATES }       from "components/forms/validationStates"
-import { debounce }                from "lodash"
 
 type Props = {
     maxItems: 2,
