@@ -1,19 +1,19 @@
 // @flow
 
 
-import { Icon }                            from "components/Icon"
-import { FlexBlock }                       from "components/layout/FlexBlock"
-import React, { type ComponentType }       from "react"
-import { Button, Props as ButtonProps }    from "components/forms/Button"
-import { SPACINGS }                        from "styles/spacings"
-import type { ColorProps, ContainerProps } from "styles/types"
-import { DO_NOTHING }                      from "utils/functionHelpers"
+import { Icon }                              from "components/Icon"
+import { FlexBlock }                         from "components/layout/FlexBlock"
+import React, { type ComponentType }         from "react"
+import { Button, type Props as ButtonProps } from "components/forms/Button"
+import { SPACINGS }                          from "styles/spacings"
+import type { ColorProps, ContainerProps }   from "styles/types"
+import { DO_NOTHING }                        from "utils/functionHelpers"
 
 type Props = {
     to? :any,
     href? :string,
     external :boolean,
-    LinkComponent :ComponentType<{ className :string, to :any } & *>
+    LinkComponent :string | ComponentType<{ className :string, to :any } & *>
 } & ButtonProps & ColorProps & ContainerProps
 
 export const ButtonLink = ({
