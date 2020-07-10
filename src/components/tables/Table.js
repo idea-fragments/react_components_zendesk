@@ -26,7 +26,7 @@ export type Item = {
     [string] :React.Node,
     key :ItemKey,
     containerStyles? :ItemContainerStyles,
-    actions :Array<ItemAction>
+    actions? :Array<ItemAction>
 }
 
 export type ColumnConfig = {

@@ -95,26 +95,33 @@ export let Dropdown = (props :Props) => {
               filterOptions,
           } = props
 
-    const filterMatchingOptionsRef = useRef(
-        debounce(value => {
-            const searchText    = value.trim().toLowerCase()
-            let matchingOptions = options
+    const filterFunc = value => {
+        const searchText    = value.trim().toLowerCase()
+        let matchingOptions = options
 
-            if (searchText !== "") {
-                matchingOptions = options.filter(option => {
-                    return (
-                        option[valueField]
-                            .trim()
-                            .toLowerCase()
-                            .indexOf(value.trim().toLowerCase()) !== -1
-                    )
-                })
-            }
+        if (searchText !== "") {
+            matchingOptions = options.filter(option => {
+                return (
+                    option[valueField]
+                        .trim()
+                        .toLowerCase()
+                        .indexOf(value.trim().toLowerCase()) !== -1
+                )
+            })
+        }
 
-            setFilteredOptions(matchingOptions)
-            setFilteringOptionsTo(false)
-        }, 300),
-    )
+        setFilteredOptions(matchingOptions)
+        setFilteringOptionsTo(false)
+    }
+
+    const filterMatchingOptionsRef = useRef(debounce(filterFunc, 300))
+
+    useEffect(() => {
+        if (!filterOptions) return
+        filterMatchingOptionsRef.current = debounce(filterFunc, 300)
+        setFilteredOptions(options)
+        setSearchFilter("")
+    }, [options])
 
     useEffect(() => {
         if (!filterOptions) return
@@ -122,7 +129,6 @@ export let Dropdown = (props :Props) => {
         setFilteringOptionsTo(true)
         filterMatchingOptionsRef.current(searchFilter)
     }, [searchFilter, filterOptions])
-
 
     let { message }   = props
     const optionNodes = useRawOptions ? options : createOptions(
