@@ -1,8 +1,8 @@
 // @flow
 
 import {
+    buttonLikeHoverable,
     getInlineStyling,
-    textColorForButton,
 }                                          from "components/forms/buttonMixins"
 import { Icon }                            from "components/Icon"
 import { FlexBlock }                       from "components/layout/FlexBlock"
@@ -10,12 +10,10 @@ import type { StyledProps }                from "components/StyledProps.type"
 import React, { forwardRef, type Ref }     from "react"
 import { Button as SButton }               from "@zendeskgarden/react-buttons"
 import type { Alignment }                  from "styles/alignments"
-import { dark, light }                     from "styles/colors"
 import { SPACINGS }                        from "styles/spacings"
 import type { Theme }                      from "styles/theme/Theme.type"
 import type { ColorProps, ContainerProps } from "styles/types"
 import styled, { css }                     from "styled-components"
-import { DO_NOTHING }                      from "utils/functionHelpers"
 
 const fitContent   = css`
   width: fit-content;
@@ -23,24 +21,13 @@ const fitContent   = css`
 `
 const fitContainer = css`width: 100%;`
 const colors       = css`
-    background: ${({ flat, primary, inline, color }) => flat || !primary || inline
-                                                        ? "transparent"
-                                                        : color};
+    ${buttonLikeHoverable};
     border-color: ${({ flat, primary, inline, color }) => !flat && !primary && !inline
                                                           ? color
                                                           : "transparent"};
     
     ${getInlineStyling}
-    ${textColorForButton}
-    
-    :hover {
-      background: ${({ color }) => light(color)};
-    }
-    
-    :active {
-      background: ${({ color }) => dark(color)};
-    }
-    
+   
     :hover, :active {
       border-color: transparent;
     }

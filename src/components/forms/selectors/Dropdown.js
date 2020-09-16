@@ -1,5 +1,6 @@
 // @flow
 
+import { buttonLikeHoverable }         from "components/forms/buttonMixins"
 import { VALIDATION_STATES }           from "components/forms/validationStates"
 import { Loadable }                    from "components/loaders/Loadable"
 import { debounce }                    from "lodash"
@@ -18,7 +19,7 @@ import {
     Field,
     Label,
     Hint,
-    Item,
+    Item as ZItem,
     NextItem,
     PreviousItem,
     Message,
@@ -68,6 +69,15 @@ const menuStyles = (extraStyles) => css`
   ${extraStyles}
 `
 
+const Item = styled(ZItem).attrs(({ danger, theme }) => {
+    if (!danger) return
+    return { color: theme.styles.colorDanger, primary: true }
+})`
+  &&&& {
+    ${({ danger }) => danger ? buttonLikeHoverable : ""}
+  }
+`
+
 export let Dropdown = (props :Props) => {
     const [
               state,
@@ -91,7 +101,7 @@ export let Dropdown = (props :Props) => {
               label, options, keyField, valueField,
               hint, selectedKey, selectedKeys, onChange, children, onStateChange,
               useRawOptions, trigger, menuCSS, maxMenuHeight, returnItemOnChange,
-              placement, async, fluid, validation, menuItemComponent,
+              placement, async, validation, menuItemComponent,
               filterOptions,
           } = props
 
@@ -182,7 +192,6 @@ export let Dropdown = (props :Props) => {
 
     const handleStateChange = (
         changes :StateChangeOptions,
-        stateAndHelpers,
     ) => {
         onStateChange(changes)
 
@@ -247,6 +256,7 @@ export let Dropdown = (props :Props) => {
     )
 }
 
+// eslint-disable-next-line no-unused-vars
 const getPopperModifiers = (fluid) => {
     if (!fluid) return null
     return {
@@ -314,9 +324,11 @@ const createOptions = (
         const ItemType  = getItemType(o)
         const Component = menuItemComponent
 
-        return <ItemType key={o[key]} value={o} disabled={o.disabled}>
+        return <ItemType key={o[key]}
+                         value={o}
+                         disabled={o.disabled}
+                         danger={o.danger}>
             {menuItemComponent ? <Component {...o} /> : o[value]}
         </ItemType>
     })
-
 }

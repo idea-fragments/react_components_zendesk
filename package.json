@@ -4,8 +4,8 @@
   "private": true,
   "main": "src/index.js",
   "dependencies": {
-    "@mdi/js": "^4.5.95",
-    "@mdi/react": "^1.2.1",
+    "@mdi/js": "^5.5.55",
+    "@mdi/react": "^1.4.0",
     "@zendeskgarden/react-avatars": "^6.4.4",
     "@zendeskgarden/react-breadcrumbs": "^6.4.4",
     "@zendeskgarden/react-buttons": "^6.4.4",
