@@ -45,10 +45,8 @@ export let InfoPanel = ({
                       className={className}
                       color={foreground}
                       bgColor={background}>
-        <Icon svg={mdiInformation} color={iconColor} />
-        <div css={`flex: 1`}>
-            {children}
-        </div>
+        <div><Icon svg={mdiInformation} color={iconColor} /></div>
+        <div css={`flex: 1;`}>{children}</div>
     </Container>
 }
 
