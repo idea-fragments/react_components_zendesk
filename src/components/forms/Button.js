@@ -3,17 +3,17 @@
 import {
     buttonLikeHoverable,
     getInlineStyling,
-}                                          from "components/forms/buttonMixins"
-import { Icon }                            from "components/Icon"
-import { FlexBlock }                       from "components/layout/FlexBlock"
-import type { StyledProps }                from "components/StyledProps.type"
-import React, { forwardRef, type Ref }     from "react"
-import { Button as SButton }               from "@zendeskgarden/react-buttons"
-import type { Alignment }                  from "styles/alignments"
-import { SPACINGS }                        from "styles/spacings"
-import type { Theme }                      from "styles/theme/Theme.type"
-import type { ColorProps, ContainerProps } from "styles/types"
-import styled, { css }                     from "styled-components"
+}                                                          from "components/forms/buttonMixins"
+import { Icon }                                            from "components/Icon"
+import { FlexBlock }                                       from "components/layout/FlexBlock"
+import type { StyledProps }                                from "components/StyledProps.type"
+import React, { forwardRef, type Ref, type ComponentType } from "react"
+import { Button as SButton }                               from "@zendeskgarden/react-buttons"
+import type { Alignment }                                  from "styles/alignments"
+import { SPACINGS }                                        from "styles/spacings"
+import type { Theme }                                      from "styles/theme/Theme.type"
+import type { ColorProps, ContainerProps }                 from "styles/types"
+import styled, { css }                                     from "styled-components"
 
 const fitContent   = css`
   width: fit-content;
@@ -67,41 +67,37 @@ export type Props = {
 } & ColorProps & ContainerProps
 
 // eslint-disable-next-line no-use-before-define
-export const Button = styled(forwardRef<Props, typeof Button>((
+export let Button = (
     {
         children,
         flat,
         fluid,
         groupKey,
         icon,
+        innerAs,
         iconPosition,
         primary,
-        innerAs,
         ...props
     } :Props,
     ref :Ref,
-) => {
+) => <SButton as={innerAs} ref={ref} {...props}>
+    {
+        icon
+        ? <FlexBlock spacing={SPACINGS.XS} justify={"center"}
+                     alignItems={"center"}>
+            {iconPosition === "left" &&
+             <Icon color={"currentColor"} svg={icon} />}
+            {children ? <span>{children}</span> : undefined}
+            {iconPosition === "right" &&
+             <Icon color={"currentColor"} svg={icon} />}
+        </FlexBlock>
+        : <span>{children}</span>
+    }
+</SButton>
 
-    return (
-        <SButton as={innerAs}
-                 ref={ref}
-                 {...props}>
-            {icon ? (
-                <FlexBlock spacing={SPACINGS.XS}
-                           justify={"center"}
-                           alignItems={"center"}>
-                    {iconPosition === "left" &&
-                     <Icon color={"currentColor"} svg={icon} />}
-                    {children ? <span>{children}</span> : undefined}
-                    {iconPosition === "right" &&
-                     <Icon color={"currentColor"} svg={icon} />}
-                </FlexBlock>
-            ) : (
-                 <span>{children}</span>
-             )}
-        </SButton>
-    )
-})).attrs((props) => ({
+
+Button = forwardRef<Props, Button>(Button)
+Button = styled<Props, Button>(Button).attrs((props) => ({
     ...props,
     color: baseColor(props),
 }))`

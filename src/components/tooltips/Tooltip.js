@@ -7,7 +7,9 @@ const darkMode = css`
   background: ${({theme}) => theme.styles.tooltip.darkBackground};
 `
 
-export let Tooltip = styled(ZTooltip)`
+export let Tooltip = styled(ZTooltip).attrs({
+    delayMilliseconds: 0
+})`
   && {
     ${({type}) => type !== "light" ? darkMode : ""}
   }

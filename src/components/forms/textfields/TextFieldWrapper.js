@@ -1,20 +1,20 @@
 // @flow
 
-import type { FormFieldProps }     from "components/forms/formField.types"
-import { VALIDATION_STATES }       from "components/forms/validationStates"
-import { FlexBlock }               from "components/layout/FlexBlock"
-import type { StyledProps }        from "components/StyledProps.type"
-import React, { useState, useRef } from "react"
-import type { ComponentType }      from "react"
-import { useObserver }             from "mobx-react"
-import styled                      from "styled-components"
-import { dark, fade }              from "styles/colors"
+import type { FormFieldProps } from "components/forms/formField.types"
+import { VALIDATION_STATES }   from "components/forms/validationStates"
+import { FlexBlock }           from "components/layout/FlexBlock"
+import type { StyledProps }    from "components/StyledProps.type"
+import React                   from "react"
+import type { ComponentType }  from "react"
+import { useObserver }         from "mobx-react"
+import styled                  from "styled-components"
+import { dark, fade }          from "styles/colors"
 import {
     Field as ZField,
     Label,
     Hint,
     Message,
-}                                  from "@zendeskgarden/react-forms"
+}                              from "@zendeskgarden/react-forms"
 
 type Props = FormFieldProps & {
     WrappedComponent :ComponentType<>,
@@ -25,6 +25,7 @@ const Field = styled(ZField)`
 `
 
 export let TextFieldWrapper = ({
+                                   className,
                                    compact,
                                    emptyState,
                                    fluid,
@@ -39,7 +40,7 @@ export let TextFieldWrapper = ({
                                } :Props) => {
     message = validation.message || message
     return useObserver(() => (
-        <Container withRows spacing={null} fluid={fluid}>
+        <Container className={className} withRows spacing={null} fluid={fluid}>
             <Field compact={compact}>
                 {label ? <Label>{label}</Label> : null}
                 {hint ? <Hint>{hint}</Hint> : null}

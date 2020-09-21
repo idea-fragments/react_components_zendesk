@@ -19,9 +19,9 @@ export type FormComponent =
 
 export type TextFieldProps<V = string, T = SyntheticInputEvent<HTMLInputElement>> =
     {
-        value? :V,
-        type? :string,
         autoComplete? :string,
+        small? :boolean,
+        type? :string,
+        value? :V,
         onChange :(T) => void
-    }
-    & FormFieldProps
+    } & FormFieldProps

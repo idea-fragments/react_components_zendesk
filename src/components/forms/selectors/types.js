@@ -24,6 +24,7 @@ type Common = {
     validation :Validation,
     flat? :boolean,
     open? :boolean,
+    small? :boolean,
 } & ContainerProps
 
 export type SelectorProps = {

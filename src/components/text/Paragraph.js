@@ -14,6 +14,10 @@ export const Paragraph = styled(Text).attrs({
 
 Paragraph.COMPONENT_NAME = COMPONENT_NAME
 
+export const XXS = styled(Paragraph)`
+  font-size: ${FONT_SIZES.XXS};
+`
+
 export const XS = styled(Paragraph)`
   font-size: ${FONT_SIZES.XS};
 `

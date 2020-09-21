@@ -1,7 +1,7 @@
 // @flow
 
-import { IObservableArray } from "mobx"
-import {flatten as ldFlatten} from "lodash"
+import { IObservableArray }     from "mobx"
+import { flatten as ldFlatten } from "lodash"
 
 
 export type ArrayLike<T> = Array<T> | IObservableArray<T>
@@ -24,7 +24,13 @@ export const takeOutItem = <T>(arr :Array<T>, index :number) :Array<T> => {
 export const isEmpty    = (arr :ArrayLike<*>) :boolean => arr.length <= 0
 export const isNotEmpty = (arr :ArrayLike<*>) :boolean => !isEmpty(arr)
 
-export const lastItem = <E>(a :ArrayLike<E>) :E => a[a.length - 1]
+export const lastItem      = <E>(a :ArrayLike<E>) :E => a[a.length - 1]
+export const isLastItem    = <E>(a :ArrayLike<E>, item :E) :boolean => (
+    lastItem(a) === item
+)
+export const isNotLastItem = <E>(a :ArrayLike<E>, item :E) :boolean => (
+    !isLastItem(a, item)
+)
 
 export const arrayOfSizeN = (n :number) :Array<0> => {
     const arr :0[] = []

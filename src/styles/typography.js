@@ -1,4 +1,5 @@
-const XS     = ".8rem"
+const XXS    = ".8rem"
+const XS     = ".9rem"
 const SM     = "1rem"
 const MD     = "1.3rem"
 const LG     = "1.7rem"
@@ -30,7 +31,7 @@ export const FONT_TAGS = Object.freeze({
 })
 
 export const FONT_SIZES = Object.freeze({
-    XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL,
+    XXS, XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL,
 })
 
 export const FONT_WEIGHTS = {

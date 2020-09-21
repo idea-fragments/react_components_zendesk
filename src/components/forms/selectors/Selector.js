@@ -15,6 +15,7 @@ export let Selector = (props :RefinedSelectorProps) => {
             optionsKeyMap,
             emptyState,
             selectedKey,
+            small,
             valueField,
             validation,
         } = props
@@ -36,7 +37,8 @@ export let Selector = (props :RefinedSelectorProps) => {
 
     return (
         <Dropdown {...props}>
-            <Select validation={validation.validation}>
+            <Select small={small}
+                    validation={validation.validation}>
                 {selectedKey
                  ? optionsKeyMap[selectedKey][valueField]
                  : emptyState}
