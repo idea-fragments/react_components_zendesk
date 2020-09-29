@@ -16,7 +16,7 @@ export class Logger implements LoggerI {
     }
 
     #log = (level) => (...args) => {
-        if (typeof window !== "undefined" &&
+        if (typeof window === "undefined" ||
             !window.DEBUG_MODULES.has(this.moduleName)) return
 
         console[level](
