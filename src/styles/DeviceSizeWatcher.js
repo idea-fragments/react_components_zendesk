@@ -84,6 +84,8 @@ class DeviceSizeWatcher {
     getSize = () :DeviceSize => this.#currentSize
 
     #createAllListeners = () => {
+        if (typeof window === "undefined") return
+
         logger.writeInfo("#createAllListeners")
 
         const queries = deviceQueries(true)
