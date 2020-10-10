@@ -4,18 +4,19 @@ import type { Validation }     from "components/forms/Validation.type"
 import type { ContainerProps } from "styles/types"
 import * as React              from "react"
 
-export type SelectorItemKey = string | number
+export type SelectorItemKey = ?string | ?number
 export type SelectorOption = { [string] :any }
 export type OnMultiSelectItemRemoveFunc<T = SelectorItemKey> = (T) => void
 export type OnItemSelectedFunc<T = SelectorItemKey | SelectorOption> = (T) => void
 
 type Common = {
+    disabled? :boolean,
     label? :string,
     options :Array<SelectorOption>,
     optionsKeyMap? :{ [SelectorItemKey] :SelectorOption },
     keyField :string,
     valueField :string,
-    message? :string,
+    message? :?string | null,
     emptyState? :string,
     hint? :string | React.Element,
     onChange? :OnItemSelectedFunc<>,

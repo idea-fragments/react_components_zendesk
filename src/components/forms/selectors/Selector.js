@@ -8,7 +8,7 @@ import type {
 }                            from "components/forms/selectors/types"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 
-export let Selector = (props :RefinedSelectorProps) => {
+export let Selector = ({ disabled, ...props } :RefinedSelectorProps) => {
     let {
             keyField,
             options,
@@ -38,6 +38,7 @@ export let Selector = (props :RefinedSelectorProps) => {
     return (
         <Dropdown {...props}>
             <Select small={small}
+                    disabled={disabled}
                     validation={validation.validation}>
                 {selectedKey
                  ? optionsKeyMap[selectedKey][valueField]
