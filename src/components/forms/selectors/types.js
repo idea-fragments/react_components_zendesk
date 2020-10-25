@@ -7,7 +7,7 @@ import * as React              from "react"
 export type SelectorItemKey = ?string | ?number
 export type SelectorOption = { [string] :any }
 export type OnMultiSelectItemRemoveFunc<T = SelectorItemKey> = (T) => void
-export type OnItemSelectedFunc<T = SelectorItemKey | SelectorOption> = (T) => void
+export type OnItemSelectedFunc = (SelectorItemKey) => void | (SelectorOption) => void
 
 type Common = {
     disabled? :boolean,
@@ -19,7 +19,7 @@ type Common = {
     message? :?string | null,
     emptyState? :string,
     hint? :string | React.Element,
-    onChange? :OnItemSelectedFunc<>,
+    onChange? :OnItemSelectedFunc,
     onStateChange? :(state) => void,
     invalidOnNoSelection? :boolean,
     validation :Validation,
@@ -30,7 +30,7 @@ type Common = {
 
 export type SelectorProps = {
     selectedKey? :SelectorItemKey,
-    onChange? :OnItemSelectedFunc<>,
+    onChange? :OnItemSelectedFunc,
 } & Common
 
 export type MultiSelectorProps = {

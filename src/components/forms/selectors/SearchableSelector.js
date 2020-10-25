@@ -8,23 +8,24 @@ import styled                          from "styled-components"
 import { DO_NOTHING }                  from "utils/functionHelpers"
 import { COLORS, veryLight }           from "styles/colors"
 import { FONT_WEIGHTS }                from "styles/typography"
+import { isFunction }                  from "utils/typeCheckers"
 
 /* optionsKeyMap prop is not needed here. SearchableSelector uses Zendesk's Autocomplete
-* component which generates its own display value from options prop, unlike
-* our Selector component, which relies on you passing in the display value as a
-* child.
-*
-* SearchableSelector will take passed in options props and create required options
-* prop for Autocomplete based on passed in keyField and valueField.
-* */
+ * component which generates its own display value from options prop, unlike
+ * our Selector component, which relies on you passing in the display value as a
+ * child.
+ *
+ * SearchableSelector will take passed in options props and create required options
+ * prop for Autocomplete based on passed in keyField and valueField.
+ * */
 type Props = {
     onSearchTextChange :?(string) => void,
 } & RefinedSelectorProps
 
 /*
-* If we need this full width, maybe add a Block wrapper here
-* */
-export let SearchableSelector = (props :Props) => {
+ * If we need this full width, maybe add a Block wrapper here
+ * */
+export let SearchableSelector = ({ children, ...props } :Props) => {
     const {
               emptyState, className, compact,
               selectedKey, keyField, valueField, onChange, options,
@@ -63,11 +64,15 @@ export let SearchableSelector = (props :Props) => {
                   onStateChange={handleStateChange}
                   options={matchingOptions}>
             <Autocomplete>
-                {selectedKey != null ? optionsKeyMap[selectedKey][valueField] : emptyState}
+                {
+                    !!selectedKey
+                    ? isFunction(children)
+                      ? children(optionsKeyMap[selectedKey])
+                      : optionsKeyMap[selectedKey][valueField]
+                    : emptyState
+                }
             </Autocomplete>
         </Dropdown>
-        // {/*<Block compact={compact} className={className}>*/}
-        // </Block>
     )
 }
 
@@ -83,8 +88,6 @@ SearchableSelector = styled(SearchableSelector)`
     cursor: ${({ flat } :Props) => flat ? "pointer !important" : "inherit"};
   }
   :hover > div {
-    background: ${veryLight(COLORS.GREY)};
+    ${({ flat } :Props) => flat ? `background: ${veryLight(COLORS.GREY)};` : ""};
   }
 `
-
-// SearchableSelector = (observer(SearchableSelector))

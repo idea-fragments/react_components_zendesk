@@ -17,8 +17,9 @@ import { isEmpty, isNotEmpty }         from "utils/arrayHelpers"
 import { DO_NOTHING }                  from "utils/functionHelpers"
 import {
     Field,
-    Label,
+    Label as ZenLabel,
     Hint,
+    HeaderItem,
     Item as ZItem,
     NextItem,
     PreviousItem,
@@ -306,11 +307,16 @@ export const MultiSelect  = styled(ZenMultiSelect)`
     div { max-width: 100%; }
   }
 `
+const Label               = styled(ZenLabel)`
+  && { color: ${(p) => p.theme.styles.textColorPrimary}; }
+`
 
 const getItemType = (o) => {
     if (o.isNextItem) return NextItem
     if (o.isBackItem) return PreviousItem
     if (o.isAddItem) return AddItem
+    if (o.isHeaderItem) return HeaderItem
+
     return Item
 }
 
