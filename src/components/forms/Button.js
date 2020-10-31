@@ -3,17 +3,17 @@
 import {
     buttonLikeHoverable,
     getInlineStyling,
-}                                                          from "components/forms/buttonMixins"
-import { Icon }                                            from "components/Icon"
-import { FlexBlock }                                       from "components/layout/FlexBlock"
-import type { StyledProps }                                from "components/StyledProps.type"
-import React, { forwardRef, type Ref, type ComponentType } from "react"
-import { Button as SButton }                               from "@zendeskgarden/react-buttons"
-import type { Alignment }                                  from "styles/alignments"
-import { SPACINGS }                                        from "styles/spacings"
-import type { Theme }                                      from "styles/theme/Theme.type"
-import type { ColorProps, ContainerProps }                 from "styles/types"
-import styled, { css }                                     from "styled-components"
+}                                          from "components/forms/buttonMixins"
+import { Icon }                            from "components/Icon"
+import { FlexBlock }                       from "components/layout/FlexBlock"
+import type { StyledProps }                from "components/StyledProps.type"
+import React, { forwardRef, type Ref }     from "react"
+import { Button as SButton }               from "@zendeskgarden/react-buttons"
+import type { Alignment }                  from "styles/alignments"
+import { SPACINGS }                        from "styles/spacings"
+import type { Theme }                      from "styles/theme/Theme.type"
+import type { ColorProps, ContainerProps } from "styles/types"
+import styled, { css }                     from "styled-components"
 
 const fitContent   = css`
   width: fit-content;
@@ -41,10 +41,11 @@ const casing = ({ theme } :{ theme :Theme }) => {
     return casing ? css`text-transform: ${casing};` : ""
 }
 
-const baseColor = ({ color, success, danger, theme } :Props & StyledProps) => {
+const baseColor = ({ color, success, danger, warning, theme } :Props & StyledProps) => {
     if (color) return color
     if (danger) return theme.styles.colorDanger
     if (success) return theme.styles.colorSuccess
+    if (warning) return theme.styles.colorWarning
 
     return theme.styles.colorPrimary
 }

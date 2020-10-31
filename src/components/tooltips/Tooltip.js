@@ -9,11 +9,11 @@ const darkMode = css`
 
 export let Tooltip = styled(ZTooltip).attrs({
     arrow: false,
-    delayMilliseconds: 0
+    delayMilliseconds: 0,
+    zIndex: 999
 })`
   && {
-    width: 300px;
-    max-width: 100vw;
+    max-width: min(100vw, 300px);
     white-space: unset;
     ${({type}) => type !== "light" ? darkMode : ""}
   }

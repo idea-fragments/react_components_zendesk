@@ -1,16 +1,15 @@
 // @flow
 
-import React, { Fragment } from "react"
-import MIcon, { Stack }    from "@mdi/react"
-import { DO_NOTHING }      from "utils/functionHelpers"
-import { isArray }         from "utils/typeCheckers"
+import React            from "react"
+import MIcon, { Stack } from "@mdi/react"
+import { DO_NOTHING }   from "utils/functionHelpers"
+import { isArray }      from "utils/typeCheckers"
 
 const COMPONENT_NAME = "Icon"
 
-// eslint-disable-next-line
 type Props = {
     size :number,
-    svg :string | Array,
+    svg :string | Array<string>,
     title? :string,
     color? :string,
     onClick :() => void,
@@ -23,9 +22,7 @@ export const Icon = ({ size, svg, title, color, onClick } :Props) => {
                     title={title}
                     color={color || "currentColor"}
                     data-component-name={COMPONENT_NAME}>
-               {svg.map((s, i) => {
-                   return <MIcon key={i} path={s}/>
-               })}
+               {svg.map((s, i) => <MIcon key={i} path={s} />)}
            </Stack>
            : <MIcon path={svg}
                     onClick={onClick}

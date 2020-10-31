@@ -5,26 +5,45 @@ import type { StyledComponentProps }         from "components/StyledComponentPro
 import * as React                            from "react"
 import {
     Modal as ZenModal,
-    Header,
+    Header as ZenHeader,
     Body,
     Footer,
     FooterItem,
     Close,
 }                                            from "@zendeskgarden/react-modals"
 import styled                                from "styled-components"
+import { textWithColor }                     from "styles/mixins"
 
 export type ModalContent = {
     autoClose? :boolean,
     blocking? :boolean,
-    title? :string,
     body :any,
     buttons? :Array<{ +props :{ disableable :boolean } & ButtonProps }>,
+    isDanger? :boolean,
+    isSuccess? :boolean,
+    isWarning? :boolean,
+    title? :string,
     withCancelButton? :boolean,
     withNoActions? :boolean,
-    isSuccess? :boolean,
-    isDanger? :boolean,
     onClose? :() => void,
 }
+
+const Header = styled(ZenHeader).attrs(({
+                                            danger,
+                                            success,
+                                            warning,
+                                            theme,
+                                        }) => {
+    // Color is overwritten by a class style from zendesk :(
+    let color = theme.styles.textColorPrimary
+    if (danger) color = theme.styles.colorDanger
+    if (success) color = theme.styles.colorSuccess
+    if (warning) color = theme.styles.colorWarning
+
+    return { color }
+})`
+  ${textWithColor}
+`
 
 const createButtons = (
     buttons :Array<React.Node>,
@@ -42,7 +61,7 @@ const createButtons = (
                     {
                         onClick : async () => {
                             await onClick()
-                            if(autoClose) closeModal()
+                            if (autoClose) closeModal()
                         },
                         disabled: disableable ? shouldDisable : disabled,
                     },
@@ -72,14 +91,15 @@ export let Modal = ({
 
     const {
               autoClose = true,
-              title,
               body,
               buttons,
-              onClose,
-              withCancelButton,
-              withNoActions,
               isDanger,
               isSuccess,
+              isWarning,
+              title,
+              withCancelButton,
+              withNoActions,
+              onClose,
           } :ModalContent = modalContent
 
     const handleClose = () => {
@@ -95,7 +115,8 @@ export let Modal = ({
                     primary
                     disabled={disableActions}
                     success={isSuccess}
-                    danger={isDanger}>
+                    danger={isDanger}
+                    warning={isWarning}>
                 OK
             </Button>
         </FooterItem>
@@ -110,7 +131,9 @@ export let Modal = ({
                           e.preventDefault()
                       },
                   }}>
-            <Header danger={isDanger}>{title}</Header>
+            <Header danger={isDanger} success={isSuccess} warning={isWarning}>
+                {title}
+            </Header>
             <Body>{body}</Body>
             {
                 withNoActions
@@ -133,10 +156,14 @@ export let Modal = ({
 
 }
 
-Modal                = styled(Modal)`
+Modal = styled(Modal)`
+  &&&& {
+    color: ${({ theme }) => theme.styles.textColorPrimary};
     ${Body} {
       font-size: inherit;
     }
+  }
 `
+
 Modal.COMPONENT_NAME = "Modal"
 Modal.defaultProps   = {}

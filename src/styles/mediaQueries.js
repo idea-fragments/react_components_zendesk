@@ -1,30 +1,32 @@
 // @flow
 
 import { deviseSizes } from "styles/deviceSizes"
-import { css }         from "styled-components"
+import { css, CSSRules }         from "styled-components"
 
 export const PHONE_SIZE  = 560
 export const TABLET_SIZE = 840
 
-export const forPhones = (styles :string) :string => `
+type Styles = CSSRules
+
+export const forPhones = (styles :Styles) :string => `
     @media screen and (max-width: ${unit(PHONE_SIZE)}) {
         ${styles}
     }
 `
 
-export const forTablets = (styles :string) :string => `
+export const forTablets = (styles :Styles) :string => `
     @media screen and (max-width: ${unit(TABLET_SIZE)}) {
         ${styles}
     }
 `
 
 export type MediaQueriesI = {
-    forPhones :(styles :string) => string,
-    forTablets :(styles :string) => string,
-    forTabletsAndUp :(styles :string) => string,
-    forLargeTabletsAndUp :(styles :string) => string,
-    forSmallComputersAndUp :(styles :string) => string,
-    forLargeComputers :(styles :string) => string,
+    forPhones :(styles :Styles) => string,
+    forTablets :(styles :Styles) => string,
+    forTabletsAndUp :(styles :Styles) => string,
+    forLargeTabletsAndUp :(styles :Styles) => string,
+    forSmallComputersAndUp :(styles :Styles) => string,
+    forLargeComputers :(styles :Styles) => string,
 }
 
 export const mediaQueries = (wideLayout?: boolean) :MediaQueriesI => {
