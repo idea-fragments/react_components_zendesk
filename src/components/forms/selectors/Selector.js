@@ -40,7 +40,7 @@ export let Selector = ({ disabled, ...props } :RefinedSelectorProps) => {
             <Select small={small}
                     disabled={disabled}
                     validation={validation.validation}>
-                {selectedKey
+                {selectedKey && optionsKeyMap.hasOwnProperty(selectedKey)
                  ? optionsKeyMap[selectedKey][valueField]
                  : emptyState}
             </Select>

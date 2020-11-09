@@ -8,14 +8,20 @@ import { isArray }      from "utils/typeCheckers"
 const COMPONENT_NAME = "Icon"
 
 type Props = {
-    size :number,
+    color? :string,
+    size? :number,
     svg :string | Array<string>,
     title? :string,
-    color? :string,
-    onClick :() => void,
+    onClick? :() => void,
 }
 
-export const Icon = ({ size, svg, title, color, onClick } :Props) => {
+export const Icon = ({
+                         color,
+                         size = 1,
+                         svg,
+                         title,
+                         onClick = DO_NOTHING,
+                     } :Props) => {
     return isArray(svg)
            ? <Stack onClick={onClick}
                     size={size}
@@ -33,7 +39,3 @@ export const Icon = ({ size, svg, title, color, onClick } :Props) => {
 }
 
 Icon.COMPONENT_NAME = COMPONENT_NAME
-Icon.defaultProps   = {
-    size   : 1,
-    onClick: DO_NOTHING,
-}

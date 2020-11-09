@@ -9,7 +9,9 @@ import {
     Title,
     Close,
 }                                    from "@zendeskgarden/react-notifications"
-import styled                        from "styled-components"
+import styled, { css }               from "styled-components"
+import { textColorForBackground }    from "styles/mixins"
+import { SPACINGS }                  from "styles/spacings"
 
 export const ALERT_TYPES = Object.freeze({
     INFO   : "info",
@@ -60,21 +62,23 @@ export let Alert = ({
               type = ALERT_TYPES.INFO,
           } :AlertContent = alertContent
 
+
     return (
         <AbsoluteContainer>
-            <ZenAlert onClose={handleClose}
-                      className={className}
-                      type={type}>
+            <AlertWrapper className={className}
+                          type={type}
+                          onClose={handleClose}>
                 <Title>{title}</Title>
                 {body}
                 <Close onClick={handleClose} aria-label="Close alert" />
-            </ZenAlert>
+            </AlertWrapper>
         </AbsoluteContainer>
     )
 
 }
 
-Alert                = styled(Alert)``
+Alert = styled(Alert)``
+
 Alert.COMPONENT_NAME = "Alert"
 Alert.defaultProps   = {}
 
@@ -83,5 +87,25 @@ const AbsoluteContainer = styled(FlexBlock).attrs({
     alignItems: "center",
 })`
   position: fixed;
-  width: 100%;
+  left: 0;
+  right: 0;
+  top: ${SPACINGS.LG};
+  max-width: 100%;
+`
+
+const AlertWrapper = styled(ZenAlert).attrs(({ theme, type }) => ({
+    color: {
+        [ALERT_TYPES.ERROR]  : theme.styles.colorDanger,
+        [ALERT_TYPES.SUCCESS]: theme.styles.colorSuccess,
+        [ALERT_TYPES.WARNING]: theme.styles.colorWarning,
+    }[type],
+}))`
+  // &&&& {
+  //   background-color: ${p => p.color} !important;
+  //   ${textColorForBackground}
+  //  
+  //   ${Title} {
+  //     ${textColorForBackground}
+  //   }
+  // }
 `
