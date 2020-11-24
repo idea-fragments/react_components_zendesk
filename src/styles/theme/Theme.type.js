@@ -34,12 +34,13 @@ export type Styles = {
         background :string,
         zIndex :number
     },
-    tooltip :{
-        darkBackground :string,
-    },
+    table :{ borderSize :string, },
     textColorPrimary :string,
     textColorOverPrimaryBg :string,
     textColorSecondary :string,
+    tooltip :{
+        darkBackground :string,
+    },
 
     // eslint-disable-next-line no-use-before-define
     getTextColorForBackground :({ color :string, theme :Theme }) => string

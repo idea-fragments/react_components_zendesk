@@ -4,7 +4,7 @@
   "private": true,
   "main": "src/index.js",
   "dependencies": {
-    "@mdi/js": "^5.5.55",
+    "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
     "@zendeskgarden/react-accordions": "^8.22.0",
     "@zendeskgarden/react-avatars": "^6.4.4",

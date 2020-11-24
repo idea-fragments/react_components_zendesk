@@ -60,15 +60,20 @@ export const NiceTable = ({
     return (
         <FlexBlock data-component-name={`${NiceTable.COMPONENT_NAME}`}>
             <Table>
-                <FlexBlock css={`margin-bottom: 3rem`}
-                           alignItems={"center"}
-                           justify={"space-between"}>
-                    <Title>
-                        {title}
-                        <HelpText>{helpText}</HelpText>
-                    </Title>
-                    {action}
-                </FlexBlock>
+                {
+                    title
+                    ? <FlexBlock css={`margin-bottom: 3rem`}
+                                 alignItems={"center"}
+                                 justify={"space-between"}>
+                        <Title>
+                            {title}
+                            <HelpText>{helpText}</HelpText>
+                        </Title>
+                        {action}
+                    </FlexBlock>
+                    : null
+                }
+
 
                 <Head>
                     <HeaderRow>
@@ -84,8 +89,8 @@ export const NiceTable = ({
                             </HeaderCell>
                         ) : null}
 
-                        {columnConfigs.map(({ name } :ColumnConfig) => (
-                            <HeaderCell key={name} width={colWidth}>
+                        {columnConfigs.map(({ name, width } :ColumnConfig) => (
+                            <HeaderCell key={name} width={width || colWidth}>
                                 <Text weight={FONT_WEIGHTS.BOLD}>
                                     {name}
                                 </Text>

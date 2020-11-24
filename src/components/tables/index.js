@@ -9,15 +9,15 @@ import {
     Cell as ZCell,
     Row as ZRow,
 }                            from "@zendeskgarden/react-tables"
-import styled                from "styled-components"
-import { COLORS, veryLight } from "styles/colors"
-import { SPACINGS }          from "styles/spacings"
+import styled                      from "styled-components"
+import { COLORS, fade, veryLight } from "styles/colors"
+import { SPACINGS }                from "styles/spacings"
 
 const Table          = styled(ZTable)``
 Table.COMPONENT_NAME = "Table"
 
 const Head = styled(ZHead)`
-  padding: ${SPACINGS.SM};
+  padding: ${(p) => p.theme.styles.table.borderSize};
   background: ${veryLight(COLORS.GREY)};
 `
 
@@ -30,24 +30,41 @@ const HeaderRow = styled(ZHeaderRow)`
 const HeaderCell = styled(ZHeaderCell)``
 
 const Body = styled(ZBody)`
-  padding: 0 ${SPACINGS.SM} ${SPACINGS.SM};
+  padding: ${(p) => { 
+      const size = p.theme.styles.table.borderSize
+      return `0 ${size} ${size}`
+  }};
   background: ${veryLight(COLORS.GREY)};
 `
+
+const Cell = styled(ZCell)``
 
 const Row = styled(ZRow)`
   background: ${COLORS.WHITE};
   border: none !important;
   
-  :hover {
-    box-shadow: inset 3px 0 0 0 #1f73b7;
+  &&&& {
+    :hover, :focus {
+      & > ${Cell}:first-child {
+        box-shadow: inset 3px 0 0 0 ${(p) => p.theme.styles.colorPrimary};
+      }
+    }
+    
+    :hover {
+      background: ${COLORS.WHITE};
+    }
+    
+    :focus {
+      background: ${(p) => fade(p.theme.styles.colorPrimary, .8)};
+    }
   }
   
   &:not(:last-of-type) {
-    margin-bottom: ${SPACINGS.SM};
+    margin-bottom: ${(p) => p.theme.styles.table.borderSize};
   }
 `
 
-const Cell = styled(ZCell)``
+
 
 Object.assign(Table, {
     Head,
