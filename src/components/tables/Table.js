@@ -1,59 +1,86 @@
 // @flow
 
-import { FlexBlock }                        from "components/layout/FlexBlock"
-import { MobileTable }                      from "components/tables/MobileTable"
-import { NiceTable }                        from "components/tables/NiceTable"
-import { SimpleTable }                      from "components/tables/SimpleTable"
-import { useCallback, useEffect, useState } from "react"
-import * as React                           from "react"
+import { FlexBox }                                 from "components/layout/FlexBox"
+import { Pagination }                              from "components/tables/blocks/Pagination"
+import { MobileTable }                             from "components/tables/MobileTable"
+import { NiceTable }                               from "components/tables/NiceTable"
+import { SimpleTable }                             from "components/tables/SimpleTable"
+import React, { useCallback, useEffect, useState } from "react"
+import type { Node, Element }                      from "react"
 import type {
     DeviceSize,
     DeviceSizeChangeListener,
-}                                           from "styles/DeviceSizeWatcher"
-import { deviceSizeWatcher }                from "styles/DeviceSizeWatcher"
-import { DO_NOTHING }                       from "utils/functionHelpers"
-import styled                               from "styled-components"
-
+}                                                  from "styles/DeviceSizeWatcher"
+import { deviceSizeWatcher }                       from "styles/DeviceSizeWatcher"
+import { DO_NOTHING }                              from "utils/functionHelpers"
+import styled                                      from "styled-components"
 
 export type ItemKey = number | string
 export type ItemContainerStyles = string
 export type ItemAction = {
+    action :(ItemKey) => void,
     label :string,
-    action :(ItemKey) => void
+}
+
+export type ItemFilterOptions = {
+    name :string,
+    options? :{ label :string, value :string },
+    type :"select" | "text",
 }
 
 export type Item = {
-    [string] :React.Node,
-    key :ItemKey,
+    [string] :Node,
+    actions? :Array<ItemAction>,
     containerStyles? :ItemContainerStyles,
-    actions? :Array<ItemAction>
+    key :ItemKey,
 }
 
 export type ColumnConfig = {
-    name :string,
-    important :boolean,
     collapsible :boolean,
+    filter? :ItemFilterOptions,
+    important :boolean,
+    name :string,
 }
 
-type Props = {
-    title? :string,
-    helpText? :string,
-    action? :React.Node,
-    columnConfigs :Array<ColumnConfig>,
-    className? :string,
-    items :Array<Item>,
-    onItemClick :(key :number) => void,
-    onItemHoverStart :(key :number) => void,
-    onItemHoverEnd :(key :number) => void,
+export type PaginationData = {
+    page :number,
+    pageSize :number,
+    totalCount :number,
+}
+
+export type TableProps = {
+    action? :Element<any>,
     checkable :boolean,
-    hasRowActions :boolean,
     checkedItems :Set<number>,
+    columnConfigs :Array<ColumnConfig>,
+    emptyState? :Node,
+    hasRowActions :boolean,
+    helpText? :string,
+    initialFilterValues :{ [string] :string },
+    items :Array<Item>,
+    title? :string,
+    onFilterChange? :(name :string, value :any) => void,
     onItemChecked :(key :ItemKey, isChecked :boolean) => void,
+    onItemClick :(key :number) => void,
+    onItemHoverEnd :(key :number) => void,
+    onItemHoverStart :(key :number) => void,
     onSelectAllToggle :(boolean) => void,
-    nice :boolean,
 }
 
-export let Table = ({ nice, className, ...props } :Props) => {
+type Props = TableProps & {
+    className? :string,
+    nice :boolean,
+    pagination? :PaginationData,
+    onPageChange :(number) => void,
+}
+
+export let Table = ({
+                        className,
+                        nice,
+                        pagination,
+                        onPageChange,
+                        ...props
+                    } :Props) => {
     const {
               getSize,
               isLargeComputer,
@@ -62,7 +89,7 @@ export let Table = ({ nice, className, ...props } :Props) => {
               unsubscribe,
           } = deviceSizeWatcher
 
-    const [_, setDeviseSize] = useState<DeviceSize>(getSize())
+    const [, setDeviseSize] = useState<DeviceSize>(getSize())
 
     const handleDeviseSizeChange = useCallback<DeviceSizeChangeListener>(
         (s :DeviceSize) => { setDeviseSize(s) },
@@ -72,18 +99,23 @@ export let Table = ({ nice, className, ...props } :Props) => {
     useEffect(() => {
         const subId = subscribe(handleDeviseSizeChange)
         return () => { unsubscribe(subId) }
-    }, [handleDeviseSizeChange])
+    }, [handleDeviseSizeChange, subscribe, unsubscribe])
 
     const largeTable = () => nice ? <NiceTable {...props} />
                                   : <SimpleTable {...props} />
     return (
-        <FlexBlock withRows className={className}>
+        <FlexBox withRows className={className}>
             {
                 isSmallComputer() || isLargeComputer()
                 ? largeTable()
                 : <MobileTable {...props} />
             }
-        </FlexBlock>
+            {
+                pagination
+                ? <Pagination {...pagination} onPageChange={onPageChange} />
+                : null
+            }
+        </FlexBox>
     )
 }
 

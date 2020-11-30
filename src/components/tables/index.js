@@ -25,6 +25,7 @@ const HeaderRow = styled(ZHeaderRow)`
   background: ${COLORS.WHITE};
   border: none !important;
   box-shadow: none !important;
+  height: auto !important;
 `
 
 const HeaderCell = styled(ZHeaderCell)``

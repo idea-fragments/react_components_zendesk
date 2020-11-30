@@ -75,6 +75,7 @@ export let Button = (
         fluid,
         groupKey,
         icon,
+        iconSize,
         innerAs,
         iconPosition,
         primary,
@@ -87,10 +88,10 @@ export let Button = (
         ? <FlexBlock spacing={SPACINGS.XS} justify={"center"}
                      alignItems={"center"}>
             {iconPosition === "left" &&
-             <Icon color={"currentColor"} svg={icon} />}
+             <Icon color={"currentColor"} svg={icon} size={iconSize} />}
             {children ? <span>{children}</span> : undefined}
             {iconPosition === "right" &&
-             <Icon color={"currentColor"} svg={icon} />}
+             <Icon color={"currentColor"} svg={icon} size={iconSize} />}
         </FlexBlock>
         : <span>{children}</span>
     }

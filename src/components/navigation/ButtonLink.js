@@ -12,8 +12,8 @@ import { DO_NOTHING }                        from "utils/functionHelpers"
 type Props = {
     to? :any,
     href? :string,
-    external :boolean,
-    LinkComponent :string | ComponentType<{ className :string, to :any } & *>
+    external? :boolean,
+    LinkComponent? :string | ComponentType<{ className :string, to :any } & *>
 } & ButtonProps & ColorProps & ContainerProps
 
 export const ButtonLink = ({

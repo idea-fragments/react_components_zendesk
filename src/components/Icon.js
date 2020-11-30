@@ -9,7 +9,7 @@ const COMPONENT_NAME = "Icon"
 
 type Props = {
     color? :string,
-    size? :number,
+    size? :number | string,
     svg :string | Array<string>,
     title? :string,
     onClick? :() => void,
