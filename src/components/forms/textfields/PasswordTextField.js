@@ -4,8 +4,13 @@ import type { TextFieldProps } from "components/forms/formField.types"
 import { TextField }           from "components/forms/textfields/TextField"
 import * as React              from "react"
 
-export const PasswordTextField = (props :TextFieldProps<>) => {
-    return <TextField type={"password"} {...props} />
+type Props = TextFieldProps<> & {
+    newPassword?: boolean
+}
+
+export const PasswordTextField = ({ newPassword, ...props } :Props) => {
+    const autoCompleteAttr = newPassword ? { autoComplete: "new-password" } : {}
+    return <TextField {...autoCompleteAttr} type={"password"} {...props} />
 }
 
 PasswordTextField.COMPONENT_NAME = "PasswordTextField"

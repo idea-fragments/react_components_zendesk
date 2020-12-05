@@ -7,7 +7,7 @@ import type { StyledProps }        from "components/StyledProps.type"
 import React, { useState, useRef } from "react"
 import type { ComponentType }      from "react"
 import { useObserver }             from "mobx-react"
-import styled                      from "styled-components"
+import styled, { css }             from "styled-components"
 import { dark, fade }              from "styles/colors"
 import {
     Field as ZField,
@@ -15,6 +15,7 @@ import {
     Hint,
     Message,
 }                                  from "@zendeskgarden/react-forms"
+import { FONT_SIZES }              from "vendor/react_components_zendesk/src/styles/typography"
 
 type Props = FormFieldProps & {
     WrappedComponent :ComponentType<>,
@@ -42,7 +43,16 @@ export let TextFieldWrapper = ({
         <Container withRows spacing={null} fluid={fluid}>
             <Field compact={compact}>
                 {label ? <Label>{label}</Label> : null}
-                {hint ? <Hint>{hint}</Hint> : null}
+                {
+                    hint
+                    ? <Hint
+                        css={`&&& {
+                          font-size: ${FONT_SIZES.XS};
+                        }`}>
+                        {hint}
+                    </Hint>
+                    : null
+                }
                 <WrappedComponent
                     placeholder={emptyState}
                     validation={validation.validation}
@@ -52,10 +62,17 @@ export let TextFieldWrapper = ({
                     value={value}
                     onChange={onChange}
                 />
-                {message
-                 ? <Message
-                     validation={validation.validation}>{message}</Message>
-                 : null}
+                {
+                    message
+                    ? <Message
+                        css={`&&& {
+                          font-size: ${FONT_SIZES.XS};
+                        }`}
+                        validation={validation.validation}>
+                        {message}
+                    </Message>
+                    : null
+                }
             </Field>
         </Container>
     ))
@@ -67,17 +84,20 @@ TextFieldWrapper.defaultProps   = {
 }
 TextFieldWrapper.COMPONENT_NAME = "TextFieldWrapper"
 
-TextFieldWrapper = styled(TextFieldWrapper)`
+const hoverFocusStyling = css`
+  :hover {
+    border-color: ${({ theme } :StyledProps<>) => theme.styles.colorPrimary};
+  }
+
+  :focus {
+    border-color: ${({ theme } :StyledProps<>) => dark(theme.styles.colorPrimary)};
+    box-shadow: ${({ theme } :StyledProps<>) => `0 0 0 3px ${fade(theme.styles.colorPrimary)}`};
+  }
+`
+TextFieldWrapper        = styled(TextFieldWrapper)`
   &&&& {
     font-size: inherit;
-    :hover {
-      border-color: ${({ theme } :StyledProps<>) => theme.styles.colorPrimary};
-    }
-    
-    :focus {
-      border-color: ${({ theme } :StyledProps<>) => dark(theme.styles.colorPrimary)};
-      box-shadow:${({ theme } :StyledProps<>) => `0 0 0 3px ${fade(theme.styles.colorPrimary)}`};
-    }
+    ${(p) => !p.disabled ? hoverFocusStyling : ""}
   }
 `
 

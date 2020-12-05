@@ -32,5 +32,8 @@ export * from "./src/components/forms/Button"
 export * from "./src/components/forms/IconButton"
 
 
+export * from "./src/components/forms/Checkbox"
+
+
 export * from "./src/components/forms/Form"
 export * from "./src/components/forms/validationStates"

@@ -1,16 +1,16 @@
 // @flow
 
 import type { Validation }     from "components/forms/Validation.type"
-import * as React              from "react"
+import React, { type Node }    from "react"
 import type { ContainerProps } from "styles/types"
 
 export type FormFieldProps = {
     label? :string,
-    message? :string,
-    hint? :string,
-    emptyState? :string,
+    message? :Node,
+    hint? :Node,
+    emptyState? :Node,
     disabled? :boolean,
-    validation :Validation,
+    validation? :Validation,
 } & ContainerProps
 
 export type FormComponent =
