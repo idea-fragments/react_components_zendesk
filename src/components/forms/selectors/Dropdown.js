@@ -1,5 +1,6 @@
 // @flow
 
+import { buttonLikeHoverable }         from "components/forms/buttonMixins"
 import { VALIDATION_STATES }           from "components/forms/validationStates"
 import { Loadable }                    from "components/loaders/Loadable"
 import { debounce }                    from "lodash"
@@ -9,6 +10,7 @@ import type {
     SelectorItemKey,
     SelectorOption,
     SelectorProps,
+    StateChange,
 }                                      from "components/forms/selectors/types"
 import styled, { css }                 from "styled-components"
 import { FONT_SIZES }                  from "styles/typography"
@@ -16,9 +18,10 @@ import { isEmpty, isNotEmpty }         from "utils/arrayHelpers"
 import { DO_NOTHING }                  from "utils/functionHelpers"
 import {
     Field,
-    Label,
+    Label as ZenLabel,
     Hint,
-    Item,
+    HeaderItem,
+    Item as ZItem,
     NextItem,
     PreviousItem,
     Message,
@@ -30,8 +33,6 @@ import {
     Autocomplete as ZenAutocomplete,
     Trigger,
 }                                      from "@zendeskgarden/react-dropdowns"
-
-import type { StateChangeOptions }     from "@zendeskgarden/react-dropdowns"
 import { isArray, isNumber, isString } from "utils/typeCheckers"
 
 export type MenuPlacement =
@@ -68,32 +69,56 @@ const menuStyles = (extraStyles) => css`
   ${extraStyles}
 `
 
+const Item = styled(ZItem).attrs(({ danger, theme }) => {
+    if (!danger) return
+    return { color: theme.styles.colorDanger, primary: true }
+})`
+  &&&& {
+    ${({ danger }) => danger ? buttonLikeHoverable : ""}
+  }
+`
+
+const CLEAR_OPTION = {
+    label         : "-- None --",
+    value         : "_cleared",
+    isClearingItem: true,
+}
+
 export let Dropdown = (props :Props) => {
+    const [state, setState]                         = useState({ isOpen: false })
+    const controlledState                           = { ...state, ...props }
+    const [filteringOptions, setFilteringOptionsTo] = useState<boolean>(false)
+    const [searchFilter, setSearchFilter]           = useState<string>("")
+
     const [
-              state,
-              setState,
-          ]               = useState({ isOpen: false })
-    const [
-              filteringOptions,
-              setFilteringOptionsTo,
-          ]               = useState<boolean>(false)
-    const [
-              filteredOptions,
-              setFilteredOptions,
-          ]               = useState<SelectorOption[]>(props.options)
-    const [
-              searchFilter,
-              setSearchFilter,
-          ]               = useState<string>("")
-    const controlledState = { ...state, ...props }
+              filteredOptions, setFilteredOptions,
+          ] = useState<SelectorOption[]>(props.options)
 
     const {
-              label, options, keyField, valueField,
-              hint, selectedKey, selectedKeys, onChange, children, onStateChange,
-              useRawOptions, trigger, menuCSS, maxMenuHeight, returnItemOnChange,
-              placement, async, fluid, validation, menuItemComponent,
+              async,
+              children,
+              className,
+              clearable,
               filterOptions,
+              hint,
+              keyField,
+              label,
+              maxMenuHeight,
+              menuCSS,
+              menuItemComponent,
+              options,
+              placement,
+              returnItemOnChange,
+              selectedKey,
+              selectedKeys,
+              trigger,
+              useRawOptions,
+              validation,
+              valueField,
+              onChange,
+              onStateChange,
           } = props
+
 
     const filterFunc = value => {
         const searchText    = value.trim().toLowerCase()
@@ -137,6 +162,7 @@ export let Dropdown = (props :Props) => {
         valueField,
         menuItemComponent,
         filteringOptions,
+        clearable,
     )
     message           = validation.message || message
     const messageNode = message
@@ -148,6 +174,11 @@ export let Dropdown = (props :Props) => {
     const labelNode   = label ? <Label>{label}</Label> : null
 
     const handleChange = (item :SelectorOption | SelectorOption[]) => {
+        if (item.isClearingItem) {
+            onChange(null)
+            return
+        }
+
         if (isArray(item)) {
             // $FlowFixMe
             handleMultiSelectChange(item)
@@ -180,11 +211,13 @@ export let Dropdown = (props :Props) => {
         onChange([...new Set(changes)])
     }
 
-    const handleStateChange = (
-        changes :StateChangeOptions,
-        stateAndHelpers,
-    ) => {
-        onStateChange(changes)
+    const handleStateChange = (changes :StateChange) => {
+        const item = changes.selectedItem || {}
+
+        onStateChange({
+            ...changes,
+            selectedItem: item.isClearingItem ? null : item,
+        })
 
         if (changes.hasOwnProperty("isOpen")) {
             if (useRawOptions) {
@@ -192,7 +225,6 @@ export let Dropdown = (props :Props) => {
                 return
             }
 
-            const item = changes.selectedItem || {}
             setState({
                 ...state,
                 isOpen: item.isNextItem || item.isBackItem || changes.isOpen,
@@ -221,7 +253,7 @@ export let Dropdown = (props :Props) => {
             {
                 trigger
                 ? <Trigger>{trigger}</Trigger>
-                : <Field className={props.className}>
+                : <Field className={className}>
                     {labelNode}
                     {hintNode}
                     {children}
@@ -247,6 +279,7 @@ export let Dropdown = (props :Props) => {
     )
 }
 
+// eslint-disable-next-line no-unused-vars
 const getPopperModifiers = (fluid) => {
     if (!fluid) return null
     return {
@@ -296,27 +329,44 @@ export const MultiSelect  = styled(ZenMultiSelect)`
     div { max-width: 100%; }
   }
 `
+const Label               = styled(ZenLabel)`
+  && { color: ${(p) => p.theme.styles.textColorPrimary}; }
+`
 
 const getItemType = (o) => {
     if (o.isNextItem) return NextItem
     if (o.isBackItem) return PreviousItem
     if (o.isAddItem) return AddItem
+    if (o.isHeaderItem) return HeaderItem
+
     return Item
 }
 
 const createOptions = (
-    options, key, value, menuItemComponent, isFilteringOptions,
+    options, key, value, menuItemComponent, isFilteringOptions, isClearable,
 ) => {
     if (isFilteringOptions) return <Item disabled>Loading items...</Item>
     if (isEmpty(options)) return <Item disabled>No matches found</Item>
 
-    return options.map((o) => {
+    const nodes = options.map((o) => {
         const ItemType  = getItemType(o)
         const Component = menuItemComponent
 
-        return <ItemType key={o[key]} value={o} disabled={o.disabled}>
+        return <ItemType key={o[key]}
+                         value={o}
+                         disabled={o.disabled}
+                         danger={o.danger}>
             {menuItemComponent ? <Component {...o} /> : o[value]}
         </ItemType>
     })
 
+    if (isClearable) {
+        nodes.unshift(
+            <Item key={CLEAR_OPTION.value} value={CLEAR_OPTION}>
+                {CLEAR_OPTION.label}
+            </Item>,
+        )
+    }
+
+    return nodes
 }

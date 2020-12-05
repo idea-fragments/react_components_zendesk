@@ -4,8 +4,9 @@
   "private": true,
   "main": "src/index.js",
   "dependencies": {
-    "@mdi/js": "^4.5.95",
-    "@mdi/react": "^1.2.1",
+    "@mdi/js": "^5.8.55",
+    "@mdi/react": "^1.4.0",
+    "@zendeskgarden/react-accordions": "^8.22.0",
     "@zendeskgarden/react-avatars": "^6.4.4",
     "@zendeskgarden/react-breadcrumbs": "^6.4.4",
     "@zendeskgarden/react-buttons": "^6.4.4",
@@ -41,7 +42,7 @@
     "@babel/plugin-proposal-decorators": "^7.6.0",
     "babel-plugin-styled-components": "^1.10.6",
     "babel-preset-env": "^1.7.0",
-    "flow-bin": "^0.109.0"
+    "flow-bin": "^0.136.0"
   },
   "peerDependencies": {
     "react": "^16.10.2"

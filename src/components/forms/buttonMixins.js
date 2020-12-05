@@ -1,7 +1,7 @@
 // @flow
 
 import { css }                                   from "styled-components"
-import { dark, lighter }                         from "styles/colors"
+import { dark, light, lighter }                  from "styles/colors"
 import { textWithColor, textColorForBackground } from "styles/mixins"
 
 export const getInlineStyling = css`
@@ -16,12 +16,30 @@ export const inlineWithText = css`
 `
 
 export const textColorForButton = css`
-  ${({ flat, inline, primary }) => flat || inline || !primary ? textColorForFlatButton : textColorForBackground}
+  ${({ flat, inline, primary }) => flat || inline || !primary
+                                   ? textColorForFlatButton
+                                   : textColorForBackground}
 `
 
 export const textColorForFlatButton = css`
   ${textWithColor}
   ${({ inline }) => inline ? inlineButtonStates : flatButtonStates}
+`
+
+export const buttonLikeHoverable = css`
+    background: ${({ flat, primary, inline, color }) => flat || !primary || inline
+                                                        ? "transparent"
+                                                        : color};
+    
+    :hover {
+      background: ${({ color }) => light(color)};
+    }
+    
+    :active {
+      background: ${({ color }) => dark(color)};
+    }
+    
+    ${textColorForButton}
 `
 
 const flatButtonStates = css`

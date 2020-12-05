@@ -58,12 +58,12 @@ export const Row = ({
                 </Cell>
             ) : null}
             {columnConfigs.map((c :ColumnConfig) => {
-                const { name, important } = c
+                const { name, important, width } = c
                 const { BOLD, REGULAR }   = FONT_WEIGHTS
                 const weight              = important ? BOLD : REGULAR
                 return (
-                    <Cell key={`${key}-${name}`} width={colWidth}>
-                        <Text weight={weight}>
+                    <Cell key={`${key}-${name}`} width={width || colWidth}>
+                        <Text css={`font-weight: ${weight};`}>
                             {item[name]}
                         </Text>
                     </Cell>

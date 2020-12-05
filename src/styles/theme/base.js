@@ -12,6 +12,8 @@ export const base = {
     colorSuccess: COLORS.GREEN,
     container   : { horizontalPadding: "1rem" },
     sidebar     : { zIndex: 10000 },
+    table: { borderSize: "1rem" },
+    tooltip     : { darkBackground: "#747183" },
 
     getTextColorForBackground: ({ color, theme }) => {
         if (hasGoodContrast(color, theme.styles.textColorLight)) {

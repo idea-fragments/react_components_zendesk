@@ -1,10 +1,10 @@
 // @flow
 
-import { FlexBlock }           from "components/layout/FlexBlock"
-import { useEffect, useRef }   from "react"
-import * as React              from "react"
-import styled                  from "styled-components"
-import { NavBarScrollWatcher } from "utils/NavBarScrollWatcher"
+import { FlexBlock }                   from "components/layout/FlexBlock"
+import { useEffect, useRef, useState } from "react"
+import * as React                      from "react"
+import styled                          from "styled-components"
+import { NavBarScrollWatcher }         from "utils/NavBarScrollWatcher"
 
 type Props = {
     alertView :React.Node,
@@ -18,16 +18,19 @@ type Props = {
 export const AppBarLayout = ({
                                  alertView,
                                  appBar,
-                                 appBarHeight,
                                  className,
                                  content,
                                  drawerView,
                              } :Props) => {
-
-    const appBarRef = useRef<HTMLDivElement>(null)
+    const appBarRef                       = useRef<HTMLDivElement>(null)
+    const [appBarHeight, setAppBarHeight] = useState<number>(0)
 
     useEffect(() => {
         NavBarScrollWatcher.setNavBar(appBarRef.current)
+    }, [])
+
+    useEffect(() => {
+        setAppBarHeight(appBarRef.current.getBoundingClientRect().height)
     }, [])
 
     return (
@@ -37,7 +40,7 @@ export const AppBarLayout = ({
                    alignSelf={"center"}
                    className={className}>
             <div ref={appBarRef}>{appBar}</div>
-            <FlexBlock css={`min-height: calc(100vh - ${appBarHeight});`}
+            <FlexBlock css={`min-height: calc(100vh - ${appBarHeight}px);`}
                        spacing={null}
                        withRows
                        fluid>
@@ -54,5 +57,5 @@ export const AppBarLayout = ({
 AppBarLayout.COMPONENT_NAME = "AppBarLayout"
 
 const DrawerWrapper = styled.div`
-  z-index: ${({theme}) => theme.styles.sidebar.zIndex};
+  z-index: ${({ theme }) => theme.styles.sidebar.zIndex};
 `

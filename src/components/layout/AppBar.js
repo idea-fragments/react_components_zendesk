@@ -3,7 +3,12 @@
 import { IconButton }            from "components/forms/IconButton"
 import { Container }             from "components/layout/Container"
 import { FlexBlock }             from "components/layout/FlexBlock"
-import React, { ElementType }    from "react"
+import React, {
+    type ElementType,
+    useEffect,
+    useRef,
+    useState,
+}                                from "react"
 import { useStores }             from "stores/useStores"
 import styled, { css }           from "styled-components"
 import { mdiArrowLeft, mdiMenu } from "@mdi/js"
@@ -26,36 +31,45 @@ type Props = {
     title :string,
 } & ContainerProps
 
-export const AppBar = ({
-                           actions,
-                           fixed,
-                           fluid,
-                           logo,
-                           height,
-                           onBackClicked,
-                           onLogoClicked,
-                           showBackButton,
-                           title,
-                       } :Props) => {
+export let AppBar = ({
+                         actions,
+                         className,
+                         fixed,
+                         fluid,
+                         logo,
+                         height,
+                         onBackClicked,
+                         onLogoClicked,
+                         showBackButton,
+                         title,
+                     } :Props) => {
 
     // TODO this should not use MobX...switch to react context
-    const { ui } = useStores()
-    const theme  = useTheme()
+    const { ui }                              = useStores()
+    const theme                               = useTheme()
+    const appBarRef                           = useRef<HTMLDivElement>(null)
+    const [renderedHeight, setRenderedHeight] = useState<number>(0)
+
+    useEffect(() => {
+        setRenderedHeight(appBarRef.current.getBoundingClientRect().height)
+    }, [])
 
     const openNavDrawer = () => {
         ui.openDrawerWith({
             body: <FlexBlock withRows alignItems={"flex-start"}>
                 {actions.map((a :React.Node, i :number) => (
-                    <DrawerItem key={i} onClick={ui.closeDrawer}>{a}</DrawerItem>
+                    <DrawerItem key={i} onClick={ui.closeDrawer}>
+                        {a}
+                    </DrawerItem>
                 ))}
             </FlexBlock>,
         })
     }
 
     return <>
-        {fixed ? <FixedPlaceHolder height={height} /> : null}
-        <BarWrapper fixed={fixed}>
-            <Content height={height} fluid={fluid}>
+        {fixed ? <FixedPlaceHolder height={`${renderedHeight}px`} /> : null}
+        <BarWrapper fixed={fixed} className={className}>
+            <Content ref={appBarRef} height={height} fluid={fluid}>
                 {
                     showBackButton
                     ? <IconButton icon={mdiArrowLeft}
@@ -71,10 +85,13 @@ export const AppBar = ({
                     {title}
                 </FlexBlock>
                 <MobileNav
-                    color={theme.styles.getTextColorForBackground({
-                        color: theme.styles.appBar.background,
-                        theme,
-                    })}
+                    color={
+                        theme.styles.nav.linkColor ||
+                        theme.styles.getTextColorForBackground({
+                            color: theme.styles.appBar.background,
+                            theme,
+                        })
+                    }
                     onClick={openNavDrawer} />
                 <DesktopNav alignItems={"center"}>
                     {actions}
@@ -84,6 +101,7 @@ export const AppBar = ({
     </>
 }
 
+AppBar              = styled(AppBar)``
 AppBar.defaultProps = {
     actions       : [],
     height        : "auto",
@@ -124,8 +142,8 @@ const DesktopNav = styled(FlexBlock).attrs({
 `
 
 const DrawerItem = styled(FlexBlock)`
-  //width: 100%;
-  //padding: 0 1rem;
+  width: 100%;
+  padding: 0 1rem;
 `
 
 const FixedPlaceHolder = styled.div`

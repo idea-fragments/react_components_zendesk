@@ -37,15 +37,18 @@ const deviceQueries = (isSkinnyLayout) :{ [DeviceSize] :string } => {
     }
 }
 
-const logger = new Logger("DeviceSizeWatcher")
+const logger   = new Logger("DeviceSizeWatcher")
+const checkAny = (arr :Array<() => boolean>) => () => arr.some((f) => f())
 
 class DeviceSizeWatcher {
     #subscribers = {}
     #idGen       = newIdGenerator()
     #currentSize :DeviceSize
+
     constructor() {
         this.#createAllListeners()
     }
+
     subscribe = (callBack :Function) :number => {
         const id              = nextId(this.#idGen)
         this.#subscribers[id] = callBack
@@ -62,36 +65,49 @@ class DeviceSizeWatcher {
               .forEach((f :DeviceSizeChangeListener) => { f(s) })
     }
 
-    isPhone         = () => this.#currentSize === DEVICES.phone
-    isTablet        = () => this.#currentSize === DEVICES.tablet
-    isLargeTablet   = () => this.#currentSize === DEVICES.largeTablet
-    isSmallComputer = () => this.#currentSize === DEVICES.smallComputer
-    isLargeComputer = () => this.#currentSize === DEVICES.largeComputer
+    isPhone              = () => this.#currentSize === DEVICES.phone
+    isTablet             = () => this.#currentSize === DEVICES.tablet
+    isLargeTablet        = () => this.#currentSize === DEVICES.largeTablet
+    isSmallComputer      = () => this.#currentSize === DEVICES.smallComputer
+    isLargeComputer      = () => this.#currentSize === DEVICES.largeComputer
+    isSmallComputerAndUp = checkAny([
+        this.isSmallComputer,
+        this.isLargeComputer,
+    ])
+    isLargeTabletAndUp   = checkAny([
+        this.isLargeTablet,
+        this.isSmallComputerAndUp,
+    ])
+    isTabletAndUp        = checkAny([this.isTablet, this.isLargeTabletAndUp])
 
+    any     = (arr :Array<() => boolean>) => arr.some((f) => f())
     getSize = () :DeviceSize => this.#currentSize
 
     #createAllListeners = () => {
+        if (typeof window === "undefined") return
+
         logger.writeInfo("#createAllListeners")
 
-        const queries = deviceQueries(false)
+        const queries = deviceQueries(true)
         logger.writeInfo("queries", queries)
 
-        Object.entries(DEVICES).forEach(([name :string, s :DeviceSize]) :void => {
-        logger.writeInfo("name", name)
-            const ml :MediaQueryList = window.matchMedia(queries[s])
-            ml.addListener((e :MediaQueryListEvent) => {
-                if (!e.matches) return
+        Object.entries(DEVICES)
+              .forEach(([name :string, s :DeviceSize]) :void => {
+                  logger.writeInfo("name", name)
+                  const ml :MediaQueryList = window.matchMedia(queries[s])
+                  ml.addListener((e :MediaQueryListEvent) => {
+                      if (!e.matches) return
 
-                this.#currentSize = s
-                logger.writeInfo("Changed to size:", name)
-                this.#notifyReceivers(s)
-            })
+                      this.#currentSize = s
+                      logger.writeInfo("Changed to size:", name)
+                      this.#notifyReceivers(s)
+                  })
 
-            if (ml.matches) {
-                this.#currentSize = s
-                logger.writeInfo("Initial size:", name)
-            }
-        })
+                  if (ml.matches) {
+                      this.#currentSize = s
+                      logger.writeInfo("Initial size:", name)
+                  }
+              })
     }
 }
 

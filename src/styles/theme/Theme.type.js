@@ -5,8 +5,8 @@ export type Styles = {
         background :string,
         zIndex :number,
     },
-    buttons: {
-        textTransform: string,
+    buttons :{
+        textTransform :string,
     },
     colorAccent :string,
     colorPrimary :string,
@@ -29,14 +29,18 @@ export type Styles = {
         thumbColor :string,
         trackColor :string,
     },
+    scrollbarColor :string,
     sidebar :{
         background :string,
         zIndex :number
     },
+    table :{ borderSize :string, },
     textColorPrimary :string,
     textColorOverPrimaryBg :string,
     textColorSecondary :string,
-    scrollbarColor :string,
+    tooltip :{
+        darkBackground :string,
+    },
 
     // eslint-disable-next-line no-use-before-define
     getTextColorForBackground :({ color :string, theme :Theme }) => string

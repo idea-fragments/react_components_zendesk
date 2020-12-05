@@ -1,8 +1,8 @@
 // @flow
 
 import {
+    buttonLikeHoverable,
     getInlineStyling,
-    textColorForButton,
 }                                          from "components/forms/buttonMixins"
 import { Icon }                            from "components/Icon"
 import { FlexBlock }                       from "components/layout/FlexBlock"
@@ -10,12 +10,10 @@ import type { StyledProps }                from "components/StyledProps.type"
 import React, { forwardRef, type Ref }     from "react"
 import { Button as SButton }               from "@zendeskgarden/react-buttons"
 import type { Alignment }                  from "styles/alignments"
-import { dark, light }                     from "styles/colors"
 import { SPACINGS }                        from "styles/spacings"
 import type { Theme }                      from "styles/theme/Theme.type"
 import type { ColorProps, ContainerProps } from "styles/types"
 import styled, { css }                     from "styled-components"
-import { DO_NOTHING }                      from "utils/functionHelpers"
 
 const fitContent   = css`
   width: fit-content;
@@ -23,24 +21,13 @@ const fitContent   = css`
 `
 const fitContainer = css`width: 100%;`
 const colors       = css`
-    background: ${({ flat, primary, inline, color }) => flat || !primary || inline
-                                                        ? "transparent"
-                                                        : color};
+    ${buttonLikeHoverable};
     border-color: ${({ flat, primary, inline, color }) => !flat && !primary && !inline
                                                           ? color
                                                           : "transparent"};
     
     ${getInlineStyling}
-    ${textColorForButton}
-    
-    :hover {
-      background: ${({ color }) => light(color)};
-    }
-    
-    :active {
-      background: ${({ color }) => dark(color)};
-    }
-    
+   
     :hover, :active {
       border-color: transparent;
     }
@@ -54,10 +41,11 @@ const casing = ({ theme } :{ theme :Theme }) => {
     return casing ? css`text-transform: ${casing};` : ""
 }
 
-const baseColor = ({ color, success, danger, theme } :Props & StyledProps) => {
+const baseColor = ({ color, success, danger, warning, theme } :Props & StyledProps) => {
     if (color) return color
     if (danger) return theme.styles.colorDanger
     if (success) return theme.styles.colorSuccess
+    if (warning) return theme.styles.colorWarning
 
     return theme.styles.colorPrimary
 }
@@ -80,41 +68,38 @@ export type Props = {
 } & ColorProps & ContainerProps
 
 // eslint-disable-next-line no-use-before-define
-export const Button = styled(forwardRef<Props, typeof Button>((
+export let Button = (
     {
         children,
         flat,
         fluid,
         groupKey,
         icon,
+        iconSize,
+        innerAs,
         iconPosition,
         primary,
-        innerAs,
         ...props
     } :Props,
     ref :Ref,
-) => {
+) => <SButton as={innerAs} ref={ref} {...props}>
+    {
+        icon
+        ? <FlexBlock spacing={SPACINGS.XS} justify={"center"}
+                     alignItems={"center"}>
+            {iconPosition === "left" &&
+             <Icon color={"currentColor"} svg={icon} size={iconSize} />}
+            {children ? <span>{children}</span> : undefined}
+            {iconPosition === "right" &&
+             <Icon color={"currentColor"} svg={icon} size={iconSize} />}
+        </FlexBlock>
+        : <span>{children}</span>
+    }
+</SButton>
 
-    return (
-        <SButton as={innerAs}
-                 ref={ref}
-                 {...props}>
-            {icon ? (
-                <FlexBlock spacing={SPACINGS.XS}
-                           justify={"center"}
-                           alignItems={"center"}>
-                    {iconPosition === "left" &&
-                     <Icon color={"currentColor"} svg={icon} />}
-                    {children ? <span>{children}</span> : undefined}
-                    {iconPosition === "right" &&
-                     <Icon color={"currentColor"} svg={icon} />}
-                </FlexBlock>
-            ) : (
-                 <span>{children}</span>
-             )}
-        </SButton>
-    )
-})).attrs((props) => ({
+
+Button = forwardRef<Props, Button>(Button)
+Button = styled<Props, Button>(Button).attrs((props) => ({
     ...props,
     color: baseColor(props),
 }))`
