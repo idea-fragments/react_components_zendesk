@@ -1,34 +1,28 @@
 // @flow
 
-import { IconButton }            from "components/forms/IconButton"
-import { Container }             from "components/layout/Container"
-import { FlexBlock }             from "components/layout/FlexBlock"
-import React, {
-    type ElementType,
-    useEffect,
-    useRef,
-    useState,
-}                                from "react"
-import { useStores }             from "stores/useStores"
-import styled, { css }           from "styled-components"
-import { mdiArrowLeft, mdiMenu } from "@mdi/js"
-import { SPACINGS }              from "styles/spacings"
-import { useTheme }              from "styles/theme/useTheme"
-import type { ContainerProps }   from "styles/types"
-import { DO_NOTHING }            from "utils/functionHelpers"
-import { mediaQueries }          from "styles/mediaQueries"
+import { IconButton }              from "components/forms/IconButton"
+import { Container }               from "components/layout/Container"
+import { FlexBlock }               from "components/layout/FlexBlock"
+import React, { type ElementType } from "react"
+import { useStores }               from "stores/useStores"
+import styled, { css }             from "styled-components"
+import { mdiArrowLeft, mdiMenu }   from "@mdi/js"
+import { SPACINGS }                from "styles/spacings"
+import { useTheme }                from "styles/theme/useTheme"
+import type { ContainerProps }     from "styles/types"
+import { DO_NOTHING }              from "utils/functionHelpers"
+import { mediaQueries }            from "styles/mediaQueries"
 
 const { forLargeTabletsAndUp } = mediaQueries()
 
 type Props = {
     actions :Array<React.Node>,
     fixed? :boolean,
-    height :string,
     logo? :ElementType,
     onBackClicked :() => void,
     onLogoClicked :() => void,
     showBackButton :boolean,
-    title :string,
+    title :ElementType,
 } & ContainerProps
 
 export let AppBar = ({
@@ -37,7 +31,6 @@ export let AppBar = ({
                          fixed,
                          fluid,
                          logo,
-                         height,
                          onBackClicked,
                          onLogoClicked,
                          showBackButton,
@@ -45,14 +38,9 @@ export let AppBar = ({
                      } :Props) => {
 
     // TODO this should not use MobX...switch to react context
-    const { ui }                              = useStores()
-    const theme                               = useTheme()
-    const appBarRef                           = useRef<HTMLDivElement>(null)
-    const [renderedHeight, setRenderedHeight] = useState<number>(0)
-
-    useEffect(() => {
-        setRenderedHeight(appBarRef.current.getBoundingClientRect().height)
-    }, [])
+    const { ui }       = useStores()
+    const theme        = useTheme()
+    const appBarHeight = theme.styles.appBar.height
 
     const openNavDrawer = () => {
         ui.openDrawerWith({
@@ -67,9 +55,9 @@ export let AppBar = ({
     }
 
     return <>
-        {fixed ? <FixedPlaceHolder height={`${renderedHeight}px`} /> : null}
+        {fixed ? <FixedPlaceHolder height={`${appBarHeight}`} /> : null}
         <BarWrapper fixed={fixed} className={className}>
-            <Content ref={appBarRef} height={height} fluid={fluid}>
+            <Content height={appBarHeight} fluid={fluid}>
                 {
                     showBackButton
                     ? <IconButton icon={mdiArrowLeft}
@@ -158,7 +146,7 @@ const MobileNav = styled(IconButton).attrs({
     margin-right: 0;
     ${forLargeTabletsAndUp(css`
       display: none;
-    `)} 
+    `)}
   }
 `
 

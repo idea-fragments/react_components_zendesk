@@ -3,6 +3,7 @@
 export type Styles = {
     appBar :{
         background :string,
+        height :string,
         zIndex :number,
     },
     buttons :{

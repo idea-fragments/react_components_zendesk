@@ -1,10 +1,11 @@
 // @flow
 
-import { FlexBlock }                   from "components/layout/FlexBlock"
-import { useEffect, useRef, useState } from "react"
-import * as React                      from "react"
-import styled                          from "styled-components"
-import { NavBarScrollWatcher }         from "utils/NavBarScrollWatcher"
+import { FlexBlock }           from "components/layout/FlexBlock"
+import { useEffect, useRef }   from "react"
+import * as React              from "react"
+import styled                  from "styled-components"
+import { NavBarScrollWatcher } from "utils/NavBarScrollWatcher"
+import { useTheme }            from "vendor/react_components_zendesk/hooks"
 
 type Props = {
     alertView :React.Node,
@@ -22,15 +23,12 @@ export const AppBarLayout = ({
                                  content,
                                  drawerView,
                              } :Props) => {
-    const appBarRef                       = useRef<HTMLDivElement>(null)
-    const [appBarHeight, setAppBarHeight] = useState<number>(0)
+    const theme        = useTheme()
+    const appBarHeight = theme.styles.appBar.height
+    const appBarRef    = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         NavBarScrollWatcher.setNavBar(appBarRef.current)
-    }, [])
-
-    useEffect(() => {
-        setAppBarHeight(appBarRef.current.getBoundingClientRect().height)
     }, [])
 
     return (
@@ -40,7 +38,7 @@ export const AppBarLayout = ({
                    alignSelf={"center"}
                    className={className}>
             <div ref={appBarRef}>{appBar}</div>
-            <FlexBlock css={`min-height: calc(100vh - ${appBarHeight}px);`}
+            <FlexBlock css={`min-height: calc(100vh - ${appBarHeight});`}
                        spacing={null}
                        withRows
                        fluid>
