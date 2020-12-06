@@ -1,8 +1,8 @@
 // @flow
 
 import { SearchableSelector } from "components/forms/selectors/SearchableSelector"
-import React         from "react"
-import { MONTH_MAP } from "utils/dateTime/calendar"
+import React                  from "react"
+import { MONTH_MAP }          from "utils/dateTime/calendar"
 
 const parseNumberAndCall = (action :(number) => void) => (s :string) => {
     action(Number(s))
@@ -36,16 +36,18 @@ type Props = {
     onMonthSelected :(number) => void
 }
 
-export const MonthPicker = ({ month, onMonthSelected } :Props) => (
-    <SearchableSelector compact
-                        flat
-                        maxMenuHeight={"10rem"}
-                        options={MONTH_OPTIONS}
-                        optionsKeyMap={OPTIONS_KEY_MAP}
-                        keyField={keyField}
-                        valueField={valueField}
-                        selectedKey={month}
-                        emptyState={"Type or Select Month"}
-                        onChange={parseNumberAndCall(onMonthSelected)}
-    />
-)
+export const MonthPicker = ({ month, onMonthSelected } :Props) => {
+    return (
+        <SearchableSelector compact
+                            flat
+                            maxMenuHeight={"10rem"}
+                            options={MONTH_OPTIONS}
+                            optionsKeyMap={OPTIONS_KEY_MAP}
+                            keyField={keyField}
+                            valueField={valueField}
+                            selectedKey={month.toString()}
+                            emptyState={"Type or Select Month"}
+                            onChange={parseNumberAndCall(onMonthSelected)}
+        />
+    )
+}

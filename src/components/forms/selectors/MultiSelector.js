@@ -4,7 +4,7 @@ import { Dropdown, MultiSelect }   from "components/forms/selectors/Dropdown"
 import { Tag, Close }              from "components/tags/Tag"
 import React from "react"
 import type {
-    RefinedMultiSelectorProps,
+    MultiSelectorProps,
     SelectorItemKey,
     SelectorOption,
 }                                  from "components/forms/selectors/types"
@@ -13,7 +13,7 @@ import { VALIDATION_STATES }       from "components/forms/validationStates"
 type Props = {
     maxItems: 2,
     selectedKeys :Array<SelectorItemKey>,
-} & RefinedMultiSelectorProps
+} & MultiSelectorProps
 
 export let MultiSelector = ({maxItems, ...props} :Props) => {
     let {
@@ -53,6 +53,5 @@ export let MultiSelector = ({maxItems, ...props} :Props) => {
 MultiSelector.defaultProps = {
     invalidOnNoSelection: true,
     validation          : { validation: VALIDATION_STATES.NONE },
-    optionNodes         : [],
 }
 

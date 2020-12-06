@@ -1,7 +1,10 @@
 // @flow
 
 import { Autocomplete, Dropdown }      from "components/forms/selectors/Dropdown"
-import type { RefinedSelectorProps }   from "components/forms/selectors/types"
+import type {
+    SelectorOption,
+    SelectorProps,
+} from "components/forms/selectors/types"
 import { useState, useEffect, useRef } from "react"
 import * as React                      from "react"
 import styled                          from "styled-components"
@@ -20,17 +23,20 @@ import { isFunction }                  from "utils/typeCheckers"
  * */
 type Props = {
     onSearchTextChange :?(string) => void,
-} & RefinedSelectorProps
+} & SelectorProps
 
 /*
  * If we need this full width, maybe add a Block wrapper here
  * */
 export let SearchableSelector = ({ children, ...props } :Props) => {
     const {
-              emptyState, className, compact,
-              selectedKey, keyField, valueField, onChange, options,
-              optionsKeyMap, dropdownState, flat,
+              emptyState,
+              keyField,
+              options,
+              selectedKey,
+              valueField,
           } = props
+    let { optionsKeyMap } = props
 
     const [searchText, setSearchText]           = useState("")
     const [matchingOptions, setMatchingOptions] = useState(options)
@@ -56,6 +62,15 @@ export let SearchableSelector = ({ children, ...props } :Props) => {
         if (state.hasOwnProperty("inputValue")) {
             setSearchText(state.inputValue)
         }
+    }
+
+    if (optionsKeyMap == null && options != null) {
+        optionsKeyMap = options.reduce(
+            (m :{ [string] :SelectorOption }, o :SelectorOption) => {
+                m[o[keyField]] = o
+                return m
+            }, {},
+        )
     }
 
     if (!optionsKeyMap) return null

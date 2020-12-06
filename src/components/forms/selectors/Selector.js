@@ -3,12 +3,12 @@
 import { Dropdown, Select }  from "components/forms/selectors/Dropdown"
 import * as React            from "react"
 import type {
-    RefinedSelectorProps,
+    SelectorProps,
     SelectorOption,
 }                            from "components/forms/selectors/types"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 
-export let Selector = ({ disabled, ...props } :RefinedSelectorProps) => {
+export let Selector = ({ disabled, ...props } :SelectorProps) => {
     let {
             keyField,
             options,

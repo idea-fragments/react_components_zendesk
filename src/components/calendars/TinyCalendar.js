@@ -55,12 +55,16 @@ export let TinyCalendar = ({
                                onChange,
                                logger,
                            } :Props) => {
-    const [date, setDate] = useState<Moment>(initialDate)
+    const [date, setDate] = useState<Moment>(minDate || initialDate)
     const theme           = useTheme()
+    const outOfMinRange   = minDate && date.isBefore(minDate)
+    const usableDate      = outOfMinRange ? minDate : date
 
     const changeDateState = ({ month, year } :MonthYearPickerChange) => {
-        const newDate = moment(date).month(month).year(year)
-        setDate(maxDateBetween(newDate, minDate))
+        const newDate = moment(usableDate).month(month).year(year)
+        setDate(maxDateBetween(
+            newDate, (minDate || moment().year(Number.MIN_VALUE)),
+        ))
     }
 
     const rangeColors = [
@@ -109,13 +113,13 @@ export let TinyCalendar = ({
              */
             navigatorRenderer={(_, changeShownDate) => {
                 return <MonthYearPicker
-                    month={date.month()}
-                    year={date.year()}
+                    month={usableDate.month()}
+                    year={usableDate.year()}
                     minDate={minDate}
                     pastFutureYearRangeSize={3}
                     onChange={({ month, year } :MonthYearPickerChange) => {
                         changeShownDate(
-                            moment(date).month(month).year(year).toDate()
+                            moment(usableDate).month(month).year(year).toDate(),
                         )
                         changeDateState({ month, year })
                     }}
@@ -123,7 +127,7 @@ export let TinyCalendar = ({
             }}
             ranges={ranges}
             rangeColors={rangeColors}
-            shownDate={date.toDate()}
+            shownDate={usableDate.toDate()}
             showSelectionPreview={false}
             showMonthAndYearPickers={false}
             showMonthArrow={false}
@@ -149,44 +153,44 @@ TinyCalendar.defaultProps   = {
     disabledDates: [],
     fluid        : false,
     initialDate  : moment(),
-    minDate      : moment().year(Number.MIN_VALUE),
+    // minDate      : moment().year(Number.MIN_VALUE),
     showLegend   : false,
     onChange     : DO_NOTHING,
 }
 TinyCalendar                = loggable(TinyCalendar)
 
-const Container = styled(PaddedFlexBlock)`  
+const Container = styled(PaddedFlexBlock)`
   width: ${({ fluid }) => fluid ? "100%" : "24.5rem"};
-  
+
   .rdrMonth {
     width: 100%;
   }
-  
+
   .rdrDay.rdrDayToday .rdrDayNumber span:after {
     background: ${({ theme }) => theme.styles.colorPrimary};
   }
-  
+
   .rdrDay.rdrDayHovered {
     .rdrDayNumber {
       background: ${({ theme }) => theme.styles.colorPrimary};
       border-radius: 2em;
-      
+
       span {
         color: ${({ theme }) => theme.styles.textColorOverPrimaryBg};
       }
-      
+
       ::after {
         display: none;
       }
     }
   }
-  
+
   .rdrDayNumber {
     font-weight: ${FONT_WEIGHTS.REGULAR};
     top: 2px;
     bottom: 2px;
   }
-  
+
   .rdrMonthAndYearWrapper {
     display: none;
   }
