@@ -27,6 +27,7 @@ const OverflowButton = styled(Button).attrs({
     "aria-label"         : "Row actions",
     inline               : true,
 })`
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
