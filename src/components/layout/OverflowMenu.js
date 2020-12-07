@@ -6,7 +6,7 @@ import { Dropdown }           from "components/forms/selectors/Dropdown"
 import * as React             from "react"
 import { COLORS, darker }     from "styles/colors"
 import styled                 from "styled-components"
-import {mdiDotsVertical}              from "@mdi/js"
+import { mdiDotsVertical }    from "@mdi/js"
 
 const COMPONENT_NAME = "OverflowMenu"
 
@@ -16,7 +16,7 @@ export type OverflowMenuItem = {
 }
 
 type Props = {
-    placement?: MenuPlacement,
+    placement? :MenuPlacement,
     actions :Array<OverflowMenuItem>
 }
 
@@ -25,7 +25,7 @@ const OverflowButton = styled(Button).attrs({
     "data-component-name": COMPONENT_NAME,
     color                : darker(COLORS.GREY),
     "aria-label"         : "Row actions",
-    inline: true,
+    inline               : true,
 })`
   display: flex;
   flex-direction: column;

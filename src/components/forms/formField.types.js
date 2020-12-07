@@ -10,7 +10,7 @@ export type FormFieldProps = {
     hint? :Node,
     emptyState? :Node,
     disabled? :boolean,
-    validation? :Validation,
+    validation? :?Validation,
 } & ContainerProps
 
 export type FormComponent =

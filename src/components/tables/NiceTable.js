@@ -11,6 +11,10 @@ import type { Item, TableProps } from "components/tables/Table"
 import React                     from "react"
 import { isNotEmpty }            from "utils/arrayHelpers"
 
+type Props = TableProps & {
+    hasRowActions :boolean,
+}
+
 export const NiceTable = ({
                               action,
                               checkable,
@@ -28,7 +32,7 @@ export const NiceTable = ({
                               onItemHoverEnd,
                               onItemHoverStart,
                               onSelectAllToggle,
-                          } :TableProps) => {
+                          } :Props) => {
     return (
         <FlexBox>
             <Table>

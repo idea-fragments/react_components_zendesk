@@ -43,9 +43,9 @@ export const Row = ({
 
     return (
         <Container css={containerStyles || {}} onClick={() => onClick(key)}>
-            <PaddedFlexBlock css={`background: white; 
-                                   width: 100%;
-                                   border-radius: .3rem;`}>
+            <PaddedFlexBlock css={`background: white;
+              width: 100%;
+              border-radius: .3rem;`}>
                 {checkable ? (
                     <Checkbox checked={checked} onChange={handleCheckChange}>
                         <Label hidden>Select</Label>
@@ -56,13 +56,19 @@ export const Row = ({
                     <Grid>
                         {columnConfigs.map((c :ColumnConfig) => {
                             const { name, collapsible, important } = c
-                            const { MEDIUM, REGULAR, BOLD }        = FONT_WEIGHTS
+                            const {
+                                      MEDIUM,
+                                      REGULAR,
+                                      BOLD,
+                                  }                                = FONT_WEIGHTS
 
                             const titleWeight = important ? BOLD : MEDIUM
                             const valueWeight = important ? MEDIUM : REGULAR
 
                             const cssStyles = collapsible && isCollapsed
-                                              ? css`&& { display: none; }`
+                                              ? css`&& {
+                                      display: none;
+                                    }`
                                               : ""
 
                             return (
@@ -78,7 +84,7 @@ export const Row = ({
                                     <Col md={7} sm={12}>
                                         <Text
                                             css={`font-weight: ${valueWeight};
-                                                  font-size: ${FONT_SIZES.XS};`}>
+                                              font-size: ${FONT_SIZES.XS};`}>
                                             {item[name]}
                                         </Text>
                                     </Col>
@@ -100,7 +106,14 @@ export const Row = ({
                         </Button>
                     </ButtonContainer>
                 </FlexBlock>
-                {actions ? <div><OverflowMenu actions={actions} /></div> : null}
+                {
+                    actions
+                    ? <div>
+                        <OverflowMenu actions={actions}
+                                      placement={"bottom-end"} />
+                    </div>
+                    : null
+                }
             </PaddedFlexBlock>
         </Container>
     )

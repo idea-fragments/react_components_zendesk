@@ -1,27 +1,27 @@
 // @flow
 
-import { Legend }                     from "components/calendars/blocks/Legend"
-import type { MonthYearPickerChange } from "components/calendars/blocks/MonthYearPicker"
-import { MonthYearPicker }            from "components/calendars/blocks/MonthYearPicker"
-import type { Legendable }            from "components/calendars/Legendable.type"
-import { PaddedFlexBlock }            from "components/layout/FlexBlock"
-import moment, { Moment }             from "moment"
-import { useState }                   from "react"
-import * as React                     from "react"
-import { Calendar }                   from "react-date-range"
-import { useTheme }                   from "styles/theme/useTheme"
-import type { DateRange }             from "utils/dateTime/DateRange.type"
-import styled                         from "styled-components"
+import { Legend }                      from "components/calendars/blocks/Legend"
+import type { MonthYearPickerChange }  from "components/calendars/blocks/MonthYearPicker"
+import { MonthYearPicker }             from "components/calendars/blocks/MonthYearPicker"
+import type { Legendable }             from "components/calendars/Legendable.type"
+import { PaddedFlexBlock }             from "components/layout/FlexBlock"
+import moment, { Moment }              from "moment"
+import { useEffect, useRef, useState } from "react"
+import * as React                      from "react"
+import { Calendar }                    from "react-date-range"
+import { useTheme }                    from "styles/theme/useTheme"
+import type { DateRange }              from "utils/dateTime/DateRange.type"
+import styled                          from "styled-components"
 import {
     maxDateBetween,
     momentListToDateList,
-}                                     from "utils/dateTimeHelpers"
-import { DO_NOTHING }                 from "utils/functionHelpers"
-import { loggable }                   from "utils/logging/loggable"
-import { COLORS, fade }               from "styles/colors"
-import { SPACINGS }                   from "styles/spacings"
-import { FONT_WEIGHTS }               from "styles/typography"
-import { flatten }                    from "utils/arrayHelpers"
+}                                      from "utils/dateTimeHelpers"
+import { DO_NOTHING }                  from "utils/functionHelpers"
+import { loggable }                    from "utils/logging/loggable"
+import { COLORS, fade }                from "styles/colors"
+import { SPACINGS }                    from "styles/spacings"
+import { FONT_WEIGHTS }                from "styles/typography"
+import { flatten }                     from "utils/arrayHelpers"
 
 export type LabeledRangeList = {
     color? :string,
@@ -55,16 +55,24 @@ export let TinyCalendar = ({
                                onChange,
                                logger,
                            } :Props) => {
-    const [date, setDate] = useState<Moment>(minDate || initialDate)
-    const theme           = useTheme()
-    const outOfMinRange   = minDate && date.isBefore(minDate)
-    const usableDate      = outOfMinRange ? minDate : date
+    const [date, setDate]    = useState<Moment>(minDate || initialDate)
+    const theme              = useTheme()
+    const outOfMinRange      = minDate && date.isBefore(minDate)
+    const usableDate :Moment = outOfMinRange ? minDate : date
+    const changeShownDate    = useRef<?(Date) => void>(null)
+
+    useEffect(() => {
+        if (changeShownDate.current != null) {
+            changeShownDate.current(usableDate.toDate())
+        }
+    }, [usableDate])
 
     const changeDateState = ({ month, year } :MonthYearPickerChange) => {
-        const newDate = moment(usableDate).month(month).year(year)
-        setDate(maxDateBetween(
+        const newDate       = moment(usableDate).month(month).year(year)
+        const newUsableDate = maxDateBetween(
             newDate, (minDate || moment().year(Number.MIN_VALUE)),
-        ))
+        )
+        setDate(newUsableDate)
     }
 
     const rangeColors = [
@@ -101,7 +109,7 @@ export let TinyCalendar = ({
                       spacing={SPACINGS.SM}>
         <Calendar
             color={theme.styles.colorPrimary}
-            // date={date.toDate()}
+            // date={usableDate.toDate()}
             displayMode={displayMode}
             disabledDates={momentListToDateList(disabledDates)}
             dragSelectionEnabled={false}
@@ -111,16 +119,17 @@ export let TinyCalendar = ({
              showMonthAndYearPickers prop doesnt need to be set to false at the moment
              but will be done anyway just in case.
              */
-            navigatorRenderer={(_, changeShownDate) => {
+            navigatorRenderer={(_, changeShownDateFunc) => {
+                changeShownDate.current = changeShownDateFunc
                 return <MonthYearPicker
                     month={usableDate.month()}
                     year={usableDate.year()}
                     minDate={minDate}
                     pastFutureYearRangeSize={3}
                     onChange={({ month, year } :MonthYearPickerChange) => {
-                        changeShownDate(
-                            moment(usableDate).month(month).year(year).toDate(),
-                        )
+                        // changeShownDate(
+                        //     moment(usableDate).month(month).year(year).toDate(),
+                        // )
                         changeDateState({ month, year })
                     }}
                 />

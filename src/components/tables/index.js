@@ -8,15 +8,17 @@ import {
     Body as ZBody,
     Cell as ZCell,
     Row as ZRow,
-}                            from "@zendeskgarden/react-tables"
+}                                  from "@zendeskgarden/react-tables"
 import styled                      from "styled-components"
 import { COLORS, fade, veryLight } from "styles/colors"
 import { SPACINGS }                from "styles/spacings"
+import { FONT_SIZES }              from "vendor/react_components_zendesk/src/styles/typography"
 
 const Table          = styled(ZTable)``
 Table.COMPONENT_NAME = "Table"
 
 const Head = styled(ZHead)`
+  font-size: ${FONT_SIZES.SM};
   padding: ${(p) => p.theme.styles.table.borderSize};
   background: ${veryLight(COLORS.GREY)};
 `
@@ -31,6 +33,7 @@ const HeaderRow = styled(ZHeaderRow)`
 const HeaderCell = styled(ZHeaderCell)``
 
 const Body = styled(ZBody)`
+  font-size: ${FONT_SIZES.SM};
   padding: ${(p) => { 
       const size = p.theme.styles.table.borderSize
       return `0 ${size} ${size}`

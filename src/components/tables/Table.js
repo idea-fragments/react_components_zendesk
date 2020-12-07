@@ -12,6 +12,7 @@ import type {
     DeviceSizeChangeListener,
 }                                                  from "styles/DeviceSizeWatcher"
 import { deviceSizeWatcher }                       from "styles/DeviceSizeWatcher"
+import { isNotEmpty }                              from "utils/arrayHelpers"
 import { DO_NOTHING }                              from "utils/functionHelpers"
 import styled                                      from "styled-components"
 
@@ -54,7 +55,6 @@ export type TableProps = {
     checkedItems :Set<number>,
     columnConfigs :Array<ColumnConfig>,
     emptyState? :Node,
-    hasRowActions :boolean,
     helpText? :string,
     initialFilterValues :{ [string] :string },
     items :Array<Item>,
@@ -76,6 +76,7 @@ type Props = TableProps & {
 
 export let Table = ({
                         className,
+                        hasRowActions,
                         nice,
                         pagination,
                         onPageChange,
@@ -101,8 +102,15 @@ export let Table = ({
         return () => { unsubscribe(subId) }
     }, [handleDeviseSizeChange, subscribe, unsubscribe])
 
-    const largeTable = () => nice ? <NiceTable {...props} />
-                                  : <SimpleTable {...props} />
+    hasRowActions = hasRowActions || props.items.some(
+        (i :Item) => i.actions && isNotEmpty(i.actions),
+    )
+
+    const largeTable = () => nice
+                             ? <NiceTable {...props}
+                                          hasRowActions={hasRowActions} />
+                             : <SimpleTable {...props}
+                                            hasRowActions={hasRowActions} />
     return (
         <FlexBox withRows className={className}>
             {
@@ -121,7 +129,6 @@ export let Table = ({
 
 Table.COMPONENT_NAME = "Table"
 Table.defaultProps   = {
-    hasRowActions    : false,
     checkable        : false,
     checkedItems     : new Set(),
     onItemChecked    : DO_NOTHING,
