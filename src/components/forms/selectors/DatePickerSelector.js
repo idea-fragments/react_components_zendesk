@@ -3,11 +3,12 @@
 import { TinyCalendar }        from "components/calendars/TinyCalendar"
 import type { TextFieldProps } from "components/forms/formField.types"
 import { Dropdown, Select }    from "components/forms/selectors/Dropdown"
+import type { StateChange }    from "components/forms/selectors/types"
 import moment, { type Moment } from "moment"
-import { useState }            from "react"
-import * as React              from "react"
+import React, { useState }     from "react"
 import { formatMonthDateYear } from "utils/dateTimeHelpers"
 import { DO_NOTHING }          from "utils/functionHelpers"
+import { Logger }              from "utils/logging/Logger"
 
 type Props = {
     minimumDate? :Moment,
@@ -18,11 +19,14 @@ type State = {
     isOpen :boolean
 }
 
+const logger                             = new Logger("DatePickerSelector")
+const stateChangesThatFailWithDatePicker = [
+    "__autocomplete_blur_input__",
+    "__autocomplete_blur_button__",
+]
+
 export const DatePickerSelector = (props :Props) => {
-    const [
-              state,
-              setState,
-          ] :[State, (State) => void] = useState({ isOpen: false })
+    const [state, setState] = useState<State>({ isOpen: false })
 
     const {
               value,
@@ -33,12 +37,16 @@ export const DatePickerSelector = (props :Props) => {
               onChange,
           } :Props = props
 
-    const setDropdownState = ({ isOpen } :State) => {
-        if (disabled || isOpen == null) return
+    const setDropdownState = ({ isOpen, type } :StateChange) => {
+        logger.writeInfo("Dropdown state changed:", { isOpen })
+        if (disabled
+            || isOpen == null
+            || stateChangesThatFailWithDatePicker.includes(type)) return
         setState({ isOpen })
     }
 
     const handleCalendarChange = (d :Date) => {
+        logger.writeInfo("Date selected:", d)
         onChange(moment(d))
         closeCalendar()
     }
@@ -58,7 +66,9 @@ export const DatePickerSelector = (props :Props) => {
                                     disabledDates={disabledDates} />,
                   ]}
                   menuCSS={`width: auto !important;`}>
-            <Select validation={props.validation.validation}
+            <Select validation={props.validation
+                                ? props.validation.validation
+                                : null}
                     disabled={disabled}>
                 {value ? formatMonthDateYear(value) : emptyState}
             </Select>

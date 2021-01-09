@@ -33,6 +33,7 @@ import {
     Autocomplete as ZenAutocomplete,
     Trigger,
 }                                      from "@zendeskgarden/react-dropdowns"
+import { Logger }                      from "utils/logging/Logger"
 import { isArray, isNumber, isString } from "utils/typeCheckers"
 
 export type MenuPlacement =
@@ -50,16 +51,21 @@ export type MenuPlacement =
     | "start-top"
     | "start-bottom"
 
-type Props = SelectorProps & {
+type OptionalSelectorProps = {
+    keyField? :string,
+    valueField? :string,
+}
+
+type Props = $Diff<SelectorProps, OptionalSelectorProps> & {
     async :boolean,
-    filterOption :boolean,
+    filterOption? :boolean,
     maxMenuHeight? :string,
     menuCSS? :string,
     placement? :MenuPlacement,
     returnItemOnChange :boolean,
     trigger? :React.Node,
     useRawOptions :boolean,
-}
+} & OptionalSelectorProps
 
 const menuStyles = (extraStyles) => css`
   && { width: 100%; }
@@ -83,6 +89,8 @@ const CLEAR_OPTION = {
     value         : "_cleared",
     isClearingItem: true,
 }
+
+const logger = new Logger("Dropdown")
 
 export let Dropdown = (props :Props) => {
     const [state, setState]                         = useState({ isOpen: false })
@@ -118,7 +126,6 @@ export let Dropdown = (props :Props) => {
               onChange,
               onStateChange,
           } = props
-
 
     const filterFunc = value => {
         const searchText    = value.trim().toLowerCase()
@@ -174,6 +181,7 @@ export let Dropdown = (props :Props) => {
     const labelNode   = label ? <Label>{label}</Label> : null
 
     const handleChange = (item :SelectorOption | SelectorOption[]) => {
+        logger.writeInfo("selection made", item)
         if (item.isClearingItem) {
             onChange(null)
             return
@@ -212,6 +220,7 @@ export let Dropdown = (props :Props) => {
     }
 
     const handleStateChange = (changes :StateChange) => {
+        logger.writeInfo("state change", changes)
         const item = changes.selectedItem || {}
 
         onStateChange({
