@@ -9,6 +9,7 @@ import React, { useState }     from "react"
 import { formatMonthDateYear } from "utils/dateTimeHelpers"
 import { DO_NOTHING }          from "utils/functionHelpers"
 import { Logger }              from "utils/logging/Logger"
+import Downshift               from "downshift"
 
 type Props = {
     minimumDate? :Moment,
@@ -21,8 +22,8 @@ type State = {
 
 const logger                             = new Logger("DatePickerSelector")
 const stateChangesThatFailWithDatePicker = [
-    "__autocomplete_blur_input__",
-    "__autocomplete_blur_button__",
+    Downshift.stateChangeTypes.blurInput,
+    Downshift.stateChangeTypes.blurButton,
 ]
 
 export const DatePickerSelector = (props :Props) => {
