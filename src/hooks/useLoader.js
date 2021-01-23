@@ -9,10 +9,12 @@ import type { ComponentType }     from "react"
 import { returnAfterMinimum }     from "utils/dateTimeHelpers"
 import type { PromiseFunc }       from "utils/function.types"
 import { newIdGenerator, nextId } from "utils/idGenerator"
+import { Logger }                 from "utils/logging/Logger"
 
 const gen = newIdGenerator()
 
 const visibleLoaderIds = observable(new Set<number>())
+const logger           = new Logger("useLoader")
 
 type LoadingFunc<T> = (PromiseFunc<*, T>) => PromiseFunc<*, T>
 
@@ -22,20 +24,31 @@ type Return<T> = {
 }
 
 export const useLoader = <T>() :Return<T> => {
+    logger.writeInfo("Called")
     const Loader      = useRef<?ComponentType<any>>(null)
     const withLoading = useRef<?LoadingFunc<T>>(null)
 
     if (!Loader.current || !withLoading.current) {
         const id = nextId(gen)
-
+        logger.writeInfo("Creating new loader id:", id)
         Loader.current = ({ cssStyles, showSpinner, ...props }) => {
-            return <Observer>{() =>
-                <Loadable showSpinner={showSpinner != null
-                                       ? showSpinner
-                                       : visibleLoaderIds.has(id)}
-                          {...props}
-                          css={cssStyles}
+            return <Observer>{() => {
+                logger.writeInfo(
+                    "Rendering Loader id:",
+                    id,
+                    "showSpinner",
+                    showSpinner,
+                    "visibleLoaderIds.has(id)",
+                    visibleLoaderIds.has(id),
+                )
+                return <Loadable debugId={id}
+                                 showSpinner={showSpinner != null
+                                              ? showSpinner
+                                              : visibleLoaderIds.has(id)}
+                                 {...props}
+                                 css={cssStyles}
                 />
+            }
             }</Observer>
         }
 

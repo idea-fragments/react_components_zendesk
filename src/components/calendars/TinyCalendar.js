@@ -17,7 +17,6 @@ import {
     momentListToDateList,
 }                                      from "utils/dateTimeHelpers"
 import { DO_NOTHING }                  from "utils/functionHelpers"
-import { loggable }                    from "utils/logging/loggable"
 import { COLORS, fade }                from "styles/colors"
 import { SPACINGS }                    from "styles/spacings"
 import { FONT_WEIGHTS }                from "styles/typography"
@@ -40,7 +39,7 @@ type Props = {
     minDate? :Moment,
     ranges? :Array<ColoredDateRange>,
     showLegend :boolean,
-    onChange :() => void,
+    onChange :(Date) => void,
 }
 
 export let TinyCalendar = ({
@@ -53,7 +52,6 @@ export let TinyCalendar = ({
                                ranges,
                                showLegend,
                                onChange,
-                               logger,
                            } :Props) => {
     const [date, setDate]    = useState<Moment>(minDate || initialDate)
     const theme              = useTheme()
@@ -166,7 +164,6 @@ TinyCalendar.defaultProps   = {
     showLegend   : false,
     onChange     : DO_NOTHING,
 }
-TinyCalendar                = loggable(TinyCalendar)
 
 const Container = styled(PaddedFlexBlock)`
   width: ${({ fluid }) => fluid ? "100%" : "24.5rem"};

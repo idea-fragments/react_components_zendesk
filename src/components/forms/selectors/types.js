@@ -1,8 +1,6 @@
 // @flow
 
-import type { Validation }     from "components/forms/Validation.type"
-import type { ContainerProps } from "styles/types"
-import type { Node }           from "react"
+import type { FormFieldProps } from "components/forms/formField.types"
 
 export type SelectorItemKey = string | number | null
 export type SelectorOption = { [string] :any }
@@ -12,27 +10,22 @@ export type StateChange = {
     highlightedIndex?: number,
     isOpen?: boolean,
     selectedItem?: SelectorOption | null,
+    type: string,
 }
 
-type Common = {
+type Common = FormFieldProps & {
     clearable? :boolean,
-    disabled? :boolean,
-    label? :string,
     options :Array<SelectorOption>,
     optionsKeyMap? :{ [SelectorItemKey] :SelectorOption },
     keyField :string,
     valueField :string,
-    message? :?string | null,
-    emptyState? :string,
-    hint? :string | Node,
     onChange? :OnItemSelectedFunc,
     onStateChange? :(StateChange) => void,
     invalidOnNoSelection? :boolean,
-    validation :Validation,
     flat? :boolean,
     open? :boolean,
     small? :boolean,
-} & ContainerProps
+}
 
 export type SelectorProps = {
     selectedKey? :SelectorItemKey,

@@ -7,6 +7,9 @@ import { Dots }                            from "@zendeskgarden/react-loaders"
 import type { Theme }                      from "styles/theme/Theme.type"
 import { FONT_SIZES }                      from "styles/typography"
 import styled, { ThemeContext }            from "styled-components"
+import { Logger }                          from "utils/logging/Logger"
+
+const logger = new Logger("Loadable")
 
 const Container = styled(FlexBlock)`
   height: 100%;
@@ -23,20 +26,30 @@ const LoaderContainer = styled(FlexBlock)`
 const ChildrenContainer = styled(FlexBlock)`
   width: 100%;
   opacity: ${({ showSpinner, opaqueSpinner }) => {
-      if(!showSpinner) return "1"
-      return opaqueSpinner ? "0" : ".3" 
+    if (!showSpinner) return "1"
+    return opaqueSpinner ? "0" : ".3"
   }};
 `
 
-export let Loadable = ({ children, showSpinner, className, opaqueSpinner }) => {
+export let Loadable = ({
+                           children,
+                           className,
+                           debugId,
+                           opaqueSpinner,
+                           showSpinner,
+                       }) => {
+    logger.writeInfo("Rendering id:", debugId, "showSpinner", showSpinner)
     const theme                               = useContext<Theme>(ThemeContext)
     const [canHideSpinner, setCanHideSpinner] = useState<boolean>(true)
 
     useEffect(() => {
         if (!showSpinner) return
         setCanHideSpinner(false)
-        setTimeout(() => {setCanHideSpinner(true)}, 500)
-    }, [showSpinner])
+        setTimeout(() => {
+            logger.writeInfo("setting setCanHideSpinner true id:", debugId)
+            setCanHideSpinner(true)
+        }, 500)
+    }, [debugId, showSpinner])
 
     const showingSpinner = showSpinner || !canHideSpinner
 
