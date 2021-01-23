@@ -1,3 +1,3 @@
 // @flow
 
-export const DO_NOTHING = function() {}
+export const DO_NOTHING = function(...args :any) {}
