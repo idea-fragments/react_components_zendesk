@@ -34,6 +34,19 @@ export const FONT_SIZES = Object.freeze({
     XXS, XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL,
 })
 
+export const FONT_SIZES_EM = Object.freeze({
+    XXS: XXS.replace("r", ""),
+    XS: XS.replace("r", ""),
+    SM: SM.replace("r", ""),
+    MD: MD.replace("r", ""),
+    LG: LG.replace("r", ""),
+    XL: XL.replace("r", ""),
+    XXL: XXL.replace("r", ""),
+    XXXL: XXXL.replace("r", ""),
+    XXXXL: XXXXL.replace("r", ""),
+    XXXXXL: XXXXXL.replace("r", ""),
+})
+
 export const FONT_WEIGHTS = {
     THIN, LIGHT, REGULAR, MEDIUM, BOLD, BLACK,
 }

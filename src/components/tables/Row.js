@@ -58,19 +58,27 @@ export const Row = ({
                 </Cell>
             ) : null}
             {columnConfigs.map((c :ColumnConfig) => {
-                const { name, important, width } = c
-                const { BOLD, REGULAR }   = FONT_WEIGHTS
-                const weight              = important ? BOLD : REGULAR
+                const {
+                          css,
+                          name,
+                          important,
+                          width,
+                      }                 = c
+                const { BOLD, REGULAR } = FONT_WEIGHTS
+                const weight            = important ? BOLD : REGULAR
+
                 return (
-                    <Cell key={`${key}-${name}`} width={width || colWidth}>
-                        <Text css={`font-weight: ${weight};`}>
+                    <Cell key={`${key}-${name}`}
+                          css={css}
+                          width={css ? null : width || colWidth}>
+                        <Text css={`font-weight: ${weight}; width: 100%;`}>
                             {item[name]}
                         </Text>
                     </Cell>
                 )
             })}
             {actions ? <OverflowMenuCell menu>
-                <OverflowMenu actions={actions} placement={"bottom-end"}/>
+                <OverflowMenu actions={actions} placement={"bottom-end"} />
             </OverflowMenuCell> : null}
         </MyRow>
     )

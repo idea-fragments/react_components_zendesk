@@ -14,7 +14,7 @@ import type {
 import { deviceSizeWatcher }                       from "styles/DeviceSizeWatcher"
 import { isNotEmpty }                              from "utils/arrayHelpers"
 import { DO_NOTHING }                              from "utils/functionHelpers"
-import styled                                      from "styled-components"
+import styled, {type CSSRules}                                      from "styled-components"
 
 export type ItemKey = number | string
 export type ItemContainerStyles = string
@@ -38,9 +38,11 @@ export type Item = {
 
 export type ColumnConfig = {
     collapsible :boolean,
+    css: CSSRules,
     filter? :ItemFilterOptions,
     important :boolean,
     name :string,
+    width? :string,
 }
 
 export type PaginationData = {

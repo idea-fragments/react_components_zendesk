@@ -1,7 +1,7 @@
 // @flow
 
-import { deviseSizes } from "styles/deviceSizes"
-import { css, CSSRules }         from "styled-components"
+import { deviseSizes }        from "styles/deviceSizes"
+import { css, type CSSRules } from "styled-components"
 
 export const PHONE_SIZE  = 560
 export const TABLET_SIZE = 840
@@ -29,7 +29,7 @@ export type MediaQueriesI = {
     forLargeComputers :(styles :Styles) => string,
 }
 
-export const mediaQueries = (wideLayout?: boolean) :MediaQueriesI => {
+export const mediaQueries = (wideLayout? :boolean) :MediaQueriesI => {
     const {
               phoneSize,
               tabletSize,
@@ -39,39 +39,39 @@ export const mediaQueries = (wideLayout?: boolean) :MediaQueriesI => {
 
     return {
         forPhones: (styles :string) :string => css`
-            @media screen and (max-width: ${unit(phoneSize)}) {
-                ${styles}
-            }
+          @media screen and (max-width: ${unit(phoneSize)}) {
+            ${styles}
+          }
         `,
 
         forTablets: (styles :string) :string => css`
-            @media screen and (max-width: ${unit(tabletSize)}) {
-                ${styles}
-            }
+          @media screen and (max-width: ${unit(tabletSize)}) {
+            ${styles}
+          }
         `,
 
         forTabletsAndUp: (styles :string) :string => css`
-            @media screen and (min-width: ${unit(phoneSize + 1)}) {
-                ${styles}
-            }
+          @media screen and (min-width: ${unit(phoneSize + 1)}) {
+            ${styles}
+          }
         `,
 
         forLargeTabletsAndUp: (styles :string) :string => css`
-            @media (min-width: ${unit(tabletSize + 1)}) {
-                ${styles}
-            }
+          @media (min-width: ${unit(tabletSize + 1)}) {
+            ${styles}
+          }
         `,
 
         forSmallComputersAndUp: (styles :string) :string => css`
-            @media screen and (min-width: ${unit(largeTabletSize + 1)}) {
-                ${styles}
-            }
+          @media screen and (min-width: ${unit(largeTabletSize + 1)}) {
+            ${styles}
+          }
         `,
 
         forLargeComputers: (styles :string) :string => css`
-            @media screen and (min-width: ${unit(smallComputerSize + 1)}) {
-                ${styles}
-            }
+          @media screen and (min-width: ${unit(smallComputerSize + 1)}) {
+            ${styles}
+          }
         `,
     }
 }

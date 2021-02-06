@@ -22,7 +22,7 @@ type Props = {
     checkedItems :Set<number>,
     columnConfigs :Array<ColumnConfig>,
     hasRowActions :boolean,
-    initialFilterValues: { [string]: string },
+    initialFilterValues :{ [string] :string },
     items :Array<Item>,
     onFilterChange :(name :string, value :any) => void,
     onSelectAllToggle :(boolean) => void,
@@ -39,7 +39,7 @@ export const Header = ({
                            onSelectAllToggle,
                        } :Props) => {
     const [enabledFilters, setVisibleFiltersTo] = useState(
-        Object.keys(initialFilterValues)
+        Object.keys(initialFilterValues),
     )
 
     const colWidth    = columnWidth(columnConfigs.length)
@@ -71,8 +71,10 @@ export const Header = ({
                 </HeaderCell>
             ) : null}
 
-            {columnConfigs.map(({ name, width, filter } :ColumnConfig) => (
-                <HeaderCell key={name} width={width || colWidth}>
+            {columnConfigs.map(({ css, name, width, filter } :ColumnConfig) => (
+                <HeaderCell key={name}
+                            css={css}
+                            width={css ? null : width || colWidth}>
                     {
                         filter
                         ? <FlexBlock css={`flex: 1;`}

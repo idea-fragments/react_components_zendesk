@@ -11,7 +11,7 @@ import {
 }                                  from "@zendeskgarden/react-tables"
 import styled, { css }             from "styled-components"
 import { COLORS, fade, veryLight } from "styles/colors"
-import { FONT_SIZES }              from "styles/typography"
+import { FONT_SIZES_EM as FONT_SIZES }              from "styles/typography"
 
 const Table          = styled(ZTable)``
 Table.COMPONENT_NAME = "Table"
