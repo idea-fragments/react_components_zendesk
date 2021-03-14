@@ -24,7 +24,7 @@ export const light :Theme = {
         infoPanel             : {
             background: COLORS.VERY_LIGHT_GREY,
         },
-        pageBackground        : COLORS.VERY_LIGHT_GREY,
+        pageBackground        : COLORS.WHITE,
         overlayBackground     : fade(COLORS.LIGHT_GREY),
         scrollbar             : {
             thumbColor: "#00000033",

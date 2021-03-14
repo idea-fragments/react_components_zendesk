@@ -22,8 +22,12 @@ const hideTitle = css`
 
 // $FlowFixMe
 export const Section = styled.section`
-  background: ${({ color }) => color ? color : "transparent"};
-  padding: ${SPACINGS.XXXL} 0;
+  background: ${({ color, theme }) => color ? color : theme.styles.section.background};
+  border-radius: ${(p) => p.theme.styles.section.borderRadius};
+  box-shadow: ${(p) => p.theme.styles.section.shadow};
+  margin: ${(p) => p.theme.styles.section.margin};
+  padding: ${(p) => p.theme.styles.section.padding};
+  
   ${({color}) => color ? textColorForBackground : ""}
   ${({titleHidden}) => titleHidden ? hideTitle : ""}
   

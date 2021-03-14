@@ -1,9 +1,10 @@
 // @flow
 
-import { dark }  from "styles/theme/dark"
-import { light } from "styles/theme/light"
+import { dark }   from "styles/theme/dark"
+import { light }  from "styles/theme/light"
+import { light2 } from "styles/theme/light2"
 
-export const THEMES = { light, dark }
+export const THEMES = { light, light2, dark }
 
 export * from "styles/theme/Theme.type"
 export * from "styles/colors"

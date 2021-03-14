@@ -5,7 +5,7 @@ import React, { type Node }    from "react"
 import type { ContainerProps } from "styles/types"
 
 export type FormFieldProps = {
-    label? :string,
+    label? :Node,
     message? :Node,
     hint? :Node,
     emptyState? :Node,
