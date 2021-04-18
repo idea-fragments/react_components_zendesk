@@ -102,6 +102,7 @@ AppBar.COMPONENT_NAME = "AppBar"
 
 const BarWrapper = styled.header`
   background: ${({ theme }) => theme.styles.appBar.background};
+  box-shadow: ${({ theme }) => theme.styles.appBar.shadow};
   position: ${({ fixed }) => fixed ? "fixed" : "unset"};
   top: ${({ fixed }) => fixed ? "0" : "unset"};
   left: ${({ fixed }) => fixed ? "0" : "unset"};

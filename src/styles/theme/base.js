@@ -1,11 +1,13 @@
 // @flow
 
 import { COLORS, hasGoodContrast } from "styles/colors"
+import { SPACINGS }                from "styles/spacings"
 
 export const base = {
     appBar      : {
         height: "80px",
-        zIndex: 399
+        shadow: "unset",
+        zIndex: 399,
     }, // modal backdrop zindex is 400
     buttons     : { textTransform: null },
     colorAccent : COLORS.BLUE,
@@ -14,8 +16,12 @@ export const base = {
     colorWarning: COLORS.YELLOW,
     colorSuccess: COLORS.GREEN,
     container   : { horizontalPadding: "1rem" },
+    section     : {
+        background: "transparent",
+        padding   : `${SPACINGS.XXXL} 0`,
+    },
     sidebar     : { zIndex: 10000 },
-    table: { borderSize: "1rem" },
+    table       : { borderSize: "1rem" },
     tooltip     : { darkBackground: "#747183" },
 
     getTextColorForBackground: ({ color, theme }) => {
