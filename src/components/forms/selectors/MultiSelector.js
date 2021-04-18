@@ -20,7 +20,6 @@ export let MultiSelector = ({maxItems, ...props} :Props) => {
             keyField,
             options,
             optionsKeyMap,
-            emptyState,
             valueField,
             validation,
         } = props

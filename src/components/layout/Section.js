@@ -2,7 +2,6 @@
 
 import styled, { css }            from "styled-components"
 import { textColorForBackground } from "styles/mixins"
-import { SPACINGS }               from "styles/spacings"
 
 // eslint-disable-next-line no-unused-vars
 type Props = {

@@ -9,7 +9,7 @@ import {
     Title,
     Close,
 }                                    from "@zendeskgarden/react-notifications"
-import styled, { css }               from "styled-components"
+import styled                        from "styled-components"
 import { textColorForBackground }    from "styles/mixins"
 import { SPACINGS }                  from "styles/spacings"
 

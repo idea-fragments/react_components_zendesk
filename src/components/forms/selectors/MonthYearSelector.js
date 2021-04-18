@@ -1,4 +1,5 @@
 // @flow
+// --- UNFINISHED ----
 
 import type { TextFieldProps } from "components/forms/formField.types"
 import { Dropdown, Select }    from "components/forms/selectors/Dropdown"
@@ -21,7 +22,6 @@ export const MonthYearSelector = (props :Props) => {
     const {
               value,
               emptyState,
-              minimumDate,
               disabled,
               onChange,
           } :Props = props
@@ -31,6 +31,7 @@ export const MonthYearSelector = (props :Props) => {
         setState({ isOpen })
     }
 
+    // eslint-disable-next-line no-unused-vars
     const handleCalendarChange = (d :Date) => {
         onChange(moment(d))
         closeCalendar()

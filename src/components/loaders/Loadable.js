@@ -57,7 +57,6 @@ export let Loadable = ({
                       spacing={null}
                       alignItems={"center"}>
         <ChildrenContainer spacing={null}
-                           withRows
                            className={className}
                            opaqueSpinner={opaqueSpinner}
                            showSpinner={showingSpinner}
