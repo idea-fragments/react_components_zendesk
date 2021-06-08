@@ -29,9 +29,15 @@ export * from "./src/components/forms/textfields/TextFieldWrapper"
  * BUTTONS
  * ============================= */
 export * from "./src/components/forms/Button"
+export * from "./src/components/forms/CycleButton"
 export * from "./src/components/forms/IconButton"
 
 export * from "./src/components/forms/Checkbox"
 export * from "./src/components/forms/Form"
-export * from "./src/components/forms/Toggle"
 export * from "./src/components/forms/validationStates"
+
+/* =============================
+ * Toggles
+ * ============================= */
+export * from "./src/components/forms/Toggle"
+export * from "./src/components/forms/TaggedToggle"

@@ -41,7 +41,10 @@ export let TextFieldWrapper = ({
                                } :Props) => {
     message = validation.message || message
     return useObserver(() => (
-        <Container className={className} withRows spacing={null} fluid={fluid}>
+        <Container className={className}
+                   withRows
+                   spacing={null}
+                   fluid={fluid}>
             <Field compact={compact}>
                 {label ? <Label>{label}</Label> : null}
                 {

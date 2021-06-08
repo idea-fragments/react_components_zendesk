@@ -1,21 +1,22 @@
 // @flow
 
 export type ContainerStyles = {
-    background: string,
-    borderRadius: string,
-    height: string,
-    margin: string,
-    padding: string,
-    shadow: string,
-    zIndex: string,
+    background :string,
+    borderRadius :string,
+    height :string,
+    margin :string,
+    padding :string,
+    shadow :string,
+    zIndex :string,
 }
 
 export type Styles = {
-    appBar : ContainerStyles,
+    appBar :ContainerStyles,
     buttons :{
         textTransform :string,
     },
     colorAccent :string,
+    colorSecondary :string,
     colorPrimary :string,
     colorWarning :string,
     colorDanger :string,
@@ -37,7 +38,7 @@ export type Styles = {
         trackColor :string,
     },
     scrollbarColor :string,
-    section: ContainerStyles,
+    section :ContainerStyles,
     sidebar :{
         background :string,
         zIndex :number

@@ -1,12 +1,13 @@
 // @flow
 
-import { Dropdown, Select }  from "components/forms/selectors/Dropdown"
-import * as React            from "react"
+import { Dropdown, Select }   from "components/forms/selectors/Dropdown"
+import * as React             from "react"
 import type {
     SelectorProps,
     SelectorOption,
-}                            from "components/forms/selectors/types"
-import { VALIDATION_STATES } from "components/forms/validationStates"
+}                             from "components/forms/selectors/types"
+import { VALIDATION_STATES }  from "components/forms/validationStates"
+import { SelectorEmptyState } from "components/forms/selectors/SelectorEmptyState"
 
 export let Selector = ({ disabled, ...props } :SelectorProps) => {
     let {
@@ -42,7 +43,7 @@ export let Selector = ({ disabled, ...props } :SelectorProps) => {
                     validation={validation.validation}>
                 {selectedKey && optionsKeyMap.hasOwnProperty(selectedKey)
                  ? optionsKeyMap[selectedKey][valueField]
-                 : emptyState}
+                 : <SelectorEmptyState>{emptyState}</SelectorEmptyState>}
             </Select>
         </Dropdown>
     )
