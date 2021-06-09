@@ -19,7 +19,7 @@ import styled, {type CSSRules}                                      from "styled
 export type ItemKey = number | string
 export type ItemContainerStyles = string
 export type ItemAction = {
-    action :(ItemKey) => void,
+    action :() => void,
     label :string,
 }
 
@@ -73,7 +73,7 @@ type Props = TableProps & {
     className? :string,
     nice :boolean,
     pagination? :PaginationData,
-    onPageChange :(number) => void,
+    onPageChange? :(number) => void,
 }
 
 export let Table = ({
