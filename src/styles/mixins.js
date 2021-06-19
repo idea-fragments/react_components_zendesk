@@ -1,6 +1,11 @@
 // @flow
 
-import { css } from "styled-components"
+import { css }          from "styled-components"
+import {
+  COLORS,
+  dark,
+  darker,
+} from "vendor/react_components_zendesk/src/styles/colors"
 
 
 export const backgroundPrimaryWithText = css`
@@ -20,5 +25,5 @@ export const textColorPrimary = css`
 `
 
 export const textWithColor = css`
-  color: ${(props) => props.color };
+  color: ${({color}) => color === COLORS.YELLOW ? darker(color) : color };
 `

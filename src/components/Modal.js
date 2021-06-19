@@ -141,7 +141,11 @@ export let Modal = ({
                 : <Footer>
                     {withCancelButton
                      ? <FooterItem>
-                         <Button onClick={handleClose} flat>
+                         <Button onClick={handleClose}
+                                 flat
+                                 success={isSuccess}
+                                 danger={isDanger}
+                                 warning={isWarning}>
                              Cancel
                          </Button>
                      </FooterItem>
