@@ -15,7 +15,7 @@ type Props = {
   info? :boolean,
   notDismissible? :boolean,
   success? :boolean,
-  title :string,
+  title? :string,
   warning? :boolean,
   onClose? :() => void,
 }
@@ -33,8 +33,8 @@ export const Notification :StatelessFunctionalComponent<Props> = ({
 
   const dismissible = !notDismissible
 
-  const type = () :string => {
-    if (danger) return "danger"
+  const type = () :?string => {
+    if (danger) return "error"
     if (info) return "info"
     if (success) return "success"
     if (warning) return "warning"
