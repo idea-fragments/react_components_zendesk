@@ -1,11 +1,7 @@
 // @flow
 
-import { css }          from "styled-components"
-import {
-  COLORS,
-  dark,
-  darker,
-} from "vendor/react_components_zendesk/src/styles/colors"
+import { css }            from "styled-components"
+import { COLORS, darker } from "styles/colors"
 
 
 export const backgroundPrimaryWithText = css`

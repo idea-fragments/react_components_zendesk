@@ -9,13 +9,13 @@ const darkMode = css`
 `
 
 type Props = {
-    trigger :Node,
     arrow? :boolean,
     children :Node,
+    trigger :Node,
+    type? : "light" | null
 }
 
 export let Tooltip :ComponentType<Props> = styled(ZTooltip).attrs({
-    arrow:             false,
     delayMilliseconds: 0,
     zIndex:            999,
 })`
@@ -25,3 +25,5 @@ export let Tooltip :ComponentType<Props> = styled(ZTooltip).attrs({
     ${({ type }) => type !== "light" ? darkMode : ""}
   }
 `
+
+Tooltip.defaultProps = { arrow: false }
