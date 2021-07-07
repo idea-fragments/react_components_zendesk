@@ -1,21 +1,21 @@
 // @flow
 
-import { buttonLikeHoverable }         from "components/forms/buttonMixins"
-import { VALIDATION_STATES }           from "components/forms/validationStates"
-import { Loadable }                    from "components/loaders/Loadable"
-import { debounce }                    from "lodash"
-import { useState, useEffect, useRef } from "react"
-import * as React                      from "react"
+import { buttonLikeHoverable }                      from "components/forms/buttonMixins"
+import { VALIDATION_STATES }                        from "components/forms/validationStates"
+import { Loadable }                                 from "components/loaders/Loadable"
+import { debounce }                                 from "lodash"
+import { useState, useEffect, useRef, useCallback } from "react"
+import * as React                                   from "react"
 import type {
     SelectorItemKey,
     SelectorOption,
     SelectorProps,
     StateChange,
-}                                      from "components/forms/selectors/types"
-import styled, { css }                 from "styled-components"
-import { FONT_SIZES }                  from "styles/typography"
-import { isEmpty, isNotEmpty }         from "utils/arrayHelpers"
-import { DO_NOTHING }                  from "utils/functionHelpers"
+}                                                   from "components/forms/selectors/types"
+import styled, { css }                              from "styled-components"
+import { FONT_SIZES }                               from "styles/typography"
+import { isEmpty, isNotEmpty }                      from "utils/arrayHelpers"
+import { DO_NOTHING }                               from "utils/functionHelpers"
 import {
     Field,
     Label as ZenLabel,
@@ -32,9 +32,9 @@ import {
     Multiselect as ZenMultiSelect,
     Autocomplete as ZenAutocomplete,
     Trigger,
-}                                      from "@zendeskgarden/react-dropdowns"
-import { Logger }                      from "utils/logging/Logger"
-import { isArray, isNumber, isString } from "utils/typeCheckers"
+}                                                   from "@zendeskgarden/react-dropdowns"
+import { Logger }                                   from "utils/logging/Logger"
+import { isArray, isNumber, isString }              from "utils/typeCheckers"
 
 export type MenuPlacement =
     "start"
@@ -58,7 +58,7 @@ type OptionalSelectorProps = {
 
 type Props = $Diff<SelectorProps, OptionalSelectorProps> & {
     async :boolean,
-    filterOption? :boolean,
+    shouldFilterOptions? :boolean,
     maxMenuHeight? :string,
     menuCSS? :string,
     placement? :MenuPlacement,
@@ -107,7 +107,7 @@ export let Dropdown = (props :Props) => {
               children,
               className,
               clearable,
-              filterOptions,
+              shouldFilterOptions,
               hint,
               keyField,
               label,
@@ -127,7 +127,7 @@ export let Dropdown = (props :Props) => {
               onStateChange,
           } = props
 
-    const filterFunc = value => {
+    const filterFunc = useCallback(value => {
         const searchText    = value.trim().toLowerCase()
         let matchingOptions = options
 
@@ -144,27 +144,27 @@ export let Dropdown = (props :Props) => {
 
         setFilteredOptions(matchingOptions)
         setFilteringOptionsTo(false)
-    }
+    }, [options, valueField])
 
     const filterMatchingOptionsRef = useRef(debounce(filterFunc, 300))
 
     useEffect(() => {
-        if (!filterOptions) return
+        if (!shouldFilterOptions) return
         filterMatchingOptionsRef.current = debounce(filterFunc, 300)
         setFilteredOptions(options)
         setSearchFilter("")
-    }, [options])
+    }, [filterFunc, shouldFilterOptions, options])
 
     useEffect(() => {
-        if (!filterOptions) return
+        if (!shouldFilterOptions) return
 
         setFilteringOptionsTo(true)
         filterMatchingOptionsRef.current(searchFilter)
-    }, [searchFilter, filterOptions])
+    }, [searchFilter, shouldFilterOptions])
 
     let { message }   = props
     const optionNodes = useRawOptions ? options : createOptions(
-        filterOptions ? filteredOptions : options,
+      shouldFilterOptions ? filteredOptions : options,
         keyField,
         valueField,
         menuItemComponent,

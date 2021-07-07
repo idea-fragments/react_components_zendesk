@@ -34,7 +34,7 @@ export let MultiSelector = ({maxItems, ...props} :Props) => {
     }
 
     return (
-        <Dropdown {...props} filterOptions>
+        <Dropdown {...props} shouldFilterOptions>
             <MultiSelect
                 maxItems={maxItems}
                 validation={validation.validation}

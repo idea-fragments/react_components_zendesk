@@ -58,7 +58,7 @@ export type TableProps = {
     columnConfigs :Array<ColumnConfig>,
     emptyState? :Node,
     helpText? :string,
-    initialFilterValues :{ [string] :string },
+    initialFilterValues? :{ [string] :string },
     items :Array<Item>,
     title? :string,
     onFilterChange? :(name :string, value :any) => void,
