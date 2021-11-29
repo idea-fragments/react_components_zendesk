@@ -6,8 +6,8 @@ import React, { Children, Fragment } from "react"
 import type { ComponentType, Node }  from "react"
 import styled                        from "styled-components"
 import { COLORS }                    from "styles/colors"
-import { SPACINGS }                  from "styles/spacings"
-import { FONT_SIZES, FONT_WEIGHTS }  from "styles/typography"
+import { SPACINGS }                 from "styles/spacings"
+import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 
 
 export const Breadcrumbs :ComponentType<*> = ({ children }) => {

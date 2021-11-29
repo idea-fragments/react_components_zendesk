@@ -2,9 +2,9 @@
 
 import { Modal as ModalView }        from "components/Modal"
 import type { StyledComponentProps } from "components/StyledComponentProps.type"
-import * as React                    from "react"
-import { UiStore }                   from "stores/UiStore"
-import { useStores }                 from "stores/useStores"
+import * as React    from "react"
+import { UiStore }   from "stores/UiStore"
+import { useStores } from "stores/useStores"
 import { useObserver }               from "mobx-react"
 import styled, { css }               from "styled-components"
 import { mediaQueries }               from "styles/mediaQueries"
@@ -28,6 +28,7 @@ export let Modal = ({ className } :StyledComponentProps) => {
                   areModalActionsDisabled,
               } = ui
 
+      console.log("ui.isModalVisible", ui.isModalVisible)
         return <ModalView closeModal={closeModal}
                           modalContent={modalContent}
                           isVisible={ui.isModalVisible}

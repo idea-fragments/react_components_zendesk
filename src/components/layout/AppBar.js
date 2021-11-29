@@ -1,16 +1,16 @@
 // @flow
 
-import { IconButton }              from "components/forms/IconButton"
-import { Container }               from "components/layout/Container"
+import { IconButton } from "components/forms/IconButton"
+import { Container }  from "components/layout/Container"
 import { FlexBlock }               from "components/layout/FlexBlock"
 import React, { type ElementType } from "react"
 import { useStores }               from "stores/useStores"
 import styled, { css }             from "styled-components"
 import { mdiArrowLeft, mdiMenu }   from "@mdi/js"
-import { SPACINGS }                from "styles/spacings"
-import { useTheme }                from "styles/theme/useTheme"
-import type { ContainerProps }     from "styles/types"
-import { DO_NOTHING }              from "utils/functionHelpers"
+import { SPACINGS }            from "styles/spacings"
+import { useTheme }            from "styles/theme/useTheme"
+import type { ContainerProps } from "styles/types"
+import { DO_NOTHING }          from "utils/functionHelpers"
 import { mediaQueries }            from "styles/mediaQueries"
 
 const { forLargeTabletsAndUp } = mediaQueries()

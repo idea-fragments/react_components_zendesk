@@ -1,7 +1,7 @@
 // @flow
 
-import { Loadable }               from "components/loaders/Loadable"
-import { observable }             from "mobx"
+import { Loadable }   from "components/loaders/Loadable"
+import { observable } from "mobx"
 import { actionAsync, task }      from "mobx-utils"
 import { Observer }               from "mobx-react"
 import React, { useRef }          from "react"

@@ -9,9 +9,9 @@ import { useState, useEffect, useRef } from "react"
 import * as React                      from "react"
 import styled                          from "styled-components"
 import { DO_NOTHING }                  from "utils/functionHelpers"
-import { COLORS, veryLight }           from "styles/colors"
-import { FONT_WEIGHTS }                from "styles/typography"
-import { isFunction }                  from "utils/typeCheckers"
+import { COLORS, veryLight } from "styles/colors"
+import { FONT_WEIGHTS }      from "styles/typography"
+import { isFunction }        from "utils/typeCheckers"
 
 /* optionsKeyMap prop is not needed here. SearchableSelector uses Zendesk's Autocomplete
  * component which generates its own display value from options prop, unlike

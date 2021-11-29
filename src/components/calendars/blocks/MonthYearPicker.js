@@ -2,9 +2,9 @@
 
 import { mdiArrowLeft, mdiArrowRight }           from "@mdi/js"
 import { MonthPicker }                           from "components/calendars/blocks/MonthPicker"
-import { YearPicker }                            from "components/calendars/blocks/YearPicker"
-import { IconButton }                            from "components/forms/IconButton"
-import { FlexBlock }                             from "components/layout/FlexBlock"
+import { YearPicker } from "components/calendars/blocks/YearPicker"
+import { IconButton } from "components/forms/IconButton"
+import { FlexBlock }  from "components/layout/FlexBlock"
 import moment, { Moment }                        from "moment"
 import React                                     from "react"
 import styled                                    from "styled-components"

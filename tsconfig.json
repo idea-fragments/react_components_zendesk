@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": "src/",
+    "checkJs": false,
+    "downlevelIteration": true,
+    "jsx": "react-jsx",
+    "preserveConstEnums": true
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "extends": "@tsconfig/create-react-app/tsconfig.json",
+  "include": [
+    "src/**/*"
+  ]
+}

@@ -3,9 +3,9 @@
 import { FlexBlock }              from "components/layout/FlexBlock"
 import React, { forwardRef, Ref } from "react"
 import styled                     from "styled-components"
-import { SPACINGS }               from "styles/spacings"
-import type { ContainerProps }    from "styles/types"
-import type { PromiseFunc }       from "utils/function.types"
+import { SPACINGS }            from "styles/spacings"
+import type { ContainerProps } from "styles/types"
+import type { PromiseFunc }    from "utils/function.types"
 
 type Props = {
     onSubmit :PromiseFunc<>,

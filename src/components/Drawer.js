@@ -1,12 +1,12 @@
 // @flow
 
-import { IconButton }                from "components/forms/IconButton"
-import { PaddedFlexBlock }           from "components/layout/FlexBlock"
+import { IconButton }      from "components/forms/IconButton"
+import { PaddedFlexBlock } from "components/layout/FlexBlock"
 import type { StyledComponentProps } from "components/StyledComponentProps.type"
 import * as React                    from "react"
 import styled                        from "styled-components"
-import { mdiClose }                  from "@mdi/js"
-import { useTheme }                  from "styles/theme/useTheme"
+import { mdiClose } from "@mdi/js"
+import { useTheme } from "styles/theme/useTheme"
 
 export type DrawerContent = {
     body :any,

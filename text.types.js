@@ -1,3 +1,3 @@
 // @flow
 
-export * from "./src/components/text/types"
+export * from "components/text/types"
