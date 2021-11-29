@@ -1,5 +1,3 @@
-// @flow
-
 export * from "./src/components/layout/AppBar"
 export * from "./src/components/layout/AppBarLayout"
 export * from "./src/components/layout/Container"

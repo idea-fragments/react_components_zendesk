@@ -5,8 +5,8 @@ import type { ColumnConfig, Item, ItemKey, } from "components/tables/Table"
 import { columnWidth }                       from "components/tables/utils"
 import { Text }                              from "components/text/Text"
 import React                                 from "react"
-import styled           from "styled-components"
-import { FONT_WEIGHTS } from "styles/typography"
+import styled                                from "styled-components"
+import { FONT_WEIGHTS }                      from "styles/typography"
 
 type Props = {
   checkable?: boolean,
