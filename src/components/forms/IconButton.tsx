@@ -1,5 +1,3 @@
-// @flow
-
 import { Button, Props as ButtonProps } from "components/forms/Button"
 import React                            from "react"
 import styled                           from "styled-components"

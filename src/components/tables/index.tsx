@@ -1,5 +1,3 @@
-// @flow
-
 import {
   Table as ZTable,
   Head as ZHead,

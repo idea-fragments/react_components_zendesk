@@ -1,7 +1,8 @@
+import { Button, BUTTON_SIZES } from "components/forms/Button"
+import { Carousel }             from "components/layout/Carousel"
+import { FlexBox }              from "components/layout/FlexBox"
 import type { PaginationData }  from "components/tables/Table"
 import React                    from "react"
-import { Button, BUTTON_SIZES } from "react-components-zendesk/forms"
-import { Carousel, FlexBox }    from "react-components-zendesk/layouts"
 import { arrayOfSizeN }         from "utils/arrayHelpers"
 import { DO_NOTHING }           from "utils/functionHelpers"
 

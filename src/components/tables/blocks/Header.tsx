@@ -1,5 +1,3 @@
-// @flow
-
 import { mdiFilterVariant } from "@mdi/js"
 import { Checkbox }         from "components/forms/Checkbox"
 import { IconButton }       from "components/forms/IconButton"
@@ -13,14 +11,15 @@ import {
 }                           from "components/tables/index"
 import type {
   ColumnConfig,
-  Item, ItemKey
-} from "components/tables/Table"
+  Item,
+  ItemKey
+}                           from "components/tables/Table"
 import { columnWidth }      from "components/tables/utils"
 import { Text }             from "components/text/Text"
 import React, { useState }  from "react"
-import { SPACINGS }     from "styles/spacings"
-import { FONT_WEIGHTS } from "styles/typography"
-import { DO_NOTHING }   from "utils/functionHelpers"
+import { SPACINGS }         from "styles/spacings"
+import { FONT_WEIGHTS }     from "styles/typography"
+import { DO_NOTHING }       from "utils/functionHelpers"
 
 type Props = {
   checkable?: boolean,
