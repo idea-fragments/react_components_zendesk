@@ -1,5 +1,3 @@
-// @flow
-
 import { mdiDotsVertical }    from "@mdi/js"
 import { Button }             from "components/forms/Button"
 import type { MenuPlacement } from "components/forms/selectors/Dropdown"
