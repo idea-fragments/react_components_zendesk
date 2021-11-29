@@ -2,37 +2,36 @@
 
 import { FlexBlock }               from "components/layout/FlexBlock"
 import { Checkbox, Label }         from "@zendeskgarden/react-forms"
+import { FlexBox }                 from "components/layout/FlexBox"
+import { HelpText }                from "components/tables/blocks/HelpText"
+import { Title }                   from "components/tables/blocks/Title"
 import { Row }                     from "components/tables/Row"
+import { TableProps }              from "components/tables/Table"
 import type { ColumnConfig, Item } from "components/tables/Table"
 import { columnWidth }             from "components/tables/utils"
-import { XL }     from "components/text/Paragraph"
-import { Text }   from "components/text/Text"
-import * as React from "react"
+import { XL }                      from "components/text/Paragraph"
+import { Text }                    from "components/text/Text"
+import { ReactNode }               from "react"
+import * as React                  from "react"
 import {
     Table as ZTable,
     Head,
     HeaderRow,
     HeaderCell,
     Body,
-}                       from "@zendeskgarden/react-tables"
-import { FONT_WEIGHTS } from "styles/typography"
+}                                  from "@zendeskgarden/react-tables"
+import { FONT_WEIGHTS }            from "styles/typography"
 
-type Props = {
-    title :string,
-    action :React.Node,
-    columnConfigs :Array<ColumnConfig>,
-    items :Array<Item>,
-    onItemClick :(key :number) => void,
-    checkable :boolean,
-    checkedItems :{ [number] :boolean },
-    onItemChecked :(key :number, isChecked :boolean) => void,
-    onSelectAllToggle :(boolean) => void,
+type Props = TableProps & {
+  hasRowActions: boolean,
+  onSelectAllToggle?: (b: boolean) => void,
 }
 
 export const SimpleTable = ({
                                 title,
-                                action,
+                                actions,
                                 columnConfigs,
+  helpText,
                                 items,
                                 onItemClick,
                                 checkable,
@@ -45,24 +44,24 @@ export const SimpleTable = ({
 
     const allSelected = checkedItems.size === items.length
 
-    const handleSelectAll = (e :SyntheticInputEvent<HTMLInputElement>) => {
-        onSelectAllToggle(e.target.checked)
-    }
-
     return (
         <FlexBlock data-component-name={`${SimpleTable.COMPONENT_NAME}`}>
             <ZTable>
-                <FlexBlock alignAxis={"center"} justify={"space-between"}>
-                    <XL>{title}</XL>
-                    {action}
-                </FlexBlock>
+              <FlexBox css={`margin-bottom: 1rem`}
+                       justifyContent={"space-between"} withRows>
+                {title ? <Title>{title}</Title> : null}
+                {helpText ? <HelpText>{helpText}</HelpText> : null}
+                <FlexBox css={`flex: 1`} justifyContent={"flex-end"}>
+                  {actions?.({ checkedItems })?.map((a) => a)}
+                </FlexBox>
+              </FlexBox>
 
                 <Head>
                     <HeaderRow>
                         {checkable ? (
                             <HeaderCell minimum>
                                 <Checkbox checked={allSelected}
-                                          onChange={handleSelectAll}>
+                                          onChange={onSelectAllToggle}>
                                     <Label hidden
                                            indeterminate={checkedItems.size > 0 && !allSelected}>
                                         Select all Jobs

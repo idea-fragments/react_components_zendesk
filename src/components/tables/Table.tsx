@@ -1,5 +1,3 @@
-// @flow
-
 import { FlexBox }                                            from "components/layout/FlexBox"
 import { Pagination }                                         from "components/tables/blocks/Pagination"
 import { MobileTable }                                        from "components/tables/MobileTable"
@@ -144,7 +142,7 @@ export let Table = ({
       }
       {
         pagination
-        ? <Pagination {...pagination} onPageChange={onPageChange} />
+        ? <Pagination {...pagination} onPageChange={onPageChange!!} />
         : null
       }
     </FlexBox>

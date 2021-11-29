@@ -1,15 +1,15 @@
 // @flow
 
 import {
-    Table as ZTable,
-    Head as ZHead,
-    HeaderRow as ZHeaderRow,
-    HeaderCell as ZHeaderCell,
-    Body as ZBody,
-    Cell as ZCell,
-    Row as ZRow,
-}                                  from "@zendeskgarden/react-tables"
-import styled, { css }             from "styled-components"
+  Table as ZTable,
+  Head as ZHead,
+  HeaderRow as ZHeaderRow,
+  HeaderCell as ZHeaderCell,
+  Body as ZBody,
+  Cell as ZCell,
+  Row as ZRow,
+}                                      from "@zendeskgarden/react-tables"
+import styled, { css }                 from "styled-components"
 import { COLORS, fade, veryLight }     from "styles/colors"
 import { FONT_SIZES_EM as FONT_SIZES } from "styles/typography"
 
@@ -46,7 +46,7 @@ const Cell = styled(ZCell)``
 
 const clickableRowStyling = css`
   cursor: pointer;
-  
+
   :hover, :focus {
     & > ${Cell}:first-child {
       box-shadow: inset 3px 0 0 0 ${(p) => p.theme.styles.colorPrimary};
@@ -68,7 +68,7 @@ const unclickableRowStyling = css`
       box-shadow: unset;
     }
   }
-  
+
   :hover, :focus {
     background: ${COLORS.WHITE};
   }
@@ -87,21 +87,21 @@ const Row = styled(ZRow)`
 `
 
 Object.assign(Table, {
-    Head,
-    HeaderRow,
-    HeaderCell,
-    Body,
-    Row,
-    Cell,
+  Head,
+  HeaderRow,
+  HeaderCell,
+  Body,
+  Row,
+  Cell,
 })
 
 export {
-    Table,
-    Head,
-    HeaderRow,
-    HeaderCell,
-    Body,
-    Row,
-    Cell,
+  Table,
+  Head,
+  HeaderRow,
+  HeaderCell,
+  Body,
+  Row,
+  Cell,
 }
 
