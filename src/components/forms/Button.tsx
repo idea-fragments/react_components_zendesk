@@ -8,16 +8,15 @@ import {
 import { Icon }                                              from "components/Icon"
 import { FlexBox }                                           from "components/layout/FlexBox"
 import { Dots }                                              from "components/loaders/Dots"
-import { Loadable }                                          from "components/loaders/Loadable"
 import type { StyledProps }                                  from "components/StyledProps.type"
 import { useIsMounted }                                      from "hooks/useIsMounted"
-import React, { FC, forwardRef, Ref, useCallback, useState } from "react"
+import React, { FC, forwardRef, MouseEvent, Ref, useCallback, useState } from "react"
 import styled, { css }                                       from "styled-components"
 import type { Alignment }                                    from "styles/alignments"
 import { COLORS }                                            from "styles/colors"
-import { SPACINGS }                        from "styles/spacings"
-import type { Theme }                      from "styles/theme/Theme.type"
-import type { ColorProps, ContainerProps } from "styles/types"
+import { SPACINGS }                                          from "styles/spacings"
+import type { Theme }                                        from "styles/theme/Theme.type"
+import type { ColorProps, ContainerProps }                   from "styles/types"
 import { FONT_SIZES }                                        from "styles/typography"
 import type { PromiseFunc }                                  from "utils/function.types"
 
@@ -131,27 +130,22 @@ export let Button = (
     }, [autoLoadable, isLoading, loadingProp]
   )
 
-  const processClick = async () => {
-    if (!autoLoadable) {
-      (onClick as Function)()
-      return
-    }
-
+  const processClick = async (e :MouseEvent) => {
     setIsLoadingTo(true)
-    await onClick()
+    await onClick(e)
     if (isMounted()) setIsLoadingTo(false)
   }
-  // if (flat && !computedIsLoading()) styles.border = "none"
-
 
   return <SButton as={innerAs}
                   disabled={disabled || computedIsLoading()}
                   ref={ref}
-                  onClick={processClick}
+                  onClick={autoLoadable ?  processClick : onClick}
                   {...props}>
     {
       computedIsLoading()
-      ? <FlexBox alignItems={"center"} css={`min-height: 30px`} justifyContent={"center"}>
+      ? <FlexBox alignItems={"center"}
+                 css={`min-height: 30px`}
+                 justifyContent={"center"}>
         <Dots size={FONT_SIZES.MD} />
       </FlexBox>
       : (
