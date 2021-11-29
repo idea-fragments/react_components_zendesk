@@ -1,9 +1,9 @@
 // @flow
 
-import { buttonLikeHoverable }         from "components/forms/buttonMixins"
-import { VALIDATION_STATES } from "components/forms/validationStates"
-import { Loadable }          from "components/loaders/Loadable"
-import { debounce }          from "lodash"
+import { buttonLikeHoverable }                      from "components/forms/buttonMixins"
+import { VALIDATION_STATES }                        from "components/forms/validationStates"
+import { Loadable }                                 from "components/loaders/Loadable"
+import { debounce }                                 from "lodash"
 import { useState, useEffect, useRef, useCallback } from "react"
 import * as React                                   from "react"
 import type {
@@ -11,11 +11,11 @@ import type {
     SelectorOption,
     SelectorProps,
     StateChange,
-}                                      from "components/forms/selectors/types"
-import styled, { css }         from "styled-components"
-import { FONT_SIZES }          from "styles/typography"
-import { isEmpty, isNotEmpty } from "utils/arrayHelpers"
-import { DO_NOTHING }                  from "utils/functionHelpers"
+}                                                   from "components/forms/selectors/types"
+import styled, { css }                              from "styled-components"
+import { FONT_SIZES }                               from "styles/typography"
+import { isEmpty, isNotEmpty }                      from "utils/arrayHelpers"
+import { DO_NOTHING }                               from "utils/functionHelpers"
 import {
     Field,
     Label as ZenLabel,
@@ -32,9 +32,9 @@ import {
     Multiselect as ZenMultiSelect,
     Autocomplete as ZenAutocomplete,
     Trigger,
-}                                      from "@zendeskgarden/react-dropdowns"
-import { Logger }                      from "utils/logging/Logger"
-import { isArray, isNumber, isString } from "utils/typeCheckers"
+}                                                   from "@zendeskgarden/react-dropdowns"
+import { Logger }                                   from "utils/logging/Logger"
+import { isArray, isNumber, isString }              from "utils/typeCheckers"
 
 export type MenuPlacement =
     "start"

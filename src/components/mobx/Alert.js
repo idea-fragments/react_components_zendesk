@@ -2,9 +2,9 @@
 
 import { Alert as AlertView }        from "components/Alert"
 import type { StyledComponentProps } from "components/StyledComponentProps.type"
-import * as React    from "react"
-import { UiStore }   from "stores/UiStore"
-import { useStores } from "stores/useStores"
+import * as React                    from "react"
+import { UiStore }                   from "stores/UiStore"
+import { useStores }                 from "stores/useStores"
 import { useObserver }               from "mobx-react"
 import styled, { css }               from "styled-components"
 

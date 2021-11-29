@@ -1,12 +1,12 @@
 // @flow
 
 import type { Legendable } from "components/calendars/Legendable.type"
-import { FlexBlock } from "components/layout/FlexBlock"
-import { Text }      from "components/text/Text"
-import * as React    from "react"
+import { FlexBlock }       from "components/layout/FlexBlock"
+import { Text }            from "components/text/Text"
+import * as React          from "react"
 import styled              from "styled-components"
-import { SPACINGS }   from "styles/spacings"
-import { FONT_SIZES } from "styles/typography"
+import { SPACINGS }        from "styles/spacings"
+import { FONT_SIZES }      from "styles/typography"
 
 type Props = {
     legendables :Array<Legendable>,

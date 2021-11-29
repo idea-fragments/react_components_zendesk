@@ -3,7 +3,7 @@
 import { mdiArrowLeft, mdiArrowRight } from "@mdi/js"
 import { IconButton }                  from "components/forms/IconButton"
 import { FlexBox }                     from "components/layout/FlexBox"
-import React, { type Node } from "react"
+import React, { type Node }            from "react"
 import styled                          from "styled-components"
 
 type Props = {

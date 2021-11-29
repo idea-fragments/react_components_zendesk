@@ -5,9 +5,9 @@ import React, { type Node } from "react"
 import { FlexBlock }        from "components/layout/FlexBlock"
 import { Icon }             from "components/Icon"
 import { COLORS }           from "styles/colors"
-import styled         from "styled-components"
-import type { Theme } from "styles/theme/Theme.type"
-import { useTheme }   from "styles/theme/useTheme"
+import styled               from "styled-components"
+import type { Theme }       from "styles/theme/Theme.type"
+import { useTheme }         from "styles/theme/useTheme"
 
 export const INFO_PANEL_TYPES            = Object.freeze({
     INFO   : 0,

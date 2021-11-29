@@ -3,10 +3,10 @@
 import React, { Fragment }                   from "react"
 import { Button, type Props as ButtonProps } from "components/forms/Button"
 import styled                                from "styled-components"
-import { isLastItem, isNotLastItem } from "utils/arrayHelpers"
-import { FlexBox }                   from "components/layout/FlexBox"
-import { COLORS }     from "styles/colors"
-import { FONT_SIZES } from "styles/typography"
+import { isLastItem, isNotLastItem }         from "utils/arrayHelpers"
+import { FlexBox }                           from "components/layout/FlexBox"
+import { COLORS }                            from "styles/colors"
+import { FONT_SIZES }                        from "styles/typography"
 
 type Option = { label :string, value :string }
 

@@ -1,5 +1,5 @@
 // @flow
-import { Text } from "components/text/Text"
+import { Text }                                from "components/text/Text"
 import styled                                  from "styled-components"
 import { FONT_SIZES, FONT_TAGS, FONT_WEIGHTS } from "styles/typography"
 

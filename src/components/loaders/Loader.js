@@ -5,9 +5,9 @@ import { useContext }           from "react"
 import * as React               from "react"
 import { useObserver }          from "mobx-react"
 import { Dots }                 from "@zendeskgarden/react-loaders"
-import { useStores }  from "stores/useStores"
-import type { Theme } from "styles/theme/Theme.type"
-import { FONT_SIZES } from "styles/typography"
+import { useStores }            from "stores/useStores"
+import type { Theme }           from "styles/theme/Theme.type"
+import { FONT_SIZES }           from "styles/typography"
 import styled, { ThemeContext } from "styled-components"
 
 type Props = {

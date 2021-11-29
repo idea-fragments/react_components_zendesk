@@ -8,9 +8,9 @@ import { PaddedFlexBlock }             from "components/layout/FlexBlock"
 import moment, { Moment }              from "moment"
 import { useEffect, useRef, useState } from "react"
 import * as React                      from "react"
-import { Calendar }       from "react-date-range"
-import { useTheme }       from "styles/theme/useTheme"
-import type { DateRange } from "utils/dateTime/DateRange.type"
+import { Calendar }                    from "react-date-range"
+import { useTheme }                    from "styles/theme/useTheme"
+import type { DateRange }              from "utils/dateTime/DateRange.type"
 import styled                          from "styled-components"
 import {
     maxDateBetween,
@@ -18,9 +18,9 @@ import {
 }                                      from "utils/dateTimeHelpers"
 import { DO_NOTHING }                  from "utils/functionHelpers"
 import { COLORS, fade }                from "styles/colors"
-import { SPACINGS }     from "styles/spacings"
-import { FONT_WEIGHTS } from "styles/typography"
-import { flatten }      from "utils/arrayHelpers"
+import { SPACINGS }                    from "styles/spacings"
+import { FONT_WEIGHTS }                from "styles/typography"
+import { flatten }                     from "utils/arrayHelpers"
 
 export type LabeledRangeList = {
     color? :string,

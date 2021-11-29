@@ -6,21 +6,21 @@ import {
   mdiCheckCircle,
   mdiClose,
   mdiInformation,
-}                       from "@mdi/js"
-import { BUTTON_SIZES } from "components/forms/Button"
-import { IconButton }   from "components/forms/IconButton"
-import { Icon }         from "components/Icon"
-import { FlexBlock }                 from "components/layout/FlexBlock"
-import { FlexBox }                   from "components/layout/FlexBox"
+}                                        from "@mdi/js"
+import { BUTTON_SIZES }                  from "components/forms/Button"
+import { IconButton }                    from "components/forms/IconButton"
+import { Icon }                          from "components/Icon"
+import { FlexBlock }                     from "components/layout/FlexBlock"
+import { FlexBox }                       from "components/layout/FlexBox"
 import type { StyledComponentProps }     from "components/StyledComponentProps.type"
 import { Text }                          from "components/text/Text"
 import React, { useCallback, useEffect } from "react"
 import styled                            from "styled-components"
 import { COLORS }                        from "styles/colors"
 import { textColorForBackground }        from "styles/mixins"
-import { SPACINGS }     from "styles/spacings"
-import { useTheme }     from "styles/theme/useTheme"
-import { FONT_WEIGHTS } from "styles/typography"
+import { SPACINGS }                      from "styles/spacings"
+import { useTheme }                      from "styles/theme/useTheme"
+import { FONT_WEIGHTS }                  from "styles/typography"
 
 export const ALERT_TYPES = Object.freeze({
   INFO:    "info",

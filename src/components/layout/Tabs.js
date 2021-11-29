@@ -1,8 +1,8 @@
 // @flow
 
 import { Tabs as ZTabs, TabPanel as ZTabPanel } from "@zendeskgarden/react-tabs"
-import styled           from "styled-components"
-import { FONT_WEIGHTS } from "styles/typography"
+import styled                                   from "styled-components"
+import { FONT_WEIGHTS }                         from "styles/typography"
 
 export const Tabs = styled(ZTabs)`
   &&& {
