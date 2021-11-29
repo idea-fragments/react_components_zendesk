@@ -52,7 +52,7 @@ export const MobileTable = ({
              {allSelected ? "Deselect" : "Select"} All
            </Button> : undefined}
 
-          {actions?.map((a) => a())}
+          {actions?.({ checkedItems })?.map((a) => a)}
         </FlexBox>
       </FlexBox>
 
