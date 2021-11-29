@@ -2,9 +2,9 @@
 
 import type { FormFieldProps } from "components/forms/formField.types"
 import { VALIDATION_STATES }   from "components/forms/validationStates"
-import { FlexBlock }           from "components/layout/FlexBlock"
-import type { StyledProps }    from "components/StyledProps.type"
-import React                   from "react"
+import { FlexBlock }        from "components/layout/FlexBlock"
+import type { StyledProps } from "components/StyledProps.type"
+import React                from "react"
 import type { ComponentType }  from "react"
 import { useObserver }         from "mobx-react"
 import styled, { css }         from "styled-components"
@@ -14,8 +14,8 @@ import {
     Label,
     Hint,
     Message,
-}                              from "@zendeskgarden/react-forms"
-import { FONT_SIZES }          from "vendor/react_components_zendesk/src/styles/typography"
+}                     from "@zendeskgarden/react-forms"
+import { FONT_SIZES } from "styles/typography"
 
 type Props = FormFieldProps & {
     WrappedComponent :ComponentType<>,
