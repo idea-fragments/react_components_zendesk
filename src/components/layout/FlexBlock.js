@@ -12,7 +12,7 @@ type ResponsiveProps = {
     props :Props
 }
 
-export type Props = {
+type Props = {
     compactAxis? :boolean,
     compact? :boolean,
     withRows? :boolean,
