@@ -1,7 +1,4 @@
-// @flow
+import type { Theme }       from "styles/theme/Theme.type"
+import { ThemedStyledProps} from "styled-components"
 
-import type { Theme } from "styles/theme/Theme.type"
-
-export type StyledProps<Props = {}> = Props & {
-    theme: Theme,
-}
+export type StyledProps<Props = {}> = ThemedStyledProps<Props, Theme>

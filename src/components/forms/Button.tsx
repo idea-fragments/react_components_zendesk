@@ -1,24 +1,32 @@
-// @flow
-
-import { Button as SButton }                                 from "@zendeskgarden/react-buttons"
+import { Button as SButton } from "@zendeskgarden/react-buttons"
 import {
   buttonLikeHoverable,
   getInlineStyling,
-}                                                            from "components/forms/buttonMixins"
-import { Icon }                                              from "components/Icon"
-import { FlexBox }                                           from "components/layout/FlexBox"
-import { Dots }                                              from "components/loaders/Dots"
-import type { StyledProps }                                  from "components/StyledProps.type"
-import { useIsMounted }                                      from "hooks/useIsMounted"
-import React, { FC, forwardRef, MouseEvent, Ref, useCallback, useState } from "react"
-import styled, { css }                                       from "styled-components"
-import type { Alignment }                                    from "styles/alignments"
-import { COLORS }                                            from "styles/colors"
-import { SPACINGS }                                          from "styles/spacings"
-import type { Theme }                                        from "styles/theme/Theme.type"
-import type { ColorProps, ContainerProps }                   from "styles/types"
-import { FONT_SIZES }                                        from "styles/typography"
-import type { PromiseFunc }                                  from "utils/function.types"
+}                            from "components/forms/buttonMixins"
+import { Icon }              from "components/Icon"
+import { FlexBox }           from "components/layout/FlexBox"
+import { Dots }              from "components/loaders/Dots"
+import type { StyledProps }  from "components/StyledProps.type"
+import { useIsMounted }      from "hooks/useIsMounted"
+import React, {
+  FC,
+  forwardRef,
+  MouseEvent,
+  Ref,
+  useCallback,
+  useState
+}                            from "react"
+import styled, { css }       from "styled-components"
+import type { Alignment }    from "styles/alignments"
+import { COLORS }            from "styles/colors"
+import { SPACINGS }          from "styles/spacings"
+import type { Theme }        from "styles/theme/Theme.type"
+import type {
+  ColorProps,
+  ContainerProps
+}                            from "styles/types"
+import { FONT_SIZES }        from "styles/typography"
+import type { PromiseFunc }  from "utils/function.types"
 
 const fitContent   = css`
   width: fit-content;
@@ -130,7 +138,7 @@ export let Button = (
     }, [autoLoadable, isLoading, loadingProp]
   )
 
-  const processClick = async (e :MouseEvent) => {
+  const processClick = async (e: MouseEvent) => {
     setIsLoadingTo(true)
     await onClick(e)
     if (isMounted()) setIsLoadingTo(false)
@@ -139,7 +147,7 @@ export let Button = (
   return <SButton as={innerAs}
                   disabled={disabled || computedIsLoading()}
                   ref={ref}
-                  onClick={autoLoadable ?  processClick : onClick}
+                  onClick={autoLoadable ? processClick : onClick}
                   {...props}>
     {
       computedIsLoading()

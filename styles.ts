@@ -4,6 +4,7 @@ import { light2 } from "./src/styles/theme/light2"
 
 export const THEMES = { light, light2, dark }
 
+export * from "./src/components/StyledProps.type"
 export * from "./src/styles/theme/Theme.type"
 export * from "./src/styles/colors"
 export * from "./src/styles/spacings"

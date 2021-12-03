@@ -1,11 +1,8 @@
-// @flow
-
 import styled, { css }            from "styled-components"
 import { textColorForBackground } from "styles/mixins"
 
-// eslint-disable-next-line no-unused-vars
 type Props = {
-    titleHidden :boolean
+    titleHidden? :boolean
 }
 
 const hideTitle = css`
@@ -19,7 +16,6 @@ const hideTitle = css`
   }
 `
 
-// $FlowFixMe
 export const Section = styled.section`
   background: ${({ color, theme }) => color ? color : theme.styles.section.background};
   border-radius: ${(p) => p.theme.styles.section.borderRadius};
@@ -28,7 +24,7 @@ export const Section = styled.section`
   padding: ${(p) => p.theme.styles.section.padding};
   
   ${({color}) => color ? textColorForBackground : ""}
-  ${({titleHidden}) => titleHidden ? hideTitle : ""}
+  ${({titleHidden} :Props) => titleHidden ? hideTitle : ""}
   
   & > :first-child {
     margin-top: 0;

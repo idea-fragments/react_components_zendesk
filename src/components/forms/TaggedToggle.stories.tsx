@@ -1,7 +1,5 @@
-// @flow
-
 import React, { useState } from "react"
-import { TaggedToggle }     from "components/forms/TaggedToggle"
+import { TaggedToggle }    from "components/forms/TaggedToggle"
 
 export default {
     title:     "react_components_zendesk/forms/TaggedToggle",
