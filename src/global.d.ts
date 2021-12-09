@@ -19,3 +19,11 @@ declare module "@zendeskgarden/react-tooltips"
 declare module "@zendeskgarden/react-theming"
 declare module "@zendeskgarden/react-typography"
 declare module "@zendeskgarden/react-utilities"
+
+declare global {
+  interface Window {
+    DEBUG_MODULES: Set<string>,
+  }
+}
+
+export type Nullable<T> = T | null | undefined

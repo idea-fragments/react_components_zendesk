@@ -5,16 +5,20 @@ import {
   FooterItem,
   Header as ZenHeader,
   Modal as ZenModal,
-}                                          from "@zendeskgarden/react-modals"
-import { Button, Props as ButtonProps }    from "components/forms/Button"
-import type { StyledComponentProps }       from "components/StyledComponentProps.type"
-import React, { MouseEvent, ReactElement } from "react"
-import styled                              from "styled-components"
-import { textWithColor }                   from "styles/mixins"
+}                                                    from "@zendeskgarden/react-modals"
+import {
+  Button,
+  Props as ButtonProps
+}                                                    from "components/forms/Button"
+import type { StyledComponentProps }                 from "components/StyledComponentProps.type"
+import React, { MouseEvent, ReactElement, useState } from "react"
+import styled                                        from "styled-components"
+import { textWithColor }                             from "styles/mixins"
 
 type ButtonType =
   ReactElement
   & { props: { disableable: boolean } & ButtonProps }
+
 export type ModalContent = {
   autoClose?: boolean,
   blocking?: boolean,
@@ -51,8 +55,8 @@ const createButtons = (
   closeModal: () => void,
   shouldDisable: boolean,
   autoClose: boolean,
+  adjustModalState: () => void,
 ) => (
-  // $FlowFixMe
   buttons.map((b: ButtonType) => {
     const { onClick, disabled, disableable } = b.props
     return (
@@ -61,6 +65,7 @@ const createButtons = (
           b,
           {
             onClick:  async () => {
+              adjustModalState()
               await onClick()
               if (autoClose) closeModal()
             },
@@ -87,6 +92,7 @@ export let Modal = ({
                       className,
                     }: Props) => {
 
+  const [isProcessing, setIsProcessingTo] = useState(false)
   if (!isVisible) return null
   if (!modalContent) throw new Error("Modal found null modal content")
 
@@ -105,12 +111,21 @@ export let Modal = ({
 
   const handleClose = () => {
     closeModal()
+    setIsProcessingTo(false)
     if (onClose) onClose()
   }
 
+  const setProcessingState = () => setIsProcessingTo(true)
+
   const footerItems = () => (
     buttons
-    ? createButtons(buttons, handleClose, disableActions, autoClose)
+    ? createButtons(
+      buttons,
+      handleClose,
+      disableActions,
+      autoClose,
+      setProcessingState
+    )
     : <FooterItem>
       <Button onClick={handleClose}
               primary
@@ -144,6 +159,7 @@ export let Modal = ({
            ? <FooterItem>
              <Button onClick={handleClose}
                      flat
+                     loading={isProcessing}
                      success={isSuccess}
                      danger={isDanger}
                      warning={isWarning}>

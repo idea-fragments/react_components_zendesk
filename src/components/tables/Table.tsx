@@ -111,7 +111,7 @@ export let Table = ({
   useEffect(() => {
     const subId = subscribe(handleDeviseSizeChange)
     return () => { unsubscribe(subId) }
-  }, [handleDeviseSizeChange, subscribe, unsubscribe])
+  }, [handleDeviseSizeChange])
 
   const hasRowActions = props.items.some(
     (i: Item) => i.actions && isNotEmpty(i.actions),

@@ -35,7 +35,7 @@ export const Chip = styled(XXS)
     }
 
     return { as: "div", background, color }
-  })`
+  })<Props>`
   background: ${p => p.background};
   color: ${p => p.color};
   padding: 2px 8px;

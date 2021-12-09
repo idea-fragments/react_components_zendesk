@@ -1,5 +1,3 @@
-// @flow
-
 import { ButtonLink }   from "components/navigation/ButtonLink"
 import React            from "react"
 import styled           from "styled-components"

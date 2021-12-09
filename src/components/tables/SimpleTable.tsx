@@ -1,26 +1,25 @@
-// @flow
-
-import { FlexBlock }               from "components/layout/FlexBlock"
-import { Checkbox, Label }         from "@zendeskgarden/react-forms"
-import { FlexBox }                 from "components/layout/FlexBox"
-import { HelpText }                from "components/tables/blocks/HelpText"
-import { Title }                   from "components/tables/blocks/Title"
-import { Row }                     from "components/tables/Row"
-import { TableProps }              from "components/tables/Table"
-import type { ColumnConfig, Item } from "components/tables/Table"
-import { columnWidth }             from "components/tables/utils"
-import { XL }                      from "components/text/Paragraph"
-import { Text }                    from "components/text/Text"
-import { ReactNode }               from "react"
-import * as React                  from "react"
+import { Checkbox, Label } from "@zendeskgarden/react-forms"
 import {
-    Table as ZTable,
-    Head,
-    HeaderRow,
-    HeaderCell,
-    Body,
-}                                  from "@zendeskgarden/react-tables"
-import { FONT_WEIGHTS }            from "styles/typography"
+  Body,
+  Head,
+  HeaderCell,
+  HeaderRow,
+  Table as ZTable,
+}                          from "@zendeskgarden/react-tables"
+import { FlexBlock }       from "components/layout/FlexBlock"
+import { FlexBox }         from "components/layout/FlexBox"
+import { HelpText }        from "components/tables/blocks/HelpText"
+import { Title }           from "components/tables/blocks/Title"
+import { Row }             from "components/tables/Row"
+import type {
+  ColumnConfig,
+  Item
+}                          from "components/tables/Table"
+import { TableProps }      from "components/tables/Table"
+import { columnWidth }     from "components/tables/utils"
+import { Text }            from "components/text/Text"
+import * as React          from "react"
+import { FONT_WEIGHTS }    from "styles/typography"
 
 type Props = TableProps & {
   hasRowActions: boolean,

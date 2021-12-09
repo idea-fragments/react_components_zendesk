@@ -3,11 +3,13 @@ import React, { FC }            from "react"
 import { FONT_SIZES, FontSize } from "styles/typography"
 
 type Props = {
-  size: FontSize
+  color?: string,
+  size?: FontSize
 }
 
-export const Dots: FC<Props> = ({ size = FONT_SIZES.XXL }) => {
-  return <ZDots data-component-name={`${Dots.COMPONENT_NAME}`}
+export const Dots: FC<Props> = ({ color, size = FONT_SIZES.XXL }) => {
+  return <ZDots color={color}
+                data-component-name={`${Dots.COMPONENT_NAME}`}
                 size={size}
                 delayMS={100}
                 velocity={-.25} />
