@@ -48,6 +48,7 @@ export const Header = ({
 
   const colWidth    = columnWidth(columnConfigs.length)
   const allSelected = checkedItems?.size === items.length
+  const someSelected = !!checkedItems?.size && !allSelected
 
   const handleSelectAll = (checked: boolean) => {
     if (!!onSelectAllToggle) onSelectAllToggle(checked)
@@ -65,7 +66,9 @@ export const Header = ({
     <HeaderRow>
       {checkable ? (
         <HeaderCell minimum>
-          <Checkbox checked={allSelected} onChange={handleSelectAll} />
+          <Checkbox checked={allSelected}
+                    indeterminate={someSelected}
+                    onChange={handleSelectAll} />
         </HeaderCell>
       ) : null}
 

@@ -6,17 +6,18 @@ import {
   Message,
 }                                                  from "@zendeskgarden/react-forms"
 import type { FormFieldProps }                     from "components/forms/formField.types"
-import { VALIDATION_STATES } from "components/forms/validationStates"
-import { FlexBox }           from "components/layout/FlexBox"
-import type { StyledProps }  from "components/StyledProps.type"
+import { VALIDATION_STATES }                       from "components/forms/validationStates"
+import { FlexBox }                                 from "components/layout/FlexBox"
+import type { StyledProps }                        from "components/StyledProps.type"
 import React, { ChangeEvent, useEffect, useState } from "react"
 import styled                                      from "styled-components"
-import { dark, fade }          from "styles/colors"
-import type { ContainerProps } from "styles/types"
-import { FONT_SIZES }          from "styles/typography"
+import { dark, fade }                              from "styles/colors"
+import type { ContainerProps }                     from "styles/types"
+import { FONT_SIZES }                              from "styles/typography"
 
 type Props = FormFieldProps & {
   checked?: boolean,
+  indeterminate?: boolean,
   onChange: (checked: boolean) => void
 }
 
@@ -26,6 +27,7 @@ export let Checkbox = ({
                          emptyState,
                          fluid,
                          hint,
+                         indeterminate,
                          label,
                          message,
                          validation = { validation: VALIDATION_STATES.NONE },
@@ -50,7 +52,10 @@ export let Checkbox = ({
         {...props}
         onChange={handleCheck}
       >
-        <Label hidden={!label}>{label ?? ""}</Label>
+        <Label hidden={!label}
+               indeterminate={indeterminate}>
+          {label ?? ""}
+        </Label>
         {
           hint
           ? <Hint css={`&&& { font-size: ${FONT_SIZES.XS}; }`}>{hint}</Hint>
@@ -59,7 +64,7 @@ export let Checkbox = ({
         {
           message
           ?
-          <Message css={`&&& { font-size: ${FONT_SIZES.XS };}`}
+          <Message css={`&&& { font-size: ${FONT_SIZES.XS};}`}
                    validation={validation?.validation}>
             {message}
           </Message>

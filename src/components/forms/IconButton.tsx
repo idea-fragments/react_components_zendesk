@@ -6,9 +6,19 @@ const COMPONENT_NAME = "IconButton"
 
 type Props = Omit<ButtonProps, "children">
 
-export const IconButton = styled((props: Props): JSX.Element => {
-  return <Button primary={false} flat {...props} pill fluid={false} />
-})`
+export const IconButton = styled(({
+                                    primary,
+                                    flat,
+                                    pill,
+                                    ...props
+                                  }: Props): JSX.Element => {
+  return <Button flat={flat != null ? flat : true}
+                 fluid={false}
+                 {...props}
+                 pill={pill != null ? pill : true}
+                 primary={primary ?? false}
+  />
+})<Props>`
   && {
     padding: .5em;
     min-width: 0;
