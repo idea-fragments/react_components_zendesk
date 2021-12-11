@@ -1,5 +1,3 @@
-// @flow
-
 export interface LoggerI {
     writeInfo :(...args :any) => void,
     writeError :(...args :any) => void,

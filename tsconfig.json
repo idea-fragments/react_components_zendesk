@@ -4,8 +4,10 @@
     "baseUrl": "src/",
     "checkJs": false,
     "downlevelIteration": true,
+    "experimentalDecorators": true,
     "jsx": "react-jsx",
-    "preserveConstEnums": true
+    "preserveConstEnums": true,
+    "target": "ES6"
   },
   "exclude": [
     "node_modules",

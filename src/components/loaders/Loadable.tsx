@@ -2,15 +2,15 @@ import { Dots }                                       from "@zendeskgarden/react
 import { FlexBox }                                    from "components/layout/FlexBox"
 import { useIsMounted }                               from "hooks/useIsMounted"
 import React, { FC, useContext, useEffect, useState } from "react"
-import styled, { ThemeContext } from "styled-components"
-import type { Theme }           from "styles/theme/Theme.type"
-import { FONT_SIZES }           from "styles/typography"
+import styled, { ThemeContext }                       from "styled-components"
+import type { Theme }                                 from "styles/theme/Theme.type"
+import { FONT_SIZES }                                 from "styles/typography"
 import { Logger }                                     from "utils/logging/Logger"
 
 const logger = new Logger("Loadable")
 
 const Container = styled(FlexBox)`
-  height: 100%;
+  //height: 100%;
   width: 100%;
   position: relative;
 `
@@ -44,7 +44,7 @@ export let Loadable: FC<Props> = ({
                                     showSpinner = false,
                                   }) => {
   logger.writeInfo("Rendering id:", debugId, "showSpinner", showSpinner)
-  const isMounted                   = useIsMounted()
+  const isMounted                           = useIsMounted()
   const theme                               = useContext<Theme>(ThemeContext)
   const [canHideSpinner, setCanHideSpinner] = useState<boolean>(true)
 

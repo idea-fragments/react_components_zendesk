@@ -8,6 +8,8 @@ export const dark: Theme = {
   isDark: true,
   styles: {
     ...base,
+    // deprecated
+    // @ts-ignore
     navBackground:          "#1d1e21",
     nav:                    {
       linkColor: light(COLORS.GREY),
@@ -22,13 +24,13 @@ export const dark: Theme = {
       trackColor: "#ffffff33",
     },
     sidebar:                {
-      ...base.sidebar,
+      ...base.sidebar!!,
       background: COLORS.MIDNIGHT_BLUE,
     },
     textColorDark:          COLORS.MIDNIGHT_PURPLE,
     textColorLight:         textColorPrimary,
-    textColorPrimary,
     textColorOverPrimaryBg: COLORS.WHITE,
+    textColorPrimary,
     textColorSecondary:     COLORS.GREY_NOT_QUITE_BLUE,
   },
 }

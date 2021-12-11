@@ -46,7 +46,7 @@ export const MobileTable = ({
         <FlexBox justifyContent={"space-between"}>
           {checkable ?
            <Button compact
-                   secondary
+                   neutral
                    size={BUTTON_SIZES.SMALL}
                    onClick={() => { onSelectAllToggle?.(!allSelected) }}>
              {allSelected ? "Deselect" : "Select"} All

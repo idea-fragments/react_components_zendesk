@@ -1,17 +1,23 @@
+import { StyledProps } from "components/StyledProps.type"
+import { Nullable }    from "global"
+
 export type ContainerStyles = {
-  background: string,
-  borderRadius: string,
-  height: string,
-  margin: string,
-  padding: string,
-  shadow: string,
-  zIndex: string,
+  background?: string,
+  borderRadius?: string,
+  height?: string,
+  margin?: string,
+  padding?: string,
+  shadow?: string,
+  zIndex?: number,
 }
 
 export type Styles = {
   appBar: ContainerStyles,
+  border: {
+    color: string,
+  },
   buttons: {
-    textTransform: string,
+    textTransform: Nullable<string>,
   },
   colorAccent: string,
   colorSecondary: string,
@@ -26,8 +32,16 @@ export type Styles = {
   infoPanel: {
     background: string,
   },
+  modal: {
+    backdrop: {
+      background: string,
+    }
+  },
   nav: {
     linkColor: string,
+  },
+  notifications: {
+    zIndex: number,
   },
   overlayBackground: string,
   pageBackground: string,
@@ -39,18 +53,20 @@ export type Styles = {
   section: ContainerStyles,
   sidebar: {
     background: string,
+    boxShadow: string,
     zIndex: number
   },
   table: { borderSize: string, },
-  textColorPrimary: string,
+  textColorDark: string,
+  textColorLight: string,
   textColorOverPrimaryBg: string,
+  textColorPrimary: string,
   textColorSecondary: string,
   tooltip: {
     darkBackground: string,
   },
 
-  // eslint-disable-next-line no-use-before-define
-  getTextColorForBackground: ({ color: string, theme: Theme }) => string
+  getTextColorForBackground: (p: StyledProps<{ color: string }>) => string
 }
 
 export type Theme = {

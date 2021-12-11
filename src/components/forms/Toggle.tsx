@@ -1,9 +1,13 @@
-import { Field, Toggle as ZToggle }                from "@zendeskgarden/react-forms"
-import { Hint }                                    from "components/forms/Hint"
-import { Label }                                   from "components/forms/Label"
-import React, { ChangeEvent, ReactNode, useState } from "react"
-import styled, { css }                             from "styled-components"
-import { dark }                                    from "styles/colors"
+// @ts-ignore
+import { Field, Toggle as ZToggle }          from "@zendeskgarden/react-forms"
+import { Hint }                              from "components/forms/Hint"
+import { Label }                             from "components/forms/Label"
+import React, { ChangeEvent, FC, ReactNode } from "react"
+import styled, { css }                       from "styled-components"
+import { dark }                              from "styles/colors"
+import { Logger }                            from "utils/logging/Logger"
+
+const logger = new Logger("Toggles")
 
 type Props = {
   checked?: boolean,
@@ -14,28 +18,25 @@ type Props = {
 }
 export type ToggleProps = Props
 
-export let Toggle = ({
-                       checked,
-                       hint,
-                       label,
-                       onChange,
-                       ...props
-                     }: Props) => {
-  const checkedPropOr      = (value: boolean) => checked == null
-                                                 ? value
-                                                 : checked
-  const [active, setState] = useState(checkedPropOr(false))
-
+export let Toggle: FC<Props> = ({
+                                  checked,
+                                  hint,
+                                  label,
+                                  onChange,
+                                  ...props
+                                }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setState(e.target.checked)
+    logger.writeInfo("handleChange", e.target.checked)
     onChange(e.target.checked)
   }
 
   return <Field>
-    <ZToggle {...props} checked={checkedPropOr(active)} onChange={handleChange}>
+    <StyledZToggle {...props}
+                   checked={checked}
+                   onChange={handleChange}>
       <Label hidden={!label}>{label}</Label>
       {hint ? <Hint>{hint}</Hint> : null}
-    </ZToggle>
+    </StyledZToggle>
   </Field>
 }
 
@@ -50,10 +51,12 @@ const toggleColor = css`
   }
 `
 
-Toggle = styled(Toggle)`
+const StyledZToggle = styled(ZToggle)`
   font-size: inherit;
 
   &&&&& {
     ${({ checked }) => checked ? toggleColor : ""}
   }
 `
+
+Toggle = styled(Toggle)``

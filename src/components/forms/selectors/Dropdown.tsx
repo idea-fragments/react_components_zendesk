@@ -298,24 +298,23 @@ export let Dropdown: FC<Props> = (props) => {
   )
 }
 
-// eslint-disable-next-line no-unused-vars
-const getPopperModifiers = (fluid) => {
-  if (!fluid) return null
-  return {
-    computeStyle: {
-      fn: (data) => {
-        const { width, left, right } = data.offsets.reference
-
-        data.styles.width         = width
-        data.offsets.popper.width = width
-        data.offsets.popper.left  = left
-        data.offsets.popper.right = right
-
-        return data
-      },
-    },
-  }
-}
+// const getPopperModifiers = (fluid) => {
+//   if (!fluid) return null
+//   return {
+//     computeStyle: {
+//       fn: (data) => {
+//         const { width, left, right } = data.offsets.reference
+//
+//         data.styles.width         = width
+//         data.offsets.popper.width = width
+//         data.offsets.popper.left  = left
+//         data.offsets.popper.right = right
+//
+//         return data
+//       },
+//     },
+//   }
+// }
 
 Dropdown = styled(Dropdown)`
   &&, && * {

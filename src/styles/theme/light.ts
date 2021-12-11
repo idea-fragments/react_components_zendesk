@@ -4,6 +4,7 @@ import type { Theme }   from "styles/theme/Theme.type"
 
 const textColorPrimary = COLORS.JAZZ_MAN_BLUE
 
+
 export const light: Theme = {
   isDark: false,
   styles: {
@@ -12,6 +13,8 @@ export const light: Theme = {
       ...base.appBar,
       background: "transparent",
     },
+    // deprecated
+    // @ts-ignore
     navBackground:          COLORS.GREY_NOT_QUITE_BLUE,
     nav:                    {
       linkColor: COLORS.MIDNIGHT_PURPLE,
@@ -29,13 +32,13 @@ export const light: Theme = {
       trackColor: "#00000022",
     },
     sidebar:                {
-      ...base.sidebar,
-      background: COLORS.VERY_LIGHT_GREY,
+      ...base.sidebar!!,
+      background: COLORS.WHITE,
     },
     textColorDark:          textColorPrimary,
     textColorLight:         COLORS.WHITE,
-    textColorPrimary,
     textColorOverPrimaryBg: COLORS.WHITE,
+    textColorPrimary,
     textColorSecondary:     COLORS.GREY_NOT_QUITE_BLUE,
   },
 }

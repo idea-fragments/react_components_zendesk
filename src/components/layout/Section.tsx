@@ -28,12 +28,14 @@ export const Section = styled.section`
   
   & > :first-child {
     margin-top: 0;
+    padding-top: 0;
   }
   
   & > section {
     padding-bottom: 0;
   }
+  
   & + section {
-    padding-top: 0;
+    //padding-top: 0;
   }
 `
