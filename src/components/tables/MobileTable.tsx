@@ -43,7 +43,7 @@ export const MobileTable = ({
         </Title>
 
 
-        <FlexBox justifyContent={"space-between"}>
+        <FlexBox justifyContent={"space-between"} wrap>
           {checkable ?
            <Button compact
                    neutral
