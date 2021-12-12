@@ -220,7 +220,7 @@ const Backdrop = styled.div<{ isClosing: boolean }>`
   z-index: 400;
 `
 
-const Body = styled(FlexBox)`
+const Body = styled(FlexBox).attrs({ withRows: true })`
   flex: 1;
   overflow: auto;
   padding: ${MARGIN_SIZE};

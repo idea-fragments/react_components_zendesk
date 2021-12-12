@@ -22,6 +22,7 @@ export type Styles = {
   colorAccent: string,
   colorSecondary: string,
   colorPrimary: string,
+  colorPrimaryDark: string,
   colorWarning: string,
   colorDanger: string,
   colorSuccess: string,
