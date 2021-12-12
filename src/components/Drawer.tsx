@@ -24,7 +24,7 @@ export type DrawerContent = {
   body: ReactNode,
   title?: string,
   withCancelButton?: boolean,
-  // withNoActions?: boolean,
+  withNoActions?: boolean,
   onClose?: () => void,
 }
 
@@ -53,7 +53,8 @@ export let Drawer: FC<Props> = ({
           body,
           onClose,
           title,
-          withCancelButton
+          withCancelButton,
+          withNoActions,
         }                           = drawerContent ?? {} as DrawerContent
 
   const animateClose = useCallback(() => {
@@ -130,17 +131,28 @@ export let Drawer: FC<Props> = ({
         </Header>
 
         <Body>{body ?? cachedContent.current}</Body>
-        <Footer>
-          {withCancelButton
-           ? <Button compact
-                     disabled={isClosing}
-                     flat
-                     onClick={handleClose}>
-             Cancel
-           </Button>
-           : null}
-          <Button compact disabled={isClosing} onClick={handleClose}>OK</Button>
-        </Footer>
+        {
+          !withNoActions
+          ? <Footer>
+            {
+              withCancelButton
+              ? <Button compact
+                        disabled={isClosing}
+                        flat
+                        onClick={handleClose}>
+                Cancel
+              </Button>
+              : null
+            }
+            <Button compact
+                    disabled={isClosing}
+                    onClick={handleClose}>
+              OK
+            </Button>
+          </Footer>
+          : null
+        }
+
       </AbsoluteContainer>
     </Backdrop>
   )
