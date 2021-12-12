@@ -11,8 +11,8 @@ import type { ColumnConfig, Item, ItemKey } from "components/tables/Table"
 import { Text }                             from "components/text/Text"
 import React, { FC }                        from "react"
 import styled, { css }                      from "styled-components"
-import { COLORS, veryLight }        from "styles/colors"
-import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
+import { COLORS, veryLight }                from "styles/colors"
+import { FONT_SIZES, FONT_WEIGHTS }         from "styles/typography"
 
 
 type Props = {
@@ -95,18 +95,23 @@ export const Row: FC<Props> = ({
             })}
           </Grid>
 
-          <ButtonContainer>
-            <Button fluid
-                    icon={
-                      isCollapsed
-                      ? mdiChevronDown
-                      : mdiChevronUp
-                    }
-                    size={"small"}
-                    onClick={toggleCollapse}>
-              Show {isCollapsed ? "More" : "Less"}
-            </Button>
-          </ButtonContainer>
+          {
+            columnConfigs.some((c) => c.collapsible)
+            ? <ButtonContainer>
+              <Button fluid
+                      icon={
+                        isCollapsed
+                        ? mdiChevronDown
+                        : mdiChevronUp
+                      }
+                      size={"small"}
+                      onClick={toggleCollapse}>
+                Show {isCollapsed ? "More" : "Less"}
+              </Button>
+            </ButtonContainer>
+            : null
+          }
+
         </FlexBox>
         {
           actions
