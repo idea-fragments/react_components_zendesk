@@ -12,7 +12,7 @@ import {
 }                                                    from "components/forms/Button"
 import type { StyledComponentProps }                 from "components/StyledComponentProps.type"
 import React, { MouseEvent, ReactElement, useState } from "react"
-import styled                                        from "styled-components"
+import styled, { css }                               from "styled-components"
 import { textWithColor }                             from "styles/mixins"
 
 type ButtonType =
@@ -25,6 +25,7 @@ export type ModalContent = {
   body: any,
   buttons?: ButtonType[],
   isDanger?: boolean,
+  isNotDismissible?: boolean,
   isSuccess?: boolean,
   isWarning?: boolean,
   title?: string,
@@ -147,9 +148,14 @@ export let Modal = ({
                   e.preventDefault()
                 },
               }}>
-      <Header danger={isDanger} success={isSuccess} warning={isWarning}>
-        {title}
-      </Header>
+      {
+        title
+        ? <Header danger={isDanger} success={isSuccess} warning={isWarning}>
+          {title}
+        </Header>
+        : null
+      }
+
       <Body>{body}</Body>
       {
         withNoActions
@@ -174,13 +180,22 @@ export let Modal = ({
       <Close aria-label="Close modal" />
     </ZenModal>
   )
-
 }
 
-Modal = styled(Modal)`
+const hideCloseButton = css`
+  button[data-garden-id="modals.close"] {
+    display: none;
+  }
+`
+
+Modal = styled(Modal)<Props>`
   &&&& {
     color: ${({ theme }) => theme.styles.textColorPrimary};
-
+    
+    ${({ modalContent }) => modalContent?.isNotDismissible
+                            ? hideCloseButton
+                            : ""}
+    
     ${Body} {
       font-size: inherit;
     }

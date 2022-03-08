@@ -188,7 +188,7 @@ export const Button: ComponentType<Props> = styled(
 
       const processClick = async (e: MouseEvent) => {
         setIsLoadingTo(true)
-        await onClick(e)
+        try { await onClick(e) } catch {}
         if (isMounted()) setIsLoadingTo(false)
       }
       return <ButtonBase {...props}
