@@ -83,3 +83,23 @@ export const minDateBetween = (a: Moment, b: Moment): Moment => (
 export const maxDateBetween = (a: Moment, b: Moment): Moment => (
   a.isAfter(b) ? a : b
 )
+
+export const addNDaysFromDate       = (n: number, d = new Date()): Date =>
+  momentArithmetic(d, "add", n, "days")
+export const addNWeeksFromDate      = (n: number, d = new Date()): Date =>
+  momentArithmetic(d, "add", n, "weeks")
+export const subtractNDaysFromDate  = (n: number, d = new Date()): Date =>
+  momentArithmetic(d, "subtract", n, "days")
+export const subtractNWeeksFromDate = (n: number, d = new Date()): Date =>
+  momentArithmetic(d, "subtract", n, "weeks")
+
+const momentArithmetic = (
+  d: Date,
+  func: string,
+  n: number,
+  unit: string
+): Date => {
+  // @ts-ignore
+  const newDate = (moment(d)[func] as Function)(n, unit) as Moment
+  return newDate.toDate()
+}
