@@ -18,9 +18,9 @@ type Props = {
   actions: Array<ReactNode>,
   fixed?: boolean,
   logo?: ElementType,
-  onBackClicked: () => void,
+  onBackClicked?: () => void,
   onLogoClicked: () => void,
-  showBackButton: boolean,
+  showBackButton?: boolean,
   title: ElementType,
 } & ContainerProps
 

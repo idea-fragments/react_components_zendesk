@@ -3,13 +3,14 @@ import { Textarea }               from "@zendeskgarden/react-forms"
 import { TextFieldWrapper }       from "components/forms/textfields/TextFieldWrapper"
 import React, { ChangeEvent, FC } from "react"
 
-type Props = FormFieldProps & {
+export type TextAreaProps = FormFieldProps & {
   resizable?: boolean,
   value?: string,
   onChange: (text: string, e: ChangeEvent<HTMLTextAreaElement>) => void,
 }
 
-export const TextArea: FC<Props> = ({ onChange, ...props }) => {
+
+export const TextArea: FC<TextAreaProps> = ({ onChange, ...props }) => {
   const notifyParentOfChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value, e)
   }

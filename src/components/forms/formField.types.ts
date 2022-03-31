@@ -1,27 +1,26 @@
-// @flow
-
 import type { Validation }     from "components/forms/Validation.type"
-import React, { type Node }    from "react"
+import { ChangeEvent }         from "react"
+import React, { ReactNode }    from "react"
 import type { ContainerProps } from "styles/types"
 
 export type FormFieldProps = {
-    label? :Node,
-    message? :Node,
-    hint? :Node,
-    emptyState? :Node,
+    label? :ReactNode,
+    message? :ReactNode,
+    hint? :ReactNode,
+    emptyState? :ReactNode,
     disabled? :boolean,
-    validation? :?Validation,
+    validation? :Validation | undefined,
 } & ContainerProps
 
 export type FormComponent =
-    React.ComponentType<* & FormFieldProps>
+    React.ComponentType<any & FormFieldProps>
     & { defaultProps :FormFieldProps }
 
-export type TextFieldProps<V = string, T = SyntheticInputEvent<HTMLInputElement>> =
+export type TextFieldProps<V = string, T = ChangeEvent<HTMLInputElement>> =
     {
         autoComplete? :string,
         small? :boolean,
         type? :string,
         value? :V,
-        onChange :(T) => void
+        onChange :(event: T) => void
     } & FormFieldProps

@@ -11,7 +11,7 @@ export type ResponsiveProps<P> = {
 
 export type Props = {
   alignItems?: string,
-  gap?: string | null,
+  gap?: string | null | "unset",
   fluid?: boolean,
   inline?: boolean,
   justifyContent?: string,
