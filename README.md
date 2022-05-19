@@ -1,4 +1,4 @@
-# react_components_zendesk
+# react_components_zendesk ...
 
 - Clone project into submodule for your main project
 - add `"react-components-zendesk":"file:src/vendor/react_components_zendesk"` to the package.json of the main project.
