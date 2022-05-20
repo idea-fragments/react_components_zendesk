@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": false,
   "main": "src/index.js",
+  "files": [
+    "dist/"
+  ],
   "dependencies": {
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
