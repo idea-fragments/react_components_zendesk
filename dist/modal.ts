@@ -1,1 +1,1 @@
-export * from "./src/components/Modal"
+export * from "components/Modal"

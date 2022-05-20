@@ -1,4 +1,2 @@
-// @flow
-
-export * from "./src/components/tags/Chip"
-export * from "./src/components/tags/Tag"
+export * from "components/tags/Chip"
+export * from "components/tags/Tag"

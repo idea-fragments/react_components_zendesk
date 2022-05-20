@@ -1,0 +1,1 @@
+{"version":3,"file":"Text.d.ts","sourceRoot":"","sources":["../../../src/components/text/Text.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAA4B,OAAO,CAAA;AAEvD,OAAO,KAAK,EAAc,cAAc,EAAE,MAAM,cAAc,CAAA;AAC9D,OAAO,KAAK,EAAE,SAAS,EAAE,MAAuB,mBAAmB,CAAA;AAqBnE,eAAO,MAAM,IAAI;cAlBL,SAAS;SAuBpB,CAAA"}

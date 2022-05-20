@@ -1,12 +1,11 @@
 {
-  "name": "react-components-zendesk",
+  "name": "@idea-fragments/react-components-zendesk",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "src/index.js",
   "dependencies": {
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
-    "@zendeskgarden/react-accordions": "^8.22.0",
     "@zendeskgarden/react-avatars": "^6.4.4",
     "@zendeskgarden/react-breadcrumbs": "^6.4.4",
     "@zendeskgarden/react-buttons": "^6.4.4",
@@ -33,14 +32,29 @@
     "mobx-react": "^6.1.3",
     "mobx-utils": "^5.5.2",
     "moment": "^2.24.0",
+    "react": "^16.14.0",
     "react-date-range": "^1.0.3",
+    "react-dom": "^16.14.0",
     "react-number-format": "^4.4.1",
     "react-scripts": "^4.0.3",
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@storybook/addon-actions": "^6.5.3",
+    "@storybook/addon-essentials": "^6.5.3",
+    "@storybook/addon-interactions": "^6.5.3",
+    "@storybook/addon-links": "^6.5.3",
+    "@storybook/builder-webpack4": "^6.5.3",
+    "@storybook/manager-webpack4": "^6.5.3",
+    "@storybook/node-logger": "^6.5.3",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.5.3",
+    "@storybook/testing-library": "^0.0.11",
     "@tsconfig/create-react-app": "^1.0.2",
+    "@types/color": "^3.0.3",
+    "@types/react-date-range": "^1.4.3",
+    "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-plugin-styled-components": "^1.10.6",
@@ -48,27 +62,44 @@
     "flow-bin": "^0.165.1",
     "typescript": "^4.5.2"
   },
-  "peerDependencies": {
-    "react": "^17.0.2"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app",
     "overrides": [
       {
-        "files": ["**/*.stories.*"],
-        "rules": { "import/no-anonymous-default-export": "off" }
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
       },
       {
-        "files": ["*.ts"],
-        "plugins": ["@typescript-eslint"],
+        "files": [
+          "*.ts"
+        ],
+        "plugins": [
+          "@typescript-eslint"
+        ],
         "parser": "@typescript-eslint/parser",
-        "parserOptions": { "project": "./tsconfig.json" }
+        "parserOptions": {
+          "project": "./tsconfig.json"
+        }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
       }
     ]
   },
@@ -83,5 +114,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Component library built on the V6 version of the Zendesk React components library.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idea-fragments/react_components_zendesk.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "IdeaFragments",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/idea-fragments/react_components_zendesk/issues"
+  },
+  "homepage": "https://github.com/idea-fragments/react_components_zendesk#readme"
 }

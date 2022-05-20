@@ -1,3 +1,3 @@
-export * from "./src/components/loaders/AsyncLoadable"
-export * from "./src/components/loaders/Loadable"
-export * from "./src/components/loaders/Loader"
+export * from "components/loaders/AsyncLoadable"
+export * from "components/loaders/Loadable"
+export * from "components/loaders/Loader"

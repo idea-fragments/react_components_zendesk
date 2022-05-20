@@ -1,3 +1,3 @@
-export * from "./src/components/Component.type"
-export * from "./src/components/StyledComponentProps.type"
-export * from "./src/components/StyledProps.type"
+export * from "components/Component.type"
+export * from "components/StyledComponentProps.type"
+export * from "components/StyledProps.type"

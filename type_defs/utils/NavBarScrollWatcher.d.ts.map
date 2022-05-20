@@ -1,0 +1,1 @@
+{"version":3,"file":"NavBarScrollWatcher.d.ts","sourceRoot":"","sources":["../../src/utils/NavBarScrollWatcher.ts"],"names":[],"mappings":"AAKA,oBAAY,0BAA0B,GAAG,CAAC,CAAC,EAAE,OAAO,KAAK,IAAI,CAAA;AAmC7D,qBAAa,mBAAmB;IAC5B,MAAM,CAAC,oBAAoB,MAAO,0BAA0B,gBAY3D;IAED,MAAM,CAAC,SAAS,MAAO,cAAc,UAAmB;IAExD,MAAM,CAAC,eAAe,aAA+B;CACxD"}

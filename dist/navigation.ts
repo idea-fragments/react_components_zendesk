@@ -1,3 +1,3 @@
-export * from "./src/components/navigation/Breadcrumbs"
-export * from "./src/components/navigation/ButtonLink"
-export * from "./src/components/navigation/InlineButtonLink"
+export * from "components/navigation/Breadcrumbs"
+export * from "components/navigation/ButtonLink"
+export * from "components/navigation/InlineButtonLink"

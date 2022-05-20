@@ -1,3 +1,5 @@
+import { ValueOf } from "utils/types"
+
 const XXS    = ".8rem"
 const XS     = ".9rem"
 const SM     = "1rem"
@@ -26,40 +28,40 @@ const P    = "p"
 const SPAN = "span"
 const DIV  = "div"
 
-export const FONT_TAGS = Object.freeze({
-    H1, H2, H3, H4, H5, H6, P, SPAN, DIV,
-})
+export const FONT_TAGS = {
+  H1, H2, H3, H4, H5, H6, P, SPAN, DIV,
+} as const
 
-export const FONT_SIZES = Object.freeze({
-    XXS, XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL,
-})
+export const FONT_SIZES = {
+  XXS, XS, SM, MD, LG, XL, XXL, XXXL, XXXXL, XXXXXL,
+} as const
 
 export const FONT_SIZES_EM = Object.freeze({
-    XXS: XXS.replace("r", ""),
-    XS: XS.replace("r", ""),
-    SM: SM.replace("r", ""),
-    MD: MD.replace("r", ""),
-    LG: LG.replace("r", ""),
-    XL: XL.replace("r", ""),
-    XXL: XXL.replace("r", ""),
-    XXXL: XXXL.replace("r", ""),
-    XXXXL: XXXXL.replace("r", ""),
-    XXXXXL: XXXXXL.replace("r", ""),
+  XXS:    XXS.replace("r", ""),
+  XS:     XS.replace("r", ""),
+  SM:     SM.replace("r", ""),
+  MD:     MD.replace("r", ""),
+  LG:     LG.replace("r", ""),
+  XL:     XL.replace("r", ""),
+  XXL:    XXL.replace("r", ""),
+  XXXL:   XXXL.replace("r", ""),
+  XXXXL:  XXXXL.replace("r", ""),
+  XXXXXL: XXXXXL.replace("r", ""),
 })
 
 export const FONT_WEIGHTS = {
-    THIN, LIGHT, REGULAR, MEDIUM, BOLD, BLACK,
-}
+  THIN, LIGHT, REGULAR, MEDIUM, BOLD, BLACK,
+} as const
 
-export type FontSize = XS | SM | MD | LG | XL | XXL | XXXL
-export type FontWeight = THIN | LIGHT | REGULAR | MEDIUM | BOLD | BLACK
-export type FontTag = H1 | H2 | H3 | H4 | H5 | H6 | P | SPAN | DIV
+export type FontSize = ValueOf<typeof FONT_SIZES>
+export type FontWeight = ValueOf<typeof FONT_WEIGHTS>
+export type FontTag = ValueOf<typeof FONT_TAGS>
 export type TextAlignment = "center" | "left" | "right"
 
 export type TextProps = {
-    align? :TextAlignment,
-    as? :FontTag,
-    hasSubText? :boolean,
-    size? :FontSize,
-    weight? :FontWeight,
+  align?: TextAlignment,
+  as?: FontTag,
+  hasSubText?: boolean,
+  size?: FontSize,
+  weight?: FontWeight,
 }

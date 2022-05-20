@@ -1,3 +1,3 @@
-export { useLoader }   from "./src/hooks/useLoader"
-export { useLoaderV2 } from "./src/hooks/useLoaderV2"
-export { useTheme }    from "./src/styles/theme/useTheme"
+export { useLoader }   from "hooks/useLoader"
+export { useLoaderV2 } from "hooks/useLoaderV2"
+export { useTheme }    from "styles/theme/useTheme"
