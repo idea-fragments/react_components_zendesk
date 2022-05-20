@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Checkbox, Label } from "@zendeskgarden/react-forms"
 import {
   Body,
@@ -5,6 +6,7 @@ import {
   HeaderCell,
   HeaderRow,
   Table as ZTable,
+  /*@ts-ignore*/
 }                          from "@zendeskgarden/react-tables"
 import { FlexBlock }       from "components/layout/FlexBlock"
 import { FlexBox }         from "components/layout/FlexBox"
@@ -27,73 +29,71 @@ type Props = TableProps & {
 }
 
 export const SimpleTable = ({
-                                title,
-                                actions,
-                                columnConfigs,
-  helpText,
-                                items,
-                                onItemClick,
-                                checkable,
-                                checkedItems,
-                                onItemChecked,
-                                onSelectAllToggle,
-                            } :Props) => {
+                              title,
+                              actions,
+                              columnConfigs,
+                              helpText,
+                              items,
+                              onItemClick,
+                              checkable,
+                              checkedItems,
+                              onItemChecked,
+                              onSelectAllToggle,
+                            }: Props) => {
 
-    const colWidth = columnWidth(columnConfigs.length)
+  const colWidth = columnWidth(columnConfigs.length)
 
-    const allSelected = checkedItems.size === items.length
+  const allSelected = checkedItems?.size === items.length
 
-    return (
-        <FlexBlock data-component-name={`${SimpleTable.COMPONENT_NAME}`}>
-            <ZTable>
-              <FlexBox css={`margin-bottom: 1rem`}
-                       justifyContent={"space-between"} withRows>
-                {title ? <Title>{title}</Title> : null}
-                {helpText ? <HelpText>{helpText}</HelpText> : null}
-                <FlexBox css={`flex: 1`} justifyContent={"flex-end"}>
-                  {actions?.({ checkedItems })?.map((a) => a)}
-                </FlexBox>
-              </FlexBox>
+  return (
+    <FlexBlock>
+      <ZTable>
+        <FlexBox css={`margin-bottom: 1rem`}
+                 justifyContent={"space-between"} withRows>
+          {title ? <Title>{title}</Title> : null}
+          {helpText ? <HelpText>{helpText}</HelpText> : null}
+          <FlexBox css={`flex: 1`} justifyContent={"flex-end"}>
+            {/*@ts-ignore*/}
+            {actions?.({ checkedItems })?.map((a) => a)}
+          </FlexBox>
+        </FlexBox>
 
-                <Head>
-                    <HeaderRow>
-                        {checkable ? (
-                            <HeaderCell minimum>
-                                <Checkbox checked={allSelected}
-                                          onChange={onSelectAllToggle}>
-                                    <Label hidden
-                                           indeterminate={checkedItems.size > 0 && !allSelected}>
-                                        Select all Jobs
-                                    </Label>
-                                </Checkbox>
-                            </HeaderCell>
-                        ) : null}
+        <Head>
+          <HeaderRow>
+            {checkable ? (
+              <HeaderCell minimum>
+                <Checkbox checked={allSelected}
+                          onChange={onSelectAllToggle}>
+                  <Label hidden
+                         indeterminate={checkedItems!.size > 0 && !allSelected}>
+                    Select all Jobs
+                  </Label>
+                </Checkbox>
+              </HeaderCell>
+            ) : null}
 
-                        {columnConfigs.map(({ name } :ColumnConfig) => (
-                            <HeaderCell key={name} width={colWidth}>
-                                <Text weight={FONT_WEIGHTS.BOLD}>
-                                    {name}
-                                </Text>
-                            </HeaderCell>
-                        ))}
-                    </HeaderRow>
-                </Head>
+            {columnConfigs.map(({ name }: ColumnConfig) => (
+              <HeaderCell key={name} width={colWidth}>
+                <Text weight={FONT_WEIGHTS.BOLD}>
+                  {name}
+                </Text>
+              </HeaderCell>
+            ))}
+          </HeaderRow>
+        </Head>
 
-                <Body>
-                    {items.map((item :Item) => (
-                        <Row item={item}
-                             key={item.key}
-                             columnConfigs={columnConfigs}
-                             onClick={onItemClick}
-                             checkable={checkable}
-                             checked={checkedItems.has(item.key)}
-                             onCheck={onItemChecked} />
-                    ))}
-                </Body>
-            </ZTable>
-        </FlexBlock>
-    )
+        <Body>
+          {items.map((item: Item) => (
+            <Row item={item}
+                 key={item.key}
+                 columnConfigs={columnConfigs}
+                 onClick={onItemClick}
+                 checkable={checkable}
+                 checked={checkedItems?.has(item.key)}
+                 onCheck={onItemChecked} />
+          ))}
+        </Body>
+      </ZTable>
+    </FlexBlock>
+  )
 }
-
-SimpleTable.COMPONENT_NAME = "Table"
-SimpleTable.defaultProps   = {}

@@ -37,9 +37,9 @@ export const OverflowMenu = ({ actions, placement }: Props) => (
             returnItemOnChange
             valueField={"label"}
             keyField={"label"}
+            // @ts-ignore
             onChange={({ action }) => { action() }}
+            // @ts-ignore
             trigger={<OverflowButton />}
   />
 )
-
-OverflowMenu.COMPONENT_NAME = COMPONENT_NAME

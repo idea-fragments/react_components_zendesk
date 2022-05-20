@@ -39,6 +39,7 @@ export const NiceTable = ({
           {title ? <Title>{title}</Title> : null}
           {helpText ? <HelpText>{helpText}</HelpText> : null}
           <FlexBox css={`flex: 1`} justifyContent={"flex-end"}>
+            {/* @ts-ignore */}
             {actions?.({ checkedItems })?.map((a) => a)}
           </FlexBox>
         </FlexBox>

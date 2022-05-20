@@ -1,5 +1,3 @@
-// @flow
-
 import { Button, BUTTON_SIZES } from "components/forms/Button"
 import { FlexBox }              from "components/layout/FlexBox"
 import { HelpText }             from "components/tables/blocks/HelpText"
@@ -7,8 +5,8 @@ import { Title }                from "components/tables/blocks/Title"
 import { Row }                  from "components/tables/MobileTable/Row"
 import type { Item }            from "components/tables/Table"
 import { TableProps }           from "components/tables/Table"
-import React          from "react"
-import { FONT_SIZES } from "styles/typography"
+import React                    from "react"
+import { FONT_SIZES }           from "styles/typography"
 
 type Props = TableProps & {
   hasRowActions: boolean,
@@ -31,8 +29,7 @@ export const MobileTable = ({
   const allSelected = checkedItems?.size === items.length
 
   return (
-    // @ts-ignore
-    <FlexBox data-component-name={`${MobileTable.COMPONENT_NAME}`} withRows>
+    <FlexBox withRows>
       <FlexBox css={`flex-wrap: wrap;`}
                justifyContent={"space-between"}
                withRows
@@ -51,7 +48,7 @@ export const MobileTable = ({
                    onClick={() => { onSelectAllToggle?.(!allSelected) }}>
              {allSelected ? "Deselect" : "Select"} All
            </Button> : undefined}
-
+          {/*@ts-ignore*/}
           {actions?.({ checkedItems })?.map((a) => a)}
         </FlexBox>
       </FlexBox>

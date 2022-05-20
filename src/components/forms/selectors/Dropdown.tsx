@@ -14,32 +14,49 @@ import {
   PreviousItem,
   Select as ZenSelect,
   Trigger,
-}                                                                  from "@zendeskgarden/react-dropdowns"
-import { buttonLikeHoverable }                                     from "components/forms/buttonMixins"
+}                                                  from "@zendeskgarden/react-dropdowns"
+import { IItemProps }                              from "@zendeskgarden/react-dropdowns/dist/typings/Menu/Items/Item"
+import { VALIDATION }                              from "@zendeskgarden/react-dropdowns/dist/typings/styled/field/StyledMessage"
+import { buttonLikeHoverable }                     from "components/forms/buttonMixins"
+import {
+  getItemType,
+  Item
+}                                                  from "components/forms/selectors/Dropdown/Item"
 import type {
+  MultiSelectorProps,
   SelectorItemKey,
   SelectorOption,
   SelectorProps,
   StateChange,
-}                                                                  from "components/forms/selectors/types"
-import { VALIDATION_STATES }                                       from "components/forms/validationStates"
-import { Loadable }                                                from "components/loaders/Loadable"
-import { debounce }                                                from "lodash"
-import * as React                                                  from "react"
-import { FC, ReactNode, useCallback, useEffect, useRef, useState } from "react"
-import styled, { css }                                             from "styled-components"
-import { FONT_SIZES }                                              from "styles/typography"
+}                                                  from "components/forms/selectors/types"
+import { VALIDATION_STATES }                       from "components/forms/validationStates"
+import { Loadable }                                from "components/loaders/Loadable"
+import { StateChangeOptions }                      from "downshift"
+import { debounce }                                from "lodash"
+import * as React                                  from "react"
+import {
+  ComponentType,
+  FC, PropsWithChildren,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+}                                                  from "react"
+import styled, { css, FlattenSimpleInterpolation } from "styled-components"
+import { Theme }                                   from "styles/theme/Theme.type"
+import { FONT_SIZES }                              from "styles/typography"
 import {
   isEmpty,
   isNotEmpty
-}                                                                  from "utils/arrayHelpers"
-import { DO_NOTHING }                                              from "utils/functionHelpers"
-import { Logger }                                                  from "utils/logging/Logger"
+}                                                  from "utils/arrayHelpers"
+import { DO_NOTHING }                              from "utils/functionHelpers"
+import { Logger }                                  from "utils/logging/Logger"
 import {
   isArray,
   isNumber,
   isString
-}                                                                  from "utils/typeCheckers"
+}                                                  from "utils/typeCheckers"
 
 export type MenuPlacement =
   "start"
@@ -61,18 +78,27 @@ type OptionalSelectorProps = {
   valueField?: string,
 }
 
-type Props = Omit<SelectorProps, "keyField" | "valueField"> & {
-  async: boolean,
-  shouldFilterOptions?: boolean,
+type CommonProps = {
+  async?: boolean,
+  isOpen?:boolean,
   maxMenuHeight?: string,
   menuCSS?: string,
+  menuItemComponent?: ComponentType<any>,
   placement?: MenuPlacement,
-  returnItemOnChange: boolean,
+  returnItemOnChange?: boolean,
+  shouldFilterOptions?: boolean,
   trigger?: ReactNode,
-  useRawOptions: boolean,
-} & OptionalSelectorProps
+  useRawOptions?: boolean,
+}
 
-const menuStyles = (extraStyles) => css`
+type SelectorsProps = (CommonProps & SelectorProps)
+  | (CommonProps & MultiSelectorProps)
+
+type Props =
+  Omit<SelectorsProps, "keyField" | "valueField">
+  & OptionalSelectorProps
+
+const menuStyles = (extraStyles: string = "") => css`
   && { width: 100%; }
 
   &&, && * {
@@ -80,15 +106,6 @@ const menuStyles = (extraStyles) => css`
   }
 
   ${extraStyles}
-`
-
-const Item = styled(ZItem).attrs(({ danger, theme }) => {
-  if (!danger) return
-  return { color: theme.styles.colorDanger, primary: true }
-})`
-  &&&& {
-    ${({ danger }) => danger ? buttonLikeHoverable : ""}
-  }
 `
 
 const CLEAR_OPTION = {
@@ -99,7 +116,7 @@ const CLEAR_OPTION = {
 
 const logger = new Logger("Dropdown")
 
-export let Dropdown: FC<Props> = (props) => {
+export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
   const [state, setState]                         = useState({ isOpen: false })
   const controlledState                           = { ...state, ...props }
   const [filteringOptions, setFilteringOptionsTo] = useState<boolean>(false)
@@ -124,8 +141,6 @@ export let Dropdown: FC<Props> = (props) => {
           options,
           placement,
           returnItemOnChange,
-          selectedKey,
-          selectedKeys,
           trigger,
           useRawOptions,
           validation,
@@ -134,14 +149,17 @@ export let Dropdown: FC<Props> = (props) => {
           onStateChange,
         } = props
 
-  const filterFunc = useCallback(value => {
+  const { selectedKey }  = props as SelectorProps
+  const { selectedKeys } = props as MultiSelectorProps
+
+  const filterFunc = useCallback((value: string) => {
     const searchText    = value.trim().toLowerCase()
     let matchingOptions = options
 
     if (searchText !== "") {
       matchingOptions = options.filter(option => {
         return (
-          option[valueField]
+          option[valueField!]
             .trim()
             .toLowerCase()
             .indexOf(value.trim().toLowerCase()) !== -1
@@ -170,17 +188,18 @@ export let Dropdown: FC<Props> = (props) => {
   }, [searchFilter, shouldFilterOptions])
 
   let { message }   = props
-  const optionNodes = useRawOptions ? options : createOptions(
+  const optionNodes = useRawOptions ? options as JSX.Element[] : createOptions(
     shouldFilterOptions ? filteredOptions : options,
-    keyField,
-    valueField,
+    keyField!,
+    valueField!,
     menuItemComponent,
     filteringOptions,
     clearable,
   )
-  message           = validation.message || message
+  message           = validation?.message ?? message
   const messageNode = message
-                      ? <Message validation={validation.validation}>
+                      ?
+                      <Message validation={validation!.validation as VALIDATION}>
                         {message}
                       </Message>
                       : null
@@ -189,28 +208,30 @@ export let Dropdown: FC<Props> = (props) => {
 
   const handleChange = (item: SelectorOption | SelectorOption[]) => {
     logger.writeInfo("selection made", item)
-    if (item.isClearingItem) {
-      onChange(null)
+    if ((item as SelectorOption).isClearingItem) {
+      onChange!(null)
       return
     }
 
     if (isArray(item)) {
-      // $FlowFixMe
-      handleMultiSelectChange(item)
+      handleMultiSelectChange(item as SelectorOption[])
       return
     }
 
     if (useRawOptions || returnItemOnChange) {
-      onChange(item)
+      // @ts-ignore
+      onChange!(item)
       return
     }
 
-    onChange(item[keyField])
+    onChange!((item as SelectorOption)[keyField!])
   }
 
   const handleMultiSelectChange = (items: Array<SelectorItemKey | SelectorOption>) => {
     if (useRawOptions || returnItemOnChange) {
-      onChange([...new Set(items)])
+      const rawSet = new Set(items)
+      // @ts-ignore
+      onChange!([...rawSet])
       return
     }
     // When using the Dropdown with a MultiSelector, the dropdown
@@ -218,19 +239,19 @@ export let Dropdown: FC<Props> = (props) => {
     // item to the end of the list. So we need to transform the last item
     // into the SelectorItemKey
     const changes = items.map((i: SelectorItemKey | SelectorOption) => {
-      if (isNumber(i) || isString(i)) return i
-      // $FlowFixMe
-      return i[keyField]
+      if (isNumber(i) || isString(i)) return i as SelectorItemKey
+      return (i as SelectorOption)[keyField!] as SelectorItemKey
     })
 
-    onChange([...new Set(changes)])
+    // @ts-ignore
+    onChange!([...new Set(changes)])
   }
 
   const handleStateChange = (changes: StateChange) => {
     logger.writeInfo("state change", changes)
     const item = changes.selectedItem || {}
 
-    onStateChange({
+    onStateChange!({
       ...changes,
       selectedItem: item.isClearingItem ? null : item,
     })
@@ -243,7 +264,7 @@ export let Dropdown: FC<Props> = (props) => {
 
       setState({
         ...state,
-        isOpen: item.isNextItem || item.isBackItem || changes.isOpen,
+        isOpen: item.isNextItem || item.isBackItem || changes.isOpen || false,
       })
       return
     }
@@ -256,6 +277,7 @@ export let Dropdown: FC<Props> = (props) => {
   const optionsLoaded = optionNodes && isNotEmpty(optionNodes)
 
   return (
+    // @ts-ignore
     <ZenDropdown
       selectedItem={selectedKey}
       selectedItems={selectedKeys
@@ -264,7 +286,7 @@ export let Dropdown: FC<Props> = (props) => {
       isOpen={controlledState.isOpen}
       onSelect={handleChange}
       onStateChange={handleStateChange}
-      downshiftProps={{ itemToString: item => item }}
+      downshiftProps={{ itemToString: (item: any) => item }}
     >
       {
         trigger
@@ -316,6 +338,7 @@ export let Dropdown: FC<Props> = (props) => {
 //   }
 // }
 
+// @ts-ignore
 Dropdown = styled(Dropdown)`
   &&, && * {
     font-size: inherit;
@@ -323,13 +346,12 @@ Dropdown = styled(Dropdown)`
 
   && {
     ${({ fluid }) => fluid ? "width: 100%;" : ""}
-    ${Message} {
+    ${Message as any} {
       font-size: ${FONT_SIZES.XS};
     }
   }
 `
 
-// $FlowFixMe
 Dropdown.defaultProps = {
   async:              false,
   useRawOptions:      false,
@@ -341,31 +363,28 @@ Dropdown.defaultProps = {
   onStateChange: DO_NOTHING,
 }
 
-export const Autocomplete = ZenAutocomplete
-export const Select       = ZenSelect
-export const MultiSelect  = styled(ZenMultiSelect)`
+export const Autocomplete = ZenAutocomplete as ComponentType<any>
+export const Select = ZenSelect as ComponentType<any>
+export const MultiSelect = styled(ZenMultiSelect as ComponentType<any>)`
   && {
     div { max-width: 100%; }
   }
 `
-const Label               = styled(ZenLabel)`
+
+const Label = styled(ZenLabel)`
   && { color: ${(p) => p.theme.styles.textColorPrimary}; }
 `
 
-const getItemType = (o) => {
-  if (o.isNextItem) return NextItem
-  if (o.isBackItem) return PreviousItem
-  if (o.isAddItem) return AddItem
-  if (o.isHeaderItem) return HeaderItem
-
-  return Item
-}
-
 const createOptions = (
-  options, key, value, menuItemComponent, isFilteringOptions, isClearable,
+  options: SelectorOption[],
+  key: string,
+  value: string,
+  menuItemComponent: ComponentType<any> | undefined,
+  isFilteringOptions: boolean,
+  isClearable: boolean = false,
 ) => {
-  if (isFilteringOptions) return <Item disabled>Loading items...</Item>
-  if (isEmpty(options)) return <Item disabled>No matches found</Item>
+  if (isFilteringOptions) return [<Item disabled>Loading items...</Item>]
+  if (isEmpty(options)) return [<Item disabled>No matches found</Item>]
 
   const nodes = options.map((o) => {
     const ItemType  = getItemType(o)
@@ -373,9 +392,9 @@ const createOptions = (
 
     return <ItemType key={o[key]}
                      value={o}
-                     disabled={o.disabled}
+                     disabled={false}
                      danger={o.danger}>
-      {menuItemComponent ? <Component {...o} /> : o[value]}
+      {Component ? <Component {...o} /> : o[value]}
     </ItemType>
   })
 

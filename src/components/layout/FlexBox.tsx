@@ -2,8 +2,6 @@ import styled, { css } from "styled-components"
 import { MediaQuery }  from "styles/mediaQueries"
 import { SPACINGS }    from "styles/spacings"
 
-const COMPONENT_NAME = "FlexBox"
-
 export type ResponsiveProps<P> = {
   mediaQueryFunc: MediaQuery,
   props: P
@@ -24,7 +22,7 @@ export type FlexBoxProps = Props
 
 const getFlexDirection = ({ withRows }: Props) => withRows ? "column" : "row"
 
-export const FlexBox = styled.div`
+export const FlexBox = styled.div<Props>`
   align-items: ${({ alignItems }) => alignItems ? alignItems : "initial"};
   display: ${(p) => p.inline ? "inline-flex" : "flex"};
   flex: ${({ fluid }: Props) => fluid ? 1 : "unset"};
@@ -36,8 +34,6 @@ export const FlexBox = styled.div`
   ${(p: Props) => p.responsivePropsList ? responsiveStyles(p) : ""}
 `
 
-// @ts-ignore
-FlexBox.COMPONENT_NAME = COMPONENT_NAME
 FlexBox.defaultProps   = { withRows: false }
 
 const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) => (

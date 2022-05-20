@@ -35,7 +35,7 @@ const fitContent   = css`
                             : ""}
 `
 const fitContainer = css`width: 100%;`
-const colors       = css`
+const colors       = css<Props & { color: string }>`
   ${buttonLikeHoverable};
   border-color: ${({ flat, primary, inline, color }: Props) =>
           !flat && !primary && !inline

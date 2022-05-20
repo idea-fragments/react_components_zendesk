@@ -53,7 +53,7 @@ type ActionsCreatorParams = {
 }
 
 export type TableProps = {
-  actions?: (p :ActionsCreatorParams) => ReactNode[],
+  actions?: (p: ActionsCreatorParams) => ReactNode[],
   checkable?: boolean,
   checkedItems?: Set<ItemKey>,
   columnConfigs: Array<ColumnConfig>,
@@ -86,6 +86,7 @@ const {
       } = deviceSizeWatcher
 
 export let Table = ({
+// @ts-ignore
                       action,
                       actions,
                       className,
@@ -149,6 +150,4 @@ export let Table = ({
   )
 }
 
-// @ts-ignore
-Table.COMPONENT_NAME = "Table"
-Table                = styled(Table)``
+Table = styled(Table)``

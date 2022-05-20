@@ -14,13 +14,16 @@ const Story = (args: Partial<ToggleProps>) => {
 }
 
 export const Default = Story.bind({})
+// @ts-ignore
 Default.args         = {}
 
 export const Disabled = Story.bind({})
+// @ts-ignore
 Disabled.args         = {
   disabled: true,
 }
 export const Labeled  = Story.bind({})
+// @ts-ignore
 Labeled.args          = {
   hint:  "Will do the thing",
   label: "Do Something",

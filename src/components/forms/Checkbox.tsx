@@ -4,6 +4,7 @@ import {
   Hint,
   Label,
   Message,
+  /* @ts-ignore */
 }                                                  from "@zendeskgarden/react-forms"
 import type { FormFieldProps }                     from "components/forms/formField.types"
 import { VALIDATION_STATES }                       from "components/forms/validationStates"

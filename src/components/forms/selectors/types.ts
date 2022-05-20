@@ -1,17 +1,22 @@
 import type { FormFieldProps } from "components/forms/formField.types"
+import { StateChangeOptions }  from "downshift"
 
-export type SelectorItemKey = string | number | null
-export type SelectorOption = { [key: string]: any }
+export type SelectorItemKey = string | number | null | undefined
+export type SelectorOptionOptionalAttrs = {
+  isClearingItem?: boolean,
+  isNextItem?: boolean,
+  isBackItem?: boolean,
+  isAddItem?: boolean,
+  isHeaderItem?: boolean,
+}
+export type SelectorOption =
+  { [key: string]: any }
+  & SelectorOptionOptionalAttrs
 export type OnMultiSelectItemRemoveFunc<T = SelectorItemKey> = (k: T) => void
 export type OnItemSelectedFunc =
   ((k: SelectorItemKey) => void)
-  | ((o: SelectorOption) => void)
-export type StateChange = {
-  highlightedIndex?: number,
-  isOpen?: boolean,
-  selectedItem?: SelectorOption | null,
-  type: string,
-}
+  | ((o: SelectorOption | null) => void)
+export type StateChange = StateChangeOptions<SelectorOption>
 
 type Common = FormFieldProps & {
   clearable?: boolean,

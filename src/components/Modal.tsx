@@ -5,6 +5,7 @@ import {
   FooterItem,
   Header as ZenHeader,
   Modal as ZenModal,
+  /* @ts-ignore */
 }                                                    from "@zendeskgarden/react-modals"
 import {
   Button,
@@ -191,11 +192,10 @@ const hideCloseButton = css`
 Modal = styled(Modal)<Props>`
   &&&& {
     color: ${({ theme }) => theme.styles.textColorPrimary};
-    
+
     ${({ modalContent }) => modalContent?.isNotDismissible
                             ? hideCloseButton
                             : ""}
-    
     ${Body} {
       font-size: inherit;
     }

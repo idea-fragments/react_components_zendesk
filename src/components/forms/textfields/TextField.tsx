@@ -1,9 +1,9 @@
-import type { TextFieldProps } from "components/forms/formField.types"
-import { Input }               from "@zendeskgarden/react-forms"
-import { TextFieldWrapper }    from "components/forms/textfields/TextFieldWrapper"
-import { ChangeEvent, FC }     from "react"
-import * as React              from "react"
-import styled                  from "styled-components"
+// @ts-ignore
+import { Input }                  from "@zendeskgarden/react-forms"
+import type { TextFieldProps }    from "components/forms/formField.types"
+import { TextFieldWrapper }       from "components/forms/textfields/TextFieldWrapper"
+import React, { ChangeEvent, FC } from "react"
+import styled                     from "styled-components"
 
 type NewOnChangeFunc = (
   value: string,

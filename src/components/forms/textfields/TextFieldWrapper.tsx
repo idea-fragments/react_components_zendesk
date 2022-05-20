@@ -3,6 +3,7 @@ import {
   Hint,
   Label,
   Message,
+  /* @ts-ignore */
 }                                 from "@zendeskgarden/react-forms"
 import { TextFieldProps }         from "components/forms/formField.types"
 import { TextAreaProps }          from "components/forms/textfields/TextArea"

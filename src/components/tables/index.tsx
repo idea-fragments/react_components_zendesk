@@ -6,6 +6,7 @@ import {
   Body as ZBody,
   Cell as ZCell,
   Row as ZRow,
+  /* @ts-ignore */
 }                                      from "@zendeskgarden/react-tables"
 import styled, { css }                 from "styled-components"
 import { COLORS, fade, veryLight }     from "styles/colors"

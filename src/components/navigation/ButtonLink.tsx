@@ -25,6 +25,7 @@ export const ButtonLink = ({
   return (
     <Button {...otherProps}
             flat={flat != null ? flat : !otherProps.inline}
+            // @ts-ignore
             innerAs={LinkComponent}
             {...external ? { target: "_blank" } : {}}>
       {icon ? (

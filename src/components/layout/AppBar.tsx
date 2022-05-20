@@ -25,14 +25,14 @@ type Props = {
 } & ContainerProps
 
 export let AppBar: FC<Props> = ({
-                                  actions,
+                                  actions = [],
                                   className,
                                   fixed,
                                   fluid,
                                   logo,
-                                  onBackClicked,
-                                  onLogoClicked,
-                                  showBackButton,
+                                  onBackClicked = DO_NOTHING,
+                                  onLogoClicked = DO_NOTHING,
+                                  showBackButton = false,
                                   title,
                                 }) => {
 
@@ -61,7 +61,7 @@ export let AppBar: FC<Props> = ({
                         onClick={onBackClicked} />
           : null
         }
-
+        {/*@ts-ignore*/}
         <FlexBox alignItems={"center"}
                  onClick={onLogoClicked}
                  css={`cursor: pointer;`}>
@@ -72,7 +72,7 @@ export let AppBar: FC<Props> = ({
           color={
             theme.styles.nav.linkColor ||
             theme.styles.getTextColorForBackground({
-              color: theme.styles.appBar.background,
+              color: theme.styles.appBar.background ?? "$fff",
               theme,
             })
           }
@@ -85,18 +85,9 @@ export let AppBar: FC<Props> = ({
   </>
 }
 
-AppBar              = styled(AppBar)``
-AppBar.defaultProps = {
-  actions:        [],
-  height:         "auto",
-  showBackButton: false,
-  onBackClicked:  DO_NOTHING,
-  onLogoClicked:  DO_NOTHING,
-}
+AppBar = styled(AppBar)``
 
-AppBar.COMPONENT_NAME = "AppBar"
-
-const BarWrapper = styled.header`
+const BarWrapper = styled.header<{ fixed?: boolean }>`
   background: ${({ theme }) => theme.styles.appBar.background};
   box-shadow: ${({ theme }) => theme.styles.appBar.shadow};
   position: ${({ fixed }) => fixed ? "fixed" : "unset"};
@@ -112,7 +103,9 @@ const Content = styled(Container).attrs({
   justify:    "space-between",
   alignItems: "center",
 })`
-  height: ${({ height }) => height ? height : "fit-content"};
+  height: ${({ height }: { height?: string }) => height
+                                                 ? height
+                                                 : "fit-content"};
 `
 
 const DesktopNav = styled(FlexBox).attrs({

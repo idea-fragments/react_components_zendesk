@@ -14,13 +14,14 @@ type Bool = typeof TRUE | typeof FALSE
 
 type Props = {
   label: string,
+  hideLabel? :boolean,
   selectedKey?: boolean | undefined,
   onChange: OnItemSelectedFunc,
 }
 
 export let BooleanSelector: FC<Props> = (props) => {
   const {
-          onChange, selectedKey, label,
+          onChange = DO_NOTHING, selectedKey, label = "", hideLabel = false,
         } = props
 
   /*
@@ -54,15 +55,7 @@ export let BooleanSelector: FC<Props> = (props) => {
   )
 }
 
-BooleanSelector.defaultProps = {
-  label:     "",
-  hideLabel: false,
-  onChange:  DO_NOTHING,
-}
-
-// @ts-ignore
-BooleanSelector.COMPONENT_NAME = "BooleanSelector"
-BooleanSelector                = observer(BooleanSelector)
+BooleanSelector = observer(BooleanSelector)
 
 const convertBooleanToKey = (b?: boolean): Bool | string => {
   if (b == null) return ""
@@ -72,6 +65,7 @@ const convertBooleanToKey = (b?: boolean): Bool | string => {
 const notifyWithBoolean = (notify: OnItemSelectedFunc) => (
   (s: SelectorItemKey): void => {
     const bool = s === TRUE
+    // @ts-ignore
     notify(bool)
   }
 )

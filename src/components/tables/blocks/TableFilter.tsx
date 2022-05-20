@@ -38,6 +38,7 @@ export const TableFilter = ({
                              selectedKey={value}
                              small
                              valueField={"label"}
+                             // @ts-ignore
                              onChange={setValue} />
                  : <TextField small
                               value={value}

@@ -1,8 +1,16 @@
-import { Dots }                                       from "@zendeskgarden/react-loaders"
-import { FlexBox }                                    from "components/layout/FlexBox"
-import { useIsMounted }                               from "hooks/useIsMounted"
-import React, { FC, useContext, useEffect, useState } from "react"
-import styled, { ThemeContext }                       from "styled-components"
+// @ts-ignore
+import { Dots }                 from "@zendeskgarden/react-loaders"
+import { FlexBox }              from "components/layout/FlexBox"
+import { useIsMounted }         from "hooks/useIsMounted"
+import React, {
+  FC,
+
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState
+} from "react"
+import styled, { ThemeContext } from "styled-components"
 import type { Theme }                                 from "styles/theme/Theme.type"
 import { FONT_SIZES }                                 from "styles/typography"
 import { Logger }                                     from "utils/logging/Logger"
@@ -15,13 +23,15 @@ const Container = styled(FlexBox)`
   position: relative;
 `
 
-const LoaderContainer = styled(FlexBox)`
+const LoaderContainer = styled(FlexBox)<{ showSpinner :boolean }>`
   height: 100%;
   width: 100%;
   position: absolute;
 `
 
-const ChildrenContainer = styled(FlexBox)`
+const ChildrenContainer = styled(FlexBox)<{
+  showSpinner :boolean, opaqueSpinner :boolean,
+}>`
   width: 100%;
   opacity: ${({ showSpinner, opaqueSpinner }) => {
     if (!showSpinner) return "1"
@@ -36,7 +46,7 @@ type Props = {
   showSpinner: boolean,
 }
 
-export let Loadable: FC<Props> = ({
+export let Loadable: FC<PropsWithChildren<Props>> = ({
                                     children,
                                     className,
                                     debugId,
@@ -60,6 +70,7 @@ export let Loadable: FC<Props> = ({
   const showingSpinner = showSpinner || !canHideSpinner
 
 
+
   return <Container justifyContent={"center"}
                     gap={"unset"}
                     alignItems={"center"}>
@@ -76,8 +87,7 @@ export let Loadable: FC<Props> = ({
      ? <LoaderContainer justifyContent={"center"}
                         alignItems={"center"}
                         showSpinner={showingSpinner}>
-       <Dots data-component-name={`${Loadable.COMPONENT_NAME}`}
-             color={theme.styles.colorPrimary}
+       <Dots color={theme.styles.colorPrimary}
              size={FONT_SIZES.XXL}
              delayMS={100}
              velocity={-.25} />
@@ -87,7 +97,3 @@ export let Loadable: FC<Props> = ({
 }
 
 Loadable = styled(Loadable)``
-
-Loadable.defaultProps   = {}
-// @ts-ignore
-Loadable.COMPONENT_NAME = "Loadable"

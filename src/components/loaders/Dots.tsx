@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Dots as ZDots }        from "@zendeskgarden/react-loaders"
 import React, { FC }            from "react"
 import { FONT_SIZES, FontSize } from "styles/typography"
@@ -9,11 +10,7 @@ type Props = {
 
 export const Dots: FC<Props> = ({ color, size = FONT_SIZES.XXL }) => {
   return <ZDots color={color}
-                data-component-name={`${Dots.COMPONENT_NAME}`}
                 size={size}
                 delayMS={100}
                 velocity={-.25} />
 }
-
-// @ts-ignore
-Dots.COMPONENT_NAME = "Dots"

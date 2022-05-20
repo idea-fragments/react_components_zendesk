@@ -39,7 +39,7 @@ export let MultiSelector = ({ maxItems, ...props }: Props) => {
       <MultiSelect
         maxItems={maxItems}
         validation={validation?.validation}
-        renderItem={({ value, removeValue }) => (
+        renderItem={({ value, removeValue }: any) => (
           <Tag size="large">
             <span>{optionsKeyMap?.[value]?.[valueField]}</span>
             <Close onClick={() => removeValue()} />

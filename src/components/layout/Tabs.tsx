@@ -1,3 +1,4 @@
+// @ts-ignore
 import { TabPanel as ZTabPanel, Tabs as ZTabs } from "@zendeskgarden/react-tabs"
 import styled                                   from "styled-components"
 import { COLORS }                               from "styles/colors"

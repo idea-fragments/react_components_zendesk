@@ -1,13 +1,13 @@
-import { FlexBox }                               from "components/layout/FlexBox"
-import React, { FC, FormEvent, forwardRef, Ref } from "react"
-import styled                                    from "styled-components"
+import { FlexBox }                                                  from "components/layout/FlexBox"
+import React, { FC, FormEvent, forwardRef, PropsWithChildren, Ref } from "react"
+import styled                                                       from "styled-components"
 import { SPACINGS }                              from "styles/spacings"
 import type { ContainerProps }                   from "styles/types"
 import type { PromiseFunc }                      from "utils/function.types"
 
-type Props = {
+type Props = PropsWithChildren<{
   onSubmit: PromiseFunc,
-} & ContainerProps
+}> & ContainerProps
 
 export let Form: FC<Props> = forwardRef<HTMLFormElement, Props>((
   { onSubmit, className, children, ...props },

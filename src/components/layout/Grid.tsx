@@ -1,9 +1,8 @@
-// @flow
-
 import {
-    Grid as ZGrid,
-    Row as ZRow,
-    Col as ZCol,
+  Grid as ZGrid,
+  Row as ZRow,
+  Col as ZCol,
+  /* @ts-ignore */
 }                   from "@zendeskgarden/react-grid"
 import styled       from "styled-components"
 import { SPACINGS } from "styles/spacings"
