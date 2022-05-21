@@ -4,7 +4,7 @@ import { FlexBox }              from "components/layout/FlexBox"
 import { Icon }                 from "components/Icon"
 import { COLORS }               from "styles/colors"
 import styled                   from "styled-components"
-import type { Theme }           from "styles/theme/Theme.type"
+import { Theme }           from "styles/theme/Theme.type"
 import { useTheme }             from "styles/theme/useTheme"
 import { ValueOf }              from "utils/types"
 

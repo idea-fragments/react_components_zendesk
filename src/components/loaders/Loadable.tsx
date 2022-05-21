@@ -11,7 +11,7 @@ import React, {
   useState
 } from "react"
 import styled, { ThemeContext } from "styled-components"
-import type { Theme }                                 from "styles/theme/Theme.type"
+import { Theme }                                 from "styles/theme/Theme.type"
 import { FONT_SIZES }                                 from "styles/typography"
 import { Logger }                                     from "utils/logging/Logger"
 

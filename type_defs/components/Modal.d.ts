@@ -1,5 +1,5 @@
 import { Props as ButtonProps } from "components/forms/Button";
-import type { StyledComponentProps } from "components/StyledComponentProps.type";
+import { StyledComponentProps } from "components/StyledComponentProps.type";
 import { ReactElement } from "react";
 declare type ButtonType = ReactElement & {
     props: {

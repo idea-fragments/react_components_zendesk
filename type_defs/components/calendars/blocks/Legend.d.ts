@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import type { Legendable } from "components/calendars/Legendable.type";
+import { Legendable } from "components/calendars/Legendable.type";
 declare type Props = {
     legendables: Array<Legendable>;
     defaultColor: string;

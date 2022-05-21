@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 export declare type TooltipProps = {
     arrow?: boolean;
     children: ReactNode;

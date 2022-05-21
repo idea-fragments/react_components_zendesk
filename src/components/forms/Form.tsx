@@ -2,8 +2,8 @@ import { FlexBox }                                                  from "compon
 import React, { FC, FormEvent, forwardRef, PropsWithChildren, Ref } from "react"
 import styled                                                       from "styled-components"
 import { SPACINGS }                              from "styles/spacings"
-import type { ContainerProps }                   from "styles/types"
-import type { PromiseFunc }                      from "utils/function.types"
+import { ContainerProps }                   from "styles/types"
+import { PromiseFunc }                      from "utils/function.types"
 
 type Props = PropsWithChildren<{
   onSubmit: PromiseFunc,

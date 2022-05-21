@@ -5,7 +5,7 @@ import { useObserver }          from "mobx-react"
 // @ts-ignore
 import { Dots }                 from "@zendeskgarden/react-loaders"
 import { useStores }            from "stores/useStores"
-import type { Theme }           from "styles/theme/Theme.type"
+import { Theme }           from "styles/theme/Theme.type"
 import { FONT_SIZES }           from "styles/typography"
 import styled, { ThemeContext } from "styled-components"
 

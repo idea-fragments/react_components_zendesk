@@ -1,5 +1,5 @@
 import React, { ComponentType as RComponentType } from "react"
-import type { LoggerI }                           from "utils/logging/Logger.type"
+import { LoggerI }                           from "utils/logging/Logger.type"
 import { withModuleLogging }                      from "utils/logging/with_module_logging"
 
 type ComponentType<T> = RComponentType<T> & {

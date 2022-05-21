@@ -4,7 +4,7 @@ import { HelpText }              from "components/tables/blocks/HelpText"
 import { Title }                 from "components/tables/blocks/Title"
 import { Body, Table }           from "components/tables/index"
 import { Row }                   from "components/tables/Row"
-import type { Item, TableProps } from "components/tables/Table"
+import { Item, TableProps } from "components/tables/Table"
 import React                     from "react"
 import { isNotEmpty }            from "utils/arrayHelpers"
 

@@ -1,7 +1,7 @@
 import { ReactNode }                       from "react"
 import styled, { css }                     from "styled-components"
-import type { ColorProps, ContainerProps } from "styles/types"
-import type { TextProps }                  from "styles/typography"
+import { ColorProps, ContainerProps } from "styles/types"
+import { TextProps }                  from "styles/typography"
 
 type Props = TextProps & ContainerProps & {
   children: ReactNode

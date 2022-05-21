@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import type { TextFieldProps } from "components/forms/formField.types";
-import type { Moment } from "moment";
+import { TextFieldProps } from "components/forms/formField.types";
+import { Moment } from "moment";
 declare type Props = {
     minimumDate?: Moment;
 } & TextFieldProps<string, string>;

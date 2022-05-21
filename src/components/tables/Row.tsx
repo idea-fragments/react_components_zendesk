@@ -1,7 +1,7 @@
 import { Checkbox }                          from "components/forms/Checkbox"
 import { OverflowMenu }                      from "components/layout/OverflowMenu"
 import { Cell, Row as MyRow }                from "components/tables/index"
-import type { ColumnConfig, Item, ItemKey, } from "components/tables/Table"
+import { ColumnConfig, Item, ItemKey, } from "components/tables/Table"
 import { columnWidth }                       from "components/tables/utils"
 import { Text }                              from "components/text/Text"
 import React                                 from "react"

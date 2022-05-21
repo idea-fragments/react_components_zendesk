@@ -1,6 +1,6 @@
 import { COLORS, fade, light, lighter } from "styles/colors"
 import { base }                         from "styles/theme/base"
-import type { Theme }                   from "styles/theme/Theme.type"
+import { Theme }                   from "styles/theme/Theme.type"
 
 const textColorPrimary = COLORS.LIGHT_GREY
 

@@ -22,7 +22,7 @@ import {
   getItemType,
   Item
 }                                                  from "components/forms/selectors/Dropdown/Item"
-import type {
+import {
   MultiSelectorProps,
   SelectorItemKey,
   SelectorOption,

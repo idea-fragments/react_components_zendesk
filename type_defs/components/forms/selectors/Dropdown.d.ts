@@ -1,4 +1,4 @@
-import type { MultiSelectorProps, SelectorProps } from "components/forms/selectors/types";
+import { MultiSelectorProps, SelectorProps } from "components/forms/selectors/types";
 import * as React from "react";
 import { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
 export declare type MenuPlacement = "start" | "auto" | "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "end" | "end-top" | "end-bottom" | "start-top" | "start-bottom";

@@ -1,4 +1,4 @@
-import type { OnItemSelectedFunc } from "components/forms/selectors/types";
+import { OnItemSelectedFunc } from "components/forms/selectors/types";
 import { FC } from "react";
 declare type Props = {
     label: string;

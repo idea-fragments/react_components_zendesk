@@ -1,7 +1,7 @@
 import { Icon, IconProps } from "components/Icon"
 import { FlexBox } from "components/layout/FlexBox"
 import { Tooltip, TooltipProps } from "components/tooltips/Tooltip"
-import type { FC } from "react"
+import { FC } from "react"
 import React from "react"
 
 type Props =

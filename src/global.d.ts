@@ -1,4 +1,4 @@
-import type {} from 'styled-components/cssprop'
+import {} from 'styled-components/cssprop'
 
 declare module "@zendeskgarden/react-accordions"
 declare module "@zendeskgarden/react-avatars"

@@ -1,5 +1,5 @@
 import { Modal as ModalView }        from "components/Modal"
-import type { StyledComponentProps } from "components/StyledComponentProps.type"
+import { StyledComponentProps } from "components/StyledComponentProps.type"
 import * as React                    from "react"
 import { useStores }                 from "stores/useStores"
 import { useObserver }               from "mobx-react"

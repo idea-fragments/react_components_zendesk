@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import type { ItemFilterOptions } from "components/tables/Table";
+import { ItemFilterOptions } from "components/tables/Table";
 declare type Props = ItemFilterOptions & {
     initialValue?: string;
     onChange: (name: string, value: any) => void;

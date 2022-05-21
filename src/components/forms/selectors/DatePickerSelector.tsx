@@ -1,10 +1,10 @@
 import { TinyCalendar }                from "components/calendars/TinyCalendar"
-import type { TextFieldProps }         from "components/forms/formField.types"
+import { TextFieldProps }         from "components/forms/formField.types"
 import {
   Dropdown,
   Select
 }                                      from "components/forms/selectors/Dropdown"
-import type { StateChange }            from "components/forms/selectors/types"
+import { StateChange }            from "components/forms/selectors/types"
 import Downshift, { StateChangeTypes } from "downshift"
 import moment, { Moment }              from "moment"
 import React, { useState }             from "react"

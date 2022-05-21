@@ -9,7 +9,7 @@ import {
   HeaderCell,
   HeaderRow,
 }                           from "components/tables/index"
-import type {
+import {
   ColumnConfig,
   Item,
   ItemKey

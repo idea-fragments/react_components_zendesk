@@ -1,4 +1,4 @@
-import type { TextFieldProps } from "components/forms/formField.types";
+import { TextFieldProps } from "components/forms/formField.types";
 import { ChangeEvent, FC } from "react";
 declare type NewOnChangeFunc = (value: string, event: ChangeEvent<HTMLInputElement>) => void;
 declare type OriginalProps = TextFieldProps & {

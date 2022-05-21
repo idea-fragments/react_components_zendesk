@@ -1,6 +1,6 @@
 // @flow
 
-import type { Legendable } from "components/calendars/Legendable.type"
+import { Legendable } from "components/calendars/Legendable.type"
 import { FlexBlock }       from "components/layout/FlexBlock"
 import { Text }            from "components/text/Text"
 import * as React          from "react"

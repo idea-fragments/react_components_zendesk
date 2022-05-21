@@ -1,6 +1,6 @@
 import { Dropdown, Select }   from "components/forms/selectors/Dropdown"
 import { SelectorEmptyState } from "components/forms/selectors/SelectorEmptyState"
-import type {
+import {
   SelectorOption,
   SelectorProps,
 }                             from "components/forms/selectors/types"

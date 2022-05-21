@@ -1,5 +1,5 @@
 import { Selector }   from "components/forms/selectors/Selector"
-import type {
+import {
   OnItemSelectedFunc,
   SelectorItemKey,
 }                     from "components/forms/selectors/types"

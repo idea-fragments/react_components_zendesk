@@ -1,4 +1,4 @@
-import type { StyledComponentProps } from "components/StyledComponentProps.type";
+import { StyledComponentProps } from "components/StyledComponentProps.type";
 import { Nullable } from "global";
 import { FC } from "react";
 export declare const ALERT_TYPES: {

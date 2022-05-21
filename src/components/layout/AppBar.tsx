@@ -8,7 +8,7 @@ import styled, { css }                       from "styled-components"
 import { mediaQueries }                      from "styles/mediaQueries"
 import { SPACINGS }                          from "styles/spacings"
 import { useTheme }                          from "styles/theme/useTheme"
-import type { ContainerProps }               from "styles/types"
+import { ContainerProps }               from "styles/types"
 import { DO_NOTHING }                        from "utils/functionHelpers"
 
 const { forSmallComputersAndUp } = mediaQueries()

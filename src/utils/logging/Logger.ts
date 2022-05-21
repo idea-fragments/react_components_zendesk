@@ -1,4 +1,4 @@
-import type { LoggerI } from "utils/logging/Logger.type"
+import { LoggerI } from "utils/logging/Logger.type"
 
 const LEVEL_STYLES = {
   info:  "background: #499cc8; color: white;",
@@ -13,7 +13,7 @@ export class Logger implements LoggerI {
     this.moduleName = moduleName
   }
 
-  #log = (level: keyof typeof LEVEL_STYLES) => (...args: any) => {
+  log = (level: keyof typeof LEVEL_STYLES) => (...args: any) => {
     if (typeof window === "undefined" ||
         !window.DEBUG_MODULES.has(this.moduleName)) return
 
@@ -24,9 +24,9 @@ export class Logger implements LoggerI {
     )
   }
 
-  writeInfo    = this.#log("info")
-  writeError   = this.#log("error")
-  writeWarning = this.#log("warn")
+  writeInfo    = this.log("info")
+  writeError   = this.log("error")
+  writeWarning = this.log("warn")
 }
 
 if (typeof window !== `undefined`) {

@@ -11,7 +11,7 @@ import {
   Button,
   Props as ButtonProps
 }                                                    from "components/forms/Button"
-import type { StyledComponentProps }                 from "components/StyledComponentProps.type"
+import { StyledComponentProps }                 from "components/StyledComponentProps.type"
 import React, { MouseEvent, ReactElement, useState } from "react"
 import styled, { css }                               from "styled-components"
 import { textWithColor }                             from "styles/mixins"

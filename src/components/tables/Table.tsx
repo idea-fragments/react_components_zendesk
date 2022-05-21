@@ -5,7 +5,7 @@ import { NiceTable }                                          from "components/t
 import { SimpleTable }                                        from "components/tables/SimpleTable"
 import React, { ReactNode, useCallback, useEffect, useState } from "react"
 import styled, { CSSProp }                                    from "styled-components"
-import type {
+import {
   DeviceSize,
   DeviceSizeChangeListener,
 }                                                             from "styles/DeviceSizeWatcher"

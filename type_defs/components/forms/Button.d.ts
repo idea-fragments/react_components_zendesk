@@ -1,7 +1,7 @@
 import { ComponentType, PropsWithChildren, Ref } from "react";
-import type { Alignment } from "styles/alignments";
-import type { ColorProps, ContainerProps } from "styles/types";
-import type { PromiseFunc } from "utils/function.types";
+import { Alignment } from "styles/alignments";
+import { ColorProps, ContainerProps } from "styles/types";
+import { PromiseFunc } from "utils/function.types";
 export declare const BUTTON_SIZES: {
     readonly SMALL: "small";
     readonly LARGE: "large";

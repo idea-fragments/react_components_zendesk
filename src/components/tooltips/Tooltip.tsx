@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Tooltip as ZTooltip } from "@zendeskgarden/react-tooltips"
-import type { ReactNode }      from "react"
+import { ReactNode }      from "react"
 import styled, { css }         from "styled-components"
 
 const darkMode = css`

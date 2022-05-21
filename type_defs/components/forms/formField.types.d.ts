@@ -1,7 +1,7 @@
-import type { Validation } from "components/forms/Validation.type";
+import { Validation } from "components/forms/Validation.type";
 import { ChangeEvent } from "react";
 import React, { ReactNode } from "react";
-import type { ContainerProps } from "styles/types";
+import { ContainerProps } from "styles/types";
 export declare type FormFieldProps = {
     label?: ReactNode;
     message?: ReactNode;

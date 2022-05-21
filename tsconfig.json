@@ -1,17 +1,22 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "src/",
     "checkJs": false,
     "declaration": true,
+    "declarationDir": "types",
     "declarationMap": true,
     "downlevelIteration": true,
     "emitDeclarationOnly": true,
     "experimentalDecorators": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "noEmit": false,
     "outDir": "type_defs",
     "preserveConstEnums": true,
+    "rootDir": "src",
     "target": "ES6"
   },
   "exclude": [

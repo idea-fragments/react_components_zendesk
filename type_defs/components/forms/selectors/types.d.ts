@@ -1,4 +1,4 @@
-import type { FormFieldProps } from "components/forms/formField.types";
+import { FormFieldProps } from "components/forms/formField.types";
 import { StateChangeOptions } from "downshift";
 export declare type SelectorItemKey = string | number | null | undefined;
 export declare type SelectorOptionOptionalAttrs = {

@@ -2,10 +2,10 @@ import { mdiClose }                  from "@mdi/js"
 import { Button }                    from "components/forms/Button"
 import { IconButton }                from "components/forms/IconButton"
 import { FlexBox }                   from "components/layout/FlexBox"
-import type { StyledComponentProps } from "components/StyledComponentProps.type"
+import { StyledComponentProps } from "components/StyledComponentProps.type"
 import { StyledProps }               from "components/StyledProps.type"
 import { Nullable }                  from "global"
-import {
+import React, {
   FC,
   MouseEvent,
   ReactNode,

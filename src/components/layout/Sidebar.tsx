@@ -8,7 +8,7 @@
 // import styled                  from "styled-components"
 // import { mdiArrowLeft }        from "@mdi/js"
 // import { SPACINGS }            from "styles/spacings"
-// import type { ContainerProps } from "styles/types"
+// import { ContainerProps } from "styles/types"
 import { DO_NOTHING }          from "utils/functionHelpers"
 //
 // const Container = styled(FlexBlock)`

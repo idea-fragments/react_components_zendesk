@@ -1,4 +1,4 @@
-import type { SelectorProps } from "components/forms/selectors/types";
+import { SelectorProps } from "components/forms/selectors/types";
 import { FC, PropsWithChildren } from "react";
 declare type Props = PropsWithChildren<{
     onSearchTextChange?: (s: string) => void;

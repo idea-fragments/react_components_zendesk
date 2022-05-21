@@ -1,4 +1,4 @@
-import type { StyledComponentProps } from "components/StyledComponentProps.type";
+import { StyledComponentProps } from "components/StyledComponentProps.type";
 import { Nullable } from "global";
 import { FC, ReactNode } from "react";
 export declare type DrawerContent = {

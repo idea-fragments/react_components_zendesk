@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
-import type { ContainerProps } from "styles/types";
-import type { PromiseFunc } from "utils/function.types";
+import { ContainerProps } from "styles/types";
+import { PromiseFunc } from "utils/function.types";
 declare type Props = PropsWithChildren<{
     onSubmit: PromiseFunc;
 }> & ContainerProps;

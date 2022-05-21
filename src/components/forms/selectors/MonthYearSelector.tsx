@@ -1,8 +1,8 @@
 // --- UNFINISHED ----
 
-import type { TextFieldProps } from "components/forms/formField.types"
+import { TextFieldProps } from "components/forms/formField.types"
 import { Dropdown, Select }    from "components/forms/selectors/Dropdown"
-import type { Moment }         from "moment"
+import { Moment }         from "moment"
 import moment                  from "moment"
 import * as React              from "react"
 import { useState }            from "react"

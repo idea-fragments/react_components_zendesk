@@ -1,5 +1,5 @@
 import { Dropdown, MultiSelect } from "components/forms/selectors/Dropdown"
-import type {
+import {
   MultiSelectorProps,
   SelectorItemKey,
   SelectorOption,

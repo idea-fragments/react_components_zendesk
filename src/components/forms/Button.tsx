@@ -7,7 +7,7 @@ import {
 import { Icon }                            from "components/Icon"
 import { FlexBox }                         from "components/layout/FlexBox"
 import { Dots }                            from "components/loaders/Dots"
-import type { StyledProps }                from "components/StyledProps.type"
+import { StyledProps }                     from "components/StyledProps.type"
 import { useIsMounted }                    from "hooks/useIsMounted"
 import React, {
   ComponentType,
@@ -20,13 +20,13 @@ import React, {
   useState
 }                                          from "react"
 import styled, { css }                     from "styled-components"
-import type { Alignment }                  from "styles/alignments"
+import { Alignment }                  from "styles/alignments"
 import { COLORS }                          from "styles/colors"
 import { SPACINGS }                        from "styles/spacings"
-import type { Theme }                      from "styles/theme/Theme.type"
-import type { ColorProps, ContainerProps } from "styles/types"
+import { Theme }                      from "styles/theme/Theme.type"
+import { ColorProps, ContainerProps } from "styles/types"
 import { FONT_SIZES }                      from "styles/typography"
-import type { PromiseFunc }                from "utils/function.types"
+import { PromiseFunc }                from "utils/function.types"
 
 const fitContent   = css`
   width: fit-content;

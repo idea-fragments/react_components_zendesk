@@ -1,5 +1,5 @@
 import { Autocomplete, Dropdown } from "components/forms/selectors/Dropdown"
-import type {
+import {
   SelectorOption,
   SelectorProps,
   StateChange,

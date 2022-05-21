@@ -1,13 +1,13 @@
 // @ts-ignore
 import { Dots }                            from "@zendeskgarden/react-loaders"
 import { FlexBlock }                       from "components/layout/FlexBlock"
-import type { StyledComponentProps }       from "components/StyledComponentProps.type"
+import { StyledComponentProps }       from "components/StyledComponentProps.type"
 import React, { FC, useContext, useState } from "react"
 import styled, { ThemeContext }            from "styled-components"
-import type { Theme }                      from "styles/theme/Theme.type"
+import { Theme }                      from "styles/theme/Theme.type"
 import { FONT_SIZES }                      from "styles/typography"
 import { returnAfterMinimum }              from "utils/dateTimeHelpers"
-import type { PromiseFunc }                from "utils/function.types"
+import { PromiseFunc }                from "utils/function.types"
 
 type AsyncLoadFunc = <T>(f: PromiseFunc<any, T>) => Promise<T>
 export type RenderProp = { withLoading: AsyncLoadFunc }

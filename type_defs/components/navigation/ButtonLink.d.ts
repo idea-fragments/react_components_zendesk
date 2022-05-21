@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 import { Props as ButtonProps } from "components/forms/Button";
-import type { ColorProps, ContainerProps } from "styles/types";
+import { ColorProps, ContainerProps } from "styles/types";
 declare type Props = {
     to?: any;
     href?: string;

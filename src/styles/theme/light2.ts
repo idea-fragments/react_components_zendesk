@@ -1,5 +1,5 @@
 import clone          from "lodash/cloneDeep"
-import type { Theme } from "styles/theme/Theme.type"
+import { Theme } from "styles/theme/Theme.type"
 import { light }      from "styles/theme/light"
 import { SPACINGS }   from "styles/spacings"
 

@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import type { PaginationData } from "components/tables/Table";
+import { PaginationData } from "components/tables/Table";
 declare type Props = PaginationData & {
     onPageChange: (n: number) => void;
 };

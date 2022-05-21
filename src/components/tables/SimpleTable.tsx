@@ -13,7 +13,7 @@ import { FlexBox }         from "components/layout/FlexBox"
 import { HelpText }        from "components/tables/blocks/HelpText"
 import { Title }           from "components/tables/blocks/Title"
 import { Row }             from "components/tables/Row"
-import type {
+import {
   ColumnConfig,
   Item
 }                          from "components/tables/Table"

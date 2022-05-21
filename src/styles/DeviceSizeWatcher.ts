@@ -39,36 +39,36 @@ const logger   = new Logger("DeviceSizeWatcher")
 const checkAny = (arr: Array<() => boolean>) => () => arr.some((f) => f())
 
 class DeviceSizeWatcher {
-  #subscribers: { [key: number]: DeviceSizeChangeListener | null } = {}
-  #idGen                                                           = newIdGenerator()
+  subscribers: { [key: number]: DeviceSizeChangeListener | null } = {}
+  idGen                                                           = newIdGenerator()
   // @ts-ignore
-  #currentSize: DeviceSize
+  currentSize: DeviceSize
 
   constructor() {
-    this.#createAllListeners()
+    this.createAllListeners()
   }
 
   subscribe = (callBack: DeviceSizeChangeListener): number => {
-    const id              = nextId(this.#idGen)
-    this.#subscribers[id] = callBack
+    const id              = nextId(this.idGen)
+    this.subscribers[id] = callBack
     return id
   }
 
   unsubscribe = (id: number) => {
-    this.#subscribers[id] = null
-    delete this.#subscribers[id]
+    this.subscribers[id] = null
+    delete this.subscribers[id]
   }
 
-  #notifyReceivers = (s: DeviceSize) => {
-    Object.values(this.#subscribers)
+  notifyReceivers = (s: DeviceSize) => {
+    Object.values(this.subscribers)
           .forEach((f: DeviceSizeChangeListener | null) => { !!f && f(s) })
   }
 
-  isPhone              = () => this.#currentSize === DEVICES.phone
-  isTablet             = () => this.#currentSize === DEVICES.tablet
-  isLargeTablet        = () => this.#currentSize === DEVICES.largeTablet
-  isSmallComputer      = () => this.#currentSize === DEVICES.smallComputer
-  isLargeComputer      = () => this.#currentSize === DEVICES.largeComputer
+  isPhone              = () => this.currentSize === DEVICES.phone
+  isTablet             = () => this.currentSize === DEVICES.tablet
+  isLargeTablet        = () => this.currentSize === DEVICES.largeTablet
+  isSmallComputer      = () => this.currentSize === DEVICES.smallComputer
+  isLargeComputer      = () => this.currentSize === DEVICES.largeComputer
   isSmallComputerAndUp = checkAny([
     this.isSmallComputer,
     this.isLargeComputer,
@@ -80,12 +80,12 @@ class DeviceSizeWatcher {
   isTabletAndUp        = checkAny([this.isTablet, this.isLargeTabletAndUp])
 
   any     = (arr: Array<() => boolean>) => arr.some((f) => f())
-  getSize = (): DeviceSize => this.#currentSize
+  getSize = (): DeviceSize => this.currentSize
 
-  #createAllListeners = () => {
+  createAllListeners = () => {
     if (typeof window === "undefined") return
 
-    logger.writeInfo("#createAllListeners")
+    logger.writeInfo("createAllListeners")
 
     const queries = deviceQueries(true)
     logger.writeInfo("queries", queries)
@@ -97,13 +97,13 @@ class DeviceSizeWatcher {
             ml.addListener((e: MediaQueryListEvent) => {
               if (!e.matches) return
 
-              this.#currentSize = s
+              this.currentSize = s
               logger.writeInfo("Changed to size:", name)
-              this.#notifyReceivers(s)
+              this.notifyReceivers(s)
             })
 
             if (ml.matches) {
-              this.#currentSize = s
+              this.currentSize = s
               logger.writeInfo("Initial size:", name)
             }
           })

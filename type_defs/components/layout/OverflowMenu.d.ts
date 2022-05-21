@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import type { MenuPlacement } from "components/forms/selectors/Dropdown";
+import { MenuPlacement } from "components/forms/selectors/Dropdown";
 export declare type OverflowMenuItem = {
     label: string;
     action: () => void;

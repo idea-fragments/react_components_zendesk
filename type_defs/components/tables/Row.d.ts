@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import type { ColumnConfig, Item, ItemKey } from "components/tables/Table";
+import { ColumnConfig, Item, ItemKey } from "components/tables/Table";
 declare type Props = {
     checkable?: boolean;
     checkDisabled?: boolean;

@@ -1,6 +1,6 @@
 import { IconProps } from "components/Icon";
 import { TooltipProps } from "components/tooltips/Tooltip";
-import type { FC } from "react";
+import { FC } from "react";
 declare type Props = Omit<TooltipProps, "trigger"> & {
     icon: string;
     iconProps?: IconProps;

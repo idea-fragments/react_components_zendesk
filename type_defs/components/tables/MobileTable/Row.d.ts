@@ -1,4 +1,4 @@
-import type { ColumnConfig, Item, ItemKey } from "components/tables/Table";
+import { ColumnConfig, Item, ItemKey } from "components/tables/Table";
 import { FC } from "react";
 declare type Props = {
     checkable?: boolean;

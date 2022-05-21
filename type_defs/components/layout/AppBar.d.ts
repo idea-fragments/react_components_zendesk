@@ -1,5 +1,5 @@
 import { ElementType, FC, ReactNode } from "react";
-import type { ContainerProps } from "styles/types";
+import { ContainerProps } from "styles/types";
 declare type Props = {
     actions: Array<ReactNode>;
     fixed?: boolean;

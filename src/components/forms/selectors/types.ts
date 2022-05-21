@@ -1,4 +1,4 @@
-import type { FormFieldProps } from "components/forms/formField.types"
+import { FormFieldProps } from "components/forms/formField.types"
 import { StateChangeOptions }  from "downshift"
 
 export type SelectorItemKey = string | number | null | undefined

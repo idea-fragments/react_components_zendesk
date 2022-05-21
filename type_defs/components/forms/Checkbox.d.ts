@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import type { FormFieldProps } from "components/forms/formField.types";
+import { FormFieldProps } from "components/forms/formField.types";
 declare type Props = FormFieldProps & {
     checked?: boolean;
     indeterminate?: boolean;

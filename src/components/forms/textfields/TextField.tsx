@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Input }                  from "@zendeskgarden/react-forms"
-import type { TextFieldProps }    from "components/forms/formField.types"
+import { TextFieldProps }    from "components/forms/formField.types"
 import { TextFieldWrapper }       from "components/forms/textfields/TextFieldWrapper"
 import React, { ChangeEvent, FC } from "react"
 import styled                     from "styled-components"

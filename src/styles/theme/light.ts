@@ -1,6 +1,6 @@
 import { COLORS, fade } from "styles/colors"
 import { base }         from "styles/theme/base"
-import type { Theme }   from "styles/theme/Theme.type"
+import { Theme }   from "styles/theme/Theme.type"
 
 const textColorPrimary = COLORS.JAZZ_MAN_BLUE
 

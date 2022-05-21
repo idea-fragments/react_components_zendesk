@@ -3,7 +3,7 @@ import { FlexBox }                         from "components/layout/FlexBox"
 import React, { ComponentType }            from "react"
 import { Button, Props as ButtonProps }    from "components/forms/Button"
 import { SPACINGS }                        from "styles/spacings"
-import type { ColorProps, ContainerProps } from "styles/types"
+import { ColorProps, ContainerProps } from "styles/types"
 import { DO_NOTHING }                      from "utils/functionHelpers"
 
 type Props = {

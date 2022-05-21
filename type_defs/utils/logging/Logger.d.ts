@@ -1,4 +1,4 @@
-import type { LoggerI } from "utils/logging/Logger.type";
+import { LoggerI } from "utils/logging/Logger.type";
 export declare class Logger implements LoggerI {
     #private;
     moduleName: string;

@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import type { TableProps } from "components/tables/Table";
+import { TableProps } from "components/tables/Table";
 declare type Props = TableProps & {
     hasRowActions: boolean;
     onSelectAllToggle?: (b: boolean) => void;

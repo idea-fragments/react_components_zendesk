@@ -1,5 +1,5 @@
-import type { ComponentType } from "react";
-import type { PromiseFunc } from "utils/function.types";
+import { ComponentType } from "react";
+import { PromiseFunc } from "utils/function.types";
 declare type LoadingFunc<T> = (f: PromiseFunc<any, T>) => PromiseFunc<any, T>;
 declare type Return<T> = {
     withLoading: LoadingFunc<T>;

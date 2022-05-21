@@ -1,4 +1,4 @@
-import type { TextFieldProps } from "components/forms/formField.types"
+import { TextFieldProps } from "components/forms/formField.types"
 import { TextField }           from "components/forms/textfields/TextField"
 import React, { ChangeEvent }  from "react"
 
