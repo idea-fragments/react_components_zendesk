@@ -1,6 +1,3 @@
-// @flow
-
-
 import { Logger } from "utils/logging/Logger"
 
 export type ScrollPassedNavBarListener = (b :boolean) => void

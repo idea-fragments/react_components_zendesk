@@ -13,6 +13,6 @@ export declare const Chip: import("styled-components").StyledComponent<"div", an
     as: string;
     background: string;
     color: string;
-} & Props, "color" | "data-component-name" | "as" | "background">;
+} & Props, "color" | "as" | "data-component-name" | "background">;
 export {};
 //# sourceMappingURL=Chip.d.ts.map
