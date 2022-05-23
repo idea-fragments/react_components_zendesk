@@ -1,6 +1,7 @@
 import { Props as ButtonProps } from "components/forms/Button";
 import { StyledComponentProps } from "components/StyledComponentProps.type";
 import { ReactElement } from "react";
+import { UserFeedbackProps } from "styles/UserFeedbackProps";
 declare type ButtonType = ReactElement & {
     props: {
         disableable: boolean;
@@ -11,15 +12,12 @@ export declare type ModalContent = {
     blocking?: boolean;
     body: any;
     buttons?: ButtonType[];
-    isDanger?: boolean;
     isNotDismissible?: boolean;
-    isSuccess?: boolean;
-    isWarning?: boolean;
     title?: string;
     withCancelButton?: boolean;
     withNoActions?: boolean;
     onClose?: () => void;
-};
+} & UserFeedbackProps;
 declare type Props = {
     isVisible: boolean;
     closeModal: () => void;

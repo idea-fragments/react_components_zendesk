@@ -1,5 +1,3 @@
-// @ts-ignore
-import { Checkbox, Label } from "@zendeskgarden/react-forms"
 import {
   Body,
   Head,
@@ -7,17 +5,18 @@ import {
   HeaderRow,
   Table as ZTable,
   /*@ts-ignore*/
-}                          from "@zendeskgarden/react-tables"
-import { FlexBlock }       from "components/layout/FlexBlock"
-import { FlexBox }         from "components/layout/FlexBox"
-import { HelpText }        from "components/tables/blocks/HelpText"
-import { Title }           from "components/tables/blocks/Title"
-import { Row }             from "components/tables/Row"
+}                     from "@zendeskgarden/react-tables"
+import { Checkbox }   from "components/forms/Checkbox"
+import { FlexBlock }  from "components/layout/FlexBlock"
+import { FlexBox }    from "components/layout/FlexBox"
+import { HelpText }   from "components/tables/blocks/HelpText"
+import { Title }      from "components/tables/blocks/Title"
+import { Row }        from "components/tables/Row"
 import {
   ColumnConfig,
   Item
-}                          from "components/tables/Table"
-import { TableProps }      from "components/tables/Table"
+}                     from "components/tables/Table"
+import { TableProps } from "components/tables/Table"
 import { columnWidth }     from "components/tables/utils"
 import { Text }            from "components/text/Text"
 import * as React          from "react"
@@ -45,6 +44,10 @@ export const SimpleTable = ({
 
   const allSelected = checkedItems?.size === items.length
 
+  const handleSelectAll = (checked: boolean) => {
+    if (!!onSelectAllToggle) onSelectAllToggle(checked)
+  }
+
   return (
     <FlexBlock>
       <ZTable>
@@ -61,14 +64,10 @@ export const SimpleTable = ({
         <Head>
           <HeaderRow>
             {checkable ? (
-              <HeaderCell minimum>
+              <HeaderCell isMinimum>
                 <Checkbox checked={allSelected}
-                          onChange={onSelectAllToggle}>
-                  <Label hidden
-                         indeterminate={checkedItems!.size > 0 && !allSelected}>
-                    Select all Jobs
-                  </Label>
-                </Checkbox>
+                          indeterminate={checkedItems!.size > 0 && !allSelected}
+                          onChange={handleSelectAll} />
               </HeaderCell>
             ) : null}
 

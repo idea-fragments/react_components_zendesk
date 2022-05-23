@@ -24,7 +24,7 @@ declare type ButtonBaseProps = PropsWithChildren<{
     pill?: boolean;
     primary?: boolean;
     size?: ButtonSize;
-    onClick: Function;
+    onClick: () => void;
 }>;
 declare type CommonProps = ButtonBaseProps & {
     autoLoadable?: boolean;
@@ -33,7 +33,7 @@ declare type CommonProps = ButtonBaseProps & {
 } & ColorProps & ContainerProps;
 declare type ControlledLoadable = {
     loading?: boolean;
-    onClick: Function;
+    onClick: () => void;
 };
 export declare type Props = (CommonProps & ControlledLoadable) | (CommonProps & AutoLoadable);
 export declare const Button: ComponentType<Props>;

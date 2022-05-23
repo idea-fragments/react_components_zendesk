@@ -7,7 +7,7 @@ export declare const validateFields: (fieldLabels: {
     validation: "error";
     message: string;
 } | {
-    validation: null;
+    validation: undefined;
     message?: undefined;
 };
 //# sourceMappingURL=validateFields.d.ts.map

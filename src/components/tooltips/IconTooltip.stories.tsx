@@ -3,7 +3,7 @@ import { IconTooltip }    from "components/tooltips/IconTooltip"
 import React              from "react"
 
 export default {
-  title:     "react_components_zendesk/forms/IconTooltip",
+  title:     "forms/IconTooltip",
   component: IconTooltip,
   argTypes:  {},
 }

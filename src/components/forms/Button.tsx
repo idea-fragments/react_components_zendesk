@@ -18,14 +18,15 @@ import React, {
   Ref,
   useCallback,
   useState
-}                                          from "react"
-import styled, { css }                     from "styled-components"
+}                                     from "react"
+import styled, { css, ThemeProvider, ThemeContext } from "styled-components"
 import { Alignment }                  from "styles/alignments"
-import { COLORS }                          from "styles/colors"
-import { SPACINGS }                        from "styles/spacings"
+import { COLORS }                     from "styles/colors"
+import { SPACINGS }                   from "styles/spacings"
 import { Theme }                      from "styles/theme/Theme.type"
+import { useTheme }                   from "styles/theme/useTheme"
 import { ColorProps, ContainerProps } from "styles/types"
-import { FONT_SIZES }                      from "styles/typography"
+import { FONT_SIZES }                 from "styles/typography"
 import { PromiseFunc }                from "utils/function.types"
 
 const fitContent   = css`
@@ -64,6 +65,7 @@ const baseColor = ({
                      theme,
                      warning,
                    }: Props & StyledProps) => {
+  console.log("button theme is", theme)
   if (color) return color
   if (danger) return theme.styles.colorDanger
   if (neutral) return COLORS.LIGHT_GREY
@@ -94,7 +96,7 @@ type ButtonBaseProps = PropsWithChildren<{
   pill?: boolean,
   primary?: boolean,
   size?: ButtonSize,
-  onClick: Function,
+  onClick: () => void,
 }>
 
 type CommonProps = ButtonBaseProps & {
@@ -105,7 +107,7 @@ type CommonProps = ButtonBaseProps & {
 
 type ControlledLoadable = {
   loading?: boolean,
-  onClick: Function,
+  onClick: () => void,
 }
 
 export type Props = (CommonProps & ControlledLoadable)
@@ -122,10 +124,15 @@ const ButtonBase = styled(({
                              iconPosition,
                              loading,
                              onClick,
+  pill,
                              ...props
                            }: ButtonBaseProps) => {
+  const theme = useTheme()
+  console.log("from button", theme)
+  // @ts-ignore
   return <SButton as={innerAs}
                   disabled={disabled}
+                  isPill={pill}
                   ref={innerRef}
                   onClick={onClick}
                   {...props}>
@@ -195,6 +202,7 @@ export const Button: ComponentType<Props> = styled(
                          disabled={disabled || computedIsLoading()}
                          innerRef={ref}
                          loading={computedIsLoading()}
+                        // @ts-ignore
                          onClick={autoLoadable
                                   ? processClick
                                   : onClick} />

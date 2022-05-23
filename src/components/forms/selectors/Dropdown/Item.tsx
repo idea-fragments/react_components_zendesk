@@ -5,7 +5,7 @@ import {
   NextItem,
   PreviousItem
 }                              from "@zendeskgarden/react-dropdowns"
-import { IItemProps }          from "@zendeskgarden/react-dropdowns/dist/typings/Menu/Items/Item"
+import { IItemProps }          from "@zendeskgarden/react-dropdowns/dist/typings/types"
 import { buttonLikeHoverable } from "components/forms/buttonMixins"
 import { SelectorOption }      from "components/forms/selectors/types"
 import { ComponentType }       from "react"

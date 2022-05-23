@@ -65,7 +65,7 @@ export const Header = ({
   return <TableHead>
     <HeaderRow>
       {checkable ? (
-        <HeaderCell minimum>
+        <HeaderCell isMinimum>
           <Checkbox checked={allSelected}
                     indeterminate={someSelected}
                     onChange={handleSelectAll} />
@@ -84,7 +84,7 @@ export const Header = ({
           return (
             <HeaderCell key={name}
                         css={css}
-                        width={css ? null : width || colWidth}>
+                        width={css ? undefined : width || colWidth}>
               {
                 filter
                 ? <FlexBlock css={`flex: 1;`}
@@ -113,7 +113,7 @@ export const Header = ({
         },
       )}
 
-      {hasRowActions ? <HeaderCell menu /> : null}
+      {hasRowActions ? <HeaderCell hasOverflow /> : null}
     </HeaderRow>
   </TableHead>
 }

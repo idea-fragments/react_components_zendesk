@@ -11,10 +11,11 @@ import {
   Button,
   Props as ButtonProps
 }                                                    from "components/forms/Button"
-import { StyledComponentProps }                 from "components/StyledComponentProps.type"
+import { StyledComponentProps }                      from "components/StyledComponentProps.type"
 import React, { MouseEvent, ReactElement, useState } from "react"
 import styled, { css }                               from "styled-components"
 import { textWithColor }                             from "styles/mixins"
+import { UserFeedbackProps }                         from "styles/UserFeedbackProps"
 
 type ButtonType =
   ReactElement
@@ -25,22 +26,19 @@ export type ModalContent = {
   blocking?: boolean,
   body: any,
   buttons?: ButtonType[],
-  isDanger?: boolean,
   isNotDismissible?: boolean,
-  isSuccess?: boolean,
-  isWarning?: boolean,
   title?: string,
   withCancelButton?: boolean,
   withNoActions?: boolean,
   onClose?: () => void,
-}
+} & UserFeedbackProps
 
-const Header = styled(ZenHeader).attrs(({
-                                          danger,
-                                          success,
-                                          warning,
-                                          theme,
-                                        }) => {
+const Header = styled(ZenHeader).attrs<UserFeedbackProps>(({
+                                                             danger,
+                                                             success,
+                                                             warning,
+                                                             theme,
+                                                           }) => {
   // Color is overwritten by a class style from zendesk :(
   let color = theme.styles.textColorPrimary
   if (danger) color = theme.styles.colorDanger
@@ -102,10 +100,10 @@ export let Modal = ({
           autoClose = true,
           body,
           buttons,
-          isDanger,
-          isSuccess,
-          isWarning,
+          danger,
+          success,
           title,
+          warning,
           withCancelButton,
           withNoActions,
           onClose,
@@ -132,18 +130,19 @@ export let Modal = ({
       <Button onClick={handleClose}
               primary
               disabled={disableActions}
-              success={isSuccess}
-              danger={isDanger}
-              warning={isWarning}>
+              success={success}
+              danger={danger}
+              warning={warning}>
         OK
       </Button>
     </FooterItem>
   )
 
+
   return (
     <ZenModal onClose={handleClose}
               className={className}
-              animate
+              isAnimated
               backdropProps={{
                 onClick: (e: MouseEvent<HTMLElement>) => {
                   e.preventDefault()
@@ -151,7 +150,8 @@ export let Modal = ({
               }}>
       {
         title
-        ? <Header danger={isDanger} success={isSuccess} warning={isWarning}>
+          // @ts-ignore
+        ? <Header danger={danger} success={success} warning={warning}>
           {title}
         </Header>
         : null
@@ -167,9 +167,9 @@ export let Modal = ({
              <Button onClick={handleClose}
                      flat
                      loading={isProcessing}
-                     success={isSuccess}
-                     danger={isDanger}
-                     warning={isWarning}>
+                     success={success}
+                     danger={danger}
+                     warning={warning}>
                Cancel
              </Button>
            </FooterItem>
@@ -196,11 +196,8 @@ Modal = styled(Modal)<Props>`
     ${({ modalContent }) => modalContent?.isNotDismissible
                             ? hideCloseButton
                             : ""}
-    ${Body} {
+    ${Body as any} {
       font-size: inherit;
     }
   }
 `
-
-// @ts-ignore
-Modal.COMPONENT_NAME = "Modal"

@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const TaggedToggle = ({ active, onChange }: Props) => {
-  return <FlexBox alignItems={"baseline"}>
+  return <FlexBox>
     <Chip success={active}>
       {active ? "Enabled" : "Disabled"}
     </Chip>

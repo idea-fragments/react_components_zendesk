@@ -2,22 +2,19 @@ import {
   Notification as ZNotification,
   Title,
   Close,
-  /*@ts-ignore*/
-}                        from "@zendeskgarden/react-notifications"
-import { FC, ReactNode } from "react"
-import React             from "react"
-import { DO_NOTHING }    from "utils/functionHelpers"
+}                            from "@zendeskgarden/react-notifications"
+import { Type }              from "@zendeskgarden/react-notifications/dist/typings/types"
+import { FC, ReactNode }     from "react"
+import React                 from "react"
+import { UserFeedbackProps } from "styles/UserFeedbackProps"
+import { DO_NOTHING }        from "utils/functionHelpers"
 
 type Props = {
   body: ReactNode,
-  danger?: boolean,
-  info?: boolean,
   notDismissible?: boolean,
-  success?: boolean,
   title?: string,
-  warning?: boolean,
   onClose?: () => void,
-}
+} & UserFeedbackProps
 
 export const Notification: FC<Props> = ({
                                           body,
@@ -32,12 +29,12 @@ export const Notification: FC<Props> = ({
 
   const dismissible = !notDismissible
 
-  const type = (): string | null => {
+  const type = (): Type | undefined => {
     if (danger) return "error"
     if (info) return "info"
     if (success) return "success"
     if (warning) return "warning"
-    return null
+    return undefined
   }
 
   return <ZNotification type={type()}>

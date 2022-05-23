@@ -1,25 +1,41 @@
 // @ts-ignore
-import { Tooltip as ZTooltip } from "@zendeskgarden/react-tooltips"
-import { ReactNode }      from "react"
-import styled, { css }         from "styled-components"
+import { Tooltip as ZTooltip }          from "@zendeskgarden/react-tooltips"
+import { PropsWithChildren, ReactNode } from "react"
+import styled, { css }                  from "styled-components"
 
 const darkMode = css`
   background: ${({ theme }) => theme.styles.tooltip.darkBackground};
 `
 
-export type TooltipProps = {
-  arrow?: boolean,
-  children: ReactNode,
-  maxWidth?: string,
-  placement?: "start"
-  trigger: ReactNode,
-  type?: "light" | null
-}
+type Placement =
+  "start"
+  | "end"
+  | "auto"
+  | "top"
+  | "bottom"
+  | "top-start"
+  | "top-end"
+  | "bottom-start"
+  | "bottom-end"
+  | "end-top"
+  | "end-bottom"
+  | "start-top"
+  | "start-bottom"
 
-export let Tooltip = styled(ZTooltip).attrs({
-  delayMilliseconds: 0,
-  zIndex:            999,
-})<TooltipProps>`
+export type TooltipProps = PropsWithChildren<{
+  arrow?: boolean,
+  maxWidth?: string,
+  placement?: Placement,
+  content: ReactNode,
+  type?: "light" | null
+}>
+
+export const Tooltip = styled(ZTooltip)
+  .attrs<TooltipProps>(({ arrow }) => ({
+    delayMS:  0,
+    hasArrow: arrow,
+    zIndex:   999,
+  }))<TooltipProps>`
   && {
     max-width: ${({ maxWidth }: TooltipProps) => `min(100vw, ${maxWidth})`};
     white-space: unset;
@@ -27,4 +43,4 @@ export let Tooltip = styled(ZTooltip).attrs({
   }
 `
 
-Tooltip.defaultProps = { arrow: false, maxWidth: "300px" }
+Tooltip.defaultProps = { arrow: false, maxWidth: "300px", placement: "auto" }

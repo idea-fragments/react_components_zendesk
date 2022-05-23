@@ -1,7 +1,7 @@
 import React from "react";
 declare const _default: {
     title: string;
-    component: React.FC<Omit<import("./Tooltip").TooltipProps, "trigger"> & {
+    component: React.FC<React.PropsWithChildren<Omit<import("./Tooltip").TooltipProps, "content"> & {
         icon: string;
         iconProps?: {
             color?: string | undefined;
@@ -10,7 +10,7 @@ declare const _default: {
             title?: string | undefined;
             onClick?: (() => void) | undefined;
         } | undefined;
-    }>;
+    }>>;
     argTypes: {};
 };
 export default _default;

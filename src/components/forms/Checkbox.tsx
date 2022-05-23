@@ -6,14 +6,14 @@ import {
   Message,
   /* @ts-ignore */
 }                                                  from "@zendeskgarden/react-forms"
-import { FormFieldProps }                     from "components/forms/formField.types"
+import { FormFieldProps }                          from "components/forms/formField.types"
 import { VALIDATION_STATES }                       from "components/forms/validationStates"
 import { FlexBox }                                 from "components/layout/FlexBox"
-import { StyledProps }                        from "components/StyledProps.type"
+import { StyledProps }                             from "components/StyledProps.type"
 import React, { ChangeEvent, useEffect, useState } from "react"
 import styled                                      from "styled-components"
 import { dark, fade }                              from "styles/colors"
-import { ContainerProps }                     from "styles/types"
+import { ContainerProps }                          from "styles/types"
 import { FONT_SIZES }                              from "styles/typography"
 
 type Props = FormFieldProps & {
@@ -49,12 +49,11 @@ export let Checkbox = ({
     <Field>
       <ZCheckbox
         checked={checked}
-        validation={validation?.validation}
+        indeterminate={indeterminate}
         {...props}
         onChange={handleCheck}
       >
-        <Label hidden={!label}
-               indeterminate={indeterminate}>
+        <Label hidden={!label}>
           {label ?? ""}
         </Label>
         {

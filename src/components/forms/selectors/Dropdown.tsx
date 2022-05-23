@@ -1,39 +1,30 @@
 import {
-  AddItem,
   Autocomplete as ZenAutocomplete,
   Dropdown as ZenDropdown,
   Field,
-  HeaderItem,
   Hint,
-  Item as ZItem,
   Label as ZenLabel,
   Menu,
   Message,
   Multiselect as ZenMultiSelect,
-  NextItem,
-  PreviousItem,
   Select as ZenSelect,
   Trigger,
-}                                                  from "@zendeskgarden/react-dropdowns"
-import { IItemProps }                              from "@zendeskgarden/react-dropdowns/dist/typings/Menu/Items/Item"
-import { VALIDATION }                              from "@zendeskgarden/react-dropdowns/dist/typings/styled/field/StyledMessage"
-import { buttonLikeHoverable }                     from "components/forms/buttonMixins"
+}                            from "@zendeskgarden/react-dropdowns"
 import {
   getItemType,
   Item
-}                                                  from "components/forms/selectors/Dropdown/Item"
+}                            from "components/forms/selectors/Dropdown/Item"
 import {
   MultiSelectorProps,
   SelectorItemKey,
   SelectorOption,
   SelectorProps,
   StateChange,
-}                                                  from "components/forms/selectors/types"
-import { VALIDATION_STATES }                       from "components/forms/validationStates"
-import { Loadable }                                from "components/loaders/Loadable"
-import { StateChangeOptions }                      from "downshift"
-import { debounce }                                from "lodash"
-import * as React                                  from "react"
+}                            from "components/forms/selectors/types"
+import { VALIDATION_STATES } from "components/forms/validationStates"
+import { Loadable }          from "components/loaders/Loadable"
+import { debounce }          from "lodash"
+import * as React            from "react"
 import {
   ComponentType,
   FC, PropsWithChildren,
@@ -42,21 +33,20 @@ import {
   useEffect,
   useRef,
   useState
-}                                                  from "react"
-import styled, { css, FlattenSimpleInterpolation } from "styled-components"
-import { Theme }                                   from "styles/theme/Theme.type"
-import { FONT_SIZES }                              from "styles/typography"
+}                            from "react"
+import styled, { css }       from "styled-components"
+import { FONT_SIZES }        from "styles/typography"
 import {
   isEmpty,
   isNotEmpty
-}                                                  from "utils/arrayHelpers"
-import { DO_NOTHING }                              from "utils/functionHelpers"
-import { Logger }                                  from "utils/logging/Logger"
+}                            from "utils/arrayHelpers"
+import { DO_NOTHING }        from "utils/functionHelpers"
+import { Logger }            from "utils/logging/Logger"
 import {
   isArray,
   isNumber,
   isString
-}                                                  from "utils/typeCheckers"
+}                            from "utils/typeCheckers"
 
 export type MenuPlacement =
   "start"
@@ -80,7 +70,7 @@ type OptionalSelectorProps = {
 
 type CommonProps = {
   async?: boolean,
-  isOpen?:boolean,
+  isOpen?: boolean,
   maxMenuHeight?: string,
   menuCSS?: string,
   menuItemComponent?: ComponentType<any>,
@@ -199,7 +189,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
   message           = validation?.message ?? message
   const messageNode = message
                       ?
-                      <Message validation={validation!.validation as VALIDATION}>
+                      <Message validation={validation!.validation}>
                         {message}
                       </Message>
                       : null
@@ -364,8 +354,8 @@ Dropdown.defaultProps = {
 }
 
 export const Autocomplete = ZenAutocomplete as ComponentType<any>
-export const Select = ZenSelect as ComponentType<any>
-export const MultiSelect = styled(ZenMultiSelect as ComponentType<any>)`
+export const Select       = ZenSelect as ComponentType<any>
+export const MultiSelect  = styled(ZenMultiSelect as ComponentType<any>)`
   && {
     div { max-width: 100%; }
   }

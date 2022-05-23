@@ -4,12 +4,10 @@ declare type Props = {
     delay: number;
 };
 export declare const Loader: {
-    ({ forceVisibility, delay }: Props): JSX.Element | null;
+    ({ forceVisibility }: Props): JSX.Element | null;
     defaultProps: {
         forceVisibility: boolean;
-        delay: number;
     };
-    COMPONENT_NAME: string;
 };
 export {};
 //# sourceMappingURL=Loader.d.ts.map

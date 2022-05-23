@@ -1,14 +1,11 @@
 import { FC, ReactNode } from "react";
+import { UserFeedbackProps } from "styles/UserFeedbackProps";
 declare type Props = {
     body: ReactNode;
-    danger?: boolean;
-    info?: boolean;
     notDismissible?: boolean;
-    success?: boolean;
     title?: string;
-    warning?: boolean;
     onClose?: () => void;
-};
+} & UserFeedbackProps;
 export declare const Notification: FC<Props>;
 export {};
 //# sourceMappingURL=Notification.d.ts.map

@@ -1,8 +1,8 @@
 // @ts-ignore
-import { Close as ZClose, Tag as ZTag } from "@zendeskgarden/react-tags"
-import styled                           from "styled-components"
+import { Tag as ZTag } from "@zendeskgarden/react-tags"
+import styled          from "styled-components"
 
-export const Close = styled(ZClose)`
+export const Close = styled(ZTag.Close)`
   &&& { height: 26px; }
 `
 

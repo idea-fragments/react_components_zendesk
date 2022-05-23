@@ -9,5 +9,10 @@ module.exports = {
     "@storybook/addon-interactions",
     "@storybook/preset-create-react-app"
   ],
-  "framework": "@storybook/react"
+  "framework": "@storybook/react",
+  babel: {
+    plugins: [
+      ["babel-plugin-styled-components"]
+    ]
+  }
 }

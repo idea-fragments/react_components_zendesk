@@ -1,5 +1,3 @@
-// import "zendeskGardenCss"
-// import "index.css"
 import React, { useState } from "react"
 
 export const TestComponent = () => {

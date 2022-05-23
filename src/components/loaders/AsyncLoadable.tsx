@@ -1,13 +1,12 @@
-// @ts-ignore
-import { Dots }                            from "@zendeskgarden/react-loaders"
 import { FlexBlock }                       from "components/layout/FlexBlock"
-import { StyledComponentProps }       from "components/StyledComponentProps.type"
+import { Dots }                            from "components/loaders/Dots"
+import { StyledComponentProps }            from "components/StyledComponentProps.type"
 import React, { FC, useContext, useState } from "react"
 import styled, { ThemeContext }            from "styled-components"
-import { Theme }                      from "styles/theme/Theme.type"
+import { Theme }                           from "styles/theme/Theme.type"
 import { FONT_SIZES }                      from "styles/typography"
 import { returnAfterMinimum }              from "utils/dateTimeHelpers"
-import { PromiseFunc }                from "utils/function.types"
+import { PromiseFunc }                     from "utils/function.types"
 
 type AsyncLoadFunc = <T>(f: PromiseFunc<any, T>) => Promise<T>
 export type RenderProp = { withLoading: AsyncLoadFunc }
@@ -37,10 +36,7 @@ export let AsyncLoadable: FC<Props> = ({ children, className }) => {
     return <Container justify={"center"}
                       className={className}
                       alignItems={"center"}>
-      <Dots color={theme.styles.colorPrimary}
-            size={FONT_SIZES.XXL}
-            delayMS={100}
-            velocity={-.25} />
+      <Dots color={theme.styles.colorPrimary} size={FONT_SIZES.XXL} />
     </Container>
   }
 

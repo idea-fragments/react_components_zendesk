@@ -35551,6 +35551,7 @@ var casing = function (_a) {
 };
 var baseColor = function (_a) {
     var color = _a.color, danger = _a.danger, neutral = _a.neutral, success = _a.success, theme = _a.theme, warning = _a.warning;
+    console.log("theme is", theme);
     if (color)
         return color;
     if (danger)

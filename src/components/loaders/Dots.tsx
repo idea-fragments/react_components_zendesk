@@ -12,5 +12,5 @@ export const Dots: FC<Props> = ({ color, size = FONT_SIZES.XXL }) => {
   return <ZDots color={color}
                 size={size}
                 delayMS={100}
-                velocity={-.25} />
+                duration={1000} />
 }

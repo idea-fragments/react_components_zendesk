@@ -1,10 +1,10 @@
 import { IconProps } from "components/Icon";
 import { TooltipProps } from "components/tooltips/Tooltip";
-import { FC } from "react";
-declare type Props = Omit<TooltipProps, "trigger"> & {
+import { FC, PropsWithChildren } from "react";
+declare type Props = Omit<TooltipProps, "content"> & {
     icon: string;
     iconProps?: IconProps;
 };
-export declare let IconTooltip: FC<Props>;
+export declare let IconTooltip: FC<PropsWithChildren<Props>>;
 export {};
 //# sourceMappingURL=IconTooltip.d.ts.map

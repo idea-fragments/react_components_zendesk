@@ -1,5 +1,3 @@
-// @flow
-
 import { mdiChevronDown, mdiChevronUp }     from "@mdi/js"
 import { Button }                           from "components/forms/Button"
 import { Checkbox }                         from "components/forms/Checkbox"

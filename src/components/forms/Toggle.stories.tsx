@@ -2,7 +2,7 @@ import { Toggle, ToggleProps } from "components/forms/Toggle"
 import React, { useState }     from "react"
 
 export default {
-  title:     "react_components_zendesk/forms/Toggle",
+  title:     "forms/Toggle",
   component: Toggle,
   argTypes:  {},
 }

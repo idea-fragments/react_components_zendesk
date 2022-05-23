@@ -1,6 +1,6 @@
-import { css }                                   from "styled-components"
-import { dark, light, lighter }                  from "styles/colors"
-import { textColorForBackground, textWithColor } from "styles/mixins"
+import { css }                                             from "styled-components"
+import { dark, light, lighter, lightness, lightnessDelta } from "styles/colors"
+import { textColorForBackground, textWithColor }           from "styles/mixins"
 
 export const getInlineStyling = css<{ inline?: boolean }>`
   ${({ inline }) => inline ? inlineWithText : ""}
@@ -45,20 +45,28 @@ export const buttonLikeHoverable = css<{
                                                       : color};
 
   :hover {
-    background: ${({ color }) => light(color)};
+    background: ${({ primary, color }) => primary
+                                          ? lightnessDelta(color, 10)
+                                          : lightness(color, 95)};
   }
 
   :active {
-    background: ${({ color }) => dark(color)};
+    background: ${({ primary, color }) => primary
+                                          ? dark(color)
+                                          : lightness(color, 85)};
   }
 
   ${textColorForButton}
 `
 
-const flatButtonStates = css`
+const flatButtonStates = css<{ color: string }>`
   :hover, :active {
-    ${textColorForBackground}
+    color: ${({ color }) => dark(color)};
   }
+
+  // :active {
+    //   ${textColorForBackground}
+  // }
 `
 
 const inlineButtonStates = css<{ color: string }>`

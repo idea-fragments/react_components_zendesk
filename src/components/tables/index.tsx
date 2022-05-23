@@ -12,10 +12,9 @@ import styled, { css }                 from "styled-components"
 import { COLORS, fade, veryLight }     from "styles/colors"
 import { FONT_SIZES_EM as FONT_SIZES } from "styles/typography"
 
-const Table          = styled(ZTable)`
+const Table = styled(ZTable)`
   && { color: inherit; }
 `
-Table.COMPONENT_NAME = "Table"
 
 const Head = styled(ZHead)`
   font-size: ${FONT_SIZES.SM};
@@ -73,7 +72,7 @@ const unclickableRowStyling = css`
   }
 `
 
-const Row = styled(ZRow)`
+const Row = styled(ZRow)<{ clickable?: boolean }>`
   &&&& {
     background: ${COLORS.WHITE} !important;
     border: none !important;
