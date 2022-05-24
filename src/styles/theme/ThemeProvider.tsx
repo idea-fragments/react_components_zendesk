@@ -1,7 +1,7 @@
-import { GlobalStyle } from "GlobalStyle"
+import { GlobalStyle }                  from "GlobalStyle"
 import React, { FC, PropsWithChildren } from "react"
-import { ThemeProvider as Provider } from "styled-components"
-import { DEFAULT_THEME } from '@zendeskgarden/react-theming'
+import { ThemeProvider as Provider }    from "styled-components"
+import { DEFAULT_THEME }                from "@zendeskgarden/react-theming"
 
 export type Props = PropsWithChildren<{
   theme: object,

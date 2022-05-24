@@ -9,27 +9,6 @@ Component library built on the V6 version of the Zendesk React components librar
 This library's main purpose is to provide, for the IdeaFragments organization, components who's external interfaces will not change, regardless of which internal library is used to power the components. For ex, if the `Button` component is switched to use a different library other than the Zendesk library, the external props passed to the `Button` component will not change, even if the new library required different props.
 
 There are plans to update the components to use the v8 version of the Zendesk Library. But currently library is provided as is.
-module.exports = {
-"stories": [
-"../src/**/*.stories.mdx",
-"../src/**/*.stories.@(js|jsx|ts|tsx)"
-],
-"addons": [
-"@storybook/addon-links",
-"@storybook/addon-essentials",
-"@storybook/addon-interactions",
-"@storybook/preset-create-react-app"
-],
-"framework": "@storybook/react",
-"core": {
-"builder": "@storybook/builder-webpack5"
-},
-babel: {
-plugins: [
-["babel-plugin-styled-components"]
-]
-}
-}
 
 ## Usage
 

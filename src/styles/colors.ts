@@ -37,11 +37,12 @@ export const fade            = (c: string, amount: number = .5): string => {
   const { r, g, b, alpha } = Color(c).fade(amount).object()
   return `rgba(${r}, ${g}, ${b}, ${alpha})`
 }
-export const light           = (c: string, amount: number = 0.15): string => {
+
+export const light = (c: string, amount: number = 0.15): string => {
   const newColor = Color(c).lighten(amount).hex()
-  console.log("lightening to:", newColor)
-  console.log("luminosity old:", Color(c).luminosity())
-  console.log("luminosity new:", Color(newColor).luminosity())
+  // console.log("lightening to:", newColor)
+  // console.log("luminosity old:", Color(c).luminosity())
+  // console.log("luminosity new:", Color(newColor).luminosity())
   return newColor
 }
 
@@ -52,11 +53,11 @@ export const lightness = (
 ): string => Color(c).lightness(amount).hex()
 
 export const lightnessDelta = (c: string, delta: number): string => {
-  const currentColor     = Color(c)
-  const currentLightness = currentColor.lightness()
-  let newLightness = currentLightness + delta
+  const currentColor      = Color(c)
+  const currentLightness  = currentColor.lightness()
+  let newLightness        = currentLightness + delta
   const isTooBlackOrWhite = newLightness === 0 || newLightness === 100
-  if(isTooBlackOrWhite) newLightness = currentLightness + delta/2
+  if (isTooBlackOrWhite) newLightness = currentLightness + delta / 2
 
   return currentColor.lightness(newLightness).hex()
 }
