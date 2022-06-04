@@ -1,5 +1,5 @@
 import {
-  Body,
+  Body as ZBody,
   Close,
   Footer,
   FooterItem,
@@ -189,6 +189,10 @@ const hideCloseButton = css`
   }
 `
 
+const Body = styled(ZBody)`
+  font-size: inherit;
+`
+
 Modal = styled(Modal)<Props>`
   &&&& {
     color: ${({ theme }) => theme.styles.textColorPrimary};
@@ -196,8 +200,5 @@ Modal = styled(Modal)<Props>`
     ${({ modalContent }) => modalContent?.isNotDismissible
                             ? hideCloseButton
                             : ""}
-    ${Body as any} {
-      font-size: inherit;
-    }
   }
 `

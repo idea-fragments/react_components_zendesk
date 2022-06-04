@@ -63,10 +63,6 @@ const flatButtonStates = css<{ color: string }>`
   :hover, :active {
     color: ${({ color }) => dark(color)};
   }
-
-  // :active {
-    //   ${textColorForBackground}
-  // }
 `
 
 const inlineButtonStates = css<{ color: string }>`

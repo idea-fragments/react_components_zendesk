@@ -23,19 +23,10 @@ export let TranslucentLoader = ({
       {children}
       {
         isLoading
-        ? <FlexBox alignItems={"center"}
-                   justifyContent={"center"}
-                   css={`
-                     background: white;
-                     opacity: .7;
-                     top: 0;
-                     left: 0;
-                     position: absolute;
-                     height: 100%;
-                     width: 100%;
-                   `}>
+        ? <SpinnerContainer alignItems={"center"}
+                            justifyContent={"center"}>
           <Dots color={theme.styles.colorPrimary} />
-        </FlexBox>
+        </SpinnerContainer>
         : null
       }
     </Container>
@@ -46,4 +37,14 @@ TranslucentLoader = styled(TranslucentLoader)<Props>``
 
 const Container = styled.div`
   position: relative;
+`
+
+const SpinnerContainer = styled(FlexBox)`
+  background: white;
+  opacity: .7;
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 `

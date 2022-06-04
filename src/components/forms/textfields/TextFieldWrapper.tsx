@@ -3,18 +3,24 @@ import {
   Hint,
   Label,
   Message,
-  /* @ts-ignore */
-}                                           from "@zendeskgarden/react-forms"
-import { TextFieldProps }                   from "components/forms/formField.types"
-import { TextAreaProps }                    from "components/forms/textfields/TextArea"
-import { VALIDATION_STATES }                from "components/forms/validationStates"
-import { FlexBox }                          from "components/layout/FlexBox"
-import { useObserver }                      from "mobx-react"
-import { ComponentType, PropsWithChildren } from "react"
-import React, { ChangeEvent, FC }           from "react"
-import styled, { css }                      from "styled-components"
-import { dark, fade }                       from "styles/colors"
-import { FONT_SIZES }                       from "styles/typography"
+}                            from "@zendeskgarden/react-forms"
+import { TextFieldProps }    from "components/forms/formField.types"
+import { TextAreaProps }     from "components/forms/textfields/TextArea"
+import { VALIDATION_STATES } from "components/forms/validationStates"
+import { FlexBox }           from "components/layout/FlexBox"
+import { useObserver }       from "mobx-react"
+import React, {
+  ChangeEvent,
+  ComponentType,
+  forwardRef,
+  PropsWithChildren
+}                            from "react"
+import styled, { css }       from "styled-components"
+import {
+  dark,
+  fade
+}                            from "styles/colors"
+import { FONT_SIZES }        from "styles/typography"
 
 type FieldProps = TextFieldProps | (
   Omit<TextAreaProps, "onChange">
@@ -30,7 +36,7 @@ const Field = styled(ZField)`
   width: ${({ compact }: Props) => compact ? "auto" : "100%"};
 `
 
-export let TextFieldWrapper: FC<Props> = ({
+export let TextFieldWrapper = forwardRef(({
                                             className,
                                             compact,
                                             emptyState,
@@ -43,7 +49,7 @@ export let TextFieldWrapper: FC<Props> = ({
                                             WrappedComponent,
                                             onChange,
                                             ...props
-                                          }) => {
+                                          }: Props, ref) => {
   message = validation?.message || message
   return useObserver(() => (
     <Container className={className}
@@ -62,6 +68,7 @@ export let TextFieldWrapper: FC<Props> = ({
         }
         <WrappedComponent
           placeholder={emptyState}
+          ref={ref}
           validation={validation?.validation}
           {...props}
           resizable={true}
@@ -82,7 +89,7 @@ export let TextFieldWrapper: FC<Props> = ({
       </Field>
     </Container>
   ))
-}
+})
 
 const hoverFocusStyling = css`
   :hover {

@@ -24,7 +24,6 @@ import { Alignment }                  from "styles/alignments"
 import { COLORS }                     from "styles/colors"
 import { SPACINGS }                   from "styles/spacings"
 import { Theme }                      from "styles/theme/Theme.type"
-import { useTheme }                   from "styles/theme/useTheme"
 import { ColorProps, ContainerProps } from "styles/types"
 import { FONT_SIZES }                 from "styles/typography"
 import { PromiseFunc }                from "utils/function.types"
@@ -126,7 +125,6 @@ const ButtonBase = styled(({
                              pill,
                              ...props
                            }: ButtonBaseProps) => {
-  const theme = useTheme()
   // @ts-ignore
   return <SButton as={innerAs}
                   disabled={disabled}

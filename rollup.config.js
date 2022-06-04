@@ -3,8 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
-
-// import dts from "rollup-plugin-dts";
+import dts from "rollup-plugin-dts";
 import pkg from './package.json'
 import fs from "fs"
 
@@ -12,7 +11,7 @@ const modulesDir = "entries"
 let modules = fs.readdirSync(modulesDir)
   .map((nameWithExtension) => nameWithExtension.split(".")[0])
 
-modules = ["styles"]
+modules = ["loaders"]
 export default [
   ...modules.map((module) => {
     return {
@@ -33,9 +32,24 @@ export default [
         }),
         typescript({ tsconfig: "./tsconfig.json" }),
       ],
-      // external: ["react", "react-dom"]
     }
   }),
+  // ...modules.map((module) => {
+  //   return {
+  //     input:  `./dist/types/${module}.d.ts`,
+  //     output: {
+  //       file:   `dist/${module}.d.ts`,
+  //       format: "es",
+  //     },
+  //     plugins: [
+  //       dts({
+  //         compilerOptions: {
+  //           baseUrl: "./dist/types",
+  //         },
+  //       })
+  //     ],
+  //   }
+  // }),
   // {
   //   input:  "src/index.tsx",
   //   output: {

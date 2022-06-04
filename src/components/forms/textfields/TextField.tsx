@@ -1,9 +1,9 @@
 // @ts-ignore
-import { Input }                  from "@zendeskgarden/react-forms"
-import { TextFieldProps }    from "components/forms/formField.types"
-import { TextFieldWrapper }       from "components/forms/textfields/TextFieldWrapper"
-import React, { ChangeEvent, FC } from "react"
-import styled                     from "styled-components"
+import { Input }                          from "@zendeskgarden/react-forms"
+import { TextFieldProps }                 from "components/forms/formField.types"
+import { TextFieldWrapper }               from "components/forms/textfields/TextFieldWrapper"
+import React, { ChangeEvent, forwardRef } from "react"
+import styled                             from "styled-components"
 
 type NewOnChangeFunc = (
   value: string,
@@ -19,12 +19,11 @@ type PropsWithNewOnChange = Omit<TextFieldProps, "onChange"> & {
 
 type Props = PropsWithNewOnChange | OriginalProps
 
-export let TextField: FC<Props> = ({
+export let TextField = forwardRef(({
                                      onChange,
                                      useNewOnChange = false,
                                      ...props
-                                   }) => {
-
+                                   }: Props, ref) => {
   const notifyParentOfChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (useNewOnChange === true) {
       (onChange as NewOnChangeFunc)(e.target.value, e)
@@ -35,9 +34,11 @@ export let TextField: FC<Props> = ({
   }
 
   return <TextFieldWrapper {...props}
+                           ref={ref}
                            onChange={notifyParentOfChange}
                            WrappedComponent={Input} />
-}
+
+})
 
 // @ts-ignore
 TextField                = styled(TextField)``
