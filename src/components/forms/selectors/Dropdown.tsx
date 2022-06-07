@@ -5,7 +5,7 @@ import {
   Hint,
   Label as ZenLabel,
   Menu,
-  Message,
+  Message as ZenMessage,
   Multiselect as ZenMultiSelect,
   Select as ZenSelect,
   Trigger,
@@ -336,9 +336,12 @@ Dropdown = styled(Dropdown)`
 
   && {
     ${({ fluid }) => fluid ? "width: 100%;" : ""}
-    ${Message as any} {
-      font-size: ${FONT_SIZES.XS};
-    }
+  }
+`
+
+const Message = styled(ZenMessage)`
+  && {
+    font-size: ${FONT_SIZES.XS};
   }
 `
 

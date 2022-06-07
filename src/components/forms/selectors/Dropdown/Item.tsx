@@ -11,6 +11,7 @@ import { SelectorOption }      from "components/forms/selectors/types"
 import { ComponentType }       from "react"
 import styled                  from "styled-components"
 import { Theme }               from "styles/theme/Theme.type"
+import { FONT_SIZES }          from "styles/typography"
 
 export const Item = styled(ZItem).attrs(({ danger, theme }: {
   danger?: boolean,
@@ -20,6 +21,7 @@ export const Item = styled(ZItem).attrs(({ danger, theme }: {
   return { color: theme.styles.colorDanger, primary: true }
 })`
   &&&& {
+    font-size: ${FONT_SIZES.SM};
     ${({ danger }) => danger ? buttonLikeHoverable : ""}
   }
 `

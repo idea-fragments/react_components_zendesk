@@ -5,6 +5,8 @@ import { light }         from "styles/theme/light"
 
 export const decorators = [
   (Story) => <ThemeProvider theme={light}>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;400;500;600;700&display=swap"
+          rel="stylesheet" />
     <Story />
   </ThemeProvider>,
 ]
