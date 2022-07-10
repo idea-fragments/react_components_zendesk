@@ -9,7 +9,6 @@
     "./": "./dist/"
   },
   "dependencies": {
-    "@craco/craco": "^6.4.3",
     "color": "^4.2.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
