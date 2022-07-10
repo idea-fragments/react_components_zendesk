@@ -11,7 +11,7 @@ const modulesDir = "entries"
 let modules = fs.readdirSync(modulesDir)
   .map((nameWithExtension) => nameWithExtension.split(".")[0])
 
-modules = ["forms"]
+modules = ["loaders", "layouts"]
 export default [
   ...modules.map((module) => {
     return {

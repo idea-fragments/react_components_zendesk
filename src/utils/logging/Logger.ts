@@ -1,4 +1,4 @@
-import { LoggerI } from "utils/logging/Logger.type"
+ import { LoggerI } from "utils/logging/Logger.type"
 
 const LEVEL_STYLES = {
   info:  "background: #499cc8; color: white;",
