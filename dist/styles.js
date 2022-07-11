@@ -7300,8 +7300,6 @@ function () {
 
 var deviceSizeWatcher = new DeviceSizeWatcher();
 const GlobalStyle = styledComponents.createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Karla:wght@200;400;500;600;700&display=swap');
-
   html {
     font-family: Karla,
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
