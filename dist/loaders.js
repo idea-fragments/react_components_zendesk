@@ -1658,7 +1658,7 @@ var ContainerOrientation;
 })(ContainerOrientation || (ContainerOrientation = {}));
 
 function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -1671,7 +1671,6 @@ function _extends$1() {
 
     return target;
   };
-
   return _extends$1.apply(this, arguments);
 }
 
@@ -1684,11 +1683,10 @@ function _assertThisInitialized(self) {
 }
 
 function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
-
   return _setPrototypeOf(o, p);
 }
 
@@ -1700,7 +1698,7 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
   return _getPrototypeOf(o);
@@ -1725,7 +1723,7 @@ function _isNativeReflectConstruct() {
 
 function _construct(Parent, args, Class) {
   if (_isNativeReflectConstruct()) {
-    _construct = Reflect.construct;
+    _construct = Reflect.construct.bind();
   } else {
     _construct = function _construct(Parent, args, Class) {
       var a = [null];
@@ -3380,7 +3378,7 @@ StyledDotsCircleThree.defaultProps = {
 var COMPONENT_ID$5 = 'loaders.loading_placeholder';
 var StyledLoadingPlaceholder = styled__default["default"].div.attrs({
   'data-garden-id': COMPONENT_ID$5,
-  'data-garden-version': '8.51.0',
+  'data-garden-version': '8.53.2',
   role: 'progressbar'
 }).withConfig({
   displayName: "StyledLoadingPlaceholder",
@@ -3419,7 +3417,7 @@ var PROGRESS_BACKGROUND_COMPONENT_ID = 'loaders.progress_background';
 var StyledProgressBackground = styled__default["default"].div.attrs(function (props) {
   return {
     'data-garden-id': PROGRESS_BACKGROUND_COMPONENT_ID,
-    'data-garden-version': '8.51.0',
+    'data-garden-version': '8.53.2',
     borderRadius: props.borderRadius || sizeToBorderRadius(props.size, props.theme)
   };
 }).withConfig({
@@ -3443,7 +3441,7 @@ var PROGESS_INDICATOR_COMPONENT_ID = 'loaders.progress_indicator';
 var StyledProgressIndicator = styled__default["default"].div.attrs(function (props) {
   return {
     'data-garden-id': PROGESS_INDICATOR_COMPONENT_ID,
-    'data-garden-version': '8.51.0',
+    'data-garden-version': '8.53.2',
     height: props.height || sizeToHeight(props.size, props.theme),
     borderRadius: props.borderRadius || sizeToBorderRadius(props.size, props.theme)
   };
@@ -3496,7 +3494,7 @@ var retrieveSkeletonGradient = function retrieveSkeletonGradient(_ref3) {
 
 var StyledSkeleton = styled__default["default"].div.attrs({
   'data-garden-id': COMPONENT_ID$4,
-  'data-garden-version': '8.51.0'
+  'data-garden-version': '8.53.2'
 }).withConfig({
   displayName: "StyledSkeleton",
   componentId: "sc-1raozze-0"
@@ -3535,7 +3533,7 @@ StyledSpinnerCircle.defaultProps = {
 };
 var StyledSVG = styled__default["default"].svg.attrs(function (props) {
   return {
-    'data-garden-version': '8.51.0',
+    'data-garden-version': '8.53.2',
     xmlns: 'http://www.w3.org/2000/svg',
     width: props.width,
     height: props.height,
@@ -3576,7 +3574,7 @@ StyledCircle.defaultProps = {
 var StyledInline = styled__default["default"].svg.attrs(function (props) {
   return {
     'data-garden-id': COMPONENT_ID$3,
-    'data-garden-version': '8.51.0',
+    'data-garden-version': '8.53.2',
     viewBox: '0 0 16 4',
     width: props.size,
     height: props.size * 0.25
@@ -3683,7 +3681,7 @@ var Progress = React__default["default"].forwardRef(function (_ref, ref) {
   var percentage = Math.max(0, Math.min(100, value));
   return React__default["default"].createElement(StyledProgressBackground, _extends({
     "data-garden-id": COMPONENT_ID$1,
-    "data-garden-version": '8.51.0',
+    "data-garden-version": '8.53.2',
     "aria-valuemax": 100,
     "aria-valuemin": 0,
     "aria-valuenow": percentage,

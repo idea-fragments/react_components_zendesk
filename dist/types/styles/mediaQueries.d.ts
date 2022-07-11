@@ -13,7 +13,7 @@ export declare type MediaQueriesI = {
     forSmallComputersAndUp: MediaQuery;
     forLargeComputers: MediaQuery;
 };
-export declare const mediaQueries: (wideLayout?: boolean | undefined) => MediaQueriesI;
+export declare const mediaQueries: (wideLayout?: boolean) => MediaQueriesI;
 export declare const rem: (px: number) => string;
 export declare const unit: (px: number) => string;
 export declare const remSize: (e?: HTMLElement) => number;

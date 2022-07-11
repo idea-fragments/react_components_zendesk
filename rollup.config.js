@@ -4,14 +4,13 @@ import typescript from "@rollup/plugin-typescript";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import dts from "rollup-plugin-dts";
-import pkg from './package.json'
 import fs from "fs"
 
 const modulesDir = "entries"
 let modules = fs.readdirSync(modulesDir)
   .map((nameWithExtension) => nameWithExtension.split(".")[0])
 
-modules = ["loaders", "layouts"]
+// modules = ["loaders", "layouts"]
 export default [
   ...modules.map((module) => {
     return {
