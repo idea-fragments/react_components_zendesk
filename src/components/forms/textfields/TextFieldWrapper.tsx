@@ -8,7 +8,6 @@ import { TextFieldProps }    from "components/forms/formField.types"
 import { TextAreaProps }     from "components/forms/textfields/TextArea"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox }           from "components/layout/FlexBox"
-import { useObserver }       from "mobx-react"
 import React, {
   ChangeEvent,
   ComponentType,
@@ -51,8 +50,7 @@ export let TextFieldWrapper = forwardRef(({
                                             ...props
                                           }: Props, ref) => {
   message = validation?.message || message
-  return useObserver(() => (
-    <Container className={className}
+  return <Container className={className}
                withRows
                gap={"unset"}
                fluid={fluid}>
@@ -88,7 +86,6 @@ export let TextFieldWrapper = forwardRef(({
         }
       </Field>
     </Container>
-  ))
 })
 
 const hoverFocusStyling = css`

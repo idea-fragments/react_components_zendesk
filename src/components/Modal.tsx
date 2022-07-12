@@ -144,9 +144,8 @@ export let Modal = ({
               className={className}
               isAnimated
               backdropProps={{
-                onClick: (e: MouseEvent<HTMLElement>) => {
-                  e.preventDefault()
-                },
+                onClick: (e: MouseEvent<HTMLElement>) => { e.preventDefault() },
+                style:   { fontFamily: "inherit" },
               }}>
       {
         title
