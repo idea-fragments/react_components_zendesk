@@ -20,7 +20,7 @@ export declare const Tooltip: import("styled-components").StyledComponent<{
         placement: import("prop-types").Requireable<"end" | "auto" | "start" | "top" | "bottom" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
         popperModifiers: import("prop-types").Requireable<any>;
         size: import("prop-types").Requireable<"small" | "large" | "medium" | "extra-large">;
-        type: import("prop-types").Requireable<"light" | "dark">;
+        type: import("prop-types").Requireable<"dark" | "light">;
         zIndex: import("prop-types").Requireable<string | number>;
         isInitialVisible: import("prop-types").Requireable<boolean>;
         refKey: import("prop-types").Requireable<string>;

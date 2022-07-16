@@ -3,14 +3,17 @@ import { Dots }                                                from "components/
 import React, { ComponentType, PropsWithChildren, useContext } from "react"
 import styled, { ThemeContext }                                from "styled-components"
 import { Theme }                                               from "styles/theme/Theme.type"
+import { CSSProp }                                             from "styled-components"
 
 type Props = {
+  _css?: CSSProp,
   className?: string,
   innerAs?: ComponentType<any>,
   isLoading: boolean,
 }
 
 export let TranslucentLoader = ({
+                                  _css,
                                   children,
                                   className,
                                   innerAs,
@@ -19,12 +22,11 @@ export let TranslucentLoader = ({
   const theme = useContext<Theme>(ThemeContext)
 
   return (
-    <Container as={innerAs} className={className}>
+    <Container as={innerAs} className={className} _css={_css}>
       {children}
       {
         isLoading
-        ? <SpinnerContainer alignItems={"center"}
-                            justifyContent={"center"}>
+        ? <SpinnerContainer alignItems={"center"} justifyContent={"center"}>
           <Dots color={theme.styles.colorPrimary} />
         </SpinnerContainer>
         : null
@@ -35,8 +37,9 @@ export let TranslucentLoader = ({
 
 TranslucentLoader = styled(TranslucentLoader)<Props>``
 
-const Container = styled.div`
+const Container = styled.div<{ _css?: CSSProp, fluid?: boolean }>`
   position: relative;
+  ${({ _css }) => _css ? _css : ""}
 `
 
 const SpinnerContainer = styled(FlexBox)`

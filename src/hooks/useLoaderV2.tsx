@@ -9,7 +9,7 @@ import React, {
 import { CSSProp }           from "styled-components"
 
 type LoadingFunc<T> = (p: Promise<T>) => Promise<T>
-type LoaderProps = PropsWithChildren<{ as?: ComponentType, cssStyles?: CSSProp }>
+type LoaderProps = PropsWithChildren<{ as?: ComponentType, _css?: CSSProp, cssStyles?: CSSProp, fluid?: boolean }>
 type Return<T> = {
   isLoading: boolean,
   Loader: FC<LoaderProps>,
@@ -35,9 +35,8 @@ export const useLoaderV2 = <T, >(): Return<T> => {
   ), [])
 
   const Loader = useMemo((): FC<LoaderProps> => {
-    return (({ as, cssStyles, ...props }: LoaderProps) =>
+    return (({ as, ...props }: LoaderProps) =>
         <TranslucentLoader {...props}
-                           css={cssStyles}
                            innerAs={as}
                            isLoading={loading} />
     )
