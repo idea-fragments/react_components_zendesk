@@ -11,7 +11,7 @@ declare type Props = {
     } & any>;
 } & ButtonProps & ColorProps & ContainerProps;
 export declare const ButtonLink: {
-    ({ LinkComponent, external, flat, icon, iconPosition, children, ...otherProps }: Props): JSX.Element;
+    ({ LinkComponent, external, flat, icon, iconPosition, iconSize, children, ...otherProps }: Props): JSX.Element;
     COMPONENT_NAME: string;
     defaultProps: {
         primary: boolean;

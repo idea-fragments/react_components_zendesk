@@ -9,9 +9,9 @@ export const light: Theme = {
   isDark: false,
   styles: {
     ...base,
+    // @ts-ignore
     appBar:                 {
       ...base.appBar,
-      background: "transparent",
     },
     // deprecated
     // @ts-ignore
@@ -33,7 +33,7 @@ export const light: Theme = {
     },
     sidebar:                {
       ...base.sidebar!!,
-      background: COLORS.WHITE,
+      // background: COLORS.WHITE,
     },
     textColorDark:          textColorPrimary,
     textColorLight:         COLORS.WHITE,

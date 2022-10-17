@@ -9,7 +9,7 @@ import React, {
 import { CSSProp }           from "styled-components"
 
 type LoadingFunc<T> = (p: Promise<T>) => Promise<T>
-type LoaderProps = PropsWithChildren<{ as?: ComponentType, _css?: CSSProp, cssStyles?: CSSProp, fluid?: boolean }>
+type LoaderProps = PropsWithChildren<{ as?: ComponentType, _css?: CSSProp }>
 type Return<T> = {
   isLoading: boolean,
   Loader: FC<LoaderProps>,

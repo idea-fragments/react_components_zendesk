@@ -1,9 +1,10 @@
 /// <reference types="react" />
+import { SelectorProps } from "components/forms/selectors/types";
 declare const _default: {
     title: string;
-    component: ({ disabled, ...props }: import("components/forms/selectors/types").SelectorProps) => JSX.Element;
+    component: ({ disabled, ...props }: SelectorProps) => JSX.Element;
     argTypes: {};
 };
 export default _default;
-export declare const Default: () => JSX.Element;
+export declare const Default: (args: SelectorProps) => JSX.Element;
 //# sourceMappingURL=Selector.stories.d.ts.map

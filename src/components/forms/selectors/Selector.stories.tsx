@@ -1,6 +1,6 @@
-import { SelectorItemKey } from "components/forms/selectors/types"
-import React, { useState } from "react"
-import { Selector }        from "components/forms/selectors/Selector"
+import { Selector }                       from "components/forms/selectors/Selector"
+import { SelectorItemKey, SelectorProps } from "components/forms/selectors/types"
+import React, { useState }                from "react"
 
 export default {
   title:     "forms/Selector",
@@ -10,13 +10,15 @@ export default {
 
 const OPTIONS = ["AYE", "BE", "SEE"]
 
-const Story = () => {
-  const [option, setOption] = useState<SelectorItemKey>(OPTIONS[0])
-  return <Selector options={OPTIONS.map((o) => ({ label: o, value: o }))}
+const Story = (args: SelectorProps) => {
+  const [option, setOption] = useState<SelectorItemKey>()
+  return <Selector {...args}
+                   emptyState={"Select Option"}
+                   options={OPTIONS.map((o) => ({ label: o, value: o }))}
                    keyField={"value"}
-                   valueField={"label"}
-                      selectedKey={option}
-                      onChange={setOption}
+                   labelField={"label"}
+                   selectedKey={option}
+                   onChange={setOption}
   />
 }
 

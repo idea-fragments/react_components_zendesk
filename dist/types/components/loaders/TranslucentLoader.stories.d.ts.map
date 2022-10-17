@@ -1,1 +1,1 @@
-{"version":3,"file":"TranslucentLoader.stories.d.ts","sourceRoot":"","sources":["../../../src/components/loaders/TranslucentLoader.stories.tsx"],"names":[],"mappings":"AAGA,OAAO,KAAmB,MAAQ,OAAO,CAAA;;;;;;;;;;;;AAGzC,wBAIC;AA0BD,eAAO,MAAM,OAAO,mBAAiB,CAAA"}
+{"version":3,"file":"TranslucentLoader.stories.d.ts","sourceRoot":"","sources":["../../../src/components/loaders/TranslucentLoader.stories.tsx"],"names":[],"mappings":"AAGA,OAAO,KAAmB,MAAQ,OAAO,CAAA;;;;;;;;;;;AAGzC,wBAIC;AA0BD,eAAO,MAAM,OAAO,mBAAiB,CAAA"}

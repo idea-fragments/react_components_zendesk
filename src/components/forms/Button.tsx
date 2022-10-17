@@ -85,7 +85,7 @@ type ButtonBaseProps = PropsWithChildren<{
   alignSelf?: Alignment,
   disabled?: boolean,
   groupKey?: string,
-  icon?: string,
+  icon?: string | ComponentType,
   iconPosition?: "left" | "right",
   iconSize?: string,
   innerAs?: string,
@@ -134,11 +134,10 @@ const ButtonBase = styled(({
                   {...props}>
     {
       loading
-      ? <FlexBox alignItems={"center"}
-                 css={`min-height: 30px`}
+      ? <LoaderContainer alignItems={"center"}
                  justifyContent={"center"}>
         <Dots size={FONT_SIZES.MD} />
-      </FlexBox>
+      </LoaderContainer>
       : (
         icon
         ? <FlexBox alignItems={"center"}
@@ -216,3 +215,7 @@ Button.defaultProps   = {
   primary:      true,
   disabled:     false,
 }
+
+const LoaderContainer = styled(FlexBox)`
+  min-height: 30px;
+`

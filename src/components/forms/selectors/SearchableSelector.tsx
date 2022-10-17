@@ -1,24 +1,25 @@
-import { Autocomplete, Dropdown } from "components/forms/selectors/Dropdown"
+import { Autocomplete, Dropdown }                                 from "components/forms/selectors/Dropdown"
 import {
+  SelectorEmptyState
+}                                                                 from "components/forms/selectors/SelectorEmptyState"
+import {
+  SelectorItemKey,
   SelectorOption,
   SelectorProps,
   StateChange,
-}                                 from "components/forms/selectors/types"
-import React, {
-  FC,
-  PropsWithChildren,
-  useEffect,
-  useRef,
-  useState
-}                                 from "react"
-import styled                     from "styled-components"
+}                                                                 from "components/forms/selectors/types"
 import {
-  COLORS,
-  veryLight
-}                                 from "styles/colors"
-import { FONT_WEIGHTS }           from "styles/typography"
-import { DO_NOTHING }             from "utils/functionHelpers"
-import { isFunction }             from "utils/typeCheckers"
+  SelectorOptionKeyMap
+}                                                                 from "components/forms/utils/SelectorOptionKeyMap"
+import React, { FC, ReactNode, useCallback, useEffect, useState } from "react"
+import styled                                                     from "styled-components"
+import { COLORS, veryLight }                                      from "styles/colors"
+import { FONT_WEIGHTS }                                           from "styles/typography"
+import { DO_NOTHING }                                             from "utils/functionHelpers"
+import { Logger }                                                 from "utils/logging/Logger"
+import { isFunction }                                             from "utils/typeCheckers"
+
+const logger = new Logger("SearchableSelector")
 
 /* optionsKeyMap prop is not needed here. SearchableSelector uses Zendesk's Autocomplete
  * component which generates its own display value from options prop, unlike
@@ -26,32 +27,39 @@ import { isFunction }             from "utils/typeCheckers"
  * child.
  *
  * SearchableSelector will take passed in options props and create required options
- * prop for Autocomplete based on passed in keyField and valueField.
+ * prop for Autocomplete based on passed in keyField and labelField.
  * */
-type Props = PropsWithChildren<{
-  onSearchTextChange?: (s: string) => void,
-}> & SelectorProps
+type Props = {
+               children?: (o: SelectorOption) => void | ReactNode,
+               onSearchTextChange?: (s: string) => void,
+             } & SelectorProps
 
 /*
  * If we need this full width, maybe add a Block wrapper here
  * */
-export let SearchableSelector: FC<Props> = ({ children, ...props }) => {
+export let SearchableSelector: FC<Props> = ({ children, disabled, ...props }) => {
   const {
           emptyState,
-          keyField,
+          labelField,
+          onChange,
           options,
           selectedKey,
-          valueField,
-        }               = props
-  let { optionsKeyMap } = props
+        } = props
 
+  const optionsKeyMap                         = SelectorOptionKeyMap.call(props)
+  const selectedOption                        = selectedKey ? optionsKeyMap[selectedKey] : null
   const [searchText, setSearchText]           = useState("")
   const [matchingOptions, setMatchingOptions] = useState(options)
 
-  const filterOptions = useRef((value: any) => {
+  // TODO See if we need to remove this filter function here
+  //  and keep the filtering done in the Dropdown component
+  // ...otherwise we need to Debounce this function
+  const filterOptions = useCallback((value: any) => {
+    logger.writeInfo("filtering options containing")
+
     const matchingOptions = options.filter(option => {
       return (
-        option[valueField]
+        option[labelField]
           .trim()
           .toLowerCase()
           .indexOf(String(value).trim().toLowerCase()) !== -1
@@ -59,11 +67,11 @@ export let SearchableSelector: FC<Props> = ({ children, ...props }) => {
     })
 
     setMatchingOptions(matchingOptions)
-  })
+  }, [labelField, options])
 
   useEffect(() => {
-    filterOptions.current(searchText)
-  }, [searchText])
+    filterOptions(searchText)
+  }, [filterOptions, searchText])
 
   const handleStateChange = (state: StateChange) => {
     if (state.hasOwnProperty("inputValue")) {
@@ -71,29 +79,28 @@ export let SearchableSelector: FC<Props> = ({ children, ...props }) => {
     }
   }
 
-  if (optionsKeyMap == null && options != null) {
-    optionsKeyMap = options.reduce(
-      (m: { [key: string]: SelectorOption }, o: SelectorOption) => {
-        m[o[keyField]] = o
-        return m
-      }, {},
-    )
+  const handleChange = (k: SelectorItemKey | (SelectorOption | null)) => {
+    setSearchText("")
+    if (onChange) {
+      // @ts-ignore
+      onChange(k)
+    }
   }
 
-  if (!optionsKeyMap) return null
+  logger.writeInfo("matchingOptions", matchingOptions)
 
   return (
     <Dropdown {...props}
+              onChange={handleChange}
               onStateChange={handleStateChange}
               options={matchingOptions}>
-      <Autocomplete>
+      <Autocomplete disabled={disabled}>
         {
-          !!selectedKey
+          selectedOption
           ? isFunction(children)
-            /*@ts-ignore*/
-            ? (children as Function)(optionsKeyMap[selectedKey])
-            : optionsKeyMap[selectedKey][valueField]
-          : emptyState
+            ? (children as Function)(selectedOption)
+            : selectedOption[labelField]
+          : <SelectorEmptyState>{emptyState}</SelectorEmptyState>
         }
       </Autocomplete>
     </Dropdown>

@@ -1,4 +1,4 @@
- import { LoggerI } from "utils/logging/Logger.type"
+import { LoggerI } from "utils/logging/Logger.type"
 
 const LEVEL_STYLES = {
   info:  "background: #499cc8; color: white;",
@@ -30,5 +30,8 @@ export class Logger implements LoggerI {
 }
 
 if (typeof window !== `undefined`) {
-  window.DEBUG_MODULES = new Set()
+  window.DEBUG_MODULES = new Set([
+    // "Dropdown",
+    // "SearchableSelector",
+  ])
 }

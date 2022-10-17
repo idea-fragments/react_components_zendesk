@@ -10,7 +10,9 @@ export declare type ContainerStyles = {
     zIndex?: number;
 };
 export declare type Styles = {
-    appBar: ContainerStyles;
+    appBar: ContainerStyles & {
+        screenPosition: "top" | "bottom";
+    };
     border: {
         color: string;
     };
@@ -53,8 +55,14 @@ export declare type Styles = {
     scrollbarColor: string;
     section: ContainerStyles;
     sidebar: {
+        actionButton: {
+            borderRadius: string;
+            color: string;
+        };
         background: string;
         boxShadow: string;
+        padding: string;
+        width: string;
         zIndex: number;
     };
     table: {

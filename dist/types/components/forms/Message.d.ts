@@ -1,0 +1,3 @@
+/// <reference types="react" />
+export declare const Message: import("styled-components").StyledComponent<import("react").ForwardRefExoticComponent<import("@zendeskgarden/react-forms").IMessageProps & import("react").RefAttributes<HTMLDivElement>>, any, {}, never>;
+//# sourceMappingURL=Message.d.ts.map

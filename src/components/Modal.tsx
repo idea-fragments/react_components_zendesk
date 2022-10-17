@@ -26,6 +26,7 @@ export type ModalContent = {
   blocking?: boolean,
   body: any,
   buttons?: ButtonType[],
+  isLarge?: boolean,
   isNotDismissible?: boolean,
   title?: string,
   withCancelButton?: boolean,
@@ -84,6 +85,8 @@ type Props = {
   modalContent: ModalContent | null | undefined,
 } & StyledComponentProps
 
+export type ModalProps = Props
+
 export let Modal = ({
                       isVisible,
                       closeModal,
@@ -101,6 +104,7 @@ export let Modal = ({
           body,
           buttons,
           danger,
+          isLarge,
           success,
           title,
           warning,
@@ -143,6 +147,7 @@ export let Modal = ({
     <ZenModal onClose={handleClose}
               className={className}
               isAnimated
+              isLarge={isLarge}
               backdropProps={{
                 onClick: (e: MouseEvent<HTMLElement>) => { e.preventDefault() },
                 style:   { fontFamily: "inherit" },

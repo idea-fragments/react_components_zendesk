@@ -2456,9 +2456,15 @@ var base = {
     padding: "".concat(SPACINGS.XXXL, " 0")
   },
   sidebar: {
-    background: "unset",
-    zIndex: 10000,
-    boxShadow: "rgb(47 57 65 / 35%)"
+    actionButton: {
+      borderRadius: "8px",
+      color: "white"
+    },
+    background: "#f8f9fd",
+    boxShadow: "none",
+    padding: "".concat(SPACINGS.LG),
+    width: "250px",
+    zIndex: 10000
   },
   table: {
     borderSize: "1rem"
@@ -2531,9 +2537,7 @@ var light = {
       thumbColor: "#00000033",
       trackColor: "#00000022"
     },
-    sidebar: __assign(__assign({}, base.sidebar), {
-      background: COLORS.WHITE
-    }),
+    sidebar: __assign({}, base.sidebar),
     textColorDark: textColorPrimary$1,
     textColorLight: COLORS.WHITE,
     textColorOverPrimaryBg: COLORS.WHITE,

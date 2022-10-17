@@ -6,7 +6,7 @@ declare const _default: {
         iconProps?: {
             color?: string | undefined;
             size?: string | number | undefined;
-            svg: string | string[];
+            svg: string | string[] | React.ComponentType<{}>;
             title?: string | undefined;
             onClick?: (() => void) | undefined;
         } | undefined;

@@ -12,6 +12,7 @@ export declare type ModalContent = {
     blocking?: boolean;
     body: any;
     buttons?: ButtonType[];
+    isLarge?: boolean;
     isNotDismissible?: boolean;
     title?: string;
     withCancelButton?: boolean;
@@ -24,6 +25,7 @@ declare type Props = {
     disableActions: boolean;
     modalContent: ModalContent | null | undefined;
 } & StyledComponentProps;
+export declare type ModalProps = Props;
 export declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: Props) => JSX.Element | null;
 export {};
 //# sourceMappingURL=Modal.d.ts.map
