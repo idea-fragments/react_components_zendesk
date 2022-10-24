@@ -2425,7 +2425,9 @@ var SPACE_DIRECTIONS = Object.freeze({
 });
 var base = {
   appBar: {
-    height: "80px",
+    background: "#fff",
+    height: "92px",
+    screenPosition: "bottom",
     shadow: "unset",
     zIndex: 399
   },
@@ -2516,9 +2518,8 @@ var textColorPrimary$1 = COLORS.JAZZ_MAN_BLUE;
 var light = {
   isDark: false,
   styles: __assign(__assign({}, base), {
-    appBar: __assign(__assign({}, base.appBar), {
-      background: "transparent"
-    }),
+    // @ts-ignore
+    appBar: __assign({}, base.appBar),
     // deprecated
     // @ts-ignore
     navBackground: COLORS.GREY_NOT_QUITE_BLUE,
@@ -7176,7 +7177,9 @@ function () {
 }();
 
 if (typeof window !== "undefined") {
-  window.DEBUG_MODULES = new Set();
+  window.DEBUG_MODULES = new Set([// "Dropdown",
+    // "SearchableSelector",
+  ]);
 }
 
 var DEVICES = {

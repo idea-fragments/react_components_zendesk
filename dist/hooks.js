@@ -4152,7 +4152,9 @@ function () {
 }();
 
 if (typeof window !== "undefined") {
-  window.DEBUG_MODULES = new Set();
+  window.DEBUG_MODULES = new Set([// "Dropdown",
+    // "SearchableSelector",
+  ]);
 }
 
 var logger$1 = new Logger("Loadable");
@@ -9494,7 +9496,6 @@ var TranslucentLoader = function (_a) {
   var _css = _a._css,
       children = _a.children,
       className = _a.className,
-      fluid = _a.fluid,
       innerAs = _a.innerAs,
       _b = _a.isLoading,
       isLoading = _b === void 0 ? true : _b;
@@ -9502,8 +9503,7 @@ var TranslucentLoader = function (_a) {
   return jsxRuntime.jsxs(Container, __assign({
     as: innerAs,
     className: className,
-    _css: _css,
-    fluid: fluid
+    _css: _css
   }, {
     children: [children, isLoading ? jsxRuntime.jsx(SpinnerContainer, __assign({
       alignItems: "center",
@@ -9517,10 +9517,7 @@ var TranslucentLoader = function (_a) {
 };
 
 TranslucentLoader = styled__default["default"](TranslucentLoader)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
-var Container = styled__default["default"].div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  ", "\n  ", "\n"], ["\n  position: relative;\n  ", "\n  ", "\n"])), function (_a) {
-  var fluid = _a.fluid;
-  return fluid ? "width: 100%; height: 100%; flex: 1" : "";
-}, function (_a) {
+var Container = styled__default["default"].div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  ", "\n"], ["\n  position: relative;\n  ", "\n"])), function (_a) {
   var _css = _a._css;
   return _css ? _css : "";
 });

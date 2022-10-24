@@ -58,7 +58,7 @@ const ActionButton = styled(Button).attrs(() => ({
   fluid: true,
   size:  BUTTON_SIZES.SMALL
 }))<StyledProps<{ active: boolean }>>`
-  &&&& {
+  &&&&& {
     border-radius: ${({ theme }) => theme.styles.sidebar.actionButton.borderRadius};
     justify-content: flex-start;
     background: ${({ active, theme }) => active

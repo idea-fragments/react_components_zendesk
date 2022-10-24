@@ -86,7 +86,9 @@ function () {
 }();
 
 if (typeof window !== "undefined") {
-  window.DEBUG_MODULES = new Set();
+  window.DEBUG_MODULES = new Set([// "Dropdown",
+    // "SearchableSelector",
+  ]);
 }
 
 var listeners = new Set();

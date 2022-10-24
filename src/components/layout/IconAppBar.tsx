@@ -24,10 +24,10 @@ export let IconAppBar: FC<IconAppBarProps> = ({
   const appBarHeight = theme.styles.appBar.height
 
   const createActionButtons = (actions: NavigationAction[]) => actions.map(
-    (a: NavigationAction) => {
+    ({as, ...a}: NavigationAction) => {
       const props = a.href
-                    ? { as: ButtonLink, href: a.href }
-                    : { onClick: a.onClick }
+                    ? { as: as ?? ButtonLink, href: a.href }
+                    : { as, onClick: a.onClick }
 
       return <ActionButton active={a.label === activeAction}
                            compact
@@ -58,7 +58,7 @@ export let IconAppBar: FC<IconAppBarProps> = ({
 IconAppBar = styled(IconAppBar)``
 
 const ActionButton = styled(Button)<StyledProps<{ active: boolean }>>`
-  &&&& {
+  &&&&& {
     border-radius: ${({ theme }) => `calc(${theme.styles.sidebar.actionButton.borderRadius} + 10px)`};
     ${({ active, theme }) => (
             !active

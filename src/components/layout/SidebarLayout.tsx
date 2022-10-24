@@ -1,5 +1,6 @@
 import { FlexBox }       from "components/layout/FlexBox"
 import { FC, ReactNode } from "react"
+import styled            from "styled-components"
 
 export type SidebarLayoutProps = {
   mainContent: ReactNode,
@@ -7,8 +8,14 @@ export type SidebarLayoutProps = {
 }
 
 export const SidebarLayout: FC<SidebarLayoutProps> = ({ sidebar, mainContent }) => {
-  return <FlexBox css={`width: 100%; height: 100%;`} gap={"unset"}>
+  return <Container gap={"unset"}>
     {sidebar}
     {mainContent}
-  </FlexBox>
+  </Container>
 }
+
+const Container = styled(FlexBox)`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`
