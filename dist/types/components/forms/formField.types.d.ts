@@ -1,6 +1,5 @@
 import { Validation } from "components/forms/Validation.type";
-import { ChangeEvent } from "react";
-import React, { ReactNode } from "react";
+import React, { ChangeEvent, ReactNode } from "react";
 import { ContainerProps } from "styles/types";
 export declare type FormFieldProps = {
     label?: ReactNode;
@@ -15,6 +14,7 @@ export declare type FormComponent = React.ComponentType<any & FormFieldProps> & 
 };
 export declare type TextFieldProps<V = string, T = ChangeEvent<HTMLInputElement>> = {
     autoComplete?: string;
+    faux?: boolean;
     small?: boolean;
     type?: string;
     value?: V;

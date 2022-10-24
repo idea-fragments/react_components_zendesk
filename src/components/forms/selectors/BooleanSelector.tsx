@@ -14,7 +14,7 @@ type Bool = typeof TRUE | typeof FALSE
 
 type Props = {
   label: string,
-  hideLabel? :boolean,
+  hideLabel?: boolean,
   selectedKey?: boolean | undefined,
   onChange: OnItemSelectedFunc,
 }
@@ -47,7 +47,7 @@ export let BooleanSelector: FC<Props> = (props) => {
               options={options}
               optionsKeyMap={optionsKeyMap}
               keyField={"value"}
-              valueField={"text"}
+              labelField={"text"}
               selectedKey={convertedKey}
               emptyState={"Select Yes or No"}
               onChange={notifyWithBoolean(onChange)}

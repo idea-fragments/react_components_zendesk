@@ -1,10 +1,7 @@
 import { TinyCalendar }                from "components/calendars/TinyCalendar"
-import { TextFieldProps }         from "components/forms/formField.types"
-import {
-  Dropdown,
-  Select
-}                                      from "components/forms/selectors/Dropdown"
-import { StateChange }            from "components/forms/selectors/types"
+import { TextFieldProps }              from "components/forms/formField.types"
+import { Dropdown, Select }            from "components/forms/selectors/Dropdown"
+import { StateChange }                 from "components/forms/selectors/types"
 import Downshift, { StateChangeTypes } from "downshift"
 import moment, { Moment }              from "moment"
 import React, { useState }             from "react"
@@ -13,9 +10,9 @@ import { DO_NOTHING }                  from "utils/functionHelpers"
 import { Logger }                      from "utils/logging/Logger"
 
 type Props = {
-  minimumDate?: Moment,
-  disabledDates: Array<Moment>,
-} & TextFieldProps<string, Moment>
+               minimumDate?: Moment,
+               disabledDates: Array<Moment>,
+             } & TextFieldProps<string, Moment>
 
 type State = {
   isOpen: boolean

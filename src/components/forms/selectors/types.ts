@@ -15,7 +15,7 @@ export type SelectorOption =
 export type OnMultiSelectItemRemoveFunc<T = SelectorItemKey> = (k: T) => void
 export type OnItemSelectedFunc =
   ((k: SelectorItemKey) => void)
-  | ((o: SelectorOption | null) => void)
+  | ((o: SelectorOption | null | undefined) => void)
 export type StateChange = StateChangeOptions<SelectorOption>
 
 type Common = FormFieldProps & {
@@ -23,7 +23,8 @@ type Common = FormFieldProps & {
   options: Array<SelectorOption>,
   optionsKeyMap?: { [key: string]: SelectorOption },
   keyField: string,
-  valueField: string,
+  labelField: string,
+  valueField?: string,
   onChange?: OnItemSelectedFunc,
   onStateChange?: (s: StateChange) => void,
   invalidOnNoSelection?: boolean,

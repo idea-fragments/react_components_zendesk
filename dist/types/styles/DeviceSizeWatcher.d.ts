@@ -1,9 +1,7 @@
 export declare type DeviceSize = number;
 export declare type DeviceSizeChangeListener = (d: DeviceSize) => void;
 declare class DeviceSizeWatcher {
-    subscribers: {
-        [key: number]: DeviceSizeChangeListener | null;
-    };
+    private subscribers;
     idGen: Generator<number, void, unknown>;
     currentSize: DeviceSize;
     constructor();

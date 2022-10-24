@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { ModalContent } from "components/Modal";
+import { ModalContent, ModalProps } from "components/Modal";
 declare const _default: {
     title: string;
     component: ({ isVisible, closeModal, disableActions, modalContent, className, }: {
@@ -11,5 +11,5 @@ declare const _default: {
     argTypes: {};
 };
 export default _default;
-export declare const Default: () => JSX.Element;
+export declare const Default: ({ closeModal, modalContent, ...args }: ModalProps) => JSX.Element;
 //# sourceMappingURL=Modal.stories.d.ts.map

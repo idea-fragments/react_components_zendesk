@@ -39,7 +39,7 @@ const logger   = new Logger("DeviceSizeWatcher")
 const checkAny = (arr: Array<() => boolean>) => () => arr.some((f) => f())
 
 class DeviceSizeWatcher {
-  subscribers: { [key: number]: DeviceSizeChangeListener | null } = {}
+  private subscribers: { [key: number]: DeviceSizeChangeListener | null } = {}
   idGen                                                           = newIdGenerator()
   // @ts-ignore
   currentSize: DeviceSize

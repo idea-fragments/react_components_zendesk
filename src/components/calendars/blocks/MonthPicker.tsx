@@ -44,7 +44,7 @@ export const MonthPicker = ({ month, onMonthSelected }: Props) => {
                         options={MONTH_OPTIONS}
                         optionsKeyMap={OPTIONS_KEY_MAP}
                         keyField={keyField}
-                        valueField={valueField}
+                        labelField={valueField}
                         selectedKey={month.toString()}
                         emptyState={"Type or Select Month"}
       // @ts-ignore

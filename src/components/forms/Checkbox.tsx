@@ -1,12 +1,7 @@
-import {
-  Checkbox as ZCheckbox,
-  Field,
-  Hint,
-  Label,
-  Message,
-  /* @ts-ignore */
-}                                                  from "@zendeskgarden/react-forms"
+import { Checkbox as ZCheckbox, Field, Label, }    from "@zendeskgarden/react-forms"
 import { FormFieldProps }                          from "components/forms/formField.types"
+import { Hint }                                    from "components/forms/Hint"
+import { Message }                                 from "components/forms/Message"
 import { VALIDATION_STATES }                       from "components/forms/validationStates"
 import { FlexBox }                                 from "components/layout/FlexBox"
 import { StyledProps }                             from "components/StyledProps.type"
@@ -14,9 +9,8 @@ import React, { ChangeEvent, useEffect, useState } from "react"
 import styled                                      from "styled-components"
 import { dark, fade }                              from "styles/colors"
 import { ContainerProps }                          from "styles/types"
-import { FONT_SIZES }                              from "styles/typography"
 
-type Props = FormFieldProps & {
+export type CheckboxProps = FormFieldProps & {
   checked?: boolean,
   indeterminate?: boolean,
   onChange: (checked: boolean) => void
@@ -34,7 +28,7 @@ export let Checkbox = ({
                          validation = { validation: VALIDATION_STATES.NONE },
                          onChange,
                          ...props
-                       }: Props) => {
+                       }: CheckboxProps) => {
   const [checked, setCheckedTo] = useState(checkedProp)
 
   const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,16 +52,13 @@ export let Checkbox = ({
         </Label>
         {
           hint
-          ? <Hint css={`&&& { font-size: ${FONT_SIZES.XS}; }`}>{hint}</Hint>
+          ? <Hint>{hint}</Hint>
           : null
         }
         {
           message
           ?
-          <Message css={`&&& { font-size: ${FONT_SIZES.XS};}`}
-                   validation={validation?.validation}>
-            {message}
-          </Message>
+          <Message validation={validation?.validation}>{message}</Message>
           : null
         }
       </ZCheckbox>

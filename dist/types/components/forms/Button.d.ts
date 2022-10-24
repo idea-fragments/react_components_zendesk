@@ -15,7 +15,7 @@ declare type ButtonBaseProps = PropsWithChildren<{
     alignSelf?: Alignment;
     disabled?: boolean;
     groupKey?: string;
-    icon?: string;
+    icon?: string | ComponentType;
     iconPosition?: "left" | "right";
     iconSize?: string;
     innerAs?: string;

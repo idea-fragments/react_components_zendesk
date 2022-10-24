@@ -4,7 +4,7 @@ import { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
 export declare type MenuPlacement = "start" | "auto" | "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "end" | "end-top" | "end-bottom" | "start-top" | "start-bottom";
 declare type OptionalSelectorProps = {
     keyField?: string;
-    valueField?: string;
+    labelField?: string;
 };
 declare type CommonProps = {
     async?: boolean;
@@ -19,7 +19,7 @@ declare type CommonProps = {
     useRawOptions?: boolean;
 };
 declare type SelectorsProps = (CommonProps & SelectorProps) | (CommonProps & MultiSelectorProps);
-declare type Props = Omit<SelectorsProps, "keyField" | "valueField"> & OptionalSelectorProps;
+declare type Props = Omit<SelectorsProps, "keyField" | "labelField"> & OptionalSelectorProps;
 export declare let Dropdown: FC<PropsWithChildren<Props>>;
 export declare const Autocomplete: React.ComponentType<any>;
 export declare const Select: React.ComponentType<any>;

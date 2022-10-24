@@ -1,10 +1,9 @@
 /// <reference types="react" />
 import { FormFieldProps } from "components/forms/formField.types";
-declare type Props = FormFieldProps & {
+export declare type CheckboxProps = FormFieldProps & {
     checked?: boolean;
     indeterminate?: boolean;
     onChange: (checked: boolean) => void;
 };
-export declare let Checkbox: ({ checked: checkedProp, compact, emptyState, fluid, hint, indeterminate, label, message, validation, onChange, ...props }: Props) => JSX.Element;
-export {};
+export declare let Checkbox: ({ checked: checkedProp, compact, emptyState, fluid, hint, indeterminate, label, message, validation, onChange, ...props }: CheckboxProps) => JSX.Element;
 //# sourceMappingURL=Checkbox.d.ts.map

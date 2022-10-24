@@ -1,32 +1,21 @@
-// @flow
+import { FlexBox }       from "components/layout/FlexBox"
+import { FC, ReactNode } from "react"
+import styled            from "styled-components"
 
-// import { FlexBlock } from "components/layout/FlexBlock"
-// import * as React    from "react"
-
-// type Props = {
-//     sidebar :React.Node,
-//     content :React.Node,
-//     className? :string,
-// }
-
-
-export const SidebarLayout = () => {
-    throw new Error("Not Completed Yet")
+export type SidebarLayoutProps = {
+  mainContent: ReactNode,
+  sidebar: ReactNode,
 }
 
-// export const SidebarLayout = ({ className, sidebar, content } :Props) => {
-//     return (
-//         <FlexBlock data-component-name={SidebarLayout.COMPONENT_NAME}
-//                    alignSelf={"center"}
-//                    className={className}>
-//             <FlexBlock withRows css={`height: 100vh`}>
-//                 {sidebar}
-//             </FlexBlock>
-//             <FlexBlock withRows fluid>
-//                 {content}
-//             </FlexBlock>
-//         </FlexBlock>
-//     )
-// }
+export const SidebarLayout: FC<SidebarLayoutProps> = ({ sidebar, mainContent }) => {
+  return <Container gap={"unset"}>
+    {sidebar}
+    {mainContent}
+  </Container>
+}
 
-SidebarLayout.COMPONENT_NAME = "SidebarLayout"
+const Container = styled(FlexBox)`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`

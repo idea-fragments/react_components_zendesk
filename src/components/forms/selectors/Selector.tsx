@@ -1,32 +1,21 @@
-import { Dropdown, Select }   from "components/forms/selectors/Dropdown"
-import { SelectorEmptyState } from "components/forms/selectors/SelectorEmptyState"
-import {
-  SelectorOption,
-  SelectorProps,
-}                             from "components/forms/selectors/types"
-import { VALIDATION_STATES }  from "components/forms/validationStates"
-import React                  from "react"
+import { Dropdown, Select }     from "components/forms/selectors/Dropdown"
+import { SelectorEmptyState }   from "components/forms/selectors/SelectorEmptyState"
+import { SelectorProps, }       from "components/forms/selectors/types"
+import { SelectorOptionKeyMap } from "components/forms/utils/SelectorOptionKeyMap"
+import { VALIDATION_STATES }    from "components/forms/validationStates"
+import React                    from "react"
 
 export let Selector = ({ disabled, ...props }: SelectorProps) => {
   let {
-        keyField,
-        options,
-        optionsKeyMap,
         emptyState,
         selectedKey,
         small,
-        valueField,
+        labelField,
         validation,
       } = props
 
-  if (optionsKeyMap == null && options != null) {
-    optionsKeyMap = options.reduce(
-      (m: { [key: string]: SelectorOption }, o: SelectorOption) => {
-        m[o[keyField]] = o
-        return m
-      }, {},
-    )
-  }
+  const optionsKeyMap = SelectorOptionKeyMap.call(props)
+
 
   // TODO validation
   // const getValidation = () => (
@@ -40,7 +29,7 @@ export let Selector = ({ disabled, ...props }: SelectorProps) => {
               disabled={disabled}
               validation={validation?.validation}>
         {selectedKey && optionsKeyMap?.hasOwnProperty(selectedKey)
-         ? optionsKeyMap[selectedKey][valueField]
+         ? optionsKeyMap[selectedKey][labelField]
          : <SelectorEmptyState>{emptyState}</SelectorEmptyState>}
       </Select>
     </Dropdown>

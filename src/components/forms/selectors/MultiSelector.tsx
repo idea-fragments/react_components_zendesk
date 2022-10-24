@@ -4,24 +4,23 @@ import {
   SelectorItemKey,
   SelectorOption,
 }                                from "components/forms/selectors/types"
-import { VALIDATION_STATES }     from "components/forms/validationStates"
 import {
-  Close,
-  Tag
-}                                from "components/tags/Tag"
+  VALIDATION_STATES
+}                                from "components/forms/validationStates"
+import { Close, Tag }            from "components/tags/Tag"
 import React                     from "react"
 
 type Props = {
-  maxItems: 2,
-  selectedKeys: Array<SelectorItemKey>,
-} & MultiSelectorProps
+               maxItems: 2,
+               selectedKeys: Array<SelectorItemKey>,
+             } & MultiSelectorProps
 
 export let MultiSelector = ({ maxItems, ...props }: Props) => {
   let {
         keyField,
+        labelField,
         options,
         optionsKeyMap,
-        valueField,
         validation,
       } = props
 
@@ -41,7 +40,7 @@ export let MultiSelector = ({ maxItems, ...props }: Props) => {
         validation={validation?.validation}
         renderItem={({ value, removeValue }: any) => (
           <Tag size="large">
-            <span>{optionsKeyMap?.[value]?.[valueField]}</span>
+            <span>{optionsKeyMap?.[value]?.[labelField]}</span>
             <Close onClick={() => removeValue()} />
           </Tag>
         )}

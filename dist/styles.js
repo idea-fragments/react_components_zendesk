@@ -2425,7 +2425,9 @@ var SPACE_DIRECTIONS = Object.freeze({
 });
 var base = {
   appBar: {
-    height: "80px",
+    background: "#fff",
+    height: "92px",
+    screenPosition: "bottom",
     shadow: "unset",
     zIndex: 399
   },
@@ -2456,9 +2458,15 @@ var base = {
     padding: "".concat(SPACINGS.XXXL, " 0")
   },
   sidebar: {
-    background: "unset",
-    zIndex: 10000,
-    boxShadow: "rgb(47 57 65 / 35%)"
+    actionButton: {
+      borderRadius: "8px",
+      color: "white"
+    },
+    background: "#f8f9fd",
+    boxShadow: "none",
+    padding: "".concat(SPACINGS.LG),
+    width: "250px",
+    zIndex: 10000
   },
   table: {
     borderSize: "1rem"
@@ -2510,9 +2518,8 @@ var textColorPrimary$1 = COLORS.JAZZ_MAN_BLUE;
 var light = {
   isDark: false,
   styles: __assign(__assign({}, base), {
-    appBar: __assign(__assign({}, base.appBar), {
-      background: "transparent"
-    }),
+    // @ts-ignore
+    appBar: __assign({}, base.appBar),
     // deprecated
     // @ts-ignore
     navBackground: COLORS.GREY_NOT_QUITE_BLUE,
@@ -2531,9 +2538,7 @@ var light = {
       thumbColor: "#00000033",
       trackColor: "#00000022"
     },
-    sidebar: __assign(__assign({}, base.sidebar), {
-      background: COLORS.WHITE
-    }),
+    sidebar: __assign({}, base.sidebar),
     textColorDark: textColorPrimary$1,
     textColorLight: COLORS.WHITE,
     textColorOverPrimaryBg: COLORS.WHITE,
@@ -7172,7 +7177,9 @@ function () {
 }();
 
 if (typeof window !== "undefined") {
-  window.DEBUG_MODULES = new Set();
+  window.DEBUG_MODULES = new Set([// "Dropdown",
+    // "SearchableSelector",
+  ]);
 }
 
 var DEVICES = {

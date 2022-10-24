@@ -1,6 +1,6 @@
-import { Button }              from "components/forms/Button"
-import { Modal, ModalContent } from "components/Modal"
-import React, { useState }     from "react"
+import { Button }                          from "components/forms/Button"
+import { Modal, ModalContent, ModalProps } from "components/Modal"
+import React, { useState }                 from "react"
 
 export default {
   title:     "Modal",
@@ -8,21 +8,26 @@ export default {
   argTypes:  {},
 }
 
-const Story = () => {
+const Story = ({ closeModal, modalContent, ...args }: ModalProps) => {
   const [isModalOpen, setIsModalOpenTo] = useState(false)
-  const modalContent: ModalContent      = {
+
+  modalContent = {
     body:  "Body of the Modal",
     title: "Modal Title",
+    ...modalContent,
   }
 
+  closeModal = closeModal || (() => setIsModalOpenTo(false))
 
   return <>
 
     <Button onClick={() => setIsModalOpenTo(true)}>Open Modal</Button>
-    <Modal closeModal={() => setIsModalOpenTo(false)}
-           disableActions={false}
-           isVisible={isModalOpen}
-           modalContent={modalContent}
+    <Modal
+      {...args}
+      closeModal={closeModal}
+      disableActions={false}
+      isVisible={isModalOpen}
+      modalContent={modalContent}
     />
   </>
 }

@@ -9,6 +9,8 @@ export * from "components/forms/selectors/Selector"
 export * from "components/forms/selectors/MultiSelector"
 export * from "components/forms/selectors/SearchableSelector"
 export * from "components/forms/selectors/MonthYearSelector"
+export * from "components/forms/utils/SelectorOptionKeyMap"
+export * from "components/forms/utils/ArrayToSelectorOptionsConverter"
 
 /* =============================
  * TEXT FIELDS
@@ -39,6 +41,11 @@ export * from "components/forms/validationStates"
  * ============================= */
 export * from "components/forms/Toggle"
 export * from "components/forms/TaggedToggle"
+
+/* =============================
+ * Uploaders
+ * ============================= */
+export * from "components/forms/PhotoBooth"
 
 export * from "components/forms/selectors/types"
 export * from "components/forms/formField.types"

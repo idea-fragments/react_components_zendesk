@@ -12,7 +12,7 @@ export declare type SelectorOption = {
     [key: string]: any;
 } & SelectorOptionOptionalAttrs;
 export declare type OnMultiSelectItemRemoveFunc<T = SelectorItemKey> = (k: T) => void;
-export declare type OnItemSelectedFunc = ((k: SelectorItemKey) => void) | ((o: SelectorOption | null) => void);
+export declare type OnItemSelectedFunc = ((k: SelectorItemKey) => void) | ((o: SelectorOption | null | undefined) => void);
 export declare type StateChange = StateChangeOptions<SelectorOption>;
 declare type Common = FormFieldProps & {
     clearable?: boolean;
@@ -21,7 +21,8 @@ declare type Common = FormFieldProps & {
         [key: string]: SelectorOption;
     };
     keyField: string;
-    valueField: string;
+    labelField: string;
+    valueField?: string;
     onChange?: OnItemSelectedFunc;
     onStateChange?: (s: StateChange) => void;
     invalidOnNoSelection?: boolean;

@@ -1,107 +1,85 @@
-// @flow
+import { Button, BUTTON_SIZES } from "components/forms/Button"
+import { FlexBox }              from "components/layout/FlexBox"
+import { NavigationAction }     from "components/layout/NavigationAction"
+import { ButtonLink }           from "components/navigation/ButtonLink"
+import { StyledProps }          from "components/StyledProps.type"
+import { FC, ReactNode }        from "react"
+import styled                   from "styled-components"
+import { fade }                 from "styles/colors"
+import { SPACINGS }             from "styles/spacings"
 
-// import { Button }              from "components/forms/Button"
-// import { IconButton }          from "components/forms/IconButton"
-// import { FlexBlock }           from "components/layout/FlexBlock"
-// import { H3 }                  from "components/text/Header"
-// import React, { type ElementType }  from "react"
-// import styled                  from "styled-components"
-// import { mdiArrowLeft }        from "@mdi/js"
-// import { SPACINGS }            from "styles/spacings"
-// import { ContainerProps } from "styles/types"
-import { DO_NOTHING }          from "utils/functionHelpers"
-//
-// const Container = styled(FlexBlock)`
-//   height: 100%;
-//   padding: ${SPACINGS.LG};
-//   width: ${({ width }) => width};
-// `
-//
-// const Header = styled(H3)`
-//   color: ${({ theme }) => theme.styles.colorPrimary} !important;
-//   margin: 0;
-// `
-//
-// const ActionContainer = styled(FlexBlock)`
-//   flex: 1;
-// `
-//
-// const ActionItem = styled(Button).attrs({
-//     flat: true, fluid: true,
-// })`
-//   && {
-//     text-align: left;
-//   }
-// `
+type Action = NavigationAction
 
-// export type Action = {
-//     name :string,
-//     onClick :() => void,
-// }
-
-// type Props = {
-//     title :string,
-//     actions :Array<Action>,
-//     showBackButton :boolean,
-//     onBackClicked :() => void,
-//     onLogoClicked :() => void,
-//     logo? :ElementType,
-//     width :string,
-// } & ContainerProps
-
-export const Sidebar = () => {
-    throw new Error("Not Completed Yet")
+export type SidebarProps = {
+  actions: Action[],
+  actionIconSize?: string,
+  activeAction?: string,
+  logo: ReactNode,
+  lowerActions?: Action[],
 }
 
-// export const Sidebar = ({
-                            // title,
-                            // actions,
-                            // showBackButton,
-                            // onBackClicked,
-                            // onLogoClicked,
-                            // logo,
-                            // width,
-                        // } :Props) => {
-    // throw "Not Completed Yet"
-    // return <Container
-    //     data-component-name={Sidebar.COMPONENT_NAME}
-    //     spacing={SPACINGS.SM}
-    //     withRows
-    //     width={width}
-    // >
-    //     <FlexBlock>
-    //         {
-    //             showBackButton
-    //             ? <IconButton icon={mdiArrowLeft}
-    //                           flat
-    //                           onClick={onBackClicked} />
-    //             : null
-    //         }
-    //
-    //         <FlexBlock alignItems={"center"}
-    //                    onClick={onLogoClicked}
-    //                    css={`cursor: pointer;`}>
-    //             {logo ? logo : null}
-    //             <Header>{title}</Header>
-    //         </FlexBlock>
-    //     </FlexBlock>
-    //
-    //     <ActionContainer withRows>
-    //         {
-    //             actions.map(({ name, onClick } :Action) => {
-    //                 return <ActionItem onClick={onClick}>{name}</ActionItem>
-    //             })
-    //         }
-    //     </ActionContainer>
-    // </Container>
-// }
+export const Sidebar: FC<SidebarProps> = ({
+                                            actions,
+                                            actionIconSize,
+                                            activeAction,
+                                            logo,
+                                            lowerActions
+                                          }) => {
+  const createActionButtons = (actions: Action[]) => actions.map(
+    (a: Action) => {
+      const props = a.href
+                    ? { as: ButtonLink, href: a.href }
+                    : { onClick: a.onClick }
 
-Sidebar.defaultProps = {
-    actions       : [],
-    showBackButton: false,
-    onBackClicked : DO_NOTHING,
-    onLogoClicked : DO_NOTHING,
-    width         : "250px",
+      return <ActionButton active={a.label === activeAction}
+                           fluid
+                           icon={a.icon}
+                           iconPosition={"left"}
+                           iconSize={actionIconSize}
+                           key={a.label}
+                           {...props}>
+        {a.label}
+      </ActionButton>
+    }
+  )
+
+  return <Container gap={SPACINGS.XXXL} withRows>
+    {logo}
+    <FlexBox fluid gap={SPACINGS.XS} withRows>
+      {createActionButtons(actions)}
+    </FlexBox>
+    <FlexBox gap={SPACINGS.XS} withRows>
+      {lowerActions ? createActionButtons(lowerActions) : null}
+    </FlexBox>
+  </Container>
 }
 
-Sidebar.COMPONENT_NAME = "Sidebar"
+const ActionButton = styled(Button).attrs(() => ({
+  fluid: true,
+  size:  BUTTON_SIZES.SMALL
+}))<StyledProps<{ active: boolean }>>`
+  &&&&& {
+    border-radius: ${({ theme }) => theme.styles.sidebar.actionButton.borderRadius};
+    justify-content: flex-start;
+    background: ${({ active, theme }) => active
+                                         ? theme.styles.sidebar.actionButton.color
+                                         : "transparent"};
+    color: ${({ active, theme }) => {
+      return active
+             ? theme.styles.textColorPrimary
+             : fade(theme.styles.textColorPrimary, .2)
+    }};
+
+    :hover {
+      color: ${({ theme }) => theme.styles.textColorPrimary};
+    }
+  }
+`
+
+const Container = styled(FlexBox)<StyledProps>`
+  background: ${({ theme }) => theme.styles.sidebar.background};
+  height: 100%;
+  padding: ${({ theme }) => theme.styles.sidebar.padding};
+  width: ${({ theme }) => theme.styles.sidebar.width};
+  flex-shrink: 0;
+`
