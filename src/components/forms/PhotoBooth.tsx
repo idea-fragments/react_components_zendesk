@@ -13,11 +13,13 @@ import CameraPhoto, {
   FACING_MODES,
   IMAGE_TYPES
 }                            from "jslib-html5-camera-photo"
+import { isBoolean }         from "lodash"
 import {
   FC,
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState
 }                            from "react"
@@ -40,20 +42,35 @@ export type PhotoData = {
 }
 
 export type PhotoBoothProps = {
+  onHideCamera?: () => void,
   onSubmit: (data: PhotoData) => Promise<void>,
-  trigger: (onClick: () => void) => ReactNode,
+  open?: boolean,
+  trigger?: (onClick: () => void) => ReactNode,
 }
 
-export const PhotoBooth: FC<PhotoBoothProps> = ({ onSubmit, trigger }: PhotoBoothProps) => {
+export const PhotoBooth: FC<PhotoBoothProps> = ({
+                                                  onHideCamera = DO_NOTHING,
+                                                  onSubmit,
+                                                  open,
+                                                  trigger
+                                                }) => {
+  if (isBoolean(open) && trigger) throw new Error(
+    "PhotoBooth cannot have `open` and a `trigger` set at the same time"
+  )
+
   const [cameraIds, setCameraIds]                       = useState<string[]>([])
   const [currentCameraIdIndex, setCurrentCameraIdIndex] = useState<number>(0)
-  const [isCameraVisible, setIsCameraVisibleTo]         = useState(false)
+  const [_isCameraVisible, setIsCameraVisibleTo]        = useState(false)
   const [previewSrc, setPreviewSrc]                     = useState<string>()
 
   const cameraPhoto   = useRef<CameraPhoto>()
   const canvasRef     = useRef<HTMLCanvasElement>(null)
   const previewRef    = useRef<HTMLImageElement>(null)
   const viewFinderRef = useRef<HTMLVideoElement>(null)
+
+  const isCameraVisible = useMemo<boolean>(() => {
+    return open ?? _isCameraVisible
+  }, [_isCameraVisible, open])
 
   const { withLoading, isLoading } = useLoaderV2()
   const {
@@ -95,7 +112,8 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({ onSubmit, trigger }: PhotoBoot
     if (!cameraPhoto.current?.stream) return
     await stopCamera().then()
     setIsCameraVisibleTo(false)
-  }, [stopCamera])
+    onHideCamera()
+  }, [onHideCamera, stopCamera])
 
   const submitPhoto = useCallback(async () => {
     const blob = await (await fetch(previewSrc!)).blob()
@@ -105,7 +123,7 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({ onSubmit, trigger }: PhotoBoot
       await withSubmitLoading(onSubmit({ file, dataUri: previewSrc! }))
     } finally {
       clearPhoto()
-      hideCamera()
+      hideCamera().then()
     }
   }, [clearPhoto, hideCamera, onSubmit, previewSrc, withSubmitLoading])
 
@@ -131,7 +149,7 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({ onSubmit, trigger }: PhotoBoot
         || !canvasRef.current
         || !previewRef.current) return
 
-    if(!cameraPhoto.current) cameraPhoto.current = new CameraPhoto(viewFinderRef.current)
+    if (!cameraPhoto.current) cameraPhoto.current = new CameraPhoto(viewFinderRef.current)
     cameraPhoto.current.videoElement = viewFinderRef.current
     startCamera().then(DO_NOTHING)
   }, [hideCamera, isCameraVisible, startCamera])
@@ -200,7 +218,7 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({ onSubmit, trigger }: PhotoBoot
 
         </Container>
       )
-      : trigger(showCamera)
+      : trigger ? trigger(showCamera) : null
     }
   </TranslucentLoader>
 }
