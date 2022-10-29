@@ -88,9 +88,9 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
 
     // @ts-ignore
     const cameras: MediaDeviceInfo[] = await cameraPhoto.current!.enumerateCameras()
-    const foundIds                   = cameras.map((c: MediaDeviceInfo) => c.deviceId)
+    const foundIds                   = cameras.map((c) => c.deviceId).reverse()
+    onSilentError(new Error(JSON.stringify(cameras)))
 
-    onSilentError(new Error(JSON.stringify(foundIds)))
     if (isEmpty(foundIds)) foundIds.concat([FACING_MODES.ENVIRONMENT])
     setCameraIds(foundIds)
   }, [cameraIds, onSilentError])
@@ -157,21 +157,24 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
     setPreviewSrc(dataUri)
   }, [])
 
-  useEffect(() => {
-    if (!isCameraVisible
-        || !viewFinderRef.current
-        || !canvasRef.current
-        || !previewRef.current) return
+  useEffect(
+    () => {
+      if (!isCameraVisible
+          || !viewFinderRef.current
+          || !canvasRef.current
+          || !previewRef.current) return
 
-    if (!cameraPhoto.current) cameraPhoto.current = new CameraPhoto(viewFinderRef.current)
-    if(isEmpty(cameraIds)) {
-      getDeviceCameraIds().then()
-      return
-    }
+      if (!cameraPhoto.current) cameraPhoto.current = new CameraPhoto(viewFinderRef.current)
+      if (isEmpty(cameraIds)) {
+        getDeviceCameraIds().then()
+        return
+      }
 
-    cameraPhoto.current.videoElement = viewFinderRef.current
-    startCamera().then(DO_NOTHING)
-  }, [cameraIds, currentCameraIdIndex, getDeviceCameraIds, hideCamera, isCameraVisible, startCamera])
+      cameraPhoto.current.videoElement = viewFinderRef.current
+      startCamera().then(DO_NOTHING)
+    },
+    [cameraIds, currentCameraIdIndex, getDeviceCameraIds, hideCamera, isCameraVisible, startCamera]
+  )
 
   return <TranslucentLoader _css={`height: 100%; width: 100%;`} isLoading={isLoading}>
     {
