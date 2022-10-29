@@ -5,6 +5,7 @@ export declare type PhotoData = {
 };
 export declare type PhotoBoothProps = {
     onHideCamera?: () => void;
+    onSilentError?: (error: Error) => void;
     onSubmit: (data: PhotoData) => Promise<void>;
     open?: boolean;
     trigger?: (onClick: () => void) => ReactNode;

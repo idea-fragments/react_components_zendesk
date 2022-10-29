@@ -32,7 +32,8 @@ import { SPACINGS }          from "styles/spacings"
 import {
   isEmpty,
   isNotEmpty,
-  nextItemIndex
+  nextItemIndex,
+  takeOutItem
 }                            from "utils/arrayHelpers"
 import { DO_NOTHING }        from "utils/functionHelpers"
 
@@ -43,6 +44,7 @@ export type PhotoData = {
 
 export type PhotoBoothProps = {
   onHideCamera?: () => void,
+  onSilentError?: (error: Error) => void,
   onSubmit: (data: PhotoData) => Promise<void>,
   open?: boolean,
   trigger?: (onClick: () => void) => ReactNode,
@@ -50,6 +52,7 @@ export type PhotoBoothProps = {
 
 export const PhotoBooth: FC<PhotoBoothProps> = ({
                                                   onHideCamera = DO_NOTHING,
+                                                  onSilentError = DO_NOTHING,
                                                   onSubmit,
                                                   open,
                                                   trigger
@@ -97,15 +100,29 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
     setIsCameraVisibleTo(true)
   }, [])
 
+  const removeCameraIdAtIndex = useCallback(async (i: number) => {
+    setCameraIds(takeOutItem(await getDeviceCameraIds(), i))
+  }, [getDeviceCameraIds])
+
   const startCamera = useCallback(async (cameraIndex = currentCameraIdIndex) => {
-    const cameraId = (await getDeviceCameraIds())[cameraIndex]
-    // @ts-ignore
-    await withLoading(cameraPhoto.current!.startCameraMaxResolution(cameraId))
-    if (cameraIndex !== currentCameraIdIndex) setCurrentCameraIdIndex(cameraIndex)
-  }, [currentCameraIdIndex, getDeviceCameraIds, withLoading])
+    try {
+      const cameraId = (await getDeviceCameraIds())[cameraIndex]
+      // @ts-ignore
+      await withLoading(cameraPhoto.current!.startCameraMaxResolution(cameraId))
+      if (cameraIndex !== currentCameraIdIndex) setCurrentCameraIdIndex(cameraIndex)
+    } catch (e) {
+      if (!(e as Error).message.includes("Could not start video source")) throw e
+      onSilentError(e as Error)
+      await removeCameraIdAtIndex(cameraIndex)
+    }
+  }, [currentCameraIdIndex, getDeviceCameraIds, onSilentError, removeCameraIdAtIndex, withLoading])
 
   const stopCamera = useCallback(async () => {
-    await withLoading(cameraPhoto.current!.stopCamera())
+    try {
+      await withLoading(cameraPhoto.current!.stopCamera())
+    } catch (e) {
+      if (!(e as Error).message.includes("no stream to stop")) throw e
+    }
   }, [withLoading])
 
   const hideCamera = useCallback(async () => {
