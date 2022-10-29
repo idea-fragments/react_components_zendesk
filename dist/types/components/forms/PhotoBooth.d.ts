@@ -4,8 +4,10 @@ export declare type PhotoData = {
     dataUri: string;
 };
 export declare type PhotoBoothProps = {
+    onHideCamera?: () => void;
     onSubmit: (data: PhotoData) => Promise<void>;
-    trigger: (onClick: () => void) => ReactNode;
+    open?: boolean;
+    trigger?: (onClick: () => void) => ReactNode;
 };
 export declare const PhotoBooth: FC<PhotoBoothProps>;
 //# sourceMappingURL=PhotoBooth.d.ts.map
