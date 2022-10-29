@@ -35,7 +35,7 @@ export const indexBy = <FieldName extends string, T extends ObjectWithProperty<F
 }
 
 export const isEmpty        = (a: NullableArray): boolean => (!a?.length)
-export const isLastIndex    = (a: any[], i: number) => i === a.length - 1
+export const isLastIndex    = (a: ArrayLike<any>, i: number) => i === a.length - 1
 export const isLastItem     = <E>(a: ArrayLike<E>, item: E): boolean =>
   (lastItem(a) === item)
 export const isNotEmpty     = (a: NullableArray): boolean => !isEmpty(a)
@@ -43,6 +43,15 @@ export const isNotLastIndex = (a: any[], i: number) => !isLastIndex(a, i)
 export const isNotLastItem  = <E>(a: ArrayLike<E>, item: E): boolean =>
   (!isLastItem(a, item))
 export const lastItem       = <E>(a: ArrayLike<E>): E => a[a.length - 1]
+
+export const nextItem = <E>(a: ArrayLike<E>, item: E): E => {
+  const index = Array.from(a).indexOf(item)
+  return isLastIndex(a, index) ? a[0] : a[index + 1]
+}
+
+export const nextItemIndex = (a: ArrayLike<any>, currentIndex: number): number => {
+  return isLastIndex(a, currentIndex) ? 0 : currentIndex + 1
+}
 
 export const splitArray = (arr: any[], index: number,): any[][] => {
   const preSplit  = [...arr]
