@@ -83,39 +83,37 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
 
   const clearPhoto = useCallback(() => { setPreviewSrc(undefined) }, [])
 
-  const getDeviceCameraIds = useCallback(async (): Promise<string[]> => {
-    if (isNotEmpty(cameraIds)) return cameraIds
+  const getDeviceCameraIds = useCallback(async () => {
+    if (isNotEmpty(cameraIds)) return
 
     // @ts-ignore
     const cameras: MediaDeviceInfo[] = await cameraPhoto.current!.enumerateCameras()
     const foundIds                   = cameras.map((c: MediaDeviceInfo) => c.deviceId)
 
+    onSilentError(new Error(JSON.stringify(foundIds)))
     if (isEmpty(foundIds)) foundIds.concat([FACING_MODES.ENVIRONMENT])
     setCameraIds(foundIds)
-
-    return foundIds
-  }, [cameraIds])
+  }, [cameraIds, onSilentError])
 
   const showCamera = useCallback(() => {
     setIsCameraVisibleTo(true)
   }, [])
 
-  const removeCameraIdAtIndex = useCallback(async (i: number) => {
-    setCameraIds(takeOutItem(await getDeviceCameraIds(), i))
-  }, [getDeviceCameraIds])
+  const removeCameraId = useCallback(() => {
+    setCameraIds((prevState) => takeOutItem(prevState, currentCameraIdIndex))
+  }, [currentCameraIdIndex])
 
-  const startCamera = useCallback(async (cameraIndex = currentCameraIdIndex) => {
+  const startCamera = useCallback(async () => {
+    const cameraId = cameraIds[currentCameraIdIndex]
     try {
-      const cameraId = (await getDeviceCameraIds())[cameraIndex]
       // @ts-ignore
       await withLoading(cameraPhoto.current!.startCameraMaxResolution(cameraId))
-      if (cameraIndex !== currentCameraIdIndex) setCurrentCameraIdIndex(cameraIndex)
     } catch (e) {
       if (!(e as Error).message.includes("Could not start video source")) throw e
-      onSilentError(e as Error)
-      await removeCameraIdAtIndex(cameraIndex)
+      onSilentError(new Error(`Could not start video source for camera: ${cameraId}`))
+      removeCameraId()
     }
-  }, [currentCameraIdIndex, getDeviceCameraIds, onSilentError, removeCameraIdAtIndex, withLoading])
+  }, [cameraIds, currentCameraIdIndex, onSilentError, removeCameraId, withLoading])
 
   const stopCamera = useCallback(async () => {
     try {
@@ -146,9 +144,8 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
 
   const switchCamera = useCallback(async () => {
     const nextIdIndex = nextItemIndex(cameraIds, currentCameraIdIndex)
-    await stopCamera()
-    await startCamera(nextIdIndex)
-  }, [cameraIds, currentCameraIdIndex, startCamera, stopCamera])
+    setCurrentCameraIdIndex(nextIdIndex)
+  }, [cameraIds, currentCameraIdIndex])
 
   const takePhoto = useCallback(() => {
     const dataUri = cameraPhoto.current!.getDataUri({
@@ -167,9 +164,14 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
         || !previewRef.current) return
 
     if (!cameraPhoto.current) cameraPhoto.current = new CameraPhoto(viewFinderRef.current)
+    if(isEmpty(cameraIds)) {
+      getDeviceCameraIds().then()
+      return
+    }
+
     cameraPhoto.current.videoElement = viewFinderRef.current
     startCamera().then(DO_NOTHING)
-  }, [hideCamera, isCameraVisible, startCamera])
+  }, [cameraIds, currentCameraIdIndex, getDeviceCameraIds, hideCamera, isCameraVisible, startCamera])
 
   return <TranslucentLoader _css={`height: 100%; width: 100%;`} isLoading={isLoading}>
     {
