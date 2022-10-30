@@ -6,9 +6,12 @@ import { FONT_WEIGHTS }  from "styles/typography"
 
 type Props = {
   danger?: boolean,
+  fluid?: boolean,
   primary?: boolean,
   success?: boolean,
 }
+
+export type ChipProps = Props & StyledProps
 
 export const Chip = styled(XXS)
   .attrs(({ danger, primary, success, theme }: Props & StyledProps) => {
@@ -41,4 +44,5 @@ export const Chip = styled(XXS)
   padding: 2px 8px;
   border-radius: 8px;
   font-weight: ${FONT_WEIGHTS.BOLD};
+  width: ${p => p.fluid ? "100%" : "fit-content"};
 `

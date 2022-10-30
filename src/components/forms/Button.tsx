@@ -24,7 +24,11 @@ import { Alignment }                  from "styles/alignments"
 import { COLORS }                     from "styles/colors"
 import { SPACINGS }                   from "styles/spacings"
 import { Theme }                      from "styles/theme/Theme.type"
-import { ColorProps, ContainerProps } from "styles/types"
+import {
+  ColorProps,
+  ContainerProps,
+  CSSProp
+} from "styles/types"
 import { FONT_SIZES }                 from "styles/typography"
 import { PromiseFunc }                from "utils/function.types"
 
@@ -95,7 +99,7 @@ type ButtonBaseProps = PropsWithChildren<{
   primary?: boolean,
   size?: ButtonSize,
   onClick: () => void,
-}>
+}> & CSSProp
 
 type CommonProps = ButtonBaseProps & {
   autoLoadable?: boolean,
@@ -164,6 +168,7 @@ const ButtonBase = styled(({
     ${alignment}
     ${casing}
     ${({ disabled }) => !disabled ? colors : ""}
+    ${({ _css }) => _css}
   }
 `
 

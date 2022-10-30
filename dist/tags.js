@@ -78,7 +78,7 @@ var getColor$1 = styled.css(templateObject_1$2 || (templateObject_1$2 = __makeTe
 // `
 
 var subTextStyling = styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n" // @ts-ignore
+var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n" // @ts-ignore
 ])), function (_a) {
   var align = _a.align;
   return align;
@@ -91,6 +91,9 @@ var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 
 }, function (_a) {
   var hasSubText = _a.hasSubText;
   return hasSubText ? subTextStyling : "";
+}, function (_a) {
+  var _css = _a._css;
+  return _css;
 }); // @ts-ignore
 
 Text.COMPONENT_NAME = "Text";
@@ -2365,11 +2368,13 @@ var Chip = styled__default["default"](XXS).attrs(function (_a) {
     background: background,
     color: color
   };
-})(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  background: ", ";\n  color: ", ";\n  padding: 2px 8px;\n  border-radius: 8px;\n  font-weight: ", ";\n"], ["\n  background: ", ";\n  color: ", ";\n  padding: 2px 8px;\n  border-radius: 8px;\n  font-weight: ", ";\n"])), function (p) {
+})(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  background: ", ";\n  color: ", ";\n  padding: 2px 8px;\n  border-radius: 8px;\n  font-weight: ", ";\n  width: ", ";\n"], ["\n  background: ", ";\n  color: ", ";\n  padding: 2px 8px;\n  border-radius: 8px;\n  font-weight: ", ";\n  width: ", ";\n"])), function (p) {
   return p.background;
 }, function (p) {
   return p.color;
-}, FONT_WEIGHTS.BOLD);
+}, FONT_WEIGHTS.BOLD, function (p) {
+  return p.fluid ? "100%" : "fit-content";
+});
 var templateObject_1$1;
 var propTypes = {
   exports: {}

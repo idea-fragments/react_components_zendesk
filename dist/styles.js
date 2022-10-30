@@ -7108,7 +7108,7 @@ var remSize = function (e) {
   return Number(window.getComputedStyle(e, null).fontSize.replace(/[A-z]/g, ""));
 };
 
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6; // @flow
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 function newIdGenerator() {
   var id;

@@ -1,3 +1,5 @@
+import { FlattenSimpleInterpolation } from "styled-components"
+
 export type ColorProps = {
     accent? :boolean,
     color? :string,
@@ -11,8 +13,15 @@ export type ColorProps = {
 }
 
 export type ContainerProps = {
+    _css? :CSS,
     color? :string,
     compact? :boolean,
     fluid? :boolean,
     className? :any,
+}
+
+export type CSS = FlattenSimpleInterpolation | string
+
+export type CSSProp = {
+    _css? :CSS,
 }

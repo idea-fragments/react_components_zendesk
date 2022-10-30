@@ -42,6 +42,7 @@ import {
   useState
 }                 from "react"
 import styled     from "styled-components"
+import { CSS }    from "styles/types"
 import {
   FONT_SIZES
 }                 from "styles/typography"
@@ -82,6 +83,7 @@ type OptionalSelectorProps = {
 }
 
 type CommonProps = {
+  _css?: CSS,
   async?: boolean,
   isOpen?: boolean,
   maxMenuHeight?: string,
@@ -346,6 +348,8 @@ Dropdown = styled(Dropdown)`
   && {
     ${({ fluid }) => fluid ? "width: 100%;" : ""}
   }
+
+  ${({ _css }) => _css}
 `
 
 const Message = styled(ZenMessage)`

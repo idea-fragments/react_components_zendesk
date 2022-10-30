@@ -1,10 +1,12 @@
 import { MediaQuery } from "styles/mediaQueries";
+import { CSS } from "styles/types";
 export declare type ResponsiveProps<P> = {
     mediaQueryFunc: MediaQuery;
     props: P;
 };
 export declare type Props = {
     alignItems?: string;
+    _css?: CSS;
     gap?: string | null | "unset";
     fluid?: boolean;
     inline?: boolean;

@@ -278,7 +278,7 @@ var getFlexDirection = function (_a) {
   return withRows ? "column" : "row";
 };
 
-var FlexBox = styled__default["default"].div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  align-items: ", ";\n  display: ", ";\n  flex: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n\n  ", "\n"], ["\n  align-items: ", ";\n  display: ", ";\n  flex: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n\n  ", "\n"])), function (_a) {
+var FlexBox = styled__default["default"].div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  align-items: ", ";\n  display: ", ";\n  flex: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n\n  ", "\n  ", "\n"], ["\n  align-items: ", ";\n  display: ", ";\n  flex: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n\n  ", "\n  ", "\n"])), function (_a) {
   var alignItems = _a.alignItems;
   return alignItems ? alignItems : "initial";
 }, function (p) {
@@ -294,6 +294,8 @@ var FlexBox = styled__default["default"].div(templateObject_1$2 || (templateObje
   return p.wrap ? wrappedStyling : "";
 }, function (p) {
   return p.responsivePropsList ? responsiveStyles(p) : "";
+}, function (p) {
+  return p._css;
 });
 FlexBox.defaultProps = {
   withRows: false
@@ -9394,8 +9396,7 @@ var returnAfterMinimum = function (millisecs, f) {
       }
     });
   });
-}; // @flow
-
+};
 
 function newIdGenerator() {
   var id;

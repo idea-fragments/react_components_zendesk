@@ -25,7 +25,7 @@ export let Selector = ({ disabled, ...props }: SelectorProps) => {
 
   return (
     <Dropdown {...props}>
-      <Select small={small}
+      <Select isCompact={small}
               disabled={disabled}
               validation={validation?.validation}>
         {selectedKey && optionsKeyMap?.hasOwnProperty(selectedKey)
