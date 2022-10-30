@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components"
 import { MediaQuery }  from "styles/mediaQueries"
 import { SPACINGS }    from "styles/spacings"
+import { CSS }         from "styles/types"
 
 export type ResponsiveProps<P> = {
   mediaQueryFunc: MediaQuery,
@@ -9,6 +10,7 @@ export type ResponsiveProps<P> = {
 
 export type Props = {
   alignItems?: string,
+  _css?: CSS,
   gap?: string | null | "unset",
   fluid?: boolean,
   inline?: boolean,
@@ -32,9 +34,10 @@ export const FlexBox = styled.div<Props>`
   ${(p: Props) => p.wrap ? wrappedStyling : ""}
 
   ${(p: Props) => p.responsivePropsList ? responsiveStyles(p) : ""}
+  ${(p: Props) => p._css}
 `
 
-FlexBox.defaultProps   = { withRows: false }
+FlexBox.defaultProps = { withRows: false }
 
 const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) => (
   responsivePropsList?.map(({

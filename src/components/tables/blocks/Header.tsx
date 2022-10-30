@@ -2,6 +2,7 @@ import { mdiFilterVariant } from "@mdi/js"
 import { Checkbox }         from "components/forms/Checkbox"
 import { IconButton }       from "components/forms/IconButton"
 import { FlexBlock }        from "components/layout/FlexBlock"
+import { FlexBox }          from "components/layout/FlexBox"
 import { StyledProps }      from "components/StyledProps.type"
 import { TableFilter }      from "components/tables/blocks/TableFilter"
 import {
@@ -46,8 +47,8 @@ export const Header = ({
     Object.keys(initialFilterValues),
   )
 
-  const colWidth    = columnWidth(columnConfigs.length)
-  const allSelected = checkedItems?.size === items.length
+  const colWidth     = columnWidth(columnConfigs.length)
+  const allSelected  = checkedItems?.size === items.length
   const someSelected = !!checkedItems?.size && !allSelected
 
   const handleSelectAll = (checked: boolean) => {
@@ -77,37 +78,40 @@ export const Header = ({
           const color    = (p: StyledProps) => important
                                                ? p.theme.styles.colorPrimary
                                                : "unset"
-          const weight   = important ? FONT_WEIGHTS.BOLD : FONT_WEIGHTS.BOLD
           const textNode = (
-            <Text css={`color: ${color}; font-weight: ${weight};`}>{name}</Text>
+            <Text css={`color: ${color};`}>{name}</Text>
           )
           return (
             <HeaderCell key={name}
-                        css={css}
+                        _css={css}
                         width={css ? undefined : width || colWidth}>
-              {
-                filter
-                ? <FlexBlock css={`flex: 1;`}
-                             spacing={SPACINGS.XS}
-                             withRows>
-                  <FlexBlock spacing={SPACINGS.XS}>
-                    {textNode}
-                    <IconButton
-                      icon={mdiFilterVariant}
-                      iconSize={"1.2rem"}
-                      inline
-                      onClick={toggleFilter(filter.name)} />
-                  </FlexBlock>
-                  {
-                    enabledFilters.includes(filter.name)
-                    ? <TableFilter {...filter}
-                                   initialValue={initialFilterValues[filter.name]}
-                                   onChange={onFilterChange ?? DO_NOTHING} />
-                    : null
-                  }
-                </FlexBlock>
-                : textNode
-              }
+              <FlexBox _css={`flex: 1;`}
+                       gap={SPACINGS.XS}
+                       withRows>
+                {
+                  filter
+                  ?
+                  <>
+                    <FlexBox alignItems={"center"} gap={SPACINGS.XS}>
+                      {textNode}
+                      <IconButton
+                        _css={`height: fit-content;`}
+                        icon={mdiFilterVariant}
+                        iconSize={"1.2rem"}
+                        inline
+                        onClick={toggleFilter(filter.name)} />
+                    </FlexBox>
+                    {
+                      enabledFilters.includes(filter.name)
+                      ? <TableFilter {...filter}
+                                     initialValue={initialFilterValues[filter.name]}
+                                     onChange={onFilterChange ?? DO_NOTHING} />
+                      : null
+                    }
+                  </>
+                  : textNode
+                }
+              </FlexBox>
             </HeaderCell>
           )
         },

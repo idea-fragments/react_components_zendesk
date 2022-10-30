@@ -1,12 +1,14 @@
 import { MultiSelectorProps, SelectorProps } from "components/forms/selectors/types";
 import * as React from "react";
 import { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
+import { CSS } from "styles/types";
 export declare type MenuPlacement = "start" | "auto" | "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "end" | "end-top" | "end-bottom" | "start-top" | "start-bottom";
 declare type OptionalSelectorProps = {
     keyField?: string;
     labelField?: string;
 };
 declare type CommonProps = {
+    _css?: CSS;
     async?: boolean;
     isOpen?: boolean;
     maxMenuHeight?: string;

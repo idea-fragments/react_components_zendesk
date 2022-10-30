@@ -1,6 +1,6 @@
 import { ComponentType, PropsWithChildren, Ref } from "react";
 import { Alignment } from "styles/alignments";
-import { ColorProps, ContainerProps } from "styles/types";
+import { ColorProps, ContainerProps, CSSProp } from "styles/types";
 import { PromiseFunc } from "utils/function.types";
 export declare const BUTTON_SIZES: {
     readonly SMALL: "small";
@@ -25,7 +25,7 @@ declare type ButtonBaseProps = PropsWithChildren<{
     primary?: boolean;
     size?: ButtonSize;
     onClick: () => void;
-}>;
+}> & CSSProp;
 declare type CommonProps = ButtonBaseProps & {
     autoLoadable?: boolean;
     flat?: boolean;

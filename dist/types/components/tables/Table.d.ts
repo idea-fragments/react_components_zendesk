@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { CSSProp } from "styled-components";
+import { CSS } from "styles/types";
 export declare type ItemKey = number | string;
 export declare type ItemContainerStyles = string;
 export declare type ItemAction = {
@@ -29,7 +29,7 @@ export declare type Item = {
 };
 export declare type ColumnConfig = {
     collapsible: boolean;
-    css?: CSSProp;
+    css?: CSS;
     filter?: ItemFilterOptions;
     important: boolean;
     name: string;
@@ -68,6 +68,7 @@ declare type Props = TableProps & {
     pagination?: PaginationData;
     onPageChange?: (p: number) => void;
 };
+export declare type FinalizedTableProps = Props;
 export declare let Table: ({ action, actions, className, nice, pagination, onItemsChecked, onPageChange, ...props }: Props) => JSX.Element;
 export {};
 //# sourceMappingURL=Table.d.ts.map

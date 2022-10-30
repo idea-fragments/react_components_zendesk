@@ -39,7 +39,7 @@ export const Row = ({
   const { key, containerStyles, actions }: Item = item
 
   return (
-    <MyRow css={containerStyles || {}}
+    <MyRow _css={containerStyles || ""}
            onClick={() => onClick?.(key)}
            onMouseEnter={() => onHoverStart?.(key)}
            onMouseLeave={() => onHoverEnd?.(key)}
@@ -60,9 +60,9 @@ export const Row = ({
 
         return (
           <Cell key={`${key}-${name}`}
-                css={css}
+                _css={css}
                 width={css ? undefined : width || colWidth}>
-            <Text css={`font-weight: ${weight}; width: 100%;`}>
+            <Text _css={`font-weight: ${weight}; width: 100%;`}>
               {item[name]}
             </Text>
           </Cell>
@@ -76,9 +76,7 @@ export const Row = ({
 }
 
 const OverflowMenuCell = styled(Cell)`
-  && {
-    padding: 1rem 0;
-  }
+  && {}
 `
 
 Row.COMPONENT_NAME = "Row"

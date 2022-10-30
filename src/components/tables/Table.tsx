@@ -10,6 +10,7 @@ import {
   DeviceSizeChangeListener,
 }                                                             from "styles/DeviceSizeWatcher"
 import { deviceSizeWatcher }                                  from "styles/DeviceSizeWatcher"
+import { CSS }                                                from "styles/types"
 import { isNotEmpty }                                         from "utils/arrayHelpers"
 
 export type ItemKey = number | string
@@ -35,7 +36,7 @@ export type Item = { [key: string]: ReactNode } & {
 
 export type ColumnConfig = {
   collapsible: boolean,
-  css?: CSSProp,
+  css?: CSS,
   filter?: ItemFilterOptions,
   important: boolean,
   name: string,
@@ -76,6 +77,8 @@ type Props = TableProps & {
   pagination?: PaginationData,
   onPageChange?: (p: number) => void,
 }
+
+export type FinalizedTableProps = Props
 
 const {
         getSize,

@@ -32,18 +32,17 @@ export const NiceTable = ({
                             onSelectAllToggle,
                           }: Props) => {
   return (
-    <FlexBox>
-      <Table>
-        <FlexBox css={`margin-bottom: 1rem`}
-                 justifyContent={"space-between"} withRows>
-          {title ? <Title>{title}</Title> : null}
-          {helpText ? <HelpText>{helpText}</HelpText> : null}
-          <FlexBox css={`flex: 1`} justifyContent={"flex-end"}>
-            {/* @ts-ignore */}
-            {actions?.({ checkedItems })?.map((a) => a)}
-          </FlexBox>
+    <FlexBox withRows>
+      <FlexBox _css={`margin-bottom: 1rem`}
+               justifyContent={"space-between"} withRows>
+        {title ? <Title>{title}</Title> : null}
+        {helpText ? <HelpText>{helpText}</HelpText> : null}
+        <FlexBox _css={`flex: 1`} justifyContent={"flex-end"}>
+          {/* @ts-ignore */}
+          {actions?.({ checkedItems })?.map((a) => a)}
         </FlexBox>
-
+      </FlexBox>
+      <Table>
         <Header checkable={checkable}
                 checkedItems={checkedItems}
                 columnConfigs={columnConfigs}

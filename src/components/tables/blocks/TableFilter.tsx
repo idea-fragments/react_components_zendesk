@@ -32,12 +32,12 @@ export const TableFilter = ({
 
   const filter = type === "select"
                  ? <Selector clearable
-                             css={`font-weight: ${FONT_WEIGHTS.REGULAR};`}
+                             _css={`font-weight: ${FONT_WEIGHTS.REGULAR};`}
                              keyField={"value"}
+                             labelField={"label"}
                              options={options!!}
                              selectedKey={value}
                              small
-                             valueField={"label"}
                              // @ts-ignore
                              onChange={setValue} />
                  : <TextField small
@@ -47,7 +47,7 @@ export const TableFilter = ({
   return <FlexBox withRows>
     {filter}
     <Button compact
-            css={`align-self: flex-end;`}
+            _css={`align-self: flex-end;`}
             icon={mdiCheck}
             iconSize={"1rem"}
             size={BUTTON_SIZES.SMALL}

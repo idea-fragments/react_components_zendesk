@@ -6,41 +6,67 @@ import {
   Body as ZBody,
   Cell as ZCell,
   Row as ZRow,
+  OverflowButton as ZOverflowButton,
   /* @ts-ignore */
 }                                      from "@zendeskgarden/react-tables"
-import styled, { css }                 from "styled-components"
-import { COLORS, fade, veryLight }     from "styles/colors"
+import styled, {
+  css,
+  FlattenSimpleInterpolation
+}                                      from "styled-components"
+import {
+  COLORS,
+  fade,
+  light,
+  veryLight
+}                                      from "styles/colors"
+import {
+  CSS,
+  CSSProp
+}                                      from "styles/types"
 import { FONT_SIZES_EM as FONT_SIZES } from "styles/typography"
 
+const OVERFLOW_CELL_WIDTH = "3.5em"
+
 const Table = styled(ZTable)`
-  && { color: inherit; }
+  && {
+    color: inherit;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid ${veryLight(COLORS.GREY)};
+  }
 `
 
 const Head = styled(ZHead)`
-  font-size: ${FONT_SIZES.SM};
-  padding: ${(p) => p.theme.styles.table.borderSize};
+  //text-transform: uppercase;
   background: ${veryLight(COLORS.GREY)};
 `
 
 const HeaderRow = styled(ZHeaderRow)`
-  background: ${COLORS.WHITE};
+  font-size: ${FONT_SIZES.XS};
   border: none !important;
-  box-shadow: none !important;
   height: auto !important;
 `
 
-const HeaderCell = styled(ZHeaderCell)``
+const HeaderCell = styled(ZHeaderCell)<{ _css?: CSS }>`
+  vertical-align: top;
+  ${({ hasOverflow }) => hasOverflow ? `width: ${OVERFLOW_CELL_WIDTH}` : ""};
+  ${({ _css }) => _css}
+`
 
 const Body = styled(ZBody)`
   font-size: ${FONT_SIZES.SM};
-  padding: ${(p) => {
-    const size = p.theme.styles.table.borderSize
-    return `0 ${size} ${size}`
-  }};
-  background: ${veryLight(COLORS.GREY)};
 `
 
-const Cell = styled(ZCell)``
+const Cell = styled(ZCell)<CSSProp>`
+  &&&& {
+    box-shadow: none;
+    ${({ hasOverflow }) => hasOverflow ? `width: ${OVERFLOW_CELL_WIDTH}` : ""};
+    ${({ _css }) => _css}
+  }
+`
+
+const OverflowButton = styled(ZOverflowButton)`
+`
 
 const clickableRowStyling = css`
   cursor: pointer;
@@ -49,10 +75,6 @@ const clickableRowStyling = css`
     & > ${Cell}:first-child {
       box-shadow: inset 3px 0 0 0 ${(p) => p.theme.styles.colorPrimary};
     }
-  }
-
-  :hover {
-    background: ${COLORS.WHITE};
   }
 
   :focus {
@@ -67,20 +89,21 @@ const unclickableRowStyling = css`
     }
   }
 
-  :hover, :focus {
+  :focus {
     background: ${COLORS.WHITE};
   }
 `
 
-const Row = styled(ZRow)<{ clickable?: boolean }>`
+const Row = styled(ZRow)<{ clickable?: boolean, _css?: CSS }>`
   &&&& {
-    background: ${COLORS.WHITE} !important;
-    border: none !important;
+    border-width: 2px;
+    border-color: ${veryLight(COLORS.GREY)};
 
-    ${p => p.clickable ? clickableRowStyling : unclickableRowStyling}
-    &:not(:last-of-type) {
-      margin-bottom: ${(p) => p.theme.styles.table.borderSize};
+    :hover {
+      background: ${light(COLORS.GREY, .72)};
     }
+
+    ${({ _css }) => _css}
   }
 `
 
@@ -88,6 +111,7 @@ Object.assign(Table, {
   Head,
   HeaderRow,
   HeaderCell,
+  OverflowButton,
   Body,
   Row,
   Cell,
@@ -98,6 +122,7 @@ export {
   Head,
   HeaderRow,
   HeaderCell,
+  OverflowButton,
   Body,
   Row,
   Cell,

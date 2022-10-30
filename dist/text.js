@@ -50,7 +50,7 @@ var getColor = styled.css(templateObject_1 || (templateObject_1 = __makeTemplate
 // `
 
 var subTextStyling = styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n" // @ts-ignore
+var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n" // @ts-ignore
 ])), function (_a) {
   var align = _a.align;
   return align;
@@ -63,6 +63,9 @@ var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 
 }, function (_a) {
   var hasSubText = _a.hasSubText;
   return hasSubText ? subTextStyling : "";
+}, function (_a) {
+  var _css = _a._css;
+  return _css;
 }); // @ts-ignore
 
 Text.COMPONENT_NAME = "Text";

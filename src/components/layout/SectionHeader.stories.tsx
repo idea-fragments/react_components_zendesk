@@ -1,8 +1,11 @@
-import { Button }                            from "components/forms/Button"
-import { SectionHeader, SectionHeaderProps } from "components/layout/SectionHeader"
-import { H3 }                                from "components/text/Header"
-import React                                 from "react"
-import { DO_NOTHING }                        from "utils/functionHelpers"
+import { Button }     from "components/forms/Button"
+import {
+  SectionHeader,
+  SectionHeaderProps
+}                     from "components/layout/SectionHeader"
+import { H3 }         from "components/text/Header"
+import React          from "react"
+import { DO_NOTHING } from "utils/functionHelpers"
 
 export default {
   title:     "layouts/SectionHeader",
@@ -17,7 +20,9 @@ const Story = (args: SectionHeaderProps) => {
   </>
   return <SectionHeader
     {...args}
-    actions={actions}>
+    actions={actions}
+    caption={"Scan business cards to import them into your account.\n" +
+             "Once a card is saved, you can come back and complete the import later."}>
     <H3>Title of Section</H3>
   </SectionHeader>
 }
