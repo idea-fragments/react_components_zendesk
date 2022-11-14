@@ -9,29 +9,22 @@ import {
   Multiselect as ZenMultiSelect,
   Select as ZenSelect,
   Trigger,
-}                 from "@zendeskgarden/react-dropdowns"
+}                            from "@zendeskgarden/react-dropdowns"
 import {
   getItemType,
   Item
-}                 from "components/forms/selectors/Dropdown/Item"
+}                            from "components/forms/selectors/Dropdown/Item"
 import {
   MultiSelectorProps,
   SelectorItemKey,
   SelectorOption,
   SelectorProps,
   StateChange,
-}                 from "components/forms/selectors/types"
-import {
-  VALIDATION_STATES
-}                 from "components/forms/validationStates"
-import {
-  Loadable
-}                 from "components/loaders/Loadable"
-import {
-  debounce
-}                 from "lodash"
-import * as React from "react"
-import {
+}                            from "components/forms/selectors/types"
+import { VALIDATION_STATES } from "components/forms/validationStates"
+import { Loadable }          from "components/loaders/Loadable"
+import { debounce }          from "lodash"
+import React, {
   ComponentType,
   FC,
   PropsWithChildren,
@@ -40,27 +33,21 @@ import {
   useEffect,
   useRef,
   useState
-}                 from "react"
-import styled     from "styled-components"
-import { CSS }    from "styles/types"
-import {
-  FONT_SIZES
-}                 from "styles/typography"
+}                            from "react"
+import styled                from "styled-components"
+import { CSS }               from "styles/types"
+import { FONT_SIZES }        from "styles/typography"
 import {
   isEmpty,
   isNotEmpty
-}                 from "utils/arrayHelpers"
-import {
-  DO_NOTHING
-}                 from "utils/functionHelpers"
-import {
-  Logger
-}                 from "utils/logging/Logger"
+}                            from "utils/arrayHelpers"
+import { DO_NOTHING }        from "utils/functionHelpers"
+import { Logger }            from "utils/logging/Logger"
 import {
   isArray,
   isNumber,
   isString
-}                 from "utils/typeCheckers"
+}                            from "utils/typeCheckers"
 
 export type MenuPlacement =
   "start"
@@ -84,6 +71,7 @@ type OptionalSelectorProps = {
 
 type CommonProps = {
   _css?: CSS,
+  appendMenuToNode?: HTMLElement,
   async?: boolean,
   isOpen?: boolean,
   maxMenuHeight?: string,
@@ -122,6 +110,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
         ] = useState<SelectorOption[]>(props.options)
 
   const {
+          appendMenuToNode,
           async,
           children,
           className,
@@ -322,6 +311,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
 
       {controlledState.isOpen
        ? <StyledMenu _css={menuCSS ?? ""}
+                     appendToNode={appendMenuToNode}
                      maxHeight={maxMenuHeight}
                      placement={placement}
        >

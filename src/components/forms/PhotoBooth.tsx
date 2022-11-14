@@ -107,7 +107,7 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
     const cameraId = cameraIds[currentCameraIdIndex]
     try {
       // @ts-ignore
-      await withLoading(cameraPhoto.current!.startCameraMaxResolution(cameraId))
+      await withLoading(cameraPhoto.current!.startCamera(cameraId))
     } catch (e) {
       if (!(e as Error).message.includes("Could not start video source")) throw e
       onSilentError(new Error(`Could not start video source for camera: ${cameraId}`))

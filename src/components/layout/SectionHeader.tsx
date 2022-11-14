@@ -39,8 +39,9 @@ const Text = styled.div`
   & h3,
   & h4,
   & h5,
-  & h6 {
-    margin-top: 0;
+  & h6,
+  & p {
+    margin: 0;
   }
 
 `

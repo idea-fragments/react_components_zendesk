@@ -1,4 +1,9 @@
-import { FlattenSimpleInterpolation } from "styled-components"
+import { StickyColumnProps } from "components/tables/utils"
+import {
+    FlattenSimpleInterpolation,
+    Interpolation,
+    ThemeProps
+}                            from "styled-components"
 
 export type ColorProps = {
     accent? :boolean,
@@ -20,8 +25,9 @@ export type ContainerProps = {
     className? :any,
 }
 
-export type CSS = FlattenSimpleInterpolation | string
+export type CSS<T = any> = FlattenSimpleInterpolation |
+                  string | T
 
-export type CSSProp = {
-    _css? :CSS,
+export type CSSProp<T = any> = {
+    _css? :CSS<T>,
 }

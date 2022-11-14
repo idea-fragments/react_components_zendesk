@@ -66,6 +66,7 @@ export declare type Styles = {
         zIndex: number;
     };
     table: {
+        borderColor: string;
         borderSize: string;
     };
     textColorDark: string;

@@ -1,16 +1,33 @@
-import { mdiChevronDown, mdiChevronUp }     from "@mdi/js"
-import { Button }                           from "components/forms/Button"
-import { Checkbox }                         from "components/forms/Checkbox"
-import { PaddedFlexBlock }                  from "components/layout/FlexBlock"
-import { FlexBox }                          from "components/layout/FlexBox"
-import { Col, Grid, Row as GridRow }        from "components/layout/Grid"
-import { OverflowMenu }                     from "components/layout/OverflowMenu"
-import { ColumnConfig, Item, ItemKey } from "components/tables/Table"
-import { Text }                             from "components/text/Text"
-import React, { FC }                        from "react"
-import styled, { css }                      from "styled-components"
-import { COLORS, veryLight }                from "styles/colors"
-import { FONT_SIZES, FONT_WEIGHTS }         from "styles/typography"
+import {
+  mdiChevronDown,
+  mdiChevronUp
+}                       from "@mdi/js"
+import { Button }       from "components/forms/Button"
+import { Checkbox }     from "components/forms/Checkbox"
+import { FlexBox }      from "components/layout/FlexBox"
+import {
+  Col,
+  Grid,
+  Row as GridRow
+}                       from "components/layout/Grid"
+import { OverflowMenu } from "components/layout/OverflowMenu"
+import {
+  ColumnConfig,
+  Item,
+  ItemKey
+}                       from "components/tables/Table"
+import { Text }         from "components/text/Text"
+import React, { FC }    from "react"
+import styled, { css }  from "styled-components"
+import {
+  COLORS,
+  veryLight
+}                       from "styles/colors"
+import { SPACINGS }     from "styles/spacings"
+import {
+  FONT_SIZES,
+  FONT_WEIGHTS
+}                       from "styles/typography"
 
 
 type Props = {
@@ -42,10 +59,13 @@ export const Row: FC<Props> = ({
   }
 
   return (
-    <Container css={containerStyles || {}} onClick={() => onClick?.(key)}>
-      <PaddedFlexBlock css={`background: white;
+    <Container _css={containerStyles || ""} onClick={() => onClick?.(key)}>
+      <FlexBox _css={css`
+        background: white;
+        padding: ${SPACINGS.SM};
         width: 100%;
-        border-radius: .3rem;`}>
+        border-radius: .3rem;
+      `}>
         {checkable ? (
           <Checkbox
             checked={!checkDisabled && checked}
@@ -72,19 +92,18 @@ export const Row: FC<Props> = ({
                                 : ""
 
               return (
-                <GridRow key={`${key}-${c.name}`}
-                         css={cssStyles}>
+                <GridRow key={`${key}-${c.name}`} _css={cssStyles}>
                   <Col md={5} sm={12}>
-                    <Text
-                      css={`font-weight: ${titleWeight};`}>
+                    <Text _css={`font-weight: ${titleWeight};`}>
                       {name}:
                     </Text>
                   </Col>
 
                   <Col md={7} sm={12}>
-                    <Text
-                      css={`font-weight: ${valueWeight};
-                        font-size: ${FONT_SIZES.XS};`}>
+                    <Text _css={css`
+                      font-weight: ${valueWeight};
+                      font-size: ${FONT_SIZES.XS};
+                    `}>
                       {item[name]}
                     </Text>
                   </Col>
@@ -114,12 +133,11 @@ export const Row: FC<Props> = ({
         {
           actions
           ? <div>
-            <OverflowMenu actions={actions}
-                          placement={"bottom-end"} />
+            <OverflowMenu actions={actions} placement={"bottom-end"} />
           </div>
           : null
         }
-      </PaddedFlexBlock>
+      </FlexBox>
     </Container>
   )
 }

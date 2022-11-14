@@ -54,12 +54,18 @@ Default.args         = {}
 
 // @ts-ignore
 const items: Item[] = [
-  { Color: "red", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "blue", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "orange", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "yellow", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "green", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "purple", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "red", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "blue", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "orange", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "yellow", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "green", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "purple", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "violet", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "magenta", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "cyan", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "black", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "white", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  { Color: "grey", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
 ].map((item) => ({
   ...item,
   key:     item.Color,
@@ -78,9 +84,34 @@ const columnConfigs: ColumnConfig[] = [
       name:    "Filter Color",
       options: items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
       type:    "select",
-    }
+    },
+    width: "100px",
   },
-  { name: "Created At", important: false, collapsible: false },
+  {
+    name:        "Column 2",
+    important:   true,
+    collapsible: false,
+    width: "150px",
+  },
+  {
+    name:        "Column 3",
+    important:   false,
+    collapsible: false,
+    width: "150px",
+  },
+  {
+    name:        "Column 4",
+    important:   false,
+    collapsible: false,
+    width: "150px",
+  },
+  {
+    name:        "Column 5",
+    important:   false,
+    collapsible: false,
+    width: "500px",
+  },
+  { name: "Created At", important: false, collapsible: false, width: "150px", },
   {
     name:        "Status",
     important:   false,
@@ -89,6 +120,7 @@ const columnConfigs: ColumnConfig[] = [
       name:    "Status Color",
       options: undefined,
       type:    "text",
-    }
+    },
+    width: "150px",
   },
 ]

@@ -16,8 +16,8 @@ export declare type ContainerProps = {
     fluid?: boolean;
     className?: any;
 };
-export declare type CSS = FlattenSimpleInterpolation | string;
-export declare type CSSProp = {
-    _css?: CSS;
+export declare type CSS<T = any> = FlattenSimpleInterpolation | string | T;
+export declare type CSSProp<T = any> = {
+    _css?: CSS<T>;
 };
 //# sourceMappingURL=types.d.ts.map

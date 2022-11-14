@@ -53,7 +53,7 @@ export const nextItemIndex = (a: ArrayLike<any>, currentIndex: number): number =
   return isLastIndex(a, currentIndex) ? 0 : currentIndex + 1
 }
 
-export const splitArray = (arr: any[], index: number,): any[][] => {
+export const splitArray = <T>(arr: T[], index: number,): T[][] => {
   const preSplit  = [...arr]
   const postSplit = preSplit.splice(index)
   return [preSplit, postSplit]

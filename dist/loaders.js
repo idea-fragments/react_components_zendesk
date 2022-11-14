@@ -146,7 +146,7 @@ var FlexBox = styled__default["default"].div(templateObject_1$2 || (templateObje
 }, function (p) {
   return p.justifyContent || "initial";
 }, function (p) {
-  return p.wrap ? wrappedStyling : "";
+  return p.wrapped ? wrappedStyling : "";
 }, function (p) {
   return p.responsivePropsList ? responsiveStyles(p) : "";
 }, function (p) {
@@ -171,8 +171,8 @@ var responsiveStyles = function (_a) {
         inline = props.inline,
         justifyContent = props.justifyContent,
         fluid = props.fluid,
-        wrap = props.wrap;
-    return mediaQueryFunc(styled.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n      align-items: ", ";\n      display: ", ";\n      flex: ", ";\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "], ["\n      align-items: ", ";\n      display: ", ";\n      flex: ", ";\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "])), alignItems ? alignItems : "initial", inline ? "inline-flex" : "flex", fluid ? 1 : "unset", getFlexDirection(props), gap ? gap : SPACINGS.SM, justifyContent || "initial", wrap ? wrappedStyling : "")).join("");
+        wrapped = props.wrapped;
+    return mediaQueryFunc(styled.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n      align-items: ", ";\n      display: ", ";\n      flex: ", ";\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "], ["\n      align-items: ", ";\n      display: ", ";\n      flex: ", ";\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "])), alignItems ? alignItems : "initial", inline ? "inline-flex" : "flex", fluid ? 1 : "unset", getFlexDirection(props), gap ? gap : SPACINGS.SM, justifyContent || "initial", wrapped ? wrappedStyling : "")).join("");
   });
 };
 

@@ -1,7 +1,6 @@
 import { mdiFilterVariant } from "@mdi/js"
 import { Checkbox }         from "components/forms/Checkbox"
 import { IconButton }       from "components/forms/IconButton"
-import { FlexBlock }        from "components/layout/FlexBlock"
 import { FlexBox }          from "components/layout/FlexBox"
 import { StyledProps }      from "components/StyledProps.type"
 import { TableFilter }      from "components/tables/blocks/TableFilter"
@@ -15,11 +14,14 @@ import {
   Item,
   ItemKey
 }                           from "components/tables/Table"
-import { columnWidth }      from "components/tables/utils"
+import {
+  columnContainerStyles,
+  columnWidth
+}                           from "components/tables/utils"
 import { Text }             from "components/text/Text"
 import React, { useState }  from "react"
+import { css }              from "styled-components"
 import { SPACINGS }         from "styles/spacings"
-import { FONT_WEIGHTS }     from "styles/typography"
 import { DO_NOTHING }       from "utils/functionHelpers"
 
 type Props = {
@@ -66,56 +68,65 @@ export const Header = ({
   return <TableHead>
     <HeaderRow>
       {checkable ? (
-        <HeaderCell isMinimum>
+        <HeaderCell
+          _css={css`${columnContainerStyles({ important: true })}`}
+          checkableRow={checkable}
+          columnConfigs={columnConfigs}
+          index={0}
+          isMinimum>
           <Checkbox checked={allSelected}
                     indeterminate={someSelected}
                     onChange={handleSelectAll} />
         </HeaderCell>
       ) : null}
 
-      {columnConfigs.map(
-        ({ css, important, name, width, filter }: ColumnConfig) => {
-          const color    = (p: StyledProps) => important
-                                               ? p.theme.styles.colorPrimary
-                                               : "unset"
-          const textNode = (
-            <Text css={`color: ${color};`}>{name}</Text>
-          )
-          return (
-            <HeaderCell key={name}
-                        _css={css}
-                        width={css ? undefined : width || colWidth}>
-              <FlexBox _css={`flex: 1;`}
-                       gap={SPACINGS.XS}
-                       withRows>
-                {
-                  filter
-                  ?
-                  <>
-                    <FlexBox alignItems={"center"} gap={SPACINGS.XS}>
-                      {textNode}
-                      <IconButton
-                        _css={`height: fit-content;`}
-                        icon={mdiFilterVariant}
-                        iconSize={"1.2rem"}
-                        inline
-                        onClick={toggleFilter(filter.name)} />
-                    </FlexBox>
-                    {
-                      enabledFilters.includes(filter.name)
-                      ? <TableFilter {...filter}
-                                     initialValue={initialFilterValues[filter.name]}
-                                     onChange={onFilterChange ?? DO_NOTHING} />
-                      : null
-                    }
-                  </>
-                  : textNode
-                }
-              </FlexBox>
-            </HeaderCell>
-          )
-        },
-      )}
+      {columnConfigs.map((c: ColumnConfig, index: number) => {
+        const { css: _css = "", important, name, width, filter } = c
+
+        index          = checkable ? index + 1 : index
+        const color    = (p: StyledProps) => important
+                                             ? p.theme.styles.colorPrimary
+                                             : "unset"
+        const textNode = <Text css={`color: ${color};`}>{name}</Text>
+
+        return (
+          <HeaderCell
+            _css={css`${columnContainerStyles(c)} ${_css}`}
+            checkableRow={checkable}
+            columnConfigs={columnConfigs}
+            index={index}
+            key={name}
+            width={_css ? undefined : width ?? undefined}>
+            <FlexBox _css={`flex: 1;`}
+                     gap={SPACINGS.XS}
+                     withRows>
+              {
+                filter
+                ?
+                <>
+                  <FlexBox alignItems={"center"} gap={SPACINGS.XS}>
+                    {textNode}
+                    <IconButton
+                      _css={`height: fit-content;`}
+                      icon={mdiFilterVariant}
+                      iconSize={"1.2rem"}
+                      inline
+                      onClick={toggleFilter(filter.name)} />
+                  </FlexBox>
+                  {
+                    enabledFilters.includes(filter.name)
+                    ? <TableFilter {...filter}
+                                   initialValue={initialFilterValues[filter.name]}
+                                   onChange={onFilterChange ?? DO_NOTHING} />
+                    : null
+                  }
+                </>
+                : textNode
+              }
+            </FlexBox>
+          </HeaderCell>
+        )
+      })}
 
       {hasRowActions ? <HeaderCell hasOverflow /> : null}
     </HeaderRow>

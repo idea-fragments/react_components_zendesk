@@ -5,9 +5,10 @@ export declare type OverflowMenuItem = {
     action: () => void;
 };
 declare type Props = {
+    appendToNode?: HTMLElement;
     placement?: MenuPlacement;
     actions: Array<OverflowMenuItem>;
 };
-export declare const OverflowMenu: ({ actions, placement }: Props) => JSX.Element;
+export declare const OverflowMenu: ({ actions, appendToNode, placement }: Props) => JSX.Element;
 export {};
 //# sourceMappingURL=OverflowMenu.d.ts.map

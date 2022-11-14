@@ -6,6 +6,7 @@ import {
 }                   from "@zendeskgarden/react-grid"
 import styled       from "styled-components"
 import { SPACINGS } from "styles/spacings"
+import { CSSProp }  from "styles/types"
 
 export const Grid = styled(ZGrid)`
   && {
@@ -13,7 +14,9 @@ export const Grid = styled(ZGrid)`
   }
 `
 
-export const Row = ZRow
+export const Row = styled(ZRow)<CSSProp>`
+  ${({ _css }) => _css}
+`
 
 export const Col = styled(ZCol)`
   && {
