@@ -4,9 +4,9 @@ import { HelpText }             from "components/tables/blocks/HelpText"
 import { Title }                from "components/tables/blocks/Title"
 import { Row }                  from "components/tables/MobileTable/Row"
 import { Item }            from "components/tables/Table"
-import { TableProps }           from "components/tables/Table"
-import React                    from "react"
-import { FONT_SIZES }           from "styles/typography"
+import { TableProps }      from "components/tables/Table"
+import React, { Fragment } from "react"
+import { FONT_SIZES }      from "styles/typography"
 
 type Props = TableProps & {
   hasRowActions: boolean,
@@ -30,7 +30,7 @@ export const MobileTable = ({
 
   return (
     <FlexBox withRows>
-      <FlexBox css={`flex-wrap: wrap;`}
+      <FlexBox _css={`flex-wrap: wrap;`}
                justifyContent={"space-between"}
                withRows
       >
@@ -40,7 +40,7 @@ export const MobileTable = ({
         </Title>
 
 
-        <FlexBox justifyContent={"space-between"} wrap>
+        <FlexBox justifyContent={"space-between"} wrapped>
           {checkable ?
            <Button compact
                    neutral
@@ -49,7 +49,7 @@ export const MobileTable = ({
              {allSelected ? "Deselect" : "Select"} All
            </Button> : undefined}
           {/*@ts-ignore*/}
-          {actions?.({ checkedItems })?.map((a) => a)}
+          {actions?.({ checkedItems })?.map((a, i) => <Fragment key={i}>{a}</Fragment>)}
         </FlexBox>
       </FlexBox>
 

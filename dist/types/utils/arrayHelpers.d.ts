@@ -19,7 +19,7 @@ export declare const isNotLastItem: <E>(a: ArrayLike<E>, item: E) => boolean;
 export declare const lastItem: <E>(a: ArrayLike<E>) => E;
 export declare const nextItem: <E>(a: ArrayLike<E>, item: E) => E;
 export declare const nextItemIndex: (a: ArrayLike<any>, currentIndex: number) => number;
-export declare const splitArray: (arr: any[], index: number) => any[][];
+export declare const splitArray: <T>(arr: T[], index: number) => T[][];
 export declare const takeOutItem: <T>(arr: T[], index: number) => T[];
 export {};
 //# sourceMappingURL=arrayHelpers.d.ts.map

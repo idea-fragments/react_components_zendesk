@@ -1,12 +1,22 @@
-import { Checkbox }                     from "components/forms/Checkbox"
-import { OverflowMenu }                 from "components/layout/OverflowMenu"
-import { Cell, Row as MyRow }           from "components/tables/index"
-import { ColumnConfig, Item, ItemKey, } from "components/tables/Table"
-import { columnWidth }                  from "components/tables/utils"
-import { Text }                         from "components/text/Text"
-import React                            from "react"
-import styled                           from "styled-components"
-import { FONT_WEIGHTS }                 from "styles/typography"
+import { Checkbox }     from "components/forms/Checkbox"
+import { OverflowMenu } from "components/layout/OverflowMenu"
+import {
+  Cell,
+  Row as MyRow
+}                       from "components/tables/index"
+import {
+  ColumnConfig,
+  Item,
+  ItemKey,
+}                       from "components/tables/Table"
+import {
+  columnContainerStyles,
+  columnWidth
+}                       from "components/tables/utils"
+import { Text }         from "components/text/Text"
+import React            from "react"
+import styled, { css }  from "styled-components"
+import { FONT_WEIGHTS } from "styles/typography"
 
 type Props = {
   checkable?: boolean,
@@ -45,32 +55,44 @@ export const Row = ({
            onMouseLeave={() => onHoverEnd?.(key)}
     >
       {checkable ? (
-        <Cell isMinimum>
+        <Cell
+          _css={css`${columnContainerStyles({ important: true })}`}
+          checkableRow={checkable}
+          columnConfigs={columnConfigs}
+          index={0}
+          isMinimum>
           <Checkbox checked={!checkDisabled && checked}
                     disabled={checkDisabled}
                     onChange={handleCheckChange} />
         </Cell>
       ) : null}
-      {columnConfigs.map((c: ColumnConfig) => {
-        const { css, name, important, width, } = c
+      {columnConfigs.map((c: ColumnConfig, index: number) => {
+        const { css: _css = "", name, important, width, } = c
 
-        const weight = important
-                       ? FONT_WEIGHTS.MEDIUM
-                       : FONT_WEIGHTS.REGULAR
+        index        = checkable ? index + 1 : index
+        const weight = important ? FONT_WEIGHTS.MEDIUM : FONT_WEIGHTS.REGULAR
 
         return (
-          <Cell key={`${key}-${name}`}
-                _css={css}
-                width={css ? undefined : width || colWidth}>
+          <Cell
+            _css={css`${columnContainerStyles(c)} ${_css}`}
+            checkableRow={checkable}
+            columnConfigs={columnConfigs}
+            index={index}
+            key={`${key}-${name}`}
+            width={_css ? undefined : width ?? undefined}>
             <Text _css={`font-weight: ${weight}; width: 100%;`}>
               {item[name]}
             </Text>
           </Cell>
         )
       })}
-      {actions ? <OverflowMenuCell hasOverflow>
-        <OverflowMenu actions={actions} placement={"bottom-end"} />
-      </OverflowMenuCell> : null}
+      {
+        actions
+        ? <OverflowMenuCell hasOverflow>
+          <OverflowMenu actions={actions} appendToNode={document.body} placement={"bottom-end"} />
+        </OverflowMenuCell>
+        : null
+      }
     </MyRow>
   )
 }

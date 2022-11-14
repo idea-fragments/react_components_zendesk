@@ -1,38 +1,50 @@
 import {
-  Table as ZTable,
-  Head as ZHead,
-  HeaderRow as ZHeaderRow,
-  HeaderCell as ZHeaderCell,
   Body as ZBody,
   Cell as ZCell,
-  Row as ZRow,
+  Head as ZHead,
+  HeaderCell as ZHeaderCell,
+  HeaderRow as ZHeaderRow,
   OverflowButton as ZOverflowButton,
-  /* @ts-ignore */
-}                                      from "@zendeskgarden/react-tables"
-import styled, {
-  css,
-  FlattenSimpleInterpolation
-}                                      from "styled-components"
+  Row as ZRow,
+  Table as ZTable,
+}                            from "@zendeskgarden/react-tables"
+import { StickyColumnProps } from "components/tables/utils"
+import styled, { css }       from "styled-components"
 import {
   COLORS,
   fade,
   light,
   veryLight
-}                                      from "styles/colors"
+}                            from "styles/colors"
 import {
   CSS,
   CSSProp
-}                                      from "styles/types"
+}                            from "styles/types"
 import { FONT_SIZES_EM as FONT_SIZES } from "styles/typography"
 
-const OVERFLOW_CELL_WIDTH = "3.5em"
+
+const overflowCellStyles = css`
+  position: sticky;
+  right: 0;
+  z-index: 5;
+  text-align: center;
+  width: 5em;
+  
+  ::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: -2px;
+    content: "";
+    width: 2px;
+    box-shadow: inset 10px 0 8px -8px #00000026;
+  }
+`
 
 const Table = styled(ZTable)`
   && {
     color: inherit;
     border-radius: 6px;
-    overflow: hidden;
-    border: 2px solid ${veryLight(COLORS.GREY)};
   }
 `
 
@@ -47,9 +59,10 @@ const HeaderRow = styled(ZHeaderRow)`
   height: auto !important;
 `
 
-const HeaderCell = styled(ZHeaderCell)<{ _css?: CSS }>`
+const HeaderCell = styled(ZHeaderCell)<CSSProp & StickyColumnProps>`
   vertical-align: top;
-  ${({ hasOverflow }) => hasOverflow ? `width: ${OVERFLOW_CELL_WIDTH}` : ""};
+  background: ${veryLight(COLORS.GREY)};
+  ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};
   ${({ _css }) => _css}
 `
 
@@ -57,10 +70,11 @@ const Body = styled(ZBody)`
   font-size: ${FONT_SIZES.SM};
 `
 
-const Cell = styled(ZCell)<CSSProp>`
+const Cell = styled(ZCell)<CSSProp & StickyColumnProps>`
   &&&& {
+    background: white;
     box-shadow: none;
-    ${({ hasOverflow }) => hasOverflow ? `width: ${OVERFLOW_CELL_WIDTH}` : ""};
+    ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};
     ${({ _css }) => _css}
   }
 `

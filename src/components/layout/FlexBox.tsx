@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 import { MediaQuery }  from "styles/mediaQueries"
 import { SPACINGS }    from "styles/spacings"
-import { CSS }         from "styles/types"
+import { CSSProp }     from "styles/types"
 
 export type ResponsiveProps<P> = {
   mediaQueryFunc: MediaQuery,
@@ -9,16 +9,15 @@ export type ResponsiveProps<P> = {
 }
 
 export type Props = {
-  alignItems?: string,
-  _css?: CSS,
-  gap?: string | null | "unset",
-  fluid?: boolean,
-  inline?: boolean,
-  justifyContent?: string,
-  responsivePropsList?: ResponsiveProps<Props>[]
-  withRows?: boolean,
-  wrap?: boolean,
-}
+                      alignItems?: string,
+                      gap?: string | null | "unset",
+                      fluid?: boolean,
+                      inline?: boolean,
+                      justifyContent?: string,
+                      responsivePropsList?: ResponsiveProps<Props>[]
+                      withRows?: boolean,
+                      wrapped?: boolean,
+                    } & CSSProp
 
 export type FlexBoxProps = Props
 
@@ -31,7 +30,7 @@ export const FlexBox = styled.div<Props>`
   flex-direction: ${getFlexDirection};
   gap: ${(p) => p.gap ? p.gap : SPACINGS.SM};
   justify-content: ${(p) => p.justifyContent || "initial"};
-  ${(p: Props) => p.wrap ? wrappedStyling : ""}
+  ${(p: Props) => p.wrapped ? wrappedStyling : ""}
 
   ${(p: Props) => p.responsivePropsList ? responsiveStyles(p) : ""}
   ${(p: Props) => p._css}
@@ -51,7 +50,7 @@ const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) => (
             inline,
             justifyContent,
             fluid,
-            wrap
+            wrapped
           }     = props
 
     return mediaQueryFunc(css`
@@ -61,7 +60,7 @@ const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) => (
       flex-direction: ${getFlexDirection(props)};
       gap: ${gap ? gap : SPACINGS.SM};
       justify-content: ${justifyContent || "initial"};
-      ${wrap ? wrappedStyling : ""}
+      ${wrapped ? wrappedStyling : ""}
     `).join("")
   })
 )

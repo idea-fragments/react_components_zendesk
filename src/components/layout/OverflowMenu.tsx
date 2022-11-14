@@ -17,6 +17,7 @@ export type OverflowMenuItem = {
 }
 
 type Props = {
+  appendToNode?: HTMLElement,
   placement?: MenuPlacement,
   actions: Array<OverflowMenuItem>
 }
@@ -40,15 +41,16 @@ const OverflowButton = styled(ZOverflowButton).attrs(({ theme }) => ({
   }
 `
 
-export const OverflowMenu = ({ actions, placement }: Props) => (
-  <Dropdown options={actions}
-            placement={placement}
-            returnItemOnChange
-            labelField={"label"}
-            keyField={"label"}
+export const OverflowMenu = ({ actions, appendToNode, placement }: Props) => (
+  <Dropdown
+    appendMenuToNode={appendToNode}
+    keyField={"label"}
+    labelField={"label"}
     // @ts-ignore
-            onChange={({ action }) => { action() }}
-    // @ts-ignore
-            trigger={<OverflowButton />}
+    onChange={({ action }) => { action() }}
+    options={actions}
+    placement={placement}
+    returnItemOnChange
+    trigger={<OverflowButton />}
   />
 )

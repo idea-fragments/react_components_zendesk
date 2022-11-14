@@ -2469,6 +2469,7 @@ var base = {
     zIndex: 10000
   },
   table: {
+    borderColor: veryLight(COLORS.GREY),
     borderSize: "1rem"
   },
   tooltip: {

@@ -65,7 +65,7 @@ export type Styles = {
     width: string,
     zIndex: number
   },
-  table: { borderSize: string, },
+  table: { borderColor: string, borderSize: string, },
   textColorDark: string,
   textColorLight: string,
   textColorOverPrimaryBg: string,

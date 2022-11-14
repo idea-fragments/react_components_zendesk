@@ -1,4 +1,8 @@
-import { COLORS, hasGoodContrast } from "styles/colors"
+import {
+  COLORS,
+  hasGoodContrast,
+  veryLight
+} from "styles/colors"
 import { SPACINGS }                from "styles/spacings"
 import { Styles }                  from "styles/theme/Theme.type"
 
@@ -43,7 +47,10 @@ export const base: Partial<Styles> = {
     width:        "250px",
     zIndex:       10000,
   },
-  table:         { borderSize: "1rem" },
+  table:         {
+    borderColor:  veryLight(COLORS.GREY),
+    borderSize: "1rem"
+  },
   tooltip:       { darkBackground: "#747183" },
 
   getTextColorForBackground: ({ color, theme }) => {
