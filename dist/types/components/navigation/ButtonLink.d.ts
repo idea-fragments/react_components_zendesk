@@ -1,25 +1,11 @@
-import { ComponentType } from "react";
 import { Props as ButtonProps } from "components/forms/Button";
+import React from "react";
 import { ColorProps, ContainerProps } from "styles/types";
-declare type Props = {
+export declare const ButtonLink: React.ForwardRefExoticComponent<{
     to?: any;
-    href?: string;
-    external?: boolean;
-    LinkComponent?: string | ComponentType<{
-        className: string;
-        to: any;
-    } & any>;
-} & ButtonProps & ColorProps & ContainerProps;
-export declare const ButtonLink: {
-    ({ LinkComponent, external, flat, icon, iconPosition, iconSize, children, ...otherProps }: Props): JSX.Element;
-    COMPONENT_NAME: string;
-    defaultProps: {
-        primary: boolean;
-        onClick: (...args: any) => void;
-        LinkComponent: string;
-        external: boolean;
-        iconPosition: string;
-    };
-};
-export {};
+    href?: string | undefined;
+    external?: boolean | undefined;
+    LinkComponent?: string | React.ComponentType<any> | undefined;
+    onClick?: ((() => void) & (() => void)) | ((() => void) & import("../../utils/function.types").PromiseFunc<any, any>) | undefined;
+} & Omit<ButtonProps, "onClick"> & ColorProps & ContainerProps & React.RefAttributes<any>>;
 //# sourceMappingURL=ButtonLink.d.ts.map

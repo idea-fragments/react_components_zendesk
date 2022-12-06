@@ -6,13 +6,13 @@ export declare type NavigationAction = {
     href?: string;
     icon?: any | ComponentType;
     label: string;
-    onClick?: () => any;
+    onClick?: () => void;
 } & (NavigationLinkProps | NavigationButtonProps);
 declare type NavigationLinkProps = {
     href: string;
 };
 declare type NavigationButtonProps = {
-    onClick: () => any;
+    onClick: () => void;
 };
 export {};
 //# sourceMappingURL=NavigationAction.d.ts.map
