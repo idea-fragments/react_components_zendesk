@@ -19,13 +19,11 @@ const Story = () => {
     { icon: mdiHomeOutline, label: "Home", onClick: DO_NOTHING, },
     { icon: mdiViewDashboardOutline, label: "Dashboard", onClick: DO_NOTHING, },
     { icon: mdiBookOutline, label: "Projects", onClick: DO_NOTHING, },
-    { icon: mdiClipboardListOutline, label: "Tasks", onClick: DO_NOTHING, },
+    { icon: mdiClipboardListOutline, label: "Tasks", href: "https://google.com", },
   ]
 
   return <div css={"width: 400px; max-width: 100%;"}>
-    <IconAppBar
-      actions={actions}
-    />
+    <IconAppBar actions={actions} activeAction={"Tasks"} />
   </div>
 }
 

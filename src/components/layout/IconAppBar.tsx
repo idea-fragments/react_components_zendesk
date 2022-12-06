@@ -4,10 +4,11 @@ import { NavigationAction } from "components/layout/NavigationAction"
 import { ButtonLink }       from "components/navigation/ButtonLink"
 import { StyledProps }      from "components/StyledProps.type"
 import React, { FC }        from "react"
-import styled               from "styled-components"
+import styled, { css }      from "styled-components"
 import { fade }             from "styles/colors"
 import { SPACINGS }         from "styles/spacings"
 import { useTheme }         from "styles/theme/useTheme"
+import { DO_NOTHING }       from "utils/functionHelpers"
 
 type IconAppBarProps = {
   actions: NavigationAction[],
@@ -24,19 +25,23 @@ export let IconAppBar: FC<IconAppBarProps> = ({
   const appBarHeight = theme.styles.appBar.height
 
   const createActionButtons = (actions: NavigationAction[]) => actions.map(
-    ({as, ...a}: NavigationAction) => {
-      const props = a.href
-                    ? { as: as ?? ButtonLink, href: a.href }
-                    : { as, onClick: a.onClick }
+    ({ as, ...a }: NavigationAction) => {
+      const props = {
+        active:       a.label === activeAction,
+        as,
+        _css:         actionButtonStyles,
+        compact:      true,
+        icon:         a.icon,
+        iconPosition: "left",
+        iconSize:     actionIconSize,
+        key:          a.label,
+        primary:      true,
+        flat:         false,
+      } as const
 
-      return <ActionButton active={a.label === activeAction}
-                           compact
-                           icon={a.icon}
-                           iconPosition={"left"}
-                           iconSize={actionIconSize}
-                           key={a.label}
-                           {...props}>
-      </ActionButton>
+      return a.href
+             ? <ButtonLink href={a.href} {...props} />
+             : <Button onClick={a.onClick!} {...props} />
     }
   )
 
@@ -57,7 +62,7 @@ export let IconAppBar: FC<IconAppBarProps> = ({
 
 IconAppBar = styled(IconAppBar)``
 
-const ActionButton = styled(Button)<StyledProps<{ active: boolean }>>`
+const actionButtonStyles = css<{ active: boolean }>`
   &&&&& {
     border-radius: ${({ theme }) => `calc(${theme.styles.sidebar.actionButton.borderRadius} + 10px)`};
     ${({ active, theme }) => (

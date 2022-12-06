@@ -1,54 +1,51 @@
-import { Icon }                         from "components/Icon"
-import { FlexBox }                      from "components/layout/FlexBox"
-import React, { ComponentType }         from "react"
-import { Button, Props as ButtonProps } from "components/forms/Button"
-import { SPACINGS }                     from "styles/spacings"
-import { ColorProps, ContainerProps }   from "styles/types"
-import { DO_NOTHING }                   from "utils/functionHelpers"
+import {
+  Button,
+  Props as ButtonProps
+}                     from "components/forms/Button"
+import React, {
+  ComponentType,
+  ForwardedRef,
+  forwardRef
+}                     from "react"
+import {
+  ColorProps,
+  ContainerProps
+}                     from "styles/types"
+import { DO_NOTHING } from "utils/functionHelpers"
+
+/* important that the onClick function from NextJS Link components make their way
+ to the button component. Otherwise, NextJS links will not work properly,
+ causing the link to be navigated without using the NextJS routing system*/
 
 type Props = {
                to?: any,
                href?: string,
                external?: boolean,
                LinkComponent?: string | ComponentType<{ className: string, to: any } & any>
-             } & ButtonProps & ColorProps & ContainerProps
+               onClick?: ButtonProps["onClick"],
+             } & Omit<ButtonProps, "onClick"> & ColorProps & ContainerProps
 
-export const ButtonLink = ({
-                             LinkComponent,
-                             external,
-                             flat,
-                             icon,
-                             iconPosition,
-                             iconSize,
-                             children,
-                             ...otherProps
-                           }: Props) => {
+export const ButtonLink = forwardRef<any, Props>((
+  {
+    LinkComponent,
+    external,
+    flat,
+    ...otherProps
+  }: Props,
+  ref: ForwardedRef<any>
+) => {
   return (
     <Button
+      ref={ref}
       {...otherProps}
       flat={flat != null ? flat : !otherProps.inline}
       // @ts-ignore
       innerAs={LinkComponent}
-      {...external ? { target: "_blank" } : {}}>
-      {icon ? (
-        <FlexBox gap={SPACINGS.XS}
-                 justifyContent={"center"}
-                 alignItems={"center"}>
-          {iconPosition === "left" &&
-           <Icon color={"currentColor"} svg={icon} size={iconSize} />}
-          {children ? <span>{children}</span> : undefined}
-          {iconPosition === "right" &&
-           <Icon color={"currentColor"} svg={icon} size={iconSize} />}
-        </FlexBox>
-      ) : (
-         <span>{children}</span>
-       )}
-    </Button>
+      {...external ? { target: "_blank" } : {}} />
   )
-}
+})
 
-ButtonLink.COMPONENT_NAME = "ButtonLink"
-ButtonLink.defaultProps   = {
+ButtonLink.defaultProps = {
   primary:       false,
   onClick:       DO_NOTHING,
   LinkComponent: "a",
