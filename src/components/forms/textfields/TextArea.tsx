@@ -1,24 +1,56 @@
-// @ts-ignore
-import { Textarea }               from "@zendeskgarden/react-forms"
-import { FormFieldProps }         from "components/forms/formField.types"
-import { TextFieldWrapper }       from "components/forms/textfields/TextFieldWrapper"
-import React, { ChangeEvent, FC } from "react"
+import { Textarea }          from "@zendeskgarden/react-forms"
+import { FormFieldProps }    from "components/forms/formField.types"
+import { TextFieldWrapper }  from "components/forms/textfields/TextFieldWrapper"
+import { VALIDATION_STATES } from "components/forms/validationStates"
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback
+}                            from "react"
 
 export type TextAreaProps = FormFieldProps & {
+  autoExpand?: boolean,
+  characterLimit?: number,
   resizable?: boolean,
   value?: string,
   onChange: (text: string, e: ChangeEvent<HTMLTextAreaElement>) => void,
 }
 
 
-export const TextArea: FC<TextAreaProps> = ({ onChange, ...props }) => {
-  const notifyParentOfChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+export const TextArea: FC<TextAreaProps> = ({
+                                              autoExpand = false,
+                                              characterLimit,
+                                              hint,
+                                              onChange,
+                                              resizable,
+                                              ...props
+                                            }) => {
+  const notifyParentOfChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value, e)
+  }, [onChange])
+
+  const validation = () => {
+    if (!characterLimit) return props.validation
+
+    const currentLength        = props.value?.length ?? 0
+    const limitValidationState = currentLength > characterLimit
+                                 ? VALIDATION_STATES.ERROR
+                                 : VALIDATION_STATES.NONE
+    return {
+      validation: limitValidationState,
+      message:    <>Used {currentLength} of {characterLimit} characters.</>
+    }
   }
 
-  return <TextFieldWrapper {...props}
-                           onChange={notifyParentOfChange}
-                           WrappedComponent={Textarea} />
+  return <TextFieldWrapper
+    {...props}
+    validation={validation()}
+    // @ts-ignore
+    isResizable={resizable}
+    minRows={autoExpand ? 2 : undefined}
+    maxRows={autoExpand ? 20 : undefined}
+    onChange={notifyParentOfChange}
+    WrappedComponent={Textarea} />
 }
 
 // @ts-ignore

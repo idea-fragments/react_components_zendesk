@@ -1,6 +1,8 @@
 import { FormFieldProps } from "components/forms/formField.types";
 import { ChangeEvent, FC } from "react";
 export declare type TextAreaProps = FormFieldProps & {
+    autoExpand?: boolean;
+    characterLimit?: number;
     resizable?: boolean;
     value?: string;
     onChange: (text: string, e: ChangeEvent<HTMLTextAreaElement>) => void;
