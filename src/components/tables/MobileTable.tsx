@@ -54,8 +54,8 @@ export const MobileTable = ({
                    onClick={() => { onSelectAllToggle?.(!allSelected) }}>
              {allSelected ? "Deselect" : "Select"} All
            </Button> : undefined}
-          {/*@ts-ignore*/}
-          {actions?.({ checkedItems })?.map((a, i) => <Fragment key={i}>{a}</Fragment>)}
+
+          {actions}
 
           {
             onFiltersChange

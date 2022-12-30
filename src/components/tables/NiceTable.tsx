@@ -46,8 +46,7 @@ export const NiceTable = ({
         {title ? <Title>{title}</Title> : null}
         {helpText ? <HelpText>{helpText}</HelpText> : null}
         <FlexBox _css={`flex: 1`} justifyContent={"flex-end"}>
-          {/* @ts-ignore */}
-          {actions?.({ checkedItems })?.map((a, i) => <Fragment key={i}>{a}</Fragment>)}
+          {actions}
 
           {
             onFiltersChange

@@ -67,7 +67,7 @@ export const Header = ({
         const color    = (p: StyledProps) => important
                                              ? p.theme.styles.colorPrimary
                                              : "unset"
-        const textNode = <Text _css={`color: ${color};`}>{name}</Text>
+        const textNode = <Text _css={css`color: ${color};`}>{name}</Text>
 
         return (
           <HeaderCell
