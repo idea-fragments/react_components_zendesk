@@ -37,7 +37,6 @@ export const Filters: FC<FiltersProps> = ({
   }, [onFiltersChange, state])
 
   const trackChanges = useCallback((name: string, value: string) => {
-    console.log("trackChanges", name, value)
     setState((prev) => ({ ...prev, [name]: value }))
   }, [])
 

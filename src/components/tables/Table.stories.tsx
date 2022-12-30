@@ -22,8 +22,7 @@ const Story = (args: Partial<FinalizedTableProps>) => {
   const [checkedItems, setCheckedItems] = useState<Set<ItemKey>>(new Set())
 
   const actions = () => {
-    return [
-      <FlexBox fluid>
+    return <FlexBox fluid>
         <FlexBox fluid>
           <Button compact
                   danger
@@ -34,7 +33,6 @@ const Story = (args: Partial<FinalizedTableProps>) => {
         <Button neutral onClick={DO_NOTHING}>Hello</Button>
         <Button onClick={DO_NOTHING}>World</Button>
       </FlexBox>
-    ]
   }
 
   const onFiltersChange = (...args :any) => {
@@ -42,7 +40,7 @@ const Story = (args: Partial<FinalizedTableProps>) => {
   }
 
   return <Table
-    actions={actions}
+    actions={actions()}
     checkable
     columnConfigs={columnConfigs}
     items={items}

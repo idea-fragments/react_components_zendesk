@@ -41,11 +41,8 @@ export declare type PaginationData = {
     pageSize: number;
     totalCount: number;
 };
-declare type ActionsCreatorParams = {
-    checkedItems: Set<ItemKey>;
-};
 export declare type TableProps = {
-    actions?: (p: ActionsCreatorParams) => ReactNode[];
+    actions?: ReactNode;
     checkable?: boolean;
     checkedItems?: Set<ItemKey>;
     columnConfigs: Array<ColumnConfig>;

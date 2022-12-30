@@ -55,12 +55,8 @@ export type PaginationData = {
   totalCount: number,
 }
 
-type ActionsCreatorParams = {
-  checkedItems: Set<ItemKey>
-}
-
 export type TableProps = {
-  actions?: (p: ActionsCreatorParams) => ReactNode[],
+  actions?: ReactNode,
   checkable?: boolean,
   checkedItems?: Set<ItemKey>,
   columnConfigs: Array<ColumnConfig>,

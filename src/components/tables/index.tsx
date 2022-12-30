@@ -32,7 +32,6 @@ const overflowCellStyles = css`
   z-index: 5;
   text-align: center;
   width: 5em;
-  background: white;
   ::before {
     position: absolute;
     top: 0;
@@ -66,7 +65,7 @@ const HeaderRow = styled(ZHeaderRow)`
 
 const HeaderCell = styled(ZHeaderCell)<CSSProp & StickyColumnProps>`
   vertical-align: top;
-    // background: ${veryLight(COLORS.GREY)};
+  background: white;
   ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};
   ${({ _css }) => _css}
 `
@@ -77,7 +76,7 @@ const Body = styled(ZBody)`
 
 const Cell = styled(ZCell)<CSSProp & StickyColumnProps>`
   &&&& {
-    //background: white;
+    background: white;
     box-shadow: none;
     ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};
     ${({ _css }) => _css}
