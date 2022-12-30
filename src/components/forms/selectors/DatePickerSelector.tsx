@@ -1,6 +1,9 @@
 import { TinyCalendar }                from "components/calendars/TinyCalendar"
 import { TextFieldProps }              from "components/forms/formField.types"
-import { Dropdown, Select }            from "components/forms/selectors/Dropdown"
+import {
+  Dropdown,
+  Select
+}                                      from "components/forms/selectors/Dropdown"
 import { StateChange }                 from "components/forms/selectors/types"
 import Downshift, { StateChangeTypes } from "downshift"
 import moment, { Moment }              from "moment"
@@ -18,8 +21,8 @@ type State = {
   isOpen: boolean
 }
 
-const logger                                                 = new Logger(
-  "DatePickerSelector")
+const logger = new Logger("DatePickerSelector")
+
 const stateChangesThatFailWithDatePicker: StateChangeTypes[] = [
   Downshift.stateChangeTypes.blurInput,
   Downshift.stateChangeTypes.blurButton,

@@ -1,23 +1,31 @@
-import { Autocomplete, Dropdown }                                 from "components/forms/selectors/Dropdown"
 import {
-  SelectorEmptyState
-}                                                                 from "components/forms/selectors/SelectorEmptyState"
+  Autocomplete,
+  Dropdown
+}                               from "components/forms/selectors/Dropdown"
+import { SelectorEmptyState }   from "components/forms/selectors/SelectorEmptyState"
 import {
   SelectorItemKey,
   SelectorOption,
   SelectorProps,
   StateChange,
-}                                                                 from "components/forms/selectors/types"
+}                               from "components/forms/selectors/types"
+import { SelectorOptionKeyMap } from "components/forms/utils/SelectorOptionKeyMap"
+import React, {
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState
+}                               from "react"
+import styled                   from "styled-components"
 import {
-  SelectorOptionKeyMap
-}                                                                 from "components/forms/utils/SelectorOptionKeyMap"
-import React, { FC, ReactNode, useCallback, useEffect, useState } from "react"
-import styled                                                     from "styled-components"
-import { COLORS, veryLight }                                      from "styles/colors"
-import { FONT_WEIGHTS }                                           from "styles/typography"
-import { DO_NOTHING }                                             from "utils/functionHelpers"
-import { Logger }                                                 from "utils/logging/Logger"
-import { isFunction }                                             from "utils/typeCheckers"
+  COLORS,
+  veryLight
+}                               from "styles/colors"
+import { FONT_WEIGHTS }         from "styles/typography"
+import { DO_NOTHING }           from "utils/functionHelpers"
+import { Logger }               from "utils/logging/Logger"
+import { isFunction }           from "utils/typeCheckers"
 
 const logger = new Logger("SearchableSelector")
 
@@ -44,6 +52,7 @@ export let SearchableSelector: FC<Props> = ({ children, disabled, ...props }) =>
           onChange,
           options,
           selectedKey,
+          small,
         } = props
 
   const optionsKeyMap                         = SelectorOptionKeyMap.call(props)
@@ -94,7 +103,7 @@ export let SearchableSelector: FC<Props> = ({ children, disabled, ...props }) =>
               onChange={handleChange}
               onStateChange={handleStateChange}
               options={matchingOptions}>
-      <Autocomplete disabled={disabled}>
+      <Autocomplete disabled={disabled} isCompact={small}>
         {
           selectedOption
           ? isFunction(children)

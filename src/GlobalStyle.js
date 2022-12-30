@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.styles.font.size};
 
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;

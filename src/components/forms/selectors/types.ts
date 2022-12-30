@@ -1,5 +1,7 @@
-import { FormFieldProps } from "components/forms/formField.types"
-import { StateChangeOptions }  from "downshift"
+import { FormFieldProps }     from "components/forms/formField.types"
+import { MenuPlacement }      from "components/forms/selectors/Dropdown"
+import { StateChangeOptions } from "downshift"
+import { Modifiers }          from "popper.js"
 
 export type SelectorItemKey = string | number | null | undefined
 export type SelectorOptionOptionalAttrs = {
@@ -19,12 +21,16 @@ export type OnItemSelectedFunc =
 export type StateChange = StateChangeOptions<SelectorOption>
 
 type Common = FormFieldProps & {
+  appendMenuToNode?: HTMLElement,
   clearable?: boolean,
   options: Array<SelectorOption>,
   optionsKeyMap?: { [key: string]: SelectorOption },
   keyField: string,
   labelField: string,
   valueField?: string,
+  maxMenuHeight?: string,
+  menuPopperModifiers?: Record<string, any>[] | undefined, // See popper.js docs v2
+  placement?: MenuPlacement,
   onChange?: OnItemSelectedFunc,
   onStateChange?: (s: StateChange) => void,
   invalidOnNoSelection?: boolean,
@@ -34,11 +40,11 @@ type Common = FormFieldProps & {
 }
 
 export type SelectorProps = {
-  selectedKey?: SelectorItemKey,
-  onChange?: OnItemSelectedFunc,
-} & Common
+                              selectedKey?: SelectorItemKey,
+                              onChange?: OnItemSelectedFunc,
+                            } & Common
 
 export type MultiSelectorProps = {
-  selectedKeys?: SelectorItemKey[],
-  onChange?: OnItemSelectedFunc,
-} & Common
+                                   selectedKeys?: SelectorItemKey[],
+                                   onChange?: OnItemSelectedFunc,
+                                 } & Common

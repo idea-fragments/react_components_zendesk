@@ -6017,8 +6017,8 @@ TagComponent.defaultProps = {
 var Tag$1 = TagComponent;
 Tag$1.Avatar = Avatar;
 Tag$1.Close = Close$1;
-var Close = styled__default["default"](Tag$1.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  &&& { height: 26px; }\n"], ["\n  &&& { height: 26px; }\n"])));
-var Tag = styled__default["default"](Tag$1)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  && {\n    height: unset;\n    padding: .3rem 12px;\n\n    span {\n      line-height: 1rem;\n    }\n  }\n"], ["\n  && {\n    height: unset;\n    padding: .3rem 12px;\n\n    span {\n      line-height: 1rem;\n    }\n  }\n"])));
+var Close = styled__default["default"](Tag$1.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\n"], ["\n\n"])));
+var Tag = styled__default["default"](Tag$1)(templateObject_2 || (templateObject_2 = __makeTemplateObject([""], [""])));
 var templateObject_1, templateObject_2;
 exports.Chip = Chip;
 exports.Close = Close;

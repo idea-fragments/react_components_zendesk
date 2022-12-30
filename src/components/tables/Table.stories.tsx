@@ -1,17 +1,15 @@
 import { mdiTrashCanOutline } from "@mdi/js"
-import {
-  Button,
-  BUTTON_SIZES
-}                             from "components/forms/Button"
+import { Button }             from "components/forms/Button"
 import { FlexBox }            from "components/layout/FlexBox"
 import {
   ColumnConfig,
   FinalizedTableProps,
   Item,
   ItemAction,
+  ItemKey,
   Table,
 }                             from "components/tables/Table"
-import React                  from "react"
+import React, { useState }    from "react"
 import { DO_NOTHING }         from "utils/functionHelpers"
 
 export default {
@@ -20,8 +18,9 @@ export default {
   argTypes:  {},
 }
 
-
 const Story = (args: Partial<FinalizedTableProps>) => {
+  const [checkedItems, setCheckedItems] = useState<Set<ItemKey>>(new Set())
+
   const actions = () => {
     return [
       <FlexBox fluid>
@@ -29,15 +28,19 @@ const Story = (args: Partial<FinalizedTableProps>) => {
           <Button compact
                   danger
                   icon={mdiTrashCanOutline}
-                  onClick={DO_NOTHING}
-                  size={BUTTON_SIZES.SMALL} />
+                  onClick={DO_NOTHING} />
         </FlexBox>
 
-        <Button neutral onClick={DO_NOTHING} size={BUTTON_SIZES.SMALL}>Hello</Button>
-        <Button onClick={DO_NOTHING} size={BUTTON_SIZES.SMALL}>World</Button>
+        <Button neutral onClick={DO_NOTHING}>Hello</Button>
+        <Button onClick={DO_NOTHING}>World</Button>
       </FlexBox>
     ]
   }
+
+  const onFiltersChange = (...args :any) => {
+    console.log("onFiltersChange", ...args)
+  }
+
   return <Table
     actions={actions}
     checkable
@@ -45,6 +48,10 @@ const Story = (args: Partial<FinalizedTableProps>) => {
     items={items}
     title={"Table Title"}
     {...args}
+    filterState={{ "Filter Multi Color": ["red", "blue"] }}
+    onFiltersChange={onFiltersChange}
+    onItemsChecked={setCheckedItems}
+    checkedItems={checkedItems}
   />
 }
 
@@ -54,18 +61,126 @@ Default.args         = {}
 
 // @ts-ignore
 const items: Item[] = [
-  { Color: "red", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "blue", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "orange", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "yellow", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "green", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "purple", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "violet", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "magenta", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "cyan", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "black", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "white", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
-  { Color: "grey", "Column 2": "Dsfadsafdsafd", "Column 3": "Dsafdsafdsa", "Column 4": "gfdhgsdgf", "Column 5": "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl", "Created At": "2021-01-01", Status: "pending" },
+  {
+    Color:        "red",
+    key:          "red",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "blue",
+    key:        "blue",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "orange",
+    key:        "orange",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "yellow",
+    key:        "yellow",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "green",
+    key:        "green",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "purple",
+    key:        "purple",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "violet",
+    key:        "violet",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "magenta",
+    key:        "magenta",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "cyan",
+    key:        "cyan",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "black",
+    key:        "black",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "white",
+    key:        "white",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
+  {
+    Color:        "grey",
+    key:        "grey",
+    "Column 2":   "Dsfadsafdsafd",
+    "Column 3":   "Dsafdsafdsa",
+    "Column 4":   "gfdhgsdgf",
+    "Column 5":   "ndhjskalfhdjakldhfjakldhfajklfhdjasklfhdsjklafhdsajkl",
+    "Created At": "2021-01-01",
+    Status:       "pending"
+  },
 ].map((item) => ({
   ...item,
   key:     item.Color,
@@ -85,31 +200,41 @@ const columnConfigs: ColumnConfig[] = [
       options: items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
       type:    "select",
     },
-    width: "100px",
+    width:       "100px",
   },
   {
     name:        "Column 2",
     important:   true,
     collapsible: false,
-    width: "150px",
+    filter:      {
+      name:    "Filter Multi Color",
+      options: items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
+      type:    "multi-select",
+    },
+    width:       "150px",
   },
   {
     name:        "Column 3",
     important:   false,
     collapsible: false,
-    width: "150px",
+    filter:      {
+      name:    "Searchable Filter Color",
+      options: items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
+      type:    "searchable-select",
+    },
+    width:       "150px",
   },
   {
     name:        "Column 4",
     important:   false,
     collapsible: false,
-    width: "150px",
+    width:       "150px",
   },
   {
     name:        "Column 5",
     important:   false,
     collapsible: false,
-    width: "500px",
+    width:       "500px",
   },
   { name: "Created At", important: false, collapsible: false, width: "150px", },
   {
@@ -121,6 +246,6 @@ const columnConfigs: ColumnConfig[] = [
       options: undefined,
       type:    "text",
     },
-    width: "150px",
+    width:       "150px",
   },
 ]

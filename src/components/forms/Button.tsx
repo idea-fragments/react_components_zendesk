@@ -216,7 +216,7 @@ Button.COMPONENT_NAME = "Button"
 Button.defaultProps   = {
   fluid:        false,
   flat:         false,
-  iconPosition: "right",
+  iconPosition: "left",
   primary:      true,
   disabled:     false,
 }

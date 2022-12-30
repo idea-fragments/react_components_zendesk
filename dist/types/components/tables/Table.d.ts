@@ -13,11 +13,12 @@ export declare type ItemFilterOptions = {
         label: string;
         value: string;
     }[];
-    type: "select";
+    type: "multi-select" | "select" | "searchable-select";
 } | {
-    options: undefined;
+    options?: undefined;
     type: "text";
 });
+export declare type FilterState = Record<string, string | string[] | undefined>;
 export declare type Item = {
     [key: string]: ReactNode;
 } & {
@@ -49,13 +50,11 @@ export declare type TableProps = {
     checkedItems?: Set<ItemKey>;
     columnConfigs: Array<ColumnConfig>;
     emptyState?: ReactNode;
+    filterState?: FilterState;
     helpText?: ReactNode;
-    initialFilterValues?: {
-        [key: string]: string;
-    };
     items: Array<Item>;
     title?: string;
-    onFilterChange?: (name: string, value: any) => void;
+    onFiltersChange?: (changes: FilterState) => void;
     onItemChecked?: (key: ItemKey, isChecked: boolean) => void;
     onItemsChecked?: (rows: Set<ItemKey>) => void;
     onItemClick?: (key: ItemKey) => void;
@@ -64,11 +63,10 @@ export declare type TableProps = {
 };
 declare type Props = TableProps & {
     className?: string;
-    nice?: boolean;
     pagination?: PaginationData;
     onPageChange?: (p: number) => void;
 };
 export declare type FinalizedTableProps = Props;
-export declare let Table: ({ action, actions, className, nice, pagination, onItemsChecked, onPageChange, ...props }: Props) => JSX.Element;
+export declare let Table: ({ actions, className, pagination, onItemsChecked, onPageChange, ...props }: Props) => JSX.Element;
 export {};
 //# sourceMappingURL=Table.d.ts.map

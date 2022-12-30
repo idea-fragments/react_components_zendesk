@@ -1,17 +1,21 @@
-import { FlexBox }                                            from "components/layout/FlexBox"
-import { Pagination }                                         from "components/tables/blocks/Pagination"
-import { MobileTable }                                        from "components/tables/MobileTable"
-import { NiceTable }                                          from "components/tables/NiceTable"
-import { SimpleTable }                                        from "components/tables/SimpleTable"
-import React, { ReactNode, useCallback, useEffect, useState } from "react"
-import styled, { CSSProp }                                    from "styled-components"
+import { FlexBox }     from "components/layout/FlexBox"
+import { Pagination }  from "components/tables/blocks/Pagination"
+import { MobileTable } from "components/tables/MobileTable"
+import { NiceTable }   from "components/tables/NiceTable"
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState
+}                      from "react"
+import styled          from "styled-components"
 import {
   DeviceSize,
   DeviceSizeChangeListener,
-}                                                             from "styles/DeviceSizeWatcher"
-import { deviceSizeWatcher }                                  from "styles/DeviceSizeWatcher"
-import { CSS }                                                from "styles/types"
-import { isNotEmpty }                                         from "utils/arrayHelpers"
+  deviceSizeWatcher,
+}                      from "styles/DeviceSizeWatcher"
+import { CSS }         from "styles/types"
+import { isNotEmpty }  from "utils/arrayHelpers"
 
 export type ItemKey = number | string
 export type ItemContainerStyles = string
@@ -21,10 +25,12 @@ export type ItemAction = {
 }
 
 export type ItemFilterOptions = { name: string } &
-  ({
-    options: { label: string, value: string }[],
-    type: "select",
-  } | { options: undefined, type: "text" })
+                                ({
+                                   options: { label: string, value: string }[],
+                                   type: "multi-select" | "select" | "searchable-select",
+                                 } | { options?: undefined, type: "text" })
+
+export type FilterState = Record<string, string | string[] | undefined>
 
 export type Item = { [key: string]: ReactNode } & {
   actions?: Array<ItemAction>,
@@ -59,11 +65,11 @@ export type TableProps = {
   checkedItems?: Set<ItemKey>,
   columnConfigs: Array<ColumnConfig>,
   emptyState?: ReactNode,
+  filterState?: FilterState,
   helpText?: ReactNode,
-  initialFilterValues?: { [key: string]: string },
   items: Array<Item>,
   title?: string,
-  onFilterChange?: (name: string, value: any) => void,
+  onFiltersChange?: (changes: FilterState) => void,
   onItemChecked?: (key: ItemKey, isChecked: boolean) => void,
   onItemsChecked?: (rows: Set<ItemKey>) => void,
   onItemClick?: (key: ItemKey) => void,
@@ -73,7 +79,6 @@ export type TableProps = {
 
 type Props = TableProps & {
   className?: string,
-  nice?: boolean,
   pagination?: PaginationData,
   onPageChange?: (p: number) => void,
 }
@@ -89,11 +94,8 @@ const {
       } = deviceSizeWatcher
 
 export let Table = ({
-// @ts-ignore
-                      action,
                       actions,
                       className,
-                      nice = true,
                       pagination,
                       onItemsChecked,
                       onPageChange,
@@ -121,19 +123,11 @@ export let Table = ({
     (i: Item) => i.actions && isNotEmpty(i.actions),
   )
 
-  if (action && !actions) { actions = () => [action] }
-
-  const largeTable = () => nice
-                           ? <NiceTable actions={actions}
-                                        hasRowActions={hasRowActions}
-                                        onSelectAllToggle={setAllRowsSelectedTo}
-                                        {...props}
-                           />
-                           : <SimpleTable actions={actions}
-                                          hasRowActions={hasRowActions}
-                                          onSelectAllToggle={setAllRowsSelectedTo}
-                                          {...props}
-                           />
+  const largeTable = () => <NiceTable actions={actions}
+                                      hasRowActions={hasRowActions}
+                                      onSelectAllToggle={setAllRowsSelectedTo}
+                                      {...props}
+  />
   return (
     <FlexBox withRows className={className}>
       {
