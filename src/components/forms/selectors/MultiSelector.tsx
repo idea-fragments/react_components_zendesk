@@ -1,14 +1,20 @@
-import { Dropdown, MultiSelect } from "components/forms/selectors/Dropdown"
+import { Tag as ZTag }       from "@zendeskgarden/react-tags/dist/typings/elements/Tag"
+import {
+  Dropdown,
+  MultiSelect
+}                            from "components/forms/selectors/Dropdown"
 import {
   MultiSelectorProps,
   SelectorItemKey,
   SelectorOption,
-}                                from "components/forms/selectors/types"
+}                            from "components/forms/selectors/types"
+import { VALIDATION_STATES } from "components/forms/validationStates"
 import {
-  VALIDATION_STATES
-}                                from "components/forms/validationStates"
-import { Close, Tag }            from "components/tags/Tag"
-import React                     from "react"
+  Close,
+  Tag
+}                            from "components/tags/Tag"
+import React                 from "react"
+import styled                from "styled-components"
 
 type Props = {
                maxItems: 2,
@@ -21,6 +27,7 @@ export let MultiSelector = ({ maxItems, ...props }: Props) => {
         labelField,
         options,
         optionsKeyMap,
+    small,
         validation,
       } = props
 
@@ -36,10 +43,11 @@ export let MultiSelector = ({ maxItems, ...props }: Props) => {
   return (
     <Dropdown {...props} shouldFilterOptions>
       <MultiSelect
+        isCompact={small}
         maxItems={maxItems}
         validation={validation?.validation}
         renderItem={({ value, removeValue }: any) => (
-          <Tag size="large">
+          <Tag>
             <span>{optionsKeyMap?.[value]?.[labelField]}</span>
             <Close onClick={() => removeValue()} />
           </Tag>
@@ -54,4 +62,3 @@ MultiSelector.defaultProps = {
   invalidOnNoSelection: true,
   validation:           { validation: VALIDATION_STATES.NONE },
 }
-

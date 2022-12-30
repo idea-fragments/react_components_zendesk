@@ -16,6 +16,7 @@ declare const _default: {
         disabled?: boolean | undefined;
         validation?: import("../Validation.type").Validation | undefined;
     } & import("../../../styles/types").ContainerProps & {
+        appendMenuToNode?: HTMLElement | undefined;
         clearable?: boolean | undefined;
         options: import("components/forms/selectors/types").SelectorOption[];
         optionsKeyMap?: {
@@ -24,6 +25,9 @@ declare const _default: {
         keyField: string;
         labelField: string;
         valueField?: string | undefined;
+        maxMenuHeight?: string | undefined;
+        menuPopperModifiers?: Record<string, any>[] | undefined;
+        placement?: import("./Dropdown").MenuPlacement | undefined;
         onChange?: import("components/forms/selectors/types").OnItemSelectedFunc | undefined;
         onStateChange?: ((s: import("components/forms/selectors/types").StateChange) => void) | undefined;
         invalidOnNoSelection?: boolean | undefined;

@@ -1,1 +1,1 @@
-{"version":3,"file":"Table.stories.d.ts","sourceRoot":"","sources":["../../../src/components/tables/Table.stories.tsx"],"names":[],"mappings":";AAMA,OAAO,EAEL,mBAAmB,EAIpB,MAAkC,yBAAyB,CAAA;;;;;;;;;;;AAI5D,wBAIC;AA8BD,eAAO,MAAM,OAAO,SA3BC,QAAQ,mBAAmB,CAAC,gBA2BZ,CAAA"}
+{"version":3,"file":"Table.stories.d.ts","sourceRoot":"","sources":["../../../src/components/tables/Table.stories.tsx"],"names":[],"mappings":";AAGA,OAAO,EAEL,mBAAmB,EAKpB,MAAkC,yBAAyB,CAAA;;;;;;;;;;AAI5D,wBAIC;AAuCD,eAAO,MAAM,OAAO,SArCC,QAAQ,mBAAmB,CAAC,gBAqCZ,CAAA"}
