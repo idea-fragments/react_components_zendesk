@@ -1,10 +1,14 @@
-import { Button, BUTTON_SIZES } from "components/forms/Button"
-import { Carousel }             from "components/layout/Carousel"
-import { FlexBox }              from "components/layout/FlexBox"
-import { PaginationData }  from "components/tables/Table"
-import React                    from "react"
-import { arrayOfSizeN }         from "utils/arrayHelpers"
-import { DO_NOTHING }           from "utils/functionHelpers"
+import { Button }         from "components/forms/Button"
+import { Carousel }       from "components/layout/Carousel"
+import { FlexBox }        from "components/layout/FlexBox"
+import { PaginationData } from "components/tables/Table"
+import React, {
+  useCallback,
+  useMemo
+}                         from "react"
+import { css }            from "styled-components"
+import { arrayOfSizeN }   from "utils/arrayHelpers"
+import { DO_NOTHING }     from "utils/functionHelpers"
 
 type Props = PaginationData & {
   onPageChange: (n: number) => void
@@ -16,12 +20,10 @@ export const Pagination = ({
                              totalCount,
                              onPageChange,
                            }: Props) => {
-  if (!totalCount || !pageSize || totalCount <= pageSize) return null
-
-  const numberPages = Math.ceil(totalCount / pageSize)
+  const numberPages = useMemo(() => Math.ceil(totalCount / pageSize), [pageSize, totalCount])
 
   const getItems = () => {
-    const maxNumberCarouselItems = 7
+    const maxNumberCarouselItems = 5
 
     if (numberPages <= maxNumberCarouselItems) {
       return arrayOfSizeN(numberPages).map((_, i) => i + 1)
@@ -57,25 +59,30 @@ export const Pagination = ({
     return onPageChange(newPage)
   }
 
-  return <Carousel css={`align-self: center;`}
+  const movePageEnd   = useCallback(() => onPageChange(numberPages), [numberPages, onPageChange])
+  const movePageStart = useCallback(() => onPageChange(1), [onPageChange])
+
+  if (totalCount <= pageSize) return null
+
+  return <Carousel _css={css`align-self: center;`}
                    disableNextButton={page === numberPages}
                    disablePreviousButton={page === 1}
                    inline
+                   onEndClick={movePageEnd}
                    onNextClick={movePage(+1)}
-                   onPreviousClick={movePage(-1)}>
-    <FlexBox gap={"unset"}>
+                   onPreviousClick={movePage(-1)}
+                   onStartClick={movePageStart}>
+    <FlexBox gap={"2px"}>
       {
         getItems().map((num: number) => (
           <Button
+            _css={css`padding: 0; height: 30px; width: 30px;`}
             compact
             flat={num !== page}
             key={num}
+            onClick={num === page ? DO_NOTHING : movePage(num - page)}
             pill
-            size={BUTTON_SIZES.SMALL}
-            onClick={num === page
-                     ? DO_NOTHING
-                     : movePage(num - page)}
-          >
+            primary={num === page}>
             {num}
           </Button>
         ))

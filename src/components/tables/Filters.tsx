@@ -1,7 +1,6 @@
 import {
   mdiClose,
-  mdiFilterVariant,
-  mdiFilterVariantRemove
+  mdiFilterVariant
 }                                      from "@mdi/js"
 import { Button }                      from "components/forms/Button"
 import { IconButton }                  from "components/forms/IconButton"
