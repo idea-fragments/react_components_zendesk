@@ -36,8 +36,8 @@ export const Filters: FC<FiltersProps> = ({
     onFiltersChange(state)
   }, [onFiltersChange, state])
 
-  const trackChanges = useCallback((name: string, value: string) => {
-    setState((prev) => ({ ...prev, [name]: value }))
+  const trackChanges = useCallback((fieldName: string, value: string) => {
+    setState((prev) => ({ ...prev, [fieldName]: value }))
   }, [])
 
   if (isEmpty(filters)) return null
@@ -54,12 +54,13 @@ export const Filters: FC<FiltersProps> = ({
                    withRows>
             {filters.map((f: ItemFilterOptions) => (
               // @ts-ignore
-              <TableFilter key={f.name}
-                           name={f.name}
+              <TableFilter key={f.fieldName}
+                           fieldName={f.fieldName}
+                           label={f.label}
                            onChange={trackChanges}
                            options={f.options}
                            type={f.type}
-                           value={state[f.name]} />
+                           value={state[f.fieldName]} />
             ))}
 
             <Button _css={css`margin-top: ${SPACINGS.SM};`}
