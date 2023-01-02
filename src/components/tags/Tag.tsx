@@ -12,5 +12,7 @@ type Props = {
 }
 
 export const Tag = styled(ZTag)<Props>`
-  cursor: ${({ onClick }) => onClick ? "pointer" : "initial"};
+  && {
+    cursor: ${({ onClick }) => onClick ? "pointer" : "initial"};
+  }
 `

@@ -6018,7 +6018,7 @@ var Tag$1 = TagComponent;
 Tag$1.Avatar = Avatar;
 Tag$1.Close = Close$1;
 var Close = styled__default["default"](Tag$1.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\n"], ["\n\n"])));
-var Tag = styled__default["default"](Tag$1)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  cursor: ", ";\n"], ["\n  cursor: ", ";\n"])), function (_a) {
+var Tag = styled__default["default"](Tag$1)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  && {\n    cursor: ", ";\n  }\n"], ["\n  && {\n    cursor: ", ";\n  }\n"])), function (_a) {
   var onClick = _a.onClick;
   return onClick ? "pointer" : "initial";
 });

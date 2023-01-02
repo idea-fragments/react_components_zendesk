@@ -40,16 +40,21 @@ const Story = (args: Partial<FinalizedTableProps>) => {
   }
 
   return <Table
+    {...args}
     actions={actions()}
     checkable
+    checkedItems={checkedItems}
     columnConfigs={columnConfigs}
     items={items}
     title={"Table Title"}
-    {...args}
     filterState={{ "Filter Multi Color": ["red", "blue"] }}
     onFiltersChange={onFiltersChange}
     onItemsChecked={setCheckedItems}
-    checkedItems={checkedItems}
+    pagination={{
+      page: 9,
+      pageSize: 3,
+      totalCount: 100,
+  }}
   />
 }
 
