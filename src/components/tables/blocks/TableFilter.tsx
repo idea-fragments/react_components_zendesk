@@ -18,22 +18,23 @@ import { ValueOf }            from "utils/types"
 const logger = new Logger("TableFilter")
 
 type Props = ItemFilterOptions & {
-  onChange: (name: string, value: any) => void,
+  onChange: (fieldName: string, value: any) => void,
   value: ValueOf<FilterState>,
 }
 
 export const TableFilter = ({
-                              name,
+                              fieldName,
+                              label,
                               onChange,
                               options,
                               type,
                               value,
                             }: Props) => {
-  logger.writeInfo("render", name, value)
+  logger.writeInfo("render", fieldName, value)
 
   const sendChanges = useCallback((v: string) => {
-    onChange(name, v)
-  }, [name, onChange])
+    onChange(fieldName, v)
+  }, [fieldName, onChange])
 
   // @ts-ignore
   const SelectorComponent: FC<SelectorProps> | undefined = useMemo(() => {
@@ -55,7 +56,7 @@ export const TableFilter = ({
                               clearable
                               emptyState={selectorEmptyState()}
                               keyField={"value"}
-                              label={name}
+                              label={label}
                               labelField={"label"}
                               maxMenuHeight={"200px"}
                               menuPopperModifiers={[{ name: "flip", enabled: true }]}
@@ -72,8 +73,8 @@ export const TableFilter = ({
     />
   }
 
-  return <TextField label={name}
-                    emptyState={name}
+  return <TextField label={label}
+                    emptyState={label}
                     onChange={sendChanges}
                     small
                     useNewOnChange

@@ -23,19 +23,19 @@ const Story = (args: Partial<FinalizedTableProps>) => {
 
   const actions = () => {
     return <FlexBox fluid>
-        <FlexBox fluid>
-          <Button compact
-                  danger
-                  icon={mdiTrashCanOutline}
-                  onClick={DO_NOTHING} />
-        </FlexBox>
-
-        <Button neutral onClick={DO_NOTHING}>Hello</Button>
-        <Button onClick={DO_NOTHING}>World</Button>
+      <FlexBox fluid>
+        <Button compact
+                danger
+                icon={mdiTrashCanOutline}
+                onClick={DO_NOTHING} />
       </FlexBox>
+
+      <Button neutral onClick={DO_NOTHING}>Hello</Button>
+      <Button onClick={DO_NOTHING}>World</Button>
+    </FlexBox>
   }
 
-  const onFiltersChange = (...args :any) => {
+  const onFiltersChange = (...args: any) => {
     console.log("onFiltersChange", ...args)
   }
 
@@ -71,7 +71,7 @@ const items: Item[] = [
   },
   {
     Color:        "blue",
-    key:        "blue",
+    key:          "blue",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -81,7 +81,7 @@ const items: Item[] = [
   },
   {
     Color:        "orange",
-    key:        "orange",
+    key:          "orange",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -91,7 +91,7 @@ const items: Item[] = [
   },
   {
     Color:        "yellow",
-    key:        "yellow",
+    key:          "yellow",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -101,7 +101,7 @@ const items: Item[] = [
   },
   {
     Color:        "green",
-    key:        "green",
+    key:          "green",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -111,7 +111,7 @@ const items: Item[] = [
   },
   {
     Color:        "purple",
-    key:        "purple",
+    key:          "purple",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -121,7 +121,7 @@ const items: Item[] = [
   },
   {
     Color:        "violet",
-    key:        "violet",
+    key:          "violet",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -131,7 +131,7 @@ const items: Item[] = [
   },
   {
     Color:        "magenta",
-    key:        "magenta",
+    key:          "magenta",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -141,7 +141,7 @@ const items: Item[] = [
   },
   {
     Color:        "cyan",
-    key:        "cyan",
+    key:          "cyan",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -151,7 +151,7 @@ const items: Item[] = [
   },
   {
     Color:        "black",
-    key:        "black",
+    key:          "black",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -161,7 +161,7 @@ const items: Item[] = [
   },
   {
     Color:        "white",
-    key:        "white",
+    key:          "white",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -171,7 +171,7 @@ const items: Item[] = [
   },
   {
     Color:        "grey",
-    key:        "grey",
+    key:          "grey",
     "Column 2":   "Dsfadsafdsafd",
     "Column 3":   "Dsafdsafdsa",
     "Column 4":   "gfdhgsdgf",
@@ -194,9 +194,10 @@ const columnConfigs: ColumnConfig[] = [
     important:   true,
     collapsible: false,
     filter:      {
-      name:    "Filter Color",
-      options: items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
-      type:    "select",
+      fieldName: "filter_color",
+      label:     "Filter Color",
+      options:   items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
+      type:      "select",
     },
     width:       "100px",
   },
@@ -205,9 +206,10 @@ const columnConfigs: ColumnConfig[] = [
     important:   true,
     collapsible: false,
     filter:      {
-      name:    "Filter Multi Color",
-      options: items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
-      type:    "multi-select",
+      fieldName: "filter_multi_color",
+      label:     "Filter Multi Color",
+      options:   items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
+      type:      "multi-select",
     },
     width:       "150px",
   },
@@ -216,9 +218,10 @@ const columnConfigs: ColumnConfig[] = [
     important:   false,
     collapsible: false,
     filter:      {
-      name:    "Searchable Filter Color",
-      options: items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
-      type:    "searchable-select",
+      fieldName: "searchable_filter_color",
+      label:     "Searchable Filter Color",
+      options:   items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
+      type:      "searchable-select",
     },
     width:       "150px",
   },
@@ -240,9 +243,10 @@ const columnConfigs: ColumnConfig[] = [
     important:   false,
     collapsible: false,
     filter:      {
-      name:    "Status Color",
-      options: undefined,
-      type:    "text",
+      fieldName: "filter_status",
+      label:     "Status Color",
+      options:   undefined,
+      type:      "text",
     },
     width:       "150px",
   },

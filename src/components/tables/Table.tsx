@@ -24,7 +24,7 @@ export type ItemAction = {
   label: string,
 }
 
-export type ItemFilterOptions = { name: string } &
+export type ItemFilterOptions = { fieldName: string, label: string } &
                                 ({
                                    options: { label: string, value: string }[],
                                    type: "multi-select" | "select" | "searchable-select",

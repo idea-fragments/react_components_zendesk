@@ -7,7 +7,8 @@ export declare type ItemAction = {
     label: string;
 };
 export declare type ItemFilterOptions = {
-    name: string;
+    fieldName: string;
+    label: string;
 } & ({
     options: {
         label: string;
