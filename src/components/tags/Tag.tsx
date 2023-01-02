@@ -11,4 +11,6 @@ type Props = {
   children: any | typeof Close
 }
 
-export const Tag = styled(ZTag)<Props>``
+export const Tag = styled(ZTag)<Props>`
+  cursor: ${({ onClick }) => onClick ? "pointer" : "initial"};
+`
