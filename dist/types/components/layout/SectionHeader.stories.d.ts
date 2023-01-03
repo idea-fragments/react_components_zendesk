@@ -2,7 +2,7 @@
 import { SectionHeaderProps } from "components/layout/SectionHeader";
 declare const _default: {
     title: string;
-    component: import("styled-components").StyledComponent<({ actions, children: title, caption, }: SectionHeaderProps) => JSX.Element, any, {}, never>;
+    component: import("styled-components").StyledComponent<({ actions, children, caption, title, }: SectionHeaderProps) => JSX.Element, any, {}, never>;
     argTypes: {};
 };
 export default _default;

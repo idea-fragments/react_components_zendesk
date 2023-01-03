@@ -2445,6 +2445,9 @@ var base = {
   container: {
     horizontalPadding: "1rem"
   },
+  font: {
+    size: "14px"
+  },
   modal: {
     backdrop: {
       background: "rgba(47, 57, 65, 0.85)"
@@ -2470,7 +2473,7 @@ var base = {
   },
   table: {
     borderColor: veryLight(COLORS.GREY),
-    borderSize: "1rem"
+    borderSize: "1px"
   },
   tooltip: {
     darkBackground: "#747183"
@@ -7313,7 +7316,9 @@ const GlobalStyle = styledComponents.createGlobalStyle`
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    font-size: 14px;
+    font-size: ${({
+  theme
+}) => theme.styles.font.size};
 
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;

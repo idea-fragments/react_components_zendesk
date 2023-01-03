@@ -29,6 +29,9 @@ export declare type Styles = {
     container: {
         horizontalPadding: string;
     };
+    font: {
+        size: string;
+    };
     footer: {
         background: string;
     };

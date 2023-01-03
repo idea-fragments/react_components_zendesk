@@ -24,6 +24,7 @@ export const base: Partial<Styles> = {
   colorWarning:  COLORS.YELLOW,
   colorSuccess:  COLORS.GREEN,
   container:     { horizontalPadding: "1rem" },
+  font: { size: "14px" },
   modal:         {
     backdrop: {
       background: "rgba(47, 57, 65, 0.85)",
@@ -49,7 +50,7 @@ export const base: Partial<Styles> = {
   },
   table:         {
     borderColor:  veryLight(COLORS.GREY),
-    borderSize: "1rem"
+    borderSize: "1px"
   },
   tooltip:       { darkBackground: "#747183" },
 

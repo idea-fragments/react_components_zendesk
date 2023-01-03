@@ -17,7 +17,10 @@ import {
   ItemKey
 }                       from "components/tables/Table"
 import { Text }         from "components/text/Text"
-import React, { FC }    from "react"
+import React, {
+  FC,
+  useState
+}                       from "react"
 import styled, { css }  from "styled-components"
 import {
   COLORS,
@@ -28,6 +31,7 @@ import {
   FONT_SIZES,
   FONT_WEIGHTS
 }                       from "styles/typography"
+import { isNotEmpty }   from "utils/arrayHelpers"
 
 
 type Props = {
@@ -49,23 +53,48 @@ export const Row: FC<Props> = ({
                                  onCheck,
                                  onClick,
                                }) => {
-  const [isCollapsed, setCollapsedState] = React.useState(true)
+  const [isCollapsed, setCollapsedState] = useState(true)
 
   const { key, containerStyles, actions }: Item = item
 
-  const toggleCollapse    = () => { setCollapsedState(!isCollapsed) }
+  const createGridRow = ({ name, important }: ColumnConfig) => {
+    return (
+      <ColumnRow collapsible={!important}
+                 isCollapsed={isCollapsed}
+                 key={`${key}-${name}`}>
+        <Col md={5} sm={12}>
+          <Text _css={css`
+            font-weight: ${FONT_WEIGHTS.BOLD};
+            font-size: ${FONT_SIZES.XS};`}>
+            {name}:
+          </Text>
+        </Col>
+
+        <Col md={7} sm={12}>
+          <Text _css={css`
+            font-weight: ${FONT_WEIGHTS.REGULAR};
+            font-size: ${FONT_SIZES.SM};`}>
+            {item[name]}
+          </Text>
+        </Col>
+      </ColumnRow>
+    )
+  }
+
+  const [importantColumns, collapsibleColumns] = columnConfigs.reduce((acc, column) => {
+    column.important ? acc[0].push(column) : acc[1].push(column)
+    return acc
+  }, [[] as ColumnConfig[], [] as ColumnConfig[]])
+
   const handleCheckChange = (isChecked: boolean) => {
     onCheck?.(key, isChecked)
   }
 
+  const toggleCollapse = () => { setCollapsedState(!isCollapsed) }
+
   return (
     <Container _css={containerStyles || ""} onClick={() => onClick?.(key)}>
-      <FlexBox _css={css`
-        background: white;
-        padding: ${SPACINGS.SM};
-        width: 100%;
-        border-radius: .3rem;
-      `}>
+      <FlexBox fluid>
         {checkable ? (
           <Checkbox
             checked={!checkDisabled && checked}
@@ -75,60 +104,33 @@ export const Row: FC<Props> = ({
 
         <FlexBox withRows fluid>
           <Grid>
-            {columnConfigs.map((c: ColumnConfig) => {
-              const { name, collapsible, important } = c
+            {importantColumns.map(createGridRow)}
 
-              const {
-                      MEDIUM,
-                      REGULAR,
-                      BOLD,
-                    } = FONT_WEIGHTS
+            {
+              !isCollapsed
+              ? <FlexBox _css={css`
+                margin: .5em 0;
+                background: ${COLORS.LIGHT_GREY};
+                height: 2px;
+                width: 20px;
+              `} />
+              : null
+            }
 
-              const titleWeight = important ? BOLD : MEDIUM
-              const valueWeight = important ? MEDIUM : REGULAR
-
-              const cssStyles = collapsible && isCollapsed
-                                ? css`&& {display: none;}`
-                                : ""
-
-              return (
-                <GridRow key={`${key}-${c.name}`} _css={cssStyles}>
-                  <Col md={5} sm={12}>
-                    <Text _css={`font-weight: ${titleWeight};`}>
-                      {name}:
-                    </Text>
-                  </Col>
-
-                  <Col md={7} sm={12}>
-                    <Text _css={css`
-                      font-weight: ${valueWeight};
-                      font-size: ${FONT_SIZES.XS};
-                    `}>
-                      {item[name]}
-                    </Text>
-                  </Col>
-                </GridRow>
-              )
-            })}
+            {collapsibleColumns.map(createGridRow)}
           </Grid>
 
           {
-            columnConfigs.some((c) => c.collapsible)
-            ? <ButtonContainer>
-              <Button fluid
-                      icon={
-                        isCollapsed
-                        ? mdiChevronDown
-                        : mdiChevronUp
-                      }
+            isNotEmpty(collapsibleColumns)
+            ? <Button _css={css`align-self: flex-end; margin-bottom: ${SPACINGS.XS}`}
+                      icon={isCollapsed ? mdiChevronDown : mdiChevronUp}
+                      primary={false}
                       size={"small"}
                       onClick={toggleCollapse}>
-                Show {isCollapsed ? "More" : "Less"}
-              </Button>
-            </ButtonContainer>
+              Show {isCollapsed ? "More" : "Less"}
+            </Button>
             : null
           }
-
         </FlexBox>
         {
           actions
@@ -149,15 +151,15 @@ Row.defaultProps   = {}
 const Container = styled(FlexBox).attrs(() => ({
   alignItems: "stretch",
 }))`
-  background: ${veryLight(COLORS.GREY)};
-  height: auto;
-  border-radius: .3rem;
-  padding: .5rem;
+  background: ${COLORS.WHITE};
+  border-bottom: 1px solid ${veryLight(COLORS.GREY)};
+  padding: ${SPACINGS.SM};
 `
 
-const ButtonContainer = styled(FlexBox)`
-  justify-content: center;
+const ColumnRow = styled(GridRow)<{ collapsible: boolean,isCollapsed: boolean }>`
+  display: ${({ collapsible, isCollapsed }) => collapsible && isCollapsed
+                                               ? "none"
+                                               : "flex"};
+  padding: .1em;
+  border-radius: 10px;
 `
-
-// css={"align-self: flex-start;"}
-

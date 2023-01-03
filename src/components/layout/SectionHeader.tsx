@@ -1,33 +1,37 @@
+import { ComputersOnly }        from "components/layout/ComputersOnly"
+import { FlexBox }              from "components/layout/FlexBox"
+import { PhonesAndTabletsOnly } from "components/layout/PhonesAndTabletsOnly"
 import {
   PropsWithChildren,
   ReactNode
-}                   from "react"
-import styled       from "styled-components"
-import { FlexBox }  from "components/layout/FlexBox"
-import { SPACINGS } from "styles/spacings"
+}                               from "react"
+import styled                   from "styled-components"
 
 export type SectionHeaderProps = PropsWithChildren<{
   actions?: ReactNode,
   caption?: ReactNode,
+  title?: ReactNode,
 }>
-
 
 export const SectionHeader = styled(({
                                        actions,
-                                       children: title,
+                                       children,
                                        caption,
+                                       title = children,
                                      }: SectionHeaderProps): JSX.Element => {
   return <Container withRows>
     <FlexBox fluid>
       <Text>{title}</Text>
-      {actions ? <FlexBox>{actions}</FlexBox> : null}
+      <ComputersOnly>{actions ? <FlexBox>{actions}</FlexBox> : null}</ComputersOnly>
     </FlexBox>
     <Text>{caption}</Text>
+    <PhonesAndTabletsOnly>
+      {actions ? <FlexBox withRows>{actions}</FlexBox> : null}
+    </PhonesAndTabletsOnly>
   </Container>
 })``
 
 const Container = styled(FlexBox)`
-  padding: ${SPACINGS.MD} 0;
   width: 100%;
 `
 
