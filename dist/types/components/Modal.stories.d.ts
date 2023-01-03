@@ -1,12 +1,12 @@
 /// <reference types="react" />
-import { ModalContent, ModalProps } from "components/Modal";
+import { ModalProps } from "components/Modal";
 declare const _default: {
     title: string;
     component: ({ isVisible, closeModal, disableActions, modalContent, className, }: {
         isVisible: boolean;
         closeModal: () => void;
         disableActions: boolean;
-        modalContent: ModalContent | null | undefined;
+        modalContent: import("components/Modal").ModalContent | null | undefined;
     } & import("./StyledComponentProps.type").StyledComponentProps) => JSX.Element | null;
     argTypes: {};
 };

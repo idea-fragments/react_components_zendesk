@@ -1,0 +1,1 @@
+{"version":3,"file":"useToastNotifier.d.ts","sourceRoot":"","sources":["../../src/hooks/useToastNotifier.tsx"],"names":[],"mappings":"AACA,OAAO,EAEL,iBAAiB,EAClB,MAA2B,sCAAsC,CAAA;AAGlE,oBAAY,MAAM,GAAG;IACnB,MAAM,EAAE,CAAC,KAAK,EAAE,iBAAiB,KAAK,IAAI,CAAA;CAC3C,CAAA;AAED,eAAO,MAAM,gBAAgB,QAAO,MAQnC,CAAA"}

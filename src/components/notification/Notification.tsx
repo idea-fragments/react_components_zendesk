@@ -1,20 +1,25 @@
 import {
+  Close,
   Notification as ZNotification,
   Title,
-  Close,
+  ToastProvider as ZToastProvider,
 }                            from "@zendeskgarden/react-notifications"
 import { Type }              from "@zendeskgarden/react-notifications/dist/typings/types"
-import { FC, ReactNode }     from "react"
-import React                 from "react"
+import React, {
+  FC,
+  ReactNode
+}                            from "react"
 import { UserFeedbackProps } from "styles/UserFeedbackProps"
 import { DO_NOTHING }        from "utils/functionHelpers"
 
 type Props = {
-  body: ReactNode,
-  notDismissible?: boolean,
-  title?: string,
-  onClose?: () => void,
-} & UserFeedbackProps
+               body: ReactNode,
+               notDismissible?: boolean,
+               title?: string,
+               onClose?: () => void,
+             } & UserFeedbackProps
+
+export type NotificationProps = Props
 
 export const Notification: FC<Props> = ({
                                           body,
@@ -46,3 +51,5 @@ export const Notification: FC<Props> = ({
     }
   </ZNotification>
 }
+
+export const ToastProvider = ZToastProvider
