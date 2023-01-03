@@ -1,7 +1,7 @@
 import { useToast }    from "@zendeskgarden/react-notifications"
 import {
   Notification,
-  NotificationProps
+  NotificationProps,
 }                      from "components/notification/Notification"
 import { useCallback } from "react"
 

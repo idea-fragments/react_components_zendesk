@@ -23,6 +23,7 @@ const Component = (args: Partial<NotificationProps>) => {
 
   const notificationProps = {
     ...args,
+    body:  "Modal Body",
     title: "Modal Title",
   }
 

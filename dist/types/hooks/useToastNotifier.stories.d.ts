@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { NotificationProps } from "components/notification/Notification";
 declare const _default: {
     title: string;

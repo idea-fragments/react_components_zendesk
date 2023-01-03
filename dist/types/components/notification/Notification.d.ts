@@ -8,7 +8,7 @@ declare type Props = {
 } & UserFeedbackProps;
 export declare type NotificationProps = Props;
 export declare const Notification: FC<Props>;
-export declare const ToastProvider: {
+export declare const ToastProvider: import("styled-components").StyledComponent<{
     ({ limit, zIndex, placementProps, children }: React.PropsWithChildren<import("@zendeskgarden/react-notifications").IToastProviderProps>): JSX.Element;
     displayName: string;
     defaultProps: {
@@ -19,6 +19,8 @@ export declare const ToastProvider: {
         zIndex: import("prop-types").Requireable<number>;
         placementProps: import("prop-types").Requireable<object>;
     };
-};
+}, any, {
+    zIndex: 1000;
+}, "zIndex">;
 export {};
 //# sourceMappingURL=Notification.d.ts.map
