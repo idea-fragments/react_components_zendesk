@@ -29,6 +29,7 @@ export type Styles = {
   colorDanger: string,
   colorSuccess: string,
   container: { horizontalPadding: string },
+  font: { size: string },
   footer: {
     background: string
   },

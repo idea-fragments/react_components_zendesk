@@ -1,56 +1,83 @@
-import { mdiCheck }                     from "@mdi/js"
-import { Button, BUTTON_SIZES }         from "components/forms/Button"
-import { Selector }                     from "components/forms/selectors/Selector"
-import { TextField }                    from "components/forms/textfields/TextField"
-import { FlexBox }                      from "components/layout/FlexBox"
-import { ItemFilterOptions }       from "components/tables/Table"
-import React, { ChangeEvent, useState } from "react"
-import { FONT_WEIGHTS }                 from "styles/typography"
-import { Logger }                       from "utils/logging/Logger"
+import { MultiSelector }      from "components/forms/selectors/MultiSelector"
+import { SearchableSelector } from "components/forms/selectors/SearchableSelector"
+import { Selector }           from "components/forms/selectors/Selector"
+import { SelectorProps }      from "components/forms/selectors/types"
+import { TextField }          from "components/forms/textfields/TextField"
+import {
+  FilterState,
+  ItemFilterOptions
+}                             from "components/tables/Table"
+import React, {
+  FC,
+  useCallback,
+  useMemo
+}                             from "react"
+import { Logger }             from "utils/logging/Logger"
+import { ValueOf }            from "utils/types"
 
 const logger = new Logger("TableFilter")
 
 type Props = ItemFilterOptions & {
-  initialValue?: string,
-  onChange: (name: string, value: any) => void,
+  onChange: (fieldName: string, value: any) => void,
+  value: ValueOf<FilterState>,
 }
 
 export const TableFilter = ({
-                              initialValue,
-                              name,
+                              fieldName,
+                              label,
+                              onChange,
                               options,
                               type,
-                              onChange,
+                              value,
                             }: Props) => {
-  const [value, setValue] = useState<string>(initialValue ?? "")
+  logger.writeInfo("render", fieldName, value)
 
-  const onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
+  const sendChanges = useCallback((v: string) => {
+    onChange(fieldName, v)
+  }, [fieldName, onChange])
+
+  // @ts-ignore
+  const SelectorComponent: FC<SelectorProps> | undefined = useMemo(() => {
+    if (type === "multi-select") return MultiSelector
+    if (type === "select") return Selector
+    if (type === "searchable-select") return SearchableSelector
+    return undefined
+  }, [type])
+
+  const selectorEmptyState = () => {
+    if (type === "multi-select") return "Select one or more"
+    if (type === "searchable-select") return "Type to search"
+    if (type === "select") return "Select one"
+    return ""
   }
 
-  logger.writeInfo("render", name, value)
+  if (SelectorComponent) {
+    return <SelectorComponent appendMenuToNode={document.body}
+                              clearable
+                              emptyState={selectorEmptyState()}
+                              keyField={"value"}
+                              label={label}
+                              labelField={"label"}
+                              maxMenuHeight={"200px"}
+                              menuPopperModifiers={[{ name: "flip", enabled: true }]}
+      // @ts-ignore
+                              onChange={sendChanges}
+                              options={options!}
+                              placement={"bottom"}
+                              {
+                                ...(type === "multi-select"
+                                    ? { selectedKeys: value as string[] ?? [], maxItems: 2 }
+                                    : { selectedKey: value as string })
+                              }
+                              small
+    />
+  }
 
-  const filter = type === "select"
-                 ? <Selector clearable
-                             _css={`font-weight: ${FONT_WEIGHTS.REGULAR};`}
-                             keyField={"value"}
-                             labelField={"label"}
-                             options={options!!}
-                             selectedKey={value}
-                             small
-                             // @ts-ignore
-                             onChange={setValue} />
-                 : <TextField small
-                              value={value}
-                              onChange={onTextChange} />
-
-  return <FlexBox withRows>
-    {filter}
-    <Button compact
-            _css={`align-self: flex-end;`}
-            icon={mdiCheck}
-            iconSize={"1rem"}
-            size={BUTTON_SIZES.SMALL}
-            onClick={() => onChange(name, value)} />
-  </FlexBox>
+  return <TextField label={label}
+                    emptyState={label}
+                    onChange={sendChanges}
+                    small
+                    useNewOnChange
+                    value={value as string ?? ""}
+  />
 }

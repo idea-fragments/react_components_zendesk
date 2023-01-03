@@ -5,8 +5,8 @@ export type NavigationAction = {
                                  href?: string,
                                  icon?: any | ComponentType,
                                  label: string,
-                                 onClick?: () => any,
+                                 onClick?: () => void,
                                } & (NavigationLinkProps | NavigationButtonProps)
 
 type NavigationLinkProps = { href: string }
-type NavigationButtonProps = { onClick: () => any }
+type NavigationButtonProps = { onClick: () => void }

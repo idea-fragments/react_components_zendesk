@@ -2,6 +2,7 @@ import { FlexBox }         from "components/layout/FlexBox"
 import { Header }          from "components/tables/blocks/Header"
 import { HelpText }        from "components/tables/blocks/HelpText"
 import { Title }           from "components/tables/blocks/Title"
+import { Filters }         from "components/tables/Filters"
 import {
   Body,
   Table
@@ -26,12 +27,12 @@ export const NiceTable = ({
                             checkedItems,
                             columnConfigs,
                             emptyState,
+                            filterState,
                             hasRowActions,
                             helpText,
-                            initialFilterValues,
                             items,
                             title,
-                            onFilterChange,
+                            onFiltersChange,
                             onItemChecked,
                             onItemClick,
                             onItemHoverEnd,
@@ -45,8 +46,16 @@ export const NiceTable = ({
         {title ? <Title>{title}</Title> : null}
         {helpText ? <HelpText>{helpText}</HelpText> : null}
         <FlexBox _css={`flex: 1`} justifyContent={"flex-end"}>
-          {/* @ts-ignore */}
-          {actions?.({ checkedItems })?.map((a, i) => <Fragment key={i}>{a}</Fragment>)}
+          {actions}
+
+          {
+            onFiltersChange
+            ? <Filters columnConfigs={columnConfigs}
+                       filterState={filterState!}
+                       onFiltersChange={onFiltersChange} />
+            : null
+          }
+
         </FlexBox>
       </FlexBox>
       <HorizontalScroll>
@@ -55,11 +64,8 @@ export const NiceTable = ({
                   checkedItems={checkedItems}
                   columnConfigs={columnConfigs}
                   hasRowActions={hasRowActions}
-                  initialFilterValues={initialFilterValues}
                   items={items}
-                  onFilterChange={onFilterChange}
                   onSelectAllToggle={onSelectAllToggle} />
-
           <Body>
             {
               isNotEmpty(items)
@@ -88,7 +94,7 @@ export const NiceTable = ({
 
 const HorizontalScroll = styled.div`
   overflow-x: auto;
-  border: 2px solid ${({theme}) => theme.styles.table.borderColor};
+  border: 2px solid ${({ theme }) => theme.styles.table.borderColor};
 `
 
 NiceTable.COMPONENT_NAME = "NiceTable"

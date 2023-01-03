@@ -1,10 +1,10 @@
 import {
   Field as ZField,
-  Hint,
   Label,
   Message,
 }                            from "@zendeskgarden/react-forms"
 import { TextFieldProps }    from "components/forms/formField.types"
+import { Hint }              from "components/forms/Hint"
 import { TextAreaProps }     from "components/forms/textfields/TextArea"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox }           from "components/layout/FlexBox"
@@ -51,41 +51,40 @@ export let TextFieldWrapper = forwardRef(({
                                           }: Props, ref) => {
   message = validation?.message || message
   return <Container className={className}
-               withRows
-               gap={"unset"}
-               fluid={fluid}>
-      {/* @ts-ignore */}
-      <Field compact={compact}>
-        {label ? <Label>{label}</Label> : null}
-        {
-          hint
-          ? <Hint css={`&&& {font-size: ${FONT_SIZES.XS};}`}>
-            {hint}
-          </Hint>
-          : null
-        }
-        <WrappedComponent
-          placeholder={emptyState}
-          ref={ref}
-          validation={validation?.validation}
-          {...props}
-          resizable={true}
-          value={value}
-          onChange={onChange}
-        />
-        {
-          message
-          ? <Message
-            css={`&&& {
-              font-size: ${FONT_SIZES.XS};
-            }`}
-            validation={validation?.validation}>
-            {message}
-          </Message>
-          : null
-        }
-      </Field>
-    </Container>
+                    withRows
+                    gap={"unset"}
+                    fluid={fluid}>
+    {/* @ts-ignore */}
+    <Field compact={compact}>
+      {label ? <Label>{label}</Label> : null}
+      {
+        hint
+        ? <Hint _css={css`&&& {font-size: ${FONT_SIZES.XS};}`}>
+          {hint}
+        </Hint>
+        : null
+      }
+      <WrappedComponent
+        placeholder={emptyState}
+        ref={ref}
+        validation={validation?.validation}
+        {...props}
+        value={value}
+        onChange={onChange}
+      />
+      {
+        message
+        ? <Message
+          css={`&&& {
+            font-size: ${FONT_SIZES.XS};
+          }`}
+          validation={validation?.validation}>
+          {message}
+        </Message>
+        : null
+      }
+    </Field>
+  </Container>
 })
 
 const hoverFocusStyling = css`

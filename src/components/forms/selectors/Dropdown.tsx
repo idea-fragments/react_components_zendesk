@@ -34,7 +34,10 @@ import React, {
   useRef,
   useState
 }                            from "react"
-import styled                from "styled-components"
+import styled, {
+  FlattenInterpolation,
+  ThemeProps
+}                            from "styled-components"
 import { CSS }               from "styles/types"
 import { FONT_SIZES }        from "styles/typography"
 import {
@@ -75,11 +78,12 @@ type CommonProps = {
   async?: boolean,
   isOpen?: boolean,
   maxMenuHeight?: string,
-  menuCSS?: string,
+  menuCSS?: string | FlattenInterpolation<ThemeProps<any>>,
   menuItemComponent?: ComponentType<any>,
   placement?: MenuPlacement,
   returnItemOnChange?: boolean,
   shouldFilterOptions?: boolean,
+  small?: boolean,
   trigger?: ReactNode,
   useRawOptions?: boolean,
 }
@@ -123,9 +127,11 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
           maxMenuHeight,
           menuCSS,
           menuItemComponent,
+          menuPopperModifiers,
           options,
           placement,
           returnItemOnChange,
+          small,
           trigger,
           useRawOptions,
           validation,
@@ -310,19 +316,24 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
       }
 
       {controlledState.isOpen
-       ? <StyledMenu _css={menuCSS ?? ""}
+       ? (
+         // @ts-ignore
+         <StyledMenu _css={menuCSS ?? ""}
                      appendToNode={appendMenuToNode}
+                     isCompact={small}
                      maxHeight={maxMenuHeight}
                      placement={placement}
-       >
-         {
-           async
-           ? <StyledLoadable showSpinner={controlledState.isOpen && !optionsLoaded}>
-             {optionNodes}
-           </StyledLoadable>
-           : optionNodes
-         }
-       </StyledMenu>
+                     popperModifiers={menuPopperModifiers}
+         >
+           {
+             async
+             ? <StyledLoadable showSpinner={controlledState.isOpen && !optionsLoaded}>
+               {optionNodes}
+             </StyledLoadable>
+             : optionNodes
+           }
+         </StyledMenu>
+       )
        : null}
 
     </ZenDropdown>
