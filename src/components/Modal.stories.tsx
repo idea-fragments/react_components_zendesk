@@ -1,6 +1,9 @@
-import { Button }                          from "components/forms/Button"
-import { Modal, ModalContent, ModalProps } from "components/Modal"
-import React, { useState }                 from "react"
+import { Button }          from "components/forms/Button"
+import {
+  Modal,
+  ModalProps
+}                          from "components/Modal"
+import React, { useState } from "react"
 
 export default {
   title:     "Modal",
