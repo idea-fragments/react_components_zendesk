@@ -9,6 +9,7 @@ import React, {
   FC,
   ReactNode
 }                            from "react"
+import styled                from "styled-components"
 import { UserFeedbackProps } from "styles/UserFeedbackProps"
 import { DO_NOTHING }        from "utils/functionHelpers"
 
@@ -52,4 +53,6 @@ export const Notification: FC<Props> = ({
   </ZNotification>
 }
 
-export const ToastProvider = ZToastProvider
+export const ToastProvider = styled(ZToastProvider).attrs({
+  zIndex: 1000,
+})``
