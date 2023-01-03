@@ -32,6 +32,7 @@ const IGNORABLE_STATE_CHANGES: StateChangeTypes[] = [
   Downshift.stateChangeTypes.blurInput,
   Downshift.stateChangeTypes.blurButton,
   Downshift.stateChangeTypes.mouseUp,
+  Downshift.stateChangeTypes.touchEnd,
 ]
 
 export const Filters: FC<FiltersProps> = ({
@@ -61,6 +62,7 @@ export const Filters: FC<FiltersProps> = ({
   }, [closeMenu, onFiltersChange])
 
   const processDropdownStateChange = ({ isOpen, type }: StateChange) => {
+    console.log("processDropdownStateChange", isOpen, type)
     if (isOpen == null || IGNORABLE_STATE_CHANGES.includes(type)) return
     setDropdownState({ isOpen })
   }
