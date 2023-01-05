@@ -62,7 +62,6 @@ export const Filters: FC<FiltersProps> = ({
   }, [closeMenu, onFiltersChange])
 
   const processDropdownStateChange = ({ isOpen, type }: StateChange) => {
-    console.log("processDropdownStateChange", isOpen, type)
     if (isOpen == null || IGNORABLE_STATE_CHANGES.includes(type)) return
     setDropdownState({ isOpen })
   }
