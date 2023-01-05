@@ -17,8 +17,8 @@ export const AppBarLayoutV2: FC<Props> = ({
   const appBarHeight = theme.styles.appBar.height
 
   return (
-    <Container gap={"unset"} withRows>
-      <FlexBox _css={css`height: calc(100% - ${appBarHeight});`}
+    <Container>
+      <FlexBox _css={css`min-height: calc(100% - ${appBarHeight});`}
                gap={"unset"}
                withRows>
         {mainContent}
@@ -28,6 +28,6 @@ export const AppBarLayoutV2: FC<Props> = ({
   )
 }
 
-const Container = styled(FlexBox)`
+const Container = styled.div`
   height: 100%;
 `
