@@ -1,4 +1,10 @@
 import {
+  mdiCheckboxBlank,
+  mdiCheckboxBlankOutline,
+  mdiCheckboxMarked,
+  mdiCheckboxOutline
+} from "@mdi/js"
+import {
   Button,
   BUTTON_SIZES
 }                          from "components/forms/Button"
@@ -48,12 +54,14 @@ export const MobileTable = ({
 
 
         <FlexBox justifyContent={"space-between"} wrapped>
-          {checkable ?
-           <Button compact
-                   neutral
-                   onClick={() => { onSelectAllToggle?.(!allSelected) }}>
-             {allSelected ? "Deselect" : "Select"} All
-           </Button> : undefined}
+          {
+            checkable
+            ? <Button compact
+                      icon={allSelected ? mdiCheckboxMarked : mdiCheckboxBlankOutline}
+                      neutral
+                      onClick={() => { onSelectAllToggle?.(!allSelected) }} />
+            : undefined
+          }
 
           {actions}
 

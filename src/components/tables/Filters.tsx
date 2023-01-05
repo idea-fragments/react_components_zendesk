@@ -32,6 +32,7 @@ const IGNORABLE_STATE_CHANGES: StateChangeTypes[] = [
   Downshift.stateChangeTypes.blurInput,
   Downshift.stateChangeTypes.blurButton,
   Downshift.stateChangeTypes.mouseUp,
+  Downshift.stateChangeTypes.touchEnd,
 ]
 
 export const Filters: FC<FiltersProps> = ({
