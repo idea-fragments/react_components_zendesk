@@ -4,10 +4,12 @@ declare const _default: {
     title: string;
     component: React.FC<{
         checked?: boolean | undefined;
+        color?: string | undefined;
         disabled?: boolean | undefined;
-        label?: string | undefined;
         hint?: React.ReactNode;
+        label?: string | undefined;
         onChange: (checked: boolean) => void;
+        success?: boolean | undefined;
     }>;
     argTypes: {};
 };

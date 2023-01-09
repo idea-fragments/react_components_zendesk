@@ -1,5 +1,8 @@
+import {
+  TaggedToggle,
+  TaggedToggleProps
+}                          from "components/forms/TaggedToggle"
 import React, { useState } from "react"
-import { TaggedToggle }    from "components/forms/TaggedToggle"
 
 export default {
   title:     "forms/TaggedToggle",
@@ -8,9 +11,9 @@ export default {
 }
 
 
-const Story = () => {
+const Story = (args: Partial<TaggedToggleProps>) => {
   const [active, setState] = useState(false)
-  return <TaggedToggle active={active} onChange={setState} />
+  return <TaggedToggle {...args} active={active} onChange={setState} />
 }
 
 export const Default = Story.bind({})

@@ -1,21 +1,36 @@
 // @ts-ignore
-import { Field, Toggle as ZToggle }          from "@zendeskgarden/react-forms"
-import { Hint }                              from "components/forms/Hint"
-import { Label }                             from "components/forms/Label"
-import React, { ChangeEvent, FC, ReactNode } from "react"
-import styled, { css }                       from "styled-components"
-import { dark }                              from "styles/colors"
-import { Logger }                            from "utils/logging/Logger"
+import {
+  Field,
+  Toggle as ZToggle
+}                 from "@zendeskgarden/react-forms"
+import { Hint }   from "components/forms/Hint"
+import { Label }  from "components/forms/Label"
+import React, {
+  ChangeEvent,
+  FC,
+  ReactNode
+}                 from "react"
+import styled, {
+  css,
+  ThemedStyledProps,
+  ThemeProps
+}                 from "styled-components"
+import { dark }   from "styles/colors"
+import { Theme }  from "styles/theme/Theme.type"
+import { Logger } from "utils/logging/Logger"
 
 const logger = new Logger("Toggles")
 
 type Props = {
   checked?: boolean,
+  color?: string,
   disabled?: boolean,
-  label?: string,
   hint?: ReactNode,
-  onChange: (checked: boolean) => void
+  label?: string,
+  onChange: (checked: boolean) => void,
+  success?: boolean,
 }
+
 export type ToggleProps = Props
 
 export let Toggle: FC<Props> = ({
@@ -40,18 +55,26 @@ export let Toggle: FC<Props> = ({
   </Field>
 }
 
-const toggleColor = css`
+
+const finalizeColor = ({ color, success, theme }: ThemedStyledProps<ToggleProps, Theme>) => {
+  if (success) return theme.styles.colorSuccess
+  if (color) return color
+  return theme.styles.colorPrimary
+}
+
+const toggleColor = css<{ color: string }>`
   + label:before {
-    border-color: ${({ theme }) => theme.styles.colorSuccess};
-    background-color: ${({ theme }) => theme.styles.colorSuccess};
+    border-color: ${({ color }) => color};
+    background-color: ${({ color }) => color};
   }
 
   &&& + label:active:before {
-    background-color: ${({ theme }) => dark(theme.styles.colorSuccess)};
+    background-color: ${({ color }) => dark(color)};
   }
 `
 
-const StyledZToggle = styled(ZToggle)`
+const StyledZToggle = styled(ZToggle)
+  .attrs((props: ThemedStyledProps<ToggleProps, Theme>) => ({ color: finalizeColor(props) }))`
   font-size: inherit;
 
   &&&&& {

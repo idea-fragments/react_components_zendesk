@@ -2329,7 +2329,8 @@ var light = function (c, amount) {
   // console.log("luminosity new:", Color(newColor).luminosity())
 
   return newColor;
-};
+}; // Deprecated. Do not use
+
 
 var Chip = styled__default["default"](XXS).attrs(function (_a) {
   var danger = _a.danger,
@@ -6018,10 +6019,24 @@ var Tag$1 = TagComponent;
 Tag$1.Avatar = Avatar;
 Tag$1.Close = Close$1;
 var Close = styled__default["default"](Tag$1.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\n"], ["\n\n"])));
-var Tag = styled__default["default"](Tag$1)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  && {\n    cursor: ", ";\n  }\n"], ["\n  && {\n    cursor: ", ";\n  }\n"])), function (_a) {
+var Tag = styled__default["default"](Tag$1).attrs(function (props) {
+  return {
+    hue: finalizeColor(props)
+  };
+})(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  && {\n    cursor: ", ";\n  }\n"], ["\n  && {\n    cursor: ", ";\n  }\n"])), function (_a) {
   var onClick = _a.onClick;
   return onClick ? "pointer" : "initial";
 });
+
+var finalizeColor = function (_a) {
+  var color = _a.color,
+      success = _a.success,
+      theme = _a.theme;
+  if (success) return theme.styles.colorSuccess;
+  if (color) return color;
+  return undefined;
+};
+
 var templateObject_1, templateObject_2;
 exports.Chip = Chip;
 exports.Close = Close;

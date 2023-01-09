@@ -10,7 +10,7 @@ export default {
 
 const Story = (args: Partial<ToggleProps>) => {
   const [active, setState] = useState(false)
-  return <Toggle {...args} checked={active} onChange={setState} />
+  return <Toggle {...args} checked={active} hint={"some hint"} onChange={setState} />
 }
 
 export const Default = Story.bind({})
