@@ -1,4 +1,3 @@
-import { Tag as ZTag }       from "@zendeskgarden/react-tags/dist/typings/elements/Tag"
 import {
   Dropdown,
   MultiSelect
@@ -14,7 +13,6 @@ import {
   Tag
 }                            from "components/tags/Tag"
 import React                 from "react"
-import styled                from "styled-components"
 
 type Props = {
                maxItems: 2,
@@ -27,7 +25,7 @@ export let MultiSelector = ({ maxItems, ...props }: Props) => {
         labelField,
         options,
         optionsKeyMap,
-    small,
+        small,
         validation,
       } = props
 

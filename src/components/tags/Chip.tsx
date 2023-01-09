@@ -13,6 +13,7 @@ type Props = {
 
 export type ChipProps = Props & StyledProps
 
+// Deprecated. Do not use
 export const Chip = styled(XXS)
   .attrs(({ danger, primary, success, theme }: Props & StyledProps) => {
     let background
