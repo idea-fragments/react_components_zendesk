@@ -4,6 +4,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var styled = require('styled-components');
 
+var jsxRuntime = require('react/jsx-runtime');
+
 var React = require('react');
 
 function _interopDefaultLegacy(e) {
@@ -54,6 +56,31 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
+
+var __assign = function () {
+  __assign = Object.assign || function __assign(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+function __rest(s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+}
 
 function __makeTemplateObject(cooked, raw) {
   if (Object.defineProperty) {
@@ -6015,30 +6042,52 @@ TagComponent.propTypes = {
 TagComponent.defaultProps = {
   size: 'medium'
 };
-var Tag$1 = TagComponent;
-Tag$1.Avatar = Avatar;
-Tag$1.Close = Close$1;
-var Close = styled__default["default"](Tag$1.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\n"], ["\n\n"])));
-var Tag = styled__default["default"](Tag$1).attrs(function (props) {
-  return {
-    hue: finalizeColor(props)
+var Tag = TagComponent;
+Tag.Avatar = Avatar;
+Tag.Close = Close$1;
+
+var useTheme = function () {
+  return React.useContext(styled.ThemeContext);
+}; // export const setThemeContext = (ctx :)
+
+
+var Close = styled__default["default"](Tag.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\n"], ["\n\n"])));
+exports.Tag = React.forwardRef(function (_a, ref) {
+  var children = _a.children,
+      className = _a.className,
+      color = _a.color,
+      onClose = _a.onClose,
+      success = _a.success,
+      props = __rest(_a, ["children", "className", "color", "onClose", "success"]);
+
+  var theme = useTheme();
+
+  var finalizedColor = function () {
+    if (success) return theme.styles.colorSuccess;
+    if (color) return color;
+    return undefined;
   };
-})(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  && {\n    cursor: ", ";\n  }\n"], ["\n  && {\n    cursor: ", ";\n  }\n"])), function (_a) {
+
+  var onCloseClicked = React.useCallback(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
+  }, [onClose]);
+  return jsxRuntime.jsxs(Tag, __assign({
+    className: className,
+    hue: finalizedColor(),
+    ref: ref
+  }, props, {
+    children: [children, onClose ? jsxRuntime.jsx(Close, {
+      onClick: onCloseClicked
+    }) : null]
+  }));
+});
+exports.Tag = styled__default["default"](exports.Tag)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  && {\n    cursor: ", ";\n  }\n"], ["\n  && {\n    cursor: ", ";\n  }\n"])), function (_a) {
   var onClick = _a.onClick;
   return onClick ? "pointer" : "initial";
 });
-
-var finalizeColor = function (_a) {
-  var color = _a.color,
-      success = _a.success,
-      theme = _a.theme;
-  if (success) return theme.styles.colorSuccess;
-  if (color) return color;
-  return undefined;
-};
-
 var templateObject_1, templateObject_2;
 exports.Chip = Chip;
 exports.Close = Close;
-exports.Tag = Tag;
 //# sourceMappingURL=tags.js.map

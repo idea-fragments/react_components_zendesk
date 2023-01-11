@@ -12,7 +12,10 @@ export default {
 
 
 const Story = (args: Partial<TagProps>) => {
-  return <Tag {...args} color={"red"}>A text to show</Tag>
+  const onClick = () => { alert("tag clicked") }
+  const onClose = () => { alert("Close clicked") }
+
+  return <Tag {...args} color={"red"} onClick={onClick} onClose={onClose}>A text to show</Tag>
 }
 
 export const Default = Story.bind({})

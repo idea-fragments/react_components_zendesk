@@ -2,12 +2,12 @@ import { SelectorItemKey, SelectorProps } from "components/forms/selectors/types
 import React from "react";
 declare const _default: {
     title: string;
-    component: React.FC<{
-        children?: ((o: import("components/forms/selectors/types").SelectorOption) => void | React.ReactNode) | undefined;
-        onSearchTextChange?: ((s: string) => void) | undefined;
+    component: ({ maxItems, ...props }: {
+        maxItems?: number | undefined;
+        selectedKeys: SelectorItemKey[];
     } & {
-        selectedKey?: SelectorItemKey;
-        onChange?: import("components/forms/selectors/types").OnItemSelectedFunc | undefined;
+        selectedKeys?: SelectorItemKey[] | undefined;
+        onChange?: import("components/forms/selectors/types").OnItemsSelectedFunc | undefined;
     } & {
         label?: React.ReactNode;
         message?: React.ReactNode;
@@ -33,9 +33,9 @@ declare const _default: {
         flat?: boolean | undefined;
         open?: boolean | undefined;
         small?: boolean | undefined;
-    }>;
+    }) => JSX.Element;
     argTypes: {};
 };
 export default _default;
 export declare const Default: (args: SelectorProps) => JSX.Element;
-//# sourceMappingURL=SearchableSelector.stories.d.ts.map
+//# sourceMappingURL=MultiSelector.stories.d.ts.map
