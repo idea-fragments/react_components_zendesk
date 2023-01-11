@@ -12,8 +12,8 @@ export declare type SelectorOptionOptionalAttrs = {
 export declare type SelectorOption = {
     [key: string]: any;
 } & SelectorOptionOptionalAttrs;
-export declare type OnMultiSelectItemRemoveFunc<T = SelectorItemKey> = (k: T) => void;
 export declare type OnItemSelectedFunc = ((k: SelectorItemKey) => void) | ((o: SelectorOption | null | undefined) => void);
+export declare type OnItemsSelectedFunc = ((ks: SelectorItemKey[]) => void) | ((o: SelectorOption[] | null | undefined) => void);
 export declare type StateChange = StateChangeOptions<SelectorOption>;
 declare type Common = FormFieldProps & {
     appendMenuToNode?: HTMLElement;
@@ -28,7 +28,6 @@ declare type Common = FormFieldProps & {
     maxMenuHeight?: string;
     menuPopperModifiers?: Record<string, any>[] | undefined;
     placement?: MenuPlacement;
-    onChange?: OnItemSelectedFunc;
     onStateChange?: (s: StateChange) => void;
     invalidOnNoSelection?: boolean;
     flat?: boolean;
@@ -41,7 +40,7 @@ export declare type SelectorProps = {
 } & Common;
 export declare type MultiSelectorProps = {
     selectedKeys?: SelectorItemKey[];
-    onChange?: OnItemSelectedFunc;
+    onChange?: OnItemsSelectedFunc;
 } & Common;
 export {};
 //# sourceMappingURL=types.d.ts.map

@@ -47,7 +47,7 @@ const SpinnerContainer = styled(FlexBox)`
   opacity: .7;
   top: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
 `

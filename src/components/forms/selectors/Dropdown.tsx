@@ -16,11 +16,12 @@ import {
 }                            from "components/forms/selectors/Dropdown/Item"
 import {
   MultiSelectorProps,
+  OnItemSelectedFunc,
   SelectorItemKey,
   SelectorOption,
   SelectorProps,
   StateChange,
-}                            from "components/forms/selectors/types"
+} from "components/forms/selectors/types"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { Loadable }          from "components/loaders/Loadable"
 import { debounce }          from "lodash"
@@ -203,7 +204,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
     setSearchFilter("")
 
     if ((item as SelectorOption)?.isClearingItem) {
-      onChange!(null)
+      (onChange as OnItemSelectedFunc)!(null)
       return
     }
 
