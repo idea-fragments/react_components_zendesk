@@ -40,6 +40,7 @@ const Story = (args: Partial<FinalizedTableProps>) => {
   }
 
   return <Table
+    maxHeight={"240px"}
     {...args}
     actions={actions()}
     checkable
@@ -216,6 +217,7 @@ const columnConfigs: ColumnConfig[] = [
       options:   items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
       type:      "multi-select",
     },
+    sortable: true,
     width:       "150px",
   },
   {

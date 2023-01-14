@@ -31,7 +31,8 @@ const overflowCellStyles = css`
   right: 0;
   z-index: 5;
   text-align: center;
-  width: 5em;
+  width: ${(p) => `calc(5em + ${p.extraWidth ?? "0px"})` };
+  
   ::before {
     position: absolute;
     top: 0;
@@ -43,11 +44,12 @@ const overflowCellStyles = css`
   }
 `
 
-const Table = styled(ZTable)`
+const Table = styled(ZTable)<CSSProp>`
   && {
     color: inherit;
     border-radius: 6px;
   }
+  ${({ _css }) => _css}
 `
 
 const Head = styled(ZHead)`
@@ -57,8 +59,6 @@ const Head = styled(ZHead)`
 `
 
 const HeaderRow = styled(ZHeaderRow)`
-  font-size: ${FONT_SIZES.XS};
-  font-weight: ${FONT_WEIGHTS.BOLD};
   border: none !important;
   height: auto !important;
 `

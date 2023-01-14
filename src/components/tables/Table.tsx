@@ -64,6 +64,7 @@ export type TableProps = {
   filterState?: FilterState,
   helpText?: ReactNode,
   items: Array<Item>,
+  maxHeight?: string,
   title?: string,
   onFiltersChange?: (changes: FilterState) => void,
   onItemChecked?: (key: ItemKey, isChecked: boolean) => void,
@@ -119,16 +120,15 @@ export let Table = ({
     (i: Item) => i.actions && isNotEmpty(i.actions),
   )
 
-  const largeTable = () => <NiceTable actions={actions}
-                                      hasRowActions={hasRowActions}
-                                      onSelectAllToggle={setAllRowsSelectedTo}
-                                      {...props}
-  />
   return (
     <FlexBox withRows className={className}>
       {
         isSmallComputer() || isLargeComputer()
-        ? largeTable()
+        ? <NiceTable actions={actions}
+                     hasRowActions={hasRowActions}
+                     onSelectAllToggle={setAllRowsSelectedTo}
+                     {...props}
+        />
         : <MobileTable actions={actions}
                        hasRowActions={hasRowActions}
                        onSelectAllToggle={setAllRowsSelectedTo}
