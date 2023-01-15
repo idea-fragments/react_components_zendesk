@@ -8,7 +8,10 @@ import {
   Row as ZRow,
   Table as ZTable,
 }                                      from "@zendeskgarden/react-tables"
-import { StickyColumnProps }           from "components/tables/utils"
+import {
+  SortableColumnProps,
+  StickyColumnProps
+} from "components/tables/utils"
 import styled, { css }                 from "styled-components"
 import {
   COLORS,
@@ -26,12 +29,17 @@ import {
 } from "styles/typography"
 
 
-const overflowCellStyles = css`
+type OverflowColumnProps = {
+  extraWidth? : string
+}
+
+const overflowCellStyles = css<OverflowColumnProps>`
   position: sticky;
   right: 0;
   z-index: 5;
   text-align: center;
-  width: 5em;
+  width: ${(p) => `calc(5em + ${p.extraWidth ?? "0px"})` };
+  
   ::before {
     position: absolute;
     top: 0;
@@ -43,11 +51,19 @@ const overflowCellStyles = css`
   }
 `
 
-const Table = styled(ZTable)`
+// const sortableColumnHeaderStyles = css`
+//   cursor: pointer;
+//   :hover, :focus {
+//     background: ${veryLight(COLORS.GREY)};
+//   }
+// `
+
+const Table = styled(ZTable)<CSSProp>`
   && {
     color: inherit;
     border-radius: 6px;
   }
+  ${({ _css }) => _css}
 `
 
 const Head = styled(ZHead)`
@@ -57,13 +73,11 @@ const Head = styled(ZHead)`
 `
 
 const HeaderRow = styled(ZHeaderRow)`
-  font-size: ${FONT_SIZES.XS};
-  font-weight: ${FONT_WEIGHTS.BOLD};
   border: none !important;
   height: auto !important;
 `
 
-const HeaderCell = styled(ZHeaderCell)<CSSProp & StickyColumnProps>`
+const HeaderCell = styled(ZHeaderCell)<CSSProp & StickyColumnProps & OverflowColumnProps>`
   vertical-align: top;
   background: white;
   ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};

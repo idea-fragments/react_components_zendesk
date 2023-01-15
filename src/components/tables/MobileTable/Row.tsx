@@ -93,7 +93,7 @@ export const Row: FC<Props> = ({
   const toggleCollapse = () => { setCollapsedState(!isCollapsed) }
 
   return (
-    <Container _css={containerStyles || ""} onClick={() => onClick?.(key)}>
+    <Container _css={containerStyles || ""} onClick={() => onClick?.(key)} withRows>
       <FlexBox fluid>
         {checkable ? (
           <Checkbox
@@ -119,18 +119,6 @@ export const Row: FC<Props> = ({
 
             {collapsibleColumns.map(createGridRow)}
           </Grid>
-
-          {
-            isNotEmpty(collapsibleColumns)
-            ? <Button _css={css`align-self: flex-end; margin-bottom: ${SPACINGS.XS}`}
-                      icon={isCollapsed ? mdiChevronDown : mdiChevronUp}
-                      primary={false}
-                      size={"small"}
-                      onClick={toggleCollapse}>
-              Show {isCollapsed ? "More" : "Less"}
-            </Button>
-            : null
-          }
         </FlexBox>
         {
           actions
@@ -140,6 +128,18 @@ export const Row: FC<Props> = ({
           : null
         }
       </FlexBox>
+      {
+        isNotEmpty(collapsibleColumns)
+        ? <Button _css={css`align-self: flex-end; margin-bottom: ${SPACINGS.XS}`}
+                  fluid
+                  icon={isCollapsed ? mdiChevronDown : mdiChevronUp}
+                  primary={false}
+                  size={"small"}
+                  onClick={toggleCollapse}>
+          Show {isCollapsed ? "More" : "Less"}
+        </Button>
+        : null
+      }
     </Container>
   )
 }
@@ -156,7 +156,7 @@ const Container = styled(FlexBox).attrs(() => ({
   padding: ${SPACINGS.SM};
 `
 
-const ColumnRow = styled(GridRow)<{ collapsible: boolean,isCollapsed: boolean }>`
+const ColumnRow = styled(GridRow)<{ collapsible: boolean, isCollapsed: boolean }>`
   display: ${({ collapsible, isCollapsed }) => collapsible && isCollapsed
                                                ? "none"
                                                : "flex"};

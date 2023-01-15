@@ -5,7 +5,7 @@ declare type Props = TableProps & {
     onSelectAllToggle?: (b: boolean) => void;
 };
 export declare const NiceTable: {
-    ({ actions, checkable, checkedItems, columnConfigs, emptyState, filterState, hasRowActions, helpText, items, title, onFiltersChange, onItemChecked, onItemClick, onItemHoverEnd, onItemHoverStart, onSelectAllToggle, }: Props): JSX.Element;
+    ({ actions, checkable, checkedItems, columnConfigs, emptyState, filterState, hasRowActions, helpText, items, maxHeight, sortState, title, onColumnSort, onFiltersChange, onItemChecked, onItemClick, onItemHoverEnd, onItemHoverStart, onSelectAllToggle, }: Props): JSX.Element;
     COMPONENT_NAME: string;
 };
 export {};

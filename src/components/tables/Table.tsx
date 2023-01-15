@@ -40,12 +40,18 @@ export type Item = { [key: string]: ReactNode } & {
   key: ItemKey,
 }
 
+export type SortConfig =  {
+  fieldName: string,
+  label: string,
+}
+
 export type ColumnConfig = {
   collapsible: boolean,
   css?: CSS,
   filter?: ItemFilterOptions,
   important: boolean,
   name: string,
+  sort?: SortConfig,
   width?: string,
 }
 
@@ -54,6 +60,10 @@ export type PaginationData = {
   pageSize: number,
   totalCount: number,
 }
+
+export type SortDirection = "asc" | "desc" | undefined
+
+export type SortState = Record<string, SortDirection>
 
 export type TableProps = {
   actions?: ReactNode,
@@ -64,7 +74,10 @@ export type TableProps = {
   filterState?: FilterState,
   helpText?: ReactNode,
   items: Array<Item>,
+  maxHeight?: string,
+  sortState?: SortState,
   title?: string,
+  onColumnSort?: (s :SortState) => void,
   onFiltersChange?: (changes: FilterState) => void,
   onItemChecked?: (key: ItemKey, isChecked: boolean) => void,
   onItemsChecked?: (rows: Set<ItemKey>) => void,
@@ -119,16 +132,15 @@ export let Table = ({
     (i: Item) => i.actions && isNotEmpty(i.actions),
   )
 
-  const largeTable = () => <NiceTable actions={actions}
-                                      hasRowActions={hasRowActions}
-                                      onSelectAllToggle={setAllRowsSelectedTo}
-                                      {...props}
-  />
   return (
     <FlexBox withRows className={className}>
       {
         isSmallComputer() || isLargeComputer()
-        ? largeTable()
+        ? <NiceTable actions={actions}
+                     hasRowActions={hasRowActions}
+                     onSelectAllToggle={setAllRowsSelectedTo}
+                     {...props}
+        />
         : <MobileTable actions={actions}
                        hasRowActions={hasRowActions}
                        onSelectAllToggle={setAllRowsSelectedTo}

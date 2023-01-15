@@ -29,12 +29,17 @@ export declare type Item = {
     containerStyles?: ItemContainerStyles;
     key: ItemKey;
 };
+export declare type SortConfig = {
+    fieldName: string;
+    label: string;
+};
 export declare type ColumnConfig = {
     collapsible: boolean;
     css?: CSS;
     filter?: ItemFilterOptions;
     important: boolean;
     name: string;
+    sort?: SortConfig;
     width?: string;
 };
 export declare type PaginationData = {
@@ -42,6 +47,8 @@ export declare type PaginationData = {
     pageSize: number;
     totalCount: number;
 };
+export declare type SortDirection = "asc" | "desc" | undefined;
+export declare type SortState = Record<string, SortDirection>;
 export declare type TableProps = {
     actions?: ReactNode;
     checkable?: boolean;
@@ -51,7 +58,10 @@ export declare type TableProps = {
     filterState?: FilterState;
     helpText?: ReactNode;
     items: Array<Item>;
+    maxHeight?: string;
+    sortState?: SortState;
     title?: string;
+    onColumnSort?: (s: SortState) => void;
     onFiltersChange?: (changes: FilterState) => void;
     onItemChecked?: (key: ItemKey, isChecked: boolean) => void;
     onItemsChecked?: (rows: Set<ItemKey>) => void;

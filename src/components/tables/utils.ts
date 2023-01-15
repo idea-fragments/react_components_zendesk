@@ -15,6 +15,9 @@ export type StickyColumnProps = {
   columnConfigs?: ColumnConfig[],
   index?: number
 }
+export type SortableColumnProps = {
+  sortable?: boolean,
+}
 
 const calculateStickyPosition = ({
                                    checkableRow,

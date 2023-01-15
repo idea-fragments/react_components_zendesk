@@ -26,7 +26,9 @@ import { useTheme }                    from "styles/theme/useTheme"
 import { isEmpty }                     from "utils/arrayHelpers"
 import { DO_NOTHING }                  from "utils/functionHelpers"
 
-export type FiltersProps = Required<Pick<TableProps, "columnConfigs" | "filterState" | "onFiltersChange">>
+export type FiltersProps =
+  { fluidButton?: boolean, }
+  & Required<Pick<TableProps, "columnConfigs" | "filterState" | "onFiltersChange">>
 
 const IGNORABLE_STATE_CHANGES: StateChangeTypes[] = [
   Downshift.stateChangeTypes.blurInput,
@@ -38,6 +40,7 @@ const IGNORABLE_STATE_CHANGES: StateChangeTypes[] = [
 export const Filters: FC<FiltersProps> = ({
                                             columnConfigs,
                                             filterState,
+                                            fluidButton,
                                             onFiltersChange
                                           }) => {
   const theme                             = useTheme()
@@ -73,51 +76,50 @@ export const Filters: FC<FiltersProps> = ({
   if (isEmpty(filters)) return null
 
   return (
-    <FlexBox>
-      <Dropdown
-        appendMenuToNode={document.body}
-        isOpen={dropdownState.isOpen}
-        menuCSS={css`&& { font-size: ${({ theme }) => theme.styles.font.size}; }`}
-        onStateChange={processDropdownStateChange}
-        options={[
-          <FlexBox as={"li"}
-                   _css={css`padding: ${SPACINGS.SM}; width: 300px; max-width: 100%; max-height: 100%;`}
-                   key={"table_filters_menu"}
-                   withRows>
-            <IconButton _css={css`align-self: flex-end; padding: .5rem; margin-bottom: -2rem;`}
-                        color={theme.styles.textColorPrimary}
-                        compact
-                        icon={mdiClose}
-                        onClick={closeMenu} />
-            {filters.map((f: ItemFilterOptions) => (
-              // @ts-ignore
-              <TableFilter key={f.fieldName}
-                           fieldName={f.fieldName}
-                           label={f.label}
-                           onChange={trackChanges}
-                           options={f.options}
-                           type={f.type}
-                           value={state[f.fieldName]} />
-            ))}
-            <FlexBox _css={css`margin-top: ${SPACINGS.SM};`} withRows>
-              <Button fluid onClick={applyFilters}>Apply</Button>
-              <Button fluid
-                      danger
-                      onClick={clearFilters}
-                      primary={false}>
-                Clear All
-              </Button>
-            </FlexBox>
+    <Dropdown
+      appendMenuToNode={document.body}
+      isOpen={dropdownState.isOpen}
+      menuCSS={css`&& { font-size: ${({ theme }) => theme.styles.font.size}; }`}
+      onStateChange={processDropdownStateChange}
+      options={[
+        <FlexBox as={"li"}
+                 _css={css`padding: ${SPACINGS.SM}; width: 300px; max-width: 100%; max-height: 100%;`}
+                 key={"table_filters_menu"}
+                 withRows>
+          <IconButton _css={css`align-self: flex-end; padding: .5rem; margin-bottom: -2rem;`}
+                      color={theme.styles.textColorPrimary}
+                      compact
+                      icon={mdiClose}
+                      onClick={closeMenu} />
+          {filters.map((f: ItemFilterOptions) => (
+            // @ts-ignore
+            <TableFilter key={f.fieldName}
+                         fieldName={f.fieldName}
+                         label={f.label}
+                         onChange={trackChanges}
+                         options={f.options}
+                         type={f.type}
+                         value={state[f.fieldName]} />
+          ))}
+          <FlexBox _css={css`margin-top: ${SPACINGS.SM};`} withRows>
+            <Button fluid onClick={applyFilters}>Apply</Button>
+            <Button fluid
+                    danger
+                    onClick={clearFilters}
+                    primary={false}>
+              Clear All
+            </Button>
           </FlexBox>
-        ]}
-        trigger={
-          <Button icon={mdiFilterVariant}
-                  onClick={DO_NOTHING}
-                  primary={false}>
-            Filter
-          </Button>}
-        useRawOptions>
-      </Dropdown>
-    </FlexBox>
+        </FlexBox>
+      ]}
+      trigger={
+        <Button fluid={fluidButton}
+                icon={mdiFilterVariant}
+                onClick={DO_NOTHING}
+                primary={false}>
+          Filter
+        </Button>}
+      useRawOptions>
+    </Dropdown>
   )
 }

@@ -1,22 +1,19 @@
-import { Checkbox }     from "components/forms/Checkbox"
-import { OverflowMenu } from "components/layout/OverflowMenu"
+import { Checkbox }              from "components/forms/Checkbox"
+import { OverflowMenu }          from "components/layout/OverflowMenu"
 import {
   Cell,
   Row as MyRow
-}                       from "components/tables/index"
+}                                from "components/tables/index"
 import {
   ColumnConfig,
   Item,
   ItemKey,
-}                       from "components/tables/Table"
-import {
-  columnContainerStyles,
-  columnWidth
-}                       from "components/tables/utils"
-import { Text }         from "components/text/Text"
-import React            from "react"
-import styled, { css }  from "styled-components"
-import { FONT_WEIGHTS } from "styles/typography"
+}                                from "components/tables/Table"
+import { columnContainerStyles } from "components/tables/utils"
+import { Text }                  from "components/text/Text"
+import React                     from "react"
+import styled, { css }           from "styled-components"
+import { FONT_WEIGHTS }          from "styles/typography"
 
 type Props = {
   checkable?: boolean,
@@ -41,7 +38,6 @@ export const Row = ({
                       onHoverEnd,
                       onHoverStart,
                     }: Props) => {
-  const colWidth          = columnWidth(columnConfigs.length)
   const handleCheckChange = (checked: boolean) => {
     onCheck?.(item.key, checked)
   }
