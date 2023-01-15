@@ -52,7 +52,6 @@ export type ColumnConfig = {
   important: boolean,
   name: string,
   sort?: SortConfig,
-  sortableAttribute?: string,
   width?: string,
 }
 

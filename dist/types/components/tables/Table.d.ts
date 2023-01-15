@@ -40,7 +40,6 @@ export declare type ColumnConfig = {
     important: boolean;
     name: string;
     sort?: SortConfig;
-    sortableAttribute?: string;
     width?: string;
 };
 export declare type PaginationData = {

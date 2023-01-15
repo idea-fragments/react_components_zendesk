@@ -35,7 +35,6 @@ import { DO_NOTHING }                  from "utils/functionHelpers"
 
 export type SorterProps = {
   columnConfigs: ColumnConfig[],
-  // onColumnSort?: (columnName: string, direction: SortDirection) => void,
   onColumnSort?: (state: SortState) => void,
   sortState?: SortState,
 }
