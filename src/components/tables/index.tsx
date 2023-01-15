@@ -8,7 +8,10 @@ import {
   Row as ZRow,
   Table as ZTable,
 }                                      from "@zendeskgarden/react-tables"
-import { StickyColumnProps }           from "components/tables/utils"
+import {
+  SortableColumnProps,
+  StickyColumnProps
+} from "components/tables/utils"
 import styled, { css }                 from "styled-components"
 import {
   COLORS,
@@ -26,7 +29,11 @@ import {
 } from "styles/typography"
 
 
-const overflowCellStyles = css`
+type OverflowColumnProps = {
+  extraWidth? : string
+}
+
+const overflowCellStyles = css<OverflowColumnProps>`
   position: sticky;
   right: 0;
   z-index: 5;
@@ -43,6 +50,13 @@ const overflowCellStyles = css`
     box-shadow: inset 10px 0 8px -8px #00000026;
   }
 `
+
+// const sortableColumnHeaderStyles = css`
+//   cursor: pointer;
+//   :hover, :focus {
+//     background: ${veryLight(COLORS.GREY)};
+//   }
+// `
 
 const Table = styled(ZTable)<CSSProp>`
   && {
@@ -63,7 +77,7 @@ const HeaderRow = styled(ZHeaderRow)`
   height: auto !important;
 `
 
-const HeaderCell = styled(ZHeaderCell)<CSSProp & StickyColumnProps>`
+const HeaderCell = styled(ZHeaderCell)<CSSProp & StickyColumnProps & OverflowColumnProps>`
   vertical-align: top;
   background: white;
   ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};

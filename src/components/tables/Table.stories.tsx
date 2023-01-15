@@ -7,6 +7,7 @@ import {
   Item,
   ItemAction,
   ItemKey,
+  SortState,
   Table,
 }                             from "components/tables/Table"
 import React, { useState }    from "react"
@@ -20,6 +21,7 @@ export default {
 
 const Story = (args: Partial<FinalizedTableProps>) => {
   const [checkedItems, setCheckedItems] = useState<Set<ItemKey>>(new Set())
+  const [sortState, setSortState]       = useState<SortState>({})
 
   const actions = () => {
     return <FlexBox fluid>
@@ -49,13 +51,15 @@ const Story = (args: Partial<FinalizedTableProps>) => {
     items={items}
     title={"Table Title"}
     filterState={{ "Filter Multi Color": ["red", "blue"] }}
+    onColumnSort={setSortState}
     onFiltersChange={onFiltersChange}
     onItemsChecked={setCheckedItems}
     pagination={{
-      page: 9,
-      pageSize: 3,
+      page:       9,
+      pageSize:   3,
       totalCount: 100,
-  }}
+    }}
+    sortState={sortState}
   />
 }
 
@@ -217,7 +221,10 @@ const columnConfigs: ColumnConfig[] = [
       options:   items.map(({ Color }) => ({ value: Color as string, label: Color as string })),
       type:      "multi-select",
     },
-    sortable: true,
+    sort:        {
+      fieldName: "filter_multi_color",
+      label:     "Color",
+    },
     width:       "150px",
   },
   {

@@ -4105,7 +4105,7 @@ var Container = styled__default["default"].div(templateObject_2 || (templateObje
   var _css = _a._css;
   return _css ? _css : "";
 });
-var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: .7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n"], ["\n  background: white;\n  opacity: .7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n"])));
+var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: .7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"], ["\n  background: white;\n  opacity: .7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"])));
 var templateObject_1, templateObject_2, templateObject_3;
 exports.Dots = Dots;
 //# sourceMappingURL=loaders.js.map

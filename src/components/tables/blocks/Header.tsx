@@ -1,6 +1,7 @@
 import { Checkbox }              from "components/forms/Checkbox"
 import { FlexBox }               from "components/layout/FlexBox"
 import { StyledProps }           from "components/StyledProps.type"
+import { SortButton }            from "components/tables/blocks/SortButton"
 import {
   Head as TableHead,
   HeaderCell,
@@ -9,11 +10,16 @@ import {
 import {
   ColumnConfig,
   Item,
-  ItemKey
+  ItemKey,
+  SortDirection,
+  SortState
 }                                from "components/tables/Table"
 import { columnContainerStyles } from "components/tables/utils"
 import { Text }                  from "components/text/Text"
-import React, { ReactNode }      from "react"
+import React, {
+  ReactNode,
+  useCallback
+}                                from "react"
 import { css }                   from "styled-components"
 import { SPACINGS }              from "styles/spacings"
 import {
@@ -28,7 +34,9 @@ type Props = {
   columnConfigs: Array<ColumnConfig>,
   hasRowActions?: boolean,
   items: Array<Item>,
+  onColumnSort?: (s: SortState) => void,
   onSelectAllToggle?: (selected: boolean) => void,
+  sortState?: SortState,
 }
 
 export const Header = ({
@@ -38,7 +46,9 @@ export const Header = ({
                          columnConfigs,
                          hasRowActions,
                          items,
+                         onColumnSort,
                          onSelectAllToggle,
+                         sortState,
                        }: Props) => {
   const allSelected  = checkedItems?.size === items.length
   const someSelected = !!checkedItems?.size && !allSelected
@@ -46,6 +56,12 @@ export const Header = ({
   const handleSelectAll = (checked: boolean) => {
     if (!!onSelectAllToggle) onSelectAllToggle(checked)
   }
+
+  const trackSortFields = useCallback((fieldName: string, direction: SortDirection) => {
+    onColumnSort!(
+      direction ? { [fieldName]: direction } : {}
+    )
+  }, [onColumnSort])
 
   return <TableHead>
     <HeaderRow>
@@ -63,7 +79,7 @@ export const Header = ({
       ) : null}
 
       {columnConfigs.map((c: ColumnConfig, index: number) => {
-        const { css: _css = "", important, name, width } = c
+        const { css: _css = "", important, name, sort, width } = c
 
         index = checkable ? index + 1 : index
 
@@ -75,8 +91,18 @@ export const Header = ({
             index={index}
             key={name}
             width={_css ? undefined : width ?? undefined}>
-            <FlexBox _css={`flex: 1;`} gap={SPACINGS.XS} withRows>
+            <FlexBox _css={css`flex: 1;`}
+                     alignItems={"center"}
+                     gap={SPACINGS.XS}>
               <HeaderText important={important}>{name}</HeaderText>
+              {
+                sort
+                ? <SortButton
+                  fieldName={sort.fieldName}
+                  direction={sortState![sort.fieldName]}
+                  onClick={trackSortFields!} />
+                : null
+              }
             </FlexBox>
           </HeaderCell>
         )

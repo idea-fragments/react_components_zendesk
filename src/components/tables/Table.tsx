@@ -40,12 +40,19 @@ export type Item = { [key: string]: ReactNode } & {
   key: ItemKey,
 }
 
+export type SortConfig =  {
+  fieldName: string,
+  label: string,
+}
+
 export type ColumnConfig = {
   collapsible: boolean,
   css?: CSS,
   filter?: ItemFilterOptions,
   important: boolean,
   name: string,
+  sort?: SortConfig,
+  sortableAttribute?: string,
   width?: string,
 }
 
@@ -54,6 +61,10 @@ export type PaginationData = {
   pageSize: number,
   totalCount: number,
 }
+
+export type SortDirection = "asc" | "desc" | undefined
+
+export type SortState = Record<string, SortDirection>
 
 export type TableProps = {
   actions?: ReactNode,
@@ -65,7 +76,9 @@ export type TableProps = {
   helpText?: ReactNode,
   items: Array<Item>,
   maxHeight?: string,
+  sortState?: SortState,
   title?: string,
+  onColumnSort?: (s :SortState) => void,
   onFiltersChange?: (changes: FilterState) => void,
   onItemChecked?: (key: ItemKey, isChecked: boolean) => void,
   onItemsChecked?: (rows: Set<ItemKey>) => void,

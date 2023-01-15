@@ -37,7 +37,9 @@ export const NiceTable = ({
                             helpText,
                             items,
                             maxHeight,
+                            sortState,
                             title,
+                            onColumnSort,
                             onFiltersChange,
                             onItemChecked,
                             onItemClick,
@@ -48,11 +50,11 @@ export const NiceTable = ({
   const [verticalScrollbarWidth, setVerticalScrollbarWidth] = useState<number>(0)
   const [headerHeight, setHeaderHeight]                     = useState("0px")
 
-  const bodyRef      = useRef<HTMLDivElement>()
-  const headerRef    = useRef<HTMLDivElement>()
+  const bodyRef      = useRef<HTMLDivElement>(null)
+  const headerRef    = useRef<HTMLDivElement>(null)
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
     if (!headerRef.current) return
-    headerRef.current.scrollLeft = e.target.scrollLeft
+    headerRef.current.scrollLeft = (e.target as HTMLDivElement).scrollLeft
   }
 
   useEffect(() => {
@@ -68,7 +70,7 @@ export const NiceTable = ({
 
   return (
     <FlexBox withRows>
-      <FlexBox _css={`margin-bottom: 1rem`}
+      <FlexBox _css={css`margin-bottom: 1rem;`}
                justifyContent={"space-between"} withRows>
         {title ? <Title>{title}</Title> : null}
         {helpText ? <HelpText>{helpText}</HelpText> : null}
@@ -85,7 +87,7 @@ export const NiceTable = ({
 
         </FlexBox>
       </FlexBox>
-      <HorizontalScroll>
+      <TableWrapper>
         <div css={css`overflow: hidden;`} ref={headerRef}>
           <Table>
             <Header bodyScrollbarWidth={verticalScrollbarWidth}
@@ -94,16 +96,19 @@ export const NiceTable = ({
                     columnConfigs={columnConfigs}
                     hasRowActions={hasRowActions}
                     items={items}
-                    onSelectAllToggle={onSelectAllToggle} />
+                    onColumnSort={onColumnSort}
+                    onSelectAllToggle={onSelectAllToggle}
+                    sortState={sortState} />
           </Table>
         </div>
 
-        <div css={css`
-          overflow: auto ${maxHeight ? "scroll" : "auto"};
-          max-height: calc(${maxHeight} - ${headerHeight});
-        `}
-             onScroll={handleScroll}
-             ref={bodyRef}>
+        <div
+          css={css`
+            overflow: auto ${maxHeight ? "scroll" : "auto"};
+            max-height: calc(${maxHeight} - ${headerHeight});
+          `}
+          onScroll={handleScroll}
+          ref={bodyRef}>
           <Table>
             <Body>
               {
@@ -127,18 +132,13 @@ export const NiceTable = ({
             </Body>
           </Table>
         </div>
-      </HorizontalScroll>
+      </TableWrapper>
     </FlexBox>
   )
 }
 
-const HorizontalScroll = styled.div`
-  overflow-x: auto;
+const TableWrapper = styled.div`
   border: 2px solid ${({ theme }) => theme.styles.table.borderColor};
-`
-
-const VerticalScrollPadding = styled.div<{ size: number }>`
-  width: ${({ size }) => `${size}px`};
 `
 
 NiceTable.COMPONENT_NAME = "NiceTable"
