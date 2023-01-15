@@ -19,6 +19,7 @@ import React, {
   useState
 }                      from "react"
 import styled, { css } from "styled-components"
+import { CSSProp }     from "styles/types"
 import { isNotEmpty }  from "utils/arrayHelpers"
 
 type Props = TableProps & {
@@ -88,7 +89,7 @@ export const NiceTable = ({
         </FlexBox>
       </FlexBox>
       <TableWrapper>
-        <div css={css`overflow: hidden;`} ref={headerRef}>
+        <Div _css={css`overflow: hidden;`} ref={headerRef}>
           <Table>
             <Header bodyScrollbarWidth={verticalScrollbarWidth}
                     checkable={checkable}
@@ -100,10 +101,10 @@ export const NiceTable = ({
                     onSelectAllToggle={onSelectAllToggle}
                     sortState={sortState} />
           </Table>
-        </div>
+        </Div>
 
-        <div
-          css={css`
+        <Div
+          _css={css`
             overflow: auto ${maxHeight ? "scroll" : "auto"};
             max-height: calc(${maxHeight} - ${headerHeight});
           `}
@@ -131,7 +132,7 @@ export const NiceTable = ({
               }
             </Body>
           </Table>
-        </div>
+        </Div>
       </TableWrapper>
     </FlexBox>
   )
@@ -139,6 +140,10 @@ export const NiceTable = ({
 
 const TableWrapper = styled.div`
   border: 2px solid ${({ theme }) => theme.styles.table.borderColor};
+`
+
+const Div = styled.div<CSSProp>`
+  ${({ _css }) => _css}
 `
 
 NiceTable.COMPONENT_NAME = "NiceTable"
