@@ -1,7 +1,6 @@
 import React             from "react"
-import { ThemeProvider } from "styles/theme/ThemeProvider"
 import { light }         from "styles/theme/light"
-// import "calendarCss"
+import { ThemeProvider } from "styles/theme/ThemeProvider"
 
 export const decorators = [
   (Story) => <ThemeProvider theme={light}>

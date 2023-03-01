@@ -21,7 +21,7 @@ import {
   SelectorOption,
   SelectorProps,
   StateChange,
-} from "components/forms/selectors/types"
+}                            from "components/forms/selectors/types"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { Loadable }          from "components/loaders/Loadable"
 import { debounce }          from "lodash"
@@ -409,14 +409,20 @@ const createOptions = (
   if (isEmpty(options)) return [<Item disabled>No matches found</Item>]
 
   const nodes = options.map((o) => {
-    const ItemType  = getItemType(o)
-    const Component = menuItemComponent
+    const {
+            Component,
+            componentProps,
+            itemProps,
+            ...attrs
+          }        = o
+    const ItemType = getItemType(attrs)
 
-    return <ItemType key={o[key]}
-                     value={o}
-                     disabled={o.disabled ?? false}
-                     danger={o.danger}>
-      {Component ? <Component {...o} /> : o[label]}
+    return <ItemType key={o[key]} value={o} {...itemProps}>
+      {
+        Component
+        ? <Component {...componentProps}>{attrs[label]}</Component>
+        : attrs[label]
+      }
     </ItemType>
   })
 

@@ -1,22 +1,16 @@
-import {
-  mdiCheckboxBlankOutline,
-  mdiCheckboxMarked
-}                      from "@mdi/js"
-import { Button }      from "components/forms/Button"
-import { FlexBox }     from "components/layout/FlexBox"
-import { HelpText }    from "components/tables/blocks/HelpText"
-import { Title }       from "components/tables/blocks/Title"
-import { Filters }     from "components/tables/Filters"
-import { Row }         from "components/tables/MobileTable/Row"
-import { Sorter }      from "components/tables/MobileTable/Sorter"
+import { Button }       from "components/forms/Button"
+import { FlexBox }      from "components/layout/FlexBox"
+import { HelpText }     from "components/tables/blocks/HelpText"
+import { Row }          from "components/tables/blocks/MobileTable/Row"
+import { TableActions } from "components/tables/blocks/TableActions"
+import { Title }        from "components/tables/blocks/Title"
 import {
   Item,
   TableProps
-}                      from "components/tables/Table"
-import React           from "react"
-import styled, { css } from "styled-components"
-import { SPACINGS }    from "styles/spacings"
-import { FONT_SIZES }  from "styles/typography"
+}                       from "components/tables/Table"
+import React            from "react"
+import styled, { css }  from "styled-components"
+import { FONT_SIZES }   from "styles/typography"
 
 type Props = TableProps & {
   hasRowActions: boolean,
@@ -32,6 +26,8 @@ export const MobileTable = ({
                               hasRowActions,
                               helpText,
                               items,
+                              mobileListview,
+                              mobileListviewNodes,
                               sortState,
                               title,
                               onColumnSort,
@@ -56,35 +52,31 @@ export const MobileTable = ({
         <FlexBox justifyContent={"space-between"} wrapped>
           {
             checkable
-            ? <Button compact
-                      icon={allSelected ? mdiCheckboxMarked : mdiCheckboxBlankOutline}
-                      neutral
-                      onClick={() => { onSelectAllToggle?.(!allSelected) }} />
+            ? <Button compact neutral onClick={() => { onSelectAllToggle?.(!allSelected) }}>
+              {allSelected ? "Deselect All" : "Select All"}
+            </Button>
             : undefined
           }
 
-          {actions}
-
-          {
-            onFiltersChange
-            ? <Filters columnConfigs={columnConfigs}
-                       filterState={filterState!}
-                       fluidButton
-                       onFiltersChange={onFiltersChange} />
-            : null
-          }
-
-          <Sorter columnConfigs={columnConfigs}
-                  onColumnSort={onColumnSort}
-                  sortState={sortState} />
+          <TableActions
+            actions={actions}
+            columnConfigs={columnConfigs}
+            compact
+            filterState={filterState}
+            onColumnSort={onColumnSort}
+            onFiltersChange={onFiltersChange}
+            sortState={sortState}
+          />
         </FlexBox>
       </FlexBox>
 
-      <Container gap={SPACINGS.XS} withRows>
-        {items.map((item: Item) => (
+      <Container gap={"1px"} withRows>
+        {items.map((item: Item, index: number) => (
           <Row item={item}
                key={item.key}
                columnConfigs={columnConfigs}
+               listviewMode={mobileListview}
+               listviewNode={mobileListviewNodes?.[index]}
                onClick={onItemClick}
                checkable={checkable}
                checked={checkedItems?.has(item.key)}

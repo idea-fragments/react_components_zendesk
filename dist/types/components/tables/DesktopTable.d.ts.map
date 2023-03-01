@@ -1,0 +1,1 @@
+{"version":3,"file":"DesktopTable.d.ts","sourceRoot":"","sources":["../../../src/components/tables/DesktopTable.tsx"],"names":[],"mappings":";AAUA,OAAO,EAEL,UAAU,EACX,MAA4B,yBAAyB,CAAA;AAWtD,aAAK,KAAK,GAAG,UAAU,GAAG;IACxB,aAAa,EAAE,OAAO,CAAC;IACvB,iBAAiB,CAAC,EAAE,CAAC,CAAC,EAAE,OAAO,KAAK,IAAI,CAAC;CAC1C,CAAA;AAED,eAAO,MAAM,YAAY;iQAoBO,KAAK;;CAqFpC,CAAA"}

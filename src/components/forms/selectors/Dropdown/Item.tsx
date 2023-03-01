@@ -4,35 +4,40 @@ import {
   Item as ZItem,
   NextItem,
   PreviousItem
-}                                                  from "@zendeskgarden/react-dropdowns"
+}                         from "@zendeskgarden/react-dropdowns"
+import { IItemProps }     from "@zendeskgarden/react-dropdowns/dist/typings/types"
 import {
-  IItemProps
-}                                                  from "@zendeskgarden/react-dropdowns/dist/typings/types"
-import { buttonLikeHoverable, textColorForButton } from "components/forms/buttonMixins"
-import { SelectorOption }                          from "components/forms/selectors/types"
-import { ComponentType }            from "react"
-import styled, { css, StyledProps } from "styled-components"
-import { SPACINGS }                 from "styles/spacings"
-import { FONT_SIZES }                              from "styles/typography"
+  buttonLikeHoverable,
+  textColorForButton
+}                         from "components/forms/buttonMixins"
+import { SelectorOption } from "components/forms/selectors/types"
+import { ComponentType }  from "react"
+import styled, {
+  css,
+  StyledProps
+}                         from "styled-components"
+import { SPACINGS }       from "styles/spacings"
+import { CSSProp }        from "styles/types"
+import { FONT_SIZES }     from "styles/typography"
 
-export type ItemProps = IItemProps & {
+export type ItemProps = Omit<IItemProps, "onClick"> & {
   danger?: boolean,
-}
+  disabled?: boolean,
+} & CSSProp
 
-export const Item = styled(ZItem).attrs(({ danger, theme }: StyledProps<ItemProps>) => {
-  if (!danger) return { color: theme.styles.colorPrimary, primary: false }
-  return { color: theme.styles.colorDanger, primary: true }
+export const Item = styled(ZItem).attrs(({ danger, theme, ...props }: StyledProps<ItemProps>) => {
+  if (!danger) return { color: theme.styles.textColorPrimary, primary: false, ...props }
+  return { color: theme.styles.colorDanger, primary: true, ...props }
 })<ItemProps>`
   &&&& {
-    ${({disabled}) => { 
-      if(disabled) return ""
-      
+    ${({ disabled }) => {
+      if (disabled) return ""
+
       return css`
         ${buttonLikeHoverable};
-        color: ${(props) => props.theme.styles.textColorPrimary};
       `
     }};
-    
+
     font-size: ${FONT_SIZES.SM};
     margin-bottom: ${SPACINGS.XS};
 
@@ -43,6 +48,8 @@ export const Item = styled(ZItem).attrs(({ danger, theme }: StyledProps<ItemProp
     *[data-garden-id="dropdowns.item_icon"] {
       ${textColorForButton};
     }
+
+    ${({ _css }: CSSProp) => _css}
   }
 `
 

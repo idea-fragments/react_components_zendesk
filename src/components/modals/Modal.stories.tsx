@@ -2,7 +2,7 @@ import { Button }          from "components/forms/Button"
 import {
   Modal,
   ModalProps
-}                          from "components/Modal"
+}                          from "components/modals/Modal"
 import React, { useState } from "react"
 
 export default {
