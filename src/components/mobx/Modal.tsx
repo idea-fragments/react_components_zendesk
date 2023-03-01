@@ -1,4 +1,4 @@
-import { Modal as ModalView }        from "components/Modal"
+import { Modal as ModalView }   from "components/modals/Modal"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
 import * as React                    from "react"
 import { useStores }                 from "stores/useStores"

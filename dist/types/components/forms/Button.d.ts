@@ -36,6 +36,7 @@ declare type ControlledLoadable = {
     onClick: () => void;
 };
 export declare type Props = (CommonProps & ControlledLoadable) | (CommonProps & AutoLoadable);
+export declare type ButtonProps = Props;
 export declare const Button: ComponentType<Props>;
 export {};
 //# sourceMappingURL=Button.d.ts.map

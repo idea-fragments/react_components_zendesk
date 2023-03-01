@@ -1,5 +1,16 @@
-import { ReactNode } from "react";
+import { ButtonProps } from "components/forms/Button";
+import { ItemProps } from "components/forms/selectors/Dropdown/Item";
+import { ComponentType, PropsWithChildren, ReactNode } from "react";
 import { CSS } from "styles/types";
+export declare type TableAction = {
+    buttonProps?: Partial<ButtonProps>;
+    Component?: ComponentType<PropsWithChildren<Record<string, any>>>;
+    componentProps?: Record<string, any>;
+    label: string;
+    notCompactable?: boolean;
+    onClick: () => void;
+    dropdownItemProps?: Partial<ItemProps>;
+};
 export declare type ItemKey = number | string;
 export declare type ItemContainerStyles = string;
 export declare type ItemAction = {
@@ -50,7 +61,7 @@ export declare type PaginationData = {
 export declare type SortDirection = "asc" | "desc" | undefined;
 export declare type SortState = Record<string, SortDirection>;
 export declare type TableProps = {
-    actions?: ReactNode;
+    actions?: TableAction[];
     checkable?: boolean;
     checkedItems?: Set<ItemKey>;
     columnConfigs: Array<ColumnConfig>;
@@ -58,6 +69,8 @@ export declare type TableProps = {
     filterState?: FilterState;
     helpText?: ReactNode;
     items: Array<Item>;
+    mobileListview?: boolean;
+    mobileListviewNodes?: ReactNode[];
     maxHeight?: string;
     sortState?: SortState;
     title?: string;

@@ -1,6 +1,9 @@
 import { Button }         from "components/forms/Button"
 import { Carousel }       from "components/layout/Carousel"
+import { ComputersOnly }  from "components/layout/ComputersOnly"
 import { FlexBox }        from "components/layout/FlexBox"
+import { PhonesOnly }     from "components/layout/PhonesOnly"
+import { TabletsOnly }    from "components/layout/TabletsOnly"
 import { PaginationData } from "components/tables/Table"
 import React, {
   useCallback,
@@ -22,26 +25,16 @@ export const Pagination = ({
                            }: Props) => {
   const numberPages = useMemo(() => Math.ceil(totalCount / pageSize), [pageSize, totalCount])
 
-  const getItems = () => {
-    const maxNumberCarouselItems = 5
-
-    if (numberPages <= maxNumberCarouselItems) {
+  const buttonPositionings = useCallback((totalCarouselItems: number) => {
+    if (numberPages <= totalCarouselItems) {
       return arrayOfSizeN(numberPages).map((_, i) => i + 1)
     }
 
-    const equilibriumNumberOfPads = Math.floor(maxNumberCarouselItems / 2)
-
-    const leftPadding  = Math.min(
-      page - 1,
-      equilibriumNumberOfPads,
-    )
-    const rightPadding = Math.min(
-      numberPages - page,
-      equilibriumNumberOfPads,
-    )
-
-    const missingFromRight = equilibriumNumberOfPads - rightPadding
-    const missingFromLeft  = equilibriumNumberOfPads - leftPadding
+    const equilibriumNumberOfPads = Math.floor(totalCarouselItems / 2)
+    const leftPadding             = Math.min(page - 1, equilibriumNumberOfPads)
+    const rightPadding            = Math.min(numberPages - page, equilibriumNumberOfPads)
+    const missingFromRight        = equilibriumNumberOfPads - rightPadding
+    const missingFromLeft         = equilibriumNumberOfPads - leftPadding
 
     return [
       ...arrayOfSizeN(leftPadding + missingFromRight)
@@ -50,7 +43,7 @@ export const Pagination = ({
       ...arrayOfSizeN(rightPadding + missingFromLeft)
         .map((_, i) => page + (i + 1)),
     ].sort((a, b) => a - b)
-  }
+  }, [numberPages, page])
 
   const movePage = (direction: number) => () => {
     const newPage = page + direction
@@ -58,6 +51,21 @@ export const Pagination = ({
 
     return onPageChange(newPage)
   }
+
+  const createNPageButtons = useCallback((total: number) => {
+    return buttonPositionings(total).map((num: number) => (
+      <Button
+        _css={css`padding: 0; height: 30px; width: 30px;`}
+        compact
+        flat={num !== page}
+        key={num}
+        onClick={num === page ? DO_NOTHING : movePage(num - page)}
+        pill
+        primary={num === page}>
+        {num}
+      </Button>
+    ))
+  }, [buttonPositionings, movePage, page])
 
   const movePageEnd   = useCallback(() => onPageChange(numberPages), [numberPages, onPageChange])
   const movePageStart = useCallback(() => onPageChange(1), [onPageChange])
@@ -73,20 +81,15 @@ export const Pagination = ({
                    onPreviousClick={movePage(-1)}
                    onStartClick={movePageStart}>
     <FlexBox gap={"2px"}>
-      {
-        getItems().map((num: number) => (
-          <Button
-            _css={css`padding: 0; height: 30px; width: 30px;`}
-            compact
-            flat={num !== page}
-            key={num}
-            onClick={num === page ? DO_NOTHING : movePage(num - page)}
-            pill
-            primary={num === page}>
-            {num}
-          </Button>
-        ))
-      }
+      <ComputersOnly>
+        {createNPageButtons(5)}
+      </ComputersOnly>
+      <PhonesOnly>
+        {createNPageButtons(3)}
+      </PhonesOnly>
+      <TabletsOnly>
+        {createNPageButtons(5)}
+      </TabletsOnly>
     </FlexBox>
   </Carousel>
 }

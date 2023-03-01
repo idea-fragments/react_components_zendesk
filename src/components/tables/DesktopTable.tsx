@@ -1,53 +1,53 @@
-import { FlexBox }     from "components/layout/FlexBox"
-import { Header }      from "components/tables/blocks/Header"
-import { HelpText }    from "components/tables/blocks/HelpText"
-import { Title }       from "components/tables/blocks/Title"
-import { Filters }     from "components/tables/Filters"
+import { FlexBox }      from "components/layout/FlexBox"
+import { Row }          from "components/tables/blocks/DesktopTable/Row"
+import { Header }       from "components/tables/blocks/Header"
+import { HelpText }     from "components/tables/blocks/HelpText"
+import { TableActions } from "components/tables/blocks/TableActions"
+import { Title }        from "components/tables/blocks/Title"
 import {
   Body,
   Table
-}                      from "components/tables/index"
-import { Row }         from "components/tables/Row"
+}                       from "components/tables/index"
 import {
   Item,
   TableProps
-}                      from "components/tables/Table"
+}                       from "components/tables/Table"
 import React, {
   UIEvent,
   useEffect,
   useRef,
   useState
-}                      from "react"
-import styled, { css } from "styled-components"
-import { CSSProp }     from "styles/types"
-import { isNotEmpty }  from "utils/arrayHelpers"
+}                       from "react"
+import styled, { css }  from "styled-components"
+import { CSSProp }      from "styles/types"
+import { isNotEmpty }   from "utils/arrayHelpers"
 
 type Props = TableProps & {
   hasRowActions: boolean,
   onSelectAllToggle?: (b: boolean) => void,
 }
 
-export const NiceTable = ({
-                            actions,
-                            checkable = false,
-                            checkedItems,
-                            columnConfigs,
-                            emptyState,
-                            filterState,
-                            hasRowActions,
-                            helpText,
-                            items,
-                            maxHeight,
-                            sortState,
-                            title,
-                            onColumnSort,
-                            onFiltersChange,
-                            onItemChecked,
-                            onItemClick,
-                            onItemHoverEnd,
-                            onItemHoverStart,
-                            onSelectAllToggle,
-                          }: Props) => {
+export const DesktopTable = ({
+                               actions,
+                               checkable = false,
+                               checkedItems,
+                               columnConfigs,
+                               emptyState,
+                               filterState,
+                               hasRowActions,
+                               helpText,
+                               items,
+                               maxHeight,
+                               sortState,
+                               title,
+                               onColumnSort,
+                               onFiltersChange,
+                               onItemChecked,
+                               onItemClick,
+                               onItemHoverEnd,
+                               onItemHoverStart,
+                               onSelectAllToggle,
+                             }: Props) => {
   const [verticalScrollbarWidth, setVerticalScrollbarWidth] = useState<number>(0)
   const [headerHeight, setHeaderHeight]                     = useState("0px")
 
@@ -76,16 +76,12 @@ export const NiceTable = ({
         {title ? <Title>{title}</Title> : null}
         {helpText ? <HelpText>{helpText}</HelpText> : null}
         <FlexBox _css={`flex: 1`} justifyContent={"flex-end"}>
-          {actions}
-
-          {
-            onFiltersChange
-            ? <Filters columnConfigs={columnConfigs}
-                       filterState={filterState!}
-                       onFiltersChange={onFiltersChange} />
-            : null
-          }
-
+          <TableActions
+            actions={actions}
+            columnConfigs={columnConfigs}
+            filterState={filterState}
+            onFiltersChange={onFiltersChange}
+          />
         </FlexBox>
       </FlexBox>
       <TableWrapper>
@@ -146,4 +142,4 @@ const Div = styled.div<CSSProp>`
   ${({ _css }) => _css}
 `
 
-NiceTable.COMPONENT_NAME = "NiceTable"
+DesktopTable.COMPONENT_NAME = "NiceTable"

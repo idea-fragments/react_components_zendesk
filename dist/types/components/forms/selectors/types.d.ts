@@ -1,13 +1,18 @@
 import { FormFieldProps } from "components/forms/formField.types";
 import { MenuPlacement } from "components/forms/selectors/Dropdown";
+import { ItemProps } from "components/forms/selectors/Dropdown/Item";
 import { StateChangeOptions } from "downshift";
+import { ComponentType, PropsWithChildren } from "react";
 export declare type SelectorItemKey = string | number | null | undefined;
 export declare type SelectorOptionOptionalAttrs = {
+    Component?: ComponentType<PropsWithChildren<Record<string, any>>>;
+    componentProps?: Record<string, any>;
     isClearingItem?: boolean;
     isNextItem?: boolean;
     isBackItem?: boolean;
     isAddItem?: boolean;
     isHeaderItem?: boolean;
+    itemProps?: Partial<ItemProps>;
 };
 export declare type SelectorOption = {
     [key: string]: any;

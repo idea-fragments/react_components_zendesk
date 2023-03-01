@@ -1,5 +1,4 @@
 import { mdiTrashCanOutline } from "@mdi/js"
-import { Button }             from "components/forms/Button"
 import { FlexBox }            from "components/layout/FlexBox"
 import {
   ColumnConfig,
@@ -9,8 +8,14 @@ import {
   ItemKey,
   SortState,
   Table,
+  TableAction,
 }                             from "components/tables/Table"
-import React, { useState }    from "react"
+import React, {
+  FC,
+  useCallback,
+  useMemo,
+  useState
+}                             from "react"
 import { DO_NOTHING }         from "utils/functionHelpers"
 
 export default {
@@ -23,32 +28,52 @@ const Story = (args: Partial<FinalizedTableProps>) => {
   const [checkedItems, setCheckedItems] = useState<Set<ItemKey>>(new Set())
   const [sortState, setSortState]       = useState<SortState>({})
 
-  const actions = () => {
-    return <FlexBox fluid>
-      <FlexBox fluid>
-        <Button compact
-                danger
-                icon={mdiTrashCanOutline}
-                onClick={DO_NOTHING} />
-      </FlexBox>
+  const actions = useMemo((): TableAction[] => {
+    return [
+      {
+        buttonProps:       {
+          compact: true,
+          danger:  true,
+          icon:    mdiTrashCanOutline,
+        },
+        dropdownItemProps: { danger: true },
+        label:             "Delete",
+        notCompactable:    true,
+        onClick:           DO_NOTHING,
+      },
+      {
+        buttonProps: { neutral: true },
+        label:       "Hello World",
+        onClick:     DO_NOTHING,
+      },
+      {
+        dropdownItemProps: { color: "#ff10ff" },
+        label:             "Fun Days",
+        onClick:           DO_NOTHING,
+      },
+      {
+        Component:      DummyLink,
+        componentProps: { href: "https://google.com" },
+        label:          "Link",
+        notCompactable: true,
+        onClick:        DO_NOTHING,
+      },
+    ]
+  }, [])
 
-      <Button neutral onClick={DO_NOTHING}>Hello</Button>
-      <Button onClick={DO_NOTHING}>World</Button>
-    </FlexBox>
-  }
-
-  const onFiltersChange = (...args: any) => {
+  const onFiltersChange = useCallback((...args: any) => {
     console.log("onFiltersChange", ...args)
-  }
+  }, [])
 
   return <Table
     maxHeight={"240px"}
     {...args}
-    actions={actions()}
+    actions={actions}
     checkable
     checkedItems={checkedItems}
     columnConfigs={columnConfigs}
     items={items}
+    mobileListviewNodes={listviewNodes}
     title={"Table Title"}
     filterState={{ "Filter Multi Color": ["red", "blue"] }}
     onColumnSort={setSortState}
@@ -61,6 +86,11 @@ const Story = (args: Partial<FinalizedTableProps>) => {
     }}
     sortState={sortState}
   />
+}
+
+const DummyLink: FC<any> = (props) => {
+  // eslint-disable-next-line jsx-a11y/anchor-has-content
+  return <a {...props} />
 }
 
 export const Default = Story.bind({})
@@ -197,6 +227,15 @@ const items: Item[] = [
     { action: DO_NOTHING, label: "Action 2" },
   ] as ItemAction[])
 }))
+
+// @ts-ignore
+
+const listviewNodes = items.map(({ Color, Status }, index: number) => {
+  return <FlexBox withRows key={index}>
+    <div>{Color}</div>
+    <div>{Status}</div>
+  </FlexBox>
+})
 
 const columnConfigs: ColumnConfig[] = [
   {

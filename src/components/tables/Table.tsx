@@ -1,21 +1,37 @@
-import { FlexBox }     from "components/layout/FlexBox"
-import { Pagination }  from "components/tables/blocks/Pagination"
-import { MobileTable } from "components/tables/MobileTable"
-import { NiceTable }   from "components/tables/NiceTable"
+import { ButtonProps }        from "components/forms/Button"
+import { ItemProps }          from "components/forms/selectors/Dropdown/Item"
+import { FlexBox }            from "components/layout/FlexBox"
+import { ModalManager }       from "components/modals/ModalManager"
+import { ModalStateProvider } from "components/stateProviders/ModalStateProvider"
+import { Pagination }         from "components/tables/blocks/Pagination"
+import { DesktopTable }       from "components/tables/DesktopTable"
+import { MobileTable }        from "components/tables/MobileTable"
 import React, {
+  ComponentType,
+  PropsWithChildren,
   ReactNode,
   useCallback,
   useEffect,
   useState
-}                      from "react"
-import styled          from "styled-components"
+}                             from "react"
+import styled                 from "styled-components"
 import {
   DeviceSize,
   DeviceSizeChangeListener,
   deviceSizeWatcher,
-}                      from "styles/DeviceSizeWatcher"
-import { CSS }         from "styles/types"
-import { isNotEmpty }  from "utils/arrayHelpers"
+}                             from "styles/DeviceSizeWatcher"
+import { CSS }                from "styles/types"
+import { isNotEmpty }         from "utils/arrayHelpers"
+
+export type TableAction = {
+  buttonProps?: Partial<ButtonProps>,
+  Component?: ComponentType<PropsWithChildren<Record<string, any>>>,
+  componentProps?: Record<string, any>,
+  label: string,
+  notCompactable?: boolean,
+  onClick: () => void,
+  dropdownItemProps?: Partial<ItemProps>
+}
 
 export type ItemKey = number | string
 export type ItemContainerStyles = string
@@ -40,7 +56,7 @@ export type Item = { [key: string]: ReactNode } & {
   key: ItemKey,
 }
 
-export type SortConfig =  {
+export type SortConfig = {
   fieldName: string,
   label: string,
 }
@@ -66,7 +82,7 @@ export type SortDirection = "asc" | "desc" | undefined
 export type SortState = Record<string, SortDirection>
 
 export type TableProps = {
-  actions?: ReactNode,
+  actions?: TableAction[],
   checkable?: boolean,
   checkedItems?: Set<ItemKey>,
   columnConfigs: Array<ColumnConfig>,
@@ -74,10 +90,12 @@ export type TableProps = {
   filterState?: FilterState,
   helpText?: ReactNode,
   items: Array<Item>,
+  mobileListview?: boolean,
+  mobileListviewNodes?: ReactNode[],
   maxHeight?: string,
   sortState?: SortState,
   title?: string,
-  onColumnSort?: (s :SortState) => void,
+  onColumnSort?: (s: SortState) => void,
   onFiltersChange?: (changes: FilterState) => void,
   onItemChecked?: (key: ItemKey, isChecked: boolean) => void,
   onItemsChecked?: (rows: Set<ItemKey>) => void,
@@ -133,25 +151,28 @@ export let Table = ({
   )
 
   return (
-    <FlexBox withRows className={className}>
-      {
-        isSmallComputer() || isLargeComputer()
-        ? <NiceTable actions={actions}
-                     hasRowActions={hasRowActions}
-                     onSelectAllToggle={setAllRowsSelectedTo}
-                     {...props}
-        />
-        : <MobileTable actions={actions}
-                       hasRowActions={hasRowActions}
-                       onSelectAllToggle={setAllRowsSelectedTo}
-                       {...props} />
-      }
-      {
-        pagination
-        ? <Pagination {...pagination} onPageChange={onPageChange!!} />
-        : null
-      }
-    </FlexBox>
+    <ModalStateProvider>
+      <ModalManager />
+      <FlexBox withRows className={className}>
+        {
+          isSmallComputer() || isLargeComputer()
+          ? <DesktopTable actions={actions}
+                          hasRowActions={hasRowActions}
+                          onSelectAllToggle={setAllRowsSelectedTo}
+                          {...props}
+          />
+          : <MobileTable actions={actions}
+                         hasRowActions={hasRowActions}
+                         onSelectAllToggle={setAllRowsSelectedTo}
+                         {...props} />
+        }
+        {
+          pagination
+          ? <Pagination {...pagination} onPageChange={onPageChange!!} />
+          : null
+        }
+      </FlexBox>
+    </ModalStateProvider>
   )
 }
 

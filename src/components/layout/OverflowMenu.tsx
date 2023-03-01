@@ -22,7 +22,7 @@ type Props = {
   actions: Array<OverflowMenuItem>
 }
 
-const OverflowButton = styled(ZOverflowButton).attrs(({ theme }) => ({
+export const OverflowButton = styled(ZOverflowButton).attrs(({ theme }) => ({
   icon:                  mdiDotsVertical,
   "data-component-name": COMPONENT_NAME,
   compact:               true,

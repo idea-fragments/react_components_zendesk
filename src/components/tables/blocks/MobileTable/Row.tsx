@@ -19,6 +19,7 @@ import {
 import { Text }         from "components/text/Text"
 import React, {
   FC,
+  ReactNode,
   useState
 }                       from "react"
 import styled, { css }  from "styled-components"
@@ -40,6 +41,8 @@ type Props = {
   checkDisabled?: boolean,
   columnConfigs: Array<ColumnConfig>,
   item: Item,
+  listviewMode?: boolean,
+  listviewNode?: ReactNode,
   onCheck?: (row: ItemKey, checked: boolean) => void,
   onClick?: (row: ItemKey) => void,
 }
@@ -50,6 +53,8 @@ export const Row: FC<Props> = ({
                                  checkDisabled,
                                  columnConfigs,
                                  item,
+                                 listviewMode,
+                                 listviewNode,
                                  onCheck,
                                  onClick,
                                }) => {
@@ -103,22 +108,26 @@ export const Row: FC<Props> = ({
         ) : null}
 
         <FlexBox withRows fluid>
-          <Grid>
-            {importantColumns.map(createGridRow)}
+          {
+            listviewMode
+            ? listviewNode
+            : <Grid>
+              {importantColumns.map(createGridRow)}
 
-            {
-              !isCollapsed
-              ? <FlexBox _css={css`
-                margin: .5em 0;
-                background: ${COLORS.LIGHT_GREY};
-                height: 2px;
-                width: 20px;
-              `} />
-              : null
-            }
+              {
+                !isCollapsed
+                ? <FlexBox _css={css`
+                  margin: .5em 0;
+                  background: ${COLORS.LIGHT_GREY};
+                  height: 2px;
+                  width: 20px;
+                `} />
+                : null
+              }
 
-            {collapsibleColumns.map(createGridRow)}
-          </Grid>
+              {collapsibleColumns.map(createGridRow)}
+            </Grid>
+          }
         </FlexBox>
         {
           actions
@@ -129,7 +138,7 @@ export const Row: FC<Props> = ({
         }
       </FlexBox>
       {
-        isNotEmpty(collapsibleColumns)
+        isNotEmpty(collapsibleColumns) && !listviewMode
         ? <Button _css={css`align-self: flex-end; margin-bottom: ${SPACINGS.XS}`}
                   fluid
                   icon={isCollapsed ? mdiChevronDown : mdiChevronUp}

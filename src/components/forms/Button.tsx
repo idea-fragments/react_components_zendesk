@@ -115,6 +115,8 @@ type ControlledLoadable = {
 export type Props = (CommonProps & ControlledLoadable)
   | (CommonProps & AutoLoadable)
 
+export type ButtonProps = Props
+
 const ButtonBase = styled(({
                              children,
                              disabled,
@@ -160,6 +162,7 @@ const ButtonBase = styled(({
 }).attrs((props: Props & StyledProps) => ({
   ...props,
   color: baseColor(props),
+  primary: props.flat ? false : props.primary
 }))`
   &&&& {
     font-size: inherit;
