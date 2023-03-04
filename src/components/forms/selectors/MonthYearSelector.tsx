@@ -9,7 +9,7 @@ import { useState }            from "react"
 
 type Props = {
   minimumDate?: Moment,
-} & TextFieldProps<string, string>
+} & TextFieldProps
 
 type State = {
   isOpen: boolean

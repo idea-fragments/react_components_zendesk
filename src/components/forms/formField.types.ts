@@ -1,26 +1,26 @@
-import { Validation }                    from "components/forms/Validation.type"
-import React, { ChangeEvent, ReactNode } from "react"
-import { ContainerProps }                from "styles/types"
+import { Validation }     from "components/forms/Validation.type"
+import {
+  ChangeEvent,
+  ReactNode
+}                         from "react"
+import { ContainerProps } from "styles/types"
 
 export type FormFieldProps = {
+                               disabled?: boolean,
+                               emptyState?: ReactNode,
+                               hint?: ReactNode,
                                label?: ReactNode,
                                message?: ReactNode,
-                               hint?: ReactNode,
-                               emptyState?: ReactNode,
-                               disabled?: boolean,
+                               required?: boolean,
                                validation?: Validation | undefined,
                              } & ContainerProps
 
-export type FormComponent =
-  React.ComponentType<any & FormFieldProps>
-  & { defaultProps: FormFieldProps }
-
-export type TextFieldProps<V = string, T = ChangeEvent<HTMLInputElement>> =
+export type TextFieldProps<V = string> =
   {
     autoComplete?: string,
     faux?: boolean,
     small?: boolean,
     type?: string,
     value?: V,
-    onChange: (event: T) => void
+    onChange: (value: V, event: ChangeEvent<HTMLInputElement>) => void,
   } & FormFieldProps

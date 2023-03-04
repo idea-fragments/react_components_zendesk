@@ -4,7 +4,7 @@ declare const _default: {
     title: string;
     component: import("styled-components").StyledComponent<"div", any, import("../../styles/typography").TextProps & import("../../styles/types").ContainerProps & {
         children: React.ReactNode;
-    } & {
+    } & import("../../styles/types").ColorProps & {
         as: "p";
         "data-component-name": string;
     } & {

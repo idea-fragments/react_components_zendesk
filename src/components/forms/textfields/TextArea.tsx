@@ -4,8 +4,7 @@ import { TextFieldWrapper }  from "components/forms/textfields/TextFieldWrapper"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import React, {
   ChangeEvent,
-  FC,
-  useCallback
+  FC
 }                            from "react"
 
 export type TextAreaProps = FormFieldProps & {
@@ -25,10 +24,6 @@ export const TextArea: FC<TextAreaProps> = ({
                                               resizable,
                                               ...props
                                             }) => {
-  const notifyParentOfChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(e.target.value, e)
-  }, [onChange])
-
   const validation = () => {
     if (!characterLimit) return props.validation
 
@@ -49,7 +44,8 @@ export const TextArea: FC<TextAreaProps> = ({
     isResizable={resizable}
     minRows={autoExpand ? 2 : undefined}
     maxRows={autoExpand ? 20 : undefined}
-    onChange={notifyParentOfChange}
+    onChange={onChange}
+    // @ts-ignore
     WrappedComponent={Textarea} />
 }
 

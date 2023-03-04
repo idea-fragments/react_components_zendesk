@@ -77,7 +77,6 @@ export const TableFilter = ({
                     emptyState={label}
                     onChange={sendChanges}
                     small
-                    useNewOnChange
                     value={value as string ?? ""}
   />
 }

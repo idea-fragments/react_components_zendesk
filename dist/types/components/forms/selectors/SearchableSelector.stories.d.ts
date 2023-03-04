@@ -9,11 +9,12 @@ declare const _default: {
         selectedKey?: SelectorItemKey;
         onChange?: import("components/forms/selectors/types").OnItemSelectedFunc | undefined;
     } & {
+        disabled?: boolean | undefined;
+        emptyState?: React.ReactNode;
+        hint?: React.ReactNode;
         label?: React.ReactNode;
         message?: React.ReactNode;
-        hint?: React.ReactNode;
-        emptyState?: React.ReactNode;
-        disabled?: boolean | undefined;
+        required?: boolean | undefined;
         validation?: import("../Validation.type").Validation | undefined;
     } & import("../../../styles/types").ContainerProps & {
         appendMenuToNode?: HTMLElement | undefined;

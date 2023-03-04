@@ -1,14 +1,18 @@
-import { TextFieldProps } from "components/forms/formField.types";
-import React, { ChangeEvent } from "react";
-declare type NewOnChangeFunc = (value: string, event: ChangeEvent<HTMLInputElement>) => void;
-declare type OriginalProps = TextFieldProps & {
-    useNewOnChange?: false;
-};
-declare type PropsWithNewOnChange = Omit<TextFieldProps, "onChange"> & {
-    onChange: NewOnChangeFunc;
-    useNewOnChange: true;
-};
-declare type Props = PropsWithNewOnChange | OriginalProps;
-export declare let TextField: React.ForwardRefExoticComponent<Props & React.RefAttributes<unknown>>;
-export {};
+import React from "react";
+export declare let TextField: React.ForwardRefExoticComponent<{
+    autoComplete?: string | undefined;
+    faux?: boolean | undefined;
+    small?: boolean | undefined;
+    type?: string | undefined;
+    value?: string | undefined;
+    onChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+} & {
+    disabled?: boolean | undefined;
+    emptyState?: React.ReactNode;
+    hint?: React.ReactNode;
+    label?: React.ReactNode;
+    message?: React.ReactNode;
+    required?: boolean | undefined;
+    validation?: import("../Validation.type").Validation | undefined;
+} & import("../../../styles/types").ContainerProps & React.RefAttributes<unknown>>;
 //# sourceMappingURL=TextField.d.ts.map
