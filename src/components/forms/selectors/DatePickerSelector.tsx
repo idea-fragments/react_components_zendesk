@@ -15,7 +15,8 @@ import { Logger }                      from "utils/logging/Logger"
 type Props = {
                minimumDate?: Moment,
                disabledDates: Array<Moment>,
-             } & TextFieldProps<string, Moment>
+               onChange: (d: Moment) => void,
+             } & Omit<TextFieldProps, "onChange">
 
 type State = {
   isOpen: boolean

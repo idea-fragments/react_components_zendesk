@@ -1,9 +1,8 @@
 import {
   TextArea,
   TextAreaProps
-} from "components/forms/textfields/TextArea"
+}                          from "components/forms/textfields/TextArea"
 import React, { useState } from "react"
-import { CycleButton }     from "components/forms/CycleButton"
 
 export default {
   title:     "forms/TextArea",
@@ -11,7 +10,7 @@ export default {
   argTypes:  {},
 }
 
-const Story = (args :Partial<TextAreaProps>) => {
+const Story = (args: Partial<TextAreaProps>) => {
   const [value, setValue] = useState("")
 
   return <TextArea

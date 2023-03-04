@@ -4,7 +4,8 @@ import { Moment } from "moment";
 declare type Props = {
     minimumDate?: Moment;
     disabledDates: Array<Moment>;
-} & TextFieldProps<string, Moment>;
+    onChange: (d: Moment) => void;
+} & Omit<TextFieldProps, "onChange">;
 export declare const DatePickerSelector: {
     (props: Props): JSX.Element;
     COMPONENT_NAME: string;

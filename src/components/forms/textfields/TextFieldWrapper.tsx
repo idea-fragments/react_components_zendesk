@@ -8,11 +8,13 @@ import { Hint }              from "components/forms/Hint"
 import { TextAreaProps }     from "components/forms/textfields/TextArea"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox }           from "components/layout/FlexBox"
+import { Text }              from "components/text/Text"
 import React, {
   ChangeEvent,
   ComponentType,
   forwardRef,
-  PropsWithChildren
+  PropsWithChildren,
+  useCallback
 }                            from "react"
 import styled, { css }       from "styled-components"
 import {
@@ -21,13 +23,15 @@ import {
 }                            from "styles/colors"
 import { FONT_SIZES }        from "styles/typography"
 
-type FieldProps = TextFieldProps | (
-  Omit<TextAreaProps, "onChange">
-  & { onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void }
-  )
+type FieldProps = TextFieldProps | TextAreaProps
 
 type Props = PropsWithChildren<{
-  WrappedComponent: ComponentType<FieldProps & any>
+  WrappedComponent: ComponentType<Omit<FieldProps, "onChange" | "validation"> &
+                                  {
+                                    onChange: ((e: ChangeEvent<HTMLInputElement>) => void) |
+                                              ((e: ChangeEvent<HTMLTextAreaElement>) => void),
+                                    validation?: string
+                                  }>,
   compact?: boolean,
 }> & FieldProps
 
@@ -43,12 +47,18 @@ export let TextFieldWrapper = forwardRef(({
                                             hint,
                                             label,
                                             message,
+                                            required,
                                             validation,
                                             value,
                                             WrappedComponent,
                                             onChange,
                                             ...props
                                           }: Props, ref) => {
+  const notifyParentOfChange = useCallback((e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+    // @ts-ignore
+    onChange(e.target.value, e)
+  }, [onChange])
+
   message = validation?.message || message
   return <Container className={className}
                     withRows
@@ -56,7 +66,15 @@ export let TextFieldWrapper = forwardRef(({
                     fluid={fluid}>
     {/* @ts-ignore */}
     <Field compact={compact}>
-      {label ? <Label>{label}</Label> : null}
+      {
+        label || required
+        ? <FlexBox gap={".3em"}>
+          {label ? <Label>{label}</Label> : null}
+          {required ? <Text danger><b>*</b></Text> : null}
+        </FlexBox>
+        : null
+      }
+
       {
         hint
         ? <Hint _css={css`&&& {font-size: ${FONT_SIZES.XS};}`}>
@@ -65,12 +83,13 @@ export let TextFieldWrapper = forwardRef(({
         : null
       }
       <WrappedComponent
+        // @ts-ignore
         placeholder={emptyState}
         ref={ref}
         validation={validation?.validation}
         {...props}
         value={value}
-        onChange={onChange}
+        onChange={notifyParentOfChange}
       />
       {
         message

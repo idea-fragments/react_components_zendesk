@@ -9,7 +9,7 @@ declare type Props = {
 export declare type ChipProps = Props & StyledProps;
 export declare const Chip: import("styled-components").StyledComponent<"div", any, import("styles/typography").TextProps & import("../../styles/types").ContainerProps & {
     children: import("react").ReactNode;
-} & {
+} & import("../../styles/types").ColorProps & {
     as: "p";
     "data-component-name": string;
 } & {
