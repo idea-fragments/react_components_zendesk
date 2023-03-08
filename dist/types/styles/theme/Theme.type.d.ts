@@ -10,7 +10,7 @@ export declare type ContainerStyles = {
     zIndex?: number;
 };
 export declare type Styles = {
-    appBar: ContainerStyles & {
+    appBar: Required<Pick<ContainerStyles, "background" | "height" | "shadow" | "zIndex">> & {
         screenPosition: "top" | "bottom";
     };
     border: {

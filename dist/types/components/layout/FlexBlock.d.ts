@@ -13,7 +13,7 @@ export declare type Props = {
     spacing?: string | null;
     responsivePropsList?: Array<ResponsiveProps>;
 };
-export declare const FlexBlock: import("styled-components").StyledComponent<"div", any, Props, never>;
-export declare const PaddedFlexBlock: import("styled-components").StyledComponent<"div", any, Props, never>;
+export declare const FlexBlock: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, Props, never>;
+export declare const PaddedFlexBlock: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, Props, never>;
 export {};
 //# sourceMappingURL=FlexBlock.d.ts.map

@@ -27,6 +27,6 @@ declare type Props = Omit<SelectorsProps, "keyField" | "labelField"> & OptionalS
 export declare let Dropdown: FC<PropsWithChildren<Props>>;
 export declare const Autocomplete: React.ComponentType<any>;
 export declare const Select: React.ComponentType<any>;
-export declare const MultiSelect: import("styled-components").StyledComponent<React.ComponentType<any>, any, {}, never>;
+export declare const MultiSelect: import("styled-components").StyledComponent<React.ComponentType<any>, import("styled-components").DefaultTheme, {}, never>;
 export {};
 //# sourceMappingURL=Dropdown.d.ts.map

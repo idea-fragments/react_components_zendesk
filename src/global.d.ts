@@ -1,4 +1,6 @@
-import {} from 'styled-components/cssprop'
+import {}        from "styled-components/cssprop"
+import { Theme } from "styles/theme/Theme.type"
+import "styled-components"
 
 declare module "@zendeskgarden/react-accordions"
 declare module "@zendeskgarden/react-avatars"
@@ -25,3 +27,7 @@ declare global {
 }
 
 export type Nullable<T> = T | null | undefined
+
+declare module "styled-components" {
+  export interface DefaultTheme extends Theme {}
+}

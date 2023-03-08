@@ -1,5 +1,5 @@
 import { Button }                                 from "components/forms/Button"
-import { PhotoBooth, PhotoBoothProps, PhotoData } from "components/forms/PhotoBooth"
+import { PhotoBooth, PhotoBoothProps, PhotoData } from "components/forms/media/PhotoBooth"
 import React                                      from "react"
 
 export default {

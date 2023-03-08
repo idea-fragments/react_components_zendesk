@@ -19,7 +19,7 @@ export declare const ToastProvider: import("styled-components").StyledComponent<
         zIndex: import("prop-types").Requireable<number>;
         placementProps: import("prop-types").Requireable<object>;
     };
-}, any, {
+}, import("styled-components").DefaultTheme, {
     zIndex: 1000;
 }, "zIndex">;
 export {};

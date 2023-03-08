@@ -1,8 +1,10 @@
-import { FlexBox }            from "components/layout/FlexBox"
-import styled                 from "styled-components"
-import { deviseSizes }        from "styles/deviceSizes"
-import { mediaQueries, unit } from "styles/mediaQueries"
-import { css }                from "styled-components"
+import { FlexBox }     from "components/layout/FlexBox"
+import styled, { css } from "styled-components"
+import { breakpoints } from "styles/breakpoints/breakpoints"
+import {
+  mediaQueries,
+  unit
+}                      from "styles/mediaQueries"
 
 const {
         forLargeComputers,
@@ -14,7 +16,7 @@ const {
         tabletSize,
         largeTabletSize,
         smallComputerSize,
-      } = deviseSizes()
+      } = breakpoints({ wideLayout: false })
 
 const deviceSettings = css`
   ${forLargeTabletsAndUp(css`

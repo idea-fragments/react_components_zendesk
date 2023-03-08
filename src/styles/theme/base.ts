@@ -1,10 +1,11 @@
+import { StyledProps } from "components/StyledProps.type"
 import {
   COLORS,
   hasGoodContrast,
   veryLight
-} from "styles/colors"
-import { SPACINGS }                from "styles/spacings"
-import { Styles }                  from "styles/theme/Theme.type"
+}                      from "styles/colors"
+import { SPACINGS }    from "styles/spacings"
+import { Styles }      from "styles/theme/Theme.type"
 
 export const base: Partial<Styles> = {
   appBar:        {
@@ -18,8 +19,8 @@ export const base: Partial<Styles> = {
     color: "rgb(233, 235, 237)",
   },
   buttons:       { textTransform: null },
-  colorAccent:   COLORS.BLUE,
-  colorPrimary:  COLORS.HUB_SPOT_ORANGE,
+  colorAccent:   COLORS.HUB_SPOT_ORANGE,
+  colorPrimary:  COLORS.BLUE,
   colorDanger:   COLORS.RED,
   colorWarning:  COLORS.YELLOW,
   colorSuccess:  COLORS.GREEN,
@@ -54,7 +55,7 @@ export const base: Partial<Styles> = {
   },
   tooltip:       { darkBackground: "#747183" },
 
-  getTextColorForBackground: ({ color, theme }) => {
+  getTextColorForBackground: ({ color, theme }: StyledProps<{ color: string }>) :string => {
     if (hasGoodContrast(color, theme.styles.textColorLight)) {
       return theme.styles.textColorLight
     }

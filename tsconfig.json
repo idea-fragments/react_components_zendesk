@@ -28,7 +28,12 @@
   "exclude": [
     "node_modules",
     "**/*.spec.ts",
-    "entries/*.ts"
+    "entries/*.ts",
+    "**/*.stories.mdx",
+    "**/*.stories.js",
+    "**/*.stories.jsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx"
   ],
   "extends": "@tsconfig/create-react-app/tsconfig.json",
   "include": [
