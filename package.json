@@ -1,6 +1,6 @@
 {
   "name": "@idea-fragments/react-components-zendesk",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "private": false,
   "files": [
     "dist"
@@ -79,6 +79,8 @@
     "mobx-utils": "^6.0.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-easy-crop": "^4.7.4",
+    "react-images-uploading": "^3.1.7",
     "react-scripts": "^5.0.1",
     "rollup": "^2.74.1",
     "rollup-plugin-dts": "^4.2.1",

@@ -9,7 +9,7 @@ declare type Props = {
     placement?: MenuPlacement;
     actions: Array<OverflowMenuItem>;
 };
-export declare const OverflowButton: import("styled-components").StyledComponent<React.ForwardRefExoticComponent<import("@zendeskgarden/react-tables/dist/typings/elements/OverflowButton").IOverflowButtonProps & React.RefAttributes<HTMLButtonElement>>, any, {
+export declare const OverflowButton: import("styled-components").StyledComponent<React.ForwardRefExoticComponent<import("@zendeskgarden/react-tables/dist/typings/elements/OverflowButton").IOverflowButtonProps & React.RefAttributes<HTMLButtonElement>>, import("styled-components").DefaultTheme, {
     icon: string;
     "data-component-name": string;
     compact: boolean;
@@ -19,7 +19,7 @@ export declare const OverflowButton: import("styled-components").StyledComponent
     primary: boolean;
     iconSize: string;
     as: React.ComponentType<import("components/forms/Button").Props>;
-}, "color" | "primary" | "aria-label" | "as" | "size" | "data-component-name" | "compact" | "icon" | "iconSize">;
+}, "color" | "primary" | "size" | "data-component-name" | "aria-label" | "as" | "compact" | "icon" | "iconSize">;
 export declare const OverflowMenu: ({ actions, appendToNode, placement }: Props) => JSX.Element;
 export {};
 //# sourceMappingURL=OverflowMenu.d.ts.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"TabletsOnly.d.ts","sourceRoot":"","sources":["../../../src/components/layout/TabletsOnly.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,EAAE,EAAE,iBAAiB,EAAuB,MAAM,OAAO,CAAA;AAGlE,eAAO,MAAM,WAAW,EAAE,EAAE,CAAC,iBAAiB,CAc7C,CAAA"}
+{"version":3,"file":"TabletsOnly.d.ts","sourceRoot":"","sources":["../../../src/components/layout/TabletsOnly.tsx"],"names":[],"mappings":"AACA,OAAO,EACL,EAAE,EACF,iBAAiB,EAClB,MAAoC,OAAO,CAAA;AAE5C,eAAO,MAAM,WAAW,EAAE,EAAE,CAAC,iBAAiB,CAI7C,CAAA"}

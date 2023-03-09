@@ -7,7 +7,7 @@ declare type Props = {
     success?: boolean;
 };
 export declare type ChipProps = Props & StyledProps;
-export declare const Chip: import("styled-components").StyledComponent<"div", any, import("styles/typography").TextProps & import("../../styles/types").ContainerProps & {
+export declare const Chip: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, import("styles/typography").TextProps & import("../../styles/types").ContainerProps & {
     children: import("react").ReactNode;
 } & import("../../styles/types").ColorProps & {
     as: "p";
@@ -16,6 +16,6 @@ export declare const Chip: import("styled-components").StyledComponent<"div", an
     as: string;
     background: string;
     color: string;
-} & Props, "color" | "as" | "data-component-name" | "background">;
+} & Props, "background" | "color" | "data-component-name" | "as">;
 export {};
 //# sourceMappingURL=Chip.d.ts.map

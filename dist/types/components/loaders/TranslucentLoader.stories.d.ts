@@ -2,7 +2,7 @@ import React from "react";
 declare const _default: {
     title: string;
     component: ({ _css, children, className, innerAs, isLoading }: React.PropsWithChildren<{
-        _css?: import("styled-components").CSSProp<any> | undefined;
+        _css?: import("styled-components").CSSProp<import("styled-components").DefaultTheme> | undefined;
         className?: string | undefined;
         innerAs?: React.ComponentType<any> | undefined;
         isLoading: boolean;

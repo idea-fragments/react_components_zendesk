@@ -4,5 +4,5 @@ export declare type SectionHeaderProps = PropsWithChildren<{
     caption?: ReactNode;
     title?: ReactNode;
 }>;
-export declare const SectionHeader: import("styled-components").StyledComponent<({ actions, children, caption, title, }: SectionHeaderProps) => JSX.Element, any, {}, never>;
+export declare const SectionHeader: import("styled-components").StyledComponent<({ actions, children, caption, title, }: SectionHeaderProps) => JSX.Element, import("styled-components").DefaultTheme, {}, never>;
 //# sourceMappingURL=SectionHeader.d.ts.map

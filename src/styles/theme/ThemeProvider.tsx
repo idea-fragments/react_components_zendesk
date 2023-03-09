@@ -10,7 +10,9 @@ export type Props = PropsWithChildren<{
 
 export const ThemeProvider: FC<Props> = ({ children, theme }) => {
   return <Provider theme={{
-    ...DEFAULT_THEME, ...theme,
+    ...DEFAULT_THEME,
+    ...theme,
+    // @ts-ignore
     zendeskThemeKeys: Object.keys(DEFAULT_THEME)
   }}>
     <GlobalStyle />

@@ -1,9 +1,10 @@
 import styled, { css }            from "styled-components"
 import { textColorForBackground } from "styles/mixins"
+import { ColorProps }             from "styles/types"
 
-type Props = {
+export type SectionProps = {
     titleHidden? :boolean
-}
+} & ColorProps
 
 const hideTitle = css`
   & > h1,
@@ -16,15 +17,14 @@ const hideTitle = css`
   }
 `
 
-export const Section = styled.section`
+export const Section = styled.section<SectionProps>`
   background: ${({ color, theme }) => color ? color : theme.styles.section.background};
   border-radius: ${(p) => p.theme.styles.section.borderRadius};
   box-shadow: ${(p) => p.theme.styles.section.shadow};
   margin: ${(p) => p.theme.styles.section.margin};
   padding: ${(p) => p.theme.styles.section.padding};
-  
-  ${({color}) => color ? textColorForBackground : ""}
-  ${({titleHidden} :Props) => titleHidden ? hideTitle : ""}
+  ${({titleHidden}) => titleHidden ? hideTitle : ""};
+  ${({color}) => color ? textColorForBackground : ""};
   
   & > :first-child {
     margin-top: 0;

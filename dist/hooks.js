@@ -3130,7 +3130,7 @@ var borders = {
   sm: "".concat(borderWidths.sm, " ").concat(borderStyles.solid),
   md: "".concat(borderWidths.md, " ").concat(borderStyles.solid)
 };
-var breakpoints = {
+var breakpoints$1 = {
   xs: '0px',
   sm: "".concat(BASE * 144, "px"),
   md: "".concat(BASE * 192, "px"),
@@ -3218,7 +3218,7 @@ var DEFAULT_THEME = {
   borderRadii: borderRadii,
   borderStyles: borderStyles,
   borderWidths: borderWidths,
-  breakpoints: breakpoints,
+  breakpoints: breakpoints$1,
   colors: _objectSpread2({
     base: 'light'
   }, colors),
@@ -9590,7 +9590,143 @@ var useTheme = function () {
   return React.useContext(styled.ThemeContext);
 }; // export const setThemeContext = (ctx :)
 
+/* Size key name represents all devices with a pixel width up to the number
+ specified */
 
+
+var REGULAR_BREAKPOINTS_PX = {
+  phoneSize: 575,
+  tabletSize: 767,
+  largeTabletSize: 991,
+  smallComputerSize: 1199
+};
+var WIDE_BREAKPOINTS_PX = {
+  phoneSize: 560,
+  tabletSize: 840,
+  largeTabletSize: 991,
+  smallComputerSize: 1350
+};
+var DEVICES = {
+  phone: 0,
+  tablet: 1,
+  largeTablet: 2,
+  smallComputer: 3,
+  largeComputer: 4
+};
+
+var breakpoints = function (_a) {
+  var _b = _a.wideLayout,
+      wideLayout = _b === void 0 ? false : _b;
+  return wideLayout ? WIDE_BREAKPOINTS_PX : REGULAR_BREAKPOINTS_PX;
+};
+
+var unit = function (px) {
+  return "".concat(px, "px");
+};
+
+var breakpointQueries = function (_a) {
+  var _b;
+
+  var wideLayout = _a.wideLayout;
+
+  var _c = breakpoints({
+    wideLayout: wideLayout
+  }),
+      phoneSize = _c.phoneSize,
+      tabletSize = _c.tabletSize,
+      largeTabletSize = _c.largeTabletSize,
+      smallComputerSize = _c.smallComputerSize;
+
+  var phone = DEVICES.phone,
+      tablet = DEVICES.tablet,
+      largeTablet = DEVICES.largeTablet,
+      smallComputer = DEVICES.smallComputer,
+      largeComputer = DEVICES.largeComputer;
+  return _b = {}, _b[phone] = "(max-width: ".concat(unit(phoneSize), ")"), _b[tablet] = "(min-width: ".concat(unit(phoneSize + 1), ") and (max-width: ").concat(unit(tabletSize), ")"), _b[largeTablet] = "(min-width: ".concat(unit(tabletSize + 1), ") and (max-width: ").concat(unit(largeTabletSize), ")"), _b[smallComputer] = "(min-width: ".concat(unit(largeTabletSize + 1), ") and (max-width: ").concat(unit(smallComputerSize), ")"), _b[largeComputer] = "(min-width: ".concat(unit(smallComputerSize + 1), ")"), _b;
+};
+
+var useDeviceSizeWatcher = function () {
+  var _a = __read(React.useState(), 2),
+      currentSize = _a[0],
+      setCurrentSize = _a[1];
+
+  var queries = React.useMemo(function () {
+    return breakpointQueries({
+      wideLayout: true
+    });
+  }, []);
+  var deviceListeners = React.useRef({});
+  var deviceMediaQueryLists = React.useMemo(function () {
+    return Object.values(DEVICES).reduce(function (map, size) {
+      var _a;
+
+      return __assign(__assign({}, map), (_a = {}, _a[size] = window.matchMedia(queries[size]), _a));
+    }, {});
+  }, [queries]);
+  var initChangeWatchers = React.useCallback(function () {
+    Object.entries(deviceMediaQueryLists).forEach(function (_a) {
+      var _b = __read(_a, 2),
+          size = _b[0],
+          mql = _b[1];
+
+      var listener = function (e) {
+        if (e.matches) setCurrentSize(Number(size));
+      };
+
+      mql.addEventListener("change", listener);
+      deviceListeners.current[Number(size)] = listener;
+    });
+  }, [deviceMediaQueryLists]);
+  var removeChangeWatchers = React.useCallback(function () {
+    Object.entries(deviceMediaQueryLists).forEach(function (_a) {
+      var _b = __read(_a, 2),
+          size = _b[0],
+          mql = _b[1];
+
+      mql.removeEventListener("change", deviceListeners.current[Number(size)]);
+      delete deviceListeners.current[Number(size)];
+    });
+  }, [deviceMediaQueryLists]);
+  var setInitialSize = React.useCallback(function () {
+    Object.entries(deviceMediaQueryLists).forEach(function (_a) {
+      var _b = __read(_a, 2),
+          size = _b[0],
+          mql = _b[1];
+
+      if (mql.matches) setCurrentSize(Number(size));
+    });
+  }, [deviceMediaQueryLists]);
+  React.useEffect(function () {
+    setInitialSize();
+  }, [setInitialSize]);
+  React.useEffect(function () {
+    initChangeWatchers();
+    return removeChangeWatchers;
+  }, [initChangeWatchers, removeChangeWatchers]);
+  return React.useMemo(function () {
+    var isPhone = currentSize === DEVICES.phone;
+    var isTablet = currentSize === DEVICES.tablet;
+    var isLargeTablet = currentSize === DEVICES.largeTablet;
+    var isSmallComputer = currentSize === DEVICES.smallComputer;
+    var isLargeComputer = currentSize === DEVICES.largeComputer;
+    var isSmallComputerOrLarger = isSmallComputer || isLargeComputer;
+    var isLargeTabletOrLarger = isLargeTablet || isSmallComputerOrLarger;
+    var isLargeTabletOrSmaller = isLargeTablet || isTablet || isPhone;
+    return {
+      isPhone: isPhone,
+      isTablet: isTablet,
+      isLargeTablet: isLargeTablet,
+      isSmallComputer: isSmallComputer,
+      isLargeComputer: isLargeComputer,
+      isSmallComputerOrLarger: isSmallComputerOrLarger,
+      isLargeTabletOrLarger: isLargeTabletOrLarger,
+      isLargeTabletOrSmaller: isLargeTabletOrSmaller
+    };
+  }, [currentSize]);
+};
+
+exports.useDeviceSizeWatcher = useDeviceSizeWatcher;
+exports.useIsMounted = useIsMounted;
 exports.useLoader = useLoader;
 exports.useLoaderV2 = useLoaderV2;
 exports.useTheme = useTheme;

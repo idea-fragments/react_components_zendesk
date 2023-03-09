@@ -15,7 +15,7 @@ export declare type Props = {
     wrapped?: boolean;
 } & CSSProp;
 export declare type FlexBoxProps = Props;
-export declare const FlexBox: import("styled-components").StyledComponent<"div", any, {
+export declare const FlexBox: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, {
     alignItems?: string | undefined;
     gap?: string | null | undefined;
     fluid?: boolean | undefined;

@@ -2,7 +2,7 @@ import { ChipProps } from "components/tags/Chip";
 import React from "react";
 declare const _default: {
     title: string;
-    component: import("styled-components").StyledComponent<"div", any, import("../../styles/typography").TextProps & import("../../styles/types").ContainerProps & {
+    component: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, import("../../styles/typography").TextProps & import("../../styles/types").ContainerProps & {
         children: React.ReactNode;
     } & import("../../styles/types").ColorProps & {
         as: "p";
@@ -16,7 +16,7 @@ declare const _default: {
         fluid?: boolean | undefined;
         primary?: boolean | undefined;
         success?: boolean | undefined;
-    }, "color" | "as" | "data-component-name" | "background">;
+    }, "background" | "color" | "data-component-name" | "as">;
     argTypes: {};
 };
 export default _default;

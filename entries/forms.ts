@@ -45,7 +45,8 @@ export * from "components/forms/TaggedToggle"
 /* =============================
  * Uploaders
  * ============================= */
-export * from "components/forms/PhotoBooth"
+export * from "components/forms/media/PhotoBooth"
+export * from "components/forms/media/ImageUploader"
 
 export * from "components/forms/selectors/types"
 export * from "components/forms/formField.types"

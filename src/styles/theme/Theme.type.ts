@@ -12,9 +12,11 @@ export type ContainerStyles = {
 }
 
 export type Styles = {
-  appBar: ContainerStyles & {
-    screenPosition: "top" | "bottom",
-  },
+  appBar: Required<Pick<ContainerStyles,
+    "background" | "height" | "shadow" | "zIndex">> &
+          {
+            screenPosition: "top" | "bottom",
+          },
   border: {
     color: string,
   },

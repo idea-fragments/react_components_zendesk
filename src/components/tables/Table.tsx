@@ -1,27 +1,20 @@
-import { ButtonProps }        from "components/forms/Button"
-import { ItemProps }          from "components/forms/selectors/Dropdown/Item"
-import { FlexBox }            from "components/layout/FlexBox"
-import { ModalManager }       from "components/modals/ModalManager"
-import { ModalStateProvider } from "components/stateProviders/ModalStateProvider"
-import { Pagination }         from "components/tables/blocks/Pagination"
-import { DesktopTable }       from "components/tables/DesktopTable"
-import { MobileTable }        from "components/tables/MobileTable"
+import { ButtonProps }          from "components/forms/Button"
+import { ItemProps }            from "components/forms/selectors/Dropdown/Item"
+import { FlexBox }              from "components/layout/FlexBox"
+import { ModalManager }         from "components/modals/ModalManager"
+import { ModalStateProvider }   from "components/stateProviders/ModalStateProvider"
+import { Pagination }           from "components/tables/blocks/Pagination"
+import { DesktopTable }         from "components/tables/DesktopTable"
+import { MobileTable }          from "components/tables/MobileTable"
+import { useDeviceSizeWatcher } from "hooks/useDeviceSizeWatcher"
 import React, {
   ComponentType,
   PropsWithChildren,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState
-}                             from "react"
-import styled                 from "styled-components"
-import {
-  DeviceSize,
-  DeviceSizeChangeListener,
-  deviceSizeWatcher,
-}                             from "styles/DeviceSizeWatcher"
-import { CSS }                from "styles/types"
-import { isNotEmpty }         from "utils/arrayHelpers"
+  ReactNode
+}                               from "react"
+import styled                   from "styled-components"
+import { CSS }                  from "styles/types"
+import { isNotEmpty }           from "utils/arrayHelpers"
 
 export type TableAction = {
   buttonProps?: Partial<ButtonProps>,
@@ -112,14 +105,6 @@ type Props = TableProps & {
 
 export type FinalizedTableProps = Props
 
-const {
-        getSize,
-        isLargeComputer,
-        isSmallComputer,
-        subscribe,
-        unsubscribe,
-      } = deviceSizeWatcher
-
 export let Table = ({
                       actions,
                       className,
@@ -128,23 +113,12 @@ export let Table = ({
                       onPageChange,
                       ...props
                     }: Props) => {
-
-  const [, setDeviseSize] = useState<DeviceSize>(getSize())
-
-  const handleDeviseSizeChange = useCallback<DeviceSizeChangeListener>(
-    (s: DeviceSize) => { setDeviseSize(s) },
-    [],
-  )
+  const { isSmallComputerOrLarger } = useDeviceSizeWatcher()
 
   const setAllRowsSelectedTo = (isChecked: boolean) => {
     const rows = isChecked ? props.items.map((i) => i.key) : []
     onItemsChecked?.(new Set([...rows]))
   }
-
-  useEffect(() => {
-    const subId = subscribe(handleDeviseSizeChange)
-    return () => { unsubscribe(subId) }
-  }, [handleDeviseSizeChange])
 
   const hasRowActions = props.items.some(
     (i: Item) => i.actions && isNotEmpty(i.actions),
@@ -155,7 +129,7 @@ export let Table = ({
       <ModalManager />
       <FlexBox withRows className={className}>
         {
-          isSmallComputer() || isLargeComputer()
+          isSmallComputerOrLarger
           ? <DesktopTable actions={actions}
                           hasRowActions={hasRowActions}
                           onSelectAllToggle={setAllRowsSelectedTo}

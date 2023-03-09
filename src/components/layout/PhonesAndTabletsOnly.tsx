@@ -1,18 +1,11 @@
-import { FC, PropsWithChildren, useEffect, useState } from "react"
-import { DeviceSize, deviceSizeWatcher }              from "styles/DeviceSizeWatcher"
+import { useDeviceSizeWatcher } from "hooks/useDeviceSizeWatcher"
+import {
+  FC,
+  PropsWithChildren
+}                               from "react"
 
 export const PhonesAndTabletsOnly: FC<PropsWithChildren> = ({ children }) => {
-  const isPhoneOrTablet = () => deviceSizeWatcher.isPhone()
-                                || deviceSizeWatcher.isTablet()
-                                || deviceSizeWatcher.isLargeTablet()
+  const { isPhone, isTablet, isLargeTablet } = useDeviceSizeWatcher()
 
-  const [isVisible, setIsVisibleTo] = useState(isPhoneOrTablet())
-
-  useEffect(() => {
-    deviceSizeWatcher.subscribe((_: DeviceSize) => {
-      setIsVisibleTo(isPhoneOrTablet())
-    })
-  }, [])
-
-  return isVisible ? <>{children}</> : null
+  return isPhone || isTablet || isLargeTablet ? <>{children}</> : null
 }

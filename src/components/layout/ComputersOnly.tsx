@@ -1,16 +1,18 @@
-import { FC, PropsWithChildren, useEffect, useState } from "react"
-import { DeviceSize, deviceSizeWatcher }              from "styles/DeviceSizeWatcher"
+import { useDeviceSizeWatcher } from "hooks/useDeviceSizeWatcher"
+import {
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useState
+}                               from "react"
 
 export const ComputersOnly: FC<PropsWithChildren> = ({ children }) => {
-  const [isVisible, setIsVisibleTo] = useState(
-    deviceSizeWatcher.isSmallComputerAndUp()
-  )
+  const { isSmallComputerOrLarger } = useDeviceSizeWatcher()
+  const [isVisible, setIsVisibleTo] = useState(isSmallComputerOrLarger)
 
   useEffect(() => {
-    deviceSizeWatcher.subscribe((_: DeviceSize) => {
-      setIsVisibleTo(deviceSizeWatcher.isSmallComputerAndUp())
-    })
-  }, [])
+    setIsVisibleTo(isSmallComputerOrLarger)
+  }, [isSmallComputerOrLarger])
 
   return isVisible ? <>{children}</> : null
 }

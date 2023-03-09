@@ -10,8 +10,13 @@ export const backgroundPrimaryWithText = css`
   }};
 `
 
-export const textColorForBackground = css`
-  color: ${(props) => props.theme.styles.getTextColorForBackground(props)};
+export const textColorForBackground = css<{color?: string}>`
+  ${(props) => { 
+    return props.color ? `color: ${props.theme.styles.getTextColorForBackground({
+      color: props.color,
+      theme: props.theme
+    })};` : "" 
+  }};
 `
 
 export const textColorPrimary = css`

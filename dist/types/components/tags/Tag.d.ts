@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactNode } from "react";
-export declare const Close: import("styled-components").StyledComponent<import("react").ForwardRefExoticComponent<import("react").HTMLAttributes<HTMLDivElement> & import("react").RefAttributes<HTMLDivElement>>, any, {}, never>;
+export declare const Close: import("styled-components").StyledComponent<import("react").ForwardRefExoticComponent<import("react").HTMLAttributes<HTMLDivElement> & import("react").RefAttributes<HTMLDivElement>>, import("styled-components").DefaultTheme, {}, never>;
 export declare type TagProps = {
     children: ReactNode;
     className?: string;

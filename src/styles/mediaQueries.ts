@@ -1,5 +1,8 @@
-import { css, FlattenSimpleInterpolation } from "styled-components"
-import { deviseSizes }                     from "styles/deviceSizes"
+import {
+  css,
+  FlattenSimpleInterpolation
+}                      from "styled-components"
+import { breakpoints } from "styles/breakpoints/breakpoints"
 
 export const PHONE_SIZE  = 560
 export const TABLET_SIZE = 840
@@ -34,7 +37,7 @@ export const mediaQueries = (wideLayout?: boolean): MediaQueriesI => {
           tabletSize,
           largeTabletSize,
           smallComputerSize,
-        } = deviseSizes(wideLayout)
+        } = breakpoints({ wideLayout })
 
   return {
     forPhones: (styles: Styles): Styles => css`
