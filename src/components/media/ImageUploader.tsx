@@ -3,19 +3,26 @@ import {
   Button,
   ButtonProps
 }                             from "components/forms/Button"
-import { ImageCropper }       from "components/forms/media/ImageUploader/ImageCropper"
+import { ImageCropper }       from "components/media/ImageUploader/ImageCropper"
 import { FlexBox }            from "components/layout/FlexBox"
 import { Nullable }           from "global"
 import {
   FC,
+  ReactNode,
   useCallback,
   useState
 }                             from "react"
 import ImageUploading         from "react-images-uploading"
 import { isEmpty }            from "utils/arrayHelpers"
 
+type RenderPropParams = {
+  clearImageData: () => void,
+  openImageSelector: () => void,
+}
+
 export type ImageUploaderProps = {
   buttonProps?: ButtonProps,
+  children?: (p: RenderPropParams) => ReactNode,
   imageData?: ImageData,
   onChange: (image?: ImageData) => void,
 }
@@ -27,6 +34,7 @@ export type ImageData = {
 
 export const ImageUploader: FC<ImageUploaderProps> = ({
                                                         buttonProps,
+                                                        children: renderProp,
                                                         imageData,
                                                         onChange,
                                                       }) => {
@@ -43,9 +51,15 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
   }, [onChange])
 
   const cacheUploadedImage = useCallback((imageList: ImageData[]) => {
-    setOriginalImage(isEmpty(imageList) ? undefined : imageList[0])
+    if (isEmpty(imageList)) {
+      setOriginalImage(undefined)
+      onChange(undefined)
+      return
+    }
+
+    setOriginalImage(imageList[0])
     enableCropper()
-  }, [enableCropper])
+  }, [enableCropper, onChange])
 
 
   return <ImageUploading acceptType={["jpg", "gif", "png"]}
@@ -61,26 +75,25 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
         isDragging:    ____,
         dragProps
       }) => (
-      <FlexBox justifyContent={"flex-end"}>
-        <Button
-          danger
-          icon={mdiTrashCanOutline}
-          onClick={onImageRemoveAll}
-          {...buttonProps}
-        />
+      <>
         {
-          originalImage
-          ? <Button disabled={cropMode} onClick={enableCropper} {...buttonProps}>Edit</Button>
-          : null
+          renderProp
+          ? renderProp({ clearImageData: onImageRemoveAll, openImageSelector: onImageUpload })
+          : <FlexBox>
+            <Button danger icon={mdiTrashCanOutline} onClick={onImageRemoveAll}{...buttonProps} />
+            {
+              originalImage
+              ? <Button disabled={cropMode} onClick={enableCropper} {...buttonProps}>Edit</Button>
+              : null
+            }
+            <Button onClick={onImageUpload} {...dragProps} {...buttonProps}>Select Image</Button>
+          </FlexBox>
         }
-        <Button onClick={onImageUpload}{...dragProps} {...buttonProps}>Select Image</Button>
-
         {
           cropMode && originalImage
           ? <ImageCropper imageData={originalImage} onComplete={cacheCroppedImage} />
           : null
         }
-      </FlexBox>
-    )}
+      </>)}
   </ImageUploading>
 }
