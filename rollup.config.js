@@ -10,7 +10,7 @@ const modulesDir = "entries"
 let modules = fs.readdirSync(modulesDir)
   .map((nameWithExtension) => nameWithExtension.split(".")[0])
 
-// modules = ["hooks"]
+modules = ["media"]
 export default [
   ...modules.map((module) => {
     return {

@@ -42,12 +42,6 @@ export * from "components/forms/validationStates"
 export * from "components/forms/Toggle"
 export * from "components/forms/TaggedToggle"
 
-/* =============================
- * Uploaders
- * ============================= */
-export * from "components/forms/media/PhotoBooth"
-export * from "components/forms/media/ImageUploader"
-
 export * from "components/forms/selectors/types"
 export * from "components/forms/formField.types"
 export * from "components/forms/ValidatedFormProps.type"

@@ -1,5 +1,5 @@
 import { Button }      from "components/forms/Button"
-import { ImageData }   from "components/forms/media/ImageUploader"
+import { ImageData }   from "components/media/ImageUploader"
 import { Slider }      from "components/forms/Slider"
 import { FlexBox }     from "components/layout/FlexBox"
 import { Nullable }    from "global"
@@ -30,7 +30,7 @@ const MIN_SCALE = 1
 export const ImageCropper: FC<ImageCropperProps> = ({
                                                       aspectRatio = 1,
                                                       imageData,
-                                                      imageQuality = 0.7,
+                                                      imageQuality = 0.6,
                                                       onComplete,
                                                     }) => {
   const imageRef                      = useRef<HTMLImageElement>()
