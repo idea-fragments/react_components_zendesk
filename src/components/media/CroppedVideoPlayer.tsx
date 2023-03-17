@@ -1,9 +1,13 @@
 import { VideoData }      from "components/media/VideoUploader"
 import React, {
   FC,
+  useCallback,
   useState
-}                         from "react"
-import Cropper, { Point } from "react-easy-crop"
+} from "react"
+import Cropper, {
+  MediaSize,
+  Point
+} from "react-easy-crop"
 import styled             from "styled-components"
 import { CSSProp }        from "styles/types"
 
@@ -12,20 +16,28 @@ export type CroppedVideoPlayerProps = {
   videoData: VideoData,
 }
 
+type ObjectFit = "horizontal-cover" | "vertical-cover"
+
 export const CroppedVideoPlayer = styled<FC<CroppedVideoPlayerProps>>(({
                                                                          onLoad,
                                                                          videoData
                                                                        }) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
+  const [objectFit, setObjectFit] = useState<ObjectFit>("vertical-cover")
+
+  const processLoadedMedia = useCallback(({naturalHeight, naturalWidth} :MediaSize) => {
+    setObjectFit(naturalHeight >= naturalWidth ? "horizontal-cover" : "vertical-cover")
+    onLoad?.()
+  }, [onLoad])
 
   return <Container>
     <Cropper
       aspect={1}
       crop={crop}
       initialCroppedAreaPixels={videoData.cropAreaPx}
-      objectFit={"vertical-cover"}
+      objectFit={objectFit}
       onCropChange={setCrop}
-      onMediaLoaded={onLoad}
+      onMediaLoaded={processLoadedMedia}
       onTouchRequest={() => { return false }}
       onWheelRequest={() => { return false }}
       showGrid={false}
