@@ -35,7 +35,8 @@ export let FullScreen = styled<FC<FullScreenProps>>(({
         height: auto;
         position: ${fluidContent ? "absolute" : "relative"};
         margin-top: ${fluidContent ? "2rem" : "1rem"};
-        margin-right: ${fluidContent ? "2rem" : "0"};`
+        margin-right: ${fluidContent ? "2rem" : "0"};
+        z-index: 1`
       }
       color={COLORS.WHITE}
       icon={mdiClose}
