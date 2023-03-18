@@ -10,8 +10,10 @@ export default {
 
 
 const Component: ComponentStory<typeof FullScreen> = (args) => {
-  return <FullScreen css={`right: 50px;`} visible {...args} >
-    <FlexBox>This is the content of the full screen</FlexBox>
+  return <FullScreen visible {...args} >
+    <FlexBox _css={`background: #ffcd00; height: 100%; width: 100%;`}>
+      This is the content of the full screen
+    </FlexBox>
   </FullScreen>
 }
 
@@ -20,3 +22,6 @@ Default.args         = {}
 
 export const Hidden = Component.bind({})
 Hidden.args         = { visible: false }
+
+export const WithFluidContent = Component.bind({})
+WithFluidContent.args                   = { fluidContent: true }
