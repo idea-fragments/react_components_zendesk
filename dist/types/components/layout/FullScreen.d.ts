@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren } from "react";
 export declare type FullScreenProps = PropsWithChildren<{
     className?: string;
+    fluidContent?: boolean;
     onCloseClicked: () => void;
     visible?: boolean;
 }>;
