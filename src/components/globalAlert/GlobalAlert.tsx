@@ -22,7 +22,7 @@ export const GlobalAlert: FC<Props> = ({
                                          info,
                                          notDismissible,
                                          noActionButton,
-                                         showTitle,
+                                         showTitle = false,
                                          success,
                                          title,
                                          buttonText,
