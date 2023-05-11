@@ -11,6 +11,7 @@ type Props = {
   showTitle?: boolean,
   title?: string,
   buttonText?: string,
+  onActionButtonClick?: () => void,
   onClose?: () => void,
 } & UserFeedbackProps;
 
@@ -27,6 +28,7 @@ export const GlobalAlert: FC<Props> = ({
                                          title,
                                          buttonText,
                                          warning,
+                                         onActionButtonClick = DO_NOTHING,
                                          onClose = DO_NOTHING,
                                        }) => {
   const dismissible = !notDismissible;
@@ -50,7 +52,7 @@ export const GlobalAlert: FC<Props> = ({
       <div>{body}</div>
     </ZGlobalAlert.Content>
     {hasActionButton
-      ? <ZGlobalAlert.Button>{buttonText}</ZGlobalAlert.Button>
+      ? <ZGlobalAlert.Button onClick={onActionButtonClick}>{buttonText}</ZGlobalAlert.Button>
       : null
     }
     {dismissible

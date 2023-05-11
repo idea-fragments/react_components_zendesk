@@ -7,6 +7,7 @@ declare type Props = {
     showTitle?: boolean;
     title?: string;
     buttonText?: string;
+    onActionButtonClick?: () => void;
     onClose?: () => void;
 } & UserFeedbackProps;
 export declare type GlobalAlertProps = Props;
