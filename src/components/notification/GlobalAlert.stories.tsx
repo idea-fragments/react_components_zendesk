@@ -1,8 +1,8 @@
 import {
   GlobalAlert,
   GlobalAlertProps
-} from "./GlobalAlert";
-import React, {useState} from "react"
+} from "components/notification/GlobalAlert";
+import React from "react"
 
 export default {
   title: "globalAlert/GlobalAlert",
