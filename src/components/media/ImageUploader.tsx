@@ -62,8 +62,7 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
   }, [enableCropper, onChange])
 
 
-  return <ImageUploading acceptType={["jpg", "gif", "png"]}
-                         dataURLKey={"dataURL"}
+  return <ImageUploading dataURLKey={"dataURL"}
                          onChange={cacheUploadedImage}
                          value={imageData ? [imageData] : []}>
     {({
