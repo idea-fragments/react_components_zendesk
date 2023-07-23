@@ -1,1 +1,1 @@
-{"version":3,"file":"SectionBody.d.ts","sourceRoot":"","sources":["../../../src/components/layout/SectionBody.tsx"],"names":[],"mappings":"AAGA,eAAO,MAAM,WAAW,yGAWvB,CAAA"}
+{"version":3,"file":"SectionBody.d.ts","sourceRoot":"","sources":["../../../src/components/layout/SectionBody.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,OAAO,EAAE,MAAU,cAAc,CAAA;AAW1C,eAAO,MAAM,WAAW;;wBAUvB,CAAA"}

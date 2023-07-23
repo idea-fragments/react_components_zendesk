@@ -17,7 +17,7 @@ export declare const Tooltip: import("styled-components").StyledComponent<{
         eventsEnabled: import("prop-types").Requireable<boolean>;
         id: import("prop-types").Requireable<string>;
         content: import("prop-types").Validator<string | number | boolean | import("prop-types").ReactElementLike | import("prop-types").ReactNodeArray>;
-        placement: import("prop-types").Requireable<"top" | "bottom" | "end" | "auto" | "start" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
+        placement: import("prop-types").Requireable<"top" | "bottom" | "start" | "end" | "auto" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
         popperModifiers: import("prop-types").Requireable<any>;
         size: import("prop-types").Requireable<"small" | "large" | "medium" | "extra-large">;
         type: import("prop-types").Requireable<"dark" | "light">;

@@ -19,5 +19,6 @@ export declare type ContainerProps = {
 export declare type CSS<T = any> = FlattenSimpleInterpolation | string | T;
 export declare type CSSProp<T = any> = {
     _css?: CSS<T>;
+    className?: string;
 };
 //# sourceMappingURL=types.d.ts.map

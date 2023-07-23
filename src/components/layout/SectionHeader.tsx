@@ -4,29 +4,33 @@ import {
   ReactNode
 }                      from "react"
 import styled, { css } from "styled-components"
+import { CSSProp }     from "styles/types"
 
 export type SectionHeaderProps = PropsWithChildren<{
   actions?: ReactNode,
   bordered?: boolean,
   caption?: ReactNode,
   title?: ReactNode,
-}>
+}> & CSSProp
 
 export const SectionHeader = styled(({
                                        actions,
                                        bordered = false,
-                                       children,
                                        caption,
+                                       children,
+                                       className,
                                        title = children,
                                      }: SectionHeaderProps): JSX.Element => {
-  return <Container bordered={bordered} withRows>
+  return <Container bordered={bordered} className={className} withRows>
     <FlexBox alignItems={"center"} fluid>
       <Text>{title}</Text>
       {actions ? <FlexBox>{actions}</FlexBox> : null}
     </FlexBox>
     {caption ? <Text>{caption}</Text> : null}
   </Container>
-})``
+})`
+  ${({ _css }: CSSProp) => _css}
+`
 
 const sectionBorder = css`
   border-bottom: 1px solid ${({ theme }) => theme.styles.border.color};

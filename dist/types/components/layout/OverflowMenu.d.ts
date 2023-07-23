@@ -19,7 +19,7 @@ export declare const OverflowButton: import("styled-components").StyledComponent
     primary: boolean;
     iconSize: string;
     as: React.ComponentType<import("components/forms/Button").Props>;
-}, "color" | "primary" | "size" | "data-component-name" | "aria-label" | "as" | "compact" | "icon" | "iconSize">;
+}, "color" | "primary" | "size" | "data-component-name" | "aria-label" | "compact" | "icon" | "iconSize" | "as">;
 export declare const OverflowMenu: ({ actions, appendToNode, placement }: Props) => JSX.Element;
 export {};
 //# sourceMappingURL=OverflowMenu.d.ts.map

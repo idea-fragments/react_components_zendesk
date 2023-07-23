@@ -2315,7 +2315,7 @@ var base = {
   section: {
     background: "transparent",
     body: {
-      padding: "".concat(SPACINGS.LG, " ").concat(SPACINGS.MD)
+      padding: "0 ".concat(SPACINGS.MD, " ").concat(SPACINGS.LG, " ").concat(SPACINGS.MD)
     },
     borderRadius: "".concat(SPACINGS.XS),
     header: {

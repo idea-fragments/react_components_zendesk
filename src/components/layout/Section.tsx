@@ -1,12 +1,15 @@
 import styled, { css }            from "styled-components"
 import { textColorForBackground } from "styles/mixins"
-import { ColorProps }             from "styles/types"
+import {
+  ColorProps,
+  CSSProp
+}                                 from "styles/types"
 
 export type SectionProps = {
-  bordered?: boolean,
+                             bordered?: boolean,
                              rounded?: boolean,
                              shadowed?: boolean,
-                           } & ColorProps
+                           } & ColorProps & CSSProp
 
 
 const boxShadow = css`
@@ -28,12 +31,11 @@ export const Section = styled.section<SectionProps>`
   ${({ color }) => color ? textColorForBackground : ""};
   ${({ rounded }) => rounded ? roundBorder : ""};
   ${({ shadowed }) => shadowed ? boxShadow : ""};
+  ${({ _css }: CSSProp) => _css} //& > section {
+          //  padding-bottom: 0;
+          //}
 
-  //& > section {
-  //  padding-bottom: 0;
-  //}
-
-  //& + section {
-  //  padding-top: 0;
-  //}
+          //& + section {
+          //  padding-top: 0;
+          //}
 `

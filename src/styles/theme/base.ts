@@ -37,7 +37,7 @@ export const base: Partial<Styles> = {
   section:       {
     background:   "transparent",
     body:         {
-      padding: `${SPACINGS.LG} ${SPACINGS.MD}`,
+      padding: `0 ${SPACINGS.MD} ${SPACINGS.LG} ${SPACINGS.MD}`,
     },
     borderRadius: `${SPACINGS.XS}`,
     header:       {
