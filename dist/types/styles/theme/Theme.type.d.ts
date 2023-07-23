@@ -56,7 +56,14 @@ export declare type Styles = {
         trackColor: string;
     };
     scrollbarColor: string;
-    section: ContainerStyles;
+    section: ContainerStyles & {
+        body: {
+            padding: string;
+        };
+        header: {
+            padding: string;
+        };
+    };
     sidebar: {
         actionButton: {
             borderRadius: string;
