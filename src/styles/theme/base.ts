@@ -25,7 +25,7 @@ export const base: Partial<Styles> = {
   colorWarning:  COLORS.YELLOW,
   colorSuccess:  COLORS.GREEN,
   container:     { horizontalPadding: "1rem" },
-  font: { size: "14px" },
+  font:          { size: "14px" },
   modal:         {
     backdrop: {
       background: "rgba(47, 57, 65, 0.85)",
@@ -35,8 +35,15 @@ export const base: Partial<Styles> = {
     zIndex: 401,
   },
   section:       {
-    background: "transparent",
-    padding:    `${SPACINGS.XXXL} 0`,
+    background:   "transparent",
+    body:         {
+      padding: `${SPACINGS.LG} ${SPACINGS.MD}`,
+    },
+    borderRadius: `${SPACINGS.XS}`,
+    header:       {
+      padding: `${SPACINGS.LG} ${SPACINGS.MD}`,
+    },
+    shadow:       "0 2px 6px 0 #0000001a"
   },
   sidebar:       {
     actionButton: {
@@ -50,12 +57,12 @@ export const base: Partial<Styles> = {
     zIndex:       10000,
   },
   table:         {
-    borderColor:  veryLight(COLORS.GREY),
-    borderSize: "1px"
+    borderColor: veryLight(COLORS.GREY),
+    borderSize:  "1px"
   },
   tooltip:       { darkBackground: "#747183" },
 
-  getTextColorForBackground: ({ color, theme }: StyledProps<{ color: string }>) :string => {
+  getTextColorForBackground: ({ color, theme }: StyledProps<{ color: string }>): string => {
     if (hasGoodContrast(color, theme.styles.textColorLight)) {
       return theme.styles.textColorLight
     }

@@ -3,39 +3,37 @@ import { textColorForBackground } from "styles/mixins"
 import { ColorProps }             from "styles/types"
 
 export type SectionProps = {
-    titleHidden? :boolean
-} & ColorProps
+  bordered?: boolean,
+                             rounded?: boolean,
+                             shadowed?: boolean,
+                           } & ColorProps
 
-const hideTitle = css`
-  & > h1,
-  & > h2,
-  & > h3,
-  & > h4,
-  & > h5,
-  & > h6 {
-    display: none;
-  }
+
+const boxShadow = css`
+  box-shadow: ${(p) => p.theme.styles.section.shadow};
+`
+
+const roundBorder = css`
+  border-radius: ${(p) => p.theme.styles.section.borderRadius};
+`
+
+const sectionBorder = css`
+  border: 1px solid ${({ theme }) => theme.styles.border.color};
 `
 
 export const Section = styled.section<SectionProps>`
   background: ${({ color, theme }) => color ? color : theme.styles.section.background};
-  border-radius: ${(p) => p.theme.styles.section.borderRadius};
-  box-shadow: ${(p) => p.theme.styles.section.shadow};
-  margin: ${(p) => p.theme.styles.section.margin};
-  padding: ${(p) => p.theme.styles.section.padding};
-  ${({titleHidden}) => titleHidden ? hideTitle : ""};
-  ${({color}) => color ? textColorForBackground : ""};
-  
-  & > :first-child {
-    margin-top: 0;
-    padding-top: 0;
-  }
-  
-  & > section {
-    padding-bottom: 0;
-  }
-  
-  & + section {
-    //padding-top: 0;
-  }
+
+  ${({ bordered }) => bordered ? sectionBorder : ""};
+  ${({ color }) => color ? textColorForBackground : ""};
+  ${({ rounded }) => rounded ? roundBorder : ""};
+  ${({ shadowed }) => shadowed ? boxShadow : ""};
+
+  //& > section {
+  //  padding-bottom: 0;
+  //}
+
+  //& + section {
+  //  padding-top: 0;
+  //}
 `
