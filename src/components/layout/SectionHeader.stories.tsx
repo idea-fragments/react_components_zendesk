@@ -19,6 +19,7 @@ const Story = (args: SectionHeaderProps) => {
     <Button primary={false} onClick={DO_NOTHING}>Click Me Too</Button>
   </>
   return <SectionHeader
+    bordered
     {...args}
     actions={actions}
     caption={"Scan business cards to import them into your account.\n" +

@@ -2314,7 +2314,14 @@ var base = {
   },
   section: {
     background: "transparent",
-    padding: "".concat(SPACINGS.XXXL, " 0")
+    body: {
+      padding: "".concat(SPACINGS.LG, " ").concat(SPACINGS.MD)
+    },
+    borderRadius: "".concat(SPACINGS.XS),
+    header: {
+      padding: "".concat(SPACINGS.LG, " ").concat(SPACINGS.MD)
+    },
+    shadow: "0 2px 6px 0 #0000001a"
   },
   sidebar: {
     actionButton: {
