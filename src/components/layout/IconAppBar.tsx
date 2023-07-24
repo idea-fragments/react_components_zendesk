@@ -72,9 +72,11 @@ const actionButtonStyles = css<{ active: boolean }>`
     height: 3.5em;
     width: 3.5em;
     padding: 0;
-
-    :hover {
-      color: ${({ theme }) => theme.styles.textColorPrimary};
+    
+    @media (hover: hover) {
+      :hover {
+        color: ${({ theme }) => theme.styles.textColorPrimary};
+      }
     }
   }
 `
