@@ -8,18 +8,19 @@ import styled, { css }      from "styled-components"
 import { fade }             from "styles/colors"
 import { SPACINGS }         from "styles/spacings"
 import { useTheme }         from "styles/theme/useTheme"
-import { DO_NOTHING }       from "utils/functionHelpers"
 
 type IconAppBarProps = {
   actions: NavigationAction[],
   actionIconSize?: string,
   activeAction?: string,
+  bordered?: boolean,
 }
 
 export let IconAppBar: FC<IconAppBarProps> = ({
                                                 actions = [],
                                                 actionIconSize,
                                                 activeAction,
+                                                bordered = false,
                                               }) => {
   const theme        = useTheme()
   const appBarHeight = theme.styles.appBar.height
@@ -47,11 +48,8 @@ export let IconAppBar: FC<IconAppBarProps> = ({
 
   return <>
     <FixedPlaceHolder height={`${appBarHeight}`} />
-    <BarWrapper>
+    <BarWrapper bordered={bordered}>
       <Content height={appBarHeight}>
-        {/*<FlexBox alignItems={"center"} css={`cursor: pointer;`}>*/}
-        {/*  {logo ? logo : null}*/}
-        {/*</FlexBox>*/}
         <FlexBox fluid gap={SPACINGS.XS} justifyContent={"space-between"}>
           {createActionButtons(actions)}
         </FlexBox>
@@ -81,7 +79,11 @@ const actionButtonStyles = css<{ active: boolean }>`
   }
 `
 
-const BarWrapper = styled.header<StyledProps<{ fixed?: boolean }>>`
+const barBorder = css`
+  border-top: 1px solid ${({ theme }) => theme.styles.border.color};
+`
+
+const BarWrapper = styled.header<StyledProps<{ bordered: boolean }>>`
   background: ${({ theme }) => theme.styles.appBar.background};
   box-shadow: ${({ theme }) => theme.styles.appBar.shadow};
   position: fixed;
@@ -91,6 +93,8 @@ const BarWrapper = styled.header<StyledProps<{ fixed?: boolean }>>`
   left: 0;
   width: 100%;
   z-index: ${({ theme }) => theme.styles.appBar.zIndex};
+
+  ${({ bordered }) => bordered ? barBorder : ""};
 `
 
 const Content = styled(FlexBox).attrs({ alignItems: "center", as: "nav", })`

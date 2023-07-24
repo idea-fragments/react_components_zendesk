@@ -4,6 +4,7 @@ declare type IconAppBarProps = {
     actions: NavigationAction[];
     actionIconSize?: string;
     activeAction?: string;
+    bordered?: boolean;
 };
 export declare let IconAppBar: FC<IconAppBarProps>;
 export {};

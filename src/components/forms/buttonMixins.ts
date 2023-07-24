@@ -1,6 +1,14 @@
-import { css }                                             from "styled-components"
-import { dark, light, lighter, lightness, lightnessDelta } from "styles/colors"
-import { textColorForBackground, textWithColor }           from "styles/mixins"
+import { css } from "styled-components"
+import {
+  dark,
+  lighter,
+  lightness,
+  lightnessDelta
+}              from "styles/colors"
+import {
+  textColorForBackground,
+  textWithColor
+}              from "styles/mixins"
 
 export const getInlineStyling = css<{ inline?: boolean }>`
   ${({ inline }) => inline ? inlineWithText : ""}
@@ -44,10 +52,12 @@ export const buttonLikeHoverable = css<{
                                                       ? "transparent"
                                                       : color};
 
-  :hover {
-    background: ${({ primary, color }) => primary
-                                          ? lightnessDelta(color, 10)
-                                          : lightness(color, 95)};
+  @media (hover: hover) {
+    &:hover {
+      background: ${({ primary, color }) => primary
+                                            ? lightnessDelta(color, 10)
+                                            : lightness(color, 95)};
+    }
   }
 
   :active {
@@ -60,13 +70,26 @@ export const buttonLikeHoverable = css<{
 `
 
 const flatButtonStates = css<{ color: string }>`
-  :hover, :active {
+  @media (hover: hover) {
+    &:hover {
+      color: ${({ color }) => dark(color)};
+    }
+  }
+
+  :active {
     color: ${({ color }) => dark(color)};
   }
 `
 
 const inlineButtonStates = css<{ color: string }>`
-  :hover:hover, :focus:focus {
+  @media (hover: hover) {
+    &:hover:hover {
+      color: ${(props) => lighter(props.color)};
+      background-color: unset;
+    }
+  }
+
+  :focus:focus {
     color: ${(props) => lighter(props.color)};
     background-color: unset;
   }

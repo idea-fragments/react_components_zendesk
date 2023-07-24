@@ -3,10 +3,12 @@ import {
   mdiClipboardListOutline,
   mdiHomeOutline,
   mdiViewDashboardOutline
-}                     from "@mdi/js"
-import { IconAppBar } from "components/layout/IconAppBar"
-import React          from "react"
-import { DO_NOTHING } from "utils/functionHelpers"
+}                          from "@mdi/js"
+import {
+  IconAppBar,
+  IconAppBarProps
+}                          from "components/layout/IconAppBar"
+import React, { useState } from "react"
 
 export default {
   title:     "Layouts/IconAppBar",
@@ -14,16 +16,20 @@ export default {
   argTypes:  {},
 }
 
-const Story = () => {
+const Story = (args: Partial<IconAppBarProps>) => {
+  const [activeAction, setActiveAction] = useState("Tasks")
+
+  const setAction = (action: string) => () => setActiveAction(action)
+
   const actions = [
-    { icon: mdiHomeOutline, label: "Home", onClick: DO_NOTHING, },
-    { icon: mdiViewDashboardOutline, label: "Dashboard", onClick: DO_NOTHING, },
-    { icon: mdiBookOutline, label: "Projects", onClick: DO_NOTHING, },
+    { icon: mdiHomeOutline, label: "Home", onClick: setAction("Home"), },
+    { icon: mdiViewDashboardOutline, label: "Dashboard", onClick: setAction("Dashboard"), },
+    { icon: mdiBookOutline, label: "Projects", onClick: setAction("Projects"), },
     { icon: mdiClipboardListOutline, label: "Tasks", href: "https://google.com", },
   ]
 
   return <div css={"width: 400px; max-width: 100%;"}>
-    <IconAppBar actions={actions} activeAction={"Tasks"} />
+    <IconAppBar actions={actions} activeAction={activeAction} {...args} />
   </div>
 }
 

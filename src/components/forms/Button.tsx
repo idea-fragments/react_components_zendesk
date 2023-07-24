@@ -46,8 +46,14 @@ const colors       = css<Props & { color: string }>`
           ? color
           : "transparent"};
 
-  ${getInlineStyling}
-  :hover, :active {
+  ${getInlineStyling};
+  
+  @media (hover: hover) {
+    &:hover {
+      border-color: transparent;
+    }
+  }
+  :active {
     border-color: transparent;
   }
 `
