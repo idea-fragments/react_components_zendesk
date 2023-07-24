@@ -8,6 +8,7 @@ import { SectionHeader } from "components/layout/SectionHeader"
 import { H3 }            from "components/text/Header"
 import { Paragraph }     from "components/text/Paragraph"
 import React             from "react"
+import { SectionFooter } from "components/layout/SectionFooter"
 import { css }           from "styled-components"
 import { DO_NOTHING }    from "utils/functionHelpers"
 
@@ -20,6 +21,7 @@ export default {
 const Story = (args: SectionProps) => {
   const actions = <>
     <Button onClick={DO_NOTHING}>Click Me</Button>
+    <Button neutral onClick={DO_NOTHING}>Click Me</Button>
   </>
 
   return <Section _css={css`height: 300px;`} bordered {...args}>
@@ -70,6 +72,8 @@ const Story = (args: SectionProps) => {
         lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum/.
       </Paragraph>
     </SectionBody>
+
+    <SectionFooter actions={actions} bordered />
   </Section>
 }
 
