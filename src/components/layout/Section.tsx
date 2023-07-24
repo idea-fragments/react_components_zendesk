@@ -26,7 +26,10 @@ const sectionBorder = css`
 
 export const Section = styled.section<SectionProps>`
   background: ${({ color, theme }) => color ? color : theme.styles.section.background};
-
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
   ${({ bordered }) => bordered ? sectionBorder : ""};
   ${({ color }) => color ? textColorForBackground : ""};
   ${({ rounded }) => rounded ? roundBorder : ""};

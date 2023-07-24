@@ -2,7 +2,8 @@ import styled, { css } from "styled-components"
 import { CSSProp }     from "styles/types"
 
 type SectionBodyProps = {
-  noHorizontalPadding?: boolean
+  noHorizontalPadding?: boolean,
+  scrollable?: boolean,
 } & CSSProp
 
 const removeHorizontalPadding = css`
@@ -12,12 +13,18 @@ const removeHorizontalPadding = css`
 
 export const SectionBody = styled.div<SectionBodyProps>`
   width: 100%;
+  flex: 1;
+  overflow-y: ${({ scrollable }) => scrollable ? "scroll" : "unset"};
   padding: ${({ theme }) => theme.styles.section.body.padding};
   ${({ noHorizontalPadding }) => noHorizontalPadding ? removeHorizontalPadding : "" };
   ${({ _css }: CSSProp) => _css}
-  
 
-  //& > :last-child {
-  //  margin-bottom: 0;
-  //}
+
+  & > :first-child {
+    margin-top: 0;
+  }
+  
+  & > :last-child {
+    margin-bottom: 0;
+  }
 `
