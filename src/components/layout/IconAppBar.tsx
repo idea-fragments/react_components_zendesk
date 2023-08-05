@@ -3,7 +3,11 @@ import { FlexBox }          from "components/layout/FlexBox"
 import { NavigationAction } from "components/layout/NavigationAction"
 import { ButtonLink }       from "components/navigation/ButtonLink"
 import { StyledProps }      from "components/StyledProps.type"
-import React, { FC }        from "react"
+import React, {
+  FC,
+  ForwardedRef,
+  forwardRef
+}                           from "react"
 import styled, { css }      from "styled-components"
 import { fade }             from "styles/colors"
 import { SPACINGS }         from "styles/spacings"
@@ -16,12 +20,15 @@ type IconAppBarProps = {
   bordered?: boolean,
 }
 
-export let IconAppBar: FC<IconAppBarProps> = ({
-                                                actions = [],
-                                                actionIconSize,
-                                                activeAction,
-                                                bordered = false,
-                                              }) => {
+export let IconAppBar: FC<IconAppBarProps> = forwardRef((
+  {
+    actions = [],
+    actionIconSize,
+    activeAction,
+    bordered = false,
+  },
+  ref: ForwardedRef<HTMLElement>
+) => {
   const theme        = useTheme()
   const appBarHeight = theme.styles.appBar.height
 
@@ -48,7 +55,7 @@ export let IconAppBar: FC<IconAppBarProps> = ({
 
   return <>
     <FixedPlaceHolder height={`${appBarHeight}`} />
-    <BarWrapper bordered={bordered}>
+    <BarWrapper bordered={bordered} ref={ref}>
       <Content height={appBarHeight}>
         <FlexBox fluid gap={SPACINGS.XS} justifyContent={"space-between"}>
           {createActionButtons(actions)}
@@ -56,7 +63,7 @@ export let IconAppBar: FC<IconAppBarProps> = ({
       </Content>
     </BarWrapper>
   </>
-}
+})
 
 IconAppBar = styled(IconAppBar)``
 
@@ -72,7 +79,7 @@ const actionButtonStyles = css<{ active: boolean }>`
     height: 3.5em;
     width: 3.5em;
     padding: 0;
-    
+
     @media (hover: hover) {
       :hover {
         color: ${({ theme }) => theme.styles.textColorPrimary};

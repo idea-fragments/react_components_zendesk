@@ -1,7 +1,9 @@
 import { FlexBox }     from "components/layout/FlexBox"
 import {
   PropsWithChildren,
-  ReactNode
+  ReactNode,
+  forwardRef,
+  ForwardedRef
 }                      from "react"
 import styled, { css } from "styled-components"
 import { CSSProp }     from "styles/types"
@@ -13,22 +15,25 @@ export type SectionHeaderProps = PropsWithChildren<{
   title?: ReactNode,
 }> & CSSProp
 
-export const SectionHeader = styled(({
-                                       actions,
-                                       bordered = false,
-                                       caption,
-                                       children,
-                                       className,
-                                       title = children,
-                                     }: SectionHeaderProps): JSX.Element => {
-  return <Container bordered={bordered} className={className} withRows>
+export const SectionHeader = styled(forwardRef((
+  {
+    actions,
+    bordered = false,
+    caption,
+    children,
+    className,
+    title = children,
+  }: SectionHeaderProps,
+  ref: ForwardedRef<HTMLDivElement>
+): JSX.Element => {
+  return <Container bordered={bordered} className={className} ref={ref} withRows>
     <FlexBox alignItems={"center"} fluid>
       <Text>{title}</Text>
       {actions ? <FlexBox>{actions}</FlexBox> : null}
     </FlexBox>
     {caption ? <Text>{caption}</Text> : null}
   </Container>
-})`
+}))`
   ${({ _css }: CSSProp) => _css}
 `
 
