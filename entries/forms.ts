@@ -2,7 +2,6 @@
  * SELECTORS
  * ============================= */
 
-export * from "components/forms/selectors/BooleanSelector"
 export * from "components/forms/selectors/DatePickerSelector"
 export * from "components/forms/selectors/Dropdown"
 export * from "components/forms/selectors/Selector"

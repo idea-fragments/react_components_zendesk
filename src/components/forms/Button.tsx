@@ -162,7 +162,7 @@ const ButtonBase = styled(({
                    justifyContent={"center"}>
           {iconPosition === "left" &&
            <Icon color={"currentColor"} svg={icon} size={iconSize} />}
-          {children ? <span css={`flex: 1;`}>{children}</span> : undefined}
+          {children ? <IconButtonTextContainer>{children}</IconButtonTextContainer> : undefined}
           {iconPosition === "right" &&
            <Icon color={"currentColor"} svg={icon} size={iconSize} />}
         </FlexBox>
@@ -238,4 +238,8 @@ Button.defaultProps   = {
 
 const LoaderContainer = styled(FlexBox)`
   min-height: 30px;
+`
+
+const IconButtonTextContainer = styled.span`
+  flex: 1;
 `
