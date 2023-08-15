@@ -87,6 +87,7 @@ const baseColor = ({
 const inlineWrapping = css`
   white-space: normal;
   text-align: left;
+  height: auto;
 `
 
 export const BUTTON_SIZES = { SMALL: "small", LARGE: "large" } as const
