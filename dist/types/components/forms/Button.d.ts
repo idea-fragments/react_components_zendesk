@@ -12,31 +12,31 @@ declare type AutoLoadable = {
     onClick: PromiseFunc;
 };
 declare type ButtonBaseProps = PropsWithChildren<{
+    alignItems?: string;
     alignSelf?: Alignment;
+    autoLoadable?: boolean;
     disabled?: boolean;
+    flat?: boolean;
     groupKey?: string;
     icon?: string | ComponentType;
     iconPosition?: "left" | "right";
     iconSize?: string;
+    inline?: boolean;
     innerAs?: string;
     innerRef?: Ref<HTMLButtonElement>;
     loading?: boolean;
     pill?: boolean;
     primary?: boolean;
     size?: ButtonSize;
+    wrapInlineText?: false;
     onClick: () => void;
-}> & CSSProp;
-declare type CommonProps = ButtonBaseProps & {
-    autoLoadable?: boolean;
-    flat?: boolean;
-    inline?: boolean;
-} & ColorProps & ContainerProps;
+}> & CSSProp & ColorProps & ContainerProps;
 declare type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-export declare type Props = (CommonProps & ControlledLoadable) | (CommonProps & AutoLoadable);
+export declare type Props = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 export declare type ButtonProps = Props;
-export declare const Button: ComponentType<Props>;
+export declare const Button: ComponentType<ButtonProps>;
 export {};
 //# sourceMappingURL=Button.d.ts.map

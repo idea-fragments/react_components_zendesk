@@ -15,7 +15,11 @@ const Story = ({ closeModal, modalContent, ...args }: ModalProps) => {
   const [isModalOpen, setIsModalOpenTo] = useState(false)
 
   modalContent = {
-    body:  "Body of the Modal",
+    body:  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam\n" +
+           " aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl quis nunc. Sed euismod, nisl\n" +
+           " nec aliquam aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl quis nunc. Sed\n" +
+           " euismod, nisl nec aliquam aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl\n" +
+           " quis",
     title: "Modal Title",
     ...modalContent,
   }
@@ -23,7 +27,6 @@ const Story = ({ closeModal, modalContent, ...args }: ModalProps) => {
   closeModal = closeModal || (() => setIsModalOpenTo(false))
 
   return <>
-
     <Button onClick={() => setIsModalOpenTo(true)}>Open Modal</Button>
     <Modal
       {...args}

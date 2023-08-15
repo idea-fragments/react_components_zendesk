@@ -1,14 +1,14 @@
 // @ts-ignore
-import { Button as SButton }          from "@zendeskgarden/react-buttons"
+import { Button as SButton } from "@zendeskgarden/react-buttons"
 import {
   buttonLikeHoverable,
   getInlineStyling,
-}                                     from "components/forms/buttonMixins"
-import { Icon }                       from "components/Icon"
-import { FlexBox }                    from "components/layout/FlexBox"
-import { Dots }                       from "components/loaders/Dots"
-import { StyledProps }                from "components/StyledProps.type"
-import { useIsMounted }               from "hooks/useIsMounted"
+}                            from "components/forms/buttonMixins"
+import { Icon }              from "components/Icon"
+import { FlexBox }           from "components/layout/FlexBox"
+import { Dots }              from "components/loaders/Dots"
+import { StyledProps }       from "components/StyledProps.type"
+import { useIsMounted }      from "hooks/useIsMounted"
 import React, {
   ComponentType,
   ForwardedRef,
@@ -18,19 +18,19 @@ import React, {
   Ref,
   useCallback,
   useState
-}                                     from "react"
-import styled, { css }                from "styled-components"
-import { Alignment }                  from "styles/alignments"
-import { COLORS }                     from "styles/colors"
-import { SPACINGS }                   from "styles/spacings"
-import { Theme }                      from "styles/theme/Theme.type"
+}                            from "react"
+import styled, { css }       from "styled-components"
+import { Alignment }         from "styles/alignments"
+import { COLORS }            from "styles/colors"
+import { SPACINGS }          from "styles/spacings"
+import { Theme }             from "styles/theme/Theme.type"
 import {
   ColorProps,
   ContainerProps,
   CSSProp
-} from "styles/types"
-import { FONT_SIZES }                 from "styles/typography"
-import { PromiseFunc }                from "utils/function.types"
+}                            from "styles/types"
+import { FONT_SIZES }        from "styles/typography"
+import { PromiseFunc }       from "utils/function.types"
 
 const fitContent   = css`
   width: fit-content;
@@ -47,12 +47,13 @@ const colors       = css<Props & { color: string }>`
           : "transparent"};
 
   ${getInlineStyling};
-  
+
   @media (hover: hover) {
     &:hover {
       border-color: transparent;
     }
   }
+
   :active {
     border-color: transparent;
   }
@@ -83,6 +84,11 @@ const baseColor = ({
   return theme.styles.colorPrimary
 }
 
+const inlineWrapping = css`
+  white-space: normal;
+  text-align: left;
+`
+
 export const BUTTON_SIZES = { SMALL: "small", LARGE: "large" } as const
 export type ButtonSize = typeof BUTTON_SIZES[keyof typeof BUTTON_SIZES]
 
@@ -92,38 +98,38 @@ type AutoLoadable = {
 }
 
 type ButtonBaseProps = PropsWithChildren<{
+  alignItems?: string,
   alignSelf?: Alignment,
+  autoLoadable?: boolean,
   disabled?: boolean,
+  flat?: boolean,
   groupKey?: string,
   icon?: string | ComponentType,
   iconPosition?: "left" | "right",
   iconSize?: string,
+  inline?: boolean,
   innerAs?: string,
   innerRef?: Ref<HTMLButtonElement>,
   loading?: boolean,
   pill?: boolean,
   primary?: boolean,
   size?: ButtonSize,
+  wrapInlineText?: false,
   onClick: () => void,
-}> & CSSProp
-
-type CommonProps = ButtonBaseProps & {
-  autoLoadable?: boolean,
-  flat?: boolean,
-  inline?: boolean,
-} & ColorProps & ContainerProps
+}> & CSSProp & ColorProps & ContainerProps
 
 type ControlledLoadable = {
   loading?: boolean,
   onClick: () => void,
 }
 
-export type Props = (CommonProps & ControlledLoadable)
-  | (CommonProps & AutoLoadable)
+export type Props = (ButtonBaseProps & ControlledLoadable)
+                    | (ButtonBaseProps & AutoLoadable)
 
 export type ButtonProps = Props
 
 const ButtonBase = styled(({
+                             alignItems,
                              children,
                              disabled,
                              groupKey,
@@ -146,18 +152,17 @@ const ButtonBase = styled(({
                   {...props}>
     {
       loading
-      ? <LoaderContainer alignItems={"center"}
-                 justifyContent={"center"}>
+      ? <LoaderContainer alignItems={"center"} justifyContent={"center"}>
         <Dots size={FONT_SIZES.MD} />
       </LoaderContainer>
       : (
         icon
-        ? <FlexBox alignItems={"center"}
+        ? <FlexBox alignItems={alignItems ?? "center"}
                    gap={SPACINGS.XS}
                    justifyContent={"center"}>
           {iconPosition === "left" &&
            <Icon color={"currentColor"} svg={icon} size={iconSize} />}
-          {children ? <span>{children}</span> : undefined}
+          {children ? <span css={`flex: 1;`}>{children}</span> : undefined}
           {iconPosition === "right" &&
            <Icon color={"currentColor"} svg={icon} size={iconSize} />}
         </FlexBox>
@@ -165,14 +170,15 @@ const ButtonBase = styled(({
       )
     }
   </SButton>
-}).attrs((props: Props & StyledProps) => ({
+}).attrs((props: ButtonProps & StyledProps) => ({
   ...props,
-  color: baseColor(props),
+  color:   baseColor(props),
   primary: props.flat ? false : props.primary
 }))`
   &&&& {
     font-size: inherit;
     font-weight: bold;
+    ${({ wrapInlineText }) => wrapInlineText ? inlineWrapping : ""}
     ${({ fluid }) => !fluid ? fitContent : fitContainer}
     ${alignment}
     ${casing}
@@ -181,8 +187,8 @@ const ButtonBase = styled(({
   }
 `
 
-export const Button: ComponentType<Props> = styled(
-  forwardRef<HTMLButtonElement, Props>(
+export const Button: ComponentType<ButtonProps> = styled(
+  forwardRef<HTMLButtonElement, ButtonProps>(
     (
       {
         autoLoadable = false,
@@ -190,7 +196,7 @@ export const Button: ComponentType<Props> = styled(
         loading: loadingProp = false,
         onClick,
         ...props
-      }: Props,
+      }: ButtonProps,
       ref: ForwardedRef<HTMLButtonElement>,
     ) => {
       const [isLoading, setIsLoadingTo] = useState(false)

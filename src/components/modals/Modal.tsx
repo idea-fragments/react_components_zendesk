@@ -15,6 +15,7 @@ import { StyledComponentProps }                      from "components/StyledComp
 import React, { MouseEvent, ReactElement, useState } from "react"
 import styled, { css }                               from "styled-components"
 import { textWithColor }                             from "styles/mixins"
+import { SPACINGS }                                  from "styles/spacings"
 import { UserFeedbackProps }                         from "styles/UserFeedbackProps"
 
 type ButtonType =
@@ -199,6 +200,8 @@ const Body = styled(ZBody)`
 
 Modal = styled(Modal)<Props>`
   &&&& {
+    margin-left: ${SPACINGS.SM};
+    margin-right: ${SPACINGS.SM};
     color: ${({ theme }) => theme.styles.textColorPrimary};
 
     ${({ modalContent }) => modalContent?.isNotDismissible
