@@ -6974,7 +6974,7 @@ var remSize = function (e) {
     e = document.documentElement;
   }
 
-  return Number(window.getComputedStyle(e, null).fontSize.replace(/[A-z]/g, ""));
+  return Number(window.getComputedStyle(e, null).fontSize.replace(/[A-Za-z]/g, ""));
 };
 
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;

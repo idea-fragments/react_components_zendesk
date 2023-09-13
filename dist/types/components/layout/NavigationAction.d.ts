@@ -1,5 +1,6 @@
 import { ComponentType } from "react";
 export declare type NavigationAction = {
+    alwaysActive?: boolean;
     as?: ComponentType<{
         href: string;
     }>;

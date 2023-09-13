@@ -1,6 +1,7 @@
 import { ComponentType } from "react"
 
 export type NavigationAction = {
+                                 alwaysActive?: boolean,
                                  as?: ComponentType<{ href: string }>,
                                  href?: string,
                                  icon?: any | ComponentType,
