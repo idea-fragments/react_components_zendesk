@@ -82,5 +82,5 @@ export const rem  = (px: number): string => `${px / remSize()}rem`
 export const unit = (px: number): string => `${px}px`
 
 export const remSize = (e: HTMLElement = document.documentElement) => (
-  Number(window.getComputedStyle(e, null).fontSize.replace(/[A-z]/g, ""))
+  Number(window.getComputedStyle(e, null).fontSize.replace(/[A-Za-z]/g, ""))
 )

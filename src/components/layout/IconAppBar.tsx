@@ -13,10 +13,11 @@ import { fade }             from "styles/colors"
 import { SPACINGS }         from "styles/spacings"
 import { useTheme }         from "styles/theme/useTheme"
 
-type IconAppBarProps = {
+export type IconAppBarProps = {
   actions: NavigationAction[],
   actionIconSize?: string,
   activeAction?: string,
+  fallbackToText?: boolean,
   bordered?: boolean,
 }
 
@@ -25,6 +26,7 @@ export let IconAppBar: FC<IconAppBarProps> = forwardRef((
     actions = [],
     actionIconSize,
     activeAction,
+    fallbackToText = false,
     bordered = false,
   },
   ref: ForwardedRef<HTMLElement>
@@ -35,10 +37,11 @@ export let IconAppBar: FC<IconAppBarProps> = forwardRef((
   const createActionButtons = (actions: NavigationAction[]) => actions.map(
     ({ as, ...a }: NavigationAction) => {
       const props = {
-        active:       a.label === activeAction,
+        active:       a.label === activeAction || a.alwaysActive,
         as,
-        _css:         actionButtonStyles,
+        children:     !a.icon && fallbackToText ? a.label : null,
         compact:      true,
+        _css:         !a.icon && fallbackToText ? textButtonStyles : actionButtonStyles,
         icon:         a.icon,
         iconPosition: "left",
         iconSize:     actionIconSize,
@@ -79,13 +82,12 @@ const actionButtonStyles = css<{ active: boolean }>`
     height: 3.5em;
     width: 3.5em;
     padding: 0;
-
-    @media (hover: hover) {
-      :hover {
-        color: ${({ theme }) => theme.styles.textColorPrimary};
-      }
-    }
   }
+`
+
+const textButtonStyles = css`
+  border-radius: ${({ theme }) => `calc(${theme.styles.sidebar.actionButton.borderRadius} + 10px)`};
+  height: 3.5em;
 `
 
 const barBorder = css`

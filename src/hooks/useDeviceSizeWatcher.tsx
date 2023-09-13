@@ -88,6 +88,6 @@ export const useDeviceSizeWatcher = (): Measurements => {
       isSmallComputerOrLarger,
       isLargeTabletOrLarger,
       isLargeTabletOrSmaller,
-    }
+    } as Measurements
   }, [currentSize])
 }

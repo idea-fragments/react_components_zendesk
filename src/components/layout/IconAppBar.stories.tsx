@@ -26,10 +26,11 @@ const Story = (args: Partial<IconAppBarProps>) => {
     { icon: mdiViewDashboardOutline, label: "Dashboard", onClick: setAction("Dashboard"), },
     { icon: mdiBookOutline, label: "Projects", onClick: setAction("Projects"), },
     { icon: mdiClipboardListOutline, label: "Tasks", href: "https://google.com", },
+    { alwaysActive: true, label: "Text Fallback", href: "https://google.com", },
   ]
 
   return <div css={"width: 400px; max-width: 100%;"}>
-    <IconAppBar actions={actions} activeAction={activeAction} {...args} />
+    <IconAppBar actions={actions} activeAction={activeAction} fallbackToText {...args} />
   </div>
 }
 
