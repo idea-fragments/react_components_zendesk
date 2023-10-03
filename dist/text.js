@@ -1,16 +1,14 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
 var styled = require('styled-components');
-
 function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {
     'default': e
   };
 }
-
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
+
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -26,7 +24,6 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
-
 function __makeTemplateObject(cooked, raw) {
   if (Object.defineProperty) {
     Object.defineProperty(cooked, "raw", {
@@ -35,26 +32,30 @@ function __makeTemplateObject(cooked, raw) {
   } else {
     cooked.raw = raw;
   }
-
   return cooked;
 }
-
-var getColor = styled.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n" // const subTextStyling = css`
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+  var e = new Error(message);
+  return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+var getColor = styled.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"
+// const subTextStyling = css`
 //   margin-top: 0;
 // `
 ])), function (_a) {
   var color = _a.color,
-      danger = _a.danger,
-      theme = _a.theme;
+    danger = _a.danger,
+    theme = _a.theme;
   if (danger) return theme.styles.colorDanger;
   if (color) return color;
   return "inherit";
-}); // const subTextStyling = css`
+});
+// const subTextStyling = css`
 //   margin-top: 0;
 // `
-
 var subTextStyling = styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n" // @ts-ignore
+var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"
+// @ts-ignore
 ])), function (_a) {
   var align = _a.align;
   return align;
@@ -70,8 +71,8 @@ var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 
 }, getColor, function (_a) {
   var _css = _a._css;
   return _css;
-}); // @ts-ignore
-
+});
+// @ts-ignore
 Text.COMPONENT_NAME = "Text";
 var templateObject_1, templateObject_2, templateObject_3;
 var XXS$1 = ".8rem";
@@ -81,7 +82,6 @@ var MD$1 = "1.3rem";
 var LG$1 = "1.7rem";
 var XL$1 = "2.3rem";
 var XXL = "3.3rem"; // h1
-
 var XXXL = "4rem";
 var XXXXL = "5rem";
 var XXXXXL = "6rem";
@@ -142,7 +142,9 @@ var FONT_WEIGHTS = {
   MEDIUM: MEDIUM,
   BOLD: BOLD,
   BLACK: BLACK
-}; // @flow
+};
+
+// @flow
 
 const H1 = styled__default["default"](Text).attrs({
   as: FONT_TAGS.H1
@@ -185,7 +187,9 @@ H2.COMPONENT_NAME = "H2";
 H3.COMPONENT_NAME = "H3";
 H4.COMPONENT_NAME = "H4";
 H5.COMPONENT_NAME = "H5";
-H6.COMPONENT_NAME = "H6"; // @flow
+H6.COMPONENT_NAME = "H6";
+
+// @flow
 
 const COMPONENT_NAME$2 = "Label";
 const Label = styled__default["default"](Text).attrs({
@@ -196,7 +200,9 @@ const Label = styled__default["default"](Text).attrs({
   font-size: ${FONT_SIZES.SM};
   line-height: 2.14286rem;
 `;
-Label.COMPONENT_NAME = COMPONENT_NAME$2; // @flow
+Label.COMPONENT_NAME = COMPONENT_NAME$2;
+
+// @flow
 
 const COMPONENT_NAME$1 = "Paragraph";
 const Paragraph = styled__default["default"](Text).attrs({
@@ -220,7 +226,9 @@ const LG = styled__default["default"](Paragraph)`
 `;
 const XL = styled__default["default"](Paragraph)`
   font-size: ${FONT_SIZES.XL};
-`; // @flow
+`;
+
+// @flow
 
 const COMPONENT_NAME = "Hint";
 const Hint = styled__default["default"](XS).attrs(({
@@ -233,7 +241,6 @@ const Hint = styled__default["default"](XS).attrs(({
     if (danger) return theme.styles.colorDanger;
     return theme.styles.textColorSecondary;
   };
-
   return {
     "data-component-name": COMPONENT_NAME,
     color: getTextColor()

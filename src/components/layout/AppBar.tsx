@@ -37,6 +37,7 @@ export let AppBar: FC<Props> = ({
                                 }) => {
 
   // TODO this should not use MobX...switch to react context
+  // @ts-ignore
   const { ui }       = useStores()
   const theme        = useTheme()
   const appBarHeight = theme.styles.appBar.height

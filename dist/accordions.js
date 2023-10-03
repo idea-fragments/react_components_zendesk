@@ -4670,7 +4670,9 @@ var Timeline = function (_a) {
   }, {
     children: data.map(function (item) {
       return jsxRuntime.jsx(Timeline$1.Item, __assign({
-        icon: item.icon
+        icon: item.icon ? jsxRuntime.jsx("div", {
+          children: item.icon
+        }) : undefined
       }, {
         children: jsxRuntime.jsxs(Timeline$1.Content, {
           children: [jsxRuntime.jsx(Text, {

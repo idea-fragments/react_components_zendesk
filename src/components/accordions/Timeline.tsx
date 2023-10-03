@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, FC } from "react";
 import { css } from "styled-components"
 import { Timeline as ZTimeline } from "@zendeskgarden/react-accordions";
 import { Text } from "components/text/Text";
@@ -9,18 +9,18 @@ export type TimeLineItem = {
     icon?: ReactNode
 }
 
-export type TimnelineProps = {
+export type TimelineProps = {
     isAlternate?: boolean
     data: TimeLineItem[]
 }
 
-export const Timeline: React.FC<TimnelineProps> = ({ isAlternate = false, data }) => {
+export const Timeline: FC<TimelineProps> = ({ isAlternate = false, data }) => {
 
     return (
         <ZTimeline isAlternate = {isAlternate}>
             {data.map((item) => {
                 return (
-                    <ZTimeline.Item icon = {item.icon}>
+                  <ZTimeline.Item icon = {item.icon ? <div>{item.icon}</div> : undefined}>
                         <ZTimeline.Content>
                             <Text>{item.content}</Text>
                             {

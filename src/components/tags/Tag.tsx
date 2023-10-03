@@ -3,18 +3,17 @@ import { Tag as ZTag } from "@zendeskgarden/react-tags"
 import {
   ForwardedRef,
   forwardRef,
-  MouseEventHandler,
-  useCallback,
   MouseEvent,
-  ReactNode
-} from "react"
+  MouseEventHandler,
+  ReactNode,
+  useCallback
+}                      from "react"
 import styled          from "styled-components"
 import { useTheme }    from "styles/theme/useTheme"
 
 export const Close = styled(ZTag.Close)`
 
 `
-
 export type TagProps = {
   children: ReactNode,
   className?: string, // coming from styled components
@@ -44,7 +43,7 @@ export let Tag = forwardRef((
     return undefined
   }
 
-  const onCloseClicked = useCallback((e: MouseEvent<HTMLDivElement>) => {
+  const onCloseClicked = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     e.stopPropagation()
     onClose!()
