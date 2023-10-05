@@ -17,7 +17,14 @@ const data = [
     dateTime: "2023-10-21, 9:50 PM",
     icon:     <Icon size={"unset"} svg={mdiLeaf} />
   },
-  { content: "good bye world", dateTime: "2023-10-21, 9:50 PM" }
+  { 
+    content: "good bye world", 
+    dateTime: "2023-10-21, 9:50 PM" 
+  },
+  {
+    content: "The world is full of \ninjustice",
+    dateTime: "2023-10-21, 9:50 PM"
+  }
 ]
 
 const Story = (props: TimelineProps) => {
