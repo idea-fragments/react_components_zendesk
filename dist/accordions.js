@@ -4639,7 +4639,7 @@ var getColor = styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemp
 // const subTextStyling = css`
 //   margin-top: 0;
 // `
-var subTextStyling = styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
+var subTextStyling = styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
 var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"
 // @ts-ignore
 ])), function (_a) {
@@ -4660,11 +4660,17 @@ var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 
 });
 // @ts-ignore
 Text.COMPONENT_NAME = "Text";
-var templateObject_1$1, templateObject_2, templateObject_3;
+var templateObject_1$1, templateObject_2$1, templateObject_3;
+var useTheme = function () {
+  return React__default.useContext(styled.ThemeContext);
+};
+// export const setThemeContext = (ctx :)
+
 var Timeline = function (_a) {
   var _b = _a.isAlternate,
     isAlternate = _b === void 0 ? false : _b,
     data = _a.data;
+  var theme = useTheme();
   return jsxRuntime.jsx(Timeline$1, __assign({
     isAlternate: isAlternate
   }, {
@@ -4675,10 +4681,12 @@ var Timeline = function (_a) {
         }) : undefined
       }, {
         children: jsxRuntime.jsxs(Timeline$1.Content, {
-          children: [jsxRuntime.jsx(Text, {
+          children: [jsxRuntime.jsx(Text, __assign({
+            _css: styled.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["white-space: pre-wrap;"], ["white-space: pre-wrap;"])))
+          }, {
             children: item.content
-          }), item.dateTime ? jsxRuntime.jsx(Text, __assign({
-            _css: styled.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["color: #87929D"], ["color: #87929D"])))
+          })), item.dateTime ? jsxRuntime.jsx(Text, __assign({
+            _css: styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["color: ", ";"], ["color: ", ";"])), theme.styles.textColorSecondary)
           }, {
             children: item.dateTime
           })) : null]
@@ -4687,6 +4695,6 @@ var Timeline = function (_a) {
     })
   }));
 };
-var templateObject_1;
+var templateObject_1, templateObject_2;
 exports.Timeline = Timeline;
 //# sourceMappingURL=accordions.js.map
