@@ -1,23 +1,17 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
 var styled = require('styled-components');
-
 var jsxRuntime = require('react/jsx-runtime');
-
 var React = require('react');
-
 function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {
     'default': e
   };
 }
-
 function _interopNamespace(e) {
   if (e && e.__esModule) return e;
   var n = Object.create(null);
-
   if (e) {
     Object.keys(e).forEach(function (k) {
       if (k !== 'default') {
@@ -31,16 +25,13 @@ function _interopNamespace(e) {
       }
     });
   }
-
   n["default"] = e;
   return Object.freeze(n);
 }
-
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
-
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
-
 var React__namespace = /*#__PURE__*/_interopNamespace(React);
+
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -56,32 +47,24 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
-
 var __assign = function () {
   __assign = Object.assign || function __assign(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
       s = arguments[i];
-
       for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
     }
-
     return t;
   };
-
   return __assign.apply(this, arguments);
 };
-
 function __rest(s, e) {
   var t = {};
-
   for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-
   if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
     if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
   }
   return t;
 }
-
 function __makeTemplateObject(cooked, raw) {
   if (Object.defineProperty) {
     Object.defineProperty(cooked, "raw", {
@@ -90,26 +73,30 @@ function __makeTemplateObject(cooked, raw) {
   } else {
     cooked.raw = raw;
   }
-
   return cooked;
 }
-
-var getColor$1 = styled.css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n" // const subTextStyling = css`
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+  var e = new Error(message);
+  return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+var getColor$1 = styled.css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"
+// const subTextStyling = css`
 //   margin-top: 0;
 // `
 ])), function (_a) {
   var color = _a.color,
-      danger = _a.danger,
-      theme = _a.theme;
+    danger = _a.danger,
+    theme = _a.theme;
   if (danger) return theme.styles.colorDanger;
   if (color) return color;
   return "inherit";
-}); // const subTextStyling = css`
+});
+// const subTextStyling = css`
 //   margin-top: 0;
 // `
-
 var subTextStyling = styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n" // @ts-ignore
+var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"
+// @ts-ignore
 ])), function (_a) {
   var align = _a.align;
   return align;
@@ -125,8 +112,8 @@ var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 
 }, getColor$1, function (_a) {
   var _css = _a._css;
   return _css;
-}); // @ts-ignore
-
+});
+// @ts-ignore
 Text.COMPONENT_NAME = "Text";
 var templateObject_1$2, templateObject_2$1, templateObject_3;
 var XXS$1 = ".8rem";
@@ -136,7 +123,6 @@ var MD = "1.3rem";
 var LG = "1.7rem";
 var XL = "2.3rem";
 var XXL = "3.3rem"; // h1
-
 var XXXL = "4rem";
 var XXXXL = "5rem";
 var XXXXXL = "6rem";
@@ -197,7 +183,9 @@ var FONT_WEIGHTS = {
   MEDIUM: MEDIUM,
   BOLD: BOLD,
   BLACK: BLACK
-}; // @flow
+};
+
+// @flow
 
 const COMPONENT_NAME = "Paragraph";
 const Paragraph = styled__default["default"](Text).attrs({
@@ -222,6 +210,7 @@ styled__default["default"](Paragraph)`
 styled__default["default"](Paragraph)`
   font-size: ${FONT_SIZES.XL};
 `;
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 var colorString$1 = {
   exports: {}
 };
@@ -378,25 +367,19 @@ var colorName$1 = {
 var simpleSwizzle = {
   exports: {}
 };
-
 var isArrayish$1 = function isArrayish(obj) {
   if (!obj || typeof obj === 'string') {
     return false;
   }
-
   return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== 'String');
 };
-
 var isArrayish = isArrayish$1;
 var concat = Array.prototype.concat;
 var slice = Array.prototype.slice;
-
 var swizzle$1 = simpleSwizzle.exports = function swizzle(args) {
   var results = [];
-
   for (var i = 0, len = args.length; i < len; i++) {
     var arg = args[i];
-
     if (isArrayish(arg)) {
       // http://jsperf.com/javascript-array-concat-vs-push/98
       results = concat.call(results, slice.call(arg));
@@ -404,71 +387,61 @@ var swizzle$1 = simpleSwizzle.exports = function swizzle(args) {
       results.push(arg);
     }
   }
-
   return results;
 };
-
 swizzle$1.wrap = function (fn) {
   return function () {
     return fn(swizzle$1(arguments));
   };
 };
-/* MIT license */
 
+/* MIT license */
 
 var colorNames = colorName$1;
 var swizzle = simpleSwizzle.exports;
-var hasOwnProperty = Object.hasOwnProperty;
-var reverseNames = Object.create(null); // create a list of reverse color names
+var hasOwnProperty$1 = Object.hasOwnProperty;
+var reverseNames = Object.create(null);
 
+// create a list of reverse color names
 for (var name in colorNames) {
-  if (hasOwnProperty.call(colorNames, name)) {
+  if (hasOwnProperty$1.call(colorNames, name)) {
     reverseNames[colorNames[name]] = name;
   }
 }
-
 var cs = colorString$1.exports = {
   to: {},
   get: {}
 };
-
 cs.get = function (string) {
   var prefix = string.substring(0, 3).toLowerCase();
   var val;
   var model;
-
   switch (prefix) {
     case 'hsl':
       val = cs.get.hsl(string);
       model = 'hsl';
       break;
-
     case 'hwb':
       val = cs.get.hwb(string);
       model = 'hwb';
       break;
-
     default:
       val = cs.get.rgb(string);
       model = 'rgb';
       break;
   }
-
   if (!val) {
     return null;
   }
-
   return {
     model: model,
     value: val
   };
 };
-
 cs.get.rgb = function (string) {
   if (!string) {
     return null;
   }
-
   var abbr = /^#([a-f0-9]{3,4})$/i;
   var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
   var rgba = /^rgba?\(\s*([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/;
@@ -478,28 +451,23 @@ cs.get.rgb = function (string) {
   var match;
   var i;
   var hexAlpha;
-
   if (match = string.match(hex)) {
     hexAlpha = match[2];
     match = match[1];
-
     for (i = 0; i < 3; i++) {
       // https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19
       var i2 = i * 2;
       rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
     }
-
     if (hexAlpha) {
       rgb[3] = parseInt(hexAlpha, 16) / 255;
     }
   } else if (match = string.match(abbr)) {
     match = match[1];
     hexAlpha = match[3];
-
     for (i = 0; i < 3; i++) {
       rgb[i] = parseInt(match[i] + match[i], 16);
     }
-
     if (hexAlpha) {
       rgb[3] = parseInt(hexAlpha + hexAlpha, 16) / 255;
     }
@@ -507,7 +475,6 @@ cs.get.rgb = function (string) {
     for (i = 0; i < 3; i++) {
       rgb[i] = parseInt(match[i + 1], 0);
     }
-
     if (match[4]) {
       if (match[5]) {
         rgb[3] = parseFloat(match[4]) * 0.01;
@@ -519,7 +486,6 @@ cs.get.rgb = function (string) {
     for (i = 0; i < 3; i++) {
       rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);
     }
-
     if (match[4]) {
       if (match[5]) {
         rgb[3] = parseFloat(match[4]) * 0.01;
@@ -531,34 +497,27 @@ cs.get.rgb = function (string) {
     if (match[1] === 'transparent') {
       return [0, 0, 0, 0];
     }
-
-    if (!hasOwnProperty.call(colorNames, match[1])) {
+    if (!hasOwnProperty$1.call(colorNames, match[1])) {
       return null;
     }
-
     rgb = colorNames[match[1]];
     rgb[3] = 1;
     return rgb;
   } else {
     return null;
   }
-
   for (i = 0; i < 3; i++) {
     rgb[i] = clamp(rgb[i], 0, 255);
   }
-
   rgb[3] = clamp(rgb[3], 0, 1);
   return rgb;
 };
-
 cs.get.hsl = function (string) {
   if (!string) {
     return null;
   }
-
   var hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d\.]+)%\s*,?\s*([+-]?[\d\.]+)%\s*(?:[,|\/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
   var match = string.match(hsl);
-
   if (match) {
     var alpha = parseFloat(match[4]);
     var h = (parseFloat(match[1]) % 360 + 360) % 360;
@@ -567,18 +526,14 @@ cs.get.hsl = function (string) {
     var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
     return [h, s, l, a];
   }
-
   return null;
 };
-
 cs.get.hwb = function (string) {
   if (!string) {
     return null;
   }
-
   var hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
   var match = string.match(hwb);
-
   if (match) {
     var alpha = parseFloat(match[4]);
     var h = (parseFloat(match[1]) % 360 + 360) % 360;
@@ -587,20 +542,16 @@ cs.get.hwb = function (string) {
     var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
     return [h, w, b, a];
   }
-
   return null;
 };
-
 cs.to.hex = function () {
   var rgba = swizzle(arguments);
   return '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : '');
 };
-
 cs.to.rgb = function () {
   var rgba = swizzle(arguments);
   return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')' : 'rgba(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ', ' + rgba[3] + ')';
 };
-
 cs.to.rgb.percent = function () {
   var rgba = swizzle(arguments);
   var r = Math.round(rgba[0] / 255 * 100);
@@ -608,39 +559,33 @@ cs.to.rgb.percent = function () {
   var b = Math.round(rgba[2] / 255 * 100);
   return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)' : 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';
 };
-
 cs.to.hsl = function () {
   var hsla = swizzle(arguments);
   return hsla.length < 4 || hsla[3] === 1 ? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)' : 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
-}; // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
+};
+
+// hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
 // (hwb have alpha optional & 1 is default value)
-
-
 cs.to.hwb = function () {
   var hwba = swizzle(arguments);
   var a = '';
-
   if (hwba.length >= 4 && hwba[3] !== 1) {
     a = ', ' + hwba[3];
   }
-
   return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';
 };
-
 cs.to.keyword = function (rgb) {
   return reverseNames[rgb.slice(0, 3)];
-}; // helpers
+};
 
-
+// helpers
 function clamp(num, min, max) {
   return Math.min(Math.max(min, num), max);
 }
-
 function hexDouble(num) {
   var str = Math.round(num).toString(16).toUpperCase();
   return str.length < 2 ? '0' + str : str;
 }
-
 var colorName = {
   "aliceblue": [240, 248, 255],
   "antiquewhite": [250, 235, 215],
@@ -791,20 +736,20 @@ var colorName = {
   "yellow": [255, 255, 0],
   "yellowgreen": [154, 205, 50]
 };
+
 /* MIT license */
 
 /* eslint-disable no-mixed-operators */
+const cssKeywords = colorName;
 
-const cssKeywords = colorName; // NOTE: conversions should only return primitive values (i.e. arrays, or
+// NOTE: conversions should only return primitive values (i.e. arrays, or
 //       values that give correct `typeof` results).
 //       do not use box values types (i.e. Number(), String(), etc.)
 
 const reverseKeywords = {};
-
 for (const key of Object.keys(cssKeywords)) {
   reverseKeywords[cssKeywords[key]] = key;
 }
-
 const convert$2 = {
   rgb: {
     channels: 3,
@@ -867,21 +812,19 @@ const convert$2 = {
     labels: ['gray']
   }
 };
-var conversions$2 = convert$2; // Hide .channels and .labels properties
+var conversions$2 = convert$2;
 
+// Hide .channels and .labels properties
 for (const model of Object.keys(convert$2)) {
   if (!('channels' in convert$2[model])) {
     throw new Error('missing channels property: ' + model);
   }
-
   if (!('labels' in convert$2[model])) {
     throw new Error('missing channel labels property: ' + model);
   }
-
   if (convert$2[model].labels.length !== convert$2[model].channels) {
     throw new Error('channel and label counts mismatch: ' + model);
   }
-
   const {
     channels,
     labels
@@ -895,7 +838,6 @@ for (const model of Object.keys(convert$2)) {
     value: labels
   });
 }
-
 convert$2.rgb.hsl = function (rgb) {
   const r = rgb[0] / 255;
   const g = rgb[1] / 255;
@@ -905,7 +847,6 @@ convert$2.rgb.hsl = function (rgb) {
   const delta = max - min;
   let h;
   let s;
-
   if (max === min) {
     h = 0;
   } else if (r === max) {
@@ -915,15 +856,11 @@ convert$2.rgb.hsl = function (rgb) {
   } else if (b === max) {
     h = 4 + (r - g) / delta;
   }
-
   h = Math.min(h * 60, 360);
-
   if (h < 0) {
     h += 360;
   }
-
   const l = (min + max) / 2;
-
   if (max === min) {
     s = 0;
   } else if (l <= 0.5) {
@@ -931,10 +868,8 @@ convert$2.rgb.hsl = function (rgb) {
   } else {
     s = delta / (2 - max - min);
   }
-
   return [h, s * 100, l * 100];
 };
-
 convert$2.rgb.hsv = function (rgb) {
   let rdif;
   let gdif;
@@ -946,11 +881,9 @@ convert$2.rgb.hsv = function (rgb) {
   const b = rgb[2] / 255;
   const v = Math.max(r, g, b);
   const diff = v - Math.min(r, g, b);
-
   const diffc = function (c) {
     return (v - c) / 6 / diff + 1 / 2;
   };
-
   if (diff === 0) {
     h = 0;
     s = 0;
@@ -959,7 +892,6 @@ convert$2.rgb.hsv = function (rgb) {
     rdif = diffc(r);
     gdif = diffc(g);
     bdif = diffc(b);
-
     if (r === v) {
       h = bdif - gdif;
     } else if (g === v) {
@@ -967,17 +899,14 @@ convert$2.rgb.hsv = function (rgb) {
     } else if (b === v) {
       h = 2 / 3 + gdif - rdif;
     }
-
     if (h < 0) {
       h += 1;
     } else if (h > 1) {
       h -= 1;
     }
   }
-
   return [h * 360, s * 100, v * 100];
 };
-
 convert$2.rgb.hwb = function (rgb) {
   const r = rgb[0];
   const g = rgb[1];
@@ -987,7 +916,6 @@ convert$2.rgb.hwb = function (rgb) {
   b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
   return [h, w * 100, b * 100];
 };
-
 convert$2.rgb.cmyk = function (rgb) {
   const r = rgb[0] / 255;
   const g = rgb[1] / 255;
@@ -998,47 +926,42 @@ convert$2.rgb.cmyk = function (rgb) {
   const y = (1 - b - k) / (1 - k) || 0;
   return [c * 100, m * 100, y * 100, k * 100];
 };
-
 function comparativeDistance(x, y) {
   /*
   	See https://en.m.wikipedia.org/wiki/Euclidean_distance#Squared_Euclidean_distance
   */
   return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
 }
-
 convert$2.rgb.keyword = function (rgb) {
   const reversed = reverseKeywords[rgb];
-
   if (reversed) {
     return reversed;
   }
-
   let currentClosestDistance = Infinity;
   let currentClosestKeyword;
-
   for (const keyword of Object.keys(cssKeywords)) {
-    const value = cssKeywords[keyword]; // Compute comparative distance
+    const value = cssKeywords[keyword];
 
-    const distance = comparativeDistance(rgb, value); // Check if its less, if so set as closest
+    // Compute comparative distance
+    const distance = comparativeDistance(rgb, value);
 
+    // Check if its less, if so set as closest
     if (distance < currentClosestDistance) {
       currentClosestDistance = distance;
       currentClosestKeyword = keyword;
     }
   }
-
   return currentClosestKeyword;
 };
-
 convert$2.keyword.rgb = function (keyword) {
   return cssKeywords[keyword];
 };
-
 convert$2.rgb.xyz = function (rgb) {
   let r = rgb[0] / 255;
   let g = rgb[1] / 255;
-  let b = rgb[2] / 255; // Assume sRGB
+  let b = rgb[2] / 255;
 
+  // Assume sRGB
   r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
   g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
   b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
@@ -1047,7 +970,6 @@ convert$2.rgb.xyz = function (rgb) {
   const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
   return [x * 100, y * 100, z * 100];
 };
-
 convert$2.rgb.lab = function (rgb) {
   const xyz = convert$2.rgb.xyz(rgb);
   let x = xyz[0];
@@ -1064,7 +986,6 @@ convert$2.rgb.lab = function (rgb) {
   const b = 200 * (y - z);
   return [l, a, b];
 };
-
 convert$2.hsl.rgb = function (hsl) {
   const h = hsl[0] / 360;
   const s = hsl[1] / 100;
@@ -1072,32 +993,25 @@ convert$2.hsl.rgb = function (hsl) {
   let t2;
   let t3;
   let val;
-
   if (s === 0) {
     val = l * 255;
     return [val, val, val];
   }
-
   if (l < 0.5) {
     t2 = l * (1 + s);
   } else {
     t2 = l + s - l * s;
   }
-
   const t1 = 2 * l - t2;
   const rgb = [0, 0, 0];
-
   for (let i = 0; i < 3; i++) {
     t3 = h + 1 / 3 * -(i - 1);
-
     if (t3 < 0) {
       t3++;
     }
-
     if (t3 > 1) {
       t3--;
     }
-
     if (6 * t3 < 1) {
       val = t1 + (t2 - t1) * 6 * t3;
     } else if (2 * t3 < 1) {
@@ -1107,13 +1021,10 @@ convert$2.hsl.rgb = function (hsl) {
     } else {
       val = t1;
     }
-
     rgb[i] = val * 255;
   }
-
   return rgb;
 };
-
 convert$2.hsl.hsv = function (hsl) {
   const h = hsl[0];
   let s = hsl[1] / 100;
@@ -1127,7 +1038,6 @@ convert$2.hsl.hsv = function (hsl) {
   const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
   return [h, sv * 100, v * 100];
 };
-
 convert$2.hsv.rgb = function (hsv) {
   const h = hsv[0] / 60;
   const s = hsv[1] / 100;
@@ -1138,28 +1048,21 @@ convert$2.hsv.rgb = function (hsv) {
   const q = 255 * v * (1 - s * f);
   const t = 255 * v * (1 - s * (1 - f));
   v *= 255;
-
   switch (hi) {
     case 0:
       return [v, t, p];
-
     case 1:
       return [q, v, p];
-
     case 2:
       return [p, v, t];
-
     case 3:
       return [p, q, v];
-
     case 4:
       return [t, p, v];
-
     case 5:
       return [v, p, q];
   }
 };
-
 convert$2.hsv.hsl = function (hsv) {
   const h = hsv[0];
   const s = hsv[1] / 100;
@@ -1174,36 +1077,33 @@ convert$2.hsv.hsl = function (hsv) {
   sl = sl || 0;
   l /= 2;
   return [h, sl * 100, l * 100];
-}; // http://dev.w3.org/csswg/css-color/#hwb-to-rgb
+};
 
-
+// http://dev.w3.org/csswg/css-color/#hwb-to-rgb
 convert$2.hwb.rgb = function (hwb) {
   const h = hwb[0] / 360;
   let wh = hwb[1] / 100;
   let bl = hwb[2] / 100;
   const ratio = wh + bl;
-  let f; // Wh + bl cant be > 1
+  let f;
 
+  // Wh + bl cant be > 1
   if (ratio > 1) {
     wh /= ratio;
     bl /= ratio;
   }
-
   const i = Math.floor(6 * h);
   const v = 1 - bl;
   f = 6 * h - i;
-
   if ((i & 0x01) !== 0) {
     f = 1 - f;
   }
-
   const n = wh + f * (v - wh); // Linear interpolation
 
   let r;
   let g;
   let b;
   /* eslint-disable max-statements-per-line,no-multi-spaces */
-
   switch (i) {
     default:
     case 6:
@@ -1212,31 +1112,26 @@ convert$2.hwb.rgb = function (hwb) {
       g = n;
       b = wh;
       break;
-
     case 1:
       r = n;
       g = v;
       b = wh;
       break;
-
     case 2:
       r = wh;
       g = v;
       b = n;
       break;
-
     case 3:
       r = wh;
       g = n;
       b = v;
       break;
-
     case 4:
       r = n;
       g = wh;
       b = v;
       break;
-
     case 5:
       r = v;
       g = wh;
@@ -1245,10 +1140,8 @@ convert$2.hwb.rgb = function (hwb) {
   }
   /* eslint-enable max-statements-per-line,no-multi-spaces */
 
-
   return [r * 255, g * 255, b * 255];
 };
-
 convert$2.cmyk.rgb = function (cmyk) {
   const c = cmyk[0] / 100;
   const m = cmyk[1] / 100;
@@ -1259,7 +1152,6 @@ convert$2.cmyk.rgb = function (cmyk) {
   const b = 1 - Math.min(1, y * (1 - k) + k);
   return [r * 255, g * 255, b * 255];
 };
-
 convert$2.xyz.rgb = function (xyz) {
   const x = xyz[0] / 100;
   const y = xyz[1] / 100;
@@ -1269,8 +1161,9 @@ convert$2.xyz.rgb = function (xyz) {
   let b;
   r = x * 3.2406 + y * -1.5372 + z * -0.4986;
   g = x * -0.9689 + y * 1.8758 + z * 0.0415;
-  b = x * 0.0557 + y * -0.2040 + z * 1.0570; // Assume sRGB
+  b = x * 0.0557 + y * -0.2040 + z * 1.0570;
 
+  // Assume sRGB
   r = r > 0.0031308 ? 1.055 * r ** (1.0 / 2.4) - 0.055 : r * 12.92;
   g = g > 0.0031308 ? 1.055 * g ** (1.0 / 2.4) - 0.055 : g * 12.92;
   b = b > 0.0031308 ? 1.055 * b ** (1.0 / 2.4) - 0.055 : b * 12.92;
@@ -1279,7 +1172,6 @@ convert$2.xyz.rgb = function (xyz) {
   b = Math.min(Math.max(0, b), 1);
   return [r * 255, g * 255, b * 255];
 };
-
 convert$2.xyz.lab = function (xyz) {
   let x = xyz[0];
   let y = xyz[1];
@@ -1295,7 +1187,6 @@ convert$2.xyz.lab = function (xyz) {
   const b = 200 * (y - z);
   return [l, a, b];
 };
-
 convert$2.lab.xyz = function (lab) {
   const l = lab[0];
   const a = lab[1];
@@ -1317,7 +1208,6 @@ convert$2.lab.xyz = function (lab) {
   z *= 108.883;
   return [x, y, z];
 };
-
 convert$2.lab.lch = function (lab) {
   const l = lab[0];
   const a = lab[1];
@@ -1325,15 +1215,12 @@ convert$2.lab.lch = function (lab) {
   let h;
   const hr = Math.atan2(b, a);
   h = hr * 360 / 2 / Math.PI;
-
   if (h < 0) {
     h += 360;
   }
-
   const c = Math.sqrt(a * a + b * b);
   return [l, c, h];
 };
-
 convert$2.lch.lab = function (lch) {
   const l = lch[0];
   const c = lch[1];
@@ -1343,80 +1230,67 @@ convert$2.lch.lab = function (lch) {
   const b = c * Math.sin(hr);
   return [l, a, b];
 };
-
 convert$2.rgb.ansi16 = function (args, saturation = null) {
   const [r, g, b] = args;
   let value = saturation === null ? convert$2.rgb.hsv(args)[2] : saturation; // Hsv -> ansi16 optimization
 
   value = Math.round(value / 50);
-
   if (value === 0) {
     return 30;
   }
-
   let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
-
   if (value === 2) {
     ansi += 60;
   }
-
   return ansi;
 };
-
 convert$2.hsv.ansi16 = function (args) {
   // Optimization here; we already know the value and don't need to get
   // it converted for us.
   return convert$2.rgb.ansi16(convert$2.hsv.rgb(args), args[2]);
 };
-
 convert$2.rgb.ansi256 = function (args) {
   const r = args[0];
   const g = args[1];
-  const b = args[2]; // We use the extended greyscale palette here, with the exception of
-  // black and white. normal palette only has 4 greyscale shades.
+  const b = args[2];
 
+  // We use the extended greyscale palette here, with the exception of
+  // black and white. normal palette only has 4 greyscale shades.
   if (r === g && g === b) {
     if (r < 8) {
       return 16;
     }
-
     if (r > 248) {
       return 231;
     }
-
     return Math.round((r - 8) / 247 * 24) + 232;
   }
-
   const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
   return ansi;
 };
-
 convert$2.ansi16.rgb = function (args) {
-  let color = args % 10; // Handle greyscale
+  let color = args % 10;
 
+  // Handle greyscale
   if (color === 0 || color === 7) {
     if (args > 50) {
       color += 3.5;
     }
-
     color = color / 10.5 * 255;
     return [color, color, color];
   }
-
   const mult = (~~(args > 50) + 1) * 0.5;
   const r = (color & 1) * mult * 255;
   const g = (color >> 1 & 1) * mult * 255;
   const b = (color >> 2 & 1) * mult * 255;
   return [r, g, b];
 };
-
 convert$2.ansi256.rgb = function (args) {
   // Handle greyscale
   if (args >= 232) {
     const c = (args - 232) * 10 + 8;
     return [c, c, c];
   }
-
   args -= 16;
   let rem;
   const r = Math.floor(args / 36) / 5 * 255;
@@ -1424,35 +1298,28 @@ convert$2.ansi256.rgb = function (args) {
   const b = rem % 6 / 5 * 255;
   return [r, g, b];
 };
-
 convert$2.rgb.hex = function (args) {
   const integer = ((Math.round(args[0]) & 0xFF) << 16) + ((Math.round(args[1]) & 0xFF) << 8) + (Math.round(args[2]) & 0xFF);
   const string = integer.toString(16).toUpperCase();
   return '000000'.substring(string.length) + string;
 };
-
 convert$2.hex.rgb = function (args) {
   const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
-
   if (!match) {
     return [0, 0, 0];
   }
-
   let colorString = match[0];
-
   if (match[0].length === 3) {
     colorString = colorString.split('').map(char => {
       return char + char;
     }).join('');
   }
-
   const integer = parseInt(colorString, 16);
   const r = integer >> 16 & 0xFF;
   const g = integer >> 8 & 0xFF;
   const b = integer & 0xFF;
   return [r, g, b];
 };
-
 convert$2.rgb.hcg = function (rgb) {
   const r = rgb[0] / 255;
   const g = rgb[1] / 255;
@@ -1462,13 +1329,11 @@ convert$2.rgb.hcg = function (rgb) {
   const chroma = max - min;
   let grayscale;
   let hue;
-
   if (chroma < 1) {
     grayscale = min / (1 - chroma);
   } else {
     grayscale = 0;
   }
-
   if (chroma <= 0) {
     hue = 0;
   } else if (max === r) {
@@ -1478,85 +1343,70 @@ convert$2.rgb.hcg = function (rgb) {
   } else {
     hue = 4 + (r - g) / chroma;
   }
-
   hue /= 6;
   hue %= 1;
   return [hue * 360, chroma * 100, grayscale * 100];
 };
-
 convert$2.hsl.hcg = function (hsl) {
   const s = hsl[1] / 100;
   const l = hsl[2] / 100;
   const c = l < 0.5 ? 2.0 * s * l : 2.0 * s * (1.0 - l);
   let f = 0;
-
   if (c < 1.0) {
     f = (l - 0.5 * c) / (1.0 - c);
   }
-
   return [hsl[0], c * 100, f * 100];
 };
-
 convert$2.hsv.hcg = function (hsv) {
   const s = hsv[1] / 100;
   const v = hsv[2] / 100;
   const c = s * v;
   let f = 0;
-
   if (c < 1.0) {
     f = (v - c) / (1 - c);
   }
-
   return [hsv[0], c * 100, f * 100];
 };
-
 convert$2.hcg.rgb = function (hcg) {
   const h = hcg[0] / 360;
   const c = hcg[1] / 100;
   const g = hcg[2] / 100;
-
   if (c === 0.0) {
     return [g * 255, g * 255, g * 255];
   }
-
   const pure = [0, 0, 0];
   const hi = h % 1 * 6;
   const v = hi % 1;
   const w = 1 - v;
   let mg = 0;
-  /* eslint-disable max-statements-per-line */
 
+  /* eslint-disable max-statements-per-line */
   switch (Math.floor(hi)) {
     case 0:
       pure[0] = 1;
       pure[1] = v;
       pure[2] = 0;
       break;
-
     case 1:
       pure[0] = w;
       pure[1] = 1;
       pure[2] = 0;
       break;
-
     case 2:
       pure[0] = 0;
       pure[1] = 1;
       pure[2] = v;
       break;
-
     case 3:
       pure[0] = 0;
       pure[1] = w;
       pure[2] = 1;
       break;
-
     case 4:
       pure[0] = v;
       pure[1] = 0;
       pure[2] = 1;
       break;
-
     default:
       pure[0] = 1;
       pure[1] = 0;
@@ -1564,103 +1414,82 @@ convert$2.hcg.rgb = function (hcg) {
   }
   /* eslint-enable max-statements-per-line */
 
-
   mg = (1.0 - c) * g;
   return [(c * pure[0] + mg) * 255, (c * pure[1] + mg) * 255, (c * pure[2] + mg) * 255];
 };
-
 convert$2.hcg.hsv = function (hcg) {
   const c = hcg[1] / 100;
   const g = hcg[2] / 100;
   const v = c + g * (1.0 - c);
   let f = 0;
-
   if (v > 0.0) {
     f = c / v;
   }
-
   return [hcg[0], f * 100, v * 100];
 };
-
 convert$2.hcg.hsl = function (hcg) {
   const c = hcg[1] / 100;
   const g = hcg[2] / 100;
   const l = g * (1.0 - c) + 0.5 * c;
   let s = 0;
-
   if (l > 0.0 && l < 0.5) {
     s = c / (2 * l);
   } else if (l >= 0.5 && l < 1.0) {
     s = c / (2 * (1 - l));
   }
-
   return [hcg[0], s * 100, l * 100];
 };
-
 convert$2.hcg.hwb = function (hcg) {
   const c = hcg[1] / 100;
   const g = hcg[2] / 100;
   const v = c + g * (1.0 - c);
   return [hcg[0], (v - c) * 100, (1 - v) * 100];
 };
-
 convert$2.hwb.hcg = function (hwb) {
   const w = hwb[1] / 100;
   const b = hwb[2] / 100;
   const v = 1 - b;
   const c = v - w;
   let g = 0;
-
   if (c < 1) {
     g = (v - c) / (1 - c);
   }
-
   return [hwb[0], c * 100, g * 100];
 };
-
 convert$2.apple.rgb = function (apple) {
   return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
 };
-
 convert$2.rgb.apple = function (rgb) {
   return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
 };
-
 convert$2.gray.rgb = function (args) {
   return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
 };
-
 convert$2.gray.hsl = function (args) {
   return [0, 0, args[0]];
 };
-
 convert$2.gray.hsv = convert$2.gray.hsl;
-
 convert$2.gray.hwb = function (gray) {
   return [0, 100, gray[0]];
 };
-
 convert$2.gray.cmyk = function (gray) {
   return [0, 0, 0, gray[0]];
 };
-
 convert$2.gray.lab = function (gray) {
   return [gray[0], 0, 0];
 };
-
 convert$2.gray.hex = function (gray) {
   const val = Math.round(gray[0] / 100 * 255) & 0xFF;
   const integer = (val << 16) + (val << 8) + val;
   const string = integer.toString(16).toUpperCase();
   return '000000'.substring(string.length) + string;
 };
-
 convert$2.rgb.gray = function (rgb) {
   const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
   return [val / 255 * 100];
 };
-
 const conversions$1 = conversions$2;
+
 /*
 	This function routes a model to all other models.
 
@@ -1673,10 +1502,9 @@ const conversions$1 = conversions$2;
 */
 
 function buildGraph() {
-  const graph = {}; // https://jsperf.com/object-keys-vs-for-in-with-closure/3
-
+  const graph = {};
+  // https://jsperf.com/object-keys-vs-for-in-with-closure/3
   const models = Object.keys(conversions$1);
-
   for (let len = models.length, i = 0; i < len; i++) {
     graph[models[i]] = {
       // http://jsperf.com/1-vs-infinity
@@ -1685,25 +1513,21 @@ function buildGraph() {
       parent: null
     };
   }
-
   return graph;
-} // https://en.wikipedia.org/wiki/Breadth-first_search
+}
 
-
+// https://en.wikipedia.org/wiki/Breadth-first_search
 function deriveBFS(fromModel) {
   const graph = buildGraph();
   const queue = [fromModel]; // Unshift -> queue -> pop
 
   graph[fromModel].distance = 0;
-
   while (queue.length) {
     const current = queue.pop();
     const adjacents = Object.keys(conversions$1[current]);
-
     for (let len = adjacents.length, i = 0; i < len; i++) {
       const adjacent = adjacents[i];
       const node = graph[adjacent];
-
       if (node.distance === -1) {
         node.distance = graph[current].distance + 1;
         node.parent = current;
@@ -1711,112 +1535,90 @@ function deriveBFS(fromModel) {
       }
     }
   }
-
   return graph;
 }
-
 function link(from, to) {
   return function (args) {
     return to(from(args));
   };
 }
-
 function wrapConversion(toModel, graph) {
   const path = [graph[toModel].parent, toModel];
   let fn = conversions$1[graph[toModel].parent][toModel];
   let cur = graph[toModel].parent;
-
   while (graph[cur].parent) {
     path.unshift(graph[cur].parent);
     fn = link(conversions$1[graph[cur].parent][cur], fn);
     cur = graph[cur].parent;
   }
-
   fn.conversion = path;
   return fn;
 }
-
 var route$1 = function (fromModel) {
   const graph = deriveBFS(fromModel);
   const conversion = {};
   const models = Object.keys(graph);
-
   for (let len = models.length, i = 0; i < len; i++) {
     const toModel = models[i];
     const node = graph[toModel];
-
     if (node.parent === null) {
       // No possible conversion, or this node is the source model.
       continue;
     }
-
     conversion[toModel] = wrapConversion(toModel, graph);
   }
-
   return conversion;
 };
-
 const conversions = conversions$2;
 const route = route$1;
 const convert$1 = {};
 const models = Object.keys(conversions);
-
 function wrapRaw(fn) {
   const wrappedFn = function (...args) {
     const arg0 = args[0];
-
     if (arg0 === undefined || arg0 === null) {
       return arg0;
     }
-
     if (arg0.length > 1) {
       args = arg0;
     }
-
     return fn(args);
-  }; // Preserve .conversion property if there is one
+  };
 
-
+  // Preserve .conversion property if there is one
   if ('conversion' in fn) {
     wrappedFn.conversion = fn.conversion;
   }
-
   return wrappedFn;
 }
-
 function wrapRounded(fn) {
   const wrappedFn = function (...args) {
     const arg0 = args[0];
-
     if (arg0 === undefined || arg0 === null) {
       return arg0;
     }
-
     if (arg0.length > 1) {
       args = arg0;
     }
+    const result = fn(args);
 
-    const result = fn(args); // We're assuming the result is an array here.
+    // We're assuming the result is an array here.
     // see notice in conversions.js; don't use box types
     // in conversion functions.
-
     if (typeof result === 'object') {
       for (let len = result.length, i = 0; i < len; i++) {
         result[i] = Math.round(result[i]);
       }
     }
-
     return result;
-  }; // Preserve .conversion property if there is one
+  };
 
-
+  // Preserve .conversion property if there is one
   if ('conversion' in fn) {
     wrappedFn.conversion = fn.conversion;
   }
-
   return wrappedFn;
 }
-
 models.forEach(fromModel => {
   convert$1[fromModel] = {};
   Object.defineProperty(convert$1[fromModel], 'channels', {
@@ -1836,34 +1638,30 @@ models.forEach(fromModel => {
 var colorConvert = convert$1;
 const colorString = colorString$1.exports;
 const convert = colorConvert;
-const skippedModels = [// To be honest, I don't really feel like keyword belongs in color convert, but eh.
-'keyword', // Gray conflicts with some method names, and has its own method defined.
-'gray', // Shouldn't really be in color-convert either...
+const skippedModels = [
+// To be honest, I don't really feel like keyword belongs in color convert, but eh.
+'keyword',
+// Gray conflicts with some method names, and has its own method defined.
+'gray',
+// Shouldn't really be in color-convert either...
 'hex'];
 const hashedModelKeys = {};
-
 for (const model of Object.keys(convert)) {
   hashedModelKeys[[...convert[model].labels].sort().join('')] = model;
 }
-
 const limiters = {};
-
 function Color(object, model) {
   if (!(this instanceof Color)) {
     return new Color(object, model);
   }
-
   if (model && model in skippedModels) {
     model = null;
   }
-
   if (model && !(model in convert)) {
     throw new Error('Unknown model: ' + model);
   }
-
   let i;
   let channels;
-
   if (object == null) {
     // eslint-disable-line no-eq-null,eqeqeq
     this.model = 'rgb';
@@ -1875,11 +1673,9 @@ function Color(object, model) {
     this.valpha = object.valpha;
   } else if (typeof object === 'string') {
     const result = colorString.get(object);
-
     if (result === null) {
       throw new Error('Unable to parse color from string: ' + object);
     }
-
     this.model = result.model;
     channels = convert[this.model].channels;
     this.color = result.value.slice(0, channels);
@@ -1898,77 +1694,61 @@ function Color(object, model) {
   } else {
     this.valpha = 1;
     const keys = Object.keys(object);
-
     if ('alpha' in object) {
       keys.splice(keys.indexOf('alpha'), 1);
       this.valpha = typeof object.alpha === 'number' ? object.alpha : 0;
     }
-
     const hashedKeys = keys.sort().join('');
-
     if (!(hashedKeys in hashedModelKeys)) {
       throw new Error('Unable to parse color from object: ' + JSON.stringify(object));
     }
-
     this.model = hashedModelKeys[hashedKeys];
     const {
       labels
     } = convert[this.model];
     const color = [];
-
     for (i = 0; i < labels.length; i++) {
       color.push(object[labels[i]]);
     }
-
     this.color = zeroArray(color);
-  } // Perform limitations (clamping, etc.)
+  }
 
-
+  // Perform limitations (clamping, etc.)
   if (limiters[this.model]) {
     channels = convert[this.model].channels;
-
     for (i = 0; i < channels; i++) {
       const limit = limiters[this.model][i];
-
       if (limit) {
         this.color[i] = limit(this.color[i]);
       }
     }
   }
-
   this.valpha = Math.max(0, Math.min(1, this.valpha));
-
   if (Object.freeze) {
     Object.freeze(this);
   }
 }
-
 Color.prototype = {
   toString() {
     return this.string();
   },
-
   toJSON() {
     return this[this.model]();
   },
-
   string(places) {
     let self = this.model in colorString.to ? this : this.rgb();
     self = self.round(typeof places === 'number' ? places : 1);
     const args = self.valpha === 1 ? self.color : [...self.color, this.valpha];
     return colorString.to[self.model](args);
   },
-
   percentString(places) {
     const self = this.rgb().round(typeof places === 'number' ? places : 1);
     const args = self.valpha === 1 ? self.color : [...self.color, this.valpha];
     return colorString.to.rgb.percent(args);
   },
-
   array() {
     return this.valpha === 1 ? [...this.color] : [...this.color, this.valpha];
   },
-
   object() {
     const result = {};
     const {
@@ -1977,57 +1757,44 @@ Color.prototype = {
     const {
       labels
     } = convert[this.model];
-
     for (let i = 0; i < channels; i++) {
       result[labels[i]] = this.color[i];
     }
-
     if (this.valpha !== 1) {
       result.alpha = this.valpha;
     }
-
     return result;
   },
-
   unitArray() {
     const rgb = this.rgb().color;
     rgb[0] /= 255;
     rgb[1] /= 255;
     rgb[2] /= 255;
-
     if (this.valpha !== 1) {
       rgb.push(this.valpha);
     }
-
     return rgb;
   },
-
   unitObject() {
     const rgb = this.rgb().object();
     rgb.r /= 255;
     rgb.g /= 255;
     rgb.b /= 255;
-
     if (this.valpha !== 1) {
       rgb.alpha = this.valpha;
     }
-
     return rgb;
   },
-
   round(places) {
     places = Math.max(places || 0, 0);
     return new Color([...this.color.map(roundToPlace(places)), this.valpha], this.model);
   },
-
   alpha(value) {
     if (value !== undefined) {
       return new Color([...this.color, Math.max(0, Math.min(1, value))], this.model);
     }
-
     return this.valpha;
   },
-
   // Rgb
   red: getset('rgb', 0, maxfn(255)),
   green: getset('rgb', 1, maxfn(255)),
@@ -2051,151 +1818,118 @@ Color.prototype = {
   l: getset('lab', 0, maxfn(100)),
   a: getset('lab', 1),
   b: getset('lab', 2),
-
   keyword(value) {
     if (value !== undefined) {
       return new Color(value);
     }
-
     return convert[this.model].keyword(this.color);
   },
-
   hex(value) {
     if (value !== undefined) {
       return new Color(value);
     }
-
     return colorString.to.hex(this.rgb().round().color);
   },
-
   hexa(value) {
     if (value !== undefined) {
       return new Color(value);
     }
-
     const rgbArray = this.rgb().round().color;
     let alphaHex = Math.round(this.valpha * 255).toString(16).toUpperCase();
-
     if (alphaHex.length === 1) {
       alphaHex = '0' + alphaHex;
     }
-
     return colorString.to.hex(rgbArray) + alphaHex;
   },
-
   rgbNumber() {
     const rgb = this.rgb().color;
     return (rgb[0] & 0xFF) << 16 | (rgb[1] & 0xFF) << 8 | rgb[2] & 0xFF;
   },
-
   luminosity() {
     // http://www.w3.org/TR/WCAG20/#relativeluminancedef
     const rgb = this.rgb().color;
     const lum = [];
-
     for (const [i, element] of rgb.entries()) {
       const chan = element / 255;
       lum[i] = chan <= 0.04045 ? chan / 12.92 : ((chan + 0.055) / 1.055) ** 2.4;
     }
-
     return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
   },
-
   contrast(color2) {
     // http://www.w3.org/TR/WCAG20/#contrast-ratiodef
     const lum1 = this.luminosity();
     const lum2 = color2.luminosity();
-
     if (lum1 > lum2) {
       return (lum1 + 0.05) / (lum2 + 0.05);
     }
-
     return (lum2 + 0.05) / (lum1 + 0.05);
   },
-
   level(color2) {
     // https://www.w3.org/TR/WCAG/#contrast-enhanced
     const contrastRatio = this.contrast(color2);
-
     if (contrastRatio >= 7) {
       return 'AAA';
     }
-
     return contrastRatio >= 4.5 ? 'AA' : '';
   },
-
   isDark() {
     // YIQ equation from http://24ways.org/2010/calculating-color-contrast
     const rgb = this.rgb().color;
     const yiq = (rgb[0] * 2126 + rgb[1] * 7152 + rgb[2] * 722) / 10000;
     return yiq < 128;
   },
-
   isLight() {
     return !this.isDark();
   },
-
   negate() {
     const rgb = this.rgb();
-
     for (let i = 0; i < 3; i++) {
       rgb.color[i] = 255 - rgb.color[i];
     }
-
     return rgb;
   },
-
   lighten(ratio) {
     const hsl = this.hsl();
     hsl.color[2] += hsl.color[2] * ratio;
     return hsl;
   },
-
   darken(ratio) {
     const hsl = this.hsl();
     hsl.color[2] -= hsl.color[2] * ratio;
     return hsl;
   },
-
   saturate(ratio) {
     const hsl = this.hsl();
     hsl.color[1] += hsl.color[1] * ratio;
     return hsl;
   },
-
   desaturate(ratio) {
     const hsl = this.hsl();
     hsl.color[1] -= hsl.color[1] * ratio;
     return hsl;
   },
-
   whiten(ratio) {
     const hwb = this.hwb();
     hwb.color[1] += hwb.color[1] * ratio;
     return hwb;
   },
-
   blacken(ratio) {
     const hwb = this.hwb();
     hwb.color[2] += hwb.color[2] * ratio;
     return hwb;
   },
-
   grayscale() {
     // http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
     const rgb = this.rgb().color;
     const value = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
     return Color.rgb(value, value, value);
   },
-
   fade(ratio) {
     return this.alpha(this.valpha - this.valpha * ratio);
   },
-
   opaquer(ratio) {
     return this.alpha(this.valpha + this.valpha * ratio);
   },
-
   rotate(degrees) {
     const hsl = this.hsl();
     let hue = hsl.color[0];
@@ -2204,14 +1938,12 @@ Color.prototype = {
     hsl.color[0] = hue;
     return hsl;
   },
-
   mix(mixinColor, weight) {
     // Ported from sass implementation in C
     // https://github.com/sass/libsass/blob/0e6b4a2850092356aa3ece07c6b249f0221caced/functions.cpp#L209
     if (!mixinColor || !mixinColor.rgb) {
       throw new Error('Argument to "mix" was not a Color instance, but rather an instance of ' + typeof mixinColor);
     }
-
     const color1 = mixinColor.rgb();
     const color2 = this.rgb();
     const p = weight === undefined ? 0.5 : weight;
@@ -2221,103 +1953,84 @@ Color.prototype = {
     const w2 = 1 - w1;
     return Color.rgb(w1 * color1.red() + w2 * color2.red(), w1 * color1.green() + w2 * color2.green(), w1 * color1.blue() + w2 * color2.blue(), color1.alpha() * p + color2.alpha() * (1 - p));
   }
+};
 
-}; // Model conversion methods and static constructors
-
+// Model conversion methods and static constructors
 for (const model of Object.keys(convert)) {
   if (skippedModels.includes(model)) {
     continue;
   }
-
   const {
     channels
-  } = convert[model]; // Conversion methods
+  } = convert[model];
 
+  // Conversion methods
   Color.prototype[model] = function (...args) {
     if (this.model === model) {
       return new Color(this);
     }
-
     if (args.length > 0) {
       return new Color(args, model);
     }
-
     return new Color([...assertArray(convert[this.model][model].raw(this.color)), this.valpha], model);
-  }; // 'static' construction methods
+  };
 
-
+  // 'static' construction methods
   Color[model] = function (...args) {
     let color = args[0];
-
     if (typeof color === 'number') {
       color = zeroArray(args, channels);
     }
-
     return new Color(color, model);
   };
 }
-
 function roundTo(number, places) {
   return Number(number.toFixed(places));
 }
-
 function roundToPlace(places) {
   return function (number) {
     return roundTo(number, places);
   };
 }
-
 function getset(model, channel, modifier) {
   model = Array.isArray(model) ? model : [model];
-
   for (const m of model) {
     (limiters[m] || (limiters[m] = []))[channel] = modifier;
   }
-
   model = model[0];
   return function (value) {
     let result;
-
     if (value !== undefined) {
       if (modifier) {
         value = modifier(value);
       }
-
       result = this[model]();
       result.color[channel] = value;
       return result;
     }
-
     result = this[model]().color[channel];
-
     if (modifier) {
       result = modifier(result);
     }
-
     return result;
   };
 }
-
 function maxfn(max) {
   return function (v) {
     return Math.max(0, Math.min(max, v));
   };
 }
-
 function assertArray(value) {
   return Array.isArray(value) ? value : [value];
 }
-
 function zeroArray(array, length) {
   for (let i = 0; i < length; i++) {
     if (typeof array[i] !== 'number') {
       array[i] = 0;
     }
   }
-
   return array;
 }
-
 var color = Color;
 var COLORS = {
   RED: "#e35b66",
@@ -2349,39 +2062,34 @@ var COLORS = {
   TRANSPARENT: "#00000000"
 };
 Object.freeze(COLORS);
-
 var light = function (c, amount) {
   if (amount === void 0) {
     amount = 0.15;
   }
-
-  var newColor = color(c).lighten(amount).hex(); // console.log("lightening to:", newColor)
+  var newColor = color(c).lighten(amount).hex();
+  // console.log("lightening to:", newColor)
   // console.log("luminosity old:", Color(c).luminosity())
   // console.log("luminosity new:", Color(newColor).luminosity())
-
   return newColor;
-}; // Deprecated. Do not use
+};
 
-
+// Deprecated. Do not use
 var Chip = styled__default["default"](XXS).attrs(function (_a) {
   var danger = _a.danger,
-      primary = _a.primary,
-      success = _a.success,
-      theme = _a.theme;
+    primary = _a.primary,
+    success = _a.success,
+    theme = _a.theme;
   var background;
   var color;
-
   switch (true) {
     case danger:
       background = light(COLORS.RED, .5);
       color = COLORS.RED;
       break;
-
     case success:
       background = "#e1ede8";
       color = COLORS.GREEN;
       break;
-
     case primary:
       background = theme.styles.colorPrimary;
       color = theme.styles.getTextColorForBackground({
@@ -2389,12 +2097,10 @@ var Chip = styled__default["default"](XXS).attrs(function (_a) {
         theme: theme
       });
       break;
-
     default:
       background = light(COLORS.GREY, .6);
       color = COLORS.GREY;
   }
-
   return {
     as: "div",
     background: background,
@@ -2415,6 +2121,7 @@ var reactIs = {
   exports: {}
 };
 var reactIs_production_min = {};
+
 /** @license React v16.13.1
  * react-is.production.min.js
  *
@@ -2425,34 +2132,31 @@ var reactIs_production_min = {};
  */
 
 var hasRequiredReactIs_production_min;
-
 function requireReactIs_production_min() {
   if (hasRequiredReactIs_production_min) return reactIs_production_min;
   hasRequiredReactIs_production_min = 1;
   var b = "function" === typeof Symbol && Symbol.for,
-      c = b ? Symbol.for("react.element") : 60103,
-      d = b ? Symbol.for("react.portal") : 60106,
-      e = b ? Symbol.for("react.fragment") : 60107,
-      f = b ? Symbol.for("react.strict_mode") : 60108,
-      g = b ? Symbol.for("react.profiler") : 60114,
-      h = b ? Symbol.for("react.provider") : 60109,
-      k = b ? Symbol.for("react.context") : 60110,
-      l = b ? Symbol.for("react.async_mode") : 60111,
-      m = b ? Symbol.for("react.concurrent_mode") : 60111,
-      n = b ? Symbol.for("react.forward_ref") : 60112,
-      p = b ? Symbol.for("react.suspense") : 60113,
-      q = b ? Symbol.for("react.suspense_list") : 60120,
-      r = b ? Symbol.for("react.memo") : 60115,
-      t = b ? Symbol.for("react.lazy") : 60116,
-      v = b ? Symbol.for("react.block") : 60121,
-      w = b ? Symbol.for("react.fundamental") : 60117,
-      x = b ? Symbol.for("react.responder") : 60118,
-      y = b ? Symbol.for("react.scope") : 60119;
-
+    c = b ? Symbol.for("react.element") : 60103,
+    d = b ? Symbol.for("react.portal") : 60106,
+    e = b ? Symbol.for("react.fragment") : 60107,
+    f = b ? Symbol.for("react.strict_mode") : 60108,
+    g = b ? Symbol.for("react.profiler") : 60114,
+    h = b ? Symbol.for("react.provider") : 60109,
+    k = b ? Symbol.for("react.context") : 60110,
+    l = b ? Symbol.for("react.async_mode") : 60111,
+    m = b ? Symbol.for("react.concurrent_mode") : 60111,
+    n = b ? Symbol.for("react.forward_ref") : 60112,
+    p = b ? Symbol.for("react.suspense") : 60113,
+    q = b ? Symbol.for("react.suspense_list") : 60120,
+    r = b ? Symbol.for("react.memo") : 60115,
+    t = b ? Symbol.for("react.lazy") : 60116,
+    v = b ? Symbol.for("react.block") : 60121,
+    w = b ? Symbol.for("react.fundamental") : 60117,
+    x = b ? Symbol.for("react.responder") : 60118,
+    y = b ? Symbol.for("react.scope") : 60119;
   function z(a) {
     if ("object" === typeof a && null !== a) {
       var u = a.$$typeof;
-
       switch (u) {
         case c:
           switch (a = a.type, a) {
@@ -2463,7 +2167,6 @@ function requireReactIs_production_min() {
             case f:
             case p:
               return a;
-
             default:
               switch (a = a && a.$$typeof, a) {
                 case k:
@@ -2472,23 +2175,18 @@ function requireReactIs_production_min() {
                 case r:
                 case h:
                   return a;
-
                 default:
                   return u;
               }
-
           }
-
         case d:
           return u;
       }
     }
   }
-
   function A(a) {
     return z(a) === m;
   }
-
   reactIs_production_min.AsyncMode = l;
   reactIs_production_min.ConcurrentMode = m;
   reactIs_production_min.ContextConsumer = k;
@@ -2502,66 +2200,51 @@ function requireReactIs_production_min() {
   reactIs_production_min.Profiler = g;
   reactIs_production_min.StrictMode = f;
   reactIs_production_min.Suspense = p;
-
   reactIs_production_min.isAsyncMode = function (a) {
     return A(a) || z(a) === l;
   };
-
   reactIs_production_min.isConcurrentMode = A;
-
   reactIs_production_min.isContextConsumer = function (a) {
     return z(a) === k;
   };
-
   reactIs_production_min.isContextProvider = function (a) {
     return z(a) === h;
   };
-
   reactIs_production_min.isElement = function (a) {
     return "object" === typeof a && null !== a && a.$$typeof === c;
   };
-
   reactIs_production_min.isForwardRef = function (a) {
     return z(a) === n;
   };
-
   reactIs_production_min.isFragment = function (a) {
     return z(a) === e;
   };
-
   reactIs_production_min.isLazy = function (a) {
     return z(a) === t;
   };
-
   reactIs_production_min.isMemo = function (a) {
     return z(a) === r;
   };
-
   reactIs_production_min.isPortal = function (a) {
     return z(a) === d;
   };
-
   reactIs_production_min.isProfiler = function (a) {
     return z(a) === g;
   };
-
   reactIs_production_min.isStrictMode = function (a) {
     return z(a) === f;
   };
-
   reactIs_production_min.isSuspense = function (a) {
     return z(a) === p;
   };
-
   reactIs_production_min.isValidElementType = function (a) {
     return "string" === typeof a || "function" === typeof a || a === e || a === m || a === g || a === f || a === p || a === q || "object" === typeof a && null !== a && (a.$$typeof === t || a.$$typeof === r || a.$$typeof === h || a.$$typeof === k || a.$$typeof === n || a.$$typeof === w || a.$$typeof === x || a.$$typeof === y || a.$$typeof === v);
   };
-
   reactIs_production_min.typeOf = z;
   return reactIs_production_min;
 }
-
 var reactIs_development = {};
+
 /** @license React v16.13.1
  * react-is.development.js
  *
@@ -2572,11 +2255,9 @@ var reactIs_development = {};
  */
 
 var hasRequiredReactIs_development;
-
 function requireReactIs_development() {
   if (hasRequiredReactIs_development) return reactIs_development;
   hasRequiredReactIs_development = 1;
-
   if (process.env.NODE_ENV !== "production") {
     (function () {
       // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
@@ -2602,20 +2283,17 @@ function requireReactIs_development() {
       var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
       var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
       var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-
       function isValidElementType(type) {
-        return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+        return typeof type === 'string' || typeof type === 'function' ||
+        // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
         type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
       }
-
       function typeOf(object) {
         if (typeof object === 'object' && object !== null) {
           var $$typeof = object.$$typeof;
-
           switch ($$typeof) {
             case REACT_ELEMENT_TYPE:
               var type = object.type;
-
               switch (type) {
                 case REACT_ASYNC_MODE_TYPE:
                 case REACT_CONCURRENT_MODE_TYPE:
@@ -2624,10 +2302,8 @@ function requireReactIs_development() {
                 case REACT_STRICT_MODE_TYPE:
                 case REACT_SUSPENSE_TYPE:
                   return type;
-
                 default:
                   var $$typeofType = type && type.$$typeof;
-
                   switch ($$typeofType) {
                     case REACT_CONTEXT_TYPE:
                     case REACT_FORWARD_REF_TYPE:
@@ -2635,21 +2311,16 @@ function requireReactIs_development() {
                     case REACT_MEMO_TYPE:
                     case REACT_PROVIDER_TYPE:
                       return $$typeofType;
-
                     default:
                       return $$typeof;
                   }
-
               }
-
             case REACT_PORTAL_TYPE:
               return $$typeof;
           }
         }
-
         return undefined;
       } // AsyncMode is deprecated along with isAsyncMode
-
 
       var AsyncMode = REACT_ASYNC_MODE_TYPE;
       var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
@@ -2676,55 +2347,42 @@ function requireReactIs_development() {
         }
         return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
       }
-
       function isConcurrentMode(object) {
         return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
       }
-
       function isContextConsumer(object) {
         return typeOf(object) === REACT_CONTEXT_TYPE;
       }
-
       function isContextProvider(object) {
         return typeOf(object) === REACT_PROVIDER_TYPE;
       }
-
       function isElement(object) {
         return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
       }
-
       function isForwardRef(object) {
         return typeOf(object) === REACT_FORWARD_REF_TYPE;
       }
-
       function isFragment(object) {
         return typeOf(object) === REACT_FRAGMENT_TYPE;
       }
-
       function isLazy(object) {
         return typeOf(object) === REACT_LAZY_TYPE;
       }
-
       function isMemo(object) {
         return typeOf(object) === REACT_MEMO_TYPE;
       }
-
       function isPortal(object) {
         return typeOf(object) === REACT_PORTAL_TYPE;
       }
-
       function isProfiler(object) {
         return typeOf(object) === REACT_PROFILER_TYPE;
       }
-
       function isStrictMode(object) {
         return typeOf(object) === REACT_STRICT_MODE_TYPE;
       }
-
       function isSuspense(object) {
         return typeOf(object) === REACT_SUSPENSE_TYPE;
       }
-
       reactIs_development.AsyncMode = AsyncMode;
       reactIs_development.ConcurrentMode = ConcurrentMode;
       reactIs_development.ContextConsumer = ContextConsumer;
@@ -2755,16 +2413,12 @@ function requireReactIs_development() {
       reactIs_development.typeOf = typeOf;
     })();
   }
-
   return reactIs_development;
 }
-
 var hasRequiredReactIs;
-
 function requireReactIs() {
   if (hasRequiredReactIs) return reactIs.exports;
   hasRequiredReactIs = 1;
-
   (function (module) {
     if (process.env.NODE_ENV === 'production') {
       module.exports = requireReactIs_production_min();
@@ -2772,101 +2426,84 @@ function requireReactIs() {
       module.exports = requireReactIs_development();
     }
   })(reactIs);
-
   return reactIs.exports;
 }
+
 /*
 object-assign
 (c) Sindre Sorhus
 @license MIT
 */
 
-
 var objectAssign;
 var hasRequiredObjectAssign;
-
 function requireObjectAssign() {
   if (hasRequiredObjectAssign) return objectAssign;
   hasRequiredObjectAssign = 1;
   /* eslint-disable no-unused-vars */
-
   var getOwnPropertySymbols = Object.getOwnPropertySymbols;
   var hasOwnProperty = Object.prototype.hasOwnProperty;
   var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
   function toObject(val) {
     if (val === null || val === undefined) {
       throw new TypeError('Object.assign cannot be called with null or undefined');
     }
-
     return Object(val);
   }
-
   function shouldUseNative() {
     try {
       if (!Object.assign) {
         return false;
-      } // Detect buggy property enumeration order in older V8 versions.
+      }
+
+      // Detect buggy property enumeration order in older V8 versions.
+
       // https://bugs.chromium.org/p/v8/issues/detail?id=4118
-
-
       var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
-
       test1[5] = 'de';
-
       if (Object.getOwnPropertyNames(test1)[0] === '5') {
         return false;
-      } // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+      }
 
-
+      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
       var test2 = {};
-
       for (var i = 0; i < 10; i++) {
         test2['_' + String.fromCharCode(i)] = i;
       }
-
       var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
         return test2[n];
       });
-
       if (order2.join('') !== '0123456789') {
         return false;
-      } // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+      }
 
-
+      // https://bugs.chromium.org/p/v8/issues/detail?id=3056
       var test3 = {};
       'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
         test3[letter] = letter;
       });
-
       if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
         return false;
       }
-
       return true;
     } catch (err) {
       // We don't expect any of the above to throw, but better to be safe.
       return false;
     }
   }
-
   objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
     var from;
     var to = toObject(target);
     var symbols;
-
     for (var s = 1; s < arguments.length; s++) {
       from = Object(arguments[s]);
-
       for (var key in from) {
         if (hasOwnProperty.call(from, key)) {
           to[key] = from[key];
         }
       }
-
       if (getOwnPropertySymbols) {
         symbols = getOwnPropertySymbols(from);
-
         for (var i = 0; i < symbols.length; i++) {
           if (propIsEnumerable.call(from, symbols[i])) {
             to[symbols[i]] = from[symbols[i]];
@@ -2874,11 +2511,11 @@ function requireObjectAssign() {
         }
       }
     }
-
     return to;
   };
   return objectAssign;
 }
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2886,10 +2523,8 @@ function requireObjectAssign() {
  * LICENSE file in the root directory of this source tree.
  */
 
-
 var ReactPropTypesSecret_1;
 var hasRequiredReactPropTypesSecret;
-
 function requireReactPropTypesSecret() {
   if (hasRequiredReactPropTypesSecret) return ReactPropTypesSecret_1;
   hasRequiredReactPropTypesSecret = 1;
@@ -2897,16 +2532,15 @@ function requireReactPropTypesSecret() {
   ReactPropTypesSecret_1 = ReactPropTypesSecret;
   return ReactPropTypesSecret_1;
 }
-
 var has;
 var hasRequiredHas;
-
 function requireHas() {
   if (hasRequiredHas) return has;
   hasRequiredHas = 1;
   has = Function.call.bind(Object.prototype.hasOwnProperty);
   return has;
 }
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2914,38 +2548,30 @@ function requireHas() {
  * LICENSE file in the root directory of this source tree.
  */
 
-
 var checkPropTypes_1;
 var hasRequiredCheckPropTypes;
-
 function requireCheckPropTypes() {
   if (hasRequiredCheckPropTypes) return checkPropTypes_1;
   hasRequiredCheckPropTypes = 1;
-
   var printWarning = function () {};
-
   if (process.env.NODE_ENV !== 'production') {
     var ReactPropTypesSecret = requireReactPropTypesSecret();
     var loggedTypeFailures = {};
     var has = requireHas();
-
     printWarning = function (text) {
       var message = 'Warning: ' + text;
-
       if (typeof console !== 'undefined') {
         console.error(message);
       }
-
       try {
         // --- Welcome to debugging React ---
         // This error was thrown as a convenience so that you can use this stack
         // to find the callsite that caused this warning to fire.
         throw new Error(message);
-      } catch (x) {
-        /**/
-      }
+      } catch (x) {/**/}
     };
   }
+
   /**
    * Assert that the values match with the type specs.
    * Error messages are memorized and will only be shown once.
@@ -2957,16 +2583,14 @@ function requireCheckPropTypes() {
    * @param {?Function} getStack Returns the component stack.
    * @private
    */
-
-
   function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
     if (process.env.NODE_ENV !== 'production') {
       for (var typeSpecName in typeSpecs) {
         if (has(typeSpecs, typeSpecName)) {
-          var error; // Prop type validation may throw. In case they do, we don't want to
+          var error;
+          // Prop type validation may throw. In case they do, we don't want to
           // fail the render phase where it didn't fail before. So we log it.
           // After these have been cleaned up, we'll let them throw.
-
           try {
             // This is intentionally an invariant that gets caught. It's the same
             // behavior as without this statement except with a better message.
@@ -2975,16 +2599,13 @@ function requireCheckPropTypes() {
               err.name = 'Invariant Violation';
               throw err;
             }
-
             error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
           } catch (ex) {
             error = ex;
           }
-
           if (error && !(error instanceof Error)) {
             printWarning((componentName || 'React class') + ': type specification of ' + location + ' `' + typeSpecName + '` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a ' + typeof error + '. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).');
           }
-
           if (error instanceof Error && !(error.message in loggedTypeFailures)) {
             // Only monitor this failure once because there tends to be a lot of the
             // same error.
@@ -2996,22 +2617,21 @@ function requireCheckPropTypes() {
       }
     }
   }
+
   /**
    * Resets warning cache when testing.
    *
    * @private
    */
-
-
   checkPropTypes.resetWarningCache = function () {
     if (process.env.NODE_ENV !== 'production') {
       loggedTypeFailures = {};
     }
   };
-
   checkPropTypes_1 = checkPropTypes;
   return checkPropTypes_1;
 }
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3019,10 +2639,8 @@ function requireCheckPropTypes() {
  * LICENSE file in the root directory of this source tree.
  */
 
-
 var factoryWithTypeCheckers;
 var hasRequiredFactoryWithTypeCheckers;
-
 function requireFactoryWithTypeCheckers() {
   if (hasRequiredFactoryWithTypeCheckers) return factoryWithTypeCheckers;
   hasRequiredFactoryWithTypeCheckers = 1;
@@ -3031,17 +2649,13 @@ function requireFactoryWithTypeCheckers() {
   var ReactPropTypesSecret = requireReactPropTypesSecret();
   var has = requireHas();
   var checkPropTypes = requireCheckPropTypes();
-
   var printWarning = function () {};
-
   if (process.env.NODE_ENV !== 'production') {
     printWarning = function (text) {
       var message = 'Warning: ' + text;
-
       if (typeof console !== 'undefined') {
         console.error(message);
       }
-
       try {
         // --- Welcome to debugging React ---
         // This error was thrown as a convenience so that you can use this stack
@@ -3050,11 +2664,9 @@ function requireFactoryWithTypeCheckers() {
       } catch (x) {}
     };
   }
-
   function emptyFunctionThatReturnsNull() {
     return null;
   }
-
   factoryWithTypeCheckers = function (isValidElement, throwOnDirectAccess) {
     /* global Symbol */
     var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
@@ -3074,14 +2686,13 @@ function requireFactoryWithTypeCheckers() {
      * @param {?object} maybeIterable
      * @return {?function}
      */
-
     function getIteratorFn(maybeIterable) {
       var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-
       if (typeof iteratorFn === 'function') {
         return iteratorFn;
       }
     }
+
     /**
      * Collection of methods that allow declaration and validation of props that are
      * supplied to React components. Example usage:
@@ -3129,10 +2740,10 @@ function requireFactoryWithTypeCheckers() {
      * @internal
      */
 
+    var ANONYMOUS = '<<anonymous>>';
 
-    var ANONYMOUS = '<<anonymous>>'; // Important!
+    // Important!
     // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-
     var ReactPropTypes = {
       array: createPrimitiveTypeChecker('array'),
       bigint: createPrimitiveTypeChecker('bigint'),
@@ -3154,13 +2765,12 @@ function requireFactoryWithTypeCheckers() {
       shape: createShapeTypeChecker,
       exact: createStrictShapeTypeChecker
     };
+
     /**
      * inlined Object.is polyfill to avoid requiring consumers ship their own
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
      */
-
     /*eslint-disable no-self-compare*/
-
     function is(x, y) {
       // SameValue algorithm
       if (x === y) {
@@ -3181,27 +2791,21 @@ function requireFactoryWithTypeCheckers() {
      * is prohibitively expensive if they are created too often, such as what
      * happens in oneOfType() for any type before the one that matched.
      */
-
-
     function PropTypeError(message, data) {
       this.message = message;
       this.data = data && typeof data === 'object' ? data : {};
       this.stack = '';
-    } // Make `instanceof Error` still work for returned errors.
-
-
+    }
+    // Make `instanceof Error` still work for returned errors.
     PropTypeError.prototype = Error.prototype;
-
     function createChainableTypeChecker(validate) {
       if (process.env.NODE_ENV !== 'production') {
         var manualPropTypeCallCache = {};
         var manualPropTypeWarningCount = 0;
       }
-
       function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
         componentName = componentName || ANONYMOUS;
         propFullName = propFullName || propName;
-
         if (secret !== ReactPropTypesSecret) {
           if (throwOnDirectAccess) {
             // New behavior only for users of `prop-types` package
@@ -3211,8 +2815,8 @@ function requireFactoryWithTypeCheckers() {
           } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
             // Old behavior for people using React.PropTypes
             var cacheKey = componentName + ':' + propName;
-
-            if (!manualPropTypeCallCache[cacheKey] && // Avoid spamming the console because they are often not actionable except for lib authors
+            if (!manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
             manualPropTypeWarningCount < 3) {
               printWarning('You are manually calling a React.PropTypes validation ' + 'function for the `' + propFullName + '` prop on `' + componentName + '`. This is deprecated ' + 'and will throw in the standalone `prop-types` package. ' + 'You may be seeing this warning due to a third-party PropTypes ' + 'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.');
               manualPropTypeCallCache[cacheKey] = true;
@@ -3220,32 +2824,26 @@ function requireFactoryWithTypeCheckers() {
             }
           }
         }
-
         if (props[propName] == null) {
           if (isRequired) {
             if (props[propName] === null) {
               return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
             }
-
             return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
           }
-
           return null;
         } else {
           return validate(props, propName, componentName, location, propFullName);
         }
       }
-
       var chainedCheckType = checkType.bind(null, false);
       chainedCheckType.isRequired = checkType.bind(null, true);
       return chainedCheckType;
     }
-
     function createPrimitiveTypeChecker(expectedType) {
       function validate(props, propName, componentName, location, propFullName, secret) {
         var propValue = props[propName];
         var propType = getPropType(propValue);
-
         if (propType !== expectedType) {
           // `propValue` being instance of, say, date/regexp, pass the 'object'
           // check, but we can offer a more precise error message here rather than
@@ -3255,74 +2853,55 @@ function requireFactoryWithTypeCheckers() {
             expectedType: expectedType
           });
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createAnyTypeChecker() {
       return createChainableTypeChecker(emptyFunctionThatReturnsNull);
     }
-
     function createArrayOfTypeChecker(typeChecker) {
       function validate(props, propName, componentName, location, propFullName) {
         if (typeof typeChecker !== 'function') {
           return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
         }
-
         var propValue = props[propName];
-
         if (!Array.isArray(propValue)) {
           var propType = getPropType(propValue);
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
         }
-
         for (var i = 0; i < propValue.length; i++) {
           var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
-
           if (error instanceof Error) {
             return error;
           }
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createElementTypeChecker() {
       function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
-
         if (!isValidElement(propValue)) {
           var propType = getPropType(propValue);
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createElementTypeTypeChecker() {
       function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
-
         if (!ReactIs.isValidElementType(propValue)) {
           var propType = getPropType(propValue);
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createInstanceTypeChecker(expectedClass) {
       function validate(props, propName, componentName, location, propFullName) {
         if (!(props[propName] instanceof expectedClass)) {
@@ -3330,13 +2909,10 @@ function requireFactoryWithTypeCheckers() {
           var actualClassName = getClassName(props[propName]);
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createEnumTypeChecker(expectedValues) {
       if (!Array.isArray(expectedValues)) {
         if (process.env.NODE_ENV !== 'production') {
@@ -3346,207 +2922,155 @@ function requireFactoryWithTypeCheckers() {
             printWarning('Invalid argument supplied to oneOf, expected an array.');
           }
         }
-
         return emptyFunctionThatReturnsNull;
       }
-
       function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
-
         for (var i = 0; i < expectedValues.length; i++) {
           if (is(propValue, expectedValues[i])) {
             return null;
           }
         }
-
         var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
           var type = getPreciseType(value);
-
           if (type === 'symbol') {
             return String(value);
           }
-
           return value;
         });
         return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createObjectOfTypeChecker(typeChecker) {
       function validate(props, propName, componentName, location, propFullName) {
         if (typeof typeChecker !== 'function') {
           return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
         }
-
         var propValue = props[propName];
         var propType = getPropType(propValue);
-
         if (propType !== 'object') {
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
         }
-
         for (var key in propValue) {
           if (has(propValue, key)) {
             var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-
             if (error instanceof Error) {
               return error;
             }
           }
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createUnionTypeChecker(arrayOfTypeCheckers) {
       if (!Array.isArray(arrayOfTypeCheckers)) {
         process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
         return emptyFunctionThatReturnsNull;
       }
-
       for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
         var checker = arrayOfTypeCheckers[i];
-
         if (typeof checker !== 'function') {
           printWarning('Invalid argument supplied to oneOfType. Expected an array of check functions, but ' + 'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.');
           return emptyFunctionThatReturnsNull;
         }
       }
-
       function validate(props, propName, componentName, location, propFullName) {
         var expectedTypes = [];
-
         for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
           var checker = arrayOfTypeCheckers[i];
           var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
-
           if (checkerResult == null) {
             return null;
           }
-
           if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
             expectedTypes.push(checkerResult.data.expectedType);
           }
         }
-
         var expectedTypesMessage = expectedTypes.length > 0 ? ', expected one of type [' + expectedTypes.join(', ') + ']' : '';
         return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createNodeChecker() {
       function validate(props, propName, componentName, location, propFullName) {
         if (!isNode(props[propName])) {
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function invalidValidatorError(componentName, location, propFullName, key, type) {
       return new PropTypeError((componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + type + '`.');
     }
-
     function createShapeTypeChecker(shapeTypes) {
       function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
         var propType = getPropType(propValue);
-
         if (propType !== 'object') {
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
         }
-
         for (var key in shapeTypes) {
           var checker = shapeTypes[key];
-
           if (typeof checker !== 'function') {
             return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
           }
-
           var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-
           if (error) {
             return error;
           }
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function createStrictShapeTypeChecker(shapeTypes) {
       function validate(props, propName, componentName, location, propFullName) {
         var propValue = props[propName];
         var propType = getPropType(propValue);
-
         if (propType !== 'object') {
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-        } // We need to check all keys in case some are required but missing from props.
-
-
+        }
+        // We need to check all keys in case some are required but missing from props.
         var allKeys = assign({}, props[propName], shapeTypes);
-
         for (var key in allKeys) {
           var checker = shapeTypes[key];
-
           if (has(shapeTypes, key) && typeof checker !== 'function') {
             return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
           }
-
           if (!checker) {
             return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' + '\nBad object: ' + JSON.stringify(props[propName], null, '  ') + '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  '));
           }
-
           var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-
           if (error) {
             return error;
           }
         }
-
         return null;
       }
-
       return createChainableTypeChecker(validate);
     }
-
     function isNode(propValue) {
       switch (typeof propValue) {
         case 'number':
         case 'string':
         case 'undefined':
           return true;
-
         case 'boolean':
           return !propValue;
-
         case 'object':
           if (Array.isArray(propValue)) {
             return propValue.every(isNode);
           }
-
           if (propValue === null || isValidElement(propValue)) {
             return true;
           }
-
           var iteratorFn = getIteratorFn(propValue);
-
           if (iteratorFn) {
             var iterator = iteratorFn.call(propValue);
             var step;
-
             if (iteratorFn !== propValue.entries) {
               while (!(step = iterator.next()).done) {
                 if (!isNode(step.value)) {
@@ -3557,7 +3081,6 @@ function requireFactoryWithTypeCheckers() {
               // Iterator will provide entry [k,v] tuples rather than values.
               while (!(step = iterator.next()).done) {
                 var entry = step.value;
-
                 if (entry) {
                   if (!isNode(entry[1])) {
                     return false;
@@ -3568,69 +3091,59 @@ function requireFactoryWithTypeCheckers() {
           } else {
             return false;
           }
-
           return true;
-
         default:
           return false;
       }
     }
-
     function isSymbol(propType, propValue) {
       // Native Symbol.
       if (propType === 'symbol') {
         return true;
-      } // falsy value can't be a Symbol
+      }
 
-
+      // falsy value can't be a Symbol
       if (!propValue) {
         return false;
-      } // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+      }
 
-
+      // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
       if (propValue['@@toStringTag'] === 'Symbol') {
         return true;
-      } // Fallback for non-spec compliant Symbols which are polyfilled.
+      }
 
-
+      // Fallback for non-spec compliant Symbols which are polyfilled.
       if (typeof Symbol === 'function' && propValue instanceof Symbol) {
         return true;
       }
-
       return false;
-    } // Equivalent of `typeof` but with special handling for array and regexp.
+    }
 
-
+    // Equivalent of `typeof` but with special handling for array and regexp.
     function getPropType(propValue) {
       var propType = typeof propValue;
-
       if (Array.isArray(propValue)) {
         return 'array';
       }
-
       if (propValue instanceof RegExp) {
         // Old webkits (at least until Android 4.0) return 'function' rather than
         // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
         // passes PropTypes.object.
         return 'object';
       }
-
       if (isSymbol(propType, propValue)) {
         return 'symbol';
       }
-
       return propType;
-    } // This handles more types than `getPropType`. Only used for error messages.
+    }
+
+    // This handles more types than `getPropType`. Only used for error messages.
     // See `createPrimitiveTypeChecker`.
-
-
     function getPreciseType(propValue) {
       if (typeof propValue === 'undefined' || propValue === null) {
         return '' + propValue;
       }
-
       var propType = getPropType(propValue);
-
       if (propType === 'object') {
         if (propValue instanceof Date) {
           return 'date';
@@ -3638,47 +3151,41 @@ function requireFactoryWithTypeCheckers() {
           return 'regexp';
         }
       }
-
       return propType;
-    } // Returns a string that is postfixed to a warning about an invalid type.
+    }
+
+    // Returns a string that is postfixed to a warning about an invalid type.
     // For example, "undefined" or "of type array"
-
-
     function getPostfixForTypeWarning(value) {
       var type = getPreciseType(value);
-
       switch (type) {
         case 'array':
         case 'object':
           return 'an ' + type;
-
         case 'boolean':
         case 'date':
         case 'regexp':
           return 'a ' + type;
-
         default:
           return type;
       }
-    } // Returns class name of the object, if any.
+    }
 
-
+    // Returns class name of the object, if any.
     function getClassName(propValue) {
       if (!propValue.constructor || !propValue.constructor.name) {
         return ANONYMOUS;
       }
-
       return propValue.constructor.name;
     }
-
     ReactPropTypes.checkPropTypes = checkPropTypes;
     ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
     ReactPropTypes.PropTypes = ReactPropTypes;
     return ReactPropTypes;
   };
-
   return factoryWithTypeCheckers;
 }
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3686,41 +3193,30 @@ function requireFactoryWithTypeCheckers() {
  * LICENSE file in the root directory of this source tree.
  */
 
-
 var factoryWithThrowingShims;
 var hasRequiredFactoryWithThrowingShims;
-
 function requireFactoryWithThrowingShims() {
   if (hasRequiredFactoryWithThrowingShims) return factoryWithThrowingShims;
   hasRequiredFactoryWithThrowingShims = 1;
   var ReactPropTypesSecret = requireReactPropTypesSecret();
-
   function emptyFunction() {}
-
   function emptyFunctionWithReset() {}
-
   emptyFunctionWithReset.resetWarningCache = emptyFunction;
-
   factoryWithThrowingShims = function () {
     function shim(props, propName, componentName, location, propFullName, secret) {
       if (secret === ReactPropTypesSecret) {
         // It is still safe when called from React.
         return;
       }
-
       var err = new Error('Calling PropTypes validators directly is not supported by the `prop-types` package. ' + 'Use PropTypes.checkPropTypes() to call them. ' + 'Read more at http://fb.me/use-check-prop-types');
       err.name = 'Invariant Violation';
       throw err;
     }
-
     shim.isRequired = shim;
-
     function getShim() {
       return shim;
     } // Important!
     // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-
-
     var ReactPropTypes = {
       array: shim,
       bigint: shim,
@@ -3747,9 +3243,9 @@ function requireFactoryWithThrowingShims() {
     ReactPropTypes.PropTypes = ReactPropTypes;
     return ReactPropTypes;
   };
-
   return factoryWithThrowingShims;
 }
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3757,11 +3253,11 @@ function requireFactoryWithThrowingShims() {
  * LICENSE file in the root directory of this source tree.
  */
 
-
 if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = requireReactIs(); // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
+  var ReactIs = requireReactIs();
 
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
   propTypes.exports = requireFactoryWithTypeCheckers()(ReactIs.isElement, throwOnDirectAccess);
 } else {
@@ -3769,32 +3265,26 @@ if (process.env.NODE_ENV !== 'production') {
   // http://fb.me/prop-types-in-prod
   propTypes.exports = requireFactoryWithThrowingShims()();
 }
-
 function _extends$2() {
   _extends$2 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
   return _extends$2.apply(this, arguments);
 }
-
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
-
   return self;
 }
-
 function _setPrototypeOf(o, p) {
   _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
     o.__proto__ = p;
@@ -3802,30 +3292,24 @@ function _setPrototypeOf(o, p) {
   };
   return _setPrototypeOf(o, p);
 }
-
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
-
   _setPrototypeOf(subClass, superClass);
 }
-
 function _getPrototypeOf(o) {
   _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
   return _getPrototypeOf(o);
 }
-
 function _isNativeFunction(fn) {
   return Function.toString.call(fn).indexOf("[native code]") !== -1;
 }
-
 function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
   if (typeof Proxy === "function") return true;
-
   try {
     Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
     return true;
@@ -3833,7 +3317,6 @@ function _isNativeReflectConstruct() {
     return false;
   }
 }
-
 function _construct(Parent, args, Class) {
   if (_isNativeReflectConstruct()) {
     _construct = Reflect.construct.bind();
@@ -3847,30 +3330,22 @@ function _construct(Parent, args, Class) {
       return instance;
     };
   }
-
   return _construct.apply(null, arguments);
 }
-
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
-
   _wrapNativeSuper = function _wrapNativeSuper(Class) {
     if (Class === null || !_isNativeFunction(Class)) return Class;
-
     if (typeof Class !== "function") {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     if (typeof _cache !== "undefined") {
       if (_cache.has(Class)) return _cache.get(Class);
-
       _cache.set(Class, Wrapper);
     }
-
     function Wrapper() {
       return _construct(Class, arguments, _getPrototypeOf(this).constructor);
     }
-
     Wrapper.prototype = Object.create(Class.prototype, {
       constructor: {
         value: Wrapper,
@@ -3881,48 +3356,36 @@ function _wrapNativeSuper(Class) {
     });
     return _setPrototypeOf(Wrapper, Class);
   };
-
   return _wrapNativeSuper(Class);
 }
-
 function last() {
   var _ref;
-
   return _ref = arguments.length - 1, _ref < 0 || arguments.length <= _ref ? undefined : arguments[_ref];
 }
-
 function negation(a) {
   return -a;
 }
-
 function addition(a, b) {
   return a + b;
 }
-
 function subtraction(a, b) {
   return a - b;
 }
-
 function multiplication(a, b) {
   return a * b;
 }
-
 function division(a, b) {
   return a / b;
 }
-
 function max() {
   return Math.max.apply(Math, arguments);
 }
-
 function min() {
   return Math.min.apply(Math, arguments);
 }
-
 function comma() {
   return Array.of.apply(Array, arguments);
 }
-
 var defaultSymbols = {
   symbols: {
     '*': {
@@ -4051,13 +3514,14 @@ var defaultSymbols = {
     }
   }
 };
-var defaultSymbolMap = defaultSymbols; // based on https://github.com/styled-components/styled-components/blob/fcf6f3804c57a14dd7984dfab7bc06ee2edca044/src/utils/error.js
+var defaultSymbolMap = defaultSymbols;
+
+// based on https://github.com/styled-components/styled-components/blob/fcf6f3804c57a14dd7984dfab7bc06ee2edca044/src/utils/error.js
 
 /**
  * Parse errors.md and turn it into a simple hash of code: message
  * @private
  */
-
 var ERRORS = {
   "1": "Passed invalid arguments to hsl, please pass multiple numbers e.g. hsl(360, 0.75, 0.4) or an object e.g. rgb({ hue: 255, saturation: 0.4, lightness: 0.75 }).\n\n",
   "2": "Passed invalid arguments to hsla, please pass multiple numbers e.g. hsla(360, 0.75, 0.4, 0.7) or an object e.g. rgb({ hue: 255, saturation: 0.4, lightness: 0.75, alpha: 0.7 }).\n\n",
@@ -4147,15 +3611,12 @@ function format() {
   for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
     args[_key] = arguments[_key];
   }
-
   var a = args[0];
   var b = [];
   var c;
-
   for (c = 1; c < args.length; c += 1) {
     b.push(args[c]);
   }
-
   b.forEach(function (d) {
     a = a.replace(/%[a-z]/, d);
   });
@@ -4167,29 +3628,22 @@ function format() {
  * @private
  */
 
-
 var PolishedError = /*#__PURE__*/function (_Error) {
   _inheritsLoose(PolishedError, _Error);
-
   function PolishedError(code) {
     var _this;
-
     if (process.env.NODE_ENV === 'production') {
       _this = _Error.call(this, "An error occurred. See https://github.com/styled-components/polished/blob/main/src/internalHelpers/errors.md#" + code + " for more information.") || this;
     } else {
       for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
         args[_key2 - 1] = arguments[_key2];
       }
-
       _this = _Error.call(this, format.apply(void 0, [ERRORS[code]].concat(args))) || this;
     }
-
     return _assertThisInitialized(_this);
   }
-
   return PolishedError;
 }( /*#__PURE__*/_wrapNativeSuper(Error));
-
 var unitRegExp = /((?!\w)a|na|hc|mc|dg|me[r]?|xe|ni(?![a-zA-Z])|mm|cp|tp|xp|q(?!s)|hv|xamv|nimv|wv|sm|s(?!\D|$)|ged|darg?|nrut)/g; // Merges additional math functionality into the defaults.
 
 function mergeSymbolMaps(additionalSymbols) {
@@ -4197,22 +3651,21 @@ function mergeSymbolMaps(additionalSymbols) {
   symbolMap.symbols = additionalSymbols ? _extends$2({}, defaultSymbolMap.symbols, additionalSymbols.symbols) : _extends$2({}, defaultSymbolMap.symbols);
   return symbolMap;
 }
-
 function exec(operators, values) {
   var _ref;
-
   var op = operators.pop();
   values.push(op.f.apply(op, (_ref = []).concat.apply(_ref, values.splice(-op.argCount))));
   return op.precedence;
 }
-
 function calculate(expression, additionalSymbols) {
   var symbolMap = mergeSymbolMaps(additionalSymbols);
   var match;
   var operators = [symbolMap.symbols['('].prefix];
   var values = [];
-  var pattern = new RegExp( // Pattern for numbers
-  "\\d+(?:\\.\\d+)?|" + // ...and patterns for individual operators/function names
+  var pattern = new RegExp(
+  // Pattern for numbers
+  "\\d+(?:\\.\\d+)?|" +
+  // ...and patterns for individual operators/function names
   Object.keys(symbolMap.symbols).map(function (key) {
     return symbolMap.symbols[key];
   }) // longer symbols should be listed first
@@ -4226,14 +3679,11 @@ function calculate(expression, additionalSymbols) {
   pattern.lastIndex = 0; // Reset regular expression object
 
   var afterValue = false;
-
   do {
     match = pattern.exec(expression);
-
     var _ref2 = match || [')', undefined],
-        token = _ref2[0],
-        bad = _ref2[1];
-
+      token = _ref2[0],
+      bad = _ref2[1];
     var notNumber = symbolMap.symbols[token];
     var notNewValue = notNumber && !notNumber.prefix && !notNumber.func;
     var notAfterValue = !notNumber || !notNumber.postfix && !notNumber.infix; // Check for syntax errors:
@@ -4241,19 +3691,15 @@ function calculate(expression, additionalSymbols) {
     if (bad || (afterValue ? notAfterValue : notNewValue)) {
       throw new PolishedError(37, match ? match.index : expression.length, expression);
     }
-
     if (afterValue) {
       // We either have an infix or postfix operator (they should be mutually exclusive)
       var curr = notNumber.postfix || notNumber.infix;
-
       do {
         var prev = operators[operators.length - 1];
         if ((curr.precedence - prev.precedence || prev.rightToLeft) > 0) break; // Apply previous operator, since it has precedence over current one
       } while (exec(operators, values)); // Exit loop after executing an opening parenthesis or function
 
-
       afterValue = curr.notation === 'postfix';
-
       if (curr.symbol !== ')') {
         operators.push(curr); // Postfix always has precedence over any operator that follows after it
 
@@ -4262,11 +3708,9 @@ function calculate(expression, additionalSymbols) {
     } else if (notNumber) {
       // prefix operator or function
       operators.push(notNumber.prefix || notNumber.func);
-
       if (notNumber.func) {
         // Require an opening parenthesis
         match = pattern.exec(expression);
-
         if (!match || match[0] !== '(') {
           throw new PolishedError(38, match ? match.index : expression.length, expression);
         }
@@ -4277,7 +3721,6 @@ function calculate(expression, additionalSymbols) {
       afterValue = true;
     }
   } while (match && operators.length);
-
   if (operators.length) {
     throw new PolishedError(39, match ? match.index : expression.length, expression);
   } else if (match) {
@@ -4286,7 +3729,6 @@ function calculate(expression, additionalSymbols) {
     return values.pop();
   }
 }
-
 function reverseString(str) {
   return str.split('').reverse().join('');
 }
@@ -4320,7 +3762,6 @@ function reverseString(str) {
  * }
  */
 
-
 function math(formula, additionalSymbols) {
   var reversedFormula = reverseString(formula);
   var formulaMatch = reversedFormula.match(unitRegExp); // Check that all units are the same
@@ -4330,11 +3771,9 @@ function math(formula, additionalSymbols) {
   })) {
     throw new PolishedError(41);
   }
-
   var cleanFormula = reverseString(reversedFormula.replace(unitRegExp, ''));
   return "" + calculate(cleanFormula, additionalSymbols) + (formulaMatch ? reverseString(formulaMatch[0]) : '');
 }
-
 var cssRegex = /^([+-]?(?:\d+|\d*\.\d+))([a-z]*|%)$/;
 /**
  * Returns a given CSS value and its unit as elements of an array.
@@ -4366,25 +3805,20 @@ function getValueAndUnit(value) {
   if (matchedValue) return [parseFloat(value), matchedValue[2]];
   return [value, undefined];
 }
-
 function colorToInt(color) {
   return Math.round(color * 255);
 }
-
 function convertToInt(red, green, blue) {
   return colorToInt(red) + "," + colorToInt(green) + "," + colorToInt(blue);
 }
-
 function hslToRgb(hue, saturation, lightness, convert) {
   if (convert === void 0) {
     convert = convertToInt;
   }
-
   if (saturation === 0) {
     // achromatic
     return convert(lightness, lightness, lightness);
   } // formulae from https://en.wikipedia.org/wiki/HSL_and_HSV
-
 
   var huePrime = (hue % 360 + 360) % 360 / 60;
   var chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
@@ -4392,7 +3826,6 @@ function hslToRgb(hue, saturation, lightness, convert) {
   var red = 0;
   var green = 0;
   var blue = 0;
-
   if (huePrime >= 0 && huePrime < 1) {
     red = chroma;
     green = secondComponent;
@@ -4412,14 +3845,12 @@ function hslToRgb(hue, saturation, lightness, convert) {
     red = chroma;
     blue = secondComponent;
   }
-
   var lightnessModification = lightness - chroma / 2;
   var finalRed = red + lightnessModification;
   var finalGreen = green + lightnessModification;
   var finalBlue = blue + lightnessModification;
   return convert(finalRed, finalGreen, finalBlue);
 }
-
 var namedColorMap = {
   aliceblue: 'f0f8ff',
   antiquewhite: 'faebd7',
@@ -4580,7 +4011,6 @@ function nameToHex(color) {
   var normalizedColorName = color.toLowerCase();
   return namedColorMap[normalizedColorName] ? "#" + namedColorMap[normalizedColorName] : color;
 }
-
 var hexRegex = /^#[a-fA-F0-9]{6}$/;
 var hexRgbaRegex = /^#[a-fA-F0-9]{8}$/;
 var reducedHexRegex = /^#[a-fA-F0-9]{3}$/;
@@ -4605,9 +4035,7 @@ function parseToRgb(color) {
   if (typeof color !== 'string') {
     throw new PolishedError(3);
   }
-
   var normalizedColor = nameToHex(color);
-
   if (normalizedColor.match(hexRegex)) {
     return {
       red: parseInt("" + normalizedColor[1] + normalizedColor[2], 16),
@@ -4615,7 +4043,6 @@ function parseToRgb(color) {
       blue: parseInt("" + normalizedColor[5] + normalizedColor[6], 16)
     };
   }
-
   if (normalizedColor.match(hexRgbaRegex)) {
     var alpha = parseFloat((parseInt("" + normalizedColor[7] + normalizedColor[8], 16) / 255).toFixed(2));
     return {
@@ -4625,7 +4052,6 @@ function parseToRgb(color) {
       alpha: alpha
     };
   }
-
   if (normalizedColor.match(reducedHexRegex)) {
     return {
       red: parseInt("" + normalizedColor[1] + normalizedColor[1], 16),
@@ -4633,10 +4059,8 @@ function parseToRgb(color) {
       blue: parseInt("" + normalizedColor[3] + normalizedColor[3], 16)
     };
   }
-
   if (normalizedColor.match(reducedRgbaHexRegex)) {
     var _alpha = parseFloat((parseInt("" + normalizedColor[4] + normalizedColor[4], 16) / 255).toFixed(2));
-
     return {
       red: parseInt("" + normalizedColor[1] + normalizedColor[1], 16),
       green: parseInt("" + normalizedColor[2] + normalizedColor[2], 16),
@@ -4644,9 +4068,7 @@ function parseToRgb(color) {
       alpha: _alpha
     };
   }
-
   var rgbMatched = rgbRegex.exec(normalizedColor);
-
   if (rgbMatched) {
     return {
       red: parseInt("" + rgbMatched[1], 10),
@@ -4654,9 +4076,7 @@ function parseToRgb(color) {
       blue: parseInt("" + rgbMatched[3], 10)
     };
   }
-
   var rgbaMatched = rgbaRegex.exec(normalizedColor.substring(0, 50));
-
   if (rgbaMatched) {
     return {
       red: parseInt("" + rgbaMatched[1], 10),
@@ -4665,44 +4085,32 @@ function parseToRgb(color) {
       alpha: parseFloat("" + rgbaMatched[4]) > 1 ? parseFloat("" + rgbaMatched[4]) / 100 : parseFloat("" + rgbaMatched[4])
     };
   }
-
   var hslMatched = hslRegex.exec(normalizedColor);
-
   if (hslMatched) {
     var hue = parseInt("" + hslMatched[1], 10);
     var saturation = parseInt("" + hslMatched[2], 10) / 100;
     var lightness = parseInt("" + hslMatched[3], 10) / 100;
     var rgbColorString = "rgb(" + hslToRgb(hue, saturation, lightness) + ")";
     var hslRgbMatched = rgbRegex.exec(rgbColorString);
-
     if (!hslRgbMatched) {
       throw new PolishedError(4, normalizedColor, rgbColorString);
     }
-
     return {
       red: parseInt("" + hslRgbMatched[1], 10),
       green: parseInt("" + hslRgbMatched[2], 10),
       blue: parseInt("" + hslRgbMatched[3], 10)
     };
   }
-
   var hslaMatched = hslaRegex.exec(normalizedColor.substring(0, 50));
-
   if (hslaMatched) {
     var _hue = parseInt("" + hslaMatched[1], 10);
-
     var _saturation = parseInt("" + hslaMatched[2], 10) / 100;
-
     var _lightness = parseInt("" + hslaMatched[3], 10) / 100;
-
     var _rgbColorString = "rgb(" + hslToRgb(_hue, _saturation, _lightness) + ")";
-
     var _hslRgbMatched = rgbRegex.exec(_rgbColorString);
-
     if (!_hslRgbMatched) {
       throw new PolishedError(4, normalizedColor, _rgbColorString);
     }
-
     return {
       red: parseInt("" + _hslRgbMatched[1], 10),
       green: parseInt("" + _hslRgbMatched[2], 10),
@@ -4710,10 +4118,8 @@ function parseToRgb(color) {
       alpha: parseFloat("" + hslaMatched[4]) > 1 ? parseFloat("" + hslaMatched[4]) / 100 : parseFloat("" + hslaMatched[4])
     };
   }
-
   throw new PolishedError(5);
 }
-
 function rgbToHsl(color) {
   // make sure rgb are contained in a set of [0, 255]
   var red = color.red / 255;
@@ -4722,7 +4128,6 @@ function rgbToHsl(color) {
   var max = Math.max(red, green, blue);
   var min = Math.min(red, green, blue);
   var lightness = (max + min) / 2;
-
   if (max === min) {
     // achromatic
     if (color.alpha !== undefined) {
@@ -4740,28 +4145,22 @@ function rgbToHsl(color) {
       };
     }
   }
-
   var hue;
   var delta = max - min;
   var saturation = lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
-
   switch (max) {
     case red:
       hue = (green - blue) / delta + (green < blue ? 6 : 0);
       break;
-
     case green:
       hue = (blue - red) / delta + 2;
       break;
-
     default:
       // blue case
       hue = (red - green) / delta + 4;
       break;
   }
-
   hue *= 60;
-
   if (color.alpha !== undefined) {
     return {
       hue: hue,
@@ -4770,13 +4169,13 @@ function rgbToHsl(color) {
       alpha: color.alpha
     };
   }
-
   return {
     hue: hue,
     saturation: saturation,
     lightness: lightness
   };
 }
+
 /**
  * Returns an HslColor or HslaColor object. This utility function is only useful
  * if want to extract a color component. With the color util `toColorString` you
@@ -4788,45 +4187,37 @@ function rgbToHsl(color) {
  * // Assigns `{ hue: 128, saturation: 1, lightness: 0.5, alpha: 0.75 }` to color2
  * const color2 = parseToHsl('hsla(128, 100%, 50%, 0.75)');
  */
-
-
 function parseToHsl(color) {
   // Note: At a later stage we can optimize this function as right now a hsl
   // color would be parsed converted to rgb values and converted back to hsl.
   return rgbToHsl(parseToRgb(color));
 }
+
 /**
  * Reduces hex values if possible e.g. #ff8866 to #f86
  * @private
  */
-
-
 var reduceHexValue = function reduceHexValue(value) {
   if (value.length === 7 && value[1] === value[2] && value[3] === value[4] && value[5] === value[6]) {
     return "#" + value[1] + value[3] + value[5];
   }
-
   return value;
 };
-
 var reduceHexValue$1 = reduceHexValue;
-
 function numberToHex(value) {
   var hex = value.toString(16);
   return hex.length === 1 ? "0" + hex : hex;
 }
-
 function colorToHex(color) {
   return numberToHex(Math.round(color * 255));
 }
-
 function convertToHex(red, green, blue) {
   return reduceHexValue$1("#" + colorToHex(red) + colorToHex(green) + colorToHex(blue));
 }
-
 function hslToHex(hue, saturation, lightness) {
   return hslToRgb(hue, saturation, lightness, convertToHex);
 }
+
 /**
  * Returns a string value for the color. The returned result is the smallest possible hex notation.
  *
@@ -4850,17 +4241,15 @@ function hslToHex(hue, saturation, lightness) {
  *   background: "#b3191c";
  * }
  */
-
-
 function hsl(value, saturation, lightness) {
   if (typeof value === 'number' && typeof saturation === 'number' && typeof lightness === 'number') {
     return hslToHex(value, saturation, lightness);
   } else if (typeof value === 'object' && saturation === undefined && lightness === undefined) {
     return hslToHex(value.hue, value.saturation, value.lightness);
   }
-
   throw new PolishedError(1);
 }
+
 /**
  * Returns a string value for the color. The returned result is the smallest possible rgba or hex notation.
  *
@@ -4887,17 +4276,15 @@ function hsl(value, saturation, lightness) {
  *   background: "#b3191c";
  * }
  */
-
-
 function hsla(value, saturation, lightness, alpha) {
   if (typeof value === 'number' && typeof saturation === 'number' && typeof lightness === 'number' && typeof alpha === 'number') {
     return alpha >= 1 ? hslToHex(value, saturation, lightness) : "rgba(" + hslToRgb(value, saturation, lightness) + "," + alpha + ")";
   } else if (typeof value === 'object' && saturation === undefined && lightness === undefined && alpha === undefined) {
     return value.alpha >= 1 ? hslToHex(value.hue, value.saturation, value.lightness) : "rgba(" + hslToRgb(value.hue, value.saturation, value.lightness) + "," + value.alpha + ")";
   }
-
   throw new PolishedError(2);
 }
+
 /**
  * Returns a string value for the color. The returned result is the smallest possible hex notation.
  *
@@ -4921,17 +4308,15 @@ function hsla(value, saturation, lightness, alpha) {
  *   background: "#ffcd64";
  * }
  */
-
-
 function rgb(value, green, blue) {
   if (typeof value === 'number' && typeof green === 'number' && typeof blue === 'number') {
     return reduceHexValue$1("#" + numberToHex(value) + numberToHex(green) + numberToHex(blue));
   } else if (typeof value === 'object' && green === undefined && blue === undefined) {
     return reduceHexValue$1("#" + numberToHex(value.red) + numberToHex(value.green) + numberToHex(value.blue));
   }
-
   throw new PolishedError(6);
 }
+
 /**
  * Returns a string value for the color. The returned result is the smallest possible rgba or hex notation.
  *
@@ -4966,8 +4351,6 @@ function rgb(value, green, blue) {
  *   background: "rgba(0,0,0,0.7)";
  * }
  */
-
-
 function rgba(firstValue, secondValue, thirdValue, fourthValue) {
   if (typeof firstValue === 'string' && typeof secondValue === 'number') {
     var rgbValue = parseToRgb(firstValue);
@@ -4977,22 +4360,17 @@ function rgba(firstValue, secondValue, thirdValue, fourthValue) {
   } else if (typeof firstValue === 'object' && secondValue === undefined && thirdValue === undefined && fourthValue === undefined) {
     return firstValue.alpha >= 1 ? rgb(firstValue.red, firstValue.green, firstValue.blue) : "rgba(" + firstValue.red + "," + firstValue.green + "," + firstValue.blue + "," + firstValue.alpha + ")";
   }
-
   throw new PolishedError(7);
 }
-
 var isRgb = function isRgb(color) {
   return typeof color.red === 'number' && typeof color.green === 'number' && typeof color.blue === 'number' && (typeof color.alpha !== 'number' || typeof color.alpha === 'undefined');
 };
-
 var isRgba = function isRgba(color) {
   return typeof color.red === 'number' && typeof color.green === 'number' && typeof color.blue === 'number' && typeof color.alpha === 'number';
 };
-
 var isHsl = function isHsl(color) {
   return typeof color.hue === 'number' && typeof color.saturation === 'number' && typeof color.lightness === 'number' && (typeof color.alpha !== 'number' || typeof color.alpha === 'undefined');
 };
-
 var isHsla = function isHsla(color) {
   return typeof color.hue === 'number' && typeof color.saturation === 'number' && typeof color.lightness === 'number' && typeof color.alpha === 'number';
 };
@@ -5027,7 +4405,6 @@ var isHsla = function isHsla(color) {
  * }
  */
 
-
 function toColorString(color) {
   if (typeof color !== 'object') throw new PolishedError(8);
   if (isRgba(color)) return rgba(color);
@@ -5035,12 +4412,12 @@ function toColorString(color) {
   if (isHsla(color)) return hsla(color);
   if (isHsl(color)) return hsl(color);
   throw new PolishedError(8);
-} // Type definitions taken from https://github.com/gcanti/flow-static-land/blob/master/src/Fun.js
+}
+
+// Type definitions taken from https://github.com/gcanti/flow-static-land/blob/master/src/Fun.js
 // eslint-disable-next-line no-unused-vars
 // eslint-disable-next-line no-unused-vars
 // eslint-disable-next-line no-redeclare
-
-
 function curried(f, length, acc) {
   return function fn() {
     // eslint-disable-next-line prefer-rest-params
@@ -5049,15 +4426,14 @@ function curried(f, length, acc) {
   };
 } // eslint-disable-next-line no-redeclare
 
-
 function curry(f) {
   // eslint-disable-line no-redeclare
   return curried(f, f.length, []);
 }
-
 function guard(lowerBoundary, upperBoundary, value) {
   return Math.max(lowerBoundary, Math.min(upperBoundary, value));
 }
+
 /**
  * Returns a string value for the darkened color.
  *
@@ -5082,7 +4458,6 @@ function guard(lowerBoundary, upperBoundary, value) {
  * }
  */
 
-
 function darken(amount, color) {
   if (color === 'transparent') return color;
   var hslColor = parseToHsl(color);
@@ -5091,11 +4466,10 @@ function darken(amount, color) {
   }));
 } // prettier-ignore
 
-
 var curriedDarken = /*#__PURE__*/curry
-/* ::<number | string, string, string> */
-(darken);
+/* ::<number | string, string, string> */(darken);
 var curriedDarken$1 = curriedDarken;
+
 /**
  * Returns a number (float) representing the luminance of a color.
  *
@@ -5126,17 +4500,16 @@ var curriedDarken$1 = curriedDarken;
 function getLuminance(color) {
   if (color === 'transparent') return 0;
   var rgbColor = parseToRgb(color);
-
   var _Object$keys$map = Object.keys(rgbColor).map(function (key) {
-    var channel = rgbColor[key] / 255;
-    return channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
-  }),
-      r = _Object$keys$map[0],
-      g = _Object$keys$map[1],
-      b = _Object$keys$map[2];
-
+      var channel = rgbColor[key] / 255;
+      return channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+    }),
+    r = _Object$keys$map[0],
+    g = _Object$keys$map[1],
+    b = _Object$keys$map[2];
   return parseFloat((0.2126 * r + 0.7152 * g + 0.0722 * b).toFixed(3));
 }
+
 /**
  * Returns the contrast ratio between two colors based on
  * [W3's recommended equation for calculating contrast](http://www.w3.org/TR/WCAG20/#contrast-ratiodef).
@@ -5145,12 +4518,12 @@ function getLuminance(color) {
  * const contrastRatio = getContrast('#444', '#fff');
  */
 
-
 function getContrast(color1, color2) {
   var luminance1 = getLuminance(color1);
   var luminance2 = getLuminance(color2);
   return parseFloat((luminance1 > luminance2 ? (luminance1 + 0.05) / (luminance2 + 0.05) : (luminance2 + 0.05) / (luminance1 + 0.05)).toFixed(2));
 }
+
 /**
  * Returns a string value for the lightened color.
  *
@@ -5175,7 +4548,6 @@ function getContrast(color1, color2) {
  * }
  */
 
-
 function lighten(amount, color) {
   if (color === 'transparent') return color;
   var hslColor = parseToHsl(color);
@@ -5184,10 +4556,8 @@ function lighten(amount, color) {
   }));
 } // prettier-ignore
 
-
 var curriedLighten = /*#__PURE__*/curry
-/* ::<number | string, string, string> */
-(lighten);
+/* ::<number | string, string, string> */(lighten);
 var curriedLighten$1 = curriedLighten;
 var defaultReturnIfLightColor = '#000';
 var defaultReturnIfDarkColor = '#fff';
@@ -5231,32 +4601,26 @@ function readableColor(color, returnIfLightColor, returnIfDarkColor, strict) {
   if (returnIfLightColor === void 0) {
     returnIfLightColor = defaultReturnIfLightColor;
   }
-
   if (returnIfDarkColor === void 0) {
     returnIfDarkColor = defaultReturnIfDarkColor;
   }
-
   if (strict === void 0) {
     strict = true;
   }
-
   var isColorLight = getLuminance(color) > 0.179;
   var preferredReturnColor = isColorLight ? returnIfLightColor : returnIfDarkColor;
-
   if (!strict || getContrast(color, preferredReturnColor) >= 4.5) {
     return preferredReturnColor;
   }
-
   return isColorLight ? defaultReturnIfLightColor : defaultReturnIfDarkColor;
 }
+
 /**
  * Copyright Zendesk, Inc.
  *
  * Use of this source code is governed under the Apache License, Version 2.0
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
-
-
 ({
   children: propTypes.exports.func,
   render: propTypes.exports.func,
@@ -5264,6 +4628,7 @@ function readableColor(color, returnIfLightColor, returnIfDarkColor, strict) {
   className: propTypes.exports.string,
   dataAttribute: propTypes.exports.string
 });
+
 /**
  * Copyright Zendesk, Inc.
  *
@@ -5272,7 +4637,6 @@ function readableColor(color, returnIfLightColor, returnIfDarkColor, strict) {
  */
 
 var DocumentPosition;
-
 (function (DocumentPosition) {
   DocumentPosition[DocumentPosition["DISCONNECTED"] = 1] = "DISCONNECTED";
   DocumentPosition[DocumentPosition["PRECEDING"] = 2] = "PRECEDING";
@@ -5282,12 +4646,668 @@ var DocumentPosition;
   DocumentPosition[DocumentPosition["IMPLEMENTATION_SPECIFIC"] = 32] = "IMPLEMENTATION_SPECIFIC";
 })(DocumentPosition || (DocumentPosition = {}));
 
-var ContainerOrientation;
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
 
-(function (ContainerOrientation) {
-  ContainerOrientation["HORIZONTAL"] = "horizontal";
-  ContainerOrientation["VERTICAL"] = "vertical";
-})(ContainerOrientation || (ContainerOrientation = {}));
+/** Used as the `TypeError` message for "Functions" methods. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/** `Object#toString` result references. */
+var funcTag = '[object Function]',
+  genTag = '[object GeneratorFunction]';
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+/**
+ * Checks if `value` is a host object in IE < 9.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+ */
+function isHostObject(value) {
+  // Many host objects are `Object` objects that can coerce to strings
+  // despite having improperly defined `toString` methods.
+  var result = false;
+  if (value != null && typeof value.toString != 'function') {
+    try {
+      result = !!(value + '');
+    } catch (e) {}
+  }
+  return result;
+}
+
+/** Used for built-in method references. */
+var arrayProto = Array.prototype,
+  funcProto = Function.prototype,
+  objectProto = Object.prototype;
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = function () {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? 'Symbol(src)_1.' + uid : '';
+}();
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' + funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
+
+/** Built-in value references. */
+var splice = arrayProto.splice;
+
+/* Built-in method references that are verified to be native. */
+var Map$1 = getNative(root, 'Map'),
+  nativeCreate = getNative(Object, 'create');
+
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Hash(entries) {
+  var index = -1,
+    length = entries ? entries.length : 0;
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+}
+
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function hashDelete(key) {
+  return this.has(key) && delete this.__data__[key];
+}
+
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function hashGet(key) {
+  var data = this.__data__;
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED ? undefined : result;
+  }
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+}
+
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function hashHas(key) {
+  var data = this.__data__;
+  return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
+}
+
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
+function hashSet(key, value) {
+  var data = this.__data__;
+  data[key] = nativeCreate && value === undefined ? HASH_UNDEFINED : value;
+  return this;
+}
+
+// Add methods to `Hash`.
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function ListCache(entries) {
+  var index = -1,
+    length = entries ? entries.length : 0;
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
+function listCacheClear() {
+  this.__data__ = [];
+}
+
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function listCacheDelete(key) {
+  var data = this.__data__,
+    index = assocIndexOf(data, key);
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+  return true;
+}
+
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function listCacheGet(key) {
+  var data = this.__data__,
+    index = assocIndexOf(data, key);
+  return index < 0 ? undefined : data[index][1];
+}
+
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
+function listCacheSet(key, value) {
+  var data = this.__data__,
+    index = assocIndexOf(data, key);
+  if (index < 0) {
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+  return this;
+}
+
+// Add methods to `ListCache`.
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function MapCache(entries) {
+  var index = -1,
+    length = entries ? entries.length : 0;
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
+function mapCacheClear() {
+  this.__data__ = {
+    'hash': new Hash(),
+    'map': new (Map$1 || ListCache)(),
+    'string': new Hash()
+  };
+}
+
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function mapCacheDelete(key) {
+  return getMapData(this, key)['delete'](key);
+}
+
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
+function mapCacheSet(key, value) {
+  getMapData(this, key).set(key, value);
+  return this;
+}
+
+// Add methods to `MapCache`.
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function assocIndexOf(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
+function getMapData(map, key) {
+  var data = map.__data__;
+  return isKeyable(key) ? data[typeof key == 'string' ? 'string' : 'hash'] : data.map;
+}
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
+function isKeyable(value) {
+  var type = typeof value;
+  return type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean' ? value !== '__proto__' : value === null;
+}
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && maskSrcKey in func;
+}
+
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to process.
+ * @returns {string} Returns the source code.
+ */
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+    try {
+      return func + '';
+    } catch (e) {}
+  }
+  return '';
+}
+
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided, it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is used as the map cache key. The `func`
+ * is invoked with the `this` binding of the memoized function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the
+ * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `delete`, `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoized function.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': 2 };
+ * var other = { 'c': 3, 'd': 4 };
+ *
+ * var values = _.memoize(_.values);
+ * values(object);
+ * // => [1, 2]
+ *
+ * values(other);
+ * // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object);
+ * // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object);
+ * // => ['a', 'b']
+ *
+ * // Replace `_.memoize.Cache`.
+ * _.memoize.Cache = WeakMap;
+ */
+function memoize(func, resolver) {
+  if (typeof func != 'function' || resolver && typeof resolver != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function () {
+    var args = arguments,
+      key = resolver ? resolver.apply(this, args) : args[0],
+      cache = memoized.cache;
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result);
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || MapCache)();
+  return memoized;
+}
+
+// Assign cache to `_.memoize`.
+memoize.Cache = MapCache;
+
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+function eq(value, other) {
+  return value === other || value !== value && other !== other;
+}
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 8-9 which returns 'object' for typed array and other constructors.
+  var tag = isObject(value) ? objectToString.call(value) : '';
+  return tag == funcTag || tag == genTag;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+var lodash_memoize = memoize;
+
 /**
  * Copyright Zendesk, Inc.
  *
@@ -5295,118 +5315,7 @@ var ContainerOrientation;
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
-  }
-
-  return target;
-}
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-
-  var _s, _e;
-
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-  return arr2;
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-var PALETTE = {
+const PALETTE = {
   black: '#000',
   white: '#fff',
   product: {
@@ -5414,7 +5323,7 @@ var PALETTE = {
     message: '#37b8af',
     explore: '#30aabc',
     gather: '#f6c8be',
-    guide: '#ff6224',
+    guide: '#eb4962',
     connect: '#ff6224',
     chat: '#f79a3e',
     talk: '#efc93d',
@@ -5475,7 +5384,7 @@ var PALETTE = {
     200: '#daeded',
     300: '#bdd9d7',
     400: '#90bbbb',
-    500: '#467b7c',
+    500: '#498283',
     600: '#17494d',
     700: '#03363d',
     800: '#012b30'
@@ -5547,30 +5456,30 @@ var PALETTE = {
     M600: '#9358b0'
   }
 };
-var BASE = 4;
-var borderRadii = {
-  sm: "".concat(BASE / 2, "px"),
-  md: "".concat(BASE, "px")
+const BASE = 4;
+const borderRadii = {
+  sm: `${BASE / 2}px`,
+  md: `${BASE}px`
 };
-var borderStyles = {
+const borderStyles = {
   solid: 'solid'
 };
-var borderWidths = {
+const borderWidths = {
   sm: '1px',
   md: '3px'
 };
-var borders = {
-  sm: "".concat(borderWidths.sm, " ").concat(borderStyles.solid),
-  md: "".concat(borderWidths.md, " ").concat(borderStyles.solid)
+const borders = {
+  sm: `${borderWidths.sm} ${borderStyles.solid}`,
+  md: `${borderWidths.md} ${borderStyles.solid}`
 };
-var breakpoints = {
+const breakpoints = {
   xs: '0px',
-  sm: "".concat(BASE * 144, "px"),
-  md: "".concat(BASE * 192, "px"),
-  lg: "".concat(BASE * 248, "px"),
-  xl: "".concat(BASE * 300, "px")
+  sm: `${BASE * 144}px`,
+  md: `${BASE * 192}px`,
+  lg: `${BASE * 248}px`,
+  xl: `${BASE * 300}px`
 };
-var colors = {
+const colors = {
   background: PALETTE.white,
   foreground: PALETTE.grey[800],
   primaryHue: 'blue',
@@ -5580,11 +5489,11 @@ var colors = {
   neutralHue: 'grey',
   chromeHue: 'kale'
 };
-var fonts = {
+const fonts = {
   mono: ['SFMono-Regular', 'Consolas', '"Liberation Mono"', 'Menlo', 'Courier', 'monospace'].join(','),
   system: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(',')
 };
-var fontSizes = {
+const fontSizes = {
   xs: '10px',
   sm: '12px',
   md: '14px',
@@ -5593,7 +5502,7 @@ var fontSizes = {
   xxl: '26px',
   xxxl: '36px'
 };
-var fontWeights = {
+const fontWeights = {
   thin: 100,
   extralight: 200,
   light: 300,
@@ -5604,168 +5513,212 @@ var fontWeights = {
   extrabold: 800,
   black: 900
 };
-var iconSizes = {
+const iconSizes = {
   sm: '12px',
   md: '16px',
   lg: '26px'
 };
-var lineHeights = {
-  sm: "".concat(BASE * 4, "px"),
-  md: "".concat(BASE * 5, "px"),
-  lg: "".concat(BASE * 6, "px"),
-  xl: "".concat(BASE * 7, "px"),
-  xxl: "".concat(BASE * 8, "px"),
-  xxxl: "".concat(BASE * 11, "px")
+const lineHeights = {
+  sm: `${BASE * 4}px`,
+  md: `${BASE * 5}px`,
+  lg: `${BASE * 6}px`,
+  xl: `${BASE * 7}px`,
+  xxl: `${BASE * 8}px`,
+  xxxl: `${BASE * 11}px`
 };
-
-var palette = _objectSpread2({}, PALETTE);
-
+const palette = {
+  ...PALETTE
+};
 delete palette.product;
-var shadowWidths = {
+const shadowWidths = {
+  xs: '1px',
   sm: '2px',
   md: '3px'
 };
-var shadows = {
-  sm: function sm(color) {
-    return "0 0 0 ".concat(shadowWidths.sm, " ").concat(color);
-  },
-  md: function md(color) {
-    return "0 0 0 ".concat(shadowWidths.md, " ").concat(color);
-  },
-  lg: function lg(offsetY, blurRadius, color) {
-    return "0 ".concat(offsetY, " ").concat(blurRadius, " 0 ").concat(color);
-  }
+const shadows = {
+  xs: color => `0 0 0 ${shadowWidths.xs} ${color}`,
+  sm: color => `0 0 0 ${shadowWidths.sm} ${color}`,
+  md: color => `0 0 0 ${shadowWidths.md} ${color}`,
+  lg: (offsetY, blurRadius, color) => `0 ${offsetY} ${blurRadius} 0 ${color}`
 };
-var space = {
+const space = {
   base: BASE,
-  xxs: "".concat(BASE, "px"),
-  xs: "".concat(BASE * 2, "px"),
-  sm: "".concat(BASE * 3, "px"),
-  md: "".concat(BASE * 5, "px"),
-  lg: "".concat(BASE * 8, "px"),
-  xl: "".concat(BASE * 10, "px"),
-  xxl: "".concat(BASE * 12, "px")
+  xxs: `${BASE}px`,
+  xs: `${BASE * 2}px`,
+  sm: `${BASE * 3}px`,
+  md: `${BASE * 5}px`,
+  lg: `${BASE * 8}px`,
+  xl: `${BASE * 10}px`,
+  xxl: `${BASE * 12}px`
 };
-var DEFAULT_THEME = {
-  borders: borders,
-  borderRadii: borderRadii,
-  borderStyles: borderStyles,
-  borderWidths: borderWidths,
-  breakpoints: breakpoints,
-  colors: _objectSpread2({
-    base: 'light'
-  }, colors),
+const DEFAULT_THEME = {
+  borders,
+  borderRadii,
+  borderStyles,
+  borderWidths,
+  breakpoints,
+  colors: {
+    base: 'light',
+    ...colors
+  },
   components: {},
-  fonts: fonts,
-  fontSizes: fontSizes,
-  fontWeights: fontWeights,
-  iconSizes: iconSizes,
-  lineHeights: lineHeights,
-  palette: palette,
+  fonts,
+  fontSizes,
+  fontWeights,
+  iconSizes,
+  lineHeights,
+  palette,
   rtl: false,
-  shadowWidths: shadowWidths,
-  shadows: shadows,
-  space: space
+  shadowWidths,
+  shadows,
+  space
 };
-
 function retrieveComponentStyles(componentId, props) {
-  var components = props.theme && props.theme.components;
-
+  const components = props.theme && props.theme.components;
   if (!components) {
     return undefined;
   }
-
-  var componentStyles = components[componentId];
-
+  const componentStyles = components[componentId];
   if (typeof componentStyles === 'function') {
     return componentStyles(props);
   }
-
   return componentStyles;
 }
-
-var DEFAULT_SHADE = 600;
-
-var adjust = function adjust(color, expected, actual) {
+const DEFAULT_SHADE = 600;
+const adjust = (color, expected, actual) => {
   if (expected !== actual) {
-    var amount = Math.abs(expected - actual) / 100 * 0.05;
+    const amount = Math.abs(expected - actual) / 100 * 0.05;
     return expected > actual ? curriedDarken$1(amount, color) : curriedLighten$1(amount, color);
   }
-
   return color;
 };
-
-function getColor(hue) {
-  var shade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULT_SHADE;
-  var theme = arguments.length > 2 ? arguments[2] : undefined;
-  var transparency = arguments.length > 3 ? arguments[3] : undefined;
-  var retVal;
-
+const getColor = lodash_memoize(function (hue) {
+  let shade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULT_SHADE;
+  let theme = arguments.length > 2 ? arguments[2] : undefined;
+  let transparency = arguments.length > 3 ? arguments[3] : undefined;
+  let retVal;
   if (isNaN(shade)) {
     return undefined;
   }
-
-  var palette = theme && theme.palette ? theme.palette : DEFAULT_THEME.palette;
-  var colors = theme && theme.colors ? theme.colors : DEFAULT_THEME.colors;
-
-  var _hue;
-
+  const palette = theme && theme.palette ? theme.palette : DEFAULT_THEME.palette;
+  const colors = theme && theme.colors ? theme.colors : DEFAULT_THEME.colors;
+  let _hue;
   if (typeof hue === 'string') {
     _hue = colors[hue] || hue;
   } else {
     _hue = hue;
   }
-
   if (Object.prototype.hasOwnProperty.call(palette, _hue)) {
     _hue = palette[_hue];
   }
-
-  if (_typeof(_hue) === 'object') {
+  if (typeof _hue === 'object') {
     retVal = _hue[shade];
-
     if (!retVal) {
-      var _shade = Object.keys(_hue).map(function (hueKey) {
-        return parseInt(hueKey, 10);
-      }).reduce(function (previous, current) {
+      const _shade = Object.keys(_hue).map(hueKey => parseInt(hueKey, 10)).reduce((previous, current) => {
         return Math.abs(current - shade) < Math.abs(previous - shade) ? current : previous;
       });
-
       retVal = adjust(_hue[_shade], shade, _shade);
     }
   } else {
     retVal = adjust(_hue, shade, DEFAULT_SHADE);
   }
-
   if (transparency) {
     retVal = rgba(retVal, transparency);
   }
-
   return retVal;
-}
-
+}, (hue, shade, theme, transparency) => JSON.stringify({
+  hue,
+  shade,
+  palette: theme?.palette,
+  colors: theme?.colors,
+  transparency
+}));
+const getFocusBoxShadow = _ref => {
+  let {
+    boxShadow,
+    inset = false,
+    hue = 'primaryHue',
+    shade = DEFAULT_SHADE,
+    shadowWidth = 'md',
+    spacerHue = 'background',
+    spacerShade = DEFAULT_SHADE,
+    spacerWidth = 'xs',
+    theme = DEFAULT_THEME
+  } = _ref;
+  const color = getColor(hue, shade, theme);
+  const shadow = theme.shadows[shadowWidth](color);
+  if (spacerWidth === null) {
+    return `${inset ? 'inset' : ''} ${shadow}`;
+  }
+  const spacerColor = getColor(spacerHue, spacerShade, theme);
+  const retVal = `
+    ${inset ? 'inset' : ''} ${theme.shadows[spacerWidth](spacerColor)},
+    ${inset ? 'inset' : ''} ${shadow}`;
+  return boxShadow ? `${retVal}, ${boxShadow}` : retVal;
+};
 function getLineHeight(height, fontSize) {
-  var _getValueAndUnit = getValueAndUnit(height.toString()),
-      _getValueAndUnit2 = _slicedToArray(_getValueAndUnit, 2),
-      heightValue = _getValueAndUnit2[0],
-      heightUnit = _getValueAndUnit2[1];
-
-  var _getValueAndUnit3 = getValueAndUnit(fontSize.toString()),
-      _getValueAndUnit4 = _slicedToArray(_getValueAndUnit3, 2),
-      fontSizeValue = _getValueAndUnit4[0],
-      fontSizeUnit = _getValueAndUnit4[1];
-
-  var PIXELS = 'px';
-
+  const [heightValue, heightUnit] = getValueAndUnit(height.toString());
+  const [fontSizeValue, fontSizeUnit] = getValueAndUnit(fontSize.toString());
+  const PIXELS = 'px';
   if (heightUnit && heightUnit !== PIXELS) {
-    throw new Error("Unexpected `height` with '".concat(heightUnit, "' units."));
+    throw new Error(`Unexpected \`height\` with '${heightUnit}' units.`);
   }
-
   if (fontSizeUnit && fontSizeUnit !== PIXELS) {
-    throw new Error("Unexpected `fontSize` with '".concat(fontSizeUnit, "' units."));
+    throw new Error(`Unexpected \`fontSize\` with '${fontSizeUnit}' units.`);
   }
-
   return heightValue / fontSizeValue;
 }
+const useText = function (component, props, name, text) {
+  let condition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+  const value = condition ? props[name] : undefined;
+  return React.useMemo(() => {
+    if (condition) {
+      if (name === 'children') {
+        throw new Error('Error: `children` is not a valid `useText` prop.');
+      } else if (value === null || value === '') {
+        throw new Error(component.displayName ? `Error: you must provide a valid \`${name}\` text value for <${component.displayName}>.` : `Error: you must provide a valid \`${name}\` text value.`);
+      } else if (value === undefined) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(component.displayName ? `Warning: you did not provide a customized/translated \`${name}\` text value for <${component.displayName}>. Zendesk Garden is rendering <${component.displayName} ${name}="${text}"> by default.` : `Warning: you did not provide a customized/translated \`${name}\` text value. Zendesk Garden is rendering ${name}="${text}" by default.`);
+        }
+        return text;
+      }
+    }
+    return value;
+  }, [component.displayName, value, name, text, condition]);
+};
+const SELECTOR_FOCUS_VISIBLE = '&:focus-visible, &[data-garden-focus-visible="true"]';
+const focusStyles = _ref => {
+  let {
+    condition = true,
+    selector = SELECTOR_FOCUS_VISIBLE,
+    shadowWidth = 'md',
+    spacerWidth = 'xs',
+    styles: {
+      boxShadow,
+      ...styles
+    } = {},
+    theme,
+    ...options
+  } = _ref;
+  const _boxShadow = condition ? getFocusBoxShadow({
+    boxShadow,
+    shadowWidth,
+    spacerWidth,
+    theme,
+    ...options
+  }) : boxShadow;
+  let outline;
+  let outlineOffset;
+  if (spacerWidth === null) {
+    outline = theme.shadowWidths[shadowWidth];
+  } else {
+    outline = `${math(`${theme.shadowWidths[shadowWidth]} - ${theme.shadowWidths[spacerWidth]}`)} solid transparent`;
+    outlineOffset = theme.shadowWidths[spacerWidth];
+  }
+  return styled.css(["&:focus{outline:none;}", "{outline:", ";outline-offset:", ";box-shadow:", ";", "}"], selector, outline, outlineOffset, _boxShadow, styles);
+};
+
 /**
  * Copyright Zendesk, Inc.
  *
@@ -5773,108 +5726,57 @@ function getLineHeight(height, fontSize) {
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-
 function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends$1.apply(this, arguments);
 }
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-var SIZE = ['small', 'medium', 'large'];
-var _excluded$1 = ["children"];
-var COMPONENT_ID$2 = 'tags.avatar';
-var StyledAvatar = styled__default["default"](function (_ref) {
-  var children = _ref.children,
-      props = _objectWithoutProperties(_ref, _excluded$1);
-
+const SIZE = ['small', 'medium', 'large'];
+const COMPONENT_ID$2 = 'tags.avatar';
+const StyledAvatar = styled__default["default"](_ref => {
+  let {
+    children,
+    ...props
+  } = _ref;
   return React__default["default"].cloneElement(React.Children.only(children), props);
 }).attrs({
   'data-garden-id': COMPONENT_ID$2,
-  'data-garden-version': '8.53.2'
+  'data-garden-version': '8.70.0'
 }).withConfig({
   displayName: "StyledAvatar",
   componentId: "sc-3kdmgt-0"
-})(["flex-shrink:0;font-size:0;", ";"], function (props) {
-  return retrieveComponentStyles(COMPONENT_ID$2, props);
-});
+})(["flex-shrink:0;font-size:0;", ";"], props => retrieveComponentStyles(COMPONENT_ID$2, props));
 StyledAvatar.defaultProps = {
   theme: DEFAULT_THEME
 };
-var COMPONENT_ID$1 = 'tags.close';
-var StyledClose = styled__default["default"].div.attrs({
+const COMPONENT_ID$1 = 'tags.close';
+const StyledClose = styled__default["default"].button.attrs({
   'data-garden-id': COMPONENT_ID$1,
-  'data-garden-version': '8.53.2',
-  'aria-label': 'Press delete to remove'
+  'data-garden-version': '8.70.0'
 }).withConfig({
   displayName: "StyledClose",
   componentId: "sc-d6lrpn-0"
-})(["display:flex;flex-shrink:0;align-items:center;justify-content:center;transition:opacity 0.25s ease-in-out;opacity:0.8;border:0;cursor:pointer;padding:0;font-size:0;&:hover{opacity:0.9;}&:focus{outline:none;}", ";"], function (props) {
-  return retrieveComponentStyles(COMPONENT_ID$1, props);
-});
+})(["display:flex;flex-shrink:0;align-items:center;justify-content:center;transition:opacity 0.25s ease-in-out;opacity:0.8;border:0;background:transparent;cursor:pointer;padding:0;color:inherit;font-size:0;appearance:none;&:hover{opacity:0.9;}&:focus{outline:none;}", ";"], props => retrieveComponentStyles(COMPONENT_ID$1, props));
 StyledClose.defaultProps = {
   theme: DEFAULT_THEME
 };
-var COMPONENT_ID = 'tags.tag_view';
-
-var colorStyles = function colorStyles(props) {
-  var backgroundColor;
-  var boxShadowColor;
-  var foregroundColor;
-  var closeColor;
-
+const COMPONENT_ID = 'tags.tag_view';
+const colorStyles = props => {
+  let backgroundColor;
+  let foregroundColor;
+  let closeColor;
   if (props.hue) {
-    var shade = props.hue === 'yellow' ? 400 : 600;
+    const shade = props.hue === 'yellow' ? 400 : 600;
     backgroundColor = getColor(props.hue, shade, props.theme);
-    boxShadowColor = getColor(props.hue, shade, props.theme, 0.35);
-
     if (props.hue === 'yellow' || props.hue === 'lemon') {
       foregroundColor = getColor('yellow', 800, props.theme);
     } else {
@@ -5882,22 +5784,22 @@ var colorStyles = function colorStyles(props) {
     }
   } else {
     backgroundColor = getColor('neutralHue', 200, props.theme);
-    boxShadowColor = getColor('neutralHue', 600, props.theme, 0.35);
     foregroundColor = getColor('neutralHue', 700, props.theme);
     closeColor = getColor('neutralHue', 600, props.theme);
   }
-
-  return styled.css(["background-color:", ";color:", ";&:hover{color:", ";}&:focus{box-shadow:", ";}& ", "{color:", ";}"], backgroundColor, foregroundColor, foregroundColor, props.theme.shadows.sm(boxShadowColor), StyledClose, closeColor);
+  return styled.css(["background-color:", ";color:", ";&:hover{color:", ";}", " & ", "{color:", ";}"], backgroundColor, foregroundColor, foregroundColor, focusStyles({
+    theme: props.theme,
+    shadowWidth: 'sm',
+    selector: '&:focus'
+  }), StyledClose, closeColor);
 };
-
-var sizeStyles = function sizeStyles(props) {
-  var borderRadius;
-  var padding;
-  var height;
-  var fontSize;
-  var minWidth;
-  var avatarSize;
-
+const sizeStyles = props => {
+  let borderRadius;
+  let padding;
+  let height;
+  let fontSize;
+  let minWidth;
+  let avatarSize;
   if (props.size === 'small') {
     borderRadius = props.theme.borderRadii.sm;
     padding = props.theme.space.base;
@@ -5917,11 +5819,9 @@ var sizeStyles = function sizeStyles(props) {
     fontSize = props.theme.fontSizes.sm;
     avatarSize = props.theme.space.base * 4;
   }
-
-  var avatarBorderRadius = props.size === 'large' ? math("".concat(borderRadius, " - 1")) : borderRadius;
-  var avatarMargin = (height - avatarSize) / 2;
-  var avatarTextMargin = props.isRound ? avatarMargin : avatarMargin * 2;
-
+  let avatarBorderRadius = props.size === 'large' ? math(`${borderRadius} - 1`) : borderRadius;
+  const avatarMargin = (height - avatarSize) / 2;
+  const avatarTextMargin = props.isRound ? avatarMargin : avatarMargin * 2;
   if (props.isRound) {
     borderRadius = '50%';
     padding = 0;
@@ -5930,7 +5830,6 @@ var sizeStyles = function sizeStyles(props) {
   } else if (props.isPill) {
     borderRadius = '100px';
     avatarBorderRadius = '50%';
-
     if (props.size === 'small') {
       padding = props.theme.space.base * 1.5;
       minWidth = props.theme.space.base * 6;
@@ -5940,60 +5839,34 @@ var sizeStyles = function sizeStyles(props) {
       minWidth = props.theme.space.base * 7.5;
     }
   }
-
-  return styled.css(["border-radius:", ";padding:0 ", "px;min-width:", ";height:", "px;line-height:", ";font-size:", ";& > *{width:100%;min-width:", ";}& ", "{margin-", ":-", "px;margin-", ":", "px;border-radius:", ";width:", "px;min-width:", "px;height:", "px;}& ", "{margin-", ":-", "px;border-radius:", ";width:", "px;height:", "px;}"], borderRadius, padding, minWidth ? "".concat(minWidth, "px") : "calc(".concat(padding * 2, "px + 1ch)"), height, getLineHeight(height, fontSize), fontSize, minWidth ? "".concat(minWidth - padding * 2, "px") : '1ch', StyledAvatar, props.theme.rtl ? 'right' : 'left', padding - avatarMargin, props.theme.rtl ? 'left' : 'right', avatarTextMargin, avatarBorderRadius, avatarSize, avatarSize, avatarSize, StyledClose, props.theme.rtl ? 'left' : 'right', padding, borderRadius, height, height);
+  return styled.css(["border-radius:", ";padding:0 ", "px;min-width:", ";height:", "px;line-height:", ";font-size:", ";& > *{width:100%;min-width:", ";}& ", "{margin-", ":-", "px;margin-", ":", "px;border-radius:", ";width:", "px;min-width:", "px;height:", "px;}& ", "{margin-", ":-", "px;border-radius:", ";width:", "px;height:", "px;}"], borderRadius, padding, minWidth ? `${minWidth}px` : `calc(${padding * 2}px + 1ch)`, height, getLineHeight(height, fontSize), fontSize, minWidth ? `${minWidth - padding * 2}px` : '1ch', StyledAvatar, props.theme.rtl ? 'right' : 'left', padding - avatarMargin, props.theme.rtl ? 'left' : 'right', avatarTextMargin, avatarBorderRadius, avatarSize, avatarSize, avatarSize, StyledClose, props.theme.rtl ? 'left' : 'right', padding, borderRadius, height, height);
 };
-
-var StyledTag = styled__default["default"].div.attrs({
+const StyledTag = styled__default["default"].div.attrs({
   'data-garden-id': COMPONENT_ID,
-  'data-garden-version': '8.53.2'
+  'data-garden-version': '8.70.0'
 }).withConfig({
   displayName: "StyledTag",
   componentId: "sc-1jvbe03-0"
-})(["display:inline-flex;flex-wrap:nowrap;align-items:center;justify-content:", ";transition:box-shadow 0.1s ease-in-out;box-sizing:border-box;border:0;max-width:100%;overflow:hidden;vertical-align:middle;text-decoration:none;white-space:nowrap;font-weight:", ";direction:", ";", ";&:hover{cursor:default;text-decoration:none;}&:focus{outline:none;}&:link:hover,&:visited:hover{cursor:pointer;}&:any-link:hover{cursor:pointer;}&[data-garden-focus-visible]{text-decoration:none;}", ";& > *{overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;}& b{font-weight:", ";}& ", "{display:", ";}& ", "{display:", ";}", ";"], function (props) {
-  return props.isRound && 'center';
-}, function (props) {
-  return !props.isRegular && props.theme.fontWeights.semibold;
-}, function (props) {
-  return props.theme.rtl ? 'rtl' : 'ltr';
-}, function (props) {
-  return sizeStyles(props);
-}, function (props) {
-  return colorStyles(props);
-}, function (props) {
-  return props.theme.fontWeights.semibold;
-}, StyledAvatar, function (props) {
-  return (props.isRound || props.size === 'small') && 'none';
-}, StyledClose, function (props) {
-  return props.isRound && 'none';
-}, function (props) {
-  return retrieveComponentStyles(COMPONENT_ID, props);
-});
+})(["display:inline-flex;flex-wrap:nowrap;align-items:center;justify-content:", ";transition:box-shadow 0.1s ease-in-out;box-sizing:border-box;border:0;max-width:100%;overflow:hidden;vertical-align:middle;text-decoration:none;white-space:nowrap;font-weight:", ";direction:", ";", ";&:hover{cursor:default;text-decoration:none;}&:link:hover,&:visited:hover{cursor:pointer;}&:any-link:hover{cursor:pointer;}", "{text-decoration:none;}", ";& > *{overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;}& b{font-weight:", ";}& ", "{display:", ";}& ", "{display:", ";}", ";"], props => props.isRound && 'center', props => !props.isRegular && props.theme.fontWeights.semibold, props => props.theme.rtl ? 'rtl' : 'ltr', props => sizeStyles(props), SELECTOR_FOCUS_VISIBLE, props => colorStyles(props), props => props.theme.fontWeights.semibold, StyledAvatar, props => (props.isRound || props.size === 'small') && 'none', StyledClose, props => props.isRound && 'none', props => retrieveComponentStyles(COMPONENT_ID, props));
 StyledTag.defaultProps = {
   size: 'medium',
   theme: DEFAULT_THEME
 };
-
 var _path;
-
 function _extends() {
-  _extends = Object.assign || function (target) {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends.apply(this, arguments);
 }
-
 var SvgXStroke = function SvgXStroke(props) {
   return /*#__PURE__*/React__namespace.createElement("svg", _extends({
     xmlns: "http://www.w3.org/2000/svg",
@@ -6008,27 +5881,27 @@ var SvgXStroke = function SvgXStroke(props) {
     d: "M3 9l6-6m0 6L3 3"
   })));
 };
-
-var CloseComponent = React.forwardRef(function (props, ref) {
+const CloseComponent = React.forwardRef((props, ref) => {
+  const ariaLabel = useText(CloseComponent, props, 'aria-label', 'Remove');
   return React__default["default"].createElement(StyledClose, _extends$1({
-    ref: ref
-  }, props), React__default["default"].createElement(SvgXStroke, null));
+    ref: ref,
+    "aria-label": ariaLabel
+  }, props, {
+    type: "button",
+    tabIndex: -1
+  }), React__default["default"].createElement(SvgXStroke, null));
 });
 CloseComponent.displayName = 'Tag.Close';
-var Close$1 = CloseComponent;
-
-var AvatarComponent = function AvatarComponent(props) {
-  return React__default["default"].createElement(StyledAvatar, props);
-};
-
+const Close$1 = CloseComponent;
+const AvatarComponent = props => React__default["default"].createElement(StyledAvatar, props);
 AvatarComponent.displayName = 'Tag.Avatar';
-var Avatar = AvatarComponent;
-var _excluded = ["size", "hue"];
-var TagComponent = React.forwardRef(function (_ref, ref) {
-  var size = _ref.size,
-      hue = _ref.hue,
-      otherProps = _objectWithoutProperties(_ref, _excluded);
-
+const Avatar = AvatarComponent;
+const TagComponent = React.forwardRef((_ref, ref) => {
+  let {
+    size,
+    hue,
+    ...otherProps
+  } = _ref;
   return React__default["default"].createElement(StyledTag, _extends$1({
     ref: ref,
     size: size,
@@ -6046,32 +5919,28 @@ TagComponent.propTypes = {
 TagComponent.defaultProps = {
   size: 'medium'
 };
-var Tag = TagComponent;
+const Tag = TagComponent;
 Tag.Avatar = Avatar;
 Tag.Close = Close$1;
-
 var useTheme = function () {
   return React.useContext(styled.ThemeContext);
-}; // export const setThemeContext = (ctx :)
-
+};
+// export const setThemeContext = (ctx :)
 
 var Close = styled__default["default"](Tag.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\n"], ["\n\n"])));
 exports.Tag = React.forwardRef(function (_a, ref) {
   var children = _a.children,
-      className = _a.className,
-      color = _a.color,
-      onClose = _a.onClose,
-      success = _a.success,
-      props = __rest(_a, ["children", "className", "color", "onClose", "success"]);
-
+    className = _a.className,
+    color = _a.color,
+    onClose = _a.onClose,
+    success = _a.success,
+    props = __rest(_a, ["children", "className", "color", "onClose", "success"]);
   var theme = useTheme();
-
   var finalizedColor = function () {
     if (success) return theme.styles.colorSuccess;
     if (color) return color;
     return undefined;
   };
-
   var onCloseClicked = React.useCallback(function (e) {
     e.preventDefault();
     e.stopPropagation();

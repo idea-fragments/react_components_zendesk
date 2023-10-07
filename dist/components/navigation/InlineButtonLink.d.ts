@@ -1,0 +1,2 @@
+export declare const InlineButtonLink: import("styled-components").StyledComponent<(props: any) => import("react/jsx-runtime").JSX.Element, import("styled-components").DefaultTheme, {}, never>;
+//# sourceMappingURL=InlineButtonLink.d.ts.map
