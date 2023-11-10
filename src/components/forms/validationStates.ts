@@ -1,6 +1,6 @@
 export const VALIDATION_STATES = {
-  ERROR:   "error",
+  ERROR: "error",
   WARNING: "warning",
   SUCCESS: "success",
-  NONE:    undefined,
+  NONE: undefined,
 } as const

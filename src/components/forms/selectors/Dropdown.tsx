@@ -9,11 +9,8 @@ import {
   Multiselect as ZenMultiSelect,
   Select as ZenSelect,
   Trigger,
-}                            from "@zendeskgarden/react-dropdowns"
-import {
-  getItemType,
-  Item
-}                            from "components/forms/selectors/Dropdown/Item"
+} from "@zendeskgarden/react-dropdowns"
+import { getItemType, Item } from "components/forms/selectors/Dropdown/Item"
 import {
   MultiSelectorProps,
   OnItemSelectedFunc,
@@ -21,10 +18,10 @@ import {
   SelectorOption,
   SelectorProps,
   StateChange,
-}                            from "components/forms/selectors/types"
+} from "components/forms/selectors/types"
 import { VALIDATION_STATES } from "components/forms/validationStates"
-import { Loadable }          from "components/loaders/Loadable"
-import { debounce }          from "lodash"
+import { Loadable } from "components/loaders/Loadable"
+import { debounce } from "lodash"
 import React, {
   ComponentType,
   FC,
@@ -33,28 +30,18 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
-}                            from "react"
-import styled, {
-  FlattenInterpolation,
-  ThemeProps
-}                            from "styled-components"
-import { CSS }               from "styles/types"
-import { FONT_SIZES }        from "styles/typography"
-import {
-  isEmpty,
-  isNotEmpty
-}                            from "utils/arrayHelpers"
-import { DO_NOTHING }        from "utils/functionHelpers"
-import { Logger }            from "utils/logging/Logger"
-import {
-  isArray,
-  isNumber,
-  isString
-}                            from "utils/typeCheckers"
+  useState,
+} from "react"
+import styled, { FlattenInterpolation, ThemeProps } from "styled-components"
+import { CSS } from "styles/types"
+import { FONT_SIZES } from "styles/typography"
+import { isEmpty, isNotEmpty } from "utils/arrayHelpers"
+import { DO_NOTHING } from "utils/functionHelpers"
+import { Logger } from "utils/logging/Logger"
+import { isArray, isNumber, isString } from "utils/typeCheckers"
 
 export type MenuPlacement =
-  "start"
+  | "start"
   | "auto"
   | "top"
   | "top-start"
@@ -69,100 +56,103 @@ export type MenuPlacement =
   | "start-bottom"
 
 type OptionalSelectorProps = {
-  keyField?: string,
-  labelField?: string,
+  keyField?: string
+  labelField?: string
 }
 
 type CommonProps = {
-  _css?: CSS,
-  appendMenuToNode?: HTMLElement,
-  async?: boolean,
-  isOpen?: boolean,
-  maxMenuHeight?: string,
-  menuCSS?: string | FlattenInterpolation<ThemeProps<any>>,
-  menuItemComponent?: ComponentType<any>,
-  placement?: MenuPlacement,
-  returnItemOnChange?: boolean,
-  shouldFilterOptions?: boolean,
-  small?: boolean,
-  trigger?: ReactNode,
-  useRawOptions?: boolean,
+  _css?: CSS
+  appendMenuToNode?: HTMLElement
+  async?: boolean
+  isOpen?: boolean
+  maxMenuHeight?: string
+  menuCSS?: string | FlattenInterpolation<ThemeProps<any>>
+  menuItemComponent?: ComponentType<any>
+  placement?: MenuPlacement
+  returnItemOnChange?: boolean
+  shouldFilterOptions?: boolean
+  small?: boolean
+  trigger?: ReactNode
+  useRawOptions?: boolean
 }
 
-type SelectorsProps = (CommonProps & SelectorProps)
-                      | (CommonProps & MultiSelectorProps)
+type SelectorsProps =
+  | (CommonProps & SelectorProps)
+  | (CommonProps & MultiSelectorProps)
 
-type Props =
-  Omit<SelectorsProps, "keyField" | "labelField">
-  & OptionalSelectorProps
+type Props = Omit<SelectorsProps, "keyField" | "labelField"> &
+  OptionalSelectorProps
 
 const CLEAR_OPTION = {
-  label:          "-- None --",
-  value:          "_cleared",
+  label: "-- None --",
+  value: "_cleared",
   isClearingItem: true,
 }
 
 const logger = new Logger("Dropdown")
 
 export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
-  const [state, setState]                         = useState({ isOpen: false })
-  const controlledState                           = { ...state, ...props }
+  const [state, setState] = useState({ isOpen: false })
+  const controlledState = { ...state, ...props }
   const [filteringOptions, setFilteringOptionsTo] = useState<boolean>(false)
-  const [searchFilter, setSearchFilter]           = useState<string>("")
+  const [searchFilter, setSearchFilter] = useState<string>("")
 
-  const [
-          filteredOptions, setFilteredOptions,
-        ] = useState<SelectorOption[]>(props.options)
+  const [filteredOptions, setFilteredOptions] = useState<SelectorOption[]>(
+    props.options,
+  )
 
   const {
-          appendMenuToNode,
-          async,
-          children,
-          className,
-          clearable,
-          shouldFilterOptions,
-          hint,
-          keyField,
-          label,
-          labelField,
-          maxMenuHeight,
-          menuCSS,
-          menuItemComponent,
-          menuPopperModifiers,
-          options,
-          placement,
-          returnItemOnChange,
-          small,
-          trigger,
-          useRawOptions,
-          validation,
-          onChange,
-          onStateChange,
-        } = props
+    appendMenuToNode,
+    async,
+    children,
+    className,
+    clearable,
+    shouldFilterOptions,
+    hint,
+    keyField,
+    label,
+    labelField,
+    maxMenuHeight,
+    menuCSS,
+    menuItemComponent,
+    menuPopperModifiers,
+    options,
+    placement,
+    returnItemOnChange,
+    small,
+    trigger,
+    useRawOptions,
+    validation,
+    onChange,
+    onStateChange,
+  } = props
 
-  const { selectedKey }  = props as SelectorProps
+  const { selectedKey } = props as SelectorProps
   const { selectedKeys } = props as MultiSelectorProps
 
   // TODO see if this function needs to be removed if we're also filtering
   // in the SearchableSelector component
-  const filterFunc = useCallback((value: string) => {
-    const searchText    = value.trim().toLowerCase()
-    let matchingOptions = options
+  const filterFunc = useCallback(
+    (value: string) => {
+      const searchText = value.trim().toLowerCase()
+      let matchingOptions = options
 
-    if (searchText !== "") {
-      matchingOptions = options.filter(option => {
-        return (
-          option[labelField!]
-            .trim()
-            .toLowerCase()
-            .indexOf(value.trim().toLowerCase()) !== -1
-        )
-      })
-    }
+      if (searchText !== "") {
+        matchingOptions = options.filter((option) => {
+          return (
+            option[labelField!]
+              .trim()
+              .toLowerCase()
+              .indexOf(value.trim().toLowerCase()) !== -1
+          )
+        })
+      }
 
-    setFilteredOptions(matchingOptions)
-    setFilteringOptionsTo(false)
-  }, [options, labelField])
+      setFilteredOptions(matchingOptions)
+      setFilteringOptionsTo(false)
+    },
+    [options, labelField],
+  )
 
   const filterMatchingOptionsRef = useRef(debounce(filterFunc, 300))
 
@@ -180,31 +170,32 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
     filterMatchingOptionsRef.current(searchFilter)
   }, [searchFilter, shouldFilterOptions])
 
-  let { message }   = props
-  const optionNodes = useRawOptions ? options as JSX.Element[] : createOptions(
-    shouldFilterOptions ? filteredOptions : options,
-    keyField!,
-    labelField!,
-    menuItemComponent,
-    filteringOptions,
-    clearable,
-  )
-  message           = validation?.message ?? message
-  const messageNode = message
-                      ?
-                      <Message validation={validation!.validation}>
-                        {message}
-                      </Message>
-                      : null
-  const hintNode    = hint ? <Hint>{hint}</Hint> : null
-  const labelNode   = label ? <Label>{label}</Label> : null
+  let { message } = props
+  const optionNodes = useRawOptions
+    ? (options as JSX.Element[])
+    : createOptions(
+        shouldFilterOptions ? filteredOptions : options,
+        keyField!,
+        labelField!,
+        menuItemComponent,
+        filteringOptions,
+        clearable,
+      )
+  message = validation?.message ?? message
+  const messageNode = message ? (
+    <Message validation={validation!.validation}>{message}</Message>
+  ) : null
+  const hintNode = hint ? <Hint>{hint}</Hint> : null
+  const labelNode = label ? <Label>{label}</Label> : null
 
-  const handleChange = (item: SelectorOption | SelectorOption[] | SelectorItemKey) => {
+  const handleChange = (
+    item: SelectorOption | SelectorOption[] | SelectorItemKey,
+  ) => {
     logger.writeInfo("selection made", item)
     setSearchFilter("")
 
     if ((item as SelectorOption)?.isClearingItem) {
-      (onChange as OnItemSelectedFunc)!(null)
+      ;(onChange as OnItemSelectedFunc)!(null)
       return
     }
 
@@ -219,7 +210,6 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
       return
     }
 
-
     if (!item || isString(item) || isNumber(item)) {
       logger.writeInfo("Received SelectorItemKey from downshift")
       // @ts-ignore
@@ -230,7 +220,9 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
     onChange!((item as SelectorOption)[keyField!])
   }
 
-  const handleMultiSelectChange = (items: Array<SelectorItemKey | SelectorOption>) => {
+  const handleMultiSelectChange = (
+    items: Array<SelectorItemKey | SelectorOption>,
+  ) => {
     if (useRawOptions || returnItemOnChange) {
       const rawSet = new Set(items)
       // @ts-ignore
@@ -256,7 +248,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
 
     onStateChange!({
       ...changes,
-      inputValue:   searchFilter,
+      inputValue: searchFilter,
       selectedItem: item.isClearingItem ? null : item,
     })
 
@@ -285,9 +277,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
     <ZenDropdown
       inputValue={searchFilter}
       selectedItem={selectedKey}
-      selectedItems={selectedKeys
-                     ? [...new Set(selectedKeys)]
-                     : undefined}
+      selectedItems={selectedKeys ? [...new Set(selectedKeys)] : undefined}
       isOpen={controlledState.isOpen}
       onInputValueChange={(val) => {
         logger.writeInfo("Input value change", val)
@@ -302,53 +292,51 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
           }
 
           return item
-        }
-      }}
-    >
-      {
-        trigger
-        ? <Trigger>{trigger}</Trigger>
-        : <Field className={className}>
+        },
+      }}>
+      {trigger ? (
+        <Trigger>{trigger}</Trigger>
+      ) : (
+        <Field className={className}>
           {labelNode}
           {hintNode}
           {children}
           {messageNode}
         </Field>
-      }
+      )}
 
-      {controlledState.isOpen
-       ? (
-         // @ts-ignore
-         <StyledMenu _css={menuCSS ?? ""}
-                     appendToNode={appendMenuToNode}
-                     isCompact={small}
-                     maxHeight={maxMenuHeight}
-                     placement={placement}
-                     popperModifiers={menuPopperModifiers}
-         >
-           {
-             async
-             ? <StyledLoadable showSpinner={controlledState.isOpen && !optionsLoaded}>
-               {optionNodes}
-             </StyledLoadable>
-             : optionNodes
-           }
-         </StyledMenu>
-       )
-       : null}
-
+      {controlledState.isOpen ? (
+        // @ts-ignore
+        <StyledMenu
+          _css={menuCSS ?? ""}
+          appendToNode={appendMenuToNode}
+          isCompact={small}
+          maxHeight={maxMenuHeight}
+          placement={placement}
+          popperModifiers={menuPopperModifiers}>
+          {async ? (
+            <StyledLoadable
+              showSpinner={controlledState.isOpen && !optionsLoaded}>
+              {optionNodes}
+            </StyledLoadable>
+          ) : (
+            optionNodes
+          )}
+        </StyledMenu>
+      ) : null}
     </ZenDropdown>
   )
 }
 
 // @ts-ignore
 Dropdown = styled(Dropdown)`
-  &&, && * {
+  &&,
+  && * {
     font-size: inherit;
   }
 
   && {
-    ${({ fluid }) => fluid ? "width: 100%;" : ""}
+    ${({ fluid }) => (fluid ? "width: 100%;" : "")}
   }
 
   ${({ _css }) => _css}
@@ -361,9 +349,12 @@ const Message = styled(ZenMessage)`
 `
 
 const StyledMenu = styled(Menu)`
-  && { width: 100%; }
+  && {
+    width: 100%;
+  }
 
-  &&, && * {
+  &&,
+  && * {
     font-size: inherit;
   }
 
@@ -376,25 +367,29 @@ const StyledLoadable = styled(Loadable)`
 `
 
 Dropdown.defaultProps = {
-  async:              false,
-  useRawOptions:      false,
+  async: false,
+  useRawOptions: false,
   returnItemOnChange: false,
-  validation:         { validation: VALIDATION_STATES.NONE },
+  validation: { validation: VALIDATION_STATES.NONE },
   // maxMenuHeight: "20rem",
-  onChange:      DO_NOTHING,
+  onChange: DO_NOTHING,
   onStateChange: DO_NOTHING,
 }
 
 export const Autocomplete = ZenAutocomplete as ComponentType<any>
-export const Select       = ZenSelect as ComponentType<any>
-export const MultiSelect  = styled(ZenMultiSelect as ComponentType<any>)`
+export const Select = ZenSelect as ComponentType<any>
+export const MultiSelect = styled(ZenMultiSelect as ComponentType<any>)`
   && {
-    div { max-width: 100%; }
+    div {
+      max-width: 100%;
+    }
   }
 `
 
 const Label = styled(ZenLabel)`
-  && { color: ${(p) => p.theme.styles.textColorPrimary}; }
+  && {
+    color: ${(p) => p.theme.styles.textColorPrimary};
+  }
 `
 
 const createOptions = (
@@ -409,26 +404,28 @@ const createOptions = (
   if (isEmpty(options)) return [<Item disabled>No matches found</Item>]
 
   const nodes = options.map((o) => {
-    const {
-            Component,
-            componentProps,
-            itemProps,
-            ...attrs
-          }        = o
+    const { Component, componentProps, itemProps, ...attrs } = o
     const ItemType = getItemType(attrs)
 
-    return <ItemType key={o[key]} value={o} {...itemProps}>
-      {
-        Component
-        ? <Component {...componentProps}>{attrs[label]}</Component>
-        : attrs[label]
-      }
-    </ItemType>
+    return (
+      <ItemType
+        key={o[key]}
+        value={o}
+        {...itemProps}>
+        {Component ? (
+          <Component {...componentProps}>{attrs[label]}</Component>
+        ) : (
+          attrs[label]
+        )}
+      </ItemType>
+    )
   })
 
   if (isClearable) {
     nodes.unshift(
-      <Item key={CLEAR_OPTION.value} value={CLEAR_OPTION}>
+      <Item
+        key={CLEAR_OPTION.value}
+        value={CLEAR_OPTION}>
         {CLEAR_OPTION.label}
       </Item>,
     )

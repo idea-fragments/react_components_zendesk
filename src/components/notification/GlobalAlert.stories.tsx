@@ -1,7 +1,7 @@
 import {
   GlobalAlert,
-  GlobalAlertProps
-} from "components/notification/GlobalAlert";
+  GlobalAlertProps,
+} from "components/notification/GlobalAlert"
 import React from "react"
 
 export default {
@@ -18,35 +18,37 @@ const Story = (args: Partial<GlobalAlertProps>) => {
     buttonText: "Button Text",
     showTitle: true,
   }
-  return <GlobalAlert
-    {...globalAlertProps}
-  />
+  return <GlobalAlert {...globalAlertProps} />
 }
 
-export const Info = Story.bind({});
+export const Info = Story.bind({})
 // @ts-ignore
-Info.args = {info: true}
+Info.args = { info: true }
 
-export const Danger = Story.bind({});
+export const Danger = Story.bind({})
 // @ts-ignore
-Danger.args = {danger: true}
+Danger.args = { danger: true }
 
-export const Warning = Story.bind({});
+export const Warning = Story.bind({})
 // @ts-ignore
-Warning.args = {warning: true}
+Warning.args = { warning: true }
 
-export const Success = Story.bind({});
+export const Success = Story.bind({})
 // @ts-ignore
-Success.args = {success: true}
+Success.args = { success: true }
 
-export const NoActionButton = Story.bind({});
+export const NoActionButton = Story.bind({})
 // @ts-ignore
-NoActionButton.args = {noActionButton: true, info: true}
+NoActionButton.args = { noActionButton: true, info: true }
 
-export const NotDismissible = Story.bind({});
+export const NotDismissible = Story.bind({})
 // @ts-ignore
-NotDismissible.args = {notDismissible: true, info: true}
+NotDismissible.args = { notDismissible: true, info: true }
 
-export const WithoutAllActions = Story.bind({});
+export const WithoutAllActions = Story.bind({})
 // @ts-ignore
-WithoutAllActions.args = {noActionButton: true, notDismissible: true, info: true}
+WithoutAllActions.args = {
+  noActionButton: true,
+  notDismissible: true,
+  info: true,
+}

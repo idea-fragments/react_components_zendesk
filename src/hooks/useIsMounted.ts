@@ -4,8 +4,10 @@ export const useIsMounted = () => {
   const isMounted = useRef<boolean>()
   useEffect(() => {
     isMounted.current = true
-    return () => { isMounted.current = false }
+    return () => {
+      isMounted.current = false
+    }
   }, [])
 
-  return () :boolean => !!isMounted.current
+  return (): boolean => !!isMounted.current
 }

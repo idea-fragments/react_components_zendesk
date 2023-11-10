@@ -1,9 +1,9 @@
 import { isNotLastIndex } from "utils/arrayHelpers"
-import { PromiseFunc }    from "utils/function.types"
+import { PromiseFunc } from "utils/function.types"
 
 type MaybePromiseFunc = PromiseFunc | ((...o: any) => any)
 
-export const DO_NOTHING = function(...args :any) {}
+export const DO_NOTHING = function (...args: any) {}
 
 export const flowInOrderAsync = (...funcs: MaybePromiseFunc[]): PromiseFunc => {
   const wrappedFuncs = funcs.map((func, i: number) => {
@@ -18,6 +18,7 @@ export const flowInOrderAsync = (...funcs: MaybePromiseFunc[]): PromiseFunc => {
   return async (...args) => wrappedFuncs[0](wrappedFuncs, ...args)
 }
 
-export const parseNumberAndCall = (action :(n :number) => void) => (s :string) => {
-  action(Number(s))
-}
+export const parseNumberAndCall =
+  (action: (n: number) => void) => (s: string) => {
+    action(Number(s))
+  }

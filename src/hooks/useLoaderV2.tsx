@@ -4,41 +4,45 @@ import React, {
   PropsWithChildren,
   useMemo,
   useState,
-  ComponentType
-}                            from "react"
-import { CSSProp }           from "styled-components"
+  ComponentType,
+} from "react"
+import { CSSProp } from "styled-components"
 
 type LoadingFunc<T> = (p: Promise<T>) => Promise<T>
-type LoaderProps = PropsWithChildren<{ as?: ComponentType, _css?: CSSProp }>
+type LoaderProps = PropsWithChildren<{ as?: ComponentType; _css?: CSSProp }>
 type Return<T> = {
-  isLoading: boolean,
-  Loader: FC<LoaderProps>,
-  withLoading: LoadingFunc<T>,
+  isLoading: boolean
+  Loader: FC<LoaderProps>
+  withLoading: LoadingFunc<T>
 }
 
-export const useLoaderV2 = <T, >(): Return<T> => {
+export const useLoaderV2 = <T,>(): Return<T> => {
   const [loading, setLoading] = useState<boolean>(false)
 
-  const withLoading = useMemo(() => (
-    async (p: Promise<T>): Promise<T> => {
-      setLoading(true)
-      let val
+  const withLoading = useMemo(
+    () =>
+      async (p: Promise<T>): Promise<T> => {
+        setLoading(true)
+        let val
 
-      try {
-        val = await p
-      } finally {
-        setLoading(false)
-      }
+        try {
+          val = await p
+        } finally {
+          setLoading(false)
+        }
 
-      return val
-    }
-  ), [])
+        return val
+      },
+    [],
+  )
 
   const Loader = useMemo((): FC<LoaderProps> => {
-    return (({ as, ...props }: LoaderProps) =>
-        <TranslucentLoader {...props}
-                           innerAs={as}
-                           isLoading={loading} />
+    return ({ as, ...props }: LoaderProps) => (
+      <TranslucentLoader
+        {...props}
+        innerAs={as}
+        isLoading={loading}
+      />
     )
   }, [loading])
 

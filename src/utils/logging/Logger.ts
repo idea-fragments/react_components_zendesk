@@ -1,9 +1,9 @@
 import { LoggerI } from "utils/logging/Logger.type"
 
 const LEVEL_STYLES = {
-  info:  "background: #499cc8; color: white;",
+  info: "background: #499cc8; color: white;",
   error: "background: #c14a4f; color: white;",
-  warn:  "background: #e0a270; color: black;",
+  warn: "background: #e0a270; color: black;",
 } as const
 
 export class Logger implements LoggerI {
@@ -13,19 +13,24 @@ export class Logger implements LoggerI {
     this.moduleName = moduleName
   }
 
-  log = (level: keyof typeof LEVEL_STYLES) => (...args: any) => {
-    if (typeof window === "undefined" ||
-        !window.DEBUG_MODULES.has(this.moduleName)) return
+  log =
+    (level: keyof typeof LEVEL_STYLES) =>
+    (...args: any) => {
+      if (
+        typeof window === "undefined" ||
+        !window.DEBUG_MODULES.has(this.moduleName)
+      )
+        return
 
-    console[level](
-      `%c${this.moduleName}`,
-      `${LEVEL_STYLES[level]} padding: 2px 6px;`,
-      ...args,
-    )
-  }
+      console[level](
+        `%c${this.moduleName}`,
+        `${LEVEL_STYLES[level]} padding: 2px 6px;`,
+        ...args,
+      )
+    }
 
-  writeInfo    = this.log("info")
-  writeError   = this.log("error")
+  writeInfo = this.log("info")
+  writeError = this.log("error")
   writeWarning = this.log("warn")
 }
 

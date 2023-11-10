@@ -1,94 +1,94 @@
 import { StyledProps } from "components/StyledProps.type"
-import { Nullable }    from "global"
+import { Nullable } from "global"
 
 export type ContainerStyles = {
-  background?: string,
-  borderRadius?: string,
-  height?: string,
-  margin?: string,
-  padding?: string,
-  shadow?: string,
-  zIndex?: number,
+  background?: string
+  borderRadius?: string
+  height?: string
+  margin?: string
+  padding?: string
+  shadow?: string
+  zIndex?: number
 }
 
 export type Styles = {
-  appBar: Required<Pick<ContainerStyles,
-    "background" | "height" | "shadow" | "zIndex">> &
-          {
-            screenPosition: "top" | "bottom",
-          },
+  appBar: Required<
+    Pick<ContainerStyles, "background" | "height" | "shadow" | "zIndex">
+  > & {
+    screenPosition: "top" | "bottom"
+  }
   border: {
-    color: string,
-  },
+    color: string
+  }
   buttons: {
-    textTransform: Nullable<string>,
-  },
-  colorAccent: string,
-  colorSecondary: string,
-  colorPrimary: string,
-  colorPrimaryDark: string,
-  colorWarning: string,
-  colorDanger: string,
-  colorSuccess: string,
-  container: { horizontalPadding: string },
-  font: { size: string },
+    textTransform: Nullable<string>
+  }
+  colorAccent: string
+  colorSecondary: string
+  colorPrimary: string
+  colorPrimaryDark: string
+  colorWarning: string
+  colorDanger: string
+  colorSuccess: string
+  container: { horizontalPadding: string }
+  font: { size: string }
   footer: {
     background: string
-  },
+  }
   infoPanel: {
-    background: string,
-  },
+    background: string
+  }
   modal: {
     backdrop: {
-      background: string,
+      background: string
     }
-  },
+  }
   nav: {
-    linkColor: string,
-  },
+    linkColor: string
+  }
   notifications: {
-    zIndex: number,
-  },
-  overlayBackground: string,
-  pageBackground: string,
+    zIndex: number
+  }
+  overlayBackground: string
+  pageBackground: string
   scrollbar: {
-    thumbColor: string,
-    trackColor: string,
-  },
-  scrollbarColor: string,
+    thumbColor: string
+    trackColor: string
+  }
+  scrollbarColor: string
   section: ContainerStyles & {
     body: {
-      padding: string,
-    },
-    header: {
-      padding: string,
+      padding: string
     }
-  },
+    header: {
+      padding: string
+    }
+  }
   sidebar: {
     actionButton: {
-      borderRadius: string,
-      color: string,
+      borderRadius: string
+      color: string
     }
-    background: string,
-    boxShadow: string,
-    padding: string,
-    width: string,
+    background: string
+    boxShadow: string
+    padding: string
+    width: string
     zIndex: number
-  },
-  table: { borderColor: string, borderSize: string, },
-  textColorDark: string,
-  textColorLight: string,
-  textColorOverPrimaryBg: string,
-  textColorPrimary: string,
-  textColorSecondary: string,
+  }
+  table: { borderColor: string; borderSize: string }
+  textColorDark: string
+  textColorLight: string
+  textColorOverPrimaryBg: string
+  textColorPrimary: string
+  textColorSecondary: string
   tooltip: {
-    darkBackground: string,
-  },
+    darkBackground: string
+  }
 
   getTextColorForBackground: (p: StyledProps<{ color: string }>) => string
 }
 
 export type Theme = {
-  isDark: boolean,
-  styles: Styles,
+  isDark: boolean
+  styles: Styles
 }

@@ -1,10 +1,5 @@
 import { useDeviceSizeWatcher } from "hooks/useDeviceSizeWatcher"
-import {
-  FC,
-  PropsWithChildren,
-  useEffect,
-  useState
-}                               from "react"
+import { FC, PropsWithChildren, useEffect, useState } from "react"
 
 export const ComputersOnly: FC<PropsWithChildren> = ({ children }) => {
   const { isSmallComputerOrLarger } = useDeviceSizeWatcher()

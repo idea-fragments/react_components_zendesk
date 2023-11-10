@@ -1,4 +1,4 @@
 export type Legendable = {
-    color? :string,
-    label :string,
+  color?: string
+  label: string
 } & any

@@ -1,26 +1,16 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-}                            from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { breakpointQueries } from "styles/breakpoints/breakpointQueries"
-import {
-  DEVICES,
-  DeviceSize
-}                            from "styles/breakpoints/breakpoints"
-
+import { DEVICES, DeviceSize } from "styles/breakpoints/breakpoints"
 
 export type Measurements = {
-  isLargeComputer: boolean,
-  isLargeTablet: boolean,
-  isLargeTabletOrLarger: boolean,
-  isLargeTabletOrSmaller: boolean,
-  isPhone: boolean,
-  isSmallComputer: boolean,
-  isSmallComputerOrLarger: boolean,
-  isTablet: boolean,
+  isLargeComputer: boolean
+  isLargeTablet: boolean
+  isLargeTabletOrLarger: boolean
+  isLargeTabletOrSmaller: boolean
+  isPhone: boolean
+  isSmallComputer: boolean
+  isSmallComputerOrLarger: boolean
+  isTablet: boolean
 }
 
 type Listener = (e: MediaQueryListEvent) => void
@@ -32,11 +22,12 @@ export const useDeviceSizeWatcher = (): Measurements => {
 
   const deviceListeners = useRef<Record<DeviceSize, Listener>>({})
 
-  const deviceMediaQueryLists: Record<DeviceSize, MediaQueryList> = useMemo(() => {
-    return Object.values(DEVICES).reduce((map, size) => {
-      return { ...map, [size]: window.matchMedia(queries[size]) }
-    }, {})
-  }, [queries])
+  const deviceMediaQueryLists: Record<DeviceSize, MediaQueryList> =
+    useMemo(() => {
+      return Object.values(DEVICES).reduce((map, size) => {
+        return { ...map, [size]: window.matchMedia(queries[size]) }
+      }, {})
+    }, [queries])
 
   const initChangeWatchers = useCallback(() => {
     Object.entries(deviceMediaQueryLists).forEach(([size, mql]) => {
@@ -62,22 +53,23 @@ export const useDeviceSizeWatcher = (): Measurements => {
     })
   }, [deviceMediaQueryLists])
 
-
-  useEffect(() => { setInitialSize() }, [setInitialSize])
+  useEffect(() => {
+    setInitialSize()
+  }, [setInitialSize])
   useEffect(() => {
     initChangeWatchers()
     return removeChangeWatchers
   }, [initChangeWatchers, removeChangeWatchers])
 
-  return useMemo(() :Measurements => {
-    const isPhone                 = currentSize === DEVICES.phone
-    const isTablet                = currentSize === DEVICES.tablet
-    const isLargeTablet           = currentSize === DEVICES.largeTablet
-    const isSmallComputer         = currentSize === DEVICES.smallComputer
-    const isLargeComputer         = currentSize === DEVICES.largeComputer
+  return useMemo((): Measurements => {
+    const isPhone = currentSize === DEVICES.phone
+    const isTablet = currentSize === DEVICES.tablet
+    const isLargeTablet = currentSize === DEVICES.largeTablet
+    const isSmallComputer = currentSize === DEVICES.smallComputer
+    const isLargeComputer = currentSize === DEVICES.largeComputer
     const isSmallComputerOrLarger = isSmallComputer || isLargeComputer
-    const isLargeTabletOrLarger   = isLargeTablet || isSmallComputerOrLarger
-    const isLargeTabletOrSmaller  = isLargeTablet || isTablet || isPhone
+    const isLargeTabletOrLarger = isLargeTablet || isSmallComputerOrLarger
+    const isLargeTabletOrSmaller = isLargeTablet || isTablet || isPhone
 
     return {
       isPhone,
