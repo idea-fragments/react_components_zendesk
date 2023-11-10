@@ -45,12 +45,12 @@ export const Pagination = ({
     ].sort((a, b) => a - b)
   }, [numberPages, page])
 
-  const movePage = (direction: number) => () => {
+  const movePage = useCallback((direction: number) => () => {
     const newPage = page + direction
     if (1 > newPage || newPage > numberPages) return
 
     return onPageChange(newPage)
-  }
+  }, [numberPages, onPageChange, page])
 
   const createNPageButtons = useCallback((total: number) => {
     return buttonPositionings(total).map((num: number) => (

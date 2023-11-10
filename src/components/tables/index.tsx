@@ -95,6 +95,7 @@ const Cell = styled(ZCell)<CSSProp & StickyColumnProps>`
 const OverflowButton = styled(ZOverflowButton)`
 `
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const clickableRowStyling = css`
   cursor: pointer;
 
@@ -109,6 +110,7 @@ const clickableRowStyling = css`
   }
 `
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const unclickableRowStyling = css`
   :hover, :focus {
     & > ${Cell}:first-child {

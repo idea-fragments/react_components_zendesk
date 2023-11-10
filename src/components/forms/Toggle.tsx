@@ -13,7 +13,6 @@ import React, {
 import styled, {
   css,
   ThemedStyledProps,
-  ThemeProps
 }                 from "styled-components"
 import { dark }   from "styles/colors"
 import { Theme }  from "styles/theme/Theme.type"

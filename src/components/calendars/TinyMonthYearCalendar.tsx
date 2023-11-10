@@ -5,7 +5,6 @@ import * as React                     from "react"
 import { useState }                   from "react"
 import styled                         from "styled-components"
 import { SPACINGS }                   from "styles/spacings"
-import { useTheme }                   from "styles/theme/useTheme"
 import { maxDateBetween, }            from "utils/dateTimeHelpers"
 import { DO_NOTHING }                 from "utils/functionHelpers"
 import { maxNumberBetween }           from "utils/numberHelpers"
@@ -24,8 +23,6 @@ export let TinyMonthYearCalendar = ({
                                       onChange = DO_NOTHING,
                                     }: Props) => {
   const [date, setDate] = useState<Moment>(initialDate)
-  const theme           = useTheme()
-
   const currentYear = moment().year()
   const maxYear     = currentYear + 10
   const minYear     = maxNumberBetween(
