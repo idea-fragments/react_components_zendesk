@@ -13,7 +13,6 @@ import {
 import styled, { css }      from "styled-components"
 import { fade }             from "styles/colors"
 import { SPACINGS }         from "styles/spacings"
-import { DO_NOTHING }       from "utils/functionHelpers"
 
 type Action = NavigationAction
 

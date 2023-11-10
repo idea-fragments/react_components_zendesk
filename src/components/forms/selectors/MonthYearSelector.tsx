@@ -30,7 +30,7 @@ export const MonthYearSelector = (props: Props) => {
     setState({ isOpen })
   }
 
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCalendarChange = (d: Date) => {
     // @ts-ignore
     onChange(moment(d))

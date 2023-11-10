@@ -74,10 +74,13 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-styled-components": "^2.0.7",
     "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-config-react-app": "^7.0.1",
     "mobx": "^6.5.0",
     "mobx-react": "^7.4.0",
     "mobx-utils": "^6.0.5",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.8.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-easy-crop": "^4.7.4",
@@ -105,16 +108,21 @@
     "source-map": "^0.8.0-beta.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build-storybook": "build-storybook",
     "eject": "react-scripts eject",
+    "format": "./git_hooks/pre_commit/prettier.sh",
+    "lint": "eslint",
     "rollup": "NODE_OPTIONS=--max-old-space-size=8192 rollup --config",
+    "start": "react-scripts start",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
     "overrides": [
       {
         "files": [
@@ -141,7 +149,8 @@
           "**/*.stories.*"
         ],
         "rules": {
-          "import/no-anonymous-default-export": "off"
+          "import/no-anonymous-default-export": "off",
+          "react-hooks/exhaustive-deps": "error"
         }
       }
     ]
@@ -172,5 +181,10 @@
     "url": "https://github.com/idea-fragments/react_components_zendesk/issues"
   },
   "homepage": "https://github.com/idea-fragments/react_components_zendesk#readme",
-  "types": "./dist/index.d.ts"
+  "types": "./dist/index.d.ts",
+  "pre-commit": {
+    "run": [
+      "lint"
+    ]
+  }
 }
