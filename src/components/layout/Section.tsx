@@ -1,16 +1,13 @@
-import styled, { css }            from "styled-components"
+import styled, { css } from "styled-components"
 import { textColorForBackground } from "styles/mixins"
-import {
-  ColorProps,
-  CSSProp
-}                                 from "styles/types"
+import { ColorProps, CSSProp } from "styles/types"
 
 export type SectionProps = {
-                             bordered?: boolean,
-                             rounded?: boolean,
-                             shadowed?: boolean,
-                           } & ColorProps & CSSProp
-
+  bordered?: boolean
+  rounded?: boolean
+  shadowed?: boolean
+} & ColorProps &
+  CSSProp
 
 const boxShadow = css`
   box-shadow: ${(p) => p.theme.styles.section.shadow};
@@ -25,16 +22,17 @@ const sectionBorder = css`
 `
 
 export const Section = styled.section<SectionProps>`
-  background: ${({ color, theme }) => color ? color : theme.styles.section.background};
+  background: ${({ color, theme }) =>
+    color ? color : theme.styles.section.background};
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  
-  ${({ bordered }) => bordered ? sectionBorder : ""};
-  ${({ color }) => color ? textColorForBackground : ""};
-  ${({ rounded }) => rounded ? roundBorder : ""};
-  ${({ shadowed }) => shadowed ? boxShadow : ""};
-  ${({ _css }: CSSProp) => _css} //& > section {
+
+  ${({ bordered }) => (bordered ? sectionBorder : "")};
+  ${({ color }) => (color ? textColorForBackground : "")};
+  ${({ rounded }) => (rounded ? roundBorder : "")};
+  ${({ shadowed }) => (shadowed ? boxShadow : "")};
+  ${({ _css }: CSSProp) => _css}//& > section {
           //  padding-bottom: 0;
           //}
 

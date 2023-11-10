@@ -1,7 +1,4 @@
-import {
-  Chip,
-  ChipProps
-}            from "components/tags/Chip"
+import { Chip, ChipProps } from "components/tags/Chip"
 import React from "react"
 
 export default {
@@ -10,11 +7,10 @@ export default {
   argTypes: {},
 }
 
-
 const Story = (args: Partial<ChipProps>) => {
   return <Chip {...args}>A text to show</Chip>
 }
 
 export const Default = Story.bind({})
 // @ts-ignore
-Default.args         = {}
+Default.args = {}

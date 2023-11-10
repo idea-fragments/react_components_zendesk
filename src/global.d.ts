@@ -1,4 +1,4 @@
-import {}        from "styled-components/cssprop"
+import {} from "styled-components/cssprop"
 import { Theme } from "styles/theme/Theme.type"
 import "styled-components"
 
@@ -22,7 +22,7 @@ declare module "@zendeskgarden/react-utilities"
 
 declare global {
   interface Window {
-    DEBUG_MODULES: Set<string>,
+    DEBUG_MODULES: Set<string>
   }
 }
 

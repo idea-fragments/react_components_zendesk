@@ -1,22 +1,22 @@
-import styled       from "styled-components"
+import styled from "styled-components"
 import { SPACINGS } from "styles/spacings"
 
 const COMPONENT_NAME = "FlexBlock"
 
 type ResponsiveProps = {
-  mediaQueryFunc: Function,
+  mediaQueryFunc: Function
   // eslint-disable-next-line no-use-before-define
   props: Props
 }
 
 export type Props = {
-  alignItems?: string,
-  compactAxis?: boolean,
-  compact?: boolean,
-  fluid?: boolean,
-  hidden?: boolean,
-  withRows?: boolean,
-  justify?: string,
+  alignItems?: string
+  compactAxis?: boolean
+  compact?: boolean
+  fluid?: boolean
+  hidden?: boolean
+  withRows?: boolean
+  justify?: string
   /*
    When deriving a new Styled Component based off any Block/FlexBlock
    component, if spacing is being used, flexDirection needs to be set as
@@ -36,7 +36,7 @@ export type Props = {
    flex-direction: column;
    `
    */
-  spacing?: string | null,
+  spacing?: string | null
   responsivePropsList?: Array<ResponsiveProps>
 }
 
@@ -62,20 +62,13 @@ const getSpacing = ({ spacing, ...props }: Props) => {
     }`
 }
 
-const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) => (
-  responsivePropsList?.map(({
-                              mediaQueryFunc,
-                              props: rProps,
-                            }: ResponsiveProps): string => {
-    const props = { ...originalProps, ...rProps }
-    const {
-            alignItems,
-            justify,
-            compactAxis,
-            fluid,
-          }     = props
+const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) =>
+  responsivePropsList?.map(
+    ({ mediaQueryFunc, props: rProps }: ResponsiveProps): string => {
+      const props = { ...originalProps, ...rProps }
+      const { alignItems, justify, compactAxis, fluid } = props
 
-    return mediaQueryFunc(`
+      return mediaQueryFunc(`
               display: ${getDisplay(props)};
               justify-content: ${justify || "initial"};
               align-items: ${alignItems ? alignItems : "initial"}; 
@@ -84,20 +77,18 @@ const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) => (
               flex: ${fluid ? 1 : "unset"};
               ${getSpacing(props)}
           `).join("")
-  })
-)
+    },
+  )
 
-export const FlexBlock = styled.div.attrs<Props>(({
-                                                    spacing,
-                                                  }) => ({
+export const FlexBlock = styled.div.attrs<Props>(({ spacing }) => ({
   spacing: spacing === undefined ? SPACINGS.SM : spacing,
 }))`
   display: ${getDisplay};
   justify-content: ${(p) => p.justify || "initial"};
-  align-items: ${({ alignItems }) => alignItems ? alignItems : "initial"};
-    // align-self: ${({ compactAxis }) => compactAxis ? "initial" : "stretch"};
+  align-items: ${({ alignItems }) => (alignItems ? alignItems : "initial")};
+  // align-self: ${({ compactAxis }) => (compactAxis ? "initial" : "stretch")};
   flex-direction: ${getFlexDirection};
-  flex: ${({ fluid }: Props) => fluid ? 1 : "unset"};
+  flex: ${({ fluid }: Props) => (fluid ? 1 : "unset")};
   ${getSpacing}
 
   ${responsiveStyles}
@@ -107,14 +98,13 @@ export const FlexBlock = styled.div.attrs<Props>(({
 FlexBlock.COMPONENT_NAME = COMPONENT_NAME
 
 FlexBlock.defaultProps = {
-  compactAxis:         false,
-  compact:             false,
-  withRows:            false,
+  compactAxis: false,
+  compact: false,
+  withRows: false,
   responsivePropsList: [],
 }
 
-export const PaddedFlexBlock   = styled(FlexBlock).attrs((props) => ({
-}))`
+export const PaddedFlexBlock = styled(FlexBlock).attrs((props) => ({}))`
   padding: ${SPACINGS.SM};
 `
 // @ts-ignore

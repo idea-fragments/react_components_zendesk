@@ -1,17 +1,17 @@
-import { FlexBox }              from "components/layout/FlexBox"
-import { Dots }                 from "components/loaders/Dots"
-import { useIsMounted }         from "hooks/useIsMounted"
+import { FlexBox } from "components/layout/FlexBox"
+import { Dots } from "components/loaders/Dots"
+import { useIsMounted } from "hooks/useIsMounted"
 import React, {
   FC,
   PropsWithChildren,
   useContext,
   useEffect,
-  useState
-}                               from "react"
+  useState,
+} from "react"
 import styled, { ThemeContext } from "styled-components"
-import { Theme }                from "styles/theme/Theme.type"
-import { FONT_SIZES }           from "styles/typography"
-import { Logger }               from "utils/logging/Logger"
+import { Theme } from "styles/theme/Theme.type"
+import { FONT_SIZES } from "styles/typography"
+import { Logger } from "utils/logging/Logger"
 
 const logger = new Logger("Loadable")
 
@@ -28,7 +28,8 @@ const LoaderContainer = styled(FlexBox)<{ showSpinner: boolean }>`
 `
 
 const ChildrenContainer = styled(FlexBox)<{
-  showSpinner: boolean, opaqueSpinner: boolean,
+  showSpinner: boolean
+  opaqueSpinner: boolean
 }>`
   width: 100%;
   opacity: ${({ showSpinner, opaqueSpinner }) => {
@@ -38,22 +39,22 @@ const ChildrenContainer = styled(FlexBox)<{
 `
 
 type Props = {
-  className?: string,
-  debugId?: number,
-  opaqueSpinner?: boolean,
-  showSpinner: boolean,
+  className?: string
+  debugId?: number
+  opaqueSpinner?: boolean
+  showSpinner: boolean
 }
 
 export let Loadable: FC<PropsWithChildren<Props>> = ({
-                                                       children,
-                                                       className,
-                                                       debugId,
-                                                       opaqueSpinner = false,
-                                                       showSpinner = false,
-                                                     }) => {
+  children,
+  className,
+  debugId,
+  opaqueSpinner = false,
+  showSpinner = false,
+}) => {
   logger.writeInfo("Rendering id:", debugId, "showSpinner", showSpinner)
-  const isMounted                           = useIsMounted()
-  const theme                               = useContext<Theme>(ThemeContext)
+  const isMounted = useIsMounted()
+  const theme = useContext<Theme>(ThemeContext)
   const [canHideSpinner, setCanHideSpinner] = useState<boolean>(true)
 
   useEffect(() => {
@@ -67,27 +68,33 @@ export let Loadable: FC<PropsWithChildren<Props>> = ({
 
   const showingSpinner = showSpinner || !canHideSpinner
 
+  return (
+    <Container
+      justifyContent={"center"}
+      gap={"unset"}
+      alignItems={"center"}>
+      <ChildrenContainer
+        gap={"unset"}
+        className={className}
+        opaqueSpinner={opaqueSpinner}
+        showSpinner={showingSpinner}
+        withRows>
+        {children}
+      </ChildrenContainer>
 
-  return <Container justifyContent={"center"}
-                    gap={"unset"}
-                    alignItems={"center"}>
-    <ChildrenContainer gap={"unset"}
-                       className={className}
-                       opaqueSpinner={opaqueSpinner}
-                       showSpinner={showingSpinner}
-                       withRows
-    >
-      {children}
-    </ChildrenContainer>
-
-    {showingSpinner
-     ? <LoaderContainer justifyContent={"center"}
-                        alignItems={"center"}
-                        showSpinner={showingSpinner}>
-       <Dots color={theme.styles.colorPrimary} size={FONT_SIZES.XXL} />
-     </LoaderContainer>
-     : null}
-  </Container>
+      {showingSpinner ? (
+        <LoaderContainer
+          justifyContent={"center"}
+          alignItems={"center"}
+          showSpinner={showingSpinner}>
+          <Dots
+            color={theme.styles.colorPrimary}
+            size={FONT_SIZES.XXL}
+          />
+        </LoaderContainer>
+      ) : null}
+    </Container>
+  )
 }
 
 Loadable = styled(Loadable)``

@@ -17,10 +17,11 @@ export const GlobalStyle = createGlobalStyle`
 
     *::selection {
       background: ${({ theme }) => theme.styles.colorPrimary};
-      color: ${({ theme }) => theme.styles.getTextColorForBackground({
-        color: theme.styles.colorPrimary,
-        theme,
-      })};
+      color: ${({ theme }) =>
+        theme.styles.getTextColorForBackground({
+          color: theme.styles.colorPrimary,
+          theme,
+        })};
     }
   }
 

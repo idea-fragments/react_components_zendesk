@@ -184,6 +184,7 @@
   "types": "./dist/index.d.ts",
   "pre-commit": {
     "run": [
+      "format",
       "lint"
     ]
   }

@@ -1,20 +1,20 @@
 import moment, { Moment } from "moment"
-import { PromiseFunc }    from "utils/function.types"
+import { PromiseFunc } from "utils/function.types"
 
 let defaultLocale = new Intl.DateTimeFormat().resolvedOptions().locale
 
-export const formatMonthDate     = (m: Moment): string => m.format("MMM D")
-export const formatDayDate       = (m: Moment): string => m.format("ddd, ll")
-export const formatMonthDateYear = (m: Moment): string => m.format("MMM DD YYYY")
-export const setDefaultLocale    = (locale: string) => {
-  defaultLocale =
-    locale
+export const formatMonthDate = (m: Moment): string => m.format("MMM D")
+export const formatDayDate = (m: Moment): string => m.format("ddd, ll")
+export const formatMonthDateYear = (m: Moment): string =>
+  m.format("MMM DD YYYY")
+export const setDefaultLocale = (locale: string) => {
+  defaultLocale = locale
 }
 
 type FormatOptions = {
-  locale?: string,
-  iso8601Format?: boolean,
-  timeZone?: string,
+  locale?: string
+  iso8601Format?: boolean
+  timeZone?: string
 }
 export const formatDate = (
   d: Date,
@@ -29,9 +29,11 @@ export const formatDate = (
   try {
     if (iso8601Format) {
       const parts = formatter.formatToParts(d)
-      return ["year", "month", "day"].map((part: string) => {
-        return parts?.find((p) => p.type === part)?.value
-      }).join("-")
+      return ["year", "month", "day"]
+        .map((part: string) => {
+          return parts?.find((p) => p.type === part)?.value
+        })
+        .join("-")
     }
   } catch (e) {}
 
@@ -41,15 +43,13 @@ export const formatDate = (
 
 export const formatDateTime = (
   d: Date,
-  {
-    locale = defaultLocale,
-    ...options
-  }: FormatOptions = {},
+  { locale = defaultLocale, ...options }: FormatOptions = {},
 ): string => {
-  const formattedDate = formatDate(
-    d,
-    { locale, iso8601Format: true, ...options }
-  )
+  const formattedDate = formatDate(d, {
+    locale,
+    iso8601Format: true,
+    ...options,
+  })
 
   return `${formattedDate} ${moment(d).format("LTS")}`
 }
@@ -60,9 +60,9 @@ export const returnAfterMinimum = async (
   ...fArgs: any
 ) => {
   const start: Moment = moment()
-  const val           = await f(...fArgs)
-  const end: Moment   = moment()
-  const diff          = end.diff(start, "milliseconds")
+  const val = await f(...fArgs)
+  const end: Moment = moment()
+  const diff = end.diff(start, "milliseconds")
 
   if (diff < millisecs) {
     await new Promise((resolve) => {
@@ -73,22 +73,19 @@ export const returnAfterMinimum = async (
   return val
 }
 
-export const momentListToDateList = (l: Moment[]): Date[] => (
+export const momentListToDateList = (l: Moment[]): Date[] =>
   l.map((m: Moment) => m.toDate())
-)
 
-export const minDateBetween = (a: Moment, b: Moment): Moment => (
+export const minDateBetween = (a: Moment, b: Moment): Moment =>
   a.isBefore(b) ? a : b
-)
-export const maxDateBetween = (a: Moment, b: Moment): Moment => (
+export const maxDateBetween = (a: Moment, b: Moment): Moment =>
   a.isAfter(b) ? a : b
-)
 
-export const addNDaysFromDate       = (n: number, d = new Date()): Date =>
+export const addNDaysFromDate = (n: number, d = new Date()): Date =>
   momentArithmetic(d, "add", n, "days")
-export const addNWeeksFromDate      = (n: number, d = new Date()): Date =>
+export const addNWeeksFromDate = (n: number, d = new Date()): Date =>
   momentArithmetic(d, "add", n, "weeks")
-export const subtractNDaysFromDate  = (n: number, d = new Date()): Date =>
+export const subtractNDaysFromDate = (n: number, d = new Date()): Date =>
   momentArithmetic(d, "subtract", n, "days")
 export const subtractNWeeksFromDate = (n: number, d = new Date()): Date =>
   momentArithmetic(d, "subtract", n, "weeks")
@@ -97,7 +94,7 @@ const momentArithmetic = (
   d: Date,
   func: string,
   n: number,
-  unit: string
+  unit: string,
 ): Date => {
   // @ts-ignore
   const newDate = (moment(d)[func] as Function)(n, unit) as Moment

@@ -1,7 +1,7 @@
 export interface LoggerI {
-    writeInfo :(...args :any) => void,
-    writeError :(...args :any) => void,
-    writeWarning :(...args :any) => void
+  writeInfo: (...args: any) => void
+  writeError: (...args: any) => void
+  writeWarning: (...args: any) => void
 }
 
-export type LoggableFunc = (logger :LoggerI) => any
+export type LoggableFunc = (logger: LoggerI) => any
