@@ -5,7 +5,6 @@ import {
   FooterItem,
   Header as ZenHeader,
   Modal as ZenModal,
-  /* @ts-ignore */
 } from "@zendeskgarden/react-modals"
 import { Button, Props as ButtonProps } from "components/forms/Button"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
@@ -34,7 +33,6 @@ export type ModalContent = {
 
 const Header = styled(ZenHeader).attrs<UserFeedbackProps>(
   ({ danger, success, warning, theme }) => {
-    // Color is overwritten by a class style from zendesk :(
     let color = theme.styles.textColorPrimary
     if (danger) color = theme.styles.colorDanger
     if (success) color = theme.styles.colorSuccess
@@ -42,7 +40,7 @@ const Header = styled(ZenHeader).attrs<UserFeedbackProps>(
 
     return { color }
   },
-)`
+)<UserFeedbackProps & { color: string; inline?: boolean | undefined }>`
   ${textWithColor}
 `
 
@@ -147,8 +145,8 @@ export let Modal = ({
         style: { fontFamily: "inherit" },
       }}>
       {title ? (
-        // @ts-ignore
         <Header
+          color={""}
           danger={danger}
           success={success}
           warning={warning}>

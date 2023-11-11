@@ -1,6 +1,7 @@
 import {} from "styled-components/cssprop"
 import { Theme } from "styles/theme/Theme.type"
 import "styled-components"
+import "jslib-html5-camera-photo"
 
 declare module "@zendeskgarden/react-accordions"
 declare module "@zendeskgarden/react-avatars"
@@ -30,4 +31,10 @@ export type Nullable<T> = T | null | undefined
 
 declare module "styled-components" {
   export interface DefaultTheme extends Theme {}
+}
+
+declare module "jslib-html5-camera-photo" {
+  export default class CameraPhoto {
+    enumerateCameras(): Promise<MediaDeviceInfo[]>
+  }
 }

@@ -58,7 +58,7 @@ export const MonthYearPicker = ({
     onChange(changes)
   }
 
-  const sendSelectedMonth = (m: string) => {
+  const sendSelectedMonth = (m: number) => {
     onChange({ month: Number(m), year })
   }
 
