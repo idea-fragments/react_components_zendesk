@@ -15,6 +15,7 @@ const Story = (props: Partial<ButtonProps>) => {
   return (
     <Button
       {...props}
+      innerAs={"a"}
       onClick={DO_NOTHING}>
       {props.children ?? "Click Me"}
     </Button>
@@ -22,9 +23,8 @@ const Story = (props: Partial<ButtonProps>) => {
 }
 
 export const Default = Story.bind({})
-// @ts-ignore
 Default.args = {
-  // color: "blue",
+  color: "green",
   compact: false,
   disabled: false,
   flat: false,
@@ -36,7 +36,6 @@ Default.args = {
 }
 
 export const Neutral = Story.bind({})
-// @ts-ignore
 Neutral.args = {
   compact: false,
   disabled: false,
@@ -49,7 +48,6 @@ Neutral.args = {
 }
 
 export const WithIcon = Story.bind({})
-// @ts-ignore
 WithIcon.args = {
   compact: false,
   disabled: false,
@@ -63,7 +61,6 @@ WithIcon.args = {
 }
 
 export const WithIconAndLongText = Story.bind({})
-// @ts-ignore
 WithIconAndLongText.args = {
   alignItems: "flex-start",
   children:

@@ -87,7 +87,6 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
   const getDeviceCameraIds = useCallback(async () => {
     if (isNotEmpty(cameraIds)) return
 
-    // @ts-ignore
     const cameras: MediaDeviceInfo[] =
       await cameraPhoto.current!.enumerateCameras()
     const foundIds = cameras.map((c) => c.deviceId).reverse()

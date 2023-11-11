@@ -27,7 +27,7 @@ export type TooltipProps = PropsWithChildren<{
   maxWidth?: string
   placement?: Placement
   content: ReactNode
-  type?: "light" | null
+  type?: "light"
 }>
 
 export const Tooltip = styled(ZTooltip).attrs<TooltipProps>(({ arrow }) => ({

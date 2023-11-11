@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Button as SButton } from "@zendeskgarden/react-buttons"
 import {
   buttonLikeHoverable,
@@ -151,9 +150,9 @@ const ButtonBase = styled(
     pill,
     ...props
   }: ButtonBaseProps) => {
-    // @ts-ignore
     return (
       <SButton
+        // @ts-ignore
         as={innerAs}
         disabled={disabled}
         isPill={pill}

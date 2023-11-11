@@ -34,12 +34,11 @@ export const GlobalAlert: FC<Props> = ({
   const dismissible = !notDismissible
   const hasActionButton = !noActionButton
 
-  const type = (): Type | undefined => {
+  const type = (): Type => {
     if (danger) return "error"
-    if (info) return "info"
     if (success) return "success"
     if (warning) return "warning"
-    return undefined
+    return "info"
   }
 
   // @ts-ignore

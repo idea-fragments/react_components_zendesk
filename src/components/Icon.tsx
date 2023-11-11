@@ -1,14 +1,14 @@
-import React, { ComponentType } from "react"
+import React, { ComponentType, SVGAttributes } from "react"
 import MIcon, { Stack } from "@mdi/react"
 import { DO_NOTHING } from "utils/functionHelpers"
 import { isArray, isString } from "utils/typeCheckers"
 
 const COMPONENT_NAME = "Icon"
-
+type SVGComponent = ComponentType<SVGAttributes<any>>
 type Props = {
   color?: string
   size?: number | string
-  svg: string | Array<string> | ComponentType
+  svg: string | Array<string> | SVGComponent
   title?: string
   onClick?: () => void
 }
@@ -18,44 +18,42 @@ export type IconProps = Props
 export const Icon = ({
   color,
   size = 1,
-  svg: SVG,
+  svg,
   title,
   onClick = DO_NOTHING,
 }: Props) => {
-  return isArray(SVG) ? (
-    // @ts-ignore
+  const svgString = svg as string
+  const svgStringList = svg as string[]
+  const SVGComp = svg as SVGComponent
+
+  return isArray(svg) ? (
     <Stack
-      onClick={onClick}
       size={size}
       title={title}
       color={color || "currentColor"}
       data-component-name={COMPONENT_NAME}>
-      {(SVG as string[]).map((s, i) => (
+      {svgStringList.map((s, i) => (
         <MIcon
           key={i}
           path={s}
         />
       ))}
     </Stack>
-  ) : isString(SVG) ? (
+  ) : isString(svg) ? (
     <MIcon
-      path={SVG as string}
-      // @ts-ignore
-      onClick={onClick}
+      path={svgString}
       size={size}
       title={title}
       color={color || "currentColor"}
       data-component-name={COMPONENT_NAME}
     />
   ) : (
-    // @ts-ignore
-    <SVG
+    <SVGComp
       fill={color || "currentColor"}
       data-component-name={COMPONENT_NAME}
       height={size}
       onClick={onClick}
       width={size}
-      title={title}
     />
   )
 }
