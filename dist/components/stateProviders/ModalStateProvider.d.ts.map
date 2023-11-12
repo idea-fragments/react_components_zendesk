@@ -1,1 +1,1 @@
-{"version":3,"file":"ModalStateProvider.d.ts","sourceRoot":"","sources":["../../../src/components/stateProviders/ModalStateProvider.tsx"],"names":[],"mappings":"AAAA,OAAO,EACL,EAAE,EACF,iBAAiB,EAIlB,MAAM,OAAO,CAAA;AAOd,eAAO,MAAM,kBAAkB,EAAE,EAAE,CAAC,iBAAiB,CAAC,EAAE,CAAC,CAmBxD,CAAA"}
+{"version":3,"file":"ModalStateProvider.d.ts","sourceRoot":"","sources":["../../../src/components/stateProviders/ModalStateProvider.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,EAAE,EAAE,iBAAiB,EAAmC,MAAM,OAAO,CAAA;AAO9E,eAAO,MAAM,kBAAkB,EAAE,EAAE,CAAC,iBAAiB,CAAC,EAAE,CAAC,CAmBxD,CAAA"}
