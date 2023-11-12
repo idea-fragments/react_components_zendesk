@@ -111,7 +111,7 @@
   "scripts": {
     "build": "react-scripts build",
     "build-storybook": "storybook build",
-    "cleanup": "rm -r dist && rm -r type_defs",
+    "cleanup": "rm -rf dist",
     "eject": "react-scripts eject",
     "format": "./git_hooks/pre_commit/prettier.sh",
     "lint": "eslint",
