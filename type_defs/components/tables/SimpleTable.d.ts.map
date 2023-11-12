@@ -1,1 +1,0 @@
-{"version":3,"file":"SimpleTable.d.ts","sourceRoot":"","sources":["../../../src/components/tables/SimpleTable.tsx"],"names":[],"mappings":";AAmBA,OAAO,EAAE,UAAU,EAAE,MAAW,yBAAyB,CAAA;AAMzD,aAAK,KAAK,GAAG,UAAU,GAAG;IACxB,aAAa,EAAE,OAAO,CAAC;IACvB,iBAAiB,CAAC,EAAE,CAAC,CAAC,EAAE,OAAO,KAAK,IAAI,CAAC;CAC1C,CAAA;AAED,eAAO,MAAM,WAAW,gIAWO,KAAK,gBAyDnC,CAAA"}
