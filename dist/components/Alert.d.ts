@@ -7,7 +7,7 @@ export declare const ALERT_TYPES: {
     readonly ERROR: "error";
     readonly WARNING: "warning";
 };
-export type AlertType = typeof ALERT_TYPES[keyof typeof ALERT_TYPES];
+export type AlertType = (typeof ALERT_TYPES)[keyof typeof ALERT_TYPES];
 export type AlertContent = {
     title?: string;
     body: any;

@@ -3,11 +3,13 @@ import { css } from "styled-components"
 import { Timeline as ZTimeline } from "@zendeskgarden/react-accordions"
 import { Text } from "components/text/Text"
 import { useTheme } from "styles/theme/useTheme"
+import { isString } from "utils/typeCheckers"
 
 export type TimeLineItem = {
-  content: string
+  content: ReactNode
   dateTime?: string
   icon?: ReactNode
+  key: string | number
 }
 
 export type TimelineProps = {
@@ -20,22 +22,28 @@ export const Timeline: FC<TimelineProps> = ({ isAlternate = false, data }) => {
 
   return (
     <ZTimeline isAlternate={isAlternate}>
-      {data.map((item) => {
+      {data.map(({ content, dateTime, icon, key }) => {
         return (
-          <ZTimeline.Item icon={item.icon ? <div>{item.icon}</div> : undefined}>
+          <ZTimeline.Item
+            key={key}
+            icon={icon ? <div>{icon}</div> : undefined}>
             <ZTimeline.Content>
-              <Text
-                _css={css`
-                  white-space: pre-wrap;
-                `}>
-                {item.content}
-              </Text>
-              {item.dateTime ? (
+              {isString(content) ? (
+                <Text
+                  _css={css`
+                    white-space: pre-wrap;
+                  `}>
+                  {content}
+                </Text>
+              ) : (
+                content
+              )}
+              {dateTime ? (
                 <Text
                   _css={css`
                     color: ${theme.styles.textColorSecondary};
                   `}>
-                  {item.dateTime}
+                  {dateTime}
                 </Text>
               ) : null}
             </ZTimeline.Content>

@@ -1,1 +1,1 @@
-{"version":3,"file":"PhonesAndTabletsOnly.d.ts","sourceRoot":"","sources":["../../../src/components/layout/PhonesAndTabletsOnly.tsx"],"names":[],"mappings":"AACA,OAAO,EACL,EAAE,EACF,iBAAiB,EAClB,MAAoC,OAAO,CAAA;AAE5C,eAAO,MAAM,oBAAoB,EAAE,EAAE,CAAC,iBAAiB,CAItD,CAAA"}
+{"version":3,"file":"PhonesAndTabletsOnly.d.ts","sourceRoot":"","sources":["../../../src/components/layout/PhonesAndTabletsOnly.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,EAAE,EAAE,iBAAiB,EAAE,MAAM,OAAO,CAAA;AAE7C,eAAO,MAAM,oBAAoB,EAAE,EAAE,CAAC,iBAAiB,CAItD,CAAA"}

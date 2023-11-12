@@ -1,1 +1,1 @@
-{"version":3,"file":"StyledComponentProps.type.d.ts","sourceRoot":"","sources":["../../src/components/StyledComponentProps.type.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,oBAAoB,GAAG;IAC/B,SAAS,CAAC,EAAE,MAAM,CAAC;CACtB,CAAA"}
+{"version":3,"file":"StyledComponentProps.type.d.ts","sourceRoot":"","sources":["../../src/components/StyledComponentProps.type.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,oBAAoB,GAAG;IACjC,SAAS,CAAC,EAAE,MAAM,CAAA;CACnB,CAAA"}

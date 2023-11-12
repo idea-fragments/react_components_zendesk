@@ -6,7 +6,7 @@ export declare const BUTTON_SIZES: {
     readonly SMALL: "small";
     readonly LARGE: "large";
 };
-export type ButtonSize = typeof BUTTON_SIZES[keyof typeof BUTTON_SIZES];
+export type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES];
 type AutoLoadable = {
     autoLoadable: true;
     onClick: PromiseFunc;

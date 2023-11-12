@@ -5,7 +5,7 @@ export type TooltipProps = PropsWithChildren<{
     maxWidth?: string;
     placement?: Placement;
     content: ReactNode;
-    type?: "light" | null;
+    type?: "light";
 }>;
 export declare const Tooltip: import("styled-components").StyledComponent<{
     ({ id, delayMS, isInitialVisible, content, refKey, placement, eventsEnabled, popperModifiers, children, hasArrow, size, type, appendToNode, zIndex, isVisible: externalIsVisible, ...otherProps }: import("@zendeskgarden/react-tooltips").ITooltipProps): import("react").JSX.Element;
@@ -17,7 +17,7 @@ export declare const Tooltip: import("styled-components").StyledComponent<{
         eventsEnabled: import("prop-types").Requireable<boolean>;
         id: import("prop-types").Requireable<string>;
         content: import("prop-types").Validator<NonNullable<import("prop-types").ReactNodeLike>>;
-        placement: import("prop-types").Requireable<"top" | "bottom" | "start" | "end" | "auto" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
+        placement: import("prop-types").Requireable<"top" | "bottom" | "end" | "start" | "auto" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
         popperModifiers: import("prop-types").Requireable<any>;
         size: import("prop-types").Requireable<"small" | "large" | "medium" | "extra-large">;
         type: import("prop-types").Requireable<"dark" | "light">;
@@ -38,7 +38,7 @@ export declare const Tooltip: import("styled-components").StyledComponent<{
     maxWidth?: string | undefined;
     placement?: Placement | undefined;
     content: ReactNode;
-    type?: "light" | null | undefined;
+    type?: "light" | undefined;
 } & {
     children?: ReactNode;
 }, never>;

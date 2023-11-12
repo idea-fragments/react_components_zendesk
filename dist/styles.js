@@ -1901,7 +1901,7 @@ var hasGoodContrast = function (a, b) {
 };
 var fade = function (c, amount) {
   if (amount === void 0) {
-    amount = .5;
+    amount = 0.5;
   }
   var _a = color(c).fade(amount).object(),
     r = _a.r,
@@ -2064,7 +2064,7 @@ var dark = {
     footer: {
       background: lighter(COLORS.MIDNIGHT_BLUE)
     },
-    overlayBackground: fade(COLORS.LIGHT_GREY, .9),
+    overlayBackground: fade(COLORS.LIGHT_GREY, 0.9),
     pageBackground: COLORS.MIDNIGHT_BLUE,
     scrollbar: {
       thumbColor: "#ffffff55",
@@ -5862,7 +5862,11 @@ function _getPrototypeOf(o) {
   return _getPrototypeOf(o);
 }
 function _isNativeFunction(fn) {
-  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  try {
+    return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  } catch (e) {
+    return typeof fn === "function";
+  }
 }
 function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;

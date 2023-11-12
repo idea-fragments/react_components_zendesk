@@ -1,6 +1,6 @@
 {
   "name": "@idea-fragments/react-components-zendesk",
-  "version": "0.1.63",
+  "version": "0.1.64",
   "private": false,
   "files": [
     "dist"
@@ -111,10 +111,11 @@
   "scripts": {
     "build": "react-scripts build",
     "build-storybook": "storybook build",
+    "cleanup": "rm -rf dist",
     "eject": "react-scripts eject",
     "format": "./git_hooks/pre_commit/prettier.sh",
     "lint": "eslint",
-    "rollup": "NODE_OPTIONS=--max-old-space-size=8192 rollup --config",
+    "rollup": "npm run cleanup && NODE_OPTIONS=--max-old-space-size=8192 rollup --config",
     "start": "react-scripts start",
     "storybook": "storybook dev -p 6006",
     "test": "react-scripts test"

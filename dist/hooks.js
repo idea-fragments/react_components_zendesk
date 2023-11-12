@@ -1549,7 +1549,11 @@ function _getPrototypeOf(o) {
   return _getPrototypeOf(o);
 }
 function _isNativeFunction(fn) {
-  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  try {
+    return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  } catch (e) {
+    return typeof fn === "function";
+  }
 }
 function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
@@ -4083,7 +4087,7 @@ var Container = styled__default["default"].div(templateObject_2 || (templateObje
   var _css = _a._css;
   return _css ? _css : "";
 });
-var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: .7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"], ["\n  background: white;\n  opacity: .7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"])));
+var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"], ["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"])));
 var templateObject_1, templateObject_2, templateObject_3;
 var useLoaderV2 = function () {
   var _a = __read(React.useState(false), 2),

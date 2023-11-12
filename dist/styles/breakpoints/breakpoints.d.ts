@@ -6,7 +6,7 @@ export type Breakpoints = {
 };
 export type DeviceSize = number;
 export declare const DEVICES: Record<string, DeviceSize>;
-export declare const breakpoints: ({ wideLayout }: {
+export declare const breakpoints: ({ wideLayout, }: {
     wideLayout?: boolean | undefined;
 }) => Breakpoints;
 export declare const unit: (px: number) => string;
