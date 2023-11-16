@@ -3,7 +3,7 @@ import { ChatMessage } from "components/chats/ChatMessage"
 import React, { useState } from "react"
 
 export default {
-  title:     "Chat",
+  title:     "chats/Chat",
   component: Chat,
   argTypes:  {},
 }
@@ -24,8 +24,22 @@ const ChatBody = () => {
       message: "This is the user message 2",
       dateTime: "2023-10-11, 12:52PM",
       isUserMessage: true
-    }
-
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false
+    },
+    {
+      message: "This is the user message 2",
+      dateTime: "2023-10-11, 12:52PM",
+      isUserMessage: true
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false
+    },
   ]
 
   return (
@@ -36,7 +50,9 @@ const ChatBody = () => {
             key={msg.message}
             message={msg.message}
             dateTime={msg.dateTime}
-            icon={!msg.isUserMessage ? "so" : undefined}
+            icon={msg.isUserMessage ? "Me" : "So"}
+            isUserMessage={msg.isUserMessage}
+            color={msg.isUserMessage ? "pink" : undefined}
           />
         )
       })}
@@ -63,7 +79,7 @@ const Story = (props: ChatProps) => {
         header={<h2>Hello World</h2>}
         chatBody={<ChatBody />}
         footer={"this is the footer message"}
-        value={message}
+        userInputValue={message}
         onChange={handleChange}
         onClick={handleClick}
         {...props}

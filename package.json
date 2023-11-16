@@ -110,6 +110,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "rollup": "NODE_OPTIONS=--max-old-space-size=8192 rollup --config",
+    "rolluo-windows": "rollup --config --max-old-space-size=8192",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

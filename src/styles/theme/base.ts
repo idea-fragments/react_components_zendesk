@@ -20,7 +20,7 @@ export const base: Partial<Styles> = {
   },
   buttons:       { textTransform: null },
   colorAccent:   COLORS.HUB_SPOT_ORANGE,
-  colorPrimary:  COLORS.BLUE,
+  colorPrimary:  "#7b1b3e",
   colorDanger:   COLORS.RED,
   colorWarning:  COLORS.YELLOW,
   colorSuccess:  COLORS.GREEN,

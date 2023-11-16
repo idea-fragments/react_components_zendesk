@@ -9,7 +9,7 @@ export type ChatProps = {
   header?: React.ReactNode
   chatBody: React.ReactNode
   footer?: React.ReactNode
-  value?: string
+  userInputValue?: string
   onChange: (text: string, e: React.ChangeEvent<HTMLTextAreaElement>) => void
   onClick: () => void
 }
@@ -18,7 +18,7 @@ export const Chat: React.FC<ChatProps> = ({
   header,
   chatBody,
   footer,
-  value,
+  userInputValue,
   onChange,
   onClick
 }) => {
@@ -28,8 +28,10 @@ export const Chat: React.FC<ChatProps> = ({
   return (
     <Container>
       {header}
-      {chatBody}
-      {
+      <ChatBodyContainer>
+        {chatBody}
+      </ChatBodyContainer>
+      {/* {
         footer
         ?
         <Text 
@@ -43,19 +45,35 @@ export const Chat: React.FC<ChatProps> = ({
         </Text>
         :
         null
-      }
+      } */}
       <FlexBox 
         withRows
         _css={css`
+          background-color: white;
           position: absolute;
-          bottom: 20px;
+          bottom: 10px;
           left: 0px;
           width: 100%;
         `}
       >
+        {
+          footer
+          ?
+          <Text 
+            _css={css`
+              text-align: center;
+              color: ${theme.styles.textColorSecondary};
+              margin: 30px 0px;
+            `}
+          >
+            {footer}
+          </Text>
+          :
+          null
+        }
         <TextArea 
           onChange={onChange}
-          value={value}
+          value={userInputValue}
         />
         <ButtonContainer>
           <Button onClick={onClick}>
@@ -70,9 +88,14 @@ export const Chat: React.FC<ChatProps> = ({
 const Container = styled.div`
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
+`
+
+const ChatBodyContainer = styled.div`
+  height: 90%;
+  overflow: scroll;
 `
 const ButtonContainer = styled.div`
   text-align: right;

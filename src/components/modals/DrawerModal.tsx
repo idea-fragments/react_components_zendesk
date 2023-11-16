@@ -6,7 +6,7 @@ export type DrawerModalProps = {
   title?: string
   footer?: React.ReactNode
   drawerModalBody: React.ReactNode
-  closeDrawerModal?: () => void
+  onCloseDrawerModal?: () => void
 }
 
 export const DrawerModal: React.FC<DrawerModalProps> = ({
@@ -14,15 +14,15 @@ export const DrawerModal: React.FC<DrawerModalProps> = ({
   width,
   title,
   footer,
-  closeDrawerModal,
+  onCloseDrawerModal,
   drawerModalBody
 }) => {
 
   return (
     <ZenDrawerModal 
       isOpen={isOpen} 
-      onClose={closeDrawerModal}
-      css = {`width: ${width}`}
+      onClose={onCloseDrawerModal}
+      css = {`width: ${width};`}
     >
       {
         title
