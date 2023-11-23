@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components"
 import { Text } from "components/text/Text"
 import { SPACINGS } from "styles/spacings"
+import { COLORS } from "styles/colors"
 import { useTheme } from "styles/theme/useTheme"
 
 export type ChatMessageProps = {
@@ -32,6 +33,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         </MessageText>
         <IconContainer
           color={color ?? theme.styles.colorPrimary}
+          textColor={theme.styles.getTextColorForBackground({ theme, color: color ?? theme.styles.colorPrimary })}
         >
           {icon}
         </IconContainer>
@@ -64,14 +66,16 @@ const MessageContainer = styled.div<{ isUserMessage: boolean }>`
 const MessageText = styled(Text)`
   width: 100%;
   white-space: pre-wrap;
-  background-color: lightgray;
+  background-color: ${COLORS.GREY_200};
   padding: 7px;
   border-radius: 5px;
 `
 
-const IconContainer = styled.div<{ color: string }>`
+const IconContainer = styled.div<{ color: string, textColor: string }>`
   background-color: ${({ color }) => color};
+  color: ${({ textColor }) => textColor};
   min-width: 28px;
+  line-height: 1em;
   height: 28px;
   border-radius: 50%;
   display: flex;
