@@ -1508,7 +1508,11 @@ function _getPrototypeOf(o) {
   return _getPrototypeOf(o);
 }
 function _isNativeFunction(fn) {
-  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  try {
+    return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  } catch (e) {
+    return typeof fn === "function";
+  }
 }
 function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
@@ -4666,6 +4670,10 @@ var useTheme = function () {
 };
 // export const setThemeContext = (ctx :)
 
+// @flow
+var isString = function (o) {
+  return typeof o === "string";
+};
 var Timeline = function (_a) {
   var _b = _a.isAlternate,
     isAlternate = _b === void 0 ? false : _b,
@@ -4674,24 +4682,28 @@ var Timeline = function (_a) {
   return jsxRuntime.jsx(Timeline$1, __assign({
     isAlternate: isAlternate
   }, {
-    children: data.map(function (item) {
+    children: data.map(function (_a) {
+      var content = _a.content,
+        dateTime = _a.dateTime,
+        icon = _a.icon,
+        key = _a.key;
       return jsxRuntime.jsx(Timeline$1.Item, __assign({
-        icon: item.icon ? jsxRuntime.jsx("div", {
-          children: item.icon
+        icon: icon ? jsxRuntime.jsx("div", {
+          children: icon
         }) : undefined
       }, {
         children: jsxRuntime.jsxs(Timeline$1.Content, {
-          children: [jsxRuntime.jsx(Text, __assign({
-            _css: styled.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["white-space: pre-wrap;"], ["white-space: pre-wrap;"])))
+          children: [isString(content) ? jsxRuntime.jsx(Text, __assign({
+            _css: styled.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n                    white-space: pre-wrap;\n                  "], ["\n                    white-space: pre-wrap;\n                  "])))
           }, {
-            children: item.content
-          })), item.dateTime ? jsxRuntime.jsx(Text, __assign({
-            _css: styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["color: ", ";"], ["color: ", ";"])), theme.styles.textColorSecondary)
+            children: content
+          })) : content, dateTime ? jsxRuntime.jsx(Text, __assign({
+            _css: styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n                    color: ", ";\n                  "], ["\n                    color: ", ";\n                  "])), theme.styles.textColorSecondary)
           }, {
-            children: item.dateTime
+            children: dateTime
           })) : null]
         })
-      }));
+      }), key);
     })
   }));
 };

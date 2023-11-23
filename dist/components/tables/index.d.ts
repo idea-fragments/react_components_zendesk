@@ -15,5 +15,5 @@ declare const Row: import("styled-components").StyledComponent<import("react").F
     clickable?: boolean | undefined;
     _css?: CSS;
 }, never>;
-export { Table, Head, HeaderRow, HeaderCell, OverflowButton, Body, Row, Cell, };
+export { Table, Head, HeaderRow, HeaderCell, OverflowButton, Body, Row, Cell };
 //# sourceMappingURL=index.d.ts.map

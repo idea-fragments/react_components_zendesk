@@ -1,43 +1,38 @@
 import { ColumnConfig } from "components/tables/Table"
-import {
-  css,
-  Interpolation,
-  ThemeProps
-}                       from "styled-components"
-import { CSS }          from "styles/types"
-import {
-  isNotEmpty,
-  splitArray
-}                       from "utils/arrayHelpers"
+import { css, Interpolation, ThemeProps } from "styled-components"
+import { CSS } from "styles/types"
+import { isNotEmpty, splitArray } from "utils/arrayHelpers"
 
 export type StickyColumnProps = {
-  checkableRow?: boolean,
-  columnConfigs?: ColumnConfig[],
+  checkableRow?: boolean
+  columnConfigs?: ColumnConfig[]
   index?: number
 }
 export type SortableColumnProps = {
-  sortable?: boolean,
+  sortable?: boolean
 }
 
 const calculateStickyPosition = ({
-                                   checkableRow,
-                                   columnConfigs,
-                                   index
-                                 }: Required<StickyColumnProps>): CSS => {
+  checkableRow,
+  columnConfigs,
+  index,
+}: Required<StickyColumnProps>): CSS => {
   const configs = [...columnConfigs] as Partial<ColumnConfig>[]
   if (checkableRow) configs.unshift({ important: true, width: "37.6px" })
 
   const [left] = splitArray(configs, index)
   const widths = left.map((c) => c.width)
 
-  return css`left: calc(${widths.join(" + ")});`
+  return css`
+    left: calc(${widths.join(" + ")});
+  `
 }
 
 const calculateStickyShadow = ({
-                                 checkableRow,
-                                 columnConfigs,
-                                 index
-                               }: Required<StickyColumnProps>): CSS => {
+  checkableRow,
+  columnConfigs,
+  index,
+}: Required<StickyColumnProps>): CSS => {
   const configs = [...columnConfigs] as Partial<ColumnConfig>[]
   if (checkableRow) configs.unshift({ important: true })
 
@@ -62,10 +57,10 @@ const calculateStickyShadow = ({
 
 export const columnContainerStyles = (
   c: Partial<ColumnConfig>,
-): ReadonlyArray<Interpolation<Required<StickyColumnProps> & ThemeProps<any>>> => {
-  return c.important
-         ? stickyStyles
-         : nonStickyStyles
+): ReadonlyArray<
+  Interpolation<Required<StickyColumnProps> & ThemeProps<any>>
+> => {
+  return c.important ? stickyStyles : nonStickyStyles
 }
 
 export const columnWidth = (size: number): string => `${100 / size}%`

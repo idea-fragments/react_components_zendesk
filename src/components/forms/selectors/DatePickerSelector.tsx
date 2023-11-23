@@ -1,22 +1,19 @@
-import { TinyCalendar }                from "components/calendars/TinyCalendar"
-import { TextFieldProps }              from "components/forms/formField.types"
-import {
-  Dropdown,
-  Select
-}                                      from "components/forms/selectors/Dropdown"
-import { StateChange }                 from "components/forms/selectors/types"
+import { TinyCalendar } from "components/calendars/TinyCalendar"
+import { TextFieldProps } from "components/forms/formField.types"
+import { Dropdown, Select } from "components/forms/selectors/Dropdown"
+import { StateChange } from "components/forms/selectors/types"
 import Downshift, { StateChangeTypes } from "downshift"
-import moment, { Moment }              from "moment"
-import React, { useState }             from "react"
-import { formatMonthDateYear }         from "utils/dateTimeHelpers"
-import { DO_NOTHING }                  from "utils/functionHelpers"
-import { Logger }                      from "utils/logging/Logger"
+import moment, { Moment } from "moment"
+import React, { useState } from "react"
+import { formatMonthDateYear } from "utils/dateTimeHelpers"
+import { DO_NOTHING } from "utils/functionHelpers"
+import { Logger } from "utils/logging/Logger"
 
 type Props = {
-               minimumDate?: Moment,
-               disabledDates: Array<Moment>,
-               onChange: (d: Moment) => void,
-             } & Omit<TextFieldProps, "onChange">
+  minimumDate?: Moment
+  disabledDates: Array<Moment>
+  onChange: (d: Moment) => void
+} & Omit<TextFieldProps, "onChange">
 
 type State = {
   isOpen: boolean
@@ -33,19 +30,22 @@ export const DatePickerSelector = (props: Props) => {
   const [state, setState] = useState<State>({ isOpen: false })
 
   const {
-          value,
-          emptyState,
-          minimumDate,
-          disabled,
-          disabledDates,
-          onChange,
-        }: Props = props
+    value,
+    emptyState,
+    minimumDate,
+    disabled,
+    disabledDates,
+    onChange,
+  }: Props = props
 
   const setDropdownState = ({ isOpen, type }: StateChange) => {
     logger.writeInfo("Dropdown state changed:", { isOpen })
-    if (disabled
-        || isOpen == null
-        || stateChangesThatFailWithDatePicker.includes(type)) return
+    if (
+      disabled ||
+      isOpen == null ||
+      stateChangesThatFailWithDatePicker.includes(type)
+    )
+      return
     setState({ isOpen })
   }
 
@@ -55,25 +55,29 @@ export const DatePickerSelector = (props: Props) => {
     closeCalendar()
   }
 
-  const closeCalendar = () => { setState({ isOpen: false }) }
+  const closeCalendar = () => {
+    setState({ isOpen: false })
+  }
 
   return (
     // @ts-ignore
-    <Dropdown {...props}
-              onStateChange={setDropdownState}
-              isOpen={state.isOpen}
-              useRawOptions
-              options={[
-                <TinyCalendar onChange={handleCalendarChange}
-                              key={"CalendarPanel"}
-                              minDate={minimumDate}
-                              disabledDates={disabledDates} />,
-              ]}
-              menuCSS={`width: auto !important;`}>
-      <Select validation={props.validation
-                          ? props.validation.validation
-                          : null}
-              disabled={disabled}>
+    <Dropdown
+      {...props}
+      onStateChange={setDropdownState}
+      isOpen={state.isOpen}
+      useRawOptions
+      options={[
+        <TinyCalendar
+          onChange={handleCalendarChange}
+          key={"CalendarPanel"}
+          minDate={minimumDate}
+          disabledDates={disabledDates}
+        />,
+      ]}
+      menuCSS={`width: auto !important;`}>
+      <Select
+        validation={props.validation ? props.validation.validation : null}
+        disabled={disabled}>
         {value ? formatMonthDateYear(moment(value)) : emptyState}
       </Select>
     </Dropdown>
@@ -81,9 +85,9 @@ export const DatePickerSelector = (props: Props) => {
 }
 
 DatePickerSelector.COMPONENT_NAME = "DatePickerSelector"
-DatePickerSelector.defaultProps   = {
-  onChange:      DO_NOTHING,
-  emptyState:    "Click to select date",
+DatePickerSelector.defaultProps = {
+  onChange: DO_NOTHING,
+  emptyState: "Click to select date",
   disabledDates: [],
-  disabled:      false,
+  disabled: false,
 }

@@ -1,78 +1,79 @@
 import { mdiInformation } from "@mdi/js"
-import {
-  Button,
-  ButtonProps
-}                         from "components/forms/Button"
-import React              from "react"
-import { DO_NOTHING }     from "utils/functionHelpers"
+import { Button, ButtonProps } from "components/forms/Button"
+import React from "react"
+import { DO_NOTHING } from "utils/functionHelpers"
 
 export default {
-  title:     "forms/Button",
+  title: "forms/Button",
   component: Button,
-  argTypes:  {
-    color: {}
+  argTypes: {
+    color: {},
   },
 }
 
 const Story = (props: Partial<ButtonProps>) => {
-  return <Button {...props} onClick={DO_NOTHING}>{props.children ?? "Click Me"}</Button>
+  return (
+    <Button
+      {...props}
+      innerAs={"a"}
+      onClick={DO_NOTHING}>
+      {props.children ?? "Click Me"}
+    </Button>
+  )
 }
 
 export const Default = Story.bind({})
-// @ts-ignore
-Default.args         = {
-  // color: "blue",
-  compact:  false,
+Default.args = {
+  color: "green",
+  compact: false,
   disabled: false,
-  flat:     false,
-  fluid:    false,
-  inline:   false,
-  pill:     false,
-  primary:  false,
-  neutral:  false,
+  flat: false,
+  fluid: false,
+  inline: false,
+  pill: false,
+  primary: false,
+  neutral: false,
 }
 
 export const Neutral = Story.bind({})
-// @ts-ignore
-Neutral.args         = {
-  compact:  false,
+Neutral.args = {
+  compact: false,
   disabled: false,
-  flat:     false,
-  fluid:    false,
-  inline:   false,
-  pill:     false,
-  primary:  true,
-  neutral:  true,
+  flat: false,
+  fluid: false,
+  inline: false,
+  pill: false,
+  primary: true,
+  neutral: true,
 }
 
 export const WithIcon = Story.bind({})
-// @ts-ignore
-WithIcon.args         = {
-  compact:  false,
+WithIcon.args = {
+  compact: false,
   disabled: false,
-  flat:     false,
-  fluid:    false,
-  icon:     mdiInformation,
-  inline:   false,
-  pill:     false,
-  primary:  false,
-  neutral:  false,
+  flat: false,
+  fluid: false,
+  icon: mdiInformation,
+  inline: false,
+  pill: false,
+  primary: false,
+  neutral: false,
 }
 
 export const WithIconAndLongText = Story.bind({})
-// @ts-ignore
-WithIconAndLongText.args         = {
-  alignItems:     "flex-start",
-  children:       "Learn more about what notifications you'll receive from IdentiShare",
-  compact:        false,
-  disabled:       false,
-  flat:           false,
-  fluid:          false,
-  icon:           mdiInformation,
-  iconSize:       1,
-  inline:         false,
+WithIconAndLongText.args = {
+  alignItems: "flex-start",
+  children:
+    "Learn more about what notifications you'll receive from IdentiShare",
+  compact: false,
+  disabled: false,
+  flat: false,
+  fluid: false,
+  icon: mdiInformation,
+  iconSize: 1,
+  inline: false,
   wrapInlineText: true,
-  pill:           false,
-  primary:        false,
-  neutral:        false,
+  pill: false,
+  primary: false,
+  neutral: false,
 }

@@ -2083,7 +2083,7 @@ var Chip = styled__default["default"](XXS).attrs(function (_a) {
   var color;
   switch (true) {
     case danger:
-      background = light(COLORS.RED, .5);
+      background = light(COLORS.RED, 0.5);
       color = COLORS.RED;
       break;
     case success:
@@ -2098,7 +2098,7 @@ var Chip = styled__default["default"](XXS).attrs(function (_a) {
       });
       break;
     default:
-      background = light(COLORS.GREY, .6);
+      background = light(COLORS.GREY, 0.6);
       color = COLORS.GREY;
   }
   return {
@@ -3304,7 +3304,11 @@ function _getPrototypeOf(o) {
   return _getPrototypeOf(o);
 }
 function _isNativeFunction(fn) {
-  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  try {
+    return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  } catch (e) {
+    return typeof fn === "function";
+  }
 }
 function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
@@ -5927,7 +5931,7 @@ var useTheme = function () {
 };
 // export const setThemeContext = (ctx :)
 
-var Close = styled__default["default"](Tag.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\n"], ["\n\n"])));
+var Close = styled__default["default"](Tag.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 exports.Tag = React.forwardRef(function (_a, ref) {
   var children = _a.children,
     className = _a.className,

@@ -1,6 +1,6 @@
-type IndexedMap<T> = ({
+type IndexedMap<T> = {
     [key in string | number]: T;
-});
+};
 export type Matrix<T> = Array<Array<T>>;
 export type NullableArray<T = any> = ArrayLike<T> | null | undefined;
 type ObjectWithProperty<Prop extends string> = {

@@ -1,4 +1,4 @@
 import { ThemedStyledProps } from "styled-components"
-import { Theme }             from "styles/theme/Theme.type"
+import { Theme } from "styles/theme/Theme.type"
 
 export type StyledProps<Props = {}> = ThemedStyledProps<Props, Theme>

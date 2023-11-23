@@ -1,40 +1,26 @@
-import { Button }             from "components/forms/Button"
+import { Button } from "components/forms/Button"
 import { SearchableSelector } from "components/forms/selectors/SearchableSelector"
-import { SelectorItemKey }    from "components/forms/selectors/types"
-import { FlexBox }            from "components/layout/FlexBox"
-import {
-  ColumnConfig,
-  SortDirection,
-  SortState
-}                             from "components/tables/Table"
-import React, {
-  FC,
-  useCallback,
-  useMemo,
-  useState
-}                             from "react"
-import { css }                from "styled-components"
-import { SPACINGS }           from "styles/spacings"
-import {
-  excludeBlanks,
-  isEmpty,
-  isNotEmpty
-}                             from "utils/arrayHelpers"
+import { SelectorItemKey } from "components/forms/selectors/types"
+import { FlexBox } from "components/layout/FlexBox"
+import { ColumnConfig, SortDirection, SortState } from "components/tables/Table"
+import React, { FC, useCallback, useMemo, useState } from "react"
+import { css } from "styled-components"
+import { SPACINGS } from "styles/spacings"
+import { excludeBlanks, isEmpty, isNotEmpty } from "utils/arrayHelpers"
 
 export type SorterProps = {
-  columnConfigs: ColumnConfig[],
-  onColumnSort?: (state: SortState) => void,
-  sortState?: SortState,
+  columnConfigs: ColumnConfig[]
+  onColumnSort?: (state: SortState) => void
+  sortState?: SortState
 }
 
 export const TableSorter: FC<SorterProps> = ({
-                                               columnConfigs,
-                                               onColumnSort,
-                                               sortState = {},
-                                             }) => {
-
+  columnConfigs,
+  onColumnSort,
+  sortState = {},
+}) => {
   const initialState = useMemo(() => {
-    const keys      = Object.keys(sortState)
+    const keys = Object.keys(sortState)
     const fieldName = isNotEmpty(keys) ? keys[0] : ""
     const direction = sortState[fieldName] ?? ""
 
@@ -54,7 +40,7 @@ export const TableSorter: FC<SorterProps> = ({
 
   const sortConfigs = useMemo(
     () => excludeBlanks(columnConfigs.map((c) => c.sort)),
-    [columnConfigs]
+    [columnConfigs],
   )
 
   const sortOptions = useMemo(() => {
@@ -68,24 +54,33 @@ export const TableSorter: FC<SorterProps> = ({
 
   if (isEmpty(sortConfigs)) return null
 
-  return <FlexBox key={"table_sort_menu"} withRows>
-    <SearchableSelector appendMenuToNode={document.body}
-                        clearable
-                        emptyState={"Select attribute and order"}
-                        keyField={"value"}
-                        label={"Sort By"}
-                        labelField={"label"}
-                        maxMenuHeight={"200px"}
-                        menuPopperModifiers={[{ name: "flip", enabled: true }]}
-                        onChange={setState}
-                        options={sortOptions}
-                        placement={"bottom"}
-                        selectedKey={state}
-                        small
-    />
+  return (
+    <FlexBox
+      key={"table_sort_menu"}
+      withRows>
+      <SearchableSelector
+        appendMenuToNode={document.body}
+        clearable
+        emptyState={"Select attribute and order"}
+        keyField={"value"}
+        label={"Sort By"}
+        labelField={"label"}
+        maxMenuHeight={"200px"}
+        menuPopperModifiers={[{ name: "flip", enabled: true }]}
+        onChange={setState}
+        options={sortOptions}
+        placement={"bottom"}
+        selectedKey={state}
+        small
+      />
 
-    <FlexBox _css={css`margin: ${SPACINGS.SM} 0;`} justifyContent={"flex-end"}>
-      <Button onClick={applySort}>Apply</Button>
+      <FlexBox
+        _css={css`
+          margin: ${SPACINGS.SM} 0;
+        `}
+        justifyContent={"flex-end"}>
+        <Button onClick={applySort}>Apply</Button>
+      </FlexBox>
     </FlexBox>
-  </FlexBox>
+  )
 }

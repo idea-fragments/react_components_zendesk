@@ -1,22 +1,14 @@
-import { FlexBox }     from "components/layout/FlexBox"
+import { FlexBox } from "components/layout/FlexBox"
 import styled, { css } from "styled-components"
 import { breakpoints } from "styles/breakpoints/breakpoints"
-import {
-  mediaQueries,
-  unit
-}                      from "styles/mediaQueries"
+import { mediaQueries, unit } from "styles/mediaQueries"
 
-const {
-        forLargeComputers,
-        forLargeTabletsAndUp,
-        forSmallComputersAndUp,
-      } = mediaQueries()
+const { forLargeComputers, forLargeTabletsAndUp, forSmallComputersAndUp } =
+  mediaQueries()
 
-const {
-        tabletSize,
-        largeTabletSize,
-        smallComputerSize,
-      } = breakpoints({ wideLayout: false })
+const { tabletSize, largeTabletSize, smallComputerSize } = breakpoints({
+  wideLayout: false,
+})
 
 const deviceSettings = css`
   ${forLargeTabletsAndUp(css`
@@ -41,5 +33,5 @@ export const Container = styled(FlexBox).attrs({
   width: 100%;
   padding: 0 ${({ theme }) => theme.styles.container.horizontalPadding};
 
-  ${({ fluid }) => fluid ? "" : deviceSettings}
+  ${({ fluid }) => (fluid ? "" : deviceSettings)}
 `

@@ -1,37 +1,40 @@
-import { FlexBox }                                                  from "components/layout/FlexBox"
+import { FlexBox } from "components/layout/FlexBox"
 import React, { FC, FormEvent, forwardRef, PropsWithChildren, Ref } from "react"
-import styled                                                       from "styled-components"
-import { SPACINGS }                              from "styles/spacings"
-import { ContainerProps }                   from "styles/types"
-import { PromiseFunc }                      from "utils/function.types"
+import styled from "styled-components"
+import { SPACINGS } from "styles/spacings"
+import { ContainerProps } from "styles/types"
+import { PromiseFunc } from "utils/function.types"
 
 type Props = PropsWithChildren<{
-  onSubmit: PromiseFunc,
-}> & ContainerProps
+  onSubmit: PromiseFunc
+}> &
+  ContainerProps
 
-export let Form: FC<Props> = forwardRef<HTMLFormElement, Props>((
-  { onSubmit, className, children, ...props },
-  ref: Ref<HTMLFormElement>,
-) => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    onSubmit()
-  }
+export let Form: FC<Props> = forwardRef<HTMLFormElement, Props>(
+  ({ onSubmit, className, children, ...props }, ref: Ref<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      onSubmit()
+    }
 
-  return <FlexBox withRows
-                  as={"form"}
-                  onSubmit={handleSubmit}
-                  gap={SPACINGS.SM}
-                  className={className}
-                  ref={ref}
-                  {...props}>
-    <HiddenSubmit />
-    {children}
-  </FlexBox>
-})
+    return (
+      <FlexBox
+        withRows
+        as={"form"}
+        onSubmit={handleSubmit}
+        gap={SPACINGS.SM}
+        className={className}
+        ref={ref}
+        {...props}>
+        <HiddenSubmit />
+        {children}
+      </FlexBox>
+    )
+  },
+)
 
 const HiddenSubmit = styled.input.attrs({
-  type:     "submit",
+  type: "submit",
   tabIndex: -1,
 })`
   position: absolute;

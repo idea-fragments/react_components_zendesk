@@ -1,10 +1,7 @@
-import {
-  css,
-  FlattenSimpleInterpolation
-}                      from "styled-components"
+import { css, FlattenSimpleInterpolation } from "styled-components"
 import { breakpoints } from "styles/breakpoints/breakpoints"
 
-export const PHONE_SIZE  = 560
+export const PHONE_SIZE = 560
 export const TABLET_SIZE = 840
 
 type Styles = FlattenSimpleInterpolation
@@ -23,21 +20,17 @@ export const forTablets = (styles: Styles): string => `
 `
 
 export type MediaQueriesI = {
-  forPhones: MediaQuery,
-  forTablets: MediaQuery,
-  forTabletsAndUp: MediaQuery,
-  forLargeTabletsAndUp: MediaQuery,
-  forSmallComputersAndUp: MediaQuery,
-  forLargeComputers: MediaQuery,
+  forPhones: MediaQuery
+  forTablets: MediaQuery
+  forTabletsAndUp: MediaQuery
+  forLargeTabletsAndUp: MediaQuery
+  forSmallComputersAndUp: MediaQuery
+  forLargeComputers: MediaQuery
 }
 
 export const mediaQueries = (wideLayout?: boolean): MediaQueriesI => {
-  const {
-          phoneSize,
-          tabletSize,
-          largeTabletSize,
-          smallComputerSize,
-        } = breakpoints({ wideLayout })
+  const { phoneSize, tabletSize, largeTabletSize, smallComputerSize } =
+    breakpoints({ wideLayout })
 
   return {
     forPhones: (styles: Styles): Styles => css`
@@ -78,9 +71,8 @@ export const mediaQueries = (wideLayout?: boolean): MediaQueriesI => {
   }
 }
 
-export const rem  = (px: number): string => `${px / remSize()}rem`
+export const rem = (px: number): string => `${px / remSize()}rem`
 export const unit = (px: number): string => `${px}px`
 
-export const remSize = (e: HTMLElement = document.documentElement) => (
+export const remSize = (e: HTMLElement = document.documentElement) =>
   Number(window.getComputedStyle(e, null).fontSize.replace(/[A-Za-z]/g, ""))
-)

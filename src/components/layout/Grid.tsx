@@ -3,10 +3,10 @@ import {
   Row as ZRow,
   Col as ZCol,
   /* @ts-ignore */
-}                   from "@zendeskgarden/react-grid"
-import styled       from "styled-components"
+} from "@zendeskgarden/react-grid"
+import styled from "styled-components"
 import { SPACINGS } from "styles/spacings"
-import { CSSProp }  from "styles/types"
+import { CSSProp } from "styles/types"
 
 export const Grid = styled(ZGrid)`
   && {

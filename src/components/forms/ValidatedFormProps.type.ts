@@ -1,3 +1,3 @@
 export type ValidatedFormProps = {
-    invalidFields :{ [key: string] :Array<string> }
+  invalidFields: { [key: string]: Array<string> }
 }

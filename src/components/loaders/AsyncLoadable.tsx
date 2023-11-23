@@ -1,12 +1,12 @@
-import { FlexBlock }                       from "components/layout/FlexBlock"
-import { Dots }                            from "components/loaders/Dots"
-import { StyledComponentProps }            from "components/StyledComponentProps.type"
+import { FlexBlock } from "components/layout/FlexBlock"
+import { Dots } from "components/loaders/Dots"
+import { StyledComponentProps } from "components/StyledComponentProps.type"
 import React, { FC, useContext, useState } from "react"
-import styled, { ThemeContext }            from "styled-components"
-import { Theme }                           from "styles/theme/Theme.type"
-import { FONT_SIZES }                      from "styles/typography"
-import { returnAfterMinimum }              from "utils/dateTimeHelpers"
-import { PromiseFunc }                     from "utils/function.types"
+import styled, { ThemeContext } from "styled-components"
+import { Theme } from "styles/theme/Theme.type"
+import { FONT_SIZES } from "styles/typography"
+import { returnAfterMinimum } from "utils/dateTimeHelpers"
+import { PromiseFunc } from "utils/function.types"
 
 type AsyncLoadFunc = <T>(f: PromiseFunc<any, T>) => Promise<T>
 export type RenderProp = { withLoading: AsyncLoadFunc }
@@ -16,10 +16,10 @@ type Props = {
 } & StyledComponentProps
 
 export let AsyncLoadable: FC<Props> = ({ children, className }) => {
-  const theme                        = useContext<Theme>(ThemeContext)
+  const theme = useContext<Theme>(ThemeContext)
   const [isLoading, setLoadingState] = useState<boolean>(false)
 
-  const withLoading = async <T, >(f: PromiseFunc<any, T>): Promise<T> => {
+  const withLoading = async <T,>(f: PromiseFunc<any, T>): Promise<T> => {
     setLoadingState(true)
 
     let val: Promise<any>
@@ -33,11 +33,17 @@ export let AsyncLoadable: FC<Props> = ({ children, className }) => {
   }
 
   if (isLoading) {
-    return <Container justify={"center"}
-                      className={className}
-                      alignItems={"center"}>
-      <Dots color={theme.styles.colorPrimary} size={FONT_SIZES.XXL} />
-    </Container>
+    return (
+      <Container
+        justify={"center"}
+        className={className}
+        alignItems={"center"}>
+        <Dots
+          color={theme.styles.colorPrimary}
+          size={FONT_SIZES.XXL}
+        />
+      </Container>
+    )
   }
 
   return children({ withLoading })

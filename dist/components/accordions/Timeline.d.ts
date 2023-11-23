@@ -1,8 +1,9 @@
 import { ReactNode, FC } from "react";
 export type TimeLineItem = {
-    content: string;
+    content: ReactNode;
     dateTime?: string;
     icon?: ReactNode;
+    key: string | number;
 };
 export type TimelineProps = {
     isAlternate?: boolean;

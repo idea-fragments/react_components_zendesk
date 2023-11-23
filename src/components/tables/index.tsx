@@ -7,21 +7,12 @@ import {
   OverflowButton as ZOverflowButton,
   Row as ZRow,
   Table as ZTable,
-}                                      from "@zendeskgarden/react-tables"
-import { StickyColumnProps }           from "components/tables/utils"
-import styled, { css }                 from "styled-components"
-import {
-  COLORS,
-  fade,
-  light,
-  veryLight
-}                                      from "styles/colors"
-import {
-  CSS,
-  CSSProp
-}                                      from "styles/types"
+} from "@zendeskgarden/react-tables"
+import { StickyColumnProps } from "components/tables/utils"
+import styled, { css } from "styled-components"
+import { COLORS, fade, light, veryLight } from "styles/colors"
+import { CSS, CSSProp } from "styles/types"
 import { FONT_SIZES_EM as FONT_SIZES } from "styles/typography"
-
 
 type OverflowColumnProps = {
   extraWidth?: string
@@ -63,7 +54,7 @@ const Table = styled(ZTable)<CSSProp>`
 
 const Head = styled(ZHead)`
   //text-transform: uppercase;
-    // background: ${veryLight(COLORS.GREY)};
+  // background: ${veryLight(COLORS.GREY)};
   background: ${COLORS.WHITE};
 `
 
@@ -72,10 +63,12 @@ const HeaderRow = styled(ZHeaderRow)`
   height: auto !important;
 `
 
-const HeaderCell = styled(ZHeaderCell)<CSSProp & StickyColumnProps & OverflowColumnProps>`
+const HeaderCell = styled(ZHeaderCell)<
+  CSSProp & StickyColumnProps & OverflowColumnProps
+>`
   vertical-align: top;
   background: white;
-  ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};
+  ${({ hasOverflow }) => (hasOverflow ? overflowCellStyles : "")};
   ${({ _css }) => _css}
 `
 
@@ -87,30 +80,33 @@ const Cell = styled(ZCell)<CSSProp & StickyColumnProps>`
   &&&& {
     background: white;
     box-shadow: none;
-    ${({ hasOverflow }) => hasOverflow ? overflowCellStyles : ""};
+    ${({ hasOverflow }) => (hasOverflow ? overflowCellStyles : "")};
     ${({ _css }) => _css}
   }
 `
 
-const OverflowButton = styled(ZOverflowButton)`
-`
+const OverflowButton = styled(ZOverflowButton)``
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const clickableRowStyling = css`
   cursor: pointer;
 
-  :hover, :focus {
+  :hover,
+  :focus {
     & > ${Cell}:first-child {
       box-shadow: inset 3px 0 0 0 ${(p) => p.theme.styles.colorPrimary};
     }
   }
 
   :focus {
-    background: ${(p) => fade(p.theme.styles.colorPrimary, .8)};
+    background: ${(p) => fade(p.theme.styles.colorPrimary, 0.8)};
   }
 `
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const unclickableRowStyling = css`
-  :hover, :focus {
+  :hover,
+  :focus {
     & > ${Cell}:first-child {
       box-shadow: unset;
     }
@@ -121,13 +117,13 @@ const unclickableRowStyling = css`
   }
 `
 
-const Row = styled(ZRow)<{ clickable?: boolean, _css?: CSS }>`
+const Row = styled(ZRow)<{ clickable?: boolean; _css?: CSS }>`
   &&&& {
     border-width: 2px;
     border-color: ${veryLight(COLORS.GREY)};
 
     :hover {
-      background: ${light(COLORS.GREY, .72)};
+      background: ${light(COLORS.GREY, 0.72)};
     }
 
     ${({ _css }) => _css}
@@ -144,14 +140,4 @@ Object.assign(Table, {
   Cell,
 })
 
-export {
-  Table,
-  Head,
-  HeaderRow,
-  HeaderCell,
-  OverflowButton,
-  Body,
-  Row,
-  Cell,
-}
-
+export { Table, Head, HeaderRow, HeaderCell, OverflowButton, Body, Row, Cell }

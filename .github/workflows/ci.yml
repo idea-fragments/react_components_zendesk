@@ -1,0 +1,35 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_call:
+concurrency:
+  group: ${{ github.ref_name }}
+  cancel-in-progress: ${{ github.ref_name != 'master' }}
+jobs:
+  checks:
+    container:
+      image: node:16.15.0
+    name: Run Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Code
+        uses: actions/checkout@v3
+      - name: Install packages
+        run: npm install
+      - name: Run Linting Check
+        run: npm run lint
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+      - name: List changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+      - name: Run Prettier check on changed files
+        run: npx prettier --check ${{ steps.changed-files.outputs.all_changed_files }}
+    strategy:
+      fail-fast: false
+    timeout-minutes: 10

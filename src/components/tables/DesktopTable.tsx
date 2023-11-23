@@ -1,58 +1,48 @@
-import { FlexBox }      from "components/layout/FlexBox"
-import { Row }          from "components/tables/blocks/DesktopTable/Row"
-import { Header }       from "components/tables/blocks/Header"
-import { HelpText }     from "components/tables/blocks/HelpText"
+import { FlexBox } from "components/layout/FlexBox"
+import { Row } from "components/tables/blocks/DesktopTable/Row"
+import { Header } from "components/tables/blocks/Header"
+import { HelpText } from "components/tables/blocks/HelpText"
 import { TableActions } from "components/tables/blocks/TableActions"
-import { Title }        from "components/tables/blocks/Title"
-import {
-  Body,
-  Table
-}                       from "components/tables/index"
-import {
-  Item,
-  TableProps
-}                       from "components/tables/Table"
-import React, {
-  UIEvent,
-  useEffect,
-  useRef,
-  useState
-}                       from "react"
-import styled, { css }  from "styled-components"
-import { CSSProp }      from "styles/types"
-import { isNotEmpty }   from "utils/arrayHelpers"
+import { Title } from "components/tables/blocks/Title"
+import { Body, Table } from "components/tables/index"
+import { Item, TableProps } from "components/tables/Table"
+import React, { UIEvent, useEffect, useRef, useState } from "react"
+import styled, { css } from "styled-components"
+import { CSSProp } from "styles/types"
+import { isNotEmpty } from "utils/arrayHelpers"
 
 type Props = TableProps & {
-  hasRowActions: boolean,
-  onSelectAllToggle?: (b: boolean) => void,
+  hasRowActions: boolean
+  onSelectAllToggle?: (b: boolean) => void
 }
 
 export const DesktopTable = ({
-                               actions,
-                               checkable = false,
-                               checkedItems,
-                               columnConfigs,
-                               emptyState,
-                               filterState,
-                               hasRowActions,
-                               helpText,
-                               items,
-                               maxHeight,
-                               sortState,
-                               title,
-                               onColumnSort,
-                               onFiltersChange,
-                               onItemChecked,
-                               onItemClick,
-                               onItemHoverEnd,
-                               onItemHoverStart,
-                               onSelectAllToggle,
-                             }: Props) => {
-  const [verticalScrollbarWidth, setVerticalScrollbarWidth] = useState<number>(0)
-  const [headerHeight, setHeaderHeight]                     = useState("0px")
+  actions,
+  checkable = false,
+  checkedItems,
+  columnConfigs,
+  emptyState,
+  filterState,
+  hasRowActions,
+  helpText,
+  items,
+  maxHeight,
+  sortState,
+  title,
+  onColumnSort,
+  onFiltersChange,
+  onItemChecked,
+  onItemClick,
+  onItemHoverEnd,
+  onItemHoverStart,
+  onSelectAllToggle,
+}: Props) => {
+  const [verticalScrollbarWidth, setVerticalScrollbarWidth] =
+    useState<number>(0)
+  const [headerHeight, setHeaderHeight] = useState("0px")
 
-  const bodyRef      = useRef<HTMLDivElement>(null)
-  const headerRef    = useRef<HTMLDivElement>(null)
+  const bodyRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
     if (!headerRef.current) return
     headerRef.current.scrollLeft = (e.target as HTMLDivElement).scrollLeft
@@ -61,8 +51,8 @@ export const DesktopTable = ({
   useEffect(() => {
     if (!bodyRef.current || !headerRef.current) return
 
-    const bodyWidth    = bodyRef.current.clientWidth
-    const headerWidth  = headerRef.current.clientWidth
+    const bodyWidth = bodyRef.current.clientWidth
+    const headerWidth = headerRef.current.clientWidth
     const headerHeight = headerRef.current.clientHeight
 
     setVerticalScrollbarWidth(headerWidth - bodyWidth)
@@ -71,11 +61,17 @@ export const DesktopTable = ({
 
   return (
     <FlexBox withRows>
-      <FlexBox _css={css`margin-bottom: 1rem;`}
-               justifyContent={"space-between"} withRows>
+      <FlexBox
+        _css={css`
+          margin-bottom: 1rem;
+        `}
+        justifyContent={"space-between"}
+        withRows>
         {title ? <Title>{title}</Title> : null}
         {helpText ? <HelpText>{helpText}</HelpText> : null}
-        <FlexBox _css={`flex: 1`} justifyContent={"flex-end"}>
+        <FlexBox
+          _css={`flex: 1`}
+          justifyContent={"flex-end"}>
           <TableActions
             actions={actions}
             columnConfigs={columnConfigs}
@@ -85,17 +81,23 @@ export const DesktopTable = ({
         </FlexBox>
       </FlexBox>
       <TableWrapper>
-        <Div _css={css`overflow: hidden;`} ref={headerRef}>
+        <Div
+          _css={css`
+            overflow: hidden;
+          `}
+          ref={headerRef}>
           <Table>
-            <Header bodyScrollbarWidth={verticalScrollbarWidth}
-                    checkable={checkable}
-                    checkedItems={checkedItems}
-                    columnConfigs={columnConfigs}
-                    hasRowActions={hasRowActions}
-                    items={items}
-                    onColumnSort={onColumnSort}
-                    onSelectAllToggle={onSelectAllToggle}
-                    sortState={sortState} />
+            <Header
+              bodyScrollbarWidth={verticalScrollbarWidth}
+              checkable={checkable}
+              checkedItems={checkedItems}
+              columnConfigs={columnConfigs}
+              hasRowActions={hasRowActions}
+              items={items}
+              onColumnSort={onColumnSort}
+              onSelectAllToggle={onSelectAllToggle}
+              sortState={sortState}
+            />
           </Table>
         </Div>
 
@@ -108,24 +110,22 @@ export const DesktopTable = ({
           ref={bodyRef}>
           <Table>
             <Body>
-              {
-                isNotEmpty(items)
+              {isNotEmpty(items)
                 ? items.map((item: Item) => (
-                  <Row
-                    checkable={checkable}
-                    checkDisabled={item.checkDisabled}
-                    checked={checkedItems?.has(item.key)}
-                    columnConfigs={columnConfigs}
-                    item={item}
-                    key={item.key}
-                    onCheck={onItemChecked}
-                    onClick={onItemClick}
-                    onHoverStart={onItemHoverStart}
-                    onHoverEnd={onItemHoverEnd}
-                  />
-                ))
-                : emptyState
-              }
+                    <Row
+                      checkable={checkable}
+                      checkDisabled={item.checkDisabled}
+                      checked={checkedItems?.has(item.key)}
+                      columnConfigs={columnConfigs}
+                      item={item}
+                      key={item.key}
+                      onCheck={onItemChecked}
+                      onClick={onItemClick}
+                      onHoverStart={onItemHoverStart}
+                      onHoverEnd={onItemHoverEnd}
+                    />
+                  ))
+                : emptyState}
             </Body>
           </Table>
         </Div>

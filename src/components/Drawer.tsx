@@ -1,10 +1,10 @@
-import { mdiClose }                  from "@mdi/js"
-import { Button }                    from "components/forms/Button"
-import { IconButton }                from "components/forms/IconButton"
-import { FlexBox }                   from "components/layout/FlexBox"
+import { mdiClose } from "@mdi/js"
+import { Button } from "components/forms/Button"
+import { IconButton } from "components/forms/IconButton"
+import { FlexBox } from "components/layout/FlexBox"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
-import { StyledProps }               from "components/StyledProps.type"
-import { Nullable }                  from "global"
+import { StyledProps } from "components/StyledProps.type"
+import { Nullable } from "global"
 import React, {
   FC,
   MouseEvent,
@@ -12,50 +12,45 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
-}                                    from "react"
-import styled                        from "styled-components"
-import { SPACINGS }                  from "styles/spacings"
-import { useTheme }                  from "styles/theme/useTheme"
-import { FONT_WEIGHTS }              from "styles/typography"
-import { Logger }                    from "utils/logging/Logger"
+  useState,
+} from "react"
+import styled from "styled-components"
+import { SPACINGS } from "styles/spacings"
+import { useTheme } from "styles/theme/useTheme"
+import { FONT_WEIGHTS } from "styles/typography"
+import { Logger } from "utils/logging/Logger"
 
 export type DrawerContent = {
-  body: ReactNode,
-  title?: string,
-  withCancelButton?: boolean,
-  withNoActions?: boolean,
-  onClose?: () => void,
+  body: ReactNode
+  title?: string
+  withCancelButton?: boolean
+  withNoActions?: boolean
+  onClose?: () => void
 }
 
 type Props = {
-  closeDrawer: () => void,
-  drawerContent: Nullable<DrawerContent>,
-  isOpen: boolean,
+  closeDrawer: () => void
+  drawerContent: Nullable<DrawerContent>
+  isOpen: boolean
 } & StyledComponentProps
 
 const ANIMATION_DURATION_MS = 300
-const MARGIN_SIZE           = SPACINGS.MD
-const logger                = new Logger("Drawer")
+const MARGIN_SIZE = SPACINGS.MD
+const logger = new Logger("Drawer")
 
 export let Drawer: FC<Props> = ({
-                                  closeDrawer,
-                                  drawerContent,
-                                  isOpen: isOpenProp,
-                                }) => {
-  const backdropRef                 = useRef<HTMLDivElement>(null)
-  const cachedContent               = useRef<ReactNode>()
-  const htmlOverflow                = useRef<string>()
-  const [isOpen, setIsOpenTo]       = useState(false)
+  closeDrawer,
+  drawerContent,
+  isOpen: isOpenProp,
+}) => {
+  const backdropRef = useRef<HTMLDivElement>(null)
+  const cachedContent = useRef<ReactNode>()
+  const htmlOverflow = useRef<string>()
+  const [isOpen, setIsOpenTo] = useState(false)
   const [isClosing, setIsClosingTo] = useState(false)
-  const theme                       = useTheme()
-  const {
-          body,
-          onClose,
-          title,
-          withCancelButton,
-          withNoActions,
-        }                           = drawerContent ?? {} as DrawerContent
+  const theme = useTheme()
+  const { body, onClose, title, withCancelButton, withNoActions } =
+    drawerContent ?? ({} as DrawerContent)
 
   const animateClose = useCallback(() => {
     setIsClosingTo(true)
@@ -74,11 +69,14 @@ export let Drawer: FC<Props> = ({
 
   const handleBackdropClick = ({ target, currentTarget }: MouseEvent) => {
     logger.writeInfo(
-      "backdrop click - target:", target,
-      "current target:", currentTarget
+      "backdrop click - target:",
+      target,
+      "current target:",
+      currentTarget,
     )
 
-    if (target === currentTarget && target === backdropRef.current) handleClose()
+    if (target === currentTarget && target === backdropRef.current)
+      handleClose()
   }
 
   const handleClose = () => {
@@ -86,7 +84,9 @@ export let Drawer: FC<Props> = ({
     if (onClose) onClose()
   }
 
-  useEffect(() => { if (isOpenProp) setIsOpenTo(true) }, [isOpenProp])
+  useEffect(() => {
+    if (isOpenProp) setIsOpenTo(true)
+  }, [isOpenProp])
 
   useEffect(() => {
     if (isOpenProp || !isOpen) return
@@ -99,12 +99,14 @@ export let Drawer: FC<Props> = ({
   }, [drawerContent])
 
   useEffect(() => {
-    const root      = document.querySelector("html")!!
-    const resetRoot = () => { root.style.overflow = htmlOverflow.current!! }
+    const root = document.querySelector("html")!!
+    const resetRoot = () => {
+      root.style.overflow = htmlOverflow.current!!
+    }
 
     if (isOpen) {
       htmlOverflow.current = root.style.overflow
-      root.style.overflow  = "hidden"
+      root.style.overflow = "hidden"
       return resetRoot
     }
 
@@ -117,73 +119,82 @@ export let Drawer: FC<Props> = ({
     throw new Error("Drawer found null drawer content")
 
   return (
-    <Backdrop isClosing={isClosing}
-              onClick={handleBackdropClick}
-              ref={backdropRef}>
-      <AbsoluteContainer withRows isClosing={isClosing}>
+    <Backdrop
+      isClosing={isClosing}
+      onClick={handleBackdropClick}
+      ref={backdropRef}>
+      <AbsoluteContainer
+        withRows
+        isClosing={isClosing}>
         <Header>
           <Title>{title}</Title>
           <IconButton
             icon={mdiClose}
             color={closeButtonColor}
             onClick={handleClose}
-            aria-label="Close drawer" />
+            aria-label="Close drawer"
+          />
         </Header>
 
         <Body>{body ?? cachedContent.current}</Body>
-        {
-          !withNoActions
-          ? <Footer>
-            {
-              withCancelButton
-              ? <Button compact
-                        disabled={isClosing}
-                        flat
-                        onClick={handleClose}>
+        {!withNoActions ? (
+          <Footer>
+            {withCancelButton ? (
+              <Button
+                compact
+                disabled={isClosing}
+                flat
+                onClick={handleClose}>
                 Cancel
               </Button>
-              : null
-            }
-            <Button compact
-                    disabled={isClosing}
-                    onClick={handleClose}>
+            ) : null}
+            <Button
+              compact
+              disabled={isClosing}
+              onClick={handleClose}>
               OK
             </Button>
           </Footer>
-          : null
-        }
-
+        ) : null}
       </AbsoluteContainer>
     </Backdrop>
   )
-
 }
 
-Drawer                = styled(Drawer)`
+Drawer = styled(Drawer)`
   html {
     overflow: hidden;
   }
 `
 // @ts-ignore
 Drawer.COMPONENT_NAME = "Drawer"
-Drawer.defaultProps   = {}
+Drawer.defaultProps = {}
 
 const AbsoluteContainer = styled(FlexBox)<{ isClosing: boolean }>`
   @keyframes DrawerAbsoluteContainerOpen {
-    from {right: -380px;}
-    to {right: 0;}
+    from {
+      right: -380px;
+    }
+    to {
+      right: 0;
+    }
   }
 
   @keyframes DrawerAbsoluteContainerClose {
-    0% {right: 0;}
-    20% {right: 20px;}
-    to {right: -380px;}
+    0% {
+      right: 0;
+    }
+    20% {
+      right: 20px;
+    }
+    to {
+      right: -380px;
+    }
   }
 
   animation: ${ANIMATION_DURATION_MS}ms ease-out 0s 1 normal forwards running;
-  animation-name: ${({ isClosing }) => isClosing
-                                       ? "DrawerAbsoluteContainerClose"
-                                       : "DrawerAbsoluteContainerOpen"};
+  animation-name: ${({ isClosing }) =>
+    isClosing ? "DrawerAbsoluteContainerClose" : "DrawerAbsoluteContainerOpen"};
   background: ${({ theme }) => theme.styles.sidebar.background};
   box-shadow: ${({ theme }) => theme.styles.sidebar.boxShadow} 0 20px 28px 0;
   height: 100vh;
@@ -198,21 +209,31 @@ const AbsoluteContainer = styled(FlexBox)<{ isClosing: boolean }>`
 
 const Backdrop = styled.div<{ isClosing: boolean }>`
   @keyframes ModalBackdropOpen {
-    from {opacity: 0;}
-    to {opacity: 100%;}
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 100%;
+    }
   }
 
   @keyframes ModalBackdropClose {
-    0% {opacity: 100%;}
-    50% {opacity: 100%;}
-    to {opacity: 0;}
+    0% {
+      opacity: 100%;
+    }
+    50% {
+      opacity: 100%;
+    }
+    to {
+      opacity: 0;
+    }
   }
 
   animation: ${ANIMATION_DURATION_MS}ms ease-out 0s 1 normal forwards running;
-  animation-name: ${({ isClosing }) => isClosing
-                                       ? "ModalBackdropClose"
-                                       : "ModalBackdropOpen"};
-  background-color: ${(p: StyledProps) => p.theme.styles.modal.backdrop.background};
+  animation-name: ${({ isClosing }) =>
+    isClosing ? "ModalBackdropClose" : "ModalBackdropOpen"};
+  background-color: ${(p: StyledProps) =>
+    p.theme.styles.modal.backdrop.background};
   display: flex;
   inset: 0;
   overflow: auto;
