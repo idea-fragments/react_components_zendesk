@@ -17,32 +17,29 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   isUserMessage,
   dateTime,
   icon,
-  color
+  color,
 }) => {
-
   const theme = useTheme()
 
   return (
     <Container>
-      <MessageContainer
-        isUserMessage={isUserMessage}
-
-      >
-        <MessageText>
-          {message}
-        </MessageText>
+      <MessageContainer isUserMessage={isUserMessage}>
+        <MessageText>{message}</MessageText>
         <IconContainer
           color={color ?? theme.styles.colorPrimary}
-          textColor={theme.styles.getTextColorForBackground({ theme, color: color ?? theme.styles.colorPrimary })}
-        >
+          textColor={theme.styles.getTextColorForBackground({
+            theme,
+            color: color ?? theme.styles.colorPrimary,
+          })}>
           {icon}
         </IconContainer>
       </MessageContainer>
-      <Text _css={css`
-        margin-top: 10px;
-        text-align: ${!isUserMessage ? "left" : "right"};
-        color: ${theme.styles.textColorSecondary};
-      `}>
+      <Text
+        _css={css`
+          margin-top: 10px;
+          text-align: ${!isUserMessage ? "left" : "right"};
+          color: ${theme.styles.textColorSecondary};
+        `}>
         {dateTime}
       </Text>
     </Container>
@@ -60,7 +57,8 @@ const MessageContainer = styled.div<{ isUserMessage: boolean }>`
   display: flex;
   gap: ${SPACINGS.SM};
   align-item: flex-start;
-  flex-direction: ${({ isUserMessage }) => !isUserMessage ? "row-reverse" : "row"};
+  flex-direction: ${({ isUserMessage }) =>
+    !isUserMessage ? "row-reverse" : "row"};
 `
 
 const MessageText = styled(Text)`
@@ -71,7 +69,7 @@ const MessageText = styled(Text)`
   border-radius: 5px;
 `
 
-const IconContainer = styled.div<{ color: string, textColor: string }>`
+const IconContainer = styled.div<{ color: string; textColor: string }>`
   background-color: ${({ color }) => color};
   color: ${({ textColor }) => textColor};
   min-width: 28px;
@@ -82,5 +80,3 @@ const IconContainer = styled.div<{ color: string, textColor: string }>`
   justify-content: center;
   align-items: center;
 `
-
-

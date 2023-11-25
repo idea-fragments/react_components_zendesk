@@ -3,9 +3,9 @@ import { ChatMessage } from "components/chats/ChatMessage"
 import React, { useState } from "react"
 
 export default {
-  title:     "chats/Chat",
+  title: "chats/Chat",
   component: Chat,
-  argTypes:  {},
+  argTypes: {},
 }
 
 const ChatBody = () => {
@@ -13,40 +13,40 @@ const ChatBody = () => {
     {
       message: "This is the user message",
       dateTime: "2023-10-11, 12:45PM",
-      isUserMessage: true
+      isUserMessage: true,
     },
     {
       message: "This is the chatgpt message message",
       dateTime: "2023-10-11, 12:50PM",
-      isUserMessage: false
+      isUserMessage: false,
     },
     {
       message: "This is the user message 2",
       dateTime: "2023-10-11, 12:52PM",
-      isUserMessage: true
+      isUserMessage: true,
     },
     {
       message: "This is the chatgpt message message",
       dateTime: "2023-10-11, 12:50PM",
-      isUserMessage: false
+      isUserMessage: false,
     },
     {
       message: "This is the user message 2",
       dateTime: "2023-10-11, 12:52PM",
-      isUserMessage: true
+      isUserMessage: true,
     },
     {
       message: "This is the chatgpt message message",
       dateTime: "2023-10-11, 12:50PM",
-      isUserMessage: false
+      isUserMessage: false,
     },
   ]
 
   return (
     <>
-      {messages.map(msg => {
+      {messages.map((msg) => {
         return (
-          <ChatMessage 
+          <ChatMessage
             key={msg.message}
             message={msg.message}
             dateTime={msg.dateTime}
@@ -61,21 +61,17 @@ const ChatBody = () => {
 }
 
 const Story = (props: ChatProps) => {
-
-  const [message, setMessage] = useState<string>();
+  const [message, setMessage] = useState<string>()
 
   const handleChange = (str: string) => {
     setMessage(str)
   }
 
-  const handleClick = () => {
-
-  }
-
+  const handleClick = () => {}
 
   return (
     <>
-      <Chat 
+      <Chat
         header={<h2>Hello World</h2>}
         chatBody={<ChatBody />}
         footer={"this is the footer message"}
@@ -90,4 +86,4 @@ const Story = (props: ChatProps) => {
 
 export const Default = Story.bind({})
 // @ts-ignore
-Default.args         = {}
+Default.args = {}

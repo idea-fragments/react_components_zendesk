@@ -1,13 +1,13 @@
 import { Button } from "components/forms/Button"
 import { DrawerModal, DrawerModalProps } from "components/modals/DrawerModal"
-import { Chat } from "components/chats/Chat";
-import { ChatMessage } from "components/chats/ChatMessage";
+import { Chat } from "components/chats/Chat"
+import { ChatMessage } from "components/chats/ChatMessage"
 import React, { useState } from "react"
 
 export default {
-  title:     "modals/DrawerModal",
+  title: "modals/DrawerModal",
   component: DrawerModal,
-  argTypes:  {},
+  argTypes: {},
 }
 
 const ChatBody = () => {
@@ -15,41 +15,40 @@ const ChatBody = () => {
     {
       message: "This is the user message",
       dateTime: "2023-10-11, 12:45PM",
-      isUserMessage: true
+      isUserMessage: true,
     },
     {
       message: "This is the chatgpt message message",
       dateTime: "2023-10-11, 12:50PM",
-      isUserMessage: false
+      isUserMessage: false,
     },
     {
       message: "This is the user message 2",
       dateTime: "2023-10-11, 12:52PM",
-      isUserMessage: true
+      isUserMessage: true,
     },
     {
       message: "This is the chatgpt message message",
       dateTime: "2023-10-11, 12:50PM",
-      isUserMessage: false
+      isUserMessage: false,
     },
     {
       message: "This is the user message 2",
       dateTime: "2023-10-11, 12:52PM",
-      isUserMessage: true
+      isUserMessage: true,
     },
     {
       message: "This is the chatgpt message message",
       dateTime: "2023-10-11, 12:50PM",
-      isUserMessage: false
+      isUserMessage: false,
     },
-
   ]
 
   return (
     <>
-      {messages.map(msg => {
+      {messages.map((msg) => {
         return (
-          <ChatMessage 
+          <ChatMessage
             key={msg.message}
             message={msg.message}
             dateTime={msg.dateTime}
@@ -64,7 +63,6 @@ const ChatBody = () => {
 }
 
 const Story = (props: DrawerModalProps) => {
-
   const [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
@@ -72,24 +70,25 @@ const Story = (props: DrawerModalProps) => {
   return (
     <>
       <Button onClick={open}>Open Modal</Button>
-      <DrawerModal 
+      <DrawerModal
         isOpen={isOpen}
         title="How can I help?"
-        drawerModalBody={<Chat 
-          header={<ChatMessage 
-            message="With that goal in mind, how can I help?"
-            dateTime="2023-10-12, 12:55PM"
-            icon="so"
-          />}
-          chatBody={<ChatBody />}
-          footer="This is the footer message"
-          onClick={close}
-          onChange={open}
-        />}
-        footer={<Button onClick={close}>
-          Close
-        </Button>
+        drawerModalBody={
+          <Chat
+            header={
+              <ChatMessage
+                message="With that goal in mind, how can I help?"
+                dateTime="2023-10-12, 12:55PM"
+                icon="so"
+              />
+            }
+            chatBody={<ChatBody />}
+            footer="This is the footer message"
+            onClick={close}
+            onChange={open}
+          />
         }
+        footer={<Button onClick={close}>Close</Button>}
         onCloseDrawerModal={close}
         {...props}
       />
@@ -99,4 +98,4 @@ const Story = (props: DrawerModalProps) => {
 
 export const Default = Story.bind({})
 // @ts-ignore
-Default.args         = {}
+Default.args = {}

@@ -15,38 +15,24 @@ export const DrawerModal: React.FC<DrawerModalProps> = ({
   title,
   footer,
   onCloseDrawerModal,
-  drawerModalBody
+  drawerModalBody,
 }) => {
-
   return (
-    <ZenDrawerModal 
-      isOpen={isOpen} 
+    <ZenDrawerModal
+      isOpen={isOpen}
       onClose={onCloseDrawerModal}
-      css = {`width: ${width};`}
-    >
-      {
-        title
-        ?
-        <ZenDrawerModal.Header tag="h2">
-          {title}
-        </ZenDrawerModal.Header>
-        :
-        null
-      }
-      <ZenDrawerModal.Body>
-        {drawerModalBody}
-      </ZenDrawerModal.Body>
-      {
-        footer
-        ?
+      css={`
+        width: ${width};
+      `}>
+      {title ? (
+        <ZenDrawerModal.Header tag="h2">{title}</ZenDrawerModal.Header>
+      ) : null}
+      <ZenDrawerModal.Body>{drawerModalBody}</ZenDrawerModal.Body>
+      {footer ? (
         <ZenDrawerModal.Footer>
-          <ZenDrawerModal.FooterItem>
-            {footer}
-          </ZenDrawerModal.FooterItem>
+          <ZenDrawerModal.FooterItem>{footer}</ZenDrawerModal.FooterItem>
         </ZenDrawerModal.Footer>
-        :
-        null
-      }
+      ) : null}
       {title ? <ZenDrawerModal.Close /> : null}
     </ZenDrawerModal>
   )

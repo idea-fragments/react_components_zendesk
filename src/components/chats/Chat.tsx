@@ -20,17 +20,14 @@ export const Chat: React.FC<ChatProps> = ({
   footer,
   userInputValue,
   onChange,
-  onClick
+  onClick,
 }) => {
-
   const theme = useTheme()
 
   return (
     <Container>
       {header}
-      <ChatBodyContainer>
-        {chatBody}
-      </ChatBodyContainer>
+      <ChatBodyContainer>{chatBody}</ChatBodyContainer>
       {/* {
         footer
         ?
@@ -46,7 +43,7 @@ export const Chat: React.FC<ChatProps> = ({
         :
         null
       } */}
-      <FlexBox 
+      <FlexBox
         withRows
         _css={css`
           background-color: white;
@@ -54,31 +51,23 @@ export const Chat: React.FC<ChatProps> = ({
           bottom: 10px;
           left: 0px;
           width: 100%;
-        `}
-      >
-        {
-          footer
-          ?
-          <Text 
+        `}>
+        {footer ? (
+          <Text
             _css={css`
               text-align: center;
               color: ${theme.styles.textColorSecondary};
               margin: 30px 0px;
-            `}
-          >
+            `}>
             {footer}
           </Text>
-          :
-          null
-        }
-        <TextArea 
+        ) : null}
+        <TextArea
           onChange={onChange}
           value={userInputValue}
         />
         <ButtonContainer>
-          <Button onClick={onClick}>
-            Send
-          </Button>
+          <Button onClick={onClick}>Send</Button>
         </ButtonContainer>
       </FlexBox>
     </Container>
@@ -100,7 +89,3 @@ const ChatBodyContainer = styled.div`
 const ButtonContainer = styled.div`
   text-align: right;
 `
-
-
-
-
