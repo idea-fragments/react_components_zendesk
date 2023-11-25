@@ -3,6 +3,7 @@ import { Text } from "components/text/Text"
 import { SPACINGS } from "styles/spacings"
 import { COLORS } from "styles/colors"
 import { useTheme } from "styles/theme/useTheme"
+import { FONT_SIZES } from "styles/typography"
 
 export type ChatMessageProps = {
   message: string
@@ -36,7 +37,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
       </MessageContainer>
       <Text
         _css={css`
-          margin-top: 10px;
+          font-size: ${FONT_SIZES.XS};
+          margin-top: ${SPACINGS.SM};
           text-align: ${!isUserMessage ? "left" : "right"};
           color: ${theme.styles.textColorSecondary};
         `}>

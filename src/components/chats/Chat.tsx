@@ -5,6 +5,7 @@ import { Text } from "components/text/Text"
 import { Button, BUTTON_SIZES } from "components/forms/Button"
 import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
+import { FONT_SIZES } from "styles/typography"
 
 export type ChatProps = {
   header?: React.ReactNode
@@ -50,8 +51,9 @@ export const Chat: React.FC<ChatProps> = ({
         {footer ? (
           <Text
             _css={css`
-              text-align: center;
+              font-size: ${FONT_SIZES.XS};
               color: ${theme.styles.textColorSecondary};
+              text-align: center;
             `}>
             {footer}
           </Text>
