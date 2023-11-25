@@ -2003,6 +2003,9 @@ var base = {
   container: {
     horizontalPadding: "1rem"
   },
+  drawer: {
+    width: "380px"
+  },
   font: {
     size: "14px"
   },

@@ -3,6 +3,7 @@ import { Text } from "components/text/Text"
 import { SPACINGS } from "styles/spacings"
 import { COLORS } from "styles/colors"
 import { useTheme } from "styles/theme/useTheme"
+import { FONT_SIZES } from "styles/typography"
 
 export type ChatMessageProps = {
   message: string
@@ -36,7 +37,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
       </MessageContainer>
       <Text
         _css={css`
-          margin-top: 10px;
+          font-size: ${FONT_SIZES.XS};
+          margin-top: ${SPACINGS.SM};
           text-align: ${!isUserMessage ? "left" : "right"};
           color: ${theme.styles.textColorSecondary};
         `}>
@@ -48,15 +50,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
 const Container = styled.div`
   width: 100%;
-  padding: 0px 10px;
-  margin-bottom: 20px;
 `
 
 const MessageContainer = styled.div<{ isUserMessage: boolean }>`
   width: 100%;
   display: flex;
   gap: ${SPACINGS.SM};
-  align-item: flex-start;
   flex-direction: ${({ isUserMessage }) =>
     !isUserMessage ? "row-reverse" : "row"};
 `
@@ -66,7 +65,7 @@ const MessageText = styled(Text)`
   white-space: pre-wrap;
   background-color: ${COLORS.GREY_200};
   padding: 7px;
-  border-radius: 5px;
+  border-radius: 10px;
 `
 
 const IconContainer = styled.div<{ color: string; textColor: string }>`

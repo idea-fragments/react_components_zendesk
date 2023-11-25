@@ -29,6 +29,9 @@ export type Styles = {
     container: {
         horizontalPadding: string;
     };
+    drawer: {
+        width: string;
+    };
     font: {
         size: string;
     };

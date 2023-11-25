@@ -2,8 +2,10 @@ import styled, { css } from "styled-components"
 import { FlexBox } from "components/layout/FlexBox"
 import { TextArea } from "components/forms/textfields/TextArea"
 import { Text } from "components/text/Text"
-import { Button } from "components/forms/Button"
+import { Button, BUTTON_SIZES } from "components/forms/Button"
+import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
+import { FONT_SIZES } from "styles/typography"
 
 export type ChatProps = {
   header?: React.ReactNode
@@ -25,39 +27,33 @@ export const Chat: React.FC<ChatProps> = ({
   const theme = useTheme()
 
   return (
-    <Container>
+    <Container
+      gap={SPACINGS.LG}
+      withRows>
       {header}
-      <ChatBodyContainer>{chatBody}</ChatBodyContainer>
-      {/* {
-        footer
-        ?
-        <Text 
-          _css={css`
-            text-align: center;
-            color: ${theme.styles.textColorSecondary};
-            margin-top: 30px;
-          `}
-        >
-          {footer}
-        </Text>
-        :
-        null
-      } */}
+      <FlexBox
+        fluid
+        withRows
+        _css={css`
+          flex: 1;
+          overflow-y: scroll;
+          margin: 0 -20px;
+          padding: 0 20px;
+        `}>
+        {chatBody}
+      </FlexBox>
       <FlexBox
         withRows
         _css={css`
           background-color: white;
-          position: absolute;
-          bottom: 10px;
-          left: 0px;
           width: 100%;
         `}>
         {footer ? (
           <Text
             _css={css`
-              text-align: center;
+              font-size: ${FONT_SIZES.XS};
               color: ${theme.styles.textColorSecondary};
-              margin: 30px 0px;
+              text-align: center;
             `}>
             {footer}
           </Text>
@@ -66,26 +62,20 @@ export const Chat: React.FC<ChatProps> = ({
           onChange={onChange}
           value={userInputValue}
         />
-        <ButtonContainer>
-          <Button onClick={onClick}>Send</Button>
-        </ButtonContainer>
+        <FlexBox justifyContent={"flex-end"}>
+          <Button
+            onClick={onClick}
+            size={BUTTON_SIZES.SMALL}>
+            Send
+          </Button>
+        </FlexBox>
       </FlexBox>
     </Container>
   )
 }
 
-const Container = styled.div`
+const Container = styled(FlexBox)`
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-`
-
-const ChatBodyContainer = styled.div`
-  height: 90%;
-  overflow: scroll;
-`
-const ButtonContainer = styled.div`
-  text-align: right;
 `

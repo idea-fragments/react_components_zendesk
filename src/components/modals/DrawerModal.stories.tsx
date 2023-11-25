@@ -18,7 +18,8 @@ const ChatBody = () => {
       isUserMessage: true,
     },
     {
-      message: "This is the chatgpt message message",
+      message:
+        "This is the chatgpt message message. This is the chatgpt message message. This is the chatgpt message message.",
       dateTime: "2023-10-11, 12:50PM",
       isUserMessage: false,
     },
@@ -36,6 +37,36 @@ const ChatBody = () => {
       message: "This is the user message 2",
       dateTime: "2023-10-11, 12:52PM",
       isUserMessage: true,
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false,
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false,
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false,
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false,
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false,
+    },
+    {
+      message: "This is the chatgpt message message",
+      dateTime: "2023-10-11, 12:50PM",
+      isUserMessage: false,
     },
     {
       message: "This is the chatgpt message message",
@@ -89,8 +120,8 @@ const Story = (props: DrawerModalProps) => {
           />
         }
         footer={<Button onClick={close}>Close</Button>}
-        onCloseDrawerModal={close}
         {...props}
+        onCloseDrawerModal={close}
       />
     </>
   )

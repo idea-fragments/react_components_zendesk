@@ -21,6 +21,7 @@ export const base: Partial<Styles> = {
   colorWarning: COLORS.YELLOW,
   colorSuccess: COLORS.GREEN,
   container: { horizontalPadding: "1rem" },
+  drawer: { width: "380px" },
   font: { size: "14px" },
   modal: {
     backdrop: {
