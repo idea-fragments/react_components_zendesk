@@ -1,6 +1,7 @@
 import { DrawerModal as ZenDrawerModal } from "@zendeskgarden/react-modals"
 import { FC, ReactNode } from "react"
 import styled from "styled-components"
+import { SPACINGS } from "styles/spacings"
 import { CSSProp } from "styles/types"
 
 export type DrawerModalProps = {
@@ -40,7 +41,7 @@ export const DrawerModal = styled((({
   )
 }) as FC<DrawerModalProps>)`
   font-family: inherit;
-  ${({ width }) => (width ? `width: ${width};` : "")};
-  max-width: 100vw;
+  width: ${({ width, theme }) => width ?? theme.styles.drawer.width};
+  max-width: calc(100vw - ${SPACINGS.SM});
   ${({ _css }) => _css}
 `
