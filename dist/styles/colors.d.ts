@@ -21,6 +21,7 @@ export declare const COLORS: {
     VERY_LIGHT_GREY: string;
     LIGHT_GREY: string;
     TRANSPARENT: string;
+    GREY_200: string;
 };
 export declare const hasGoodContrast: (a: string, b: string) => boolean;
 export declare const fade: (c: string, amount?: number) => string;

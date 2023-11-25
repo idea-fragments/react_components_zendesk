@@ -1893,7 +1893,8 @@ var COLORS = {
   GREY: "#919292",
   VERY_LIGHT_GREY: "#F7F7F7",
   LIGHT_GREY: "#dddddd",
-  TRANSPARENT: "#00000000"
+  TRANSPARENT: "#00000000",
+  GREY_200: "#E9EBED"
 };
 Object.freeze(COLORS);
 var hasGoodContrast = function (a, b) {
