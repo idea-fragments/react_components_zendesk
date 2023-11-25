@@ -48,15 +48,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
 const Container = styled.div`
   width: 100%;
-  padding: 0px 10px;
-  margin-bottom: 20px;
 `
 
 const MessageContainer = styled.div<{ isUserMessage: boolean }>`
   width: 100%;
   display: flex;
   gap: ${SPACINGS.SM};
-  align-item: flex-start;
   flex-direction: ${({ isUserMessage }) =>
     !isUserMessage ? "row-reverse" : "row"};
 `
@@ -66,7 +63,7 @@ const MessageText = styled(Text)`
   white-space: pre-wrap;
   background-color: ${COLORS.GREY_200};
   padding: 7px;
-  border-radius: 5px;
+  border-radius: 10px;
 `
 
 const IconContainer = styled.div<{ color: string; textColor: string }>`
