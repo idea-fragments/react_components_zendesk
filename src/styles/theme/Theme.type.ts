@@ -12,7 +12,7 @@ type FullSpectrumColors = {
   800: string
 }
 
-type MutablePartialSpectrumColors = {
+type PartialSpectrumColors = {
   400: string
   M400: string
   600: string
@@ -58,17 +58,17 @@ export type Styles = {
     yellow: FullSpectrumColors
     green: FullSpectrumColors
     kale: FullSpectrumColors
-    fuschia: MutablePartialSpectrumColors
-    pink: MutablePartialSpectrumColors
-    crimson: MutablePartialSpectrumColors
-    orange: MutablePartialSpectrumColors
-    lemon: MutablePartialSpectrumColors
-    lime: MutablePartialSpectrumColors
-    mint: MutablePartialSpectrumColors
-    teal: MutablePartialSpectrumColors
-    azure: MutablePartialSpectrumColors
-    royal: MutablePartialSpectrumColors
-    purple: MutablePartialSpectrumColors
+    fuschia: PartialSpectrumColors
+    pink: PartialSpectrumColors
+    crimson: PartialSpectrumColors
+    orange: PartialSpectrumColors
+    lemon: PartialSpectrumColors
+    lime: PartialSpectrumColors
+    mint: PartialSpectrumColors
+    teal: PartialSpectrumColors
+    azure: PartialSpectrumColors
+    royal: PartialSpectrumColors
+    purple: PartialSpectrumColors
   }
   container: { horizontalPadding: string }
   drawer: { width: string }
