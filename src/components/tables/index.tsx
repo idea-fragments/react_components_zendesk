@@ -10,7 +10,7 @@ import {
 } from "@zendeskgarden/react-tables"
 import { StickyColumnProps } from "components/tables/utils"
 import styled, { css } from "styled-components"
-import { COLORS, fade, light, veryLight } from "styles/colors"
+import { fade, light, veryLight } from "styles/colors"
 import { CSS, CSSProp } from "styles/types"
 import { FONT_SIZES_EM as FONT_SIZES } from "styles/typography"
 
@@ -54,8 +54,7 @@ const Table = styled(ZTable)<CSSProp>`
 
 const Head = styled(ZHead)`
   //text-transform: uppercase;
-  // background: ${veryLight(COLORS.GREY)};
-  background: ${COLORS.WHITE};
+  background: ${({ theme }) => theme.styles.colors.white};
 `
 
 const HeaderRow = styled(ZHeaderRow)`
@@ -113,17 +112,18 @@ const unclickableRowStyling = css`
   }
 
   :focus {
-    background: ${COLORS.WHITE};
+    background: ${({ theme }) => theme.styles.colors.white};
   }
 `
 
 const Row = styled(ZRow)<{ clickable?: boolean; _css?: CSS }>`
   &&&& {
     border-width: 2px;
-    border-color: ${veryLight(COLORS.GREY)};
+    border-color: ${({ theme }) => veryLight(theme.styles.colors.grey["500"])};
 
     :hover {
-      background: ${light(COLORS.GREY, 0.72)};
+      background: ${({ theme }) =>
+        light(theme.styles.colors.grey["500"], 0.72)};
     }
 
     ${({ _css }) => _css}

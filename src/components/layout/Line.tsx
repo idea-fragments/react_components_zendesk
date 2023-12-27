@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import { COLORS } from "styles/colors"
 
 type Props = {
   color?: string
 }
 
 export const Line = styled.hr<Props>`
-  background: ${({ color }) => (color ? color : COLORS.LIGHT_GREY)};
+  background: ${({ color, theme }) =>
+    color ? color : theme.styles.colors.grey["300"]};
   height: 2px;
   border: none;
   margin: unset;

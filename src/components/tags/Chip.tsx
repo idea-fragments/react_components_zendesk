@@ -1,7 +1,7 @@
 import { StyledProps } from "components/StyledProps.type"
 import { XXS } from "components/text/Paragraph"
 import styled from "styled-components"
-import { COLORS, light } from "styles/colors"
+import { light } from "styles/colors"
 import { FONT_WEIGHTS } from "styles/typography"
 
 type Props = {
@@ -20,12 +20,12 @@ export const Chip = styled(XXS).attrs(
     let color
     switch (true) {
       case danger:
-        background = light(COLORS.RED, 0.5)
-        color = COLORS.RED
+        background = theme.styles.colors.red["300"]
+        color = theme.styles.colorDanger
         break
       case success:
         background = "#e1ede8"
-        color = COLORS.GREEN
+        color = theme.styles.colorSuccess
         break
       case primary:
         background = theme.styles.colorPrimary
@@ -35,8 +35,8 @@ export const Chip = styled(XXS).attrs(
         })
         break
       default:
-        background = light(COLORS.GREY, 0.6)
-        color = COLORS.GREY
+        background = light(theme.styles.colors!.grey["500"], 0.6)
+        color = theme.styles.colors.grey["500"]
     }
 
     return { as: "div", background, color }

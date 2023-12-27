@@ -1,5 +1,4 @@
 import { css } from "styled-components"
-import { COLORS, darker } from "styles/colors"
 
 export const backgroundPrimaryWithText = css`
   background: ${({ theme }) => theme.styles.colorPrimary};
@@ -25,5 +24,5 @@ export const textColorPrimary = css`
 `
 
 export const textWithColor = css<{ color: string; inline?: boolean }>`
-  color: ${({ color }) => (color === COLORS.YELLOW ? darker(color) : color)};
+  color: ${({ color }) => color};
 `

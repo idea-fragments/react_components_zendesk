@@ -1,8 +1,8 @@
-import { COLORS, fade, light, lighter } from "styles/colors"
+import { fade, light, lighter } from "styles/colors"
 import { base } from "styles/theme/base"
 import { Theme } from "styles/theme/Theme.type"
 
-const textColorPrimary = COLORS.LIGHT_GREY
+const textColorPrimary = base.colors!.grey["300"]
 
 export const dark: Theme = {
   isDark: true,
@@ -12,25 +12,25 @@ export const dark: Theme = {
     // @ts-ignore
     navBackground: "#1d1e21",
     nav: {
-      linkColor: light(COLORS.GREY),
+      linkColor: light(base.colors!.grey["500"]),
     },
     footer: {
-      background: lighter(COLORS.MIDNIGHT_BLUE),
+      background: lighter(base.colors!.grey["800"]),
     },
-    overlayBackground: fade(COLORS.LIGHT_GREY, 0.9),
-    pageBackground: COLORS.MIDNIGHT_BLUE,
+    overlayBackground: fade(base.colors!.grey["300"], 0.9),
+    pageBackground: base.colors!.grey["800"],
     scrollbar: {
       thumbColor: "#ffffff55",
       trackColor: "#ffffff33",
     },
     sidebar: {
       ...base.sidebar!!,
-      background: COLORS.MIDNIGHT_BLUE,
+      background: base.colors!.grey["800"],
     },
-    textColorDark: COLORS.MIDNIGHT_PURPLE,
+    textColorDark: base.colors!.grey["700"],
     textColorLight: textColorPrimary,
-    textColorOverPrimaryBg: COLORS.WHITE,
+    textColorOverPrimaryBg: base.colors!.white,
     textColorPrimary,
-    textColorSecondary: COLORS.GREY_NOT_QUITE_BLUE,
+    textColorSecondary: base.colors!.grey["400"],
   },
 }

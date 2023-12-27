@@ -1,6 +1,24 @@
 import { StyledProps } from "components/StyledProps.type"
 import { Nullable } from "global"
 
+type FullSpectrumColors = {
+  100: string
+  200: string
+  300: string
+  400: string
+  500: string
+  600: string
+  700: string
+  800: string
+}
+
+type MutablePartialSpectrumColors = {
+  400: string
+  M400: string
+  600: string
+  M600: string
+}
+
 export type ContainerStyles = {
   background?: string
   borderRadius?: string
@@ -24,12 +42,34 @@ export type Styles = {
     textTransform: Nullable<string>
   }
   colorAccent: string
-  colorSecondary: string
+  colorDanger: string
   colorPrimary: string
   colorPrimaryDark: string
-  colorWarning: string
-  colorDanger: string
   colorSuccess: string
+  colorTertiary: string
+  colorWarning: string
+  colors: {
+    black: string
+    white: string
+    product: {}
+    grey: FullSpectrumColors
+    blue: FullSpectrumColors
+    red: FullSpectrumColors
+    yellow: FullSpectrumColors
+    green: FullSpectrumColors
+    kale: FullSpectrumColors
+    fuschia: MutablePartialSpectrumColors
+    pink: MutablePartialSpectrumColors
+    crimson: MutablePartialSpectrumColors
+    orange: MutablePartialSpectrumColors
+    lemon: MutablePartialSpectrumColors
+    lime: MutablePartialSpectrumColors
+    mint: MutablePartialSpectrumColors
+    teal: MutablePartialSpectrumColors
+    azure: MutablePartialSpectrumColors
+    royal: MutablePartialSpectrumColors
+    purple: MutablePartialSpectrumColors
+  }
   container: { horizontalPadding: string }
   drawer: { width: string }
   font: { size: string }
