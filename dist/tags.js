@@ -2032,37 +2032,6 @@ function zeroArray(array, length) {
   return array;
 }
 var color = Color;
-var COLORS = {
-  RED: "#e35b66",
-  PALE_PINK: "#cfa0b6",
-  PURPLE: "#8f749c",
-  MIDNIGHT_PURPLE: "#4f4f64",
-  LIGHT_BLUE: "#5293c7",
-  BLUE: "#3271A4",
-  JAZZ_MAN_BLUE: "#4a5965",
-  // JAZZ_MAN_BLUE      : "#2f3941",
-  MIDNIGHT_BLUE: "#2a2b30",
-  BLUE_GREEN: "#419eb6",
-  // TEAL             : "#51a9ab",
-  TEAL: "#4dc0b5",
-  // GREEN            : "#56ba8b",
-  GREEN: "#57ad8b",
-  // YELLOW             : "#ffc855",
-  YELLOW: "#ffbe6d",
-  // YELLOW           : "#f1bc71",
-  ORANGE: "#ff9369",
-  HUB_SPOT_ORANGE: "rgb(255, 122, 89)",
-  MIDNIGHT_BLACK: "#1d1e21",
-  BLACK: "#1f1f1f",
-  WHITE: "#ffffff",
-  GREY_NOT_QUITE_BLUE: "#b0b7bd",
-  GREY: "#919292",
-  VERY_LIGHT_GREY: "#F7F7F7",
-  LIGHT_GREY: "#dddddd",
-  TRANSPARENT: "#00000000",
-  GREY_200: "#E9EBED"
-};
-Object.freeze(COLORS);
 var light = function (c, amount) {
   if (amount === void 0) {
     amount = 0.15;
@@ -2084,12 +2053,12 @@ var Chip = styled__default["default"](XXS).attrs(function (_a) {
   var color;
   switch (true) {
     case danger:
-      background = light(COLORS.RED, 0.5);
-      color = COLORS.RED;
+      background = theme.styles.colors.red["300"];
+      color = theme.styles.colorDanger;
       break;
     case success:
       background = "#e1ede8";
-      color = COLORS.GREEN;
+      color = theme.styles.colorSuccess;
       break;
     case primary:
       background = theme.styles.colorPrimary;
@@ -2099,8 +2068,8 @@ var Chip = styled__default["default"](XXS).attrs(function (_a) {
       });
       break;
     default:
-      background = light(COLORS.GREY, 0.6);
-      color = COLORS.GREY;
+      background = light(theme.styles.colors.grey["500"], 0.6);
+      color = theme.styles.colors.grey["500"];
   }
   return {
     as: "div",
