@@ -9,7 +9,7 @@ import {
 import { SelectorOptionKeyMap } from "components/forms/utils/SelectorOptionKeyMap"
 import React, { FC, ReactNode, useCallback, useEffect, useState } from "react"
 import styled from "styled-components"
-import { COLORS, veryLight } from "styles/colors"
+import { veryLight } from "styles/colors"
 import { FONT_WEIGHTS } from "styles/typography"
 import { DO_NOTHING } from "utils/functionHelpers"
 import { Logger } from "utils/logging/Logger"
@@ -115,15 +115,15 @@ SearchableSelector.defaultProps = {
 }
 
 SearchableSelector = styled(SearchableSelector)`
-  font-weight: ${({ flat }: Props) => (flat ? FONT_WEIGHTS.BOLD : "inherit")};
+  font-weight: ${({ flat }) => (flat ? FONT_WEIGHTS.BOLD : "inherit")};
 
   &&& * {
-    ${({ flat }: Props) => (flat ? "border: none;" : "")}
-    cursor: ${({ flat }: Props) => (flat ? "pointer !important" : "inherit")};
+    ${({ flat }) => (flat ? "border: none;" : "")}
+    cursor: ${({ flat }) => (flat ? "pointer !important" : "inherit")};
   }
 
   :hover > div {
-    ${({ flat }: Props) =>
-      flat ? `background: ${veryLight(COLORS.GREY)};` : ""};
+    ${({ flat, theme }) =>
+      flat ? `background: ${veryLight(theme.styles.colors.grey["500"])};` : ""};
   }
 `

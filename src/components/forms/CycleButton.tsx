@@ -3,7 +3,6 @@ import { Button, Props as ButtonProps } from "components/forms/Button"
 import styled from "styled-components"
 import { isLastItem, isNotLastItem } from "utils/arrayHelpers"
 import { FlexBox } from "components/layout/FlexBox"
-import { COLORS } from "styles/colors"
 import { FONT_SIZES } from "styles/typography"
 
 type Option = { label: string; value: string }
@@ -44,7 +43,7 @@ export const CycleButton = ({
 )
 
 const Label = styled.span<{ selected?: boolean }>`
-  color: ${(p) => (p.selected ? "inherit" : COLORS.LIGHT_GREY)};
+  color: ${(p) => (p.selected ? "inherit" : p.theme.styles.colors.grey["300"])};
   font-size: ${(p) => (p.selected ? "inherit" : FONT_SIZES.XS)};
 `
 

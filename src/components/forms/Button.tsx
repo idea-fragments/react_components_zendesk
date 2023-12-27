@@ -20,7 +20,6 @@ import React, {
 } from "react"
 import styled, { css } from "styled-components"
 import { Alignment } from "styles/alignments"
-import { COLORS } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
 import { Theme } from "styles/theme/Theme.type"
 import { ColorProps, ContainerProps, CSSProp } from "styles/types"
@@ -78,7 +77,7 @@ const baseColor = ({
 }: Props & StyledProps) => {
   if (color) return color
   if (danger) return theme.styles.colorDanger
-  if (neutral) return COLORS.LIGHT_GREY
+  if (neutral) return theme.styles.colors.grey["300"]
   if (success) return theme.styles.colorSuccess
   if (warning) return theme.styles.colorWarning
 

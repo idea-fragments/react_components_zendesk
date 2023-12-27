@@ -3,8 +3,8 @@ import { Button } from "components/forms/Button"
 import { FlexBox } from "components/layout/FlexBox"
 import { FC, PropsWithChildren } from "react"
 import styled, { css } from "styled-components"
-import { COLORS } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
+import { useTheme } from "styles/theme/useTheme"
 
 export type FullScreenProps = PropsWithChildren<{
   className?: string
@@ -15,6 +15,8 @@ export type FullScreenProps = PropsWithChildren<{
 
 export let FullScreen = styled<FC<FullScreenProps>>(
   ({ children, className, fluidContent, onCloseClicked, visible = false }) => {
+    const theme = useTheme()
+
     return (
       <Container
         className={className}
@@ -31,7 +33,7 @@ export let FullScreen = styled<FC<FullScreenProps>>(
             margin-right: ${fluidContent ? "2rem" : "0"};
             z-index: 1;
           `}
-          color={COLORS.WHITE}
+          color={theme.styles.colors.white}
           icon={mdiClose}
           iconSize={"1.5rem"}
           onClick={onCloseClicked}
@@ -45,7 +47,7 @@ export let FullScreen = styled<FC<FullScreenProps>>(
 )``
 
 const Container = styled(FlexBox)<{ fluidContent?: boolean; hidden: boolean }>`
-  background: ${COLORS.BLACK};
+  background: ${({ theme }) => theme.styles.colors.black};
   position: fixed;
   height: 100vh;
   width: 100vw;

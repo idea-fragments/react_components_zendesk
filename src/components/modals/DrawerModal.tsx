@@ -6,7 +6,7 @@ import { CSSProp } from "styles/types"
 
 export type DrawerModalProps = {
   drawerModalBody: ReactNode
-  footer?: ReactNode
+  footerActions?: ReactNode[]
   isOpen: boolean
   onCloseDrawerModal?: () => void
   title?: string
@@ -16,7 +16,7 @@ export type DrawerModalProps = {
 export const DrawerModal = styled((({
   className,
   drawerModalBody,
-  footer,
+  footerActions,
   isOpen = false,
   onCloseDrawerModal,
   title,
@@ -31,9 +31,11 @@ export const DrawerModal = styled((({
         <ZenDrawerModal.Header tag="h2">{title}</ZenDrawerModal.Header>
       ) : null}
       <ZenDrawerModal.Body>{drawerModalBody}</ZenDrawerModal.Body>
-      {footer ? (
+      {footerActions ? (
         <ZenDrawerModal.Footer>
-          <ZenDrawerModal.FooterItem>{footer}</ZenDrawerModal.FooterItem>
+          {footerActions.map((n: ReactNode) => (
+            <ZenDrawerModal.FooterItem>{n}</ZenDrawerModal.FooterItem>
+          ))}
         </ZenDrawerModal.Footer>
       ) : null}
       {title ? <ZenDrawerModal.Close /> : null}

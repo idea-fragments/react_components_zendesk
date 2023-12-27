@@ -24,6 +24,7 @@ type Props = {
   title: ElementType
 } & ContainerProps
 
+// Deprecated.. Component needs to be updated to use react context state managers
 export let AppBar: FC<Props> = ({
   actions = [],
   className,

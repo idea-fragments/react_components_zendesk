@@ -7,7 +7,7 @@ import moment, { Moment } from "moment"
 import React, { useEffect, useRef, useState } from "react"
 import { Calendar, Range } from "react-date-range"
 import styled from "styled-components"
-import { COLORS, fade } from "styles/colors"
+import { fade } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
 import { FONT_WEIGHTS } from "styles/typography"
@@ -49,6 +49,7 @@ export let TinyCalendar = ({
 }: Props) => {
   const [date, setDate] = useState<Moment>(minDate || initialDate)
   const theme = useTheme()
+  const colors = theme.styles.colors
   const outOfMinRange = minDate && date.isBefore(minDate)
   const usableDate: Moment = outOfMinRange ? minDate : date
   const changeShownDate = useRef<(d: Date) => void>()
@@ -68,9 +69,11 @@ export let TinyCalendar = ({
     setDate(newUsableDate)
   }
 
-  const rangeColors = [COLORS.PURPLE, COLORS.GREEN, COLORS.YELLOW].map(
-    (color: string) => fade(color),
-  )
+  const rangeColors = [
+    colors.purple["600"],
+    colors.green["600"],
+    colors.yellow["600"],
+  ].map((color: string) => fade(color))
 
   let numUsedColors = 0
   const labelColors: { [key: string]: Legendable } = {}

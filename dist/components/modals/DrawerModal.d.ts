@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { CSSProp } from "styles/types";
 export type DrawerModalProps = {
     drawerModalBody: ReactNode;
-    footer?: ReactNode;
+    footerActions?: ReactNode[];
     isOpen: boolean;
     onCloseDrawerModal?: () => void;
     title?: string;

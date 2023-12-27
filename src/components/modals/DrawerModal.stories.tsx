@@ -102,24 +102,37 @@ const Story = (props: DrawerModalProps) => {
     <>
       <Button onClick={open}>Open Modal</Button>
       <DrawerModal
-        isOpen={isOpen}
-        title="How can I help?"
         drawerModalBody={
           <Chat
             header={
               <ChatMessage
-                message="With that goal in mind, how can I help?"
-                dateTime="2023-10-12, 12:55PM"
-                icon="so"
+                message={"With that goal in mind, how can I help?"}
+                dateTime={"2023-10-12, 12:55PM"}
+                icon={"SO"}
               />
             }
+            hideSendButton
             chatBody={<ChatBody />}
             footer="This is the footer message"
             onClick={close}
             onChange={open}
           />
         }
-        footer={<Button onClick={close}>Close</Button>}
+        footerActions={[
+          <Button
+            flat
+            key={"close"}
+            onClick={close}>
+            Close
+          </Button>,
+          <Button
+            key={"send"}
+            onClick={() => {}}>
+            Send
+          </Button>,
+        ]}
+        isOpen={isOpen}
+        title={"How can I help?"}
         {...props}
         onCloseDrawerModal={close}
       />

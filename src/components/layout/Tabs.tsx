@@ -1,7 +1,6 @@
 // @ts-ignore
 import { TabPanel as ZTabPanel, Tabs as ZTabs } from "@zendeskgarden/react-tabs"
 import styled from "styled-components"
-import { COLORS } from "styles/colors"
 import { FONT_WEIGHTS } from "styles/typography"
 
 export const Tabs = styled(ZTabs)`
@@ -27,7 +26,8 @@ export const Tabs = styled(ZTabs)`
 
       :hover:not(&[aria-selected="true"]) {
         color: ${({ theme }) => theme.styles.textColorPrimary};
-        border-bottom: 3px solid ${COLORS.LIGHT_GREY};
+        border-bottom: 3px solid
+          ${({ theme }) => theme.styles.colors.grey["300"]};
       }
 
       :focus,

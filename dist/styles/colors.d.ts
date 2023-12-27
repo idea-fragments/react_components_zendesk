@@ -1,28 +1,3 @@
-export declare const COLORS: {
-    RED: string;
-    PALE_PINK: string;
-    PURPLE: string;
-    MIDNIGHT_PURPLE: string;
-    LIGHT_BLUE: string;
-    BLUE: string;
-    JAZZ_MAN_BLUE: string;
-    MIDNIGHT_BLUE: string;
-    BLUE_GREEN: string;
-    TEAL: string;
-    GREEN: string;
-    YELLOW: string;
-    ORANGE: string;
-    HUB_SPOT_ORANGE: string;
-    MIDNIGHT_BLACK: string;
-    BLACK: string;
-    WHITE: string;
-    GREY_NOT_QUITE_BLUE: string;
-    GREY: string;
-    VERY_LIGHT_GREY: string;
-    LIGHT_GREY: string;
-    TRANSPARENT: string;
-    GREY_200: string;
-};
 export declare const hasGoodContrast: (a: string, b: string) => boolean;
 export declare const fade: (c: string, amount?: number) => string;
 export declare const light: (c: string, amount?: number) => string;

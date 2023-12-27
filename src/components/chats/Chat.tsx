@@ -1,3 +1,4 @@
+import { ChangeEvent, FC, ReactNode } from "react"
 import styled, { css } from "styled-components"
 import { FlexBox } from "components/layout/FlexBox"
 import { TextArea } from "components/forms/textfields/TextArea"
@@ -8,16 +9,18 @@ import { useTheme } from "styles/theme/useTheme"
 import { FONT_SIZES } from "styles/typography"
 
 export type ChatProps = {
-  header?: React.ReactNode
-  chatBody: React.ReactNode
-  footer?: React.ReactNode
+  header?: ReactNode
+  hideSendButton?: boolean
+  chatBody: ReactNode
+  footer?: ReactNode
   userInputValue?: string
-  onChange: (text: string, e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  onChange: (text: string, e: ChangeEvent<HTMLTextAreaElement>) => void
   onClick: () => void
 }
 
-export const Chat: React.FC<ChatProps> = ({
+export const Chat: FC<ChatProps> = ({
   header,
+  hideSendButton = false,
   chatBody,
   footer,
   userInputValue,
@@ -63,11 +66,13 @@ export const Chat: React.FC<ChatProps> = ({
           value={userInputValue}
         />
         <FlexBox justifyContent={"flex-end"}>
-          <Button
-            onClick={onClick}
-            size={BUTTON_SIZES.SMALL}>
-            Send
-          </Button>
+          {hideSendButton ? null : (
+            <Button
+              onClick={onClick}
+              size={BUTTON_SIZES.SMALL}>
+              Send
+            </Button>
+          )}
         </FlexBox>
       </FlexBox>
     </Container>

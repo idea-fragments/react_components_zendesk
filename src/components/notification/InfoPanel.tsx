@@ -2,7 +2,6 @@ import { mdiInformation } from "@mdi/js"
 import React, { FC, ReactNode } from "react"
 import { FlexBox } from "components/layout/FlexBox"
 import { Icon } from "components/Icon"
-import { COLORS } from "styles/colors"
 import styled from "styled-components"
 import { Theme } from "styles/theme/Theme.type"
 import { useTheme } from "styles/theme/useTheme"
@@ -38,7 +37,7 @@ export let InfoPanel: FC<Props> = ({
     color: background,
     theme,
   })
-  const iconColor = type === INFO ? COLORS.LIGHT_BLUE : foreground
+  const iconColor = type === INFO ? theme.styles.colors.blue["400"] : foreground
 
   return (
     <Container

@@ -1,8 +1,9 @@
-import { COLORS, fade } from "styles/colors"
+import { fade } from "styles/colors"
 import { base } from "styles/theme/base"
 import { Theme } from "styles/theme/Theme.type"
 
-const textColorPrimary = COLORS.JAZZ_MAN_BLUE
+const textColorPrimary = "#4a5965"
+// const textColorPrimary = base.colors?.grey["800"]
 
 export const light: Theme = {
   isDark: false,
@@ -14,30 +15,29 @@ export const light: Theme = {
     },
     // deprecated
     // @ts-ignore
-    navBackground: COLORS.GREY_NOT_QUITE_BLUE,
+    navBackground: base.colors!.grey["400"],
     nav: {
-      linkColor: COLORS.MIDNIGHT_PURPLE,
+      linkColor: base.colors!.grey["700"],
     },
     footer: {
-      background: COLORS.MIDNIGHT_BLUE,
+      background: base.colors!.grey["800"],
     },
     infoPanel: {
-      background: COLORS.VERY_LIGHT_GREY,
+      background: base.colors!.grey["100"],
     },
-    pageBackground: COLORS.WHITE,
-    overlayBackground: fade(COLORS.LIGHT_GREY),
+    pageBackground: base.colors!.white,
+    overlayBackground: fade(base.colors!.grey["300"]),
     scrollbar: {
       thumbColor: "#00000033",
       trackColor: "#00000022",
     },
     sidebar: {
       ...base.sidebar!!,
-      // background: COLORS.WHITE,
     },
     textColorDark: textColorPrimary,
-    textColorLight: COLORS.WHITE,
-    textColorOverPrimaryBg: COLORS.WHITE,
+    textColorLight: base.colors!.white,
+    textColorOverPrimaryBg: base.colors!.white,
     textColorPrimary,
-    textColorSecondary: COLORS.GREY_NOT_QUITE_BLUE,
+    textColorSecondary: base.colors!.grey["400"],
   },
 }

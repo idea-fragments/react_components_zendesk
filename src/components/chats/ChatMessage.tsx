@@ -1,19 +1,19 @@
+import { FC, ReactNode } from "react"
 import styled, { css } from "styled-components"
 import { Text } from "components/text/Text"
 import { SPACINGS } from "styles/spacings"
-import { COLORS } from "styles/colors"
 import { useTheme } from "styles/theme/useTheme"
 import { FONT_SIZES } from "styles/typography"
 
 export type ChatMessageProps = {
   message: string
-  isUserMessage: boolean
+  isUserMessage?: boolean
   dateTime: string
-  icon: React.ReactNode
+  icon: ReactNode
   color?: string
 }
 
-export const ChatMessage: React.FC<ChatMessageProps> = ({
+export const ChatMessage: FC<ChatMessageProps> = ({
   message,
   isUserMessage,
   dateTime,
@@ -24,7 +24,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
   return (
     <Container>
-      <MessageContainer isUserMessage={isUserMessage}>
+      <MessageContainer isUserMessage={!!isUserMessage}>
         <MessageText>{message}</MessageText>
         <IconContainer
           color={color ?? theme.styles.colorPrimary}
@@ -63,7 +63,7 @@ const MessageContainer = styled.div<{ isUserMessage: boolean }>`
 const MessageText = styled(Text)`
   width: 100%;
   white-space: pre-wrap;
-  background-color: ${COLORS.GREY_200};
+  background-color: ${({ theme }) => theme.styles.colors.grey["200"]};
   padding: 7px;
   border-radius: 10px;
 `

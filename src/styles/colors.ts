@@ -1,37 +1,5 @@
 import Color from "color"
 
-export const COLORS = {
-  RED: "#e35b66",
-  PALE_PINK: "#cfa0b6",
-  PURPLE: "#8f749c",
-  MIDNIGHT_PURPLE: "#4f4f64",
-  LIGHT_BLUE: "#5293c7",
-  BLUE: "#3271A4",
-  JAZZ_MAN_BLUE: "#4a5965",
-  // JAZZ_MAN_BLUE      : "#2f3941",
-  MIDNIGHT_BLUE: "#2a2b30",
-  BLUE_GREEN: "#419eb6",
-  // TEAL             : "#51a9ab",
-  TEAL: "#4dc0b5",
-  // GREEN            : "#56ba8b",
-  GREEN: "#57ad8b",
-  // YELLOW             : "#ffc855",
-  YELLOW: "#ffbe6d",
-  // YELLOW           : "#f1bc71",
-  ORANGE: "#ff9369",
-  HUB_SPOT_ORANGE: "rgb(255, 122, 89)",
-  MIDNIGHT_BLACK: "#1d1e21",
-  BLACK: "#1f1f1f",
-  WHITE: "#ffffff",
-  GREY_NOT_QUITE_BLUE: "#b0b7bd",
-  GREY: "#919292",
-  VERY_LIGHT_GREY: "#F7F7F7",
-  LIGHT_GREY: "#dddddd",
-  TRANSPARENT: "#00000000",
-  GREY_200: "#E9EBED",
-}
-Object.freeze(COLORS)
-
 export const hasGoodContrast = (a: string, b: string) =>
   Color(a).contrast(Color(b)) >= 2.5
 export const fade = (c: string, amount: number = 0.5): string => {

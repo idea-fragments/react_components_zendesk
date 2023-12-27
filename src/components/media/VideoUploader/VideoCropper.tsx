@@ -5,7 +5,6 @@ import { FlexBox } from "components/layout/FlexBox"
 import { FC, useCallback, useState } from "react"
 import Cropper, { Area, Point } from "react-easy-crop"
 import styled, { css } from "styled-components"
-import { COLORS } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
 
 export type VideoCropperProps = {
@@ -90,7 +89,7 @@ const Container = styled(FlexBox)`
 `
 
 const FullScreen = styled(FlexBox)`
-  background: ${COLORS.WHITE};
+  background: ${({ theme }) => theme.styles.colors.white};
   position: fixed;
   height: 100%;
   width: 100%;

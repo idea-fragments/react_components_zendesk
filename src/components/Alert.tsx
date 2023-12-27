@@ -15,7 +15,7 @@ import { Text } from "components/text/Text"
 import { Nullable } from "global"
 import React, { FC, useCallback, useEffect } from "react"
 import styled from "styled-components"
-import { COLORS, dark } from "styles/colors"
+import { dark } from "styles/colors"
 import { textColorForBackground } from "styles/mixins"
 import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
@@ -70,7 +70,7 @@ export let Alert: FC<Props> = ({
 
   const bgColor = {
     [ALERT_TYPES.ERROR]: theme.styles.colorDanger,
-    [ALERT_TYPES.INFO]: COLORS.LIGHT_BLUE,
+    [ALERT_TYPES.INFO]: theme.styles.colors.blue["400"],
     [ALERT_TYPES.SUCCESS]: theme.styles.colorSuccess,
     [ALERT_TYPES.WARNING]: theme.styles.colorWarning,
   }[type]

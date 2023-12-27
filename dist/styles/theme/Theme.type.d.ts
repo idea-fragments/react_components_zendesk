@@ -1,5 +1,21 @@
 import { StyledProps } from "components/StyledProps.type";
 import { Nullable } from "global";
+type FullSpectrumColors = {
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    500: string;
+    600: string;
+    700: string;
+    800: string;
+};
+type PartialSpectrumColors = {
+    400: string;
+    M400: string;
+    600: string;
+    M600: string;
+};
 export type ContainerStyles = {
     background?: string;
     borderRadius?: string;
@@ -20,12 +36,34 @@ export type Styles = {
         textTransform: Nullable<string>;
     };
     colorAccent: string;
-    colorSecondary: string;
+    colorDanger: string;
     colorPrimary: string;
     colorPrimaryDark: string;
-    colorWarning: string;
-    colorDanger: string;
     colorSuccess: string;
+    colorTertiary: string;
+    colorWarning: string;
+    colors: {
+        black: string;
+        white: string;
+        product: {};
+        grey: FullSpectrumColors;
+        blue: FullSpectrumColors;
+        red: FullSpectrumColors;
+        yellow: FullSpectrumColors;
+        green: FullSpectrumColors;
+        kale: FullSpectrumColors;
+        fuschia: PartialSpectrumColors;
+        pink: PartialSpectrumColors;
+        crimson: PartialSpectrumColors;
+        orange: PartialSpectrumColors;
+        lemon: PartialSpectrumColors;
+        lime: PartialSpectrumColors;
+        mint: PartialSpectrumColors;
+        teal: PartialSpectrumColors;
+        azure: PartialSpectrumColors;
+        royal: PartialSpectrumColors;
+        purple: PartialSpectrumColors;
+    };
     container: {
         horizontalPadding: string;
     };
@@ -98,4 +136,5 @@ export type Theme = {
     isDark: boolean;
     styles: Styles;
 };
+export {};
 //# sourceMappingURL=Theme.type.d.ts.map

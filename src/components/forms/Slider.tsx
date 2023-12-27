@@ -16,7 +16,6 @@ import React, {
   useState,
 } from "react"
 import styled, { css } from "styled-components"
-import { COLORS } from "styles/colors"
 import { ColorProps, ContainerProps } from "styles/types"
 import { FONT_SIZES } from "styles/typography"
 
@@ -113,15 +112,15 @@ export let Slider: FC<SliderProps> = ({
 }
 
 const baseTrackStyles = css<{ color: string; valuePercent: number }>`
-  background: ${({ color, valuePercent }) =>
-    `linear-gradient(to right, ${color} ${valuePercent}%, ${COLORS.LIGHT_GREY} ${valuePercent}%)`};
+  background: ${({ color, valuePercent, theme }) =>
+    `linear-gradient(to right, ${color} ${valuePercent}%, ${theme.styles.colors.grey["300"]} ${valuePercent}%)`};
   border-radius: 0.5rem;
   height: 0.45rem;
 `
 
 const disabledThumbStyles = css<{ disabled?: boolean }>`
-  ${({ disabled }) =>
-    disabled ? `background-color: ${COLORS.LIGHT_GREY}` : ""};
+  ${({ disabled, theme }) =>
+    disabled ? `background-color: ${theme.styles.colors.grey["300"]}` : ""};
 `
 
 const baseThumbStyles = css`

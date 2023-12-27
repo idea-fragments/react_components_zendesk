@@ -29,7 +29,6 @@ export const OverflowButton = styled(ZOverflowButton).attrs(({ theme }) => ({
   primary: true,
   iconSize: "1.2rem",
   as: Button,
-  // color:                 darker(COLORS.GREY),
   // pill:                  true,
 }))`
   &&&& {

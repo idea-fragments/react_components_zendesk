@@ -8,17 +8,18 @@ import React, {
   ReactNode,
 } from "react"
 import styled from "styled-components"
-import { COLORS } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
+import { useTheme } from "styles/theme/useTheme"
 import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 
 export const Breadcrumbs: FC<PropsWithChildren<{}>> = ({ children }) => {
+  const theme = useTheme()
   const numChildren = Children.count(children)
   const isNotLastChild = (index: number) => index !== numChildren - 1
   const separator = (
     <Icon
       svg={"arrow-ios-forward-outline"}
-      color={COLORS.HUB_SPOT_ORANGE}
+      color={theme.styles.colors.orange["400"]}
     />
   )
 
@@ -42,7 +43,7 @@ const Container = styled(FlexBlock)`
   margin-top: ${SPACINGS.SM};
   align-items: center;
 
-  color: ${COLORS.HUB_SPOT_ORANGE};
+  color: ${({ theme }) => theme.styles.colors.orange["400"]};
   font-weight: ${FONT_WEIGHTS.REGULAR} !important;
 
   & > *:last-child {

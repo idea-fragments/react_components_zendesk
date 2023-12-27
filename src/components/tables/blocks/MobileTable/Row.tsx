@@ -8,8 +8,9 @@ import { ColumnConfig, Item, ItemKey } from "components/tables/Table"
 import { Text } from "components/text/Text"
 import React, { FC, ReactNode, useState } from "react"
 import styled, { css } from "styled-components"
-import { COLORS, veryLight } from "styles/colors"
+import { veryLight } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
+import { useTheme } from "styles/theme/useTheme"
 import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 import { isNotEmpty } from "utils/arrayHelpers"
 
@@ -37,6 +38,7 @@ export const Row: FC<Props> = ({
   onClick,
 }) => {
   const [isCollapsed, setCollapsedState] = useState(true)
+  const theme = useTheme()
 
   const { key, containerStyles, actions }: Item = item
 
@@ -116,7 +118,7 @@ export const Row: FC<Props> = ({
                 <FlexBox
                   _css={css`
                     margin: 0.5em 0;
-                    background: ${COLORS.LIGHT_GREY};
+                    background: ${theme.styles.colors.grey["300"]};
                     height: 2px;
                     width: 20px;
                   `}
@@ -161,8 +163,9 @@ Row.defaultProps = {}
 const Container = styled(FlexBox).attrs(() => ({
   alignItems: "stretch",
 }))`
-  background: ${COLORS.WHITE};
-  border-bottom: 1px solid ${veryLight(COLORS.GREY)};
+  background: ${({ theme }) => theme.styles.colors.white};
+  border-bottom: 1px solid
+    ${({ theme }) => veryLight(theme.styles.colors.grey["500"])};
   padding: ${SPACINGS.SM};
 `
 
