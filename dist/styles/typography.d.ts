@@ -1,5 +1,7 @@
 import { ValueOf } from "utils/types";
 export declare const FONT_TAGS: {
+    readonly DIV: "div";
+    readonly LABEL: "label";
     readonly H1: "h1";
     readonly H2: "h2";
     readonly H3: "h3";
@@ -8,7 +10,6 @@ export declare const FONT_TAGS: {
     readonly H6: "h6";
     readonly P: "p";
     readonly SPAN: "span";
-    readonly DIV: "div";
 };
 export declare const FONT_SIZES: {
     readonly XXS: ".8rem";
@@ -46,7 +47,7 @@ export type FontSize = ValueOf<typeof FONT_SIZES>;
 export type FontWeight = ValueOf<typeof FONT_WEIGHTS>;
 export type FontTag = ValueOf<typeof FONT_TAGS>;
 export type TextAlignment = "center" | "left" | "right";
-export type TextProps = {
+export type CommonTextProps = {
     align?: TextAlignment;
     as?: FontTag;
     hasSubText?: boolean;

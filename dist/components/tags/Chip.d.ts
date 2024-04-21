@@ -7,15 +7,14 @@ type Props = {
     success?: boolean;
 };
 export type ChipProps = Props & StyledProps;
-export declare const Chip: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, import("styles/typography").TextProps & import("../../styles/types").ContainerProps & {
+export declare const Chip: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, import("styles/typography").CommonTextProps & import("../../styles/types").ContainerProps & import("../../styles/types").ColorProps & {
     children: import("react").ReactNode;
-} & import("../../styles/types").ColorProps & {
+} & {
     as: "p";
-    "data-component-name": string;
 } & {
     as: string;
     background: string;
     color: string;
-} & Props, "background" | "color" | "data-component-name" | "as">;
+} & Props, "background" | "color" | "as">;
 export {};
 //# sourceMappingURL=Chip.d.ts.map

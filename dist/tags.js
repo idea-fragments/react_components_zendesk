@@ -79,7 +79,7 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
   var e = new Error(message);
   return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
-var getColor$1 = styled.css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"
+var getColor$1 = styled.css(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"
 // const subTextStyling = css`
 //   margin-top: 0;
 // `
@@ -94,10 +94,8 @@ var getColor$1 = styled.css(templateObject_1$2 || (templateObject_1$2 = __makeTe
 // const subTextStyling = css`
 //   margin-top: 0;
 // `
-var subTextStyling = styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"
-// @ts-ignore
-])), function (_a) {
+var subTextStyling = styled.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
+var Text = styled__default["default"].div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
   var align = _a.align;
   return align;
 }, function (_a) {
@@ -113,9 +111,7 @@ var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 
   var _css = _a._css;
   return _css;
 });
-// @ts-ignore
-Text.COMPONENT_NAME = "Text";
-var templateObject_1$2, templateObject_2$1, templateObject_3;
+var templateObject_1$3, templateObject_2$2, templateObject_3$1;
 var XXS$1 = ".8rem";
 var XS = ".9rem";
 var SM = "1rem";
@@ -132,6 +128,8 @@ var REGULAR = "400";
 var MEDIUM = "500";
 var BOLD = "700";
 var BLACK = "800";
+var DIV = "div";
+var LABEL = "label";
 var H1 = "h1";
 var H2 = "h2";
 var H3 = "h3";
@@ -140,8 +138,9 @@ var H5 = "h5";
 var H6 = "h6";
 var P = "p";
 var SPAN = "span";
-var DIV = "div";
 var FONT_TAGS = {
+  DIV: DIV,
+  LABEL: LABEL,
   H1: H1,
   H2: H2,
   H3: H3,
@@ -149,8 +148,7 @@ var FONT_TAGS = {
   H5: H5,
   H6: H6,
   P: P,
-  SPAN: SPAN,
-  DIV: DIV
+  SPAN: SPAN
 };
 var FONT_SIZES = {
   XXS: XXS$1,
@@ -184,32 +182,15 @@ var FONT_WEIGHTS = {
   BOLD: BOLD,
   BLACK: BLACK
 };
-
-// @flow
-
-const COMPONENT_NAME = "Paragraph";
-const Paragraph = styled__default["default"](Text).attrs({
-  as: FONT_TAGS.P,
-  "data-component-name": COMPONENT_NAME
-})`
-  font-weight: ${FONT_WEIGHTS.REGULAR};
-`;
-Paragraph.COMPONENT_NAME = COMPONENT_NAME;
-const XXS = styled__default["default"](Paragraph)`
-  font-size: ${FONT_SIZES.XXS};
-`;
-styled__default["default"](Paragraph)`
-  font-size: ${FONT_SIZES.XS};
-`;
-styled__default["default"](Paragraph)`
-  font-size: ${FONT_SIZES.MD};
-`;
-styled__default["default"](Paragraph)`
-  font-size: ${FONT_SIZES.LG};
-`;
-styled__default["default"](Paragraph)`
-  font-size: ${FONT_SIZES.XL};
-`;
+var Paragraph = styled__default["default"](Text).attrs({
+  as: FONT_TAGS.P
+})(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  font-weight: ", ";\n"], ["\n  font-weight: ", ";\n"])), FONT_WEIGHTS.REGULAR);
+var XXS = styled__default["default"](Paragraph)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XXS);
+styled__default["default"](Paragraph)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XS);
+styled__default["default"](Paragraph)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.MD);
+styled__default["default"](Paragraph)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.LG);
+styled__default["default"](Paragraph)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XL);
+var templateObject_1$2, templateObject_2$1, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 var colorString$1 = {
   exports: {}

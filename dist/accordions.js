@@ -4644,9 +4644,7 @@ var getColor = styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemp
 //   margin-top: 0;
 // `
 var subTextStyling = styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"
-// @ts-ignore
-])), function (_a) {
+var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
   var align = _a.align;
   return align;
 }, function (_a) {
@@ -4662,8 +4660,6 @@ var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 
   var _css = _a._css;
   return _css;
 });
-// @ts-ignore
-Text.COMPONENT_NAME = "Text";
 var templateObject_1$1, templateObject_2$1, templateObject_3;
 var useTheme = function () {
   return React__default.useContext(styled.ThemeContext);

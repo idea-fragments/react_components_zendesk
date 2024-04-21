@@ -7861,6 +7861,8 @@ var REGULAR = "400";
 var MEDIUM = "500";
 var BOLD = "700";
 var BLACK = "800";
+var DIV = "div";
+var LABEL = "label";
 var H1 = "h1";
 var H2 = "h2";
 var H3 = "h3";
@@ -7869,8 +7871,9 @@ var H5 = "h5";
 var H6 = "h6";
 var P = "p";
 var SPAN = "span";
-var DIV = "div";
 var FONT_TAGS = {
+  DIV: DIV,
+  LABEL: LABEL,
   H1: H1,
   H2: H2,
   H3: H3,
@@ -7878,8 +7881,7 @@ var FONT_TAGS = {
   H5: H5,
   H6: H6,
   P: P,
-  SPAN: SPAN,
-  DIV: DIV
+  SPAN: SPAN
 };
 var FONT_SIZES = {
   XXS: XXS,
@@ -8070,10 +8072,10 @@ var ThemeProvider = function (_a) {
     children: [jsxRuntime.jsx(GlobalStyle, {}), children]
   }));
 };
-const THEMES = {
-  light,
-  light2,
-  dark,
+var THEMES = {
+  light: light,
+  light2: light2,
+  dark: dark,
   __ZENDESK_DEFAULT_THEME__: DEFAULT_THEME
 };
 exports.FONT_SIZES = FONT_SIZES;

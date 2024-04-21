@@ -1,8 +1,7 @@
 import { FC, ReactNode } from "react";
-export type Props = {
+export type AppBarLayoutV2Props = {
     appBar: ReactNode;
     mainContent: ReactNode;
 };
-export type AppBarLayoutV2Props = Props;
-export declare const AppBarLayoutV2: FC<Props>;
+export declare const AppBarLayoutV2: FC<AppBarLayoutV2Props>;
 //# sourceMappingURL=AppBarLayoutV2.d.ts.map
