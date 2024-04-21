@@ -8,37 +8,39 @@ export type ResponsiveProps<P> = {
   props: P
 }
 
-export type Props = {
+export type FlexBoxProps = {
   alignItems?: string
   gap?: string | null | "unset"
   fluid?: boolean
   inline?: boolean
   justifyContent?: string
-  responsivePropsList?: ResponsiveProps<Props>[]
+  responsivePropsList?: ResponsiveProps<FlexBoxProps>[]
   withRows?: boolean
   wrapped?: boolean
 } & CSSProp
 
-export type FlexBoxProps = Props
+const getFlexDirection = ({ withRows }: FlexBoxProps) =>
+  withRows ? "column" : "row"
 
-const getFlexDirection = ({ withRows }: Props) => (withRows ? "column" : "row")
-
-export const FlexBox = styled.div<Props>`
+export const FlexBox = styled.div<FlexBoxProps>`
   align-items: ${({ alignItems }) => (alignItems ? alignItems : "initial")};
   display: ${(p) => (p.inline ? "inline-flex" : "flex")};
-  flex: ${({ fluid }: Props) => (fluid ? 1 : "unset")};
+  flex: ${({ fluid }: FlexBoxProps) => (fluid ? 1 : "unset")};
   flex-direction: ${getFlexDirection};
   gap: ${(p) => (p.gap ? p.gap : SPACINGS.SM)};
   justify-content: ${(p) => p.justifyContent || "initial"};
-  ${(p: Props) => (p.wrapped ? wrappedStyling : "")}
+  ${(p: FlexBoxProps) => (p.wrapped ? wrappedStyling : "")}
 
-  ${(p: Props) => (p.responsivePropsList ? responsiveStyles(p) : "")}
-  ${(p: Props) => p._css}
+  ${(p: FlexBoxProps) => (p.responsivePropsList ? responsiveStyles(p) : "")}
+  ${(p: FlexBoxProps) => p._css}
 `
 
 FlexBox.defaultProps = { withRows: false }
 
-const responsiveStyles = ({ responsivePropsList, ...originalProps }: Props) =>
+const responsiveStyles = ({
+  responsivePropsList,
+  ...originalProps
+}: FlexBoxProps) =>
   responsivePropsList?.map(({ mediaQueryFunc, props: rProps }): string => {
     const props = { ...originalProps, ...rProps }
     const { alignItems, gap, inline, justifyContent, fluid, wrapped } = props
