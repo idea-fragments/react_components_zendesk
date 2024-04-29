@@ -15,7 +15,6 @@ export type TextAreaProps = FormFieldProps & {
 export const TextArea: FC<TextAreaProps> = ({
   autoExpand = false,
   characterLimit,
-  hint,
   onChange,
   resizable,
   ...props

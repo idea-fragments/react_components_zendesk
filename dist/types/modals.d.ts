@@ -63,7 +63,7 @@ type ButtonBaseProps = PropsWithChildren<{
     pill?: boolean;
     primary?: boolean;
     size?: ButtonSize;
-    wrapInlineText?: false;
+    wrapInlineText?: boolean;
     onClick: () => void;
 }> & CSSProp & ColorProps & ContainerProps;
 type ControlledLoadable = {

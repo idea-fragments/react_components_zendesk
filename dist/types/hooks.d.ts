@@ -1,6 +1,12 @@
 import { FC, PropsWithChildren, ComponentType } from 'react';
-import { CSSProp, ThemedStyledProps } from 'styled-components';
+import { FlattenSimpleInterpolation, ThemedStyledProps } from 'styled-components';
 import { Nullable } from 'global';
+
+type CSS<T = any> = FlattenSimpleInterpolation | string | T;
+type CSSProp<T = any> = {
+    _css?: CSS<T>;
+    className?: string;
+};
 
 type LoadingFunc<T> = (p: Promise<T>) => Promise<T>;
 type LoaderProps = PropsWithChildren<{
@@ -50,6 +56,26 @@ type Styles = {
     };
     buttons: {
         textTransform: Nullable<string>;
+    };
+    chat: {
+        message: {
+            currentUser: {
+                icon: {
+                    background: string;
+                };
+                text: {
+                    background: string;
+                };
+            };
+            other: {
+                icon: {
+                    background: string;
+                };
+                text: {
+                    background: string;
+                };
+            };
+        };
     };
     colorAccent: string;
     colorDanger: string;

@@ -38,6 +38,7 @@ export * from "components/forms/validationStates"
 /* =============================
  * Toggles
  * ============================= */
+export * from "components/forms/NPSQuestion"
 export * from "components/forms/Toggle"
 export * from "components/forms/TaggedToggle"
 

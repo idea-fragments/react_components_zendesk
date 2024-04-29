@@ -25,7 +25,7 @@ declare const Tooltip: styled_components.StyledComponent<{
         placement: prop_types.Requireable<"top" | "bottom" | "end" | "start" | "auto" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
         popperModifiers: prop_types.Requireable<any>;
         size: prop_types.Requireable<"small" | "large" | "medium" | "extra-large">;
-        type: prop_types.Requireable<"dark" | "light">;
+        type: prop_types.Requireable<"light" | "dark">;
         zIndex: prop_types.Requireable<NonNullable<string | number | null | undefined>>;
         isInitialVisible: prop_types.Requireable<boolean>;
         refKey: prop_types.Requireable<string>;

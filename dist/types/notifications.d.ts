@@ -32,7 +32,7 @@ type Props$1 = {
     title?: string;
     onClose?: () => void;
 } & UserFeedbackProps;
-type NotificationProps = Props$1;
+type NotificationProps$1 = Props$1;
 declare const Notification: FC<Props$1>;
 declare const ToastProvider: styled_components.StyledComponent<{
     ({ limit, zIndex, placementProps, children }: React.PropsWithChildren<_zendeskgarden_react_notifications.IToastProviderProps>): JSX.Element;
@@ -49,6 +49,9 @@ declare const ToastProvider: styled_components.StyledComponent<{
     zIndex: 1000;
 }, "zIndex">;
 
+type NotificationProps = Omit<NotificationProps$1, "body"> & {
+    body?: ReactNode;
+};
 type Return = {
     notify: (props: NotificationProps) => void;
 };
@@ -67,4 +70,4 @@ type Props = {
 type GlobalAlertProps = Props;
 declare const GlobalAlert: FC<Props>;
 
-export { GlobalAlert, GlobalAlertProps, INFO_PANEL_TYPES, InfoPanel, Notification, NotificationProps, ToastProvider, useToastNotifier };
+export { GlobalAlert, GlobalAlertProps, INFO_PANEL_TYPES, InfoPanel, Notification, NotificationProps$1 as NotificationProps, ToastProvider, useToastNotifier };

@@ -15,6 +15,18 @@ export const base: Partial<Styles> = {
     color: "rgb(233, 235, 237)",
   },
   buttons: { textTransform: null },
+  chat: {
+    message: {
+      currentUser: {
+        icon: { background: "" },
+        text: { background: "" },
+      },
+      other: {
+        icon: { background: "" },
+        text: { background: "" },
+      },
+    },
+  },
   colorAccent: "rgb(255, 122, 89)",
   colorPrimary: undefined,
   colorPrimaryDark: undefined,
@@ -217,3 +229,8 @@ base.colorWarning = base.colors!.yellow["700"]
 base.colorPrimary = base.colors!.blue["600"]
 
 base.table!.borderColor = veryLight(base.colors!.grey["500"])
+
+base.chat!.message.currentUser.icon.background = base.colorPrimary
+base.chat!.message.currentUser.text.background = base.colors!.grey["200"]
+base.chat!.message.other.icon.background = base.colorAccent ?? base.colorPrimary
+base.chat!.message.other.text.background = base.colors!.grey["400"]

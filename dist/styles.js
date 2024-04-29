@@ -1950,6 +1950,7 @@ var SPACE_DIRECTIONS = Object.freeze({
   DOWN: "down",
   RIGHT: "right"
 });
+var _a;
 var base = {
   appBar: {
     background: "#fff",
@@ -1963,6 +1964,26 @@ var base = {
   },
   buttons: {
     textTransform: null
+  },
+  chat: {
+    message: {
+      currentUser: {
+        icon: {
+          background: ""
+        },
+        text: {
+          background: ""
+        }
+      },
+      other: {
+        icon: {
+          background: ""
+        },
+        text: {
+          background: ""
+        }
+      }
+    }
   },
   colorAccent: "rgb(255, 122, 89)",
   colorPrimary: undefined,
@@ -2169,6 +2190,10 @@ base.colorSuccess = base.colors.green["600"];
 base.colorWarning = base.colors.yellow["700"];
 base.colorPrimary = base.colors.blue["600"];
 base.table.borderColor = veryLight(base.colors.grey["500"]);
+base.chat.message.currentUser.icon.background = base.colorPrimary;
+base.chat.message.currentUser.text.background = base.colors.grey["200"];
+base.chat.message.other.icon.background = (_a = base.colorAccent) !== null && _a !== void 0 ? _a : base.colorPrimary;
+base.chat.message.other.text.background = base.colors.grey["400"];
 var textColorPrimary$2 = base.colors.grey["300"];
 var dark = {
   isDark: true,

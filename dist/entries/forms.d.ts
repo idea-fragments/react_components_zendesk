@@ -18,6 +18,7 @@ export * from "components/forms/IconButton";
 export * from "components/forms/Checkbox";
 export * from "components/forms/Form";
 export * from "components/forms/validationStates";
+export * from "components/forms/NPSQuestion";
 export * from "components/forms/Toggle";
 export * from "components/forms/TaggedToggle";
 export * from "components/forms/selectors/types";

@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, ComponentType } from 'react';
 import { ValueOf } from 'utils/types';
 import * as react_jsx_runtime from 'react/jsx-runtime';
-import { CSSProp } from 'styled-components';
+import { FlattenSimpleInterpolation } from 'styled-components';
 
 type Props$2 = {
     className?: string;
@@ -31,12 +31,17 @@ type Props$1 = {
 };
 declare const Dots: FC<Props$1>;
 
+type CSS<T = any> = FlattenSimpleInterpolation | string | T;
+type CSSProp<T = any> = {
+    _css?: CSS<T>;
+    className?: string;
+};
+
 type Props = {
-    _css?: CSSProp;
     className?: string;
     innerAs?: ComponentType<any>;
     isLoading: boolean;
-};
+} & CSSProp;
 declare let TranslucentLoader: ({ _css, children, className, innerAs, isLoading, }: PropsWithChildren<Props>) => react_jsx_runtime.JSX.Element;
 
 export { Dots, Loadable, TranslucentLoader };

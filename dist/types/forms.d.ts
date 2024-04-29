@@ -8,6 +8,7 @@ import { FlattenSimpleInterpolation, FlattenInterpolation, ThemeProps } from 'st
 import { Moment } from 'moment';
 import { IItemProps } from '@zendeskgarden/react-dropdowns/dist/typings/types';
 import { StateChangeOptions } from 'downshift';
+import { Nullable } from 'global';
 
 declare const VALIDATION_STATES: {
     readonly ERROR: "error";
@@ -266,7 +267,7 @@ type ButtonBaseProps = PropsWithChildren<{
     pill?: boolean;
     primary?: boolean;
     size?: ButtonSize;
-    wrapInlineText?: false;
+    wrapInlineText?: boolean;
     onClick: () => void;
 }> & CSSProp & ColorProps & ContainerProps;
 type ControlledLoadable = {
@@ -303,6 +304,14 @@ type Props$1 = PropsWithChildren<{
 }> & ContainerProps;
 declare let Form: FC<Props$1>;
 
+type NPSScore = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+type NPSQuestionProps = {
+    label: ReactNode;
+    onChange: (n: NPSScore) => void;
+    value: Nullable<NPSScore>;
+};
+declare const NPSQuestion: FC<NPSQuestionProps>;
+
 type Props = {
     checked?: boolean;
     color?: string;
@@ -329,4 +338,4 @@ type ValidatedFormProps = {
     };
 };
 
-export { ArrayToSelectorOptionsConverter, Autocomplete, BUTTON_SIZES, Button, ButtonProps, ButtonSize, Checkbox, CheckboxProps, CycleButton, DatePickerSelector, Dropdown, EmailTextField, Form, FormFieldProps, IconButton, MenuPlacement, MonthYearSelector, MultiSelect, MultiSelector, MultiSelectorProps, NumberTextField, OnItemSelectedFunc, OnItemsSelectedFunc, PasswordTextField, Props$4 as Props, SearchableSelector, Select, Selector, SelectorItemKey, SelectorOption, SelectorOptionKeyMap, SelectorOptionKeyMapParams, SelectorOptionOptionalAttrs, SelectorProps, StateChange, TaggedToggle, TaggedToggleProps, TextArea, TextAreaProps, TextField, TextFieldProps, TextFieldWrapper, Toggle, ToggleProps, VALIDATION_STATES, ValidatedFormProps, Validation, ValidationState };
+export { ArrayToSelectorOptionsConverter, Autocomplete, BUTTON_SIZES, Button, ButtonProps, ButtonSize, Checkbox, CheckboxProps, CycleButton, DatePickerSelector, Dropdown, EmailTextField, Form, FormFieldProps, IconButton, MenuPlacement, MonthYearSelector, MultiSelect, MultiSelector, MultiSelectorProps, NPSQuestion, NPSQuestionProps, NPSScore, NumberTextField, OnItemSelectedFunc, OnItemsSelectedFunc, PasswordTextField, Props$4 as Props, SearchableSelector, Select, Selector, SelectorItemKey, SelectorOption, SelectorOptionKeyMap, SelectorOptionKeyMapParams, SelectorOptionOptionalAttrs, SelectorProps, StateChange, TaggedToggle, TaggedToggleProps, TextArea, TextAreaProps, TextField, TextFieldProps, TextFieldWrapper, Toggle, ToggleProps, VALIDATION_STATES, ValidatedFormProps, Validation, ValidationState };

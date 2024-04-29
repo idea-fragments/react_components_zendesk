@@ -104,6 +104,26 @@ type Styles = {
     buttons: {
         textTransform: Nullable<string>;
     };
+    chat: {
+        message: {
+            currentUser: {
+                icon: {
+                    background: string;
+                };
+                text: {
+                    background: string;
+                };
+            };
+            other: {
+                icon: {
+                    background: string;
+                };
+                text: {
+                    background: string;
+                };
+            };
+        };
+    };
     colorAccent: string;
     colorDanger: string;
     colorPrimary: string;
