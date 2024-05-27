@@ -6,7 +6,7 @@ import React, {
   useState,
   ComponentType,
 } from "react"
-import { CSSProp } from "styled-components"
+import { CSSProp } from "styles/types"
 
 type LoadingFunc<T> = (p: Promise<T>) => Promise<T>
 type LoaderProps = PropsWithChildren<{ as?: ComponentType; _css?: CSSProp }>

@@ -1950,6 +1950,7 @@ var SPACE_DIRECTIONS = Object.freeze({
   DOWN: "down",
   RIGHT: "right"
 });
+var _a;
 var base = {
   appBar: {
     background: "#fff",
@@ -1963,6 +1964,26 @@ var base = {
   },
   buttons: {
     textTransform: null
+  },
+  chat: {
+    message: {
+      currentUser: {
+        icon: {
+          background: ""
+        },
+        text: {
+          background: ""
+        }
+      },
+      other: {
+        icon: {
+          background: ""
+        },
+        text: {
+          background: ""
+        }
+      }
+    }
   },
   colorAccent: "rgb(255, 122, 89)",
   colorPrimary: undefined,
@@ -2169,6 +2190,10 @@ base.colorSuccess = base.colors.green["600"];
 base.colorWarning = base.colors.yellow["700"];
 base.colorPrimary = base.colors.blue["600"];
 base.table.borderColor = veryLight(base.colors.grey["500"]);
+base.chat.message.currentUser.icon.background = base.colorPrimary;
+base.chat.message.currentUser.text.background = base.colors.grey["200"];
+base.chat.message.other.icon.background = (_a = base.colorAccent) !== null && _a !== void 0 ? _a : base.colorPrimary;
+base.chat.message.other.text.background = base.colors.grey["400"];
 var textColorPrimary$2 = base.colors.grey["300"];
 var dark = {
   isDark: true,
@@ -7861,6 +7886,8 @@ var REGULAR = "400";
 var MEDIUM = "500";
 var BOLD = "700";
 var BLACK = "800";
+var DIV = "div";
+var LABEL = "label";
 var H1 = "h1";
 var H2 = "h2";
 var H3 = "h3";
@@ -7869,8 +7896,9 @@ var H5 = "h5";
 var H6 = "h6";
 var P = "p";
 var SPAN = "span";
-var DIV = "div";
 var FONT_TAGS = {
+  DIV: DIV,
+  LABEL: LABEL,
   H1: H1,
   H2: H2,
   H3: H3,
@@ -7878,8 +7906,7 @@ var FONT_TAGS = {
   H5: H5,
   H6: H6,
   P: P,
-  SPAN: SPAN,
-  DIV: DIV
+  SPAN: SPAN
 };
 var FONT_SIZES = {
   XXS: XXS,
@@ -8070,10 +8097,10 @@ var ThemeProvider = function (_a) {
     children: [jsxRuntime.jsx(GlobalStyle, {}), children]
   }));
 };
-const THEMES = {
-  light,
-  light2,
-  dark,
+var THEMES = {
+  light: light,
+  light2: light2,
+  dark: dark,
   __ZENDESK_DEFAULT_THEME__: DEFAULT_THEME
 };
 exports.FONT_SIZES = FONT_SIZES;

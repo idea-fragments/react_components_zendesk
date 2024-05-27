@@ -1,9 +1,13 @@
 import { useToast } from "@zendeskgarden/react-notifications"
 import {
   Notification,
-  NotificationProps,
+  NotificationProps as ZNotificationProps,
 } from "components/notification/Notification"
-import { useCallback } from "react"
+import { ReactNode, useCallback } from "react"
+
+export type NotificationProps = Omit<ZNotificationProps, "body"> & {
+  body?: ReactNode
+}
 
 export type Return = {
   notify: (props: NotificationProps) => void
@@ -16,7 +20,7 @@ export const useToastNotifier = (): Return => {
     (p: NotificationProps) => {
       addToast(({ close }) => (
         <Notification
-          {...p}
+          {...(p as ZNotificationProps)}
           onClose={close}
         />
       ))

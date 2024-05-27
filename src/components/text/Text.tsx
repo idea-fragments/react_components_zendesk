@@ -1,12 +1,13 @@
 import { ReactNode } from "react"
 import styled, { css, StyledProps } from "styled-components"
 import { ColorProps, ContainerProps, CSSProp } from "styles/types"
-import { TextProps } from "styles/typography"
+import { CommonTextProps } from "styles/typography"
 
-type Props = TextProps &
-  ContainerProps & {
+export type TextProps = CommonTextProps &
+  ContainerProps &
+  ColorProps & {
     children: ReactNode
-  } & ColorProps
+  }
 
 const getColor = css`
   color: ${({ color, danger, theme }: StyledProps<ColorProps>) => {
@@ -29,13 +30,10 @@ const subTextStyling = css`
 `
 
 export const Text = styled.div`
-  text-align: ${({ align }: Props) => align};
+  text-align: ${({ align }: TextProps) => align};
   width: ${({ fluid }) => (fluid ? "100%" : "unset")};
   ${({ color }) => (color ? getColor : "")}
   ${({ hasSubText }) => (hasSubText ? subTextStyling : "")}
   ${getColor}
   ${({ _css }: CSSProp) => _css}
 `
-
-// @ts-ignore
-Text.COMPONENT_NAME = "Text"

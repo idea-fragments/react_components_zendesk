@@ -4,7 +4,7 @@ export declare const Container: import("styled-components").StyledComponent<"div
     fluid?: boolean | undefined;
     inline?: boolean | undefined;
     justifyContent?: string | undefined;
-    responsivePropsList?: import("components/layout/FlexBox").ResponsiveProps<import("components/layout/FlexBox").Props>[] | undefined;
+    responsivePropsList?: import("components/layout/FlexBox").ResponsiveProps<import("components/layout/FlexBox").FlexBoxProps>[] | undefined;
     withRows?: boolean | undefined;
     wrapped?: boolean | undefined;
 } & import("../../styles/types").CSSProp<any> & {

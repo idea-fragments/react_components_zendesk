@@ -3,14 +3,13 @@ import { Dots } from "components/loaders/Dots"
 import React, { ComponentType, PropsWithChildren, useContext } from "react"
 import styled, { ThemeContext } from "styled-components"
 import { Theme } from "styles/theme/Theme.type"
-import { CSSProp } from "styled-components"
+import { CSSProp } from "styles/types"
 
 type Props = {
-  _css?: CSSProp
   className?: string
   innerAs?: ComponentType<any>
   isLoading: boolean
-}
+} & CSSProp
 
 export let TranslucentLoader = ({
   _css,

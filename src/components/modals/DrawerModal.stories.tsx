@@ -114,8 +114,8 @@ const Story = (props: DrawerModalProps) => {
             hideSendButton
             chatBody={<ChatBody />}
             footer="This is the footer message"
-            onClick={close}
-            onChange={open}
+            onSaveClicked={() => {}}
+            onChange={() => {}}
           />
         }
         footerActions={[

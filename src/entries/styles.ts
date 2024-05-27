@@ -1,6 +1,6 @@
-import { dark }          from "styles/theme/dark"
-import { light }         from "styles/theme/light"
-import { light2 }        from "styles/theme/light2"
+import { dark } from "styles/theme/dark"
+import { light } from "styles/theme/light"
+import { light2 } from "styles/theme/light2"
 import { DEFAULT_THEME } from "@zendeskgarden/react-theming"
 
 export const THEMES = {

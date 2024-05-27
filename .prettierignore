@@ -20,6 +20,9 @@ package-lock.json
 # production
 /build
 /dist
+/dist/*
+/dist/types
+/dist/types/*
 
 # misc
 .DS_Store

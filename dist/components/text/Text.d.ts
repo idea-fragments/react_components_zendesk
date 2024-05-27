@@ -1,7 +1,10 @@
 import { ReactNode } from "react";
 import { ColorProps, ContainerProps } from "styles/types";
-import { TextProps } from "styles/typography";
-export declare const Text: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, TextProps & ContainerProps & {
+import { CommonTextProps } from "styles/typography";
+export type TextProps = CommonTextProps & ContainerProps & ColorProps & {
     children: ReactNode;
-} & ColorProps, never>;
+};
+export declare const Text: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, CommonTextProps & ContainerProps & ColorProps & {
+    children: ReactNode;
+}, never>;
 //# sourceMappingURL=Text.d.ts.map

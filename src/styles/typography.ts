@@ -18,6 +18,8 @@ const MEDIUM = "500"
 const BOLD = "700"
 const BLACK = "800"
 
+const DIV = "div"
+const LABEL = "label"
 const H1 = "h1"
 const H2 = "h2"
 const H3 = "h3"
@@ -26,9 +28,10 @@ const H5 = "h5"
 const H6 = "h6"
 const P = "p"
 const SPAN = "span"
-const DIV = "div"
 
 export const FONT_TAGS = {
+  DIV,
+  LABEL,
   H1,
   H2,
   H3,
@@ -37,7 +40,6 @@ export const FONT_TAGS = {
   H6,
   P,
   SPAN,
-  DIV,
 } as const
 
 export const FONT_SIZES = {
@@ -80,7 +82,7 @@ export type FontWeight = ValueOf<typeof FONT_WEIGHTS>
 export type FontTag = ValueOf<typeof FONT_TAGS>
 export type TextAlignment = "center" | "left" | "right"
 
-export type TextProps = {
+export type CommonTextProps = {
   align?: TextAlignment
   as?: FontTag
   hasSubText?: boolean

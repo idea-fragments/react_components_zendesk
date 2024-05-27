@@ -1,12 +1,9 @@
-// @flow
-
 import { XS } from "components/text/Paragraph"
-import { FONT_WEIGHTS } from "styles/typography"
 import styled from "styled-components"
+import { ColorProps } from "styles/types"
+import { FONT_WEIGHTS } from "styles/typography"
 
-const COMPONENT_NAME = "Hint"
-
-export const Hint = styled(XS).attrs(({ color, danger, theme }) => {
+export const Hint = styled(XS).attrs<ColorProps>(({ color, danger, theme }) => {
   const getTextColor = () => {
     if (color) return color
     if (danger) return theme.styles.colorDanger
@@ -14,12 +11,9 @@ export const Hint = styled(XS).attrs(({ color, danger, theme }) => {
   }
 
   return {
-    "data-component-name": COMPONENT_NAME,
     color: getTextColor(),
   }
 })`
   color: ${({ color }) => color};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
 `
-
-Hint.COMPONENT_NAME = COMPONENT_NAME

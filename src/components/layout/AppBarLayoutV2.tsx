@@ -3,13 +3,15 @@ import React, { FC, ReactNode } from "react"
 import styled, { css } from "styled-components"
 import { useTheme } from "styles/theme/useTheme"
 
-export type Props = {
+export type AppBarLayoutV2Props = {
   appBar: ReactNode
   mainContent: ReactNode
 }
-export type AppBarLayoutV2Props = Props
 
-export const AppBarLayoutV2: FC<Props> = ({ appBar, mainContent }) => {
+export const AppBarLayoutV2: FC<AppBarLayoutV2Props> = ({
+  appBar,
+  mainContent,
+}) => {
   const theme = useTheme()
   const appBarHeight = theme.styles.appBar.height
 

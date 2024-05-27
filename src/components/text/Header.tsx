@@ -1,5 +1,3 @@
-// @flow
-
 import { Text } from "components/text/Text"
 import styled from "styled-components"
 import { FONT_SIZES, FONT_TAGS, FONT_WEIGHTS } from "styles/typography"
@@ -45,10 +43,3 @@ export const H6 = styled(Text).attrs({
   font-weight: ${FONT_WEIGHTS.BOLD};
   font-size: ${FONT_SIZES.XS};
 `
-
-H1.COMPONENT_NAME = "H1"
-H2.COMPONENT_NAME = "H2"
-H3.COMPONENT_NAME = "H3"
-H4.COMPONENT_NAME = "H4"
-H5.COMPONENT_NAME = "H5"
-H6.COMPONENT_NAME = "H6"
