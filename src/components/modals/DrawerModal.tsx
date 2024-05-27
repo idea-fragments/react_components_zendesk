@@ -33,8 +33,8 @@ export const DrawerModal = styled((({
       <ZenDrawerModal.Body>{drawerModalBody}</ZenDrawerModal.Body>
       {footerActions ? (
         <ZenDrawerModal.Footer>
-          {footerActions.map((n: ReactNode) => (
-            <ZenDrawerModal.FooterItem>{n}</ZenDrawerModal.FooterItem>
+          {footerActions.map((n: ReactNode, i) => (
+            <ZenDrawerModal.FooterItem key={i}>{n}</ZenDrawerModal.FooterItem>
           ))}
         </ZenDrawerModal.Footer>
       ) : null}
