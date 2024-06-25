@@ -28,15 +28,15 @@ import { PromiseFunc } from "utils/function.types"
 
 const fitContent = css`
   width: fit-content;
-  ${({ compact }: Props) =>
+  ${({ compact }: ButtonProps) =>
     compact ? "min-width: fit-content; padding: 0 1em;" : ""}
 `
 const fitContainer = css`
   width: 100%;
 `
-const colors = css<Props & { color: string }>`
+const colors = css<ButtonProps & { color: string }>`
   ${buttonLikeHoverable};
-  border-color: ${({ flat, primary, inline, color }: Props) =>
+  border-color: ${({ flat, primary, inline, color }: ButtonProps) =>
     !flat && !primary && !inline ? color : "transparent"};
 
   ${getInlineStyling};
@@ -51,7 +51,7 @@ const colors = css<Props & { color: string }>`
     border-color: transparent;
   }
 `
-const alignment = ({ alignSelf }: Props) =>
+const alignment = ({ alignSelf }: ButtonProps) =>
   alignSelf
     ? css`
         align-self: ${alignSelf};
@@ -74,7 +74,7 @@ const baseColor = ({
   success,
   theme,
   warning,
-}: Props & StyledProps) => {
+}: ButtonProps & StyledProps) => {
   if (color) return color
   if (danger) return theme.styles.colorDanger
   if (neutral) return theme.styles.colors.grey["300"]
@@ -127,11 +127,9 @@ type ControlledLoadable = {
   onClick: () => void
 }
 
-export type Props =
+export type ButtonProps =
   | (ButtonBaseProps & ControlledLoadable)
   | (ButtonBaseProps & AutoLoadable)
-
-export type ButtonProps = Props
 
 const ButtonBase = styled(
   ({

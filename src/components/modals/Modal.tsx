@@ -6,7 +6,7 @@ import {
   Header as ZenHeader,
   Modal as ZenModal,
 } from "@zendeskgarden/react-modals"
-import { Button, Props as ButtonProps } from "components/forms/Button"
+import { Button, ButtonProps } from "components/forms/Button"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
 import React, { MouseEvent, ReactElement, useState } from "react"
 import styled, { css } from "styled-components"

@@ -70,8 +70,7 @@ type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-type Props$1 = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
-type ButtonProps = Props$1;
+type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 
 type ItemProps = Omit<IItemProps, "onClick"> & {
     danger?: boolean;

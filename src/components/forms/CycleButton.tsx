@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { Button, Props as ButtonProps } from "components/forms/Button"
+import { Button, ButtonProps } from "components/forms/Button"
 import styled from "styled-components"
 import { isLastItem, isNotLastItem } from "utils/arrayHelpers"
 import { FlexBox } from "components/layout/FlexBox"
@@ -7,7 +7,7 @@ import { FONT_SIZES } from "styles/typography"
 
 type Option = { label: string; value: string }
 
-type Props = Omit<ButtonProps, "onClick"> & {
+type CycleButtonProps = Omit<ButtonProps, "onClick"> & {
   options: Array<Option>
   selectedOption: string
   onCycleChanged: (value: string) => void
@@ -18,7 +18,7 @@ export const CycleButton = ({
   selectedOption,
   onCycleChanged,
   ...buttonProps
-}: Props) => (
+}: CycleButtonProps) => (
   <Button
     primary={false}
     {...buttonProps}

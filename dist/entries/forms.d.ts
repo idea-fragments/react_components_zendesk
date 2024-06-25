@@ -14,6 +14,7 @@ export * from "components/forms/textfields/TextArea";
 export * from "components/forms/textfields/TextFieldWrapper";
 export * from "components/forms/Button";
 export * from "components/forms/CycleButton";
+export * from "components/forms/FileButton";
 export * from "components/forms/IconButton";
 export * from "components/forms/Checkbox";
 export * from "components/forms/Form";

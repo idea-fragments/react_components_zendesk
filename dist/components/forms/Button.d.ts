@@ -35,8 +35,7 @@ type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-export type Props = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
-export type ButtonProps = Props;
+export type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 export declare const Button: ComponentType<ButtonProps>;
 export {};
 //# sourceMappingURL=Button.d.ts.map

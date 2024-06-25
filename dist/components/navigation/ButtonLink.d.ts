@@ -1,6 +1,16 @@
-import { Props as ButtonProps } from "components/forms/Button";
-import React from "react";
+import { ButtonProps } from "components/forms/Button";
+import React, { ComponentType } from "react";
 import { ColorProps, ContainerProps } from "styles/types";
+export type ButtonLinkProps = {
+    to?: any;
+    href?: string;
+    external?: boolean;
+    LinkComponent?: string | ComponentType<{
+        className: string;
+        to: any;
+    } & any>;
+    onClick?: ButtonProps["onClick"];
+} & Omit<ButtonProps, "onClick"> & ColorProps & ContainerProps;
 export declare const ButtonLink: React.ForwardRefExoticComponent<{
     to?: any;
     href?: string | undefined;
