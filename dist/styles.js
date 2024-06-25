@@ -7990,12 +7990,6 @@ var breakpoints = function (_a) {
 };
 var PHONE_SIZE = 560;
 var TABLET_SIZE = 840;
-var forPhones = function (styles) {
-  return "\n    @media screen and (max-width: ".concat(unit(PHONE_SIZE), ") {\n        ").concat(styles, "\n    }\n");
-};
-var forTablets = function (styles) {
-  return "\n    @media screen and (max-width: ".concat(unit(TABLET_SIZE), ") {\n        ").concat(styles, "\n    }\n");
-};
 var mediaQueries = function (wideLayout) {
   var _a = breakpoints({
       wideLayout: wideLayout
@@ -8118,8 +8112,6 @@ exports.dark = dark$1;
 exports.darker = darker;
 exports.desaturate = desaturate;
 exports.fade = fade;
-exports.forPhones = forPhones;
-exports.forTablets = forTablets;
 exports.hasGoodContrast = hasGoodContrast;
 exports.light = light$1;
 exports.lighter = lighter;

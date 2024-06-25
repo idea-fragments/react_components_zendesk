@@ -32,7 +32,7 @@ type ContainerStyles = {
     shadow?: string;
     zIndex?: number;
 };
-type Styles$1 = {
+type Styles = {
     appBar: Required<Pick<ContainerStyles, "background" | "height" | "shadow" | "zIndex">> & {
         screenPosition: "top" | "bottom";
     };
@@ -161,7 +161,7 @@ type Styles$1 = {
 };
 type Theme = {
     isDark: boolean;
-    styles: Styles$1;
+    styles: Styles;
 };
 
 declare const hasGoodContrast: (a: string, b: string) => boolean;
@@ -283,10 +283,7 @@ declare const textWithColor: styled_components.FlattenInterpolation<styled_compo
 
 declare const PHONE_SIZE = 560;
 declare const TABLET_SIZE = 840;
-type Styles = FlattenSimpleInterpolation;
-type MediaQuery = (styles: Styles) => Styles;
-declare const forPhones: (styles: FlattenSimpleInterpolation) => string;
-declare const forTablets: (styles: FlattenSimpleInterpolation) => string;
+type MediaQuery = (styles: CSS) => CSS;
 type MediaQueriesI = {
     forPhones: MediaQuery;
     forTablets: MediaQuery;
@@ -312,4 +309,4 @@ declare const THEMES: {
     __ZENDESK_DEFAULT_THEME__: _zendeskgarden_react_theming.IGardenTheme;
 };
 
-export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, MediaQueriesI, MediaQuery, PHONE_SIZE, Props, SPACE_DIRECTIONS, SPACINGS, StyledProps, Styles$1 as Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, dark, darker, desaturate, fade, forPhones, forTablets, hasGoodContrast, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorPrimary, textWithColor, unit, veryDark, veryLight };
+export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, MediaQueriesI, MediaQuery, PHONE_SIZE, Props, SPACE_DIRECTIONS, SPACINGS, StyledProps, Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, dark, darker, desaturate, fade, hasGoodContrast, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorPrimary, textWithColor, unit, veryDark, veryLight };

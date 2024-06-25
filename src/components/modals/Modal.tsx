@@ -10,6 +10,7 @@ import { Button, ButtonProps } from "components/forms/Button"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
 import React, { MouseEvent, ReactElement, useState } from "react"
 import styled, { css } from "styled-components"
+import { mediaQueries } from "styles/mediaQueries"
 import { textWithColor } from "styles/mixins"
 import { SPACINGS } from "styles/spacings"
 import { UserFeedbackProps } from "styles/UserFeedbackProps"
@@ -67,14 +68,12 @@ const createButtons = (
     )
   })
 
-type Props = {
+type ModalProps = {
   isVisible: boolean
   closeModal: () => void
   disableActions: boolean
   modalContent: ModalContent | null | undefined
 } & StyledComponentProps
-
-export type ModalProps = Props
 
 export let Modal = ({
   isVisible,
@@ -82,7 +81,7 @@ export let Modal = ({
   disableActions,
   modalContent,
   className,
-}: Props) => {
+}: ModalProps) => {
   const [isProcessing, setIsProcessingTo] = useState(false)
   if (!isVisible) return null
   if (!modalContent) throw new Error("Modal found null modal content")
@@ -189,13 +188,18 @@ const Body = styled(ZBody)`
   font-size: inherit;
 `
 
-Modal = styled(Modal)<Props>`
+Modal = styled(Modal)<ModalProps>`
   &&&& {
     margin-left: ${SPACINGS.SM};
     margin-right: ${SPACINGS.SM};
+
     color: ${({ theme }) => theme.styles.textColorPrimary};
 
     ${({ modalContent }) =>
       modalContent?.isNotDismissible ? hideCloseButton : ""}
+
+    ${mediaQueries().forPhones(css`
+      width: calc(100% - (${SPACINGS.SM} * 2));
+    `)}
   }
 `

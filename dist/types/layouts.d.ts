@@ -65,8 +65,7 @@ declare const AppBarLayoutV2: FC<AppBarLayoutV2Props>;
 
 declare const ComputersOnly: FC<PropsWithChildren>;
 
-type Styles = FlattenSimpleInterpolation;
-type MediaQuery = (styles: Styles) => Styles;
+type MediaQuery = (styles: CSS) => CSS;
 
 type ResponsiveProps<P> = {
     mediaQueryFunc: MediaQuery;

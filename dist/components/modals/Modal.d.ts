@@ -19,13 +19,12 @@ export type ModalContent = {
     withNoActions?: boolean;
     onClose?: () => void;
 } & UserFeedbackProps;
-type Props = {
+type ModalProps = {
     isVisible: boolean;
     closeModal: () => void;
     disableActions: boolean;
     modalContent: ModalContent | null | undefined;
 } & StyledComponentProps;
-export type ModalProps = Props;
-export declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: Props) => import("react/jsx-runtime").JSX.Element | null;
+export declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: ModalProps) => import("react/jsx-runtime").JSX.Element | null;
 export {};
 //# sourceMappingURL=Modal.d.ts.map

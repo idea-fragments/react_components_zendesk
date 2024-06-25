@@ -100,14 +100,13 @@ type ModalContent = {
     withNoActions?: boolean;
     onClose?: () => void;
 } & UserFeedbackProps;
-type Props = {
+type ModalProps = {
     isVisible: boolean;
     closeModal: () => void;
     disableActions: boolean;
     modalContent: ModalContent | null | undefined;
 } & StyledComponentProps;
-type ModalProps = Props;
-declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: Props) => react_jsx_runtime.JSX.Element | null;
+declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: ModalProps) => react_jsx_runtime.JSX.Element | null;
 
 declare const ModalManager: FC;
 
@@ -146,4 +145,4 @@ type DrawerModalProps = {
 } & CSSProp;
 declare const DrawerModal: styled_components.StyledComponent<FC<DrawerModalProps>, styled_components.DefaultTheme, {}, never>;
 
-export { DrawerModal, DrawerModalProps, Modal, ModalContent, ModalContentState, ModalHelperFunctions, ModalManager, ModalProps, ModalState, ModalStateContext, ModalStateProvider, ModalStateWithDispatch, defaultUiState, useModalState };
+export { DrawerModal, DrawerModalProps, Modal, ModalContent, ModalContentState, ModalHelperFunctions, ModalManager, ModalState, ModalStateContext, ModalStateProvider, ModalStateWithDispatch, defaultUiState, useModalState };
