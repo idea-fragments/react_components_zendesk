@@ -69,8 +69,7 @@ type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-type Props = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
-type ButtonProps = Props;
+type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 
 type RenderPropParams$1 = {
     clearVideoData: () => void;

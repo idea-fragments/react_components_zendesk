@@ -1,4 +1,4 @@
-import { Props as ButtonProps } from "components/forms/Button";
+import { ButtonProps } from "components/forms/Button";
 import { StyledComponentProps } from "components/StyledComponentProps.type";
 import { ReactElement } from "react";
 import { UserFeedbackProps } from "styles/UserFeedbackProps";

@@ -70,7 +70,7 @@ type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-type Props$1 = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
+type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 
 type StyledComponentProps = {
     className?: string;
@@ -86,7 +86,7 @@ type UserFeedbackProps = {
 type ButtonType = ReactElement & {
     props: {
         disableable: boolean;
-    } & Props$1;
+    } & ButtonProps;
 };
 type ModalContent = {
     autoClose?: boolean;

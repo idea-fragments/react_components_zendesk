@@ -1,6 +1,5 @@
 /// <reference types="react" />
-import { Props as ButtonProps } from "components/forms/Button";
-type Props = Omit<ButtonProps, "children">;
-export declare const IconButton: import("styled-components").StyledComponent<({ primary, flat, pill, ...props }: Props) => JSX.Element, import("styled-components").DefaultTheme, Props, never>;
-export {};
+import { ButtonProps } from "components/forms/Button";
+export type IconButtonProps = Omit<ButtonProps, "children">;
+export declare const IconButton: import("styled-components").StyledComponent<({ primary, flat, pill, ...props }: IconButtonProps) => JSX.Element, import("styled-components").DefaultTheme, IconButtonProps, never>;
 //# sourceMappingURL=IconButton.d.ts.map

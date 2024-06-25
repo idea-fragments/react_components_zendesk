@@ -64,13 +64,13 @@ type TextFieldProps<V = string> = {
     onChange: (value: V, event: ChangeEvent<HTMLInputElement>) => void;
 } & FormFieldProps;
 
-type Props$b = {
+type Props$8 = {
     minimumDate?: Moment;
     disabledDates: Array<Moment>;
     onChange: (d: Moment) => void;
 } & Omit<TextFieldProps, "onChange">;
 declare const DatePickerSelector: {
-    (props: Props$b): react_jsx_runtime.JSX.Element;
+    (props: Props$8): react_jsx_runtime.JSX.Element;
     COMPONENT_NAME: string;
     defaultProps: {
         onChange: (...args: any) => void;
@@ -151,30 +151,30 @@ type CommonProps = {
     useRawOptions?: boolean;
 };
 type SelectorsProps = (CommonProps & SelectorProps) | (CommonProps & MultiSelectorProps);
-type Props$a = Omit<SelectorsProps, "keyField" | "labelField"> & OptionalSelectorProps;
-declare let Dropdown: FC<PropsWithChildren<Props$a>>;
+type Props$7 = Omit<SelectorsProps, "keyField" | "labelField"> & OptionalSelectorProps;
+declare let Dropdown: FC<PropsWithChildren<Props$7>>;
 declare const Autocomplete: react.ComponentType<any>;
 declare const Select: react.ComponentType<any>;
 declare const MultiSelect: styled_components.StyledComponent<react.ComponentType<any>, styled_components.DefaultTheme, {}, never>;
 
 declare let Selector: ({ disabled, ...props }: SelectorProps) => react_jsx_runtime.JSX.Element;
 
-type Props$9 = {
+type Props$6 = {
     maxItems?: number;
     selectedKeys: Array<SelectorItemKey>;
 } & MultiSelectorProps;
-declare let MultiSelector: ({ maxItems, ...props }: Props$9) => react_jsx_runtime.JSX.Element;
+declare let MultiSelector: ({ maxItems, ...props }: Props$6) => react_jsx_runtime.JSX.Element;
 
-type Props$8 = {
+type Props$5 = {
     children?: (o: SelectorOption) => void | ReactNode;
     onSearchTextChange?: (s: string) => void;
 } & SelectorProps;
-declare let SearchableSelector: FC<Props$8>;
+declare let SearchableSelector: FC<Props$5>;
 
-type Props$7 = {
+type Props$4 = {
     minimumDate?: Moment;
 } & TextFieldProps;
-declare const MonthYearSelector: (props: Props$7) => react_jsx_runtime.JSX.Element;
+declare const MonthYearSelector: (props: Props$4) => react_jsx_runtime.JSX.Element;
 
 type SelectorOptionKeyMapParams = Pick<SelectorProps, "keyField" | "options" | "optionsKeyMap">;
 declare class SelectorOptionKeyMap {
@@ -191,10 +191,10 @@ declare const EmailTextField: (props: TextFieldProps<any>) => react_jsx_runtime.
 
 declare let NumberTextField: ({ onChange, value: numberValue, ...props }: TextFieldProps<number>) => react_jsx_runtime.JSX.Element;
 
-type Props$6 = TextFieldProps<any> & {
+type Props$3 = TextFieldProps<any> & {
     newPassword?: boolean;
 };
-declare const PasswordTextField: ({ newPassword, ...props }: Props$6) => react_jsx_runtime.JSX.Element;
+declare const PasswordTextField: ({ newPassword, ...props }: Props$3) => react_jsx_runtime.JSX.Element;
 
 declare let TextField: react.ForwardRefExoticComponent<{
     autoComplete?: string | undefined;
@@ -223,14 +223,14 @@ type TextAreaProps = FormFieldProps & {
 declare const TextArea: FC<TextAreaProps>;
 
 type FieldProps = TextFieldProps | TextAreaProps;
-type Props$5 = PropsWithChildren<{
+type Props$2 = PropsWithChildren<{
     WrappedComponent: ComponentType<Omit<FieldProps, "onChange" | "validation"> & {
         onChange: ((e: ChangeEvent<HTMLInputElement>) => void) | ((e: ChangeEvent<HTMLTextAreaElement>) => void);
         validation?: string;
     }>;
     compact?: boolean;
 }> & FieldProps;
-declare let TextFieldWrapper: react.ForwardRefExoticComponent<Props$5 & react.RefAttributes<unknown>>;
+declare let TextFieldWrapper: react.ForwardRefExoticComponent<Props$2 & react.RefAttributes<unknown>>;
 
 declare const ALIGNMENTS: {
     readonly start: "flex-start";
@@ -274,23 +274,34 @@ type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-type Props$4 = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
-type ButtonProps = Props$4;
+type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 declare const Button: ComponentType<ButtonProps>;
 
 type Option = {
     label: string;
     value: string;
 };
-type Props$3 = Omit<Props$4, "onClick"> & {
+type CycleButtonProps = Omit<ButtonProps, "onClick"> & {
     options: Array<Option>;
     selectedOption: string;
     onCycleChanged: (value: string) => void;
 };
-declare const CycleButton: ({ options, selectedOption, onCycleChanged, ...buttonProps }: Props$3) => react_jsx_runtime.JSX.Element;
+declare const CycleButton: ({ options, selectedOption, onCycleChanged, ...buttonProps }: CycleButtonProps) => react_jsx_runtime.JSX.Element;
 
-type Props$2 = Omit<Props$4, "children">;
-declare const IconButton: styled_components.StyledComponent<({ primary, flat, pill, ...props }: Props$2) => JSX.Element, styled_components.DefaultTheme, Props$2, never>;
+type FileChangeHandler = {
+    multiple?: false;
+    onFileChange: (f: File) => void;
+    onFilesChange?: (files: File[]) => void;
+} | {
+    multiple: true;
+    onFileChange?: (f: File) => void;
+    onFilesChange: (files: File[]) => void;
+};
+type FileButtonProps = Omit<ButtonProps, "onClick"> & FileChangeHandler;
+declare const FileButton: FC<FileButtonProps>;
+
+type IconButtonProps = Omit<ButtonProps, "children">;
+declare const IconButton: styled_components.StyledComponent<({ primary, flat, pill, ...props }: IconButtonProps) => JSX.Element, styled_components.DefaultTheme, IconButtonProps, never>;
 
 type CheckboxProps = FormFieldProps & {
     checked?: boolean;
@@ -338,4 +349,4 @@ type ValidatedFormProps = {
     };
 };
 
-export { ArrayToSelectorOptionsConverter, Autocomplete, BUTTON_SIZES, Button, ButtonProps, ButtonSize, Checkbox, CheckboxProps, CycleButton, DatePickerSelector, Dropdown, EmailTextField, Form, FormFieldProps, IconButton, MenuPlacement, MonthYearSelector, MultiSelect, MultiSelector, MultiSelectorProps, NPSQuestion, NPSQuestionProps, NPSScore, NumberTextField, OnItemSelectedFunc, OnItemsSelectedFunc, PasswordTextField, Props$4 as Props, SearchableSelector, Select, Selector, SelectorItemKey, SelectorOption, SelectorOptionKeyMap, SelectorOptionKeyMapParams, SelectorOptionOptionalAttrs, SelectorProps, StateChange, TaggedToggle, TaggedToggleProps, TextArea, TextAreaProps, TextField, TextFieldProps, TextFieldWrapper, Toggle, ToggleProps, VALIDATION_STATES, ValidatedFormProps, Validation, ValidationState };
+export { ArrayToSelectorOptionsConverter, Autocomplete, BUTTON_SIZES, Button, ButtonProps, ButtonSize, Checkbox, CheckboxProps, CycleButton, DatePickerSelector, Dropdown, EmailTextField, FileButton, FileButtonProps, Form, FormFieldProps, IconButton, IconButtonProps, MenuPlacement, MonthYearSelector, MultiSelect, MultiSelector, MultiSelectorProps, NPSQuestion, NPSQuestionProps, NPSScore, NumberTextField, OnItemSelectedFunc, OnItemsSelectedFunc, PasswordTextField, SearchableSelector, Select, Selector, SelectorItemKey, SelectorOption, SelectorOptionKeyMap, SelectorOptionKeyMapParams, SelectorOptionOptionalAttrs, SelectorProps, StateChange, TaggedToggle, TaggedToggleProps, TextArea, TextAreaProps, TextField, TextFieldProps, TextFieldWrapper, Toggle, ToggleProps, VALIDATION_STATES, ValidatedFormProps, Validation, ValidationState };

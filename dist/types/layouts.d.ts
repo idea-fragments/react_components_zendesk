@@ -33,7 +33,7 @@ type CSSProp<T = any> = {
     className?: string;
 };
 
-type Props$6 = {
+type Props$5 = {
     actions: Array<ReactNode>;
     fixed?: boolean;
     logo?: ElementType;
@@ -42,9 +42,9 @@ type Props$6 = {
     showBackButton?: boolean;
     title: ElementType;
 } & ContainerProps;
-declare let AppBar: FC<Props$6>;
+declare let AppBar: FC<Props$5>;
 
-type Props$5 = {
+type Props$4 = {
     alertView: ReactNode;
     appBar: ReactNode;
     appBarHeight: string;
@@ -53,7 +53,7 @@ type Props$5 = {
     drawerView: ReactNode;
 };
 declare const AppBarLayout: {
-    ({ alertView, appBar, className, content, drawerView, }: Props$5): react_jsx_runtime.JSX.Element;
+    ({ alertView, appBar, className, content, drawerView, }: Props$4): react_jsx_runtime.JSX.Element;
     COMPONENT_NAME: string;
 };
 
@@ -106,7 +106,7 @@ declare const Container: styled_components.StyledComponent<"div", styled_compone
     withRows: boolean;
 }, "withRows">;
 
-type Props$4 = {
+type Props$3 = {
     children: ReactNode;
     className?: string;
     disableNextButton?: boolean;
@@ -117,7 +117,7 @@ type Props$4 = {
     onPreviousClick: () => void;
     onStartClick?: () => void;
 } & CSSProp;
-declare let Carousel: ({ children, className, disableNextButton, disablePreviousButton, inline, onEndClick, onNextClick, onPreviousClick, onStartClick, }: Props$4) => react_jsx_runtime.JSX.Element;
+declare let Carousel: ({ children, className, disableNextButton, disablePreviousButton, inline, onEndClick, onNextClick, onPreviousClick, onStartClick, }: Props$3) => react_jsx_runtime.JSX.Element;
 
 type StyledComponentProps = {
     className?: string;
@@ -130,12 +130,12 @@ type DrawerContent = {
     withNoActions?: boolean;
     onClose?: () => void;
 };
-type Props$3 = {
+type Props$2 = {
     closeDrawer: () => void;
     drawerContent: Nullable<DrawerContent>;
     isOpen: boolean;
 } & StyledComponentProps;
-declare let Drawer: FC<Props$3>;
+declare let Drawer: FC<Props$2>;
 
 type _ResponsiveProps = {
     mediaQueryFunc: Function;
@@ -193,10 +193,10 @@ type IconAppBarProps = {
 };
 declare let IconAppBar: FC<IconAppBarProps>;
 
-type Props$2 = {
+type Props$1 = {
     color?: string;
 };
-declare const Line: styled_components.StyledComponent<"hr", styled_components.DefaultTheme, Props$2, never>;
+declare const Line: styled_components.StyledComponent<"hr", styled_components.DefaultTheme, Props$1, never>;
 
 declare const OpacityTransition: styled_components.StyledComponent<"div", styled_components.DefaultTheme, {
     opacity: number;
@@ -244,7 +244,7 @@ type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-type Props$1 = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
+type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 
 type MenuPlacement = "start" | "auto" | "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "end" | "end-top" | "end-bottom" | "start-top" | "start-bottom";
 
@@ -266,7 +266,7 @@ declare const OverflowButton: styled_components.StyledComponent<react__default.F
     size: string;
     primary: boolean;
     iconSize: string;
-    as: react__default.ComponentType<Props$1>;
+    as: react__default.ComponentType<ButtonProps>;
 }, "color" | "primary" | "size" | "data-component-name" | "aria-label" | "compact" | "icon" | "iconSize" | "as">;
 declare const OverflowMenu: ({ actions, appendToNode, placement }: Props) => react_jsx_runtime.JSX.Element;
 

@@ -8,20 +8,20 @@ import React, {
 } from "react"
 import { CSSProp } from "styles/types"
 
-type LoadingFunc<T> = (p: Promise<T>) => Promise<T>
-type LoaderProps = PropsWithChildren<{ as?: ComponentType; _css?: CSSProp }>
-type Return<T> = {
+type LoadingFunc = <T>(p: Promise<T>) => Promise<T>
+type LoaderProps = PropsWithChildren<{ as?: ComponentType }> & CSSProp
+type Return = {
   isLoading: boolean
   Loader: FC<LoaderProps>
-  withLoading: LoadingFunc<T>
+  withLoading: LoadingFunc
 }
 
-export const useLoaderV2 = <T,>(): Return<T> => {
+export const useLoaderV2 = (): Return => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const withLoading = useMemo(
     () =>
-      async (p: Promise<T>): Promise<T> => {
+      async <T,>(p: Promise<T>): Promise<T> => {
         setLoading(true)
         let val
 

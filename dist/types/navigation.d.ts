@@ -71,16 +71,26 @@ type ControlledLoadable = {
     loading?: boolean;
     onClick: () => void;
 };
-type Props = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
+type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
 
+type ButtonLinkProps = {
+    to?: any;
+    href?: string;
+    external?: boolean;
+    LinkComponent?: string | ComponentType<{
+        className: string;
+        to: any;
+    } & any>;
+    onClick?: ButtonProps["onClick"];
+} & Omit<ButtonProps, "onClick"> & ColorProps & ContainerProps;
 declare const ButtonLink: React.ForwardRefExoticComponent<{
     to?: any;
     href?: string | undefined;
     external?: boolean | undefined;
     LinkComponent?: string | React.ComponentType<any> | undefined;
     onClick?: ((() => void) & (() => void)) | ((() => void) & PromiseFunc<any, any>) | undefined;
-} & Omit<Props, "onClick"> & ColorProps & ContainerProps & React.RefAttributes<any>>;
+} & Omit<ButtonProps, "onClick"> & ColorProps & ContainerProps & React.RefAttributes<any>>;
 
 declare const InlineButtonLink: styled_components.StyledComponent<(props: any) => react_jsx_runtime.JSX.Element, styled_components.DefaultTheme, {}, never>;
 
-export { Breadcrumbs, ButtonLink, InlineButtonLink };
+export { Breadcrumbs, ButtonLink, ButtonLinkProps, InlineButtonLink };

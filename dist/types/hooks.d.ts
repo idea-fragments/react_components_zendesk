@@ -8,17 +8,16 @@ type CSSProp<T = any> = {
     className?: string;
 };
 
-type LoadingFunc<T> = (p: Promise<T>) => Promise<T>;
+type LoadingFunc = <T>(p: Promise<T>) => Promise<T>;
 type LoaderProps = PropsWithChildren<{
     as?: ComponentType;
-    _css?: CSSProp;
-}>;
-type Return<T> = {
+}> & CSSProp;
+type Return = {
     isLoading: boolean;
     Loader: FC<LoaderProps>;
-    withLoading: LoadingFunc<T>;
+    withLoading: LoadingFunc;
 };
-declare const useLoaderV2: <T>() => Return<T>;
+declare const useLoaderV2: () => Return;
 
 type StyledProps<Props = {}> = ThemedStyledProps<Props, Theme>;
 

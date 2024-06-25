@@ -1,4 +1,4 @@
-import { Button, Props as ButtonProps } from "components/forms/Button"
+import { Button, ButtonProps } from "components/forms/Button"
 import React, { ComponentType, ForwardedRef, forwardRef } from "react"
 import { ColorProps, ContainerProps } from "styles/types"
 import { DO_NOTHING } from "utils/functionHelpers"
@@ -7,7 +7,7 @@ import { DO_NOTHING } from "utils/functionHelpers"
  to the button component. Otherwise, NextJS links will not work properly,
  causing the link to be navigated without using the NextJS routing system*/
 
-type Props = {
+export type ButtonLinkProps = {
   to?: any
   href?: string
   external?: boolean
@@ -17,9 +17,9 @@ type Props = {
   ColorProps &
   ContainerProps
 
-export const ButtonLink = forwardRef<any, Props>(
+export const ButtonLink = forwardRef<any, ButtonLinkProps>(
   (
-    { LinkComponent, external, flat, ...otherProps }: Props,
+    { LinkComponent, external, flat, ...otherProps }: ButtonLinkProps,
     ref: ForwardedRef<any>,
   ) => {
     return (
