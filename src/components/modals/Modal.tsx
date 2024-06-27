@@ -139,6 +139,8 @@ export let Modal = ({
       isLarge={isLarge}
       backdropProps={{
         onClick: (e: MouseEvent<HTMLElement>) => {
+          if ((e.target as HTMLElement).tagName.toLowerCase() === "input")
+            return
           e.preventDefault()
         },
         style: { fontFamily: "inherit" },

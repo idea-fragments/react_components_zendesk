@@ -1,5 +1,12 @@
 import { Button, ButtonProps } from "components/forms/Button"
-import { ChangeEvent, FC, useCallback, useRef } from "react"
+import {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 
 type FileChangeHandler =
   | {
@@ -22,7 +29,9 @@ export const FileButton: FC<FileButtonProps> = ({
   onFilesChange,
   ...props
 }) => {
+  const [loadingFileSelector, setLoadingFileSeletorTo] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const loadingTimeoutRef = useRef<NodeJS.Timeout>()
 
   const handleSelectedFile = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +48,18 @@ export const FileButton: FC<FileButtonProps> = ({
 
   const openFileSelector = useCallback(() => {
     inputRef.current!.click()
+    setLoadingFileSeletorTo(true)
+
+    loadingTimeoutRef.current = setTimeout(() => {
+      setLoadingFileSeletorTo(false)
+    }, 2000)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      if (!loadingTimeoutRef.current) return
+      clearTimeout(loadingTimeoutRef.current)
+    }
   }, [])
 
   return (
@@ -51,6 +72,7 @@ export const FileButton: FC<FileButtonProps> = ({
         type="file"
       />
       <Button
+        loading={loadingFileSelector}
         onClick={openFileSelector}
         {...props}>
         {children ?? "Select File"}

@@ -1,6 +1,6 @@
 import { Button } from "components/forms/Button"
 import { Modal, ModalProps } from "components/modals/Modal"
-import React, { useState } from "react"
+import { useState } from "react"
 
 export default {
   title: "Modal",
