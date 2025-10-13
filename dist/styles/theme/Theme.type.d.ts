@@ -139,6 +139,7 @@ export type Styles = {
     table: {
         borderColor: string;
         borderSize: string;
+        filterButtonIcon: Nullable<string>;
     };
     textColorDark: string;
     textColorLight: string;

@@ -11,7 +11,8 @@ let modules = fs
   .readdirSync(modulesDir)
   .map((nameWithExtension) => nameWithExtension.split(".")[0])
 
-// modules = ["alert"]
+// modules = ["utils"]
+
 export default [
   ...modules.map((module) => {
     return {

@@ -1,3 +1,4 @@
+import { Nullable } from "global";
 import { ComponentType, PropsWithChildren, Ref } from "react";
 import { Alignment } from "styles/alignments";
 import { ColorProps, ContainerProps, CSSProp } from "styles/types";
@@ -18,7 +19,7 @@ type ButtonBaseProps = PropsWithChildren<{
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: string | ComponentType;
+    icon?: Nullable<string | ComponentType>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;

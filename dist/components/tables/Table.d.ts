@@ -48,6 +48,7 @@ export type ColumnConfig = {
     collapsible: boolean;
     css?: CSS;
     filter?: ItemFilterOptions;
+    flexible?: boolean;
     important: boolean;
     name: string;
     sort?: SortConfig;
@@ -60,34 +61,43 @@ export type PaginationData = {
 };
 export type SortDirection = "asc" | "desc" | undefined;
 export type SortState = Record<string, SortDirection>;
+export type DesktopTableV2Props = {
+    showStickyShadow?: boolean;
+    showStickyBorder?: boolean;
+};
 export type TableProps = {
     actions?: TableAction[];
     checkable?: boolean;
     checkedItems?: Set<ItemKey>;
     columnConfigs: Array<ColumnConfig>;
+    desktopTableProps?: DesktopTableV2Props;
     emptyState?: ReactNode;
     filterState?: FilterState;
     helpText?: ReactNode;
     items: Array<Item>;
+    maxHeight?: string;
     mobileListview?: boolean;
     mobileListviewNodes?: ReactNode[];
-    maxHeight?: string;
-    sortState?: SortState;
-    title?: string;
     onColumnSort?: (s: SortState) => void;
     onFiltersChange?: (changes: FilterState) => void;
     onItemChecked?: (key: ItemKey, isChecked: boolean) => void;
-    onItemsChecked?: (rows: Set<ItemKey>) => void;
     onItemClick?: (key: ItemKey) => void;
     onItemHoverEnd?: (key: ItemKey) => void;
     onItemHoverStart?: (key: ItemKey) => void;
+    onItemsChecked?: (rows: Set<ItemKey>) => void;
+    sortState?: SortState;
+    title?: string;
+    useDropdownFilters?: boolean;
+    useLegacyDesktopTable?: boolean;
+    useLegacyMobileTable?: boolean;
 };
 type Props = TableProps & {
     className?: string;
     pagination?: PaginationData;
     onPageChange?: (p: number) => void;
+    onPageSizeChange?: (size: number) => void;
 };
 export type FinalizedTableProps = Props;
-export declare let Table: ({ actions, className, pagination, onItemsChecked, onPageChange, ...props }: Props) => import("react/jsx-runtime").JSX.Element;
+export declare let Table: ({ actions, className, desktopTableProps, onItemsChecked, onPageChange, onPageSizeChange, pagination, useLegacyDesktopTable, useLegacyMobileTable, ...props }: Props) => import("react/jsx-runtime").JSX.Element;
 export {};
 //# sourceMappingURL=Table.d.ts.map

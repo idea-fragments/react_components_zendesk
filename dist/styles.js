@@ -1,6 +1,7 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+var js = require('@mdi/js');
 require('react');
 var styledComponents = require('styled-components');
 var jsxRuntime = require('react/jsx-runtime');
@@ -2171,7 +2172,8 @@ var base = {
   },
   table: {
     borderColor: "---",
-    borderSize: "1px"
+    borderSize: "1px",
+    filterButtonIcon: js.mdiFilterOutline
   },
   tooltip: {
     darkBackground: "#747183"
@@ -2189,7 +2191,7 @@ base.colorDanger = base.colors.red["600"];
 base.colorSuccess = base.colors.green["600"];
 base.colorWarning = base.colors.yellow["700"];
 base.colorPrimary = base.colors.blue["600"];
-base.table.borderColor = veryLight(base.colors.grey["500"]);
+base.table.borderColor = base.colors.grey["200"];
 base.chat.message.currentUser.icon.background = base.colorPrimary;
 base.chat.message.currentUser.text.background = base.colors.grey["200"];
 base.chat.message.other.icon.background = (_a = base.colorAccent) !== null && _a !== void 0 ? _a : base.colorPrimary;
