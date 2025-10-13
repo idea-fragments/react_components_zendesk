@@ -106,7 +106,7 @@ type ModalProps = {
     closeModal: () => void;
     disableActions: boolean;
     modalContent: ModalContent | null | undefined;
-} & StyledComponentProps;
+} & StyledComponentProps & CSSProp;
 declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: ModalProps) => react_jsx_runtime.JSX.Element | null;
 
 declare const ModalManager: FC;

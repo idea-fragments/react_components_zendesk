@@ -87,7 +87,6 @@ export type TableProps = {
     onItemsChecked?: (rows: Set<ItemKey>) => void;
     sortState?: SortState;
     title?: string;
-    useDropdownFilters?: boolean;
     useLegacyDesktopTable?: boolean;
     useLegacyMobileTable?: boolean;
 };

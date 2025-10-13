@@ -31,6 +31,7 @@ export declare const stickyColumnStyles: import("styled-components").FlattenInte
  */
 export declare const baseCellStyles: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<{
     isCheckbox?: boolean | undefined;
+    isLastRow?: boolean | undefined;
     isOverflowCell?: boolean | undefined;
 }, import("styled-components").DefaultTheme>>;
 /**
@@ -73,6 +74,7 @@ export declare const RowContainer: import("styled-components").StyledComponent<"
  */
 export declare const RowCell: import("styled-components").StyledComponent<"div", import("styled-components").DefaultTheme, CSSProp<any> & {
     isCheckbox?: boolean | undefined;
+    isLastRow?: boolean | undefined;
     isOverflowCell?: boolean | undefined;
     isSticky?: boolean | undefined;
     stickyLeft?: string | undefined;

@@ -1,6 +1,7 @@
 import { ButtonProps } from "components/forms/Button";
 import { StyledComponentProps } from "components/StyledComponentProps.type";
 import { ReactElement } from "react";
+import { CSSProp } from "styles/types";
 import { UserFeedbackProps } from "styles/UserFeedbackProps";
 type ButtonType = ReactElement & {
     props: {
@@ -24,7 +25,7 @@ type ModalProps = {
     closeModal: () => void;
     disableActions: boolean;
     modalContent: ModalContent | null | undefined;
-} & StyledComponentProps;
+} & StyledComponentProps & CSSProp;
 export declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: ModalProps) => import("react/jsx-runtime").JSX.Element | null;
 export {};
 //# sourceMappingURL=Modal.d.ts.map

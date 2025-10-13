@@ -26,7 +26,7 @@ type Props = TableProps & {
  * @returns A feature-rich data table component
  */
 export declare const DesktopTableV2: {
-    ({ actions, checkable, checkedItems, columnConfigs, emptyState, filterState, hasRowActions, helpText, items, maxHeight, showStickyShadow, showStickyBorder, sortState, title, onColumnSort, onFiltersChange, onItemChecked, onItemClick, onItemHoverEnd, onItemHoverStart, onSelectAllToggle, }: Props): import("react/jsx-runtime").JSX.Element;
+    ({ checkable, checkedItems, columnConfigs, emptyState, hasRowActions, items, maxHeight, showStickyShadow, showStickyBorder, sortState, onColumnSort, onItemChecked, onItemClick, onItemHoverEnd, onItemHoverStart, onSelectAllToggle, }: Props): import("react/jsx-runtime").JSX.Element;
     COMPONENT_NAME: string;
 };
 export {};

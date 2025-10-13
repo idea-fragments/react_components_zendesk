@@ -16,6 +16,7 @@ export type GridRowProps = {
         showStickyShadow: boolean;
         showStickyBorder: boolean;
     };
+    isLastRow?: boolean;
     lastLeftStickyIndex: number;
     showStickyShadow?: boolean;
     showStickyBorder?: boolean;
@@ -31,5 +32,5 @@ export type GridRowProps = {
  * @param props - The GridRow component props
  * @returns A rendered table row
  */
-export declare const GridRow: ({ item, checkable, checkedItems, columnConfigs, hasRowActions, gridTemplateColumns, getStickyLeft, getColumnStickyProps, lastLeftStickyIndex, showStickyShadow, showStickyBorder, onItemChecked, onItemClick, onItemHoverStart, onItemHoverEnd, }: GridRowProps) => import("react/jsx-runtime").JSX.Element;
+export declare const GridRow: ({ item, checkable, checkedItems, columnConfigs, hasRowActions, gridTemplateColumns, getStickyLeft, getColumnStickyProps, isLastRow, lastLeftStickyIndex, showStickyShadow, showStickyBorder, onItemChecked, onItemClick, onItemHoverStart, onItemHoverEnd, }: GridRowProps) => import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=GridRow.d.ts.map
