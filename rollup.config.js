@@ -13,7 +13,7 @@ let modules = fs
 
 // modules = ["utils"]
 
-export default [
+const config = [
   ...modules.map((module) => {
     return {
       input: `src/entries/${module}.ts`,
@@ -46,3 +46,5 @@ export default [
     }
   }),
 ]
+
+export default config

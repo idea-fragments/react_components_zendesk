@@ -1,6 +1,6 @@
 {
   "name": "@idea-fragments/react-components-zendesk",
-  "version": "0.1.73",
+  "version": "0.1.74",
   "private": false,
   "files": [
     "dist/*.js",
@@ -8,13 +8,9 @@
     "dist/types"
   ],
   "exports": {
-    "./*": "./dist/*.js"
-  },
-  "typesVersions": {
-    ">=4.2": {
-      "*": [
-        "dist/types/*.d.ts"
-      ]
+    "./*": {
+      "types": "./dist/types/*.d.ts",
+      "default": "./dist/*.js"
     }
   },
   "dependencies": {
@@ -118,7 +114,7 @@
     "eject": "react-scripts eject",
     "format": "./git_hooks/pre_commit/prettier.sh",
     "lint": "eslint",
-    "rollup": "NODE_OPTIONS=--max-old-space-size=8192 rollup --config",
+    "rollup": "npm run cleanup && NODE_OPTIONS=--max-old-space-size=8192 rollup --config",
     "rollup-windows": "rollup --config --max-old-space-size=8192",
     "start": "react-scripts start",
     "storybook": "storybook dev -p 6006",

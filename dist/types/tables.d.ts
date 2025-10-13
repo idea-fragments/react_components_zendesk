@@ -1,0 +1,179 @@
+/// <reference types="trusted-types" />
+import * as react_jsx_runtime from 'react/jsx-runtime';
+import { Nullable } from 'global';
+import { PropsWithChildren, ComponentType, Ref, ReactNode } from 'react';
+import { ValueOf } from 'utils/types';
+import { FlattenSimpleInterpolation } from 'styled-components';
+import { IItemProps } from '@zendeskgarden/react-dropdowns/dist/typings/types';
+
+declare const ALIGNMENTS: {
+    readonly start: "flex-start";
+    readonly center: "center";
+    readonly end: "flex-end";
+};
+type Alignment = ValueOf<typeof ALIGNMENTS>;
+
+type ColorProps = {
+    accent?: boolean;
+    color?: string;
+    danger?: boolean;
+    neutral?: boolean;
+    primary?: boolean;
+    secondary?: boolean;
+    success?: boolean;
+    warning?: boolean;
+};
+type ContainerProps = {
+    _css?: CSS;
+    color?: string;
+    compact?: boolean;
+    fluid?: boolean;
+    className?: any;
+};
+type CSS<T = any> = FlattenSimpleInterpolation | string | T;
+type CSSProp<T = any> = {
+    _css?: CSS<T>;
+    className?: string;
+};
+
+type PromiseFunc<T = any, Rtn = any> = (...o: T[]) => Promise<Rtn>;
+
+declare const BUTTON_SIZES: {
+    readonly SMALL: "small";
+    readonly LARGE: "large";
+};
+type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES];
+type AutoLoadable = {
+    autoLoadable: true;
+    onClick: PromiseFunc;
+};
+type ButtonBaseProps = PropsWithChildren<{
+    alignItems?: string;
+    alignSelf?: Alignment;
+    autoLoadable?: boolean;
+    disabled?: boolean;
+    flat?: boolean;
+    groupKey?: string;
+    icon?: Nullable<string | ComponentType>;
+    iconPosition?: "left" | "right";
+    iconSize?: string;
+    inline?: boolean;
+    innerAs?: string;
+    innerRef?: Ref<HTMLButtonElement>;
+    loading?: boolean;
+    pill?: boolean;
+    primary?: boolean;
+    size?: ButtonSize;
+    wrapInlineText?: boolean;
+    onClick: () => void;
+}> & CSSProp & ColorProps & ContainerProps;
+type ControlledLoadable = {
+    loading?: boolean;
+    onClick: () => void;
+};
+type ButtonProps = (ButtonBaseProps & ControlledLoadable) | (ButtonBaseProps & AutoLoadable);
+
+type ItemProps = Omit<IItemProps, "onClick"> & {
+    danger?: boolean;
+    disabled?: boolean;
+} & CSSProp;
+
+type TableAction = {
+    buttonProps?: Partial<ButtonProps>;
+    Component?: ComponentType<PropsWithChildren<Record<string, any>>>;
+    componentProps?: Record<string, any>;
+    label: string;
+    notCompactable?: boolean;
+    onClick: () => void;
+    dropdownItemProps?: Partial<ItemProps>;
+};
+type ItemKey = number | string;
+type ItemContainerStyles = string;
+type ItemAction = {
+    action: () => void;
+    label: string;
+};
+type ItemFilterOptions = {
+    fieldName: string;
+    label: string;
+} & ({
+    options: {
+        label: string;
+        value: string;
+    }[];
+    type: "multi-select" | "select" | "searchable-select";
+} | {
+    options?: undefined;
+    type: "text";
+});
+type FilterState = Record<string, string | string[] | undefined>;
+type Item = {
+    [key: string]: ReactNode;
+} & {
+    actions?: Array<ItemAction>;
+    checkDisabled?: boolean;
+    clickDisabled?: boolean;
+    containerStyles?: ItemContainerStyles;
+    key: ItemKey;
+};
+type SortConfig = {
+    fieldName: string;
+    label: string;
+};
+type ColumnConfig = {
+    collapsible: boolean;
+    css?: CSS;
+    filter?: ItemFilterOptions;
+    flexible?: boolean;
+    important: boolean;
+    name: string;
+    sort?: SortConfig;
+    width?: string;
+};
+type PaginationData = {
+    page: number;
+    pageSize: number;
+    totalCount: number;
+};
+type SortDirection = "asc" | "desc" | undefined;
+type SortState = Record<string, SortDirection>;
+type DesktopTableV2Props = {
+    showStickyShadow?: boolean;
+    showStickyBorder?: boolean;
+};
+type TableProps = {
+    actions?: TableAction[];
+    checkable?: boolean;
+    checkedItems?: Set<ItemKey>;
+    columnConfigs: Array<ColumnConfig>;
+    desktopTableProps?: DesktopTableV2Props;
+    emptyState?: ReactNode;
+    filterState?: FilterState;
+    helpText?: ReactNode;
+    items: Array<Item>;
+    maxHeight?: string;
+    mobileListview?: boolean;
+    mobileListviewNodes?: ReactNode[];
+    onColumnSort?: (s: SortState) => void;
+    onFiltersChange?: (changes: FilterState) => void;
+    onItemChecked?: (key: ItemKey, isChecked: boolean) => void;
+    onItemClick?: (key: ItemKey) => void;
+    onItemHoverEnd?: (key: ItemKey) => void;
+    onItemHoverStart?: (key: ItemKey) => void;
+    onItemsChecked?: (rows: Set<ItemKey>) => void;
+    sortState?: SortState;
+    title?: string;
+    useDropdownFilters?: boolean;
+    useLegacyDesktopTable?: boolean;
+    useLegacyMobileTable?: boolean;
+};
+type Props = TableProps & {
+    className?: string;
+    pagination?: PaginationData;
+    onPageChange?: (p: number) => void;
+    onPageSizeChange?: (size: number) => void;
+};
+type FinalizedTableProps = Props;
+declare let Table: ({ actions, className, desktopTableProps, onItemsChecked, onPageChange, onPageSizeChange, pagination, useLegacyDesktopTable, useLegacyMobileTable, ...props }: Props) => react_jsx_runtime.JSX.Element;
+
+export { ColumnConfig, DesktopTableV2Props, FilterState, FinalizedTableProps, Item, ItemAction, ItemContainerStyles, ItemFilterOptions, ItemKey, PaginationData, SortConfig, SortDirection, SortState, Table, TableAction, TableProps };
