@@ -2,13 +2,13 @@ import { mdiChevronDown, mdiChevronUp } from "@mdi/js"
 import { Button } from "components/forms/Button"
 import { Checkbox } from "components/forms/Checkbox"
 import { FlexBox } from "components/layout/FlexBox"
-import { Col, Grid, Row as GridRow } from "components/layout/Grid"
 import { OverflowMenu } from "components/layout/OverflowMenu"
 import { ColumnConfig, Item, ItemKey } from "components/tables/Table"
 import { Text } from "components/text/Text"
 import React, { FC, ReactNode, useState } from "react"
 import styled, { css } from "styled-components"
 import { veryLight } from "styles/colors"
+import { mediaQueries } from "styles/mediaQueries"
 import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
 import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
@@ -19,6 +19,7 @@ type Props = {
   checked?: boolean
   checkDisabled?: boolean
   columnConfigs: Array<ColumnConfig>
+  isLastRow?: boolean
   item: Item
   listviewMode?: boolean
   listviewNode?: ReactNode
@@ -26,11 +27,15 @@ type Props = {
   onClick?: (row: ItemKey) => void
 }
 
+/**
+ * RowV2 - Same design as original Row but using CSS Grid instead of Grid component
+ */
 export const Row: FC<Props> = ({
   checkable,
   checked,
   checkDisabled,
   columnConfigs,
+  isLastRow,
   item,
   listviewMode,
   listviewNode,
@@ -38,19 +43,22 @@ export const Row: FC<Props> = ({
   onClick,
 }) => {
   const [isCollapsed, setCollapsedState] = useState(true)
-  const theme = useTheme()
-
   const { key, containerStyles, actions }: Item = item
+  const firstColumn = columnConfigs[0]
+  const firstColumnValue = firstColumn ? item[firstColumn.name] : null
 
-  const createGridRow = ({ name, important }: ColumnConfig) => {
+  const createFieldRow = (
+    { name, collapsible }: ColumnConfig,
+    isFirst: boolean,
+  ) => {
+    if (isFirst) return null
+
     return (
-      <ColumnRow
-        collapsible={!important}
+      <FieldRow
+        collapsible={collapsible}
         isCollapsed={isCollapsed}
         key={`${key}-${name}`}>
-        <Col
-          md={5}
-          sm={12}>
+        <FieldLabel>
           <Text
             _css={css`
               font-weight: ${FONT_WEIGHTS.BOLD};
@@ -58,11 +66,9 @@ export const Row: FC<Props> = ({
             `}>
             {name}:
           </Text>
-        </Col>
+        </FieldLabel>
 
-        <Col
-          md={7}
-          sm={12}>
+        <FieldValue>
           <FlexBox
             justifyContent={"flex-end"}
             alignItems={"center"}>
@@ -74,14 +80,14 @@ export const Row: FC<Props> = ({
               {item[name]}
             </Text>
           </FlexBox>
-        </Col>
-      </ColumnRow>
+        </FieldValue>
+      </FieldRow>
     )
   }
 
-  const [importantColumns, collapsibleColumns] = columnConfigs.reduce(
+  const [nonCollapsibleColumns, collapsibleColumns] = columnConfigs.reduce(
     (acc, column) => {
-      column.important ? acc[0].push(column) : acc[1].push(column)
+      column.collapsible ? acc[1].push(column) : acc[0].push(column)
       return acc
     },
     [[] as ColumnConfig[], [] as ColumnConfig[]],
@@ -98,56 +104,66 @@ export const Row: FC<Props> = ({
   return (
     <Container
       _css={containerStyles || ""}
+      gap={SPACINGS.SM}
+      isLastRow={isLastRow}
       onClick={() => onClick?.(key)}
       withRows>
-      <FlexBox fluid>
-        {checkable ? (
-          <Checkbox
-            checked={!checkDisabled && checked}
-            disabled={checkDisabled}
-            onChange={handleCheckChange}
-          />
-        ) : null}
-
+      {/* Row Header with first column data and actions */}
+      <FlexBox
+        withRows
+        gap={SPACINGS.XS}>
         <FlexBox
-          withRows
+          alignItems={"center"}
+          gap={SPACINGS.SM}
           fluid>
-          {listviewMode ? (
-            listviewNode
-          ) : (
-            <Grid>
-              {importantColumns.map(createGridRow)}
+          {checkable ? (
+            <Checkbox
+              checked={!checkDisabled && checked}
+              disabled={checkDisabled}
+              onChange={handleCheckChange}
+            />
+          ) : null}
 
-              {!isCollapsed ? (
-                <FlexBox
-                  _css={css`
-                    margin: 0.5em 0;
-                    background: ${theme.styles.colors.grey["300"]};
-                    height: 2px;
-                    width: 20px;
-                  `}
-                />
-              ) : null}
+          <HeaderTitle fluid>
+            <Text
+              _css={css`
+                font-weight: ${FONT_WEIGHTS.BOLD};
+                font-size: ${FONT_SIZES.SM};
+              `}>
+              {firstColumnValue}
+            </Text>
+          </HeaderTitle>
 
-              {collapsibleColumns.map(createGridRow)}
-            </Grid>
-          )}
-        </FlexBox>
-        {actions ? (
-          <div>
+          {actions ? (
             <OverflowMenu
               actions={actions}
               placement={"bottom-end"}
             />
-          </div>
-        ) : null}
+          ) : null}
+        </FlexBox>
+
+        <HeaderDivider />
       </FlexBox>
+
+      {/* Row Content */}
+      {listviewMode ? (
+        listviewNode
+      ) : (
+        <FieldsGrid>
+          {nonCollapsibleColumns.map((col, idx) =>
+            createFieldRow(col, idx === 0),
+          )}
+          {collapsibleColumns.map((col, idx) =>
+            createFieldRow(
+              col,
+              idx === 0 && nonCollapsibleColumns.length === 0,
+            ),
+          )}
+        </FieldsGrid>
+      )}
+
       {isNotEmpty(collapsibleColumns) && !listviewMode ? (
         <Button
-          _css={css`
-            align-self: flex-end;
-            margin-bottom: ${SPACINGS.XS};
-          `}
           fluid
           icon={isCollapsed ? mdiChevronDown : mdiChevronUp}
           primary={false}
@@ -160,25 +176,57 @@ export const Row: FC<Props> = ({
   )
 }
 
-// @ts-ignore
-Row.COMPONENT_NAME = "Row"
-Row.defaultProps = {}
-
 const Container = styled(FlexBox).attrs(() => ({
   alignItems: "stretch",
-}))`
+}))<{ isLastRow?: boolean }>`
   background: ${({ theme }) => theme.styles.colors.white};
-  border-bottom: 1px solid
-    ${({ theme }) => veryLight(theme.styles.colors.grey["500"])};
+  border-bottom: ${({ isLastRow, theme }) =>
+    isLastRow ? "none" : `1px solid ${theme.styles.table.borderColor}`};
   padding: ${SPACINGS.SM};
 `
 
-const ColumnRow = styled(GridRow)<{
+const HeaderTitle = styled(FlexBox)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const HeaderDivider = styled.div`
+  height: 2px;
+  width: 40px;
+  background: ${({ theme }) => theme.styles.colors.grey["300"]};
+`
+
+const FieldsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+`
+
+const FieldRow = styled.div<{
   collapsible: boolean
   isCollapsed: boolean
 }>`
   display: ${({ collapsible, isCollapsed }) =>
-    collapsible && isCollapsed ? "none" : "flex"};
+    collapsible && isCollapsed ? "none" : "grid"};
+  grid-template-columns: 5fr 7fr;
+  gap: ${SPACINGS.XS};
   padding: 0.1em;
   border-radius: 10px;
+
+  ${mediaQueries().forTablets(css`
+    grid-template-columns: 1fr 2fr;
+  `)}
+`
+
+const FieldLabel = styled.div``
+
+const FieldValue = styled.div`
+  text-align: right;
+`
+
+const SectionDivider = styled.div`
+  height: 2px;
+  width: 20px;
+  background: ${({ theme }) => theme.styles.colors.grey["300"]};
+  margin: 0.5em 0;
 `

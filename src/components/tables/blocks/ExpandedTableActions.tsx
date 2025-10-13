@@ -36,7 +36,6 @@ export const ExpandedTableActions: FC<ExpandedTableActionsProps> = ({
   return (
     <FlexBox
       alignItems={"center"}
-      fluid
       justifyContent={"flex-end"}>
       {actionTriggers}
     </FlexBox>

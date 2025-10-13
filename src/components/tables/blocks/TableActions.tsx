@@ -1,6 +1,12 @@
+import { mdiFilterOutline, mdiSwapVertical } from "@mdi/js"
+import { Button, BUTTON_SIZES } from "components/forms/Button"
+import { ComputersOnly } from "components/layout/ComputersOnly"
+import { FlexBox } from "components/layout/FlexBox"
+import { PhonesAndTabletsOnly } from "components/layout/PhonesAndTabletsOnly"
 import { CompactTableActions } from "components/tables/blocks/CompactTableActions"
 import { ExpandedTableActions } from "components/tables/blocks/ExpandedTableActions"
 import { TableFilters } from "components/tables/blocks/TableFilters"
+import { TableFiltersDropdown } from "components/tables/blocks/TableFiltersDropdown"
 import { TableSorter } from "components/tables/blocks/TableSorter"
 import {
   FilterState,
@@ -10,12 +16,12 @@ import {
 } from "components/tables/Table"
 import { useModalState } from "hooks/useModalState"
 import React, { FC, useCallback, useMemo } from "react"
+import { useTheme } from "styles/theme/useTheme"
 import { isNotEmpty } from "utils/arrayHelpers"
 
-export type TableActionsProps = { compact?: boolean } & Pick<
-  TableProps,
-  "columnConfigs"
-> &
+export type TableActionsProps = {
+  compact?: boolean
+} & Pick<TableProps, "columnConfigs"> &
   Partial<
     Pick<
       TableProps,
@@ -36,7 +42,8 @@ export const TableActions: FC<TableActionsProps> = ({
   onFiltersChange,
   sortState,
 }) => {
-  const { openModalWith, closeModal } = useModalState()
+  const { closeModal, openModalWith } = useModalState()
+  const theme = useTheme()
 
   const submitFilters = useCallback(
     (fs: FilterState) => {
@@ -82,34 +89,6 @@ export const TableActions: FC<TableActionsProps> = ({
     })
   }, [columnConfigs, openModalWith, sortState, submitSort])
 
-  const defaultTableActions = useMemo((): TableAction[] => {
-    const list = []
-
-    if (onFiltersChange)
-      list.push({
-        label: "Filter",
-        onClick: openFiltersModal,
-        buttonProps: { primary: false },
-      })
-    if (onColumnSort)
-      list.push({
-        label: "Sort",
-        onClick: openSorterModal,
-        buttonProps: { primary: false },
-      })
-
-    return list
-  }, [onColumnSort, onFiltersChange, openFiltersModal, openSorterModal])
-
-  const addDefaultTableActions = useCallback(
-    (compactables: TableAction[], nonCompactables: TableAction[]) => {
-      compact
-        ? compactables.push(...defaultTableActions)
-        : nonCompactables.push(...defaultTableActions)
-    },
-    [compact, defaultTableActions],
-  )
-
   let [compactableActions, nonCompactableActions] = useMemo((): [
     TableAction[],
     TableAction[],
@@ -128,18 +107,54 @@ export const TableActions: FC<TableActionsProps> = ({
       [[], []] as [TableAction[], TableAction[]],
     )
 
-    addDefaultTableActions(...groupedActions)
     return groupedActions
-  }, [actions, addDefaultTableActions, compact])
+  }, [actions, compact])
+
+  const filterIcon = theme.styles.table.filterButtonIcon || mdiFilterOutline
 
   return (
-    <>
+    <FlexBox
+      alignItems={"center"}
+      justifyContent={"flex-end"}
+      fluid>
+      <ComputersOnly>
+        {onFiltersChange ? (
+          <TableFiltersDropdown
+            columnConfigs={columnConfigs}
+            filterState={filterState!}
+            onFiltersChange={submitFilters}
+          />
+        ) : null}
+      </ComputersOnly>
+
+      <PhonesAndTabletsOnly>
+        {onFiltersChange ? (
+          <Button
+            compact
+            icon={filterIcon}
+            onClick={openFiltersModal}
+            primary={false}
+            size={BUTTON_SIZES.SMALL}
+          />
+        ) : null}
+
+        {onColumnSort ? (
+          <Button
+            compact
+            icon={mdiSwapVertical}
+            onClick={openSorterModal}
+            primary={false}
+            size={BUTTON_SIZES.SMALL}
+          />
+        ) : null}
+      </PhonesAndTabletsOnly>
+
       {isNotEmpty(nonCompactableActions) ? (
         <ExpandedTableActions actions={nonCompactableActions} />
       ) : null}
       {isNotEmpty(compactableActions) ? (
         <CompactTableActions actions={compactableActions} />
       ) : null}
-    </>
+    </FlexBox>
   )
 }

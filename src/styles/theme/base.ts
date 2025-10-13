@@ -1,3 +1,4 @@
+import { mdiFilterOutline } from "@mdi/js"
 import { StyledProps } from "components/StyledProps.type"
 import { hasGoodContrast, veryLight } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
@@ -208,6 +209,7 @@ export const base: Partial<Styles> = {
   table: {
     borderColor: "---",
     borderSize: "1px",
+    filterButtonIcon: mdiFilterOutline,
   },
   tooltip: { darkBackground: "#747183" },
 
@@ -228,7 +230,7 @@ base.colorWarning = base.colors!.yellow["700"]
 
 base.colorPrimary = base.colors!.blue["600"]
 
-base.table!.borderColor = veryLight(base.colors!.grey["500"])
+base.table!.borderColor = base.colors!.grey["200"]
 
 base.chat!.message.currentUser.icon.background = base.colorPrimary
 base.chat!.message.currentUser.text.background = base.colors!.grey["200"]

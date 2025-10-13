@@ -4,12 +4,18 @@ import { FlexBox } from "components/layout/FlexBox"
 import { ModalManager } from "components/modals/ModalManager"
 import { ModalStateProvider } from "components/stateProviders/ModalStateProvider"
 import { Pagination } from "components/tables/blocks/Pagination"
+import { Title } from "components/tables/blocks/Title"
+import { HelpText } from "components/tables/blocks/HelpText"
+import { TableHeader } from "components/tables/blocks/TableHeader"
 import { DesktopTable } from "components/tables/DesktopTable"
+import { DesktopTableV2 } from "components/tables/DesktopTableV2"
 import { MobileTable } from "components/tables/MobileTable"
+import { MobileTableV2 } from "components/tables/MobileTableV2"
 import { useDeviceSizeWatcher } from "hooks/useDeviceSizeWatcher"
 import React, { ComponentType, PropsWithChildren, ReactNode } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { CSS } from "styles/types"
+import { SPACINGS } from "styles/spacings"
 import { isNotEmpty } from "utils/arrayHelpers"
 
 export type TableAction = {
@@ -56,6 +62,8 @@ export type ColumnConfig = {
   collapsible: boolean
   css?: CSS
   filter?: ItemFilterOptions
+  // Allows column to expand to fill available space while respecting min-width
+  flexible?: boolean
   important: boolean
   name: string
   sort?: SortConfig
@@ -72,33 +80,43 @@ export type SortDirection = "asc" | "desc" | undefined
 
 export type SortState = Record<string, SortDirection>
 
+export type DesktopTableV2Props = {
+  showStickyShadow?: boolean
+  showStickyBorder?: boolean
+}
+
 export type TableProps = {
   actions?: TableAction[]
   checkable?: boolean
   checkedItems?: Set<ItemKey>
   columnConfigs: Array<ColumnConfig>
+  desktopTableProps?: DesktopTableV2Props
   emptyState?: ReactNode
   filterState?: FilterState
   helpText?: ReactNode
   items: Array<Item>
+  maxHeight?: string
   mobileListview?: boolean
   mobileListviewNodes?: ReactNode[]
-  maxHeight?: string
-  sortState?: SortState
-  title?: string
   onColumnSort?: (s: SortState) => void
   onFiltersChange?: (changes: FilterState) => void
   onItemChecked?: (key: ItemKey, isChecked: boolean) => void
-  onItemsChecked?: (rows: Set<ItemKey>) => void
   onItemClick?: (key: ItemKey) => void
   onItemHoverEnd?: (key: ItemKey) => void
   onItemHoverStart?: (key: ItemKey) => void
+  onItemsChecked?: (rows: Set<ItemKey>) => void
+  sortState?: SortState
+  title?: string
+  useDropdownFilters?: boolean
+  useLegacyDesktopTable?: boolean
+  useLegacyMobileTable?: boolean
 }
 
 type Props = TableProps & {
   className?: string
   pagination?: PaginationData
   onPageChange?: (p: number) => void
+  onPageSizeChange?: (size: number) => void
 }
 
 export type FinalizedTableProps = Props
@@ -106,9 +124,13 @@ export type FinalizedTableProps = Props
 export let Table = ({
   actions,
   className,
-  pagination,
+  desktopTableProps,
   onItemsChecked,
   onPageChange,
+  onPageSizeChange,
+  pagination,
+  useLegacyDesktopTable = false,
+  useLegacyMobileTable = false,
   ...props
 }: Props) => {
   const { isSmallComputerOrLarger } = useDeviceSizeWatcher()
@@ -128,15 +150,54 @@ export let Table = ({
       <FlexBox
         withRows
         className={className}>
+        <FlexBox
+          _css={css`
+            margin-bottom: ${SPACINGS.SM};
+          `}
+          justifyContent={"space-between"}
+          withRows>
+          {props.title ? <Title>{props.title}</Title> : null}
+          {props.helpText ? <HelpText>{props.helpText}</HelpText> : null}
+          <TableHeader
+            actions={actions}
+            checkable={props.checkable}
+            columnConfigs={props.columnConfigs}
+            filterState={props.filterState}
+            selectedCount={props.checkedItems?.size || 0}
+            sortState={props.sortState}
+            totalPageCount={props.items.length}
+            useDropdownFilters={true}
+            onFiltersChange={props.onFiltersChange}
+            onColumnSort={props.onColumnSort}
+            onSelectAllToggle={setAllRowsSelectedTo}
+          />
+        </FlexBox>
         {isSmallComputerOrLarger ? (
-          <DesktopTable
+          useLegacyDesktopTable ? (
+            <DesktopTable
+              actions={actions}
+              hasRowActions={hasRowActions}
+              onSelectAllToggle={setAllRowsSelectedTo}
+              {...props}
+            />
+          ) : (
+            <DesktopTableV2
+              actions={actions}
+              hasRowActions={hasRowActions}
+              onSelectAllToggle={setAllRowsSelectedTo}
+              {...desktopTableProps}
+              {...props}
+            />
+          )
+        ) : useLegacyMobileTable ? (
+          <MobileTable
             actions={actions}
             hasRowActions={hasRowActions}
             onSelectAllToggle={setAllRowsSelectedTo}
             {...props}
           />
         ) : (
-          <MobileTable
+          <MobileTableV2
             actions={actions}
             hasRowActions={hasRowActions}
             onSelectAllToggle={setAllRowsSelectedTo}
@@ -147,6 +208,7 @@ export let Table = ({
           <Pagination
             {...pagination}
             onPageChange={onPageChange!!}
+            onPageSizeChange={onPageSizeChange}
           />
         ) : null}
       </FlexBox>

@@ -128,7 +128,11 @@ export type Styles = {
     width: string
     zIndex: number
   }
-  table: { borderColor: string; borderSize: string }
+  table: {
+    borderColor: string
+    borderSize: string
+    filterButtonIcon: Nullable<string>
+  }
   textColorDark: string
   textColorLight: string
   textColorOverPrimaryBg: string

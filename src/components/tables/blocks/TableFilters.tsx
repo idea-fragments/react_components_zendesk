@@ -44,7 +44,8 @@ export const TableFilters: FC<TableFiltersProps> = ({
   return (
     <FlexBox
       _css={css`
-        /*padding: ${SPACINGS.SM}; width: 300px;*/
+        font-size: 1rem !important;
+        width: 300px;
         max-width: 100%;
         max-height: 100%;
       `}

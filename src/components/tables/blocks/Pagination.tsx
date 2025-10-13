@@ -4,14 +4,30 @@ import { ComputersOnly } from "components/layout/ComputersOnly"
 import { FlexBox } from "components/layout/FlexBox"
 import { PhonesOnly } from "components/layout/PhonesOnly"
 import { TabletsOnly } from "components/layout/TabletsOnly"
+import { PhonesAndTabletsOnly } from "components/layout/PhonesAndTabletsOnly"
+import { Selector } from "components/forms/selectors/Selector"
 import { PaginationData } from "components/tables/Table"
 import React, { useCallback, useMemo } from "react"
 import { css } from "styled-components"
+import { SPACINGS } from "styles/spacings"
 import { arrayOfSizeN } from "utils/arrayHelpers"
 import { DO_NOTHING } from "utils/functionHelpers"
 
 type Props = PaginationData & {
   onPageChange: (n: number) => void
+  onPageSizeChange?: (size: number) => void
+}
+
+const PAGE_SIZE_OPTIONS = [10, 25, 50, 75, 100]
+const PAGE_SIZE_SELECTOR_OPTIONS = PAGE_SIZE_OPTIONS.map((size) => ({
+  label: `${size}`,
+  value: size,
+}))
+
+class InvalidPageSizeError extends Error {
+  constructor() {
+    super(`Page size must be one of: ${PAGE_SIZE_OPTIONS.join(", ")}`)
+  }
 }
 
 export const Pagination = ({
@@ -19,7 +35,12 @@ export const Pagination = ({
   pageSize,
   totalCount,
   onPageChange,
+  onPageSizeChange,
 }: Props) => {
+  if (!PAGE_SIZE_OPTIONS.includes(pageSize)) {
+    throw new InvalidPageSizeError()
+  }
+
   const numberPages = useMemo(
     () => Math.ceil(totalCount / pageSize),
     [pageSize, totalCount],
@@ -88,25 +109,104 @@ export const Pagination = ({
   )
   const movePageStart = useCallback(() => onPageChange(1), [onPageChange])
 
-  if (totalCount <= pageSize) return null
+  const renderCarousel = useCallback(
+    (children: React.ReactNode) => (
+      <Carousel
+        disableNextButton={page === numberPages}
+        disablePreviousButton={page === 1}
+        inline
+        onEndClick={movePageEnd}
+        onNextClick={movePage(+1)}
+        onPreviousClick={movePage(-1)}
+        onStartClick={movePageStart}>
+        <FlexBox gap={"2px"}>{children}</FlexBox>
+      </Carousel>
+    ),
+    [page, numberPages, movePageEnd, movePage, movePageStart],
+  )
+
+  const renderPageSizeSelector = useCallback(
+    (justifyContent: string = "flex-end") => {
+      if (!onPageSizeChange) return null
+
+      return (
+        <FlexBox
+          alignItems={"center"}
+          justifyContent={justifyContent}
+          gap={SPACINGS.XS}>
+          <span>Items per page:</span>
+          <Selector
+            compact
+            small
+            emptyState={"Select size"}
+            options={PAGE_SIZE_SELECTOR_OPTIONS}
+            keyField={"value"}
+            labelField={"label"}
+            selectedKey={pageSize}
+            onChange={(size: any) => onPageSizeChange(size as number)}
+          />
+        </FlexBox>
+      )
+    },
+    [onPageSizeChange, pageSize],
+  )
+
+  const renderTotalCount = useCallback(
+    (justifyContent: string = "flex-start") => {
+      return (
+        <FlexBox
+          alignItems={"center"}
+          justifyContent={justifyContent}
+          gap={SPACINGS.XS}
+          _css={css`
+            color: ${({ theme }) => theme.styles.colors.grey["600"]};
+          `}>
+          <span>
+            <b>{totalCount}</b> total record{totalCount !== 1 ? "s" : ""}
+          </span>
+        </FlexBox>
+      )
+    },
+    [totalCount],
+  )
+
+  if (totalCount <= pageSize && !onPageSizeChange) return null
 
   return (
-    <Carousel
-      _css={css`
-        align-self: center;
-      `}
-      disableNextButton={page === numberPages}
-      disablePreviousButton={page === 1}
-      inline
-      onEndClick={movePageEnd}
-      onNextClick={movePage(+1)}
-      onPreviousClick={movePage(-1)}
-      onStartClick={movePageStart}>
-      <FlexBox gap={"2px"}>
-        <ComputersOnly>{createNPageButtons(5)}</ComputersOnly>
-        <PhonesOnly>{createNPageButtons(3)}</PhonesOnly>
-        <TabletsOnly>{createNPageButtons(5)}</TabletsOnly>
-      </FlexBox>
-    </Carousel>
+    <>
+      <ComputersOnly>
+        <div
+          css={css`
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: ${SPACINGS.SM};
+            width: 100%;
+          `}>
+          {renderTotalCount("flex-start")}
+          {renderCarousel(createNPageButtons(5))}
+          {renderPageSizeSelector("flex-end")}
+        </div>
+      </ComputersOnly>
+
+      <PhonesAndTabletsOnly>
+        <FlexBox
+          withRows
+          alignItems={"center"}
+          gap={SPACINGS.SM}
+          _css={css`
+            width: 100%;
+          `}>
+          {renderTotalCount("center")}
+          {renderCarousel(
+            <>
+              <PhonesOnly>{createNPageButtons(3)}</PhonesOnly>
+              <TabletsOnly>{createNPageButtons(5)}</TabletsOnly>
+            </>,
+          )}
+          {renderPageSizeSelector("center")}
+        </FlexBox>
+      </PhonesAndTabletsOnly>
+    </>
   )
 }

@@ -7,6 +7,7 @@ import { Icon } from "components/Icon"
 import { FlexBox } from "components/layout/FlexBox"
 import { Dots } from "components/loaders/Dots"
 import { StyledProps } from "components/StyledProps.type"
+import { Nullable } from "global"
 import { useIsMounted } from "hooks/useIsMounted"
 import React, {
   ComponentType,
@@ -105,7 +106,7 @@ type ButtonBaseProps = PropsWithChildren<{
   disabled?: boolean
   flat?: boolean
   groupKey?: string
-  icon?: string | ComponentType
+  icon?: Nullable<string | ComponentType>
   iconPosition?: "left" | "right"
   iconSize?: string
   inline?: boolean

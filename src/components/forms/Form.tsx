@@ -1,16 +1,17 @@
-import { FlexBox } from "components/layout/FlexBox"
+import { FlexBox, FlexBoxProps } from "components/layout/FlexBox"
 import React, { FC, FormEvent, forwardRef, PropsWithChildren, Ref } from "react"
 import styled from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { ContainerProps } from "styles/types"
 import { PromiseFunc } from "utils/function.types"
 
-type Props = PropsWithChildren<{
+export type FormProps = PropsWithChildren<{
   onSubmit: PromiseFunc
 }> &
-  ContainerProps
+  ContainerProps &
+  FlexBoxProps
 
-export let Form: FC<Props> = forwardRef<HTMLFormElement, Props>(
+export let Form: FC<FormProps> = forwardRef<HTMLFormElement, FormProps>(
   ({ onSubmit, className, children, ...props }, ref: Ref<HTMLFormElement>) => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
@@ -19,11 +20,11 @@ export let Form: FC<Props> = forwardRef<HTMLFormElement, Props>(
 
     return (
       <FlexBox
-        withRows
         as={"form"}
-        onSubmit={handleSubmit}
-        gap={SPACINGS.SM}
         className={className}
+        gap={SPACINGS.SM}
+        onSubmit={handleSubmit}
+        withRows
         ref={ref}
         {...props}>
         <HiddenSubmit />
