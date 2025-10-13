@@ -120,12 +120,14 @@ export const stickyColumnStyles = css<{
  */
 export const baseCellStyles = css<{
   isCheckbox?: boolean
+  isLastRow?: boolean
   isOverflowCell?: boolean
 }>`
   padding: ${CELL_PADDING};
   display: flex;
   align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.styles.table.borderColor};
+  border-bottom: ${({ isLastRow, theme }) =>
+    isLastRow ? "none" : `1px solid ${theme.styles.table.borderColor}`};
 
   ${({ isCheckbox, isOverflowCell }) =>
     (isCheckbox || isOverflowCell) &&
@@ -205,6 +207,7 @@ export const RowContainer = styled.div<{ gridTemplateColumns: string }>`
 export const RowCell = styled.div<
   CSSProp & {
     isCheckbox?: boolean
+    isLastRow?: boolean
     isOverflowCell?: boolean
     isSticky?: boolean
     stickyLeft?: string

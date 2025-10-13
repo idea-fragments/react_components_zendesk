@@ -106,8 +106,6 @@ export type TableProps = {
   onItemHoverStart?: (key: ItemKey) => void
   onItemsChecked?: (rows: Set<ItemKey>) => void
   sortState?: SortState
-  title?: string
-  useDropdownFilters?: boolean
   useLegacyDesktopTable?: boolean
   useLegacyMobileTable?: boolean
 }
@@ -166,7 +164,6 @@ export let Table = ({
             selectedCount={props.checkedItems?.size || 0}
             sortState={props.sortState}
             totalPageCount={props.items.length}
-            useDropdownFilters={true}
             onFiltersChange={props.onFiltersChange}
             onColumnSort={props.onColumnSort}
             onSelectAllToggle={setAllRowsSelectedTo}

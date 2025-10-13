@@ -26,6 +26,7 @@ export type GridRowProps = {
     showStickyShadow: boolean
     showStickyBorder: boolean
   }
+  isLastRow?: boolean
   lastLeftStickyIndex: number
   showStickyShadow?: boolean
   showStickyBorder?: boolean
@@ -51,6 +52,7 @@ export const GridRow = ({
   gridTemplateColumns,
   getStickyLeft,
   getColumnStickyProps,
+  isLastRow = false,
   lastLeftStickyIndex,
   showStickyShadow = true,
   showStickyBorder = false,
@@ -76,6 +78,7 @@ export const GridRow = ({
         <RowCell
           _css={containerStyles || ""}
           isCheckbox
+          isLastRow={isLastRow}
           isSticky
           stickyLeft={getStickyLeft(0)}
           showStickyShadow={showStickyShadow && lastLeftStickyIndex === 0}
@@ -97,6 +100,7 @@ export const GridRow = ({
           <RowCell
             key={`${key}-${name}`}
             _css={containerStyles || ""}
+            isLastRow={isLastRow}
             {...stickyProps}>
             <Text _css={`font-weight: ${weight}; width: 100%;`}>
               {item[name]}
@@ -108,6 +112,7 @@ export const GridRow = ({
       {hasRowActions && (
         <RowCell
           _css={containerStyles || ""}
+          isLastRow={isLastRow}
           isOverflowCell
           isSticky
           stickyRight="0px"

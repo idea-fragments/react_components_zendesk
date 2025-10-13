@@ -20,7 +20,6 @@ type Props = {
   selectedCount: number
   sortState?: SortState
   totalPageCount: number
-  useDropdownFilters?: boolean
   onFiltersChange?: (changes: FilterState) => void
   onColumnSort?: (s: SortState) => void
   onSelectAllToggle?: (isChecked: boolean) => void

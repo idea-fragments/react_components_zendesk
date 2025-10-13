@@ -8,7 +8,7 @@ import { PhonesAndTabletsOnly } from "components/layout/PhonesAndTabletsOnly"
 import { Selector } from "components/forms/selectors/Selector"
 import { PaginationData } from "components/tables/Table"
 import React, { useCallback, useMemo } from "react"
-import { css } from "styled-components"
+import styled, { css } from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { arrayOfSizeN } from "utils/arrayHelpers"
 import { DO_NOTHING } from "utils/functionHelpers"
@@ -175,18 +175,11 @@ export const Pagination = ({
   return (
     <>
       <ComputersOnly>
-        <div
-          css={css`
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: ${SPACINGS.SM};
-            width: 100%;
-          `}>
+        <ComputerContainer>
           {renderTotalCount("flex-start")}
           {renderCarousel(createNPageButtons(5))}
           {renderPageSizeSelector("flex-end")}
-        </div>
+        </ComputerContainer>
       </ComputersOnly>
 
       <PhonesAndTabletsOnly>
@@ -210,3 +203,11 @@ export const Pagination = ({
     </>
   )
 }
+
+const ComputerContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: ${SPACINGS.SM};
+  width: 100%;
+`

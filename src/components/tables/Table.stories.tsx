@@ -132,12 +132,6 @@ export const Default = Story.bind({})
 // @ts-ignore
 Default.args = {}
 
-export const WithDropdownFilters = Story.bind({})
-// @ts-ignore
-WithDropdownFilters.args = {
-  useDropdownFilters: true,
-}
-
 // @ts-ignore
 const items: Item[] = [
   {

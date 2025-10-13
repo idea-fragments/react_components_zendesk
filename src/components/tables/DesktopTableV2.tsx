@@ -9,7 +9,7 @@ import {
 } from "components/tables/Table"
 import React, { UIEvent, useCallback, useEffect, useRef, useState } from "react"
 import { css } from "styled-components"
-import { isNotEmpty } from "utils/arrayHelpers"
+import { isLastItem, isNotEmpty } from "utils/arrayHelpers"
 import { SPACINGS } from "styles/spacings"
 import {
   CHECKBOX_WIDTH,
@@ -55,22 +55,17 @@ type Props = TableProps & {
  * @returns A feature-rich data table component
  */
 export const DesktopTableV2 = ({
-  actions,
   checkable = false,
   checkedItems,
   columnConfigs,
   emptyState,
-  filterState,
   hasRowActions,
-  helpText,
   items,
   maxHeight,
   showStickyShadow = false,
   showStickyBorder = true,
   sortState,
-  title,
   onColumnSort,
-  onFiltersChange,
   onItemChecked,
   onItemClick,
   onItemHoverEnd,
@@ -248,6 +243,7 @@ export const DesktopTableV2 = ({
                   gridTemplateColumns={gridTemplateColumns}
                   getStickyLeft={getStickyLeft}
                   getColumnStickyProps={getColumnStickyProps}
+                  isLastRow={isLastItem(items, item)}
                   lastLeftStickyIndex={lastLeftStickyIndex}
                   showStickyShadow={showStickyShadow}
                   showStickyBorder={showStickyBorder}

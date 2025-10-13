@@ -1,6 +1,7 @@
-import { Field as ZField, Label, Message } from "@zendeskgarden/react-forms"
+import { Field as ZField, Label } from "@zendeskgarden/react-forms"
 import { TextFieldProps } from "components/forms/formField.types"
 import { Hint } from "components/forms/Hint"
+import { Message } from "components/forms/Message"
 import { TextAreaProps } from "components/forms/textfields/TextArea"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox } from "components/layout/FlexBox"
@@ -103,7 +104,7 @@ export let TextFieldWrapper = forwardRef(
           />
           {message ? (
             <Message
-              css={`
+              _css={`
                 &&& {
                   font-size: ${FONT_SIZES.XS};
                 }

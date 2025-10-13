@@ -6,6 +6,7 @@ import React from "react"
 import styled from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { FONT_SIZES } from "styles/typography"
+import { isLastItem } from "utils/arrayHelpers"
 
 type Props = TableProps & {
   hasRowActions: boolean
@@ -52,7 +53,7 @@ export const MobileTableV2 = ({
           checkable={checkable}
           checked={checkedItems?.has(item.key)}
           columnConfigs={columnConfigs}
-          isLastRow={index === items.length - 1}
+          isLastRow={isLastItem(items, item)}
           item={item}
           key={item.key}
           listviewMode={mobileListview}

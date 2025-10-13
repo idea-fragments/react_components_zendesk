@@ -13,6 +13,7 @@ import styled, { css } from "styled-components"
 import { mediaQueries } from "styles/mediaQueries"
 import { textWithColor } from "styles/mixins"
 import { SPACINGS } from "styles/spacings"
+import { CSSProp } from "styles/types"
 import { UserFeedbackProps } from "styles/UserFeedbackProps"
 
 type ButtonType = ReactElement & {
@@ -73,7 +74,8 @@ type ModalProps = {
   closeModal: () => void
   disableActions: boolean
   modalContent: ModalContent | null | undefined
-} & StyledComponentProps
+} & StyledComponentProps &
+  CSSProp
 
 export let Modal = ({
   isVisible,
@@ -194,7 +196,6 @@ Modal = styled(Modal)<ModalProps>`
   &&&& {
     margin-left: ${SPACINGS.SM};
     margin-right: ${SPACINGS.SM};
-
     color: ${({ theme }) => theme.styles.textColorPrimary};
 
     ${({ modalContent }) =>
@@ -203,5 +204,7 @@ Modal = styled(Modal)<ModalProps>`
     ${mediaQueries().forPhones(css`
       width: calc(100% - (${SPACINGS.SM} * 2));
     `)}
+
+    ${({ _css }) => _css}
   }
 `

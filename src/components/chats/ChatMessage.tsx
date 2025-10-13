@@ -59,12 +59,12 @@ export const ChatMessage = styled((({
           </MessageText>
 
           {!!actions ? (
-            <div
-              css={`
+            <Div
+              _css={`
                 margin-top: -4px;
               `}>
               <OverflowMenu actions={actions} />
-            </div>
+            </Div>
           ) : null}
         </TextAndOptionsWrapper>
         <FlexBox withRows>
@@ -95,6 +95,10 @@ export const ChatMessage = styled((({
 
 const Container = styled.div`
   width: 100%;
+`
+
+const Div = styled.div<CSSProp>`
+  ${({ _css }) => _css}
 `
 
 const MessageContainer = styled(FlexBox)<{ isUserMessage: boolean }>`

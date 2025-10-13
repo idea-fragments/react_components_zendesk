@@ -97,7 +97,7 @@ export let Slider: FC<SliderProps> = ({
 
         {message ? (
           <Message
-            css={`
+            _css={`
               &&& {
                 font-size: ${FONT_SIZES.XS};
               }

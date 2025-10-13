@@ -9,7 +9,7 @@ export const ModalManager: FC = () => {
   return (
     <Modal
       closeModal={closeModal}
-      css={`
+      _css={`
         max-width: 90%;
       `}
       disableActions={false}
