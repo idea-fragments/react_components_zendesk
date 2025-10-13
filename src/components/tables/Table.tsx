@@ -106,6 +106,7 @@ export type TableProps = {
   onItemHoverStart?: (key: ItemKey) => void
   onItemsChecked?: (rows: Set<ItemKey>) => void
   sortState?: SortState
+  title?: string
   useLegacyDesktopTable?: boolean
   useLegacyMobileTable?: boolean
 }
