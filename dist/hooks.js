@@ -241,9 +241,6 @@ var FlexBox = styled__default["default"].div(templateObject_1$1 || (templateObje
 }, function (p) {
   return p._css;
 });
-FlexBox.defaultProps = {
-  withRows: false
-};
 var responsiveStyles = function (_a) {
   var responsivePropsList = _a.responsivePropsList,
     originalProps = __rest(_a, ["responsivePropsList"]);
@@ -4065,7 +4062,9 @@ var TranslucentLoader = function (_a) {
     className = _a.className,
     innerAs = _a.innerAs,
     _b = _a.isLoading,
-    isLoading = _b === void 0 ? true : _b;
+    isLoading = _b === void 0 ? true : _b,
+    _c = _a.fullScreenBackdrop,
+    fullScreenBackdrop = _c === void 0 ? false : _c;
   var theme = React.useContext(styled.ThemeContext);
   return jsxRuntime.jsxs(Container, __assign({
     as: innerAs,
@@ -4074,6 +4073,7 @@ var TranslucentLoader = function (_a) {
   }, {
     children: [children, isLoading ? jsxRuntime.jsx(SpinnerContainer, __assign({
       alignItems: "center",
+      fullScreen: fullScreenBackdrop,
       justifyContent: "center"
     }, {
       children: jsxRuntime.jsx(Dots, {
@@ -4087,12 +4087,17 @@ var Container = styled__default["default"].div(templateObject_2 || (templateObje
   var _css = _a._css;
   return _css ? _css : "";
 });
-var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"], ["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"])));
+var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: ", ";\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"], ["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: ", ";\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"])), function (_a) {
+  var fullScreen = _a.fullScreen;
+  return fullScreen ? "fixed" : "absolute";
+});
 var templateObject_1, templateObject_2, templateObject_3;
 var useLoaderV2 = function () {
-  var _a = __read(React.useState(false), 2),
-    loading = _a[0],
-    setLoading = _a[1];
+  var _a = __read(React.useState(0), 2),
+    loadingCount = _a[0],
+    setLoadingCount = _a[1];
+  var isLoading = loadingCount > 0;
+  var loadingRef = useLatest(isLoading);
   var withLoading = React.useMemo(function () {
     return function (p) {
       return __awaiter(void 0, void 0, void 0, function () {
@@ -4100,7 +4105,9 @@ var useLoaderV2 = function () {
         return __generator(this, function (_a) {
           switch (_a.label) {
             case 0:
-              setLoading(true);
+              setLoadingCount(function (c) {
+                return c + 1;
+              });
               _a.label = 1;
             case 1:
               _a.trys.push([1,, 3, 4]);
@@ -4109,7 +4116,9 @@ var useLoaderV2 = function () {
               val = _a.sent();
               return [3 /*break*/, 4];
             case 3:
-              setLoading(false);
+              setLoadingCount(function (c) {
+                return c - 1;
+              });
               return [7 /*endfinally*/];
             case 4:
               return [2 /*return*/, val];
@@ -4124,15 +4133,20 @@ var useLoaderV2 = function () {
         props = __rest(_a, ["as"]);
       return jsxRuntime.jsx(TranslucentLoader, __assign({}, props, {
         innerAs: as,
-        isLoading: loading
+        isLoading: loadingRef.current
       }));
     };
-  }, [loading]);
+  }, [loadingRef]);
   return {
-    isLoading: loading,
+    isLoading: isLoading,
     Loader: Loader,
     withLoading: withLoading
   };
+};
+var useLatest = function (value) {
+  var ref = React.useRef(value);
+  ref.current = value;
+  return ref;
 };
 var useTheme = function () {
   return React.useContext(styled.ThemeContext);

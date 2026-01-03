@@ -41,6 +41,7 @@ export declare const FONT_WEIGHTS: {
     readonly REGULAR: "400";
     readonly MEDIUM: "500";
     readonly BOLD: "700";
+    readonly SEMI_BOLD: "600";
     readonly BLACK: "800";
 };
 export type FontSize = ValueOf<typeof FONT_SIZES>;

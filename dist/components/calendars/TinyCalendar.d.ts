@@ -1,5 +1,7 @@
-import { Moment } from "moment";
+import { FC } from "react";
 import { DateRange } from "utils/dateTime/DateRange.type";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 export type LabeledRangeList = {
     color?: string;
     label: string;
@@ -8,17 +10,16 @@ export type LabeledRangeList = {
 type ColoredDateRange = DateRange & {
     color?: string;
 };
-type Props = {
-    disabledDates: Array<Moment>;
-    displayMode?: "dateRange" | "date";
+export type TinyCalendarProps = {
+    disabledDates: Array<Date>;
     fluid?: boolean;
-    initialDate?: Moment;
+    initialDate?: Date;
     labeledRanges?: Array<LabeledRangeList>;
-    minDate?: Moment;
+    minDate?: Date;
     ranges?: Array<ColoredDateRange>;
     showLegend?: boolean;
     onChange: (d: Date) => void;
 };
-export declare let TinyCalendar: ({ disabledDates, displayMode, fluid, initialDate, labeledRanges, minDate, ranges, showLegend, onChange, }: Props) => import("react/jsx-runtime").JSX.Element;
+export declare let TinyCalendar: FC<TinyCalendarProps>;
 export {};
 //# sourceMappingURL=TinyCalendar.d.ts.map

@@ -1,6 +1,9 @@
 import { Button } from "components/forms/Button"
 import { SearchableSelector } from "components/forms/selectors/SearchableSelector"
-import { SelectorItemKey } from "components/forms/selectors/types"
+import {
+  OnItemSelectedFunc,
+  SelectorItemKey,
+} from "components/forms/selectors/types"
 import { FlexBox } from "components/layout/FlexBox"
 import { ColumnConfig, SortDirection, SortState } from "components/tables/Table"
 import React, { FC, useCallback, useMemo, useState } from "react"
@@ -13,6 +16,8 @@ export type SorterProps = {
   onColumnSort?: (state: SortState) => void
   sortState?: SortState
 }
+
+type SortOption = { label: string; value: string }
 
 export const TableSorter: FC<SorterProps> = ({
   columnConfigs,
@@ -43,7 +48,7 @@ export const TableSorter: FC<SorterProps> = ({
     [columnConfigs],
   )
 
-  const sortOptions = useMemo(() => {
+  const sortOptions: SortOption[] = useMemo(() => {
     return sortConfigs.flatMap(({ label, fieldName }) => {
       return [
         { label: `${label} - Ascending`, value: `${fieldName}::asc` },
@@ -67,7 +72,7 @@ export const TableSorter: FC<SorterProps> = ({
         labelField={"label"}
         maxMenuHeight={"200px"}
         menuPopperModifiers={[{ name: "flip", enabled: true }]}
-        onChange={setState}
+        onChange={setState as OnItemSelectedFunc}
         options={sortOptions}
         placement={"bottom"}
         selectedKey={state}

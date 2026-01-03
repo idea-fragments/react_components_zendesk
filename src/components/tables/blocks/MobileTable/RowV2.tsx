@@ -7,10 +7,8 @@ import { ColumnConfig, Item, ItemKey } from "components/tables/Table"
 import { Text } from "components/text/Text"
 import React, { FC, ReactNode, useState } from "react"
 import styled, { css } from "styled-components"
-import { veryLight } from "styles/colors"
 import { mediaQueries } from "styles/mediaQueries"
 import { SPACINGS } from "styles/spacings"
-import { useTheme } from "styles/theme/useTheme"
 import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 import { isNotEmpty } from "utils/arrayHelpers"
 
@@ -27,9 +25,6 @@ type Props = {
   onClick?: (row: ItemKey) => void
 }
 
-/**
- * RowV2 - Same design as original Row but using CSS Grid instead of Grid component
- */
 export const Row: FC<Props> = ({
   checkable,
   checked,
@@ -222,11 +217,4 @@ const FieldLabel = styled.div``
 
 const FieldValue = styled.div`
   text-align: right;
-`
-
-const SectionDivider = styled.div`
-  height: 2px;
-  width: 20px;
-  background: ${({ theme }) => theme.styles.colors.grey["300"]};
-  margin: 0.5em 0;
 `

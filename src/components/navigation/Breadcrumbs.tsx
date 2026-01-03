@@ -1,5 +1,5 @@
 import { Icon } from "components/Icon"
-import { FlexBlock } from "components/layout/FlexBlock"
+import { FlexBox } from "components/layout/FlexBox"
 import React, {
   Children,
   FC,
@@ -39,7 +39,7 @@ export const Breadcrumbs: FC<PropsWithChildren<{}>> = ({ children }) => {
   )
 }
 
-const Container = styled(FlexBlock)`
+const Container = styled(FlexBox)`
   margin-top: ${SPACINGS.SM};
   align-items: center;
 

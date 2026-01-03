@@ -11,7 +11,7 @@ export const ACTIONS_WIDTH = "5em"
 /**
  * Padding for all table cells
  */
-export const CELL_PADDING = "0.25rem"
+export const CELL_PADDING = "0.5rem"
 
 /**
  * Width of the shadow effect displayed on sticky column edges

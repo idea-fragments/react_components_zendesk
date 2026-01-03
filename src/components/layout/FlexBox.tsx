@@ -35,8 +35,6 @@ export const FlexBox = styled.div<FlexBoxProps>`
   ${(p: FlexBoxProps) => p._css}
 `
 
-FlexBox.defaultProps = { withRows: false }
-
 const responsiveStyles = ({
   responsivePropsList,
   ...originalProps

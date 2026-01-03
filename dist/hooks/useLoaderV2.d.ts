@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ComponentType } from "react";
+import { ComponentType, FC, PropsWithChildren } from "react";
 import { CSSProp } from "styles/types";
 type LoadingFunc = <T>(p: Promise<T>) => Promise<T>;
 type LoaderProps = PropsWithChildren<{

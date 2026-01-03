@@ -9,7 +9,7 @@ export declare const ACTIONS_WIDTH = "5em";
 /**
  * Padding for all table cells
  */
-export declare const CELL_PADDING = "0.25rem";
+export declare const CELL_PADDING = "0.5rem";
 /**
  * Width of the shadow effect displayed on sticky column edges
  */

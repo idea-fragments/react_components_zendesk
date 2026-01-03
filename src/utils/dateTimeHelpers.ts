@@ -1,58 +1,61 @@
 import moment, { Moment } from "moment"
 import { PromiseFunc } from "utils/function.types"
 
-let defaultLocale = new Intl.DateTimeFormat().resolvedOptions().locale
-
-export const formatMonthDate = (m: Moment): string => m.format("MMM D")
-export const formatDayDate = (m: Moment): string => m.format("ddd, ll")
-export const formatMonthDateYear = (m: Moment): string =>
-  m.format("MMM DD YYYY")
-export const setDefaultLocale = (locale: string) => {
-  defaultLocale = locale
-}
+const DEFAULT_LOCALE = new Intl.DateTimeFormat().resolvedOptions().locale
+const NUMBER_FORMAT_OPTIONS: Partial<Intl.DateTimeFormatOptions> = {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+} // 12-04-2022
+const TIME_FORMAT_OPTIONS: Partial<Intl.DateTimeFormatOptions> = {
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric",
+} // 2:00:00 pm
+const WORD_FORMAT_OPTIONS: Partial<Intl.DateTimeFormatOptions> = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+} // Dec 24, 2022
 
 type FormatOptions = {
   locale?: string
   iso8601Format?: boolean
+  numberFormat?: boolean
   timeZone?: string
-}
+} & Intl.DateTimeFormatOptions
+
 export const formatDate = (
   d: Date,
   {
-    locale = defaultLocale,
+    locale = DEFAULT_LOCALE,
     iso8601Format = false,
+    numberFormat = false,
     ...options
   }: FormatOptions = {},
 ): string => {
-  const formatter = new Intl.DateTimeFormat(locale, options)
+  options = numberFormat
+    ? { ...NUMBER_FORMAT_OPTIONS, ...options }
+    : { ...WORD_FORMAT_OPTIONS, ...options }
 
   try {
-    if (iso8601Format) {
-      const parts = formatter.formatToParts(d)
-      return ["year", "month", "day"]
-        .map((part: string) => {
-          return parts?.find((p) => p.type === part)?.value
-        })
-        .join("-")
-    }
+    if (iso8601Format) return d.toISOString()
   } catch (e) {}
 
+  const formatter = new Intl.DateTimeFormat(locale, options)
   const formatted = formatter.format(d)
   return locale.includes("en") ? formatted.replace(/\//g, "-") : formatted
 }
 
 export const formatDateTime = (
   d: Date,
-  { locale = defaultLocale, ...options }: FormatOptions = {},
+  options: FormatOptions = {},
 ): string => {
-  const formattedDate = formatDate(d, {
-    locale,
-    iso8601Format: true,
-    ...options,
-  })
-
-  return `${formattedDate} ${moment(d).format("LTS")}`
+  return formatDate(d, { ...TIME_FORMAT_OPTIONS, ...options })
 }
+
+export const formatMonthDateYear = (d: Date | string): string =>
+  moment(d).format("MMM DD YYYY")
 
 export const returnAfterMinimum = async (
   millisecs: number,
@@ -78,8 +81,7 @@ export const momentListToDateList = (l: Moment[]): Date[] =>
 
 export const minDateBetween = (a: Moment, b: Moment): Moment =>
   a.isBefore(b) ? a : b
-export const maxDateBetween = (a: Moment, b: Moment): Moment =>
-  a.isAfter(b) ? a : b
+export const maxDateBetween = (a: Date, b: Date): Date => (a > b ? a : b)
 
 export const addNDaysFromDate = (n: number, d = new Date()): Date =>
   momentArithmetic(d, "add", n, "days")

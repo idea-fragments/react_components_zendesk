@@ -1,9 +1,9 @@
-import { ComponentType, SVGAttributes } from "react";
-type SVGComponent = ComponentType<SVGAttributes<any>>;
+import { ComponentType, ReactNode, SVGAttributes } from "react";
+export type SVGComponent = ComponentType<SVGAttributes<any>>;
 type Props = {
     color?: string;
     size?: number | string;
-    svg: string | Array<string> | SVGComponent;
+    svg: string | Array<string> | SVGComponent | ReactNode;
     title?: string;
     onClick?: () => void;
 };

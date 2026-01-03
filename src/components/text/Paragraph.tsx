@@ -9,21 +9,31 @@ export const Paragraph = styled(Text).attrs({
 `
 
 export const XXS = styled(Paragraph)`
-  font-size: ${FONT_SIZES.XXS};
+  &&& {
+    font-size: ${FONT_SIZES.XXS};
+  }
 `
 
 export const XS = styled(Paragraph)`
-  font-size: ${FONT_SIZES.XS};
+  &&& {
+    font-size: ${FONT_SIZES.XS};
+  }
 `
 
 export const MD = styled(Paragraph)`
-  font-size: ${FONT_SIZES.MD};
+  &&& {
+    font-size: ${FONT_SIZES.MD};
+  }
 `
 
 export const LG = styled(Paragraph)`
-  font-size: ${FONT_SIZES.LG};
+  &&& {
+    font-size: ${FONT_SIZES.LG};
+  }
 `
 
 export const XL = styled(Paragraph)`
-  font-size: ${FONT_SIZES.XL};
+  &&& {
+    font-size: ${FONT_SIZES.XL};
+  }
 `

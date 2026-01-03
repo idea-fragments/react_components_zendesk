@@ -1,9 +1,9 @@
-import { ComponentType } from "react";
+import { ComponentType, PropsWithChildren } from "react";
 export type NavigationAction = {
     alwaysActive?: boolean;
-    as?: ComponentType<{
+    Component: ComponentType<PropsWithChildren<{
         href: string;
-    }>;
+    }>>;
     href?: string;
     icon?: any | ComponentType;
     label: string;

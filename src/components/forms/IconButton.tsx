@@ -2,12 +2,10 @@ import { Button, ButtonProps } from "components/forms/Button"
 import React from "react"
 import styled from "styled-components"
 
-const COMPONENT_NAME = "IconButton"
-
 export type IconButtonProps = Omit<ButtonProps, "children">
 
 export const IconButton = styled(
-  ({ primary, flat, pill, ...props }: IconButtonProps): JSX.Element => {
+  ({ primary, flat, pill, ...props }: IconButtonProps) => {
     return (
       <Button
         flat={flat != null ? flat : true}
@@ -22,8 +20,6 @@ export const IconButton = styled(
   && {
     padding: 0.5em;
     min-width: 0;
+    height: auto;
   }
 `
-
-// @ts-ignore
-IconButton.COMPONENT_NAME = COMPONENT_NAME

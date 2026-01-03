@@ -1,0 +1,43 @@
+diff --git a/node_modules/react-list/react-list.js b/node_modules/react-list/react-list.js
+index ac8447d..2cdf053 100644
+--- a/node_modules/react-list/react-list.js
++++ b/node_modules/react-list/react-list.js
+@@ -160,6 +160,10 @@
+       key: "componentDidMount",
+       value: function componentDidMount() {
+         this.updateFrameAndClearCache = this.updateFrameAndClearCache.bind(this);
++        // Adding this as a last resort in case we need to manually set an event
++        // listener on the scroll parent. This may be necessary for utilizing
++        // React strict mode.
++        window.reactList__updateFrameAndClearCache = this.updateFrameAndClearCache;
+         window.addEventListener('resize', this.updateFrameAndClearCache);
+         this.updateFrame(this.scrollTo.bind(this, this.props.initialIndex));
+       }
+@@ -194,8 +198,18 @@
+       key: "componentWillUnmount",
+       value: function componentWillUnmount() {
+         window.removeEventListener('resize', this.updateFrameAndClearCache);
+-        this.scrollParent.removeEventListener('scroll', this.updateFrameAndClearCache, PASSIVE);
++        this.scrollParent.removeEventListener("scroll", this.updateFrameAndClearCache, PASSIVE)
+         this.scrollParent.removeEventListener('mousewheel', NOOP, PASSIVE);
++
++        // Important to ensure proper setup on second mount in StrictMode.
++        // When using StrictMode, the scroll parent is re-rendered, but the
++        // event listeners are not, since the reference to the old scroll parent
++        // is still stored in this variable. This was causing the react-date-range
++        // library to have an issue when scrolling through an infinite scroll
++        // calendar. Only 2 months would be rendered, and the rest would be
++        // blank, because the event listeners were not firing to update the
++        // calendar list
++        this.scrollParent = null;
+       }
+     }, {
+       key: "getOffset",
+@@ -350,6 +364,7 @@
+           prev.removeEventListener('scroll', this.updateFrameAndClearCache);
+           prev.removeEventListener('mousewheel', NOOP);
+         }
++
+         // If we have a new parent, cached parent dimensions are no longer useful.
+         this.clearSizeCache();
+         this.scrollParent.addEventListener('scroll', this.updateFrameAndClearCache, PASSIVE);

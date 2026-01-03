@@ -160,10 +160,6 @@ export const Row: FC<Props> = ({
   )
 }
 
-// @ts-ignore
-Row.COMPONENT_NAME = "Row"
-Row.defaultProps = {}
-
 const Container = styled(FlexBox).attrs(() => ({
   alignItems: "stretch",
 }))`

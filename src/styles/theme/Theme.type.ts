@@ -1,7 +1,8 @@
 import { StyledProps } from "components/StyledProps.type"
 import { Nullable } from "global"
+import { ReactNode } from "react"
 
-type FullSpectrumColors = {
+export type FullSpectrumColors = {
   100: string
   200: string
   300: string
@@ -12,10 +13,10 @@ type FullSpectrumColors = {
   800: string
 }
 
-type PartialSpectrumColors = {
+export type PartialSpectrumColors = {
   400: string
-  M400: string
   600: string
+  M400: string
   M600: string
 }
 
@@ -39,6 +40,7 @@ export type Styles = {
     color: string
   }
   buttons: {
+    borderRadius: string
     textTransform: Nullable<string>
   }
   chat: {
@@ -70,20 +72,20 @@ export type Styles = {
     yellow: FullSpectrumColors
     green: FullSpectrumColors
     kale: FullSpectrumColors
+    orange: FullSpectrumColors
+    lemon: FullSpectrumColors
+    purple: FullSpectrumColors
     fuschia: PartialSpectrumColors
     pink: PartialSpectrumColors
     crimson: PartialSpectrumColors
-    orange: PartialSpectrumColors
-    lemon: PartialSpectrumColors
     lime: PartialSpectrumColors
     mint: PartialSpectrumColors
     teal: PartialSpectrumColors
     azure: PartialSpectrumColors
     royal: PartialSpectrumColors
-    purple: PartialSpectrumColors
   }
   container: { horizontalPadding: string }
-  drawer: { width: string }
+  drawer: { icon: ReactNode; width: string }
   font: { size: string }
   footer: {
     background: string
@@ -132,6 +134,10 @@ export type Styles = {
     borderColor: string
     borderSize: string
     filterButtonIcon: Nullable<string>
+  }
+  tag: {
+    textColorWeight: keyof FullSpectrumColors
+    backgroundColor: keyof FullSpectrumColors
   }
   textColorDark: string
   textColorLight: string

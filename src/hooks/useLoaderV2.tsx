@@ -1,10 +1,11 @@
 import { TranslucentLoader } from "components/loaders/TranslucentLoader"
 import React, {
+  ComponentType,
   FC,
   PropsWithChildren,
   useMemo,
+  useRef,
   useState,
-  ComponentType,
 } from "react"
 import { CSSProp } from "styles/types"
 
@@ -17,18 +18,20 @@ type Return = {
 }
 
 export const useLoaderV2 = (): Return => {
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loadingCount, setLoadingCount] = useState(0)
+  const isLoading = loadingCount > 0
+  const loadingRef = useLatest(isLoading)
 
   const withLoading = useMemo(
     () =>
       async <T,>(p: Promise<T>): Promise<T> => {
-        setLoading(true)
+        setLoadingCount((c) => c + 1)
         let val
 
         try {
           val = await p
         } finally {
-          setLoading(false)
+          setLoadingCount((c) => c - 1)
         }
 
         return val
@@ -41,14 +44,20 @@ export const useLoaderV2 = (): Return => {
       <TranslucentLoader
         {...props}
         innerAs={as}
-        isLoading={loading}
+        isLoading={loadingRef.current}
       />
     )
-  }, [loading])
+  }, [loadingRef])
 
   return {
-    isLoading: loading,
+    isLoading,
     Loader,
     withLoading,
   }
+}
+
+const useLatest = <T,>(value: T) => {
+  const ref = useRef(value)
+  ref.current = value
+  return ref
 }

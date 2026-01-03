@@ -12,9 +12,6 @@ type Props = {
     onCheck?: (row: ItemKey, checked: boolean) => void;
     onClick?: (row: ItemKey) => void;
 };
-/**
- * RowV2 - Same design as original Row but using CSS Grid instead of Grid component
- */
 export declare const Row: FC<Props>;
 export {};
 //# sourceMappingURL=RowV2.d.ts.map

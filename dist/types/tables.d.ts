@@ -1,10 +1,12 @@
 /// <reference types="trusted-types" />
 import * as react_jsx_runtime from 'react/jsx-runtime';
+import { ComponentType, SVGAttributes, PropsWithChildren, ReactNode, Ref } from 'react';
 import { Nullable } from 'global';
-import { PropsWithChildren, ComponentType, Ref, ReactNode } from 'react';
 import { ValueOf } from 'utils/types';
 import { FlattenSimpleInterpolation } from 'styled-components';
 import { IItemProps } from '@zendeskgarden/react-dropdowns/dist/typings/types';
+
+type SVGComponent = ComponentType<SVGAttributes<any>>;
 
 declare const ALIGNMENTS: {
     readonly start: "flex-start";
@@ -54,7 +56,7 @@ type ButtonBaseProps = PropsWithChildren<{
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: Nullable<string | ComponentType>;
+    icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;

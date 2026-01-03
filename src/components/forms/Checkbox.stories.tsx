@@ -13,6 +13,7 @@ const Story = (args: CheckboxProps) => {
     <Checkbox
       {...args}
       checked={checked}
+      hint={"Will you fly away?"}
       label={"Fly Away?"}
       onChange={setCheckedTo}
     />

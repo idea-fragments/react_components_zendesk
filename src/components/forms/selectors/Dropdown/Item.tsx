@@ -13,6 +13,7 @@ import {
 import { SelectorOption } from "components/forms/selectors/types"
 import { ComponentType } from "react"
 import styled, { css, StyledProps } from "styled-components"
+import { fade } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
 import { CSSProp } from "styles/types"
 import { FONT_SIZES } from "styles/typography"
@@ -24,17 +25,29 @@ export type ItemProps = Omit<IItemProps, "onClick"> & {
 
 export const Item = styled(ZItem).attrs(
   ({ danger, theme, ...props }: StyledProps<ItemProps>) => {
-    if (!danger)
-      return { color: theme.styles.textColorPrimary, primary: false, ...props }
+    if (!danger) {
+      return {
+        color: theme.styles.textColorPrimary,
+        primary: false,
+        ...props,
+      }
+    }
+
     return { color: theme.styles.colorDanger, primary: true, ...props }
   },
 )<ItemProps>`
   &&&& {
-    ${({ disabled }) => {
+    ${({ color, disabled, theme }) => {
       if (disabled) return ""
 
+      if (color !== theme.styles.textColorPrimary) {
+        return buttonLikeHoverable
+      }
+
       return css`
-        ${buttonLikeHoverable};
+        &[aria-selected="true"] {
+          background: ${fade(theme.styles.colorPrimary, 0.9)};
+        }
       `
     }};
 
@@ -46,15 +59,23 @@ export const Item = styled(ZItem).attrs(
     }
 
     *[data-garden-id="dropdowns.item_icon"] {
-      ${textColorForButton};
+      ${({ color, theme }) => {
+        if (color !== theme.styles.textColorPrimary) return textColorForButton
+
+        return css`
+          color: ${theme.styles.colorPrimary};
+        `
+      }};
     }
 
-    ${({ _css }: CSSProp) => _css}
+    ${({ _css }: CSSProp) => {
+      return _css
+    }}
   }
 `
 
 export const getItemType = (
-  o: SelectorOption,
+  o: SelectorOption<any>,
 ): ComponentType<ItemProps> | typeof Item => {
   if (o.isNextItem) return NextItem
   if (o.isBackItem) return PreviousItem

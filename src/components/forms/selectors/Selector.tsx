@@ -5,8 +5,13 @@ import { SelectorOptionKeyMap } from "components/forms/utils/SelectorOptionKeyMa
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import React from "react"
 
-export let Selector = ({ disabled, ...props }: SelectorProps) => {
-  let { emptyState, selectedKey, small, labelField, validation } = props
+export let Selector = <T,>({
+  disabled,
+  invalidOnNoSelection = true,
+  validation = { validation: VALIDATION_STATES.NONE },
+  ...props
+}: SelectorProps<T>) => {
+  let { emptyState, selectedKey, small, labelField } = props
 
   const optionsKeyMap = SelectorOptionKeyMap.call(props)
 
@@ -17,7 +22,9 @@ export let Selector = ({ disabled, ...props }: SelectorProps) => {
   // )
 
   return (
-    <Dropdown {...props}>
+    <Dropdown
+      {...props}
+      validation={validation}>
       <Select
         isCompact={small}
         disabled={disabled}
@@ -32,9 +39,16 @@ export let Selector = ({ disabled, ...props }: SelectorProps) => {
   )
 }
 
-// @ts-ignore
-Selector.defaultProps = {
-  invalidOnNoSelection: true,
-  validation: { validation: VALIDATION_STATES.NONE },
-  optionNodes: [],
+const Test = () => {
+  const options = [
+    { hello: "world", id: 1 },
+    { hello: "world2", id: 2 },
+  ]
+  return (
+    <Selector
+      options={options}
+      labelField={"hello"}
+      keyField={"id"}
+    />
+  )
 }

@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ComponentType } from 'react';
+import { FC, PropsWithChildren, ComponentType, ReactNode } from 'react';
 import { FlattenSimpleInterpolation, ThemedStyledProps } from 'styled-components';
 import { Nullable } from 'global';
 
@@ -33,8 +33,8 @@ type FullSpectrumColors = {
 };
 type PartialSpectrumColors = {
     400: string;
-    M400: string;
     600: string;
+    M400: string;
     M600: string;
 };
 type ContainerStyles = {
@@ -54,6 +54,7 @@ type Styles = {
         color: string;
     };
     buttons: {
+        borderRadius: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -93,22 +94,23 @@ type Styles = {
         yellow: FullSpectrumColors;
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
+        orange: FullSpectrumColors;
+        lemon: FullSpectrumColors;
+        purple: FullSpectrumColors;
         fuschia: PartialSpectrumColors;
         pink: PartialSpectrumColors;
         crimson: PartialSpectrumColors;
-        orange: PartialSpectrumColors;
-        lemon: PartialSpectrumColors;
         lime: PartialSpectrumColors;
         mint: PartialSpectrumColors;
         teal: PartialSpectrumColors;
         azure: PartialSpectrumColors;
         royal: PartialSpectrumColors;
-        purple: PartialSpectrumColors;
     };
     container: {
         horizontalPadding: string;
     };
     drawer: {
+        icon: ReactNode;
         width: string;
     };
     font: {
@@ -161,6 +163,10 @@ type Styles = {
         borderColor: string;
         borderSize: string;
         filterButtonIcon: Nullable<string>;
+    };
+    tag: {
+        textColorWeight: keyof FullSpectrumColors;
+        backgroundColor: keyof FullSpectrumColors;
     };
     textColorDark: string;
     textColorLight: string;

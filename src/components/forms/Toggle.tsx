@@ -1,7 +1,9 @@
-// @ts-ignore
-import { Field, Toggle as ZToggle } from "@zendeskgarden/react-forms"
-import { Hint } from "components/forms/Hint"
-import { Label } from "components/forms/Label"
+import {
+  Field,
+  Toggle as ZToggle,
+  Label,
+  Hint,
+} from "@zendeskgarden/react-forms"
 import React, { ChangeEvent, FC, ReactNode } from "react"
 import styled, { css, ThemedStyledProps } from "styled-components"
 import { dark } from "styles/colors"

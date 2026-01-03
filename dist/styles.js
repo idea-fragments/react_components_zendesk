@@ -1964,6 +1964,7 @@ var base = {
     color: "rgb(233, 235, 237)"
   },
   buttons: {
+    borderRadius: "4px",
     textTransform: null
   },
   chat: {
@@ -2064,6 +2065,16 @@ var base = {
       700: "#03363d",
       800: "#012b30"
     },
+    purple: {
+      100: "#f5eeff",
+      200: "#e4d4f4",
+      300: "#d4b8f0",
+      400: "#b552e2",
+      500: "#9333d4",
+      600: "#6a27b8",
+      700: "#4a1c80",
+      800: "#2f1154"
+    },
     fuschia: {
       400: "#d653c2",
       600: "#a81897",
@@ -2083,16 +2094,24 @@ var base = {
       M600: "#b24a3c"
     },
     orange: {
+      100: "#fff4ed",
+      200: "#ffe4cc",
+      300: "#ffcfa3",
       400: "#de701d",
+      500: "#cc5f0d",
       600: "#bf5000",
-      M400: "#d4772c",
-      M600: "#b35827"
+      700: "#8a3c00",
+      800: "#5c2800"
     },
     lemon: {
+      100: "#fffced",
+      200: "#fff7cc",
+      300: "#ffeda3",
       400: "#ffd424",
+      500: "#ffc61a",
       600: "#ffbb10",
-      M400: "#e7a500",
-      M600: "#c38f00"
+      700: "#c38f00",
+      800: "#806000"
     },
     lime: {
       400: "#43b324",
@@ -2123,12 +2142,6 @@ var base = {
       600: "#3353e2",
       M400: "#7986d8",
       M600: "#4b61c3"
-    },
-    purple: {
-      400: "#b552e2",
-      600: "#6a27b8",
-      M400: "#b072cc",
-      M600: "#9358b0"
     }
   },
   container: {
@@ -2157,7 +2170,7 @@ var base = {
     header: {
       padding: "".concat(SPACINGS.LG, " ").concat(SPACINGS.MD)
     },
-    shadow: "0 2px 6px 0 #0000001a"
+    shadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
   },
   sidebar: {
     actionButton: {
@@ -2187,6 +2200,7 @@ var base = {
     return theme.styles.textColorDark;
   }
 };
+base.border.color = base.colors.grey["200"];
 base.colorDanger = base.colors.red["600"];
 base.colorSuccess = base.colors.green["600"];
 base.colorWarning = base.colors.yellow["700"];
@@ -7886,6 +7900,7 @@ var THIN = "100";
 var LIGHT = "300";
 var REGULAR = "400";
 var MEDIUM = "500";
+var SEMI_BOLD = "600";
 var BOLD = "700";
 var BLACK = "800";
 var DIV = "div";
@@ -7940,9 +7955,10 @@ var FONT_WEIGHTS = {
   REGULAR: REGULAR,
   MEDIUM: MEDIUM,
   BOLD: BOLD,
+  SEMI_BOLD: SEMI_BOLD,
   BLACK: BLACK
 };
-var backgroundPrimaryWithText = styledComponents.css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  background: ", ";\n  color: ", ";\n"], ["\n  background: ", ";\n  color: ", ";\n"])), function (_a) {
+var backgroundPrimaryWithText = styledComponents.css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  background: ", ";\n  color: ", ";\n"], ["\n  background: ", ";\n  color: ", ";\n"])), function (_a) {
   var theme = _a.theme;
   return theme.styles.colorPrimary;
 }, function (_a) {
@@ -7955,21 +7971,66 @@ var backgroundPrimaryWithText = styledComponents.css(templateObject_1$1 || (temp
     theme: theme
   });
 });
-var textColorForBackground = styledComponents.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  ", ";\n"], ["\n  ", ";\n"])), function (props) {
+var textColorForBackground = styledComponents.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  ", ";\n"], ["\n  ", ";\n"])), function (props) {
   return props.color ? "color: ".concat(props.theme.styles.getTextColorForBackground({
     color: props.color,
     theme: props.theme
   }), ";") : "";
 });
-var textColorPrimary = styledComponents.css(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"])), function (_a) {
+var textColorPrimary = styledComponents.css(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"])), function (_a) {
   var theme = _a.theme;
   return theme.styles.textColorPrimary;
 });
-var textWithColor = styledComponents.css(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"])), function (_a) {
+var textWithColor = styledComponents.css(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"])), function (_a) {
   var color = _a.color;
   return color;
 });
-var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1;
+var templateObject_1$2, templateObject_2$2, templateObject_3$2, templateObject_4$2;
+var getInlineStyling = styledComponents.css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (_a) {
+  var inline = _a.inline;
+  return inline ? inlineWithText : "";
+});
+var inlineWithText = styledComponents.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  padding: 0;\n  //width: unset;\n  min-width: auto;\n  line-height: normal;\n"], ["\n  padding: 0;\n  //width: unset;\n  min-width: auto;\n  line-height: normal;\n"])));
+var textColorForButton = styledComponents.css(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (_a) {
+  var flat = _a.flat,
+    inline = _a.inline,
+    primary = _a.primary;
+  return flat || inline || !primary ? textColorForFlatButton : textColorForBackground;
+});
+var textColorForFlatButton = styledComponents.css(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  ", "\n  ", "\n"], ["\n  ", "\n  ", "\n"])), textWithColor, function (_a) {
+  var inline = _a.inline;
+  return inline ? inlineButtonStates : flatButtonStates;
+});
+var buttonLikeHoverable = styledComponents.css(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  cursor: pointer;\n  background: ", ";\n\n  @media (hover: hover) {\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  :active {\n    background: ", ";\n  }\n\n  transition: border-color 0.25s \n  ease-in-out, box-shadow 0.1s\n  ease-in-out, background-color 0.25s\n  ease-in-out, color 0.25s\n  ease-in-out, outline-color 0.1s\n  ease-in-out, z-index 0.25s\n  ease-in-out;\n  \n  ", "\n"], ["\n  cursor: pointer;\n  background: ", ";\n\n  @media (hover: hover) {\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  :active {\n    background: ", ";\n  }\n\n  transition: border-color 0.25s \n  ease-in-out, box-shadow 0.1s\n  ease-in-out, background-color 0.25s\n  ease-in-out, color 0.25s\n  ease-in-out, outline-color 0.1s\n  ease-in-out, z-index 0.25s\n  ease-in-out;\n  \n  ", "\n"])), function (_a) {
+  var flat = _a.flat,
+    primary = _a.primary,
+    inline = _a.inline,
+    color = _a.color;
+  return flat || !primary || inline ? "transparent" : color;
+}, function (_a) {
+  var primary = _a.primary,
+    color = _a.color;
+  return primary ? lightnessDelta(color, 10) : lightness(color, 95);
+}, function (_a) {
+  var primary = _a.primary,
+    color = _a.color;
+  return primary ? dark$1(color) : lightness(color, 85);
+}, textColorForButton);
+var flatButtonStates = styledComponents.css(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n  @media (hover: hover) {\n    &:hover {\n      color: ", ";\n    }\n  }\n\n  :active {\n    color: ", ";\n  }\n"], ["\n  @media (hover: hover) {\n    &:hover {\n      color: ", ";\n    }\n  }\n\n  :active {\n    color: ", ";\n  }\n"])), function (_a) {
+  var color = _a.color;
+  return dark$1(color);
+}, function (_a) {
+  var color = _a.color;
+  return dark$1(color);
+});
+var inlineButtonStates = styledComponents.css(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  @media (hover: hover) {\n    &:hover:hover {\n      color: ", ";\n      background-color: unset;\n    }\n  }\n\n  :focus:focus {\n    color: ", ";\n    background-color: unset;\n  }\n\n  :active:active {\n    color: ", ";\n    background-color: unset;\n  }\n"], ["\n  @media (hover: hover) {\n    &:hover:hover {\n      color: ", ";\n      background-color: unset;\n    }\n  }\n\n  :focus:focus {\n    color: ", ";\n    background-color: unset;\n  }\n\n  :active:active {\n    color: ", ";\n    background-color: unset;\n  }\n"])), function (props) {
+  return lighter(props.color);
+}, function (props) {
+  return lighter(props.color);
+}, function (props) {
+  return dark$1(props.color);
+});
+var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1, templateObject_7;
 
 /* Size key name represents all devices with a pixel width up to the number
  specified */
@@ -8110,11 +8171,14 @@ exports.TABLET_SIZE = TABLET_SIZE;
 exports.THEMES = THEMES;
 exports.ThemeProvider = ThemeProvider;
 exports.backgroundPrimaryWithText = backgroundPrimaryWithText;
+exports.buttonLikeHoverable = buttonLikeHoverable;
 exports.dark = dark$1;
 exports.darker = darker;
 exports.desaturate = desaturate;
 exports.fade = fade;
+exports.getInlineStyling = getInlineStyling;
 exports.hasGoodContrast = hasGoodContrast;
+exports.inlineWithText = inlineWithText;
 exports.light = light$1;
 exports.lighter = lighter;
 exports.lightness = lightness;
@@ -8124,6 +8188,8 @@ exports.rem = rem;
 exports.remSize = remSize;
 exports.saturate = saturate;
 exports.textColorForBackground = textColorForBackground;
+exports.textColorForButton = textColorForButton;
+exports.textColorForFlatButton = textColorForFlatButton;
 exports.textColorPrimary = textColorPrimary;
 exports.textWithColor = textWithColor;
 exports.unit = unit;

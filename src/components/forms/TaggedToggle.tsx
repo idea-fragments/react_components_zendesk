@@ -1,12 +1,14 @@
-import { Label } from "components/forms/Label"
+import { Label } from "@zendeskgarden/react-forms"
 import { Toggle, ToggleProps } from "components/forms/Toggle"
 import { FlexBox } from "components/layout/FlexBox"
 import { Tag } from "components/tags/Tag"
 import React from "react"
+import { FullSpectrumColors } from "styles/theme/Theme.type"
 
-export type TaggedToggleProps = ToggleProps & {
+export type TaggedToggleProps = Omit<ToggleProps, "color"> & {
   active?: boolean
   activeText?: string
+  color?: FullSpectrumColors
   inactiveText?: string
   toggleColor?: string
 }

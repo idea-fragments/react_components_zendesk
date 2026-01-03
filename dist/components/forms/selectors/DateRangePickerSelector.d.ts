@@ -1,0 +1,12 @@
+import { TextFieldProps } from "components/forms/formField.types";
+import { FC } from "react";
+import { DateRange } from "utils/dateTime/DateRange.type";
+export type DateRangePickerSelectorProps = {
+    disabledDates?: Array<Date>;
+    maxDate?: Date;
+    minimumDate?: Date;
+    value?: DateRange;
+    onChange: (range: DateRange) => void;
+} & Omit<TextFieldProps, "onChange" | "value">;
+export declare const DateRangePickerSelector: FC<DateRangePickerSelectorProps>;
+//# sourceMappingURL=DateRangePickerSelector.d.ts.map

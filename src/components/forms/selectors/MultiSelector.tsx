@@ -2,51 +2,43 @@ import { Dropdown, MultiSelect } from "components/forms/selectors/Dropdown"
 import {
   MultiSelectorProps,
   SelectorItemKey,
-  SelectorOption,
 } from "components/forms/selectors/types"
+import { SelectorOptionKeyMap } from "components/forms/utils/SelectorOptionKeyMap"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { Tag } from "components/tags/Tag"
-import React from "react"
+import React, { ReactNode } from "react"
 
-type Props = {
-  maxItems?: number
-  selectedKeys: Array<SelectorItemKey>
-} & MultiSelectorProps
+type RenderItemFuncParams = {
+  value: SelectorItemKey
+  removeValue: () => void
+}
 
-export let MultiSelector = ({ maxItems, ...props }: Props) => {
-  let { keyField, labelField, options, optionsKeyMap, small, validation } =
-    props
+export let MultiSelector = <T,>({
+  emptyState,
+  maxItems,
+  validation = { validation: VALIDATION_STATES.NONE },
+  ...props
+}: MultiSelectorProps<T>) => {
+  let { labelField, small } = props
 
-  if (optionsKeyMap == null && options != null) {
-    optionsKeyMap = options.reduce(
-      (m: { [key: string]: SelectorOption }, o: SelectorOption) => {
-        m[o[keyField]] = o
-        return m
-      },
-      {},
-    )
-  }
+  const optionsKeyMap = SelectorOptionKeyMap.call(props)
 
   return (
     <Dropdown
       {...props}
-      shouldFilterOptions>
+      shouldFilterOptions
+      validation={validation}>
       <MultiSelect
         isCompact={small}
         maxItems={maxItems}
-        validation={validation?.validation}
-        renderItem={({ value, removeValue }: any) => (
+        placeholder={emptyState}
+        renderItem={({ value, removeValue }: RenderItemFuncParams) => (
           <Tag onClose={removeValue}>
-            <span>{optionsKeyMap?.[value]?.[labelField]}</span>
+            <span>{optionsKeyMap[value!]?.[labelField] as ReactNode}</span>
           </Tag>
         )}
+        validation={validation.validation}
       />
     </Dropdown>
   )
-}
-
-// @ts-ignore
-MultiSelector.defaultProps = {
-  invalidOnNoSelection: true,
-  validation: { validation: VALIDATION_STATES.NONE },
 }

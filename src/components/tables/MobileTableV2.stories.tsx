@@ -1,4 +1,3 @@
-import { mdiTrashCanOutline } from "@mdi/js"
 import { MobileTableV2 } from "components/tables/MobileTableV2"
 import {
   ColumnConfig,

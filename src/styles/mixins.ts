@@ -24,5 +24,7 @@ export const textColorPrimary = css`
 `
 
 export const textWithColor = css<{ color: string; inline?: boolean }>`
-  color: ${({ color }) => color};
+  color: ${({ color }) => {
+    return color
+  }};
 `

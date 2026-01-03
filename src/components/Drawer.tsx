@@ -1,4 +1,3 @@
-import { mdiClose } from "@mdi/js"
 import { Button } from "components/forms/Button"
 import { IconButton } from "components/forms/IconButton"
 import { FlexBox } from "components/layout/FlexBox"
@@ -11,34 +10,47 @@ import React, {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
+import { CSSProp } from "styles/types"
 import { FONT_WEIGHTS } from "styles/typography"
 import { Logger } from "utils/logging/Logger"
+import { ValueOf } from "utils/types"
+
+export const DRAWER_SIZES = {
+  DEFAULT: "default",
+  FULL_WIDTH: "fullWidth",
+  LARGE: "large",
+}
 
 export type DrawerContent = {
   body: ReactNode
+  onClose?: () => void
+  size: ValueOf<typeof DRAWER_SIZES>
   title?: string
   withCancelButton?: boolean
   withNoActions?: boolean
-  onClose?: () => void
 }
 
-type Props = {
+export type DrawerProps = {
   closeDrawer: () => void
   drawerContent: Nullable<DrawerContent>
   isOpen: boolean
-} & StyledComponentProps
+  width?: string
+} & CSSProp &
+  StyledComponentProps
 
 const ANIMATION_DURATION_MS = 300
 const MARGIN_SIZE = SPACINGS.MD
 const logger = new Logger("Drawer")
 
-export let Drawer: FC<Props> = ({
+export let Drawer: FC<DrawerProps> = ({
+  className,
   closeDrawer,
   drawerContent,
   isOpen: isOpenProp,
@@ -49,8 +61,18 @@ export let Drawer: FC<Props> = ({
   const [isOpen, setIsOpenTo] = useState(false)
   const [isClosing, setIsClosingTo] = useState(false)
   const theme = useTheme()
-  const { body, onClose, title, withCancelButton, withNoActions } =
+  const { body, onClose, size, title, withCancelButton, withNoActions } =
     drawerContent ?? ({} as DrawerContent)
+  const widthFromSize = useMemo(() => {
+    switch (size) {
+      case DRAWER_SIZES.FULL_WIDTH:
+        return "width: 100%;"
+      case DRAWER_SIZES.LARGE:
+        return "width: 700px;"
+      default:
+        return ""
+    }
+  }, [size])
 
   const animateClose = useCallback(() => {
     setIsClosingTo(true)
@@ -115,8 +137,9 @@ export let Drawer: FC<Props> = ({
 
   logger.writeInfo("isOpen", isOpen)
   if (!isOpen) return null
-  if (!drawerContent && !cachedContent.current)
+  if (!drawerContent && !cachedContent.current) {
     throw new Error("Drawer found null drawer content")
+  }
 
   return (
     <Backdrop
@@ -124,15 +147,21 @@ export let Drawer: FC<Props> = ({
       onClick={handleBackdropClick}
       ref={backdropRef}>
       <AbsoluteContainer
-        withRows
-        isClosing={isClosing}>
+        _css={css`
+          && {
+            ${widthFromSize}
+          }
+        `}
+        className={className}
+        isClosing={isClosing}
+        withRows>
         <Header>
           <Title>{title}</Title>
           <IconButton
-            icon={mdiClose}
+            icon={theme.styles.drawer.icon}
             color={closeButtonColor}
             onClick={handleClose}
-            aria-label="Close drawer"
+            aria-label={"Close drawer"}
           />
         </Header>
 
@@ -165,10 +194,11 @@ Drawer = styled(Drawer)`
   html {
     overflow: hidden;
   }
+
+  width: ${({ width, theme }) => width ?? theme.styles.drawer.width};
+  max-width: calc(100vw - ${SPACINGS.SM});
+  ${({ _css }) => _css}
 `
-// @ts-ignore
-Drawer.COMPONENT_NAME = "Drawer"
-Drawer.defaultProps = {}
 
 const AbsoluteContainer = styled(FlexBox)<{ isClosing: boolean }>`
   @keyframes DrawerAbsoluteContainerOpen {
@@ -196,7 +226,7 @@ const AbsoluteContainer = styled(FlexBox)<{ isClosing: boolean }>`
   animation-name: ${({ isClosing }) =>
     isClosing ? "DrawerAbsoluteContainerClose" : "DrawerAbsoluteContainerOpen"};
   background: ${({ theme }) => theme.styles.sidebar.background};
-  box-shadow: ${({ theme }) => theme.styles.sidebar.boxShadow} 0 20px 28px 0;
+  box-shadow: ${({ theme }) => theme.styles.sidebar.boxShadow};
   height: 100vh;
   gap: unset;
   //padding: 1rem;
@@ -239,6 +269,7 @@ const Backdrop = styled.div<{ isClosing: boolean }>`
   overflow: auto;
   position: fixed;
   z-index: 400;
+  width: 100%;
 `
 
 const Body = styled(FlexBox).attrs({ withRows: true })`

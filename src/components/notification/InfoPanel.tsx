@@ -28,7 +28,7 @@ export let InfoPanel: FC<Props> = ({
   children,
   className,
   iconVerticalAlignment,
-  type,
+  type = INFO_PANEL_TYPES.INFO,
 }) => {
   const alignItems = iconVerticalAlignment === "center" ? "center" : undefined
   const theme = useTheme()
@@ -62,10 +62,6 @@ export let InfoPanel: FC<Props> = ({
 }
 
 InfoPanel = styled(InfoPanel)``
-
-InfoPanel.defaultProps = {
-  type: INFO_PANEL_TYPES.INFO,
-}
 
 const Container = styled(FlexBox)<{ bgColor: string }>`
   background: ${({ bgColor }) => bgColor};

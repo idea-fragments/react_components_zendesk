@@ -32,10 +32,9 @@ export let IconAppBar: FC<IconAppBarProps> = forwardRef(
     const appBarHeight = theme.styles.appBar.height
 
     const createActionButtons = (actions: NavigationAction[]) =>
-      actions.map(({ as, ...a }: NavigationAction) => {
+      actions.map(({ Component, ...a }: NavigationAction) => {
         const props = {
           active: a.label === activeAction || a.alwaysActive,
-          as,
           children: !a.icon && fallbackToText ? a.label : null,
           compact: true,
           _css:
@@ -47,6 +46,15 @@ export let IconAppBar: FC<IconAppBarProps> = forwardRef(
           primary: true,
           flat: false,
         } as const
+
+        if (!!Component) {
+          return (
+            <Component
+              href={a.href!}
+              {...props}
+            />
+          )
+        }
 
         return a.href ? (
           <ButtonLink

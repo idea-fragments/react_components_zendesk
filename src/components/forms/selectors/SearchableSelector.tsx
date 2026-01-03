@@ -9,9 +9,7 @@ import {
 import { SelectorOptionKeyMap } from "components/forms/utils/SelectorOptionKeyMap"
 import React, { FC, ReactNode, useCallback, useEffect, useState } from "react"
 import styled from "styled-components"
-import { veryLight } from "styles/colors"
 import { FONT_WEIGHTS } from "styles/typography"
-import { DO_NOTHING } from "utils/functionHelpers"
 import { Logger } from "utils/logging/Logger"
 import { isFunction } from "utils/typeCheckers"
 
@@ -25,19 +23,18 @@ const logger = new Logger("SearchableSelector")
  * SearchableSelector will take passed in options props and create required options
  * prop for Autocomplete based on passed in keyField and labelField.
  * */
-type Props = {
-  children?: (o: SelectorOption) => void | ReactNode
-  onSearchTextChange?: (s: string) => void
-} & SelectorProps
+export type SearchableSelectorProps<T> = {
+  children?: (o: SelectorOption<T>) => void | ReactNode
+} & SelectorProps<T>
 
 /*
  * If we need this full width, maybe add a Block wrapper here
  * */
-export let SearchableSelector: FC<Props> = ({
+export let SearchableSelector = <T,>({
   children,
   disabled,
   ...props
-}) => {
+}: SearchableSelectorProps<T>) => {
   const { emptyState, labelField, onChange, options, selectedKey, small } =
     props
 
@@ -55,7 +52,7 @@ export let SearchableSelector: FC<Props> = ({
 
       const matchingOptions = options.filter((option) => {
         return (
-          option[labelField]
+          (option[labelField] as string)
             .trim()
             .toLowerCase()
             .indexOf(String(value).trim().toLowerCase()) !== -1
@@ -71,13 +68,13 @@ export let SearchableSelector: FC<Props> = ({
     filterOptions(searchText)
   }, [filterOptions, searchText])
 
-  const handleStateChange = (state: StateChange) => {
+  const handleStateChange = (state: StateChange<T>) => {
     if (state.hasOwnProperty("inputValue")) {
       setSearchText(state.inputValue!)
     }
   }
 
-  const handleChange = (k: SelectorItemKey | (SelectorOption | null)) => {
+  const handleChange = (k: SelectorItemKey | (SelectorOption<T> | null)) => {
     setSearchText("")
     if (onChange) {
       // @ts-ignore
@@ -110,10 +107,6 @@ export let SearchableSelector: FC<Props> = ({
   )
 }
 
-SearchableSelector.defaultProps = {
-  onSearchTextChange: DO_NOTHING,
-}
-
 SearchableSelector = styled(SearchableSelector)`
   font-weight: ${({ flat }) => (flat ? FONT_WEIGHTS.BOLD : "inherit")};
 
@@ -124,6 +117,17 @@ SearchableSelector = styled(SearchableSelector)`
 
   :hover > div {
     ${({ flat, theme }) =>
-      flat ? `background: ${veryLight(theme.styles.colors.grey["500"])};` : ""};
+      flat ? `background: ${theme.styles.colors.grey["200"]};` : ""};
   }
+
+  ${(props) => {
+    if (props.small) {
+      return `
+      [data-garden-id="forms.faux_input"] {
+        min-height: unset;
+        min-width: unset;
+      }
+      `
+    }
+  }}
 `

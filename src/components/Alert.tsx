@@ -8,7 +8,6 @@ import {
 import { BUTTON_SIZES } from "components/forms/Button"
 import { IconButton } from "components/forms/IconButton"
 import { Icon } from "components/Icon"
-import { FlexBlock } from "components/layout/FlexBlock"
 import { FlexBox } from "components/layout/FlexBox"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
 import { Text } from "components/text/Text"
@@ -121,11 +120,8 @@ export let Alert: FC<Props> = ({
 }
 
 Alert = styled(Alert)``
-// @ts-ignore
-Alert.COMPONENT_NAME = "Alert"
-Alert.defaultProps = {}
 
-const AbsoluteContainer = styled(FlexBlock).attrs({
+const AbsoluteContainer = styled(FlexBox).attrs({
   justify: "center",
   alignItems: "center",
 })`

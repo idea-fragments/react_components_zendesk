@@ -1,7 +1,10 @@
 import { Button, ButtonProps } from "components/forms/Button"
+import { Nullable } from "global"
 import {
   ChangeEvent,
   FC,
+  HTMLAttributes,
+  InputHTMLAttributes,
   useCallback,
   useEffect,
   useRef,
@@ -20,10 +23,14 @@ type FileChangeHandler =
       onFilesChange: (files: File[]) => void
     }
 
-export type FileButtonProps = Omit<ButtonProps, "onClick"> & FileChangeHandler
+export type FileButtonProps = Omit<ButtonProps, "onClick"> &
+  FileChangeHandler & {
+    fileTypes: Nullable<Array<InputHTMLAttributes<HTMLInputElement>["accept"]>>
+  }
 
 export const FileButton: FC<FileButtonProps> = ({
   children,
+  fileTypes,
   multiple,
   onFileChange,
   onFilesChange,
@@ -65,11 +72,12 @@ export const FileButton: FC<FileButtonProps> = ({
   return (
     <>
       <input
+        accept={fileTypes?.join(",")}
         hidden
         multiple={multiple}
         onChange={handleSelectedFile}
         ref={inputRef}
-        type="file"
+        type={"file"}
       />
       <Button
         loading={loadingFileSelector}

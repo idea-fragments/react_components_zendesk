@@ -23,6 +23,10 @@ type ContainerProps = {
     className?: any;
 };
 type CSS<T = any> = FlattenSimpleInterpolation | string | T;
+type CSSProp<T = any> = {
+    _css?: CSS<T>;
+    className?: string;
+};
 
 declare const FONT_TAGS: {
     readonly DIV: "div";
@@ -54,6 +58,7 @@ declare const FONT_WEIGHTS: {
     readonly REGULAR: "400";
     readonly MEDIUM: "500";
     readonly BOLD: "700";
+    readonly SEMI_BOLD: "600";
     readonly BLACK: "800";
 };
 type FontSize = ValueOf<typeof FONT_SIZES>;
@@ -103,7 +108,7 @@ declare const Label: styled_components.StyledComponent<"div", styled_components.
     children: react.ReactNode;
 } & {
     as: "label";
-}, "as">;
+} & CSSProp<any>, "as">;
 
 declare const Paragraph: styled_components.StyledComponent<"div", styled_components.DefaultTheme, CommonTextProps & ContainerProps & ColorProps & {
     children: react.ReactNode;

@@ -15,41 +15,39 @@ export type SelectorOptionOptionalAttrs = {
   isHeaderItem?: boolean
   itemProps?: Partial<ItemProps>
 }
-export type SelectorOption = {
-  [key: string]: any
-} & SelectorOptionOptionalAttrs
-export type OnItemSelectedFunc =
+export type SelectorOption<T> = T & SelectorOptionOptionalAttrs
+export type OnItemSelectedFunc<T = any> =
   | ((k: SelectorItemKey) => void)
-  | ((o: SelectorOption | null | undefined) => void)
-export type OnItemsSelectedFunc =
+  | ((o: SelectorOption<T> | null | undefined) => void)
+export type OnItemsSelectedFunc<T> =
   | ((ks: SelectorItemKey[]) => void)
-  | ((o: SelectorOption[] | null | undefined) => void)
-export type StateChange = StateChangeOptions<SelectorOption>
+  | ((o: SelectorOption<T>[] | null | undefined) => void)
+export type StateChange<T> = StateChangeOptions<SelectorOption<T>>
 
-type Common = FormFieldProps & {
+export type Common<T> = FormFieldProps & {
   appendMenuToNode?: HTMLElement
   clearable?: boolean
-  options: Array<SelectorOption>
-  optionsKeyMap?: { [key: string]: SelectorOption }
-  keyField: string
-  labelField: string
-  valueField?: string
+  options: SelectorOption<T>[]
+  optionsKeyMap?: { [key: string]: SelectorOption<T> }
+  keyField: keyof T
+  labelField: keyof T
   maxMenuHeight?: string
   menuPopperModifiers?: Record<string, any>[] | undefined // See popper.js docs v2
   placement?: MenuPlacement
-  onStateChange?: (s: StateChange) => void
+  onStateChange?: (s: StateChange<T>) => void
   invalidOnNoSelection?: boolean
   flat?: boolean
   open?: boolean
   small?: boolean
 }
 
-export type SelectorProps = {
+export type SelectorProps<T> = {
   selectedKey?: SelectorItemKey
-  onChange?: OnItemSelectedFunc
-} & Common
+  onChange?: OnItemSelectedFunc<T>
+} & Common<T>
 
-export type MultiSelectorProps = {
-  selectedKeys?: SelectorItemKey[]
-  onChange?: OnItemsSelectedFunc
-} & Common
+export type MultiSelectorProps<T> = {
+  maxItems?: number
+  onChange?: OnItemsSelectedFunc<T>
+  selectedKeys: SelectorItemKey[]
+} & Common<T>

@@ -27,10 +27,9 @@ export const Sidebar: FC<SidebarProps> = ({
 }) => {
   const createActionButtons = (actions: Action[]) =>
     actions.map((a: Action) => {
-      const { as, icon, label } = a
+      const { icon, label } = a
       const props = {
         active: label === activeAction,
-        as: as,
         _css: actionButtonStyles,
         fluid: true,
         icon,

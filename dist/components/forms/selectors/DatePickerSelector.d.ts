@@ -1,19 +1,9 @@
 import { TextFieldProps } from "components/forms/formField.types";
-import { Moment } from "moment";
-type Props = {
-    minimumDate?: Moment;
-    disabledDates: Array<Moment>;
-    onChange: (d: Moment) => void;
-} & Omit<TextFieldProps, "onChange">;
-export declare const DatePickerSelector: {
-    (props: Props): import("react/jsx-runtime").JSX.Element;
-    COMPONENT_NAME: string;
-    defaultProps: {
-        onChange: (...args: any) => void;
-        emptyState: string;
-        disabledDates: never[];
-        disabled: boolean;
-    };
-};
-export {};
+import { FC } from "react";
+export type DatePickerSelectorProps = {
+    minimumDate?: Date;
+    disabledDates: Array<Date>;
+    onChange: (d: Date) => void;
+} & Omit<TextFieldProps<Date>, "onChange">;
+export declare const DatePickerSelector: FC<DatePickerSelectorProps>;
 //# sourceMappingURL=DatePickerSelector.d.ts.map

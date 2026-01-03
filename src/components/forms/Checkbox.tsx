@@ -1,6 +1,6 @@
 import { Checkbox as ZCheckbox, Field, Label } from "@zendeskgarden/react-forms"
 import { FormFieldProps } from "components/forms/formField.types"
-import { Hint } from "components/forms/Hint"
+import { Hint } from "components/text/Hint"
 import { Message } from "components/forms/Message"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox } from "components/layout/FlexBox"

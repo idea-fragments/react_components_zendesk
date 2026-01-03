@@ -1,8 +1,10 @@
 import * as styled_components from 'styled-components';
 import { FlattenSimpleInterpolation } from 'styled-components';
+import React, { ComponentType, SVGAttributes, PropsWithChildren, ReactNode, Ref, FC } from 'react';
 import { Nullable } from 'global';
-import React, { PropsWithChildren, ComponentType, Ref, ReactNode, FC } from 'react';
 import { ValueOf } from 'utils/types';
+
+type SVGComponent = ComponentType<SVGAttributes<any>>;
 
 declare const ALIGNMENTS: {
     readonly start: "flex-start";
@@ -52,7 +54,7 @@ type ButtonBaseProps = PropsWithChildren<{
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: Nullable<string | ComponentType>;
+    icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;

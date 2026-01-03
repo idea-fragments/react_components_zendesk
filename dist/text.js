@@ -85,6 +85,7 @@ var THIN = "100";
 var LIGHT = "300";
 var REGULAR = "400";
 var MEDIUM = "500";
+var SEMI_BOLD = "600";
 var BOLD = "700";
 var BLACK = "800";
 var DIV = "div";
@@ -139,6 +140,7 @@ var FONT_WEIGHTS = {
   REGULAR: REGULAR,
   MEDIUM: MEDIUM,
   BOLD: BOLD,
+  SEMI_BOLD: SEMI_BOLD,
   BLACK: BLACK
 };
 var H1 = styled__default["default"](Text).attrs({
@@ -162,16 +164,19 @@ var H6 = styled__default["default"](Text).attrs({
 var templateObject_1$3, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1;
 var Label = styled__default["default"](Text).attrs({
   as: FONT_TAGS.LABEL
-})(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  font-weight: ", ";\n  font-size: ", ";\n  line-height: 2.14286rem;\n"], ["\n  font-weight: ", ";\n  font-size: ", ";\n  line-height: 2.14286rem;\n"])), FONT_WEIGHTS.MEDIUM, FONT_SIZES.SM);
+})(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  display: block;\n  font-weight: ", ";\n  font-size: ", ";\n  line-height: 1em;\n  ", "\n"], ["\n  display: block;\n  font-weight: ", ";\n  font-size: ", ";\n  line-height: 1em;\n  ", "\n"])), FONT_WEIGHTS.SEMI_BOLD, FONT_SIZES.SM, function (_a) {
+  var _css = _a._css;
+  return _css;
+});
 var templateObject_1$2;
 var Paragraph = styled__default["default"](Text).attrs({
   as: FONT_TAGS.P
 })(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  font-weight: ", ";\n"], ["\n  font-weight: ", ";\n"])), FONT_WEIGHTS.REGULAR);
-var XXS = styled__default["default"](Paragraph)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XXS);
-var XS = styled__default["default"](Paragraph)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XS);
-var MD = styled__default["default"](Paragraph)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.MD);
-var LG = styled__default["default"](Paragraph)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.LG);
-var XL = styled__default["default"](Paragraph)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XL);
+var XXS = styled__default["default"](Paragraph)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XXS);
+var XS = styled__default["default"](Paragraph)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XS);
+var MD = styled__default["default"](Paragraph)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.MD);
+var LG = styled__default["default"](Paragraph)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.LG);
+var XL = styled__default["default"](Paragraph)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XL);
 var templateObject_1$1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 var Hint = styled__default["default"](XS).attrs(function (_a) {
   var color = _a.color,
@@ -185,7 +190,7 @@ var Hint = styled__default["default"](XS).attrs(function (_a) {
   return {
     color: getTextColor()
   };
-})(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n  font-weight: ", ";\n"], ["\n  color: ", ";\n  font-weight: ", ";\n"])), function (_a) {
+})(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n  font-weight: ", ";\n  margin: 0 0 4px;\n"], ["\n  color: ", ";\n  font-weight: ", ";\n  margin: 0 0 4px;\n"])), function (_a) {
   var color = _a.color;
   return color;
 }, FONT_WEIGHTS.MEDIUM);

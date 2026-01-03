@@ -1,6 +1,7 @@
 import { StyledProps } from "components/StyledProps.type";
 import { Nullable } from "global";
-type FullSpectrumColors = {
+import { ReactNode } from "react";
+export type FullSpectrumColors = {
     100: string;
     200: string;
     300: string;
@@ -10,10 +11,10 @@ type FullSpectrumColors = {
     700: string;
     800: string;
 };
-type PartialSpectrumColors = {
+export type PartialSpectrumColors = {
     400: string;
-    M400: string;
     600: string;
+    M400: string;
     M600: string;
 };
 export type ContainerStyles = {
@@ -33,6 +34,7 @@ export type Styles = {
         color: string;
     };
     buttons: {
+        borderRadius: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -72,22 +74,23 @@ export type Styles = {
         yellow: FullSpectrumColors;
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
+        orange: FullSpectrumColors;
+        lemon: FullSpectrumColors;
+        purple: FullSpectrumColors;
         fuschia: PartialSpectrumColors;
         pink: PartialSpectrumColors;
         crimson: PartialSpectrumColors;
-        orange: PartialSpectrumColors;
-        lemon: PartialSpectrumColors;
         lime: PartialSpectrumColors;
         mint: PartialSpectrumColors;
         teal: PartialSpectrumColors;
         azure: PartialSpectrumColors;
         royal: PartialSpectrumColors;
-        purple: PartialSpectrumColors;
     };
     container: {
         horizontalPadding: string;
     };
     drawer: {
+        icon: ReactNode;
         width: string;
     };
     font: {
@@ -141,6 +144,10 @@ export type Styles = {
         borderSize: string;
         filterButtonIcon: Nullable<string>;
     };
+    tag: {
+        textColorWeight: keyof FullSpectrumColors;
+        backgroundColor: keyof FullSpectrumColors;
+    };
     textColorDark: string;
     textColorLight: string;
     textColorOverPrimaryBg: string;
@@ -157,5 +164,4 @@ export type Theme = {
     isDark: boolean;
     styles: Styles;
 };
-export {};
 //# sourceMappingURL=Theme.type.d.ts.map

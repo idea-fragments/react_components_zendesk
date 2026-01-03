@@ -1,6 +1,6 @@
-import { mdiFilterOutline } from "@mdi/js"
+import { mdiClose, mdiFilterOutline } from "@mdi/js"
 import { StyledProps } from "components/StyledProps.type"
-import { hasGoodContrast, veryLight } from "styles/colors"
+import { hasGoodContrast } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
 import { Styles } from "styles/theme/Theme.type"
 
@@ -15,7 +15,7 @@ export const base: Partial<Styles> = {
   border: {
     color: "rgb(233, 235, 237)",
   },
-  buttons: { textTransform: null },
+  buttons: { borderRadius: "4px", textTransform: null },
   chat: {
     message: {
       currentUser: {
@@ -106,6 +106,16 @@ export const base: Partial<Styles> = {
       700: "#03363d",
       800: "#012b30",
     },
+    purple: {
+      100: "#f5eeff",
+      200: "#e4d4f4",
+      300: "#d4b8f0",
+      400: "#b552e2",
+      500: "#9333d4",
+      600: "#6a27b8",
+      700: "#4a1c80",
+      800: "#2f1154",
+    },
     fuschia: {
       400: "#d653c2",
       600: "#a81897",
@@ -125,16 +135,24 @@ export const base: Partial<Styles> = {
       M600: "#b24a3c",
     },
     orange: {
+      100: "#fff4ed",
+      200: "#ffe4cc",
+      300: "#ffcfa3",
       400: "#de701d",
+      500: "#cc5f0d",
       600: "#bf5000",
-      M400: "#d4772c",
-      M600: "#b35827",
+      700: "#8a3c00",
+      800: "#5c2800",
     },
     lemon: {
+      100: "#fffced",
+      200: "#fff7cc",
+      300: "#ffeda3",
       400: "#ffd424",
+      500: "#ffc61a",
       600: "#ffbb10",
-      M400: "#e7a500",
-      M600: "#c38f00",
+      700: "#c38f00",
+      800: "#806000",
     },
     lime: {
       400: "#43b324",
@@ -166,15 +184,9 @@ export const base: Partial<Styles> = {
       M400: "#7986d8",
       M600: "#4b61c3",
     },
-    purple: {
-      400: "#b552e2",
-      600: "#6a27b8",
-      M400: "#b072cc",
-      M600: "#9358b0",
-    },
   },
   container: { horizontalPadding: "1rem" },
-  drawer: { width: "380px" },
+  drawer: { icon: mdiClose, width: "380px" },
   font: { size: "14px" },
   modal: {
     backdrop: {
@@ -193,14 +205,14 @@ export const base: Partial<Styles> = {
     header: {
       padding: `${SPACINGS.LG} ${SPACINGS.MD}`,
     },
-    shadow: "0 2px 6px 0 #0000001a",
+    shadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
   },
   sidebar: {
     actionButton: {
       borderRadius: "8px",
       color: "white",
     },
-    background: "#f8f9fd",
+    background: "#fff",
     boxShadow: "none",
     padding: `${SPACINGS.LG}`,
     width: "250px",
@@ -210,6 +222,10 @@ export const base: Partial<Styles> = {
     borderColor: "---",
     borderSize: "1px",
     filterButtonIcon: mdiFilterOutline,
+  },
+  tag: {
+    textColorWeight: 600,
+    backgroundColor: 100,
   },
   tooltip: { darkBackground: "#747183" },
 
@@ -224,6 +240,7 @@ export const base: Partial<Styles> = {
   },
 }
 
+base.border!.color = base.colors!.grey["200"]
 base.colorDanger = base.colors!.red["600"]
 base.colorSuccess = base.colors!.green["600"]
 base.colorWarning = base.colors!.yellow["700"]

@@ -3,7 +3,7 @@ import {
   buttonLikeHoverable,
   getInlineStyling,
 } from "components/forms/buttonMixins"
-import { Icon } from "components/Icon"
+import { Icon, SVGComponent } from "components/Icon"
 import { FlexBox } from "components/layout/FlexBox"
 import { Dots } from "components/loaders/Dots"
 import { StyledProps } from "components/StyledProps.type"
@@ -15,6 +15,7 @@ import React, {
   forwardRef,
   MouseEvent,
   PropsWithChildren,
+  ReactNode,
   Ref,
   useCallback,
   useState,
@@ -106,7 +107,7 @@ type ButtonBaseProps = PropsWithChildren<{
   disabled?: boolean
   flat?: boolean
   groupKey?: string
-  icon?: Nullable<string | ComponentType>
+  icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>
   iconPosition?: "left" | "right"
   iconSize?: string
   inline?: boolean
@@ -153,7 +154,7 @@ const ButtonBase = styled(
         // @ts-ignore
         as={innerAs}
         disabled={disabled}
-        isPill={pill}
+        // isPill={pill}
         ref={innerRef}
         onClick={onClick}
         {...props}>
@@ -202,6 +203,10 @@ const ButtonBase = styled(
     font-weight: bold;
     ${({ wrapInlineText }) => (wrapInlineText ? inlineWrapping : "")}
     ${({ fluid }) => (!fluid ? fitContent : fitContainer)}
+    border-radius: ${({ pill, theme }) => {
+      if (pill) return "500px"
+      return theme.styles.buttons.borderRadius
+    }};
     ${alignment}
     ${casing}
     ${({ disabled }) => (!disabled ? colors : "")}
@@ -214,9 +219,13 @@ export const Button: ComponentType<ButtonProps> = styled(
     (
       {
         autoLoadable = false,
-        disabled,
+        disabled = false,
+        flat = false,
+        fluid = false,
+        iconPosition = "left",
         loading: loadingProp = false,
         onClick,
+        primary = true,
         ...props
       }: ButtonProps,
       ref: ForwardedRef<HTMLButtonElement>,
@@ -239,26 +248,19 @@ export const Button: ComponentType<ButtonProps> = styled(
         <ButtonBase
           {...props}
           disabled={disabled || computedIsLoading()}
+          fluid={fluid}
+          flat={flat}
+          iconPosition={iconPosition}
           innerRef={ref}
           loading={computedIsLoading()}
           // @ts-ignore
           onClick={autoLoadable ? processClick : onClick}
+          primary={primary}
         />
       )
     },
   ),
 )``
-
-// @ts-ignore
-Button.COMPONENT_NAME = "Button"
-// @ts-ignore
-Button.defaultProps = {
-  fluid: false,
-  flat: false,
-  iconPosition: "left",
-  primary: true,
-  disabled: false,
-}
 
 const LoaderContainer = styled(FlexBox)`
   min-height: 30px;

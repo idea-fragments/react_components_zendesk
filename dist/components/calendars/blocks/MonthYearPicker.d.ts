@@ -1,15 +1,16 @@
-import { Moment } from "moment";
+import { FC } from "react";
 export type MonthYearPickerChange = {
     month: number;
     year: number;
 };
-type Props = {
+type MonthYearPickerProps = {
+    maxYear?: number;
+    minDate?: Date;
     month: number;
-    year: number;
-    minDate?: Moment;
     pastFutureYearRangeSize: number;
+    year: number;
     onChange: (c: MonthYearPickerChange) => void;
 };
-export declare const MonthYearPicker: ({ month, year, minDate, pastFutureYearRangeSize, onChange, }: Props) => import("react/jsx-runtime").JSX.Element;
+export declare const MonthYearPicker: FC<MonthYearPickerProps>;
 export {};
 //# sourceMappingURL=MonthYearPicker.d.ts.map

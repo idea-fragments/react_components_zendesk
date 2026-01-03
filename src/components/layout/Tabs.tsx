@@ -1,41 +1,144 @@
-// @ts-ignore
-import { TabPanel as ZTabPanel, Tabs as ZTabs } from "@zendeskgarden/react-tabs"
-import styled from "styled-components"
+import { FlexBox } from "components/layout/FlexBox"
+import { Section, SectionProps } from "components/layout/Section"
+import { SectionBody } from "components/layout/SectionBody"
+import React, { FC, ReactNode } from "react"
+import styled, { css } from "styled-components"
+import { light } from "styles/colors"
+
 import { FONT_WEIGHTS } from "styles/typography"
+import { SPACINGS } from "styles/spacings"
 
-export const Tabs = styled(ZTabs)`
-  &&& {
-    //overflow: unset;
+export type TabsProps = {
+  children: ReactNode
+  onChange?: (selectedTab: string) => void
+  selectedItem?: string
+} & SectionProps
 
-    *[data-garden-id="tabs.tab"],
-    *[data-garden-id="tabs.tablist"] {
-      font-size: inherit;
-    }
+export type TabProps = {
+  children: ReactNode
+  disabled?: boolean
+  onSelect: (tabKey: string) => void
+  tabKey: string
+  visibleTab: string
+}
 
-    *[data-garden-id="tabs.tablist"] {
-      //border-bottom: none;
-      overflow-x: auto;
-    }
+export type TabPanelProps = {
+  children: ReactNode
+  item: string
+  visibleTab: string
+}
 
-    *[data-garden-id="tabs.tab"] {
-      padding: 10px 15px 6px;
+export const Tabs: FC<TabsProps> = ({
+  bordered,
+  rounded,
+  shadowed,
+  children,
+  ...props
+}) => {
+  const sectionProps = {
+    bordered,
+    rounded,
+    shadowed,
+  }
+  return (
+    <Section {...sectionProps}>
+      <SectionBody
+        _css={css`
+          padding-top: ${SPACINGS.SM};
+          padding-bottom: ${SPACINGS.SM};
+        `}>
+        {children}
+      </SectionBody>
+    </Section>
+  )
+}
 
-      &[aria-selected="true"] {
-        font-weight: ${FONT_WEIGHTS.BOLD};
-      }
+export const Tab: FC<TabProps> = ({
+  children,
+  disabled,
+  onSelect,
+  tabKey,
+  visibleTab,
+}) => {
+  const isSelected = tabKey === visibleTab
 
-      :hover:not(&[aria-selected="true"]) {
-        color: ${({ theme }) => theme.styles.textColorPrimary};
-        border-bottom: 3px solid
-          ${({ theme }) => theme.styles.colors.grey["300"]};
-      }
-
-      :focus,
-      &[aria-selected="true"] {
-        color: ${({ theme }) => theme.styles.colorPrimary} !important;
-      }
+  const handleClick = () => {
+    if (!disabled) {
+      onSelect(tabKey)
     }
   }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!disabled && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault()
+      onSelect(tabKey)
+    }
+  }
+
+  return (
+    <StyledTab
+      aria-selected={isSelected}
+      disabled={disabled}
+      role={"tab"}
+      tabIndex={disabled ? -1 : 0}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}>
+      {children}
+    </StyledTab>
+  )
+}
+
+export const TabPanel: FC<TabPanelProps> = ({ children, item, visibleTab }) => {
+  const isVisible = item === visibleTab
+
+  return isVisible ? (
+    <StyledTabPanel role={"tabpanel"}>{children}</StyledTabPanel>
+  ) : null
+}
+
+export const TabList = styled(FlexBox)`
+  gap: unset;
+  overflow-x: auto;
+  width: 100%;
 `
 
-export const TabPanel = ZTabPanel
+const StyledTab = styled.button<{ disabled?: boolean }>`
+  background: none;
+  border: none;
+  border-bottom: 2px solid ${({ theme }) => theme.styles.border.color};
+  border-bottom-color: ${({ disabled, theme }) =>
+    disabled ? "transparent" : theme.styles.border.color};
+  color: ${({ disabled, theme }) => {
+    if (disabled) return theme.styles.colors.grey["400"]
+    return light(theme.styles.textColorPrimary, 0.6)
+  }};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  font-size: inherit;
+  padding: ${SPACINGS.SM} ${SPACINGS.SM};
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &[aria-selected="true"] {
+    border-bottom-color: ${({ theme }) => theme.styles.colorPrimary};
+    color: ${({ theme }) => theme.styles.colorPrimary};
+    font-weight: ${FONT_WEIGHTS.BOLD};
+  }
+
+  &:hover:not([aria-selected="true"]):not(:disabled) {
+    border-bottom-color: ${({ theme }) => theme.styles.colors.grey["300"]};
+    color: ${({ theme }) => theme.styles.textColorPrimary};
+  }
+
+  // &:focus {
+  //   outline: 2px solid ${({ theme }) => theme.styles.colors.grey["300"]};
+  //   outline-offset: -2px;
+  // }
+  //
+  // &:focus:not([aria-selected="true"]) {
+  //   color: ${({ theme }) => theme.styles.colorPrimary};
+  // }
+`
+
+const StyledTabPanel = styled.div`
+  padding: ${SPACINGS.MD} ${SPACINGS.SM};
+`

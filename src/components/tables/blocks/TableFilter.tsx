@@ -5,6 +5,7 @@ import { SelectorProps } from "components/forms/selectors/types"
 import { TextField } from "components/forms/textfields/TextField"
 import { FilterState, ItemFilterOptions } from "components/tables/Table"
 import React, { FC, useCallback, useMemo } from "react"
+import { flatten } from "utils/arrayHelpers"
 import { Logger } from "utils/logging/Logger"
 import { ValueOf } from "utils/types"
 
@@ -63,7 +64,10 @@ export const TableFilter = ({
         options={options!}
         placement={"bottom"}
         {...(type === "multi-select"
-          ? { selectedKeys: (value as string[]) ?? [], maxItems: 2 }
+          ? {
+              selectedKeys: !!value ? flatten([value as string[]]) : [],
+              maxItems: 2,
+            }
           : { selectedKey: value as string })}
         small
       />

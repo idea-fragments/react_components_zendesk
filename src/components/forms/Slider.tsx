@@ -1,11 +1,12 @@
-import { Field, Label, Range as ZRange } from "@zendeskgarden/react-forms"
+import { Field, Range as ZRange } from "@zendeskgarden/react-forms"
 import { buttonLikeHoverable } from "components/forms/buttonMixins"
 import { FormFieldProps } from "components/forms/formField.types"
-import { Hint } from "components/forms/Hint"
+import { Hint } from "components/text/Hint"
 import { Message } from "components/forms/Message"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox } from "components/layout/FlexBox"
 import { StyledProps } from "components/StyledProps.type"
+import { Label } from "components/text/Label"
 import throttle from "lodash/throttle"
 import React, {
   ChangeEvent,
@@ -72,7 +73,7 @@ export let Slider: FC<SliderProps> = ({
       gap={null}
       withRows>
       <Field>
-        <Label hidden={!label}>{label ?? ""}</Label>
+        {label ? <Label>{label}</Label> : null}
         {hint ? (
           <Hint
             _css={css`

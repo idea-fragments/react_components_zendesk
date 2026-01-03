@@ -2,8 +2,6 @@ import {
   Autocomplete as ZenAutocomplete,
   Dropdown as ZenDropdown,
   Field,
-  Hint,
-  Label as ZenLabel,
   Menu,
   Message as ZenMessage,
   Multiselect as ZenMultiSelect,
@@ -12,8 +10,10 @@ import {
 } from "@zendeskgarden/react-dropdowns"
 import { getItemType, Item } from "components/forms/selectors/Dropdown/Item"
 import {
+  Common as CommonSelectorProps,
   MultiSelectorProps,
   OnItemSelectedFunc,
+  OnItemsSelectedFunc,
   SelectorItemKey,
   SelectorOption,
   SelectorProps,
@@ -21,10 +21,12 @@ import {
 } from "components/forms/selectors/types"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { Loadable } from "components/loaders/Loadable"
+import { Hint } from "components/text/Hint"
+import { Label as ImpLabel } from "components/text/Label"
 import { debounce } from "lodash"
 import React, {
   ComponentType,
-  FC,
+  Key,
   PropsWithChildren,
   ReactNode,
   useCallback,
@@ -33,6 +35,7 @@ import React, {
   useState,
 } from "react"
 import styled, { FlattenInterpolation, ThemeProps } from "styled-components"
+import { SPACINGS } from "styles/spacings"
 import { CSS } from "styles/types"
 import { FONT_SIZES } from "styles/typography"
 import { isEmpty, isNotEmpty } from "utils/arrayHelpers"
@@ -55,10 +58,9 @@ export type MenuPlacement =
   | "start-top"
   | "start-bottom"
 
-type OptionalSelectorProps = {
-  keyField?: string
-  labelField?: string
-}
+type OptionalSelectorProps<T> = Partial<
+  Pick<CommonSelectorProps<T>, "keyField" | "labelField">
+>
 
 type CommonProps = {
   _css?: CSS
@@ -76,14 +78,27 @@ type CommonProps = {
   useRawOptions?: boolean
 }
 
-type SelectorsProps =
-  | (CommonProps & SelectorProps)
-  | (CommonProps & MultiSelectorProps)
+type SelectorsProps<T> =
+  | (CommonProps & SelectorProps<T>)
+  | (CommonProps & MultiSelectorProps<T>)
 
-type Props = Omit<SelectorsProps, "keyField" | "labelField"> &
-  OptionalSelectorProps
+export type DropdownProps<T> = Omit<
+  SelectorsProps<T>,
+  "keyField" | "labelField" | "options"
+> &
+  OptionalSelectorProps<T> &
+  (
+    | {
+        options: SelectorOption<T>[]
+        useRawOptions?: false
+      }
+    | {
+        options: ReactNode[]
+        useRawOptions: true
+      }
+  )
 
-const CLEAR_OPTION = {
+export const CLEAR_OPTION = {
   label: "-- None --",
   value: "_cleared",
   isClearingItem: true,
@@ -91,19 +106,19 @@ const CLEAR_OPTION = {
 
 const logger = new Logger("Dropdown")
 
-export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
+export let Dropdown = <T,>(props: PropsWithChildren<DropdownProps<T>>) => {
   const [state, setState] = useState({ isOpen: false })
   const controlledState = { ...state, ...props }
   const [filteringOptions, setFilteringOptionsTo] = useState<boolean>(false)
   const [searchFilter, setSearchFilter] = useState<string>("")
 
-  const [filteredOptions, setFilteredOptions] = useState<SelectorOption[]>(
-    props.options,
+  const [filteredOptions, setFilteredOptions] = useState<SelectorOption<T>[]>(
+    props.options as SelectorOption<T>[],
   )
 
   const {
     appendMenuToNode,
-    async,
+    async = false,
     children,
     className,
     clearable,
@@ -118,29 +133,30 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
     menuPopperModifiers,
     options,
     placement,
-    returnItemOnChange,
+    returnItemOnChange = false,
     small,
     trigger,
-    useRawOptions,
-    validation,
-    onChange,
-    onStateChange,
+    useRawOptions = false,
+    validation = { validation: VALIDATION_STATES.NONE },
+    onChange = DO_NOTHING,
+    onStateChange = DO_NOTHING,
   } = props
 
-  const { selectedKey } = props as SelectorProps
-  const { selectedKeys } = props as MultiSelectorProps
+  const { selectedKey } = props as SelectorsProps<T> as SelectorProps<T>
+  const { selectedKeys } = props as SelectorsProps<T> as MultiSelectorProps<T>
 
   // TODO see if this function needs to be removed if we're also filtering
   // in the SearchableSelector component
   const filterFunc = useCallback(
     (value: string) => {
       const searchText = value.trim().toLowerCase()
-      let matchingOptions = options
+      let matchingOptions = options as SelectorOption<T>[]
 
       if (searchText !== "") {
-        matchingOptions = options.filter((option) => {
+        matchingOptions = (options as SelectorOption<T>[]).filter((option) => {
+          const val = option[labelField!]
           return (
-            option[labelField!]
+            (val as string)
               .trim()
               .toLowerCase()
               .indexOf(value.trim().toLowerCase()) !== -1
@@ -159,7 +175,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
   useEffect(() => {
     if (!shouldFilterOptions) return
     filterMatchingOptionsRef.current = debounce(filterFunc, 300)
-    setFilteredOptions(options)
+    setFilteredOptions(options as SelectorOption<T>[])
     setSearchFilter("")
   }, [filterFunc, shouldFilterOptions, options])
 
@@ -172,9 +188,11 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
 
   let { message } = props
   const optionNodes = useRawOptions
-    ? (options as JSX.Element[])
-    : createOptions(
-        shouldFilterOptions ? filteredOptions : options,
+    ? (options as ReactNode[])
+    : createOptions<T>(
+        shouldFilterOptions
+          ? filteredOptions
+          : (options as SelectorOption<T>[]),
         keyField!,
         labelField!,
         menuItemComponent,
@@ -189,40 +207,48 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
   const labelNode = label ? <Label>{label}</Label> : null
 
   const handleChange = (
-    item: SelectorOption | SelectorOption[] | SelectorItemKey,
+    item: SelectorOption<T> | SelectorOption<T>[] | SelectorItemKey,
   ) => {
     logger.writeInfo("selection made", item)
     setSearchFilter("")
 
-    if ((item as SelectorOption)?.isClearingItem) {
-      ;(onChange as OnItemSelectedFunc)!(null)
+    if ((item as SelectorOption<T>)?.isClearingItem) {
+      ;(onChange as OnItemSelectedFunc<T>)!(null)
       return
     }
 
     if (isArray(item)) {
-      handleMultiSelectChange(item as SelectorOption[])
+      handleMultiSelectChange(item as SelectorOption<T>[])
       return
     }
 
     if (useRawOptions || returnItemOnChange) {
-      // @ts-ignore
       onChange!(item)
       return
     }
 
     if (!item || isString(item) || isNumber(item)) {
       logger.writeInfo("Received SelectorItemKey from downshift")
-      // @ts-ignore
       onChange!(item as SelectorItemKey)
       return
     }
 
-    onChange!((item as SelectorOption)[keyField!])
+    onChange!((item as SelectorOption<T>)[keyField!])
   }
 
   const handleMultiSelectChange = (
-    items: Array<SelectorItemKey | SelectorOption>,
+    items: Array<SelectorItemKey | SelectorOption<T>>,
   ) => {
+    const clearingItemSelected = items.some((i) => {
+      if (isString(i) || isNumber(i)) return false
+      return (i as SelectorOption<T>)?.isClearingItem
+    })
+
+    if (clearingItemSelected) {
+      ;(onChange as OnItemsSelectedFunc<T>)!([])
+      return
+    }
+
     if (useRawOptions || returnItemOnChange) {
       const rawSet = new Set(items)
       // @ts-ignore
@@ -233,18 +259,18 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
     // spits back the item keys its given and will append the SelectorOption
     // item to the end of the list. So we need to transform the last item
     // into the SelectorItemKey
-    const changes = items.map((i: SelectorItemKey | SelectorOption) => {
+    const changes = items.map((i: SelectorItemKey | SelectorOption<T>) => {
       if (isNumber(i) || isString(i)) return i as SelectorItemKey
-      return (i as SelectorOption)[keyField!] as SelectorItemKey
+      return (i as SelectorOption<T>)[keyField!] as SelectorItemKey
     })
 
     // @ts-ignore
     onChange!([...new Set(changes)])
   }
 
-  const handleStateChange = (changes: StateChange) => {
+  const handleStateChange = (changes: StateChange<T>) => {
     logger.writeInfo("state change", changes)
-    const item = changes.selectedItem || {}
+    const item = changes.selectedItem || ({} as SelectorOption<T>)
 
     onStateChange!({
       ...changes,
@@ -288,7 +314,7 @@ export let Dropdown: FC<PropsWithChildren<Props>> = (props) => {
       downshiftProps={{
         itemToString: (item: any) => {
           if (keyField && item && item.hasOwnProperty(keyField)) {
-            return (item as SelectorOption)[keyField]
+            return (item as SelectorOption<T>)[keyField]
           }
 
           return item
@@ -366,16 +392,6 @@ const StyledLoadable = styled(Loadable)`
   min-height: 50px;
 `
 
-Dropdown.defaultProps = {
-  async: false,
-  useRawOptions: false,
-  returnItemOnChange: false,
-  validation: { validation: VALIDATION_STATES.NONE },
-  // maxMenuHeight: "20rem",
-  onChange: DO_NOTHING,
-  onStateChange: DO_NOTHING,
-}
-
 export const Autocomplete = ZenAutocomplete as ComponentType<any>
 export const Select = ZenSelect as ComponentType<any>
 export const MultiSelect = styled(ZenMultiSelect as ComponentType<any>)`
@@ -386,16 +402,17 @@ export const MultiSelect = styled(ZenMultiSelect as ComponentType<any>)`
   }
 `
 
-const Label = styled(ZenLabel)`
+const Label = styled(ImpLabel)`
   && {
     color: ${(p) => p.theme.styles.textColorPrimary};
+    margin-bottom: ${SPACINGS.XS};
   }
 `
 
-const createOptions = (
-  options: SelectorOption[],
-  key: string,
-  label: string,
+const createOptions = <T,>(
+  options: SelectorOption<T>[],
+  keyField: CommonSelectorProps<T>["keyField"],
+  labelField: CommonSelectorProps<T>["labelField"],
   menuItemComponent: ComponentType<any> | undefined,
   isFilteringOptions: boolean,
   isClearable: boolean = false,
@@ -405,18 +422,15 @@ const createOptions = (
 
   const nodes = options.map((o) => {
     const { Component, componentProps, itemProps, ...attrs } = o
+    const label = (attrs as T)[labelField] as ReactNode
     const ItemType = getItemType(attrs)
 
     return (
       <ItemType
-        key={o[key]}
+        key={o[keyField] as Key}
         value={o}
         {...itemProps}>
-        {Component ? (
-          <Component {...componentProps}>{attrs[label]}</Component>
-        ) : (
-          attrs[label]
-        )}
+        {Component ? <Component {...componentProps}>{label}</Component> : label}
       </ItemType>
     )
   })

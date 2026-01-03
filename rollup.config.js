@@ -4,6 +4,7 @@ import typescript from "@rollup/plugin-typescript"
 import peerDepsExternal from "rollup-plugin-peer-deps-external"
 import { getBabelOutputPlugin } from "@rollup/plugin-babel"
 import dts from "rollup-plugin-dts"
+import postcss from "rollup-plugin-postcss"
 import fs from "fs"
 
 const modulesDir = "src/entries"
@@ -11,7 +12,16 @@ let modules = fs
   .readdirSync(modulesDir)
   .map((nameWithExtension) => nameWithExtension.split(".")[0])
 
-// modules = ["utils"]
+modules = [
+  // "forms",
+  // "hooks",
+  "layouts",
+  // "media",
+  // "styles",
+  // "tables",
+  // "tags",
+  // "text",
+]
 
 const config = [
   ...modules.map((module) => {
@@ -28,6 +38,11 @@ const config = [
         peerDepsExternal(),
         resolve(),
         commonjs(),
+        postcss({
+          extract: false,
+          minimize: true,
+          modules: false,
+        }),
         getBabelOutputPlugin({
           plugins: ["babel-plugin-styled-components"],
         }),

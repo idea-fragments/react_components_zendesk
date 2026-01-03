@@ -19,11 +19,22 @@ export type ButtonLinkProps = {
 
 export const ButtonLink = forwardRef<any, ButtonLinkProps>(
   (
-    { LinkComponent, external, flat, ...otherProps }: ButtonLinkProps,
+    {
+      external = false,
+      flat,
+      iconPosition = "left",
+      LinkComponent = "a",
+      primary = false,
+      onClick = DO_NOTHING,
+      ...otherProps
+    }: ButtonLinkProps,
     ref: ForwardedRef<any>,
   ) => {
     return (
       <Button
+        iconPosition={iconPosition}
+        onClick={onClick}
+        primary={primary}
         ref={ref}
         {...otherProps}
         flat={flat != null ? flat : !otherProps.inline}
@@ -34,11 +45,3 @@ export const ButtonLink = forwardRef<any, ButtonLinkProps>(
     )
   },
 )
-
-ButtonLink.defaultProps = {
-  primary: false,
-  onClick: DO_NOTHING,
-  LinkComponent: "a",
-  external: false,
-  iconPosition: "left",
-}

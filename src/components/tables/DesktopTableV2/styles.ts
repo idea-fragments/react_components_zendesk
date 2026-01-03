@@ -2,7 +2,6 @@ import { Text } from "components/text/Text"
 import styled, { css } from "styled-components"
 import { CSSProp } from "styles/types"
 import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
-import { light, saturate, veryLight } from "styles/colors"
 import {
   ACTIONS_WIDTH,
   CELL_PADDING,
@@ -170,7 +169,7 @@ export const HeaderCell = styled.div<{
 export const HeaderText = styled(Text)<{ important: boolean }>`
   color: ${({ important, theme }) =>
     important ? theme.styles.colorPrimary : "unset"};
-  font-size: ${FONT_SIZES.XS};
+  font-size: ${FONT_SIZES.SM};
   font-weight: ${FONT_WEIGHTS.BOLD};
 `
 

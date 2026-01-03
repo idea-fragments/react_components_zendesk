@@ -16,4 +16,5 @@ export const Hint = styled(XS).attrs<ColorProps>(({ color, danger, theme }) => {
 })`
   color: ${({ color }) => color};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
+  margin: 0 0 4px;
 `

@@ -9,6 +9,7 @@ type Props = {
   className?: string
   innerAs?: ComponentType<any>
   isLoading: boolean
+  fullScreenBackdrop?: boolean
 } & CSSProp
 
 export let TranslucentLoader = ({
@@ -17,6 +18,7 @@ export let TranslucentLoader = ({
   className,
   innerAs,
   isLoading = true,
+  fullScreenBackdrop = false,
 }: PropsWithChildren<Props>) => {
   const theme = useContext<Theme>(ThemeContext)
 
@@ -29,6 +31,7 @@ export let TranslucentLoader = ({
       {isLoading ? (
         <SpinnerContainer
           alignItems={"center"}
+          fullScreen={fullScreenBackdrop}
           justifyContent={"center"}>
           <Dots color={theme.styles.colorPrimary} />
         </SpinnerContainer>
@@ -44,12 +47,12 @@ const Container = styled.div<{ _css?: CSSProp; fluid?: boolean }>`
   ${({ _css }) => (_css ? _css : "")}
 `
 
-const SpinnerContainer = styled(FlexBox)`
+const SpinnerContainer = styled(FlexBox)<{ fullScreen: boolean }>`
   background: white;
   opacity: 0.7;
   top: 0;
   left: 0;
-  position: fixed;
+  position: ${({ fullScreen }) => (fullScreen ? "fixed" : "absolute")};
   height: 100%;
   width: 100%;
   z-index: 100;

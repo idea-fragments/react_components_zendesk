@@ -1,14 +1,14 @@
-import React, { ComponentType, SVGAttributes } from "react"
+import React, { ComponentType, ReactNode, SVGAttributes } from "react"
 import MIcon, { Stack } from "@mdi/react"
 import { DO_NOTHING } from "utils/functionHelpers"
 import { isArray, isString } from "utils/typeCheckers"
 
 const COMPONENT_NAME = "Icon"
-type SVGComponent = ComponentType<SVGAttributes<any>>
+export type SVGComponent = ComponentType<SVGAttributes<any>>
 type Props = {
   color?: string
   size?: number | string
-  svg: string | Array<string> | SVGComponent
+  svg: string | Array<string> | SVGComponent | ReactNode
   title?: string
   onClick?: () => void
 }

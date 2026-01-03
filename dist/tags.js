@@ -95,7 +95,7 @@ var getColor$1 = styled.css(templateObject_1$3 || (templateObject_1$3 = __makeTe
 //   margin-top: 0;
 // `
 var subTextStyling = styled.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
+var Text = styled__default["default"].div(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
   var align = _a.align;
   return align;
 }, function (_a) {
@@ -111,7 +111,7 @@ var Text = styled__default["default"].div(templateObject_3$1 || (templateObject_
   var _css = _a._css;
   return _css;
 });
-var templateObject_1$3, templateObject_2$2, templateObject_3$1;
+var templateObject_1$3, templateObject_2$2, templateObject_3$2;
 var XXS$1 = ".8rem";
 var XS = ".9rem";
 var SM = "1rem";
@@ -126,6 +126,7 @@ var THIN = "100";
 var LIGHT = "300";
 var REGULAR = "400";
 var MEDIUM = "500";
+var SEMI_BOLD = "600";
 var BOLD = "700";
 var BLACK = "800";
 var DIV = "div";
@@ -180,17 +181,18 @@ var FONT_WEIGHTS = {
   REGULAR: REGULAR,
   MEDIUM: MEDIUM,
   BOLD: BOLD,
+  SEMI_BOLD: SEMI_BOLD,
   BLACK: BLACK
 };
 var Paragraph = styled__default["default"](Text).attrs({
   as: FONT_TAGS.P
 })(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  font-weight: ", ";\n"], ["\n  font-weight: ", ";\n"])), FONT_WEIGHTS.REGULAR);
-var XXS = styled__default["default"](Paragraph)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XXS);
-styled__default["default"](Paragraph)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XS);
-styled__default["default"](Paragraph)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.MD);
-styled__default["default"](Paragraph)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.LG);
-styled__default["default"](Paragraph)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  font-size: ", ";\n"], ["\n  font-size: ", ";\n"])), FONT_SIZES.XL);
-var templateObject_1$2, templateObject_2$1, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
+var XXS = styled__default["default"](Paragraph)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XXS);
+styled__default["default"](Paragraph)(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XS);
+styled__default["default"](Paragraph)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.MD);
+styled__default["default"](Paragraph)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.LG);
+styled__default["default"](Paragraph)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XL);
+var templateObject_1$2, templateObject_2$1, templateObject_3$1, templateObject_4, templateObject_5, templateObject_6;
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 var colorString$1 = {
   exports: {}
@@ -5877,25 +5879,17 @@ TagComponent.defaultProps = {
 const Tag = TagComponent;
 Tag.Avatar = Avatar;
 Tag.Close = Close$1;
-var useTheme = function () {
-  return React.useContext(styled.ThemeContext);
-};
-// export const setThemeContext = (ctx :)
-
 var Close = styled__default["default"](Tag.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 exports.Tag = React.forwardRef(function (_a, ref) {
+  _a.backgroundColor;
+  _a.backgroundColorWeight;
   var children = _a.children,
-    className = _a.className,
-    color = _a.color,
-    onClose = _a.onClose,
-    success = _a.success,
-    props = __rest(_a, ["children", "className", "color", "onClose", "success"]);
-  var theme = useTheme();
-  var finalizedColor = function () {
-    if (success) return theme.styles.colorSuccess;
-    if (color) return color;
-    return undefined;
-  };
+    className = _a.className;
+  _a.color;
+  var onClose = _a.onClose;
+  _a.success;
+  _a.textColor;
+  var props = __rest(_a, ["backgroundColor", "backgroundColorWeight", "children", "className", "color", "onClose", "success", "textColor"]);
   var onCloseClicked = React.useCallback(function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -5903,7 +5897,6 @@ exports.Tag = React.forwardRef(function (_a, ref) {
   }, [onClose]);
   return jsxRuntime.jsxs(Tag, __assign({
     className: className,
-    hue: finalizedColor(),
     ref: ref
   }, props, {
     children: [children, onClose ? jsxRuntime.jsx(Close, {
@@ -5911,11 +5904,57 @@ exports.Tag = React.forwardRef(function (_a, ref) {
     }) : null]
   }));
 });
-exports.Tag = styled__default["default"](exports.Tag)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  && {\n    cursor: ", ";\n  }\n"], ["\n  && {\n    cursor: ", ";\n  }\n"])), function (_a) {
+exports.Tag = styled__default["default"](exports.Tag).attrs(function (_a) {
+  var backgroundColorProp = _a.backgroundColor,
+    backgroundColorWeight = _a.backgroundColorWeight,
+    color = _a.color,
+    success = _a.success,
+    textColorProp = _a.textColor,
+    theme = _a.theme,
+    props = __rest(_a, ["backgroundColor", "backgroundColorWeight", "color", "success", "textColor", "theme"]);
+  var finalizedFullSpectrumColors = function () {
+    if (success) return theme.styles.colors.green;
+    if (color) return color;
+    return undefined;
+  };
+  var getBackgroundColor = function () {
+    var _a, _b;
+    if (backgroundColorProp) return backgroundColorProp;
+    return backgroundColorWeight ? (_a = finalizedFullSpectrumColors()) === null || _a === void 0 ? void 0 : _a[backgroundColorWeight] : (_b = finalizedFullSpectrumColors()) === null || _b === void 0 ? void 0 : _b[100];
+  };
+  var backgroundColor = getBackgroundColor();
+  var getTextColor = function () {
+    var _a;
+    if (textColorProp) return textColorProp;
+    if (!backgroundColor) return undefined;
+    if (backgroundColorWeight) {
+      return theme.styles.getTextColorForBackground({
+        color: backgroundColor,
+        theme: theme
+      });
+    }
+    return (_a = finalizedFullSpectrumColors()) === null || _a === void 0 ? void 0 : _a[600];
+  };
+  var textColor = getTextColor();
+  return __assign({
+    textColor: textColor,
+    backgroundColor: backgroundColor
+  }, props);
+})(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  && {\n    ", ";\n    ", ";\n    cursor: ", ";\n\n  }\n"], ["\n  && {\n    ", ";\n    ", ";\n    cursor: ", ";\n\n  }\n"])), function (_a) {
+  var backgroundColor = _a.backgroundColor;
+  if (backgroundColor) {
+    return "background-color: ".concat(backgroundColor, ";");
+  }
+}, function (_a) {
+  var textColor = _a.textColor;
+  if (textColor) {
+    return styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          color: ", ";\n          \n          & ", " {\n            color: ", ";\n          }\n        "], ["\n          color: ", ";\n          \n          & ", " {\n            color: ", ";\n          }\n        "])), textColor, Close, textColor);
+  }
+}, function (_a) {
   var onClick = _a.onClick;
   return onClick ? "pointer" : "initial";
 });
-var templateObject_1, templateObject_2;
+var templateObject_1, templateObject_2, templateObject_3;
 exports.Chip = Chip;
 exports.Close = Close;
 //# sourceMappingURL=tags.js.map

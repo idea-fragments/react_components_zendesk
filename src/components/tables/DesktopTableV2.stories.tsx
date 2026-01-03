@@ -257,7 +257,14 @@ const items: Item[] = [
   ...item,
   key: item.Color,
   actions: [
-    { action: DO_NOTHING, label: "Action 1" },
+    {
+      action: DO_NOTHING,
+      itemProps: {
+        danger: true,
+        primary: false,
+      },
+      label: "Action 1",
+    },
     { action: DO_NOTHING, label: "Action 2" },
   ] as ItemAction[],
 }))

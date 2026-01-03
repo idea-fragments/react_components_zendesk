@@ -1,5 +1,6 @@
+import { SVGComponent } from "components/Icon";
 import { Nullable } from "global";
-import { ComponentType, PropsWithChildren, Ref } from "react";
+import { ComponentType, PropsWithChildren, ReactNode, Ref } from "react";
 import { Alignment } from "styles/alignments";
 import { ColorProps, ContainerProps, CSSProp } from "styles/types";
 import { PromiseFunc } from "utils/function.types";
@@ -19,7 +20,7 @@ type ButtonBaseProps = PropsWithChildren<{
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: Nullable<string | ComponentType>;
+    icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;

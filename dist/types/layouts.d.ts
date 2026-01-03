@@ -1,14 +1,13 @@
 /// <reference types="react" />
 import * as react from 'react';
-import react__default, { FC, ReactNode, ElementType, PropsWithChildren, ComponentType, Ref } from 'react';
+import react__default, { FC, ReactNode, ElementType, PropsWithChildren, Dispatch, SetStateAction, ComponentType, SVGAttributes, Ref } from 'react';
 import * as styled_components from 'styled-components';
 import { FlattenSimpleInterpolation } from 'styled-components';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import { Nullable } from 'global';
-import * as _zendeskgarden_react_grid from '@zendeskgarden/react-grid';
 import { ValueOf } from 'utils/types';
+import * as _zendeskgarden_react_grid from '@zendeskgarden/react-grid';
 import * as _zendeskgarden_react_tables_dist_typings_elements_OverflowButton from '@zendeskgarden/react-tables/dist/typings/elements/OverflowButton';
-import * as _zendeskgarden_react_tabs from '@zendeskgarden/react-tabs';
 
 type ColorProps = {
     accent?: boolean;
@@ -33,7 +32,7 @@ type CSSProp<T = any> = {
     className?: string;
 };
 
-type Props$5 = {
+type Props$3 = {
     actions: Array<ReactNode>;
     fixed?: boolean;
     logo?: ElementType;
@@ -42,20 +41,7 @@ type Props$5 = {
     showBackButton?: boolean;
     title: ElementType;
 } & ContainerProps;
-declare let AppBar: FC<Props$5>;
-
-type Props$4 = {
-    alertView: ReactNode;
-    appBar: ReactNode;
-    appBarHeight: string;
-    className?: string;
-    content: ReactNode;
-    drawerView: ReactNode;
-};
-declare const AppBarLayout: {
-    ({ alertView, appBar, className, content, drawerView, }: Props$4): react_jsx_runtime.JSX.Element;
-    COMPONENT_NAME: string;
-};
+declare let AppBar: FC<Props$3>;
 
 type AppBarLayoutV2Props = {
     appBar: ReactNode;
@@ -105,7 +91,7 @@ declare const Container: styled_components.StyledComponent<"div", styled_compone
     withRows: boolean;
 }, "withRows">;
 
-type Props$3 = {
+type Props$2 = {
     children: ReactNode;
     className?: string;
     disableNextButton?: boolean;
@@ -116,43 +102,56 @@ type Props$3 = {
     onPreviousClick: () => void;
     onStartClick?: () => void;
 } & CSSProp;
-declare let Carousel: ({ children, className, disableNextButton, disablePreviousButton, inline, onEndClick, onNextClick, onPreviousClick, onStartClick, }: Props$3) => react_jsx_runtime.JSX.Element;
+declare let Carousel: ({ children, className, disableNextButton, disablePreviousButton, inline, onEndClick, onNextClick, onPreviousClick, onStartClick, }: Props$2) => react_jsx_runtime.JSX.Element;
 
 type StyledComponentProps = {
     className?: string;
 };
 
+declare const DRAWER_SIZES: {
+    DEFAULT: string;
+    FULL_WIDTH: string;
+    LARGE: string;
+};
 type DrawerContent = {
     body: ReactNode;
+    onClose?: () => void;
+    size: ValueOf<typeof DRAWER_SIZES>;
     title?: string;
     withCancelButton?: boolean;
     withNoActions?: boolean;
-    onClose?: () => void;
 };
-type Props$2 = {
+type DrawerProps = {
     closeDrawer: () => void;
     drawerContent: Nullable<DrawerContent>;
     isOpen: boolean;
-} & StyledComponentProps;
-declare let Drawer: FC<Props$2>;
+    width?: string;
+} & CSSProp & StyledComponentProps;
+declare let Drawer: FC<DrawerProps>;
 
-type _ResponsiveProps = {
-    mediaQueryFunc: Function;
-    props: FlexBlockProps;
+declare const DrawerModalManager: FC;
+
+declare const DrawerModalStateProvider: FC<PropsWithChildren<{}>>;
+
+type DrawerContentState = Record<string, any>;
+type DrawerState = {
+    isDrawerOpen: boolean;
+    drawerContent?: DrawerContent;
+    drawerContentState: DrawerContentState;
 };
-type FlexBlockProps = {
-    alignItems?: string;
-    compactAxis?: boolean;
-    compact?: boolean;
-    fluid?: boolean;
-    hidden?: boolean;
-    withRows?: boolean;
-    justify?: string;
-    spacing?: string | null;
-    responsivePropsList?: Array<_ResponsiveProps>;
+type DrawerStateWithDispatch = {
+    drawerState: Readonly<DrawerState>;
+    setDrawerState: Dispatch<SetStateAction<DrawerState>>;
 };
-declare const FlexBlock: styled_components.StyledComponent<"div", styled_components.DefaultTheme, FlexBlockProps, never>;
-declare const PaddedFlexBlock: styled_components.StyledComponent<"div", styled_components.DefaultTheme, FlexBlockProps, never>;
+declare const defaultUiState: DrawerStateWithDispatch;
+declare const DrawerStateContext: react.Context<DrawerStateWithDispatch>;
+
+type DrawerHelperFunctions = {
+    closeDrawer: () => void;
+    openDrawerWith: (c: DrawerContent) => void;
+    setDrawerContentState: (s: DrawerContentState) => void;
+};
+declare const useDrawerState: () => DrawerStateWithDispatch & DrawerHelperFunctions;
 
 type FullScreenProps = PropsWithChildren<{
     className?: string;
@@ -168,9 +167,9 @@ declare const Col: styled_components.StyledComponent<react.ForwardRefExoticCompo
 
 type NavigationAction = {
     alwaysActive?: boolean;
-    as?: ComponentType<{
+    Component: ComponentType<PropsWithChildren<{
         href: string;
-    }>;
+    }>>;
     href?: string;
     icon?: any | ComponentType;
     label: string;
@@ -201,6 +200,8 @@ declare const OpacityTransition: styled_components.StyledComponent<"div", styled
     opacity: number;
 }, never>;
 
+type SVGComponent = ComponentType<SVGAttributes<any>>;
+
 declare const ALIGNMENTS: {
     readonly start: "flex-start";
     readonly center: "center";
@@ -226,7 +227,7 @@ type ButtonBaseProps = PropsWithChildren<{
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: Nullable<string | ComponentType>;
+    icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;
@@ -312,15 +313,25 @@ declare const SectionHeader: styled_components.StyledComponent<react.ForwardRefE
     children?: ReactNode;
 } & CSSProp<any> & react.RefAttributes<HTMLDivElement>>, styled_components.DefaultTheme, {}, never>;
 
-type Action = NavigationAction;
+type Action$1 = NavigationAction;
 type SidebarProps = {
+    actions: Action$1[];
+    actionIconSize?: string;
+    activeAction?: string;
+    logo: ReactNode;
+    lowerActions?: Action$1[];
+};
+declare const Sidebar: FC<SidebarProps>;
+
+type Action = NavigationAction;
+type SidebarV2Props = {
     actions: Action[];
     actionIconSize?: string;
     activeAction?: string;
     logo: ReactNode;
     lowerActions?: Action[];
 };
-declare const Sidebar: FC<SidebarProps>;
+declare const SidebarV2: FC<SidebarV2Props>;
 
 type SidebarLayoutProps = {
     mainContent: ReactNode;
@@ -330,7 +341,35 @@ declare const SidebarLayout: FC<SidebarLayoutProps>;
 
 declare const TabletsOnly: FC<PropsWithChildren>;
 
-declare const Tabs: styled_components.StyledComponent<react.ForwardRefExoticComponent<_zendeskgarden_react_tabs.ITabsProps & react.RefAttributes<HTMLDivElement>>, styled_components.DefaultTheme, {}, never>;
-declare const TabPanel: react.ForwardRefExoticComponent<_zendeskgarden_react_tabs.ITabPanelProps & react.RefAttributes<HTMLDivElement>>;
+type TabsProps = {
+    children: ReactNode;
+    onChange?: (selectedTab: string) => void;
+    selectedItem?: string;
+} & SectionProps;
+type TabProps = {
+    children: ReactNode;
+    disabled?: boolean;
+    onSelect: (tabKey: string) => void;
+    tabKey: string;
+    visibleTab: string;
+};
+type TabPanelProps = {
+    children: ReactNode;
+    item: string;
+    visibleTab: string;
+};
+declare const Tabs: FC<TabsProps>;
+declare const Tab: FC<TabProps>;
+declare const TabPanel: FC<TabPanelProps>;
+declare const TabList: styled_components.StyledComponent<"div", styled_components.DefaultTheme, {
+    alignItems?: string | undefined;
+    gap?: string | null | undefined;
+    fluid?: boolean | undefined;
+    inline?: boolean | undefined;
+    justifyContent?: string | undefined;
+    responsivePropsList?: ResponsiveProps<FlexBoxProps>[] | undefined;
+    withRows?: boolean | undefined;
+    wrapped?: boolean | undefined;
+} & CSSProp<any>, never>;
 
-export { AppBar, AppBarLayout, AppBarLayoutV2, AppBarLayoutV2Props, Carousel, Col, ComputersOnly, Container, Drawer, DrawerContent, FlexBlock, FlexBlockProps, FlexBox, FlexBoxProps, FullScreen, FullScreenProps, Grid, IconAppBar, IconAppBarProps, Line, NavigationAction, OpacityTransition, OverflowButton, OverflowMenu, OverflowMenuItem, PaddedFlexBlock, PhonesAndTabletsOnly, PhonesOnly, ResponsiveProps, Row, Section, SectionBody, SectionFooter, SectionFooterProps, SectionHeader, SectionHeaderProps, SectionProps, Sidebar, SidebarLayout, SidebarLayoutProps, SidebarProps, TabPanel, TabletsOnly, Tabs };
+export { AppBar, AppBarLayoutV2, AppBarLayoutV2Props, Carousel, Col, ComputersOnly, Container, DRAWER_SIZES, Drawer, DrawerContent, DrawerContentState, DrawerHelperFunctions, DrawerModalManager, DrawerModalStateProvider, DrawerProps, DrawerState, DrawerStateContext, DrawerStateWithDispatch, FlexBox, FlexBoxProps, FullScreen, FullScreenProps, Grid, IconAppBar, IconAppBarProps, Line, NavigationAction, OpacityTransition, OverflowButton, OverflowMenu, OverflowMenuItem, PhonesAndTabletsOnly, PhonesOnly, ResponsiveProps, Row, Section, SectionBody, SectionFooter, SectionFooterProps, SectionHeader, SectionHeaderProps, SectionProps, Sidebar, SidebarLayout, SidebarLayoutProps, SidebarProps, SidebarV2, SidebarV2Props, Tab, TabList, TabPanel, TabPanelProps, TabProps, TabletsOnly, Tabs, TabsProps, defaultUiState, useDrawerState };

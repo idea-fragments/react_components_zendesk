@@ -14,38 +14,35 @@ export type SelectorOptionOptionalAttrs = {
     isHeaderItem?: boolean;
     itemProps?: Partial<ItemProps>;
 };
-export type SelectorOption = {
-    [key: string]: any;
-} & SelectorOptionOptionalAttrs;
-export type OnItemSelectedFunc = ((k: SelectorItemKey) => void) | ((o: SelectorOption | null | undefined) => void);
-export type OnItemsSelectedFunc = ((ks: SelectorItemKey[]) => void) | ((o: SelectorOption[] | null | undefined) => void);
-export type StateChange = StateChangeOptions<SelectorOption>;
-type Common = FormFieldProps & {
+export type SelectorOption<T> = T & SelectorOptionOptionalAttrs;
+export type OnItemSelectedFunc<T = any> = ((k: SelectorItemKey) => void) | ((o: SelectorOption<T> | null | undefined) => void);
+export type OnItemsSelectedFunc<T> = ((ks: SelectorItemKey[]) => void) | ((o: SelectorOption<T>[] | null | undefined) => void);
+export type StateChange<T> = StateChangeOptions<SelectorOption<T>>;
+export type Common<T> = FormFieldProps & {
     appendMenuToNode?: HTMLElement;
     clearable?: boolean;
-    options: Array<SelectorOption>;
+    options: SelectorOption<T>[];
     optionsKeyMap?: {
-        [key: string]: SelectorOption;
+        [key: string]: SelectorOption<T>;
     };
-    keyField: string;
-    labelField: string;
-    valueField?: string;
+    keyField: keyof T;
+    labelField: keyof T;
     maxMenuHeight?: string;
     menuPopperModifiers?: Record<string, any>[] | undefined;
     placement?: MenuPlacement;
-    onStateChange?: (s: StateChange) => void;
+    onStateChange?: (s: StateChange<T>) => void;
     invalidOnNoSelection?: boolean;
     flat?: boolean;
     open?: boolean;
     small?: boolean;
 };
-export type SelectorProps = {
+export type SelectorProps<T> = {
     selectedKey?: SelectorItemKey;
-    onChange?: OnItemSelectedFunc;
-} & Common;
-export type MultiSelectorProps = {
-    selectedKeys?: SelectorItemKey[];
-    onChange?: OnItemsSelectedFunc;
-} & Common;
-export {};
+    onChange?: OnItemSelectedFunc<T>;
+} & Common<T>;
+export type MultiSelectorProps<T> = {
+    maxItems?: number;
+    onChange?: OnItemsSelectedFunc<T>;
+    selectedKeys: SelectorItemKey[];
+} & Common<T>;
 //# sourceMappingURL=types.d.ts.map

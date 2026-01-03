@@ -30,7 +30,7 @@ export const TableFiltersDropdown: FC<Props> = ({
     [onFiltersChange],
   )
 
-  const handleStateChange = useCallback((changes: StateChange) => {
+  const handleStateChange = useCallback((changes: StateChange<unknown>) => {
     if (
       changes.isOpen == null ||
       changes.type === Downshift.stateChangeTypes.blurInput ||

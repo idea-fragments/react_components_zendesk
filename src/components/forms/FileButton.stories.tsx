@@ -16,9 +16,20 @@ const Story = (props: Partial<FileButtonProps>) => {
 
   return (
     <FlexBox withRows>
-      <FileButton onFileChange={setFile}>Select File</FileButton>
+      {props.fileTypes ? (
+        <div>Accepting [{props.fileTypes.join(", ")}] files types</div>
+      ) : (
+        <div>Accepting all file types</div>
+      )}
+
+      <FileButton
+        {...props}
+        onFileChange={setFile}>
+        Select File
+      </FileButton>
       <div>Single File: {file?.name ?? "none"}</div>
       <FileButton
+        {...props}
         multiple
         onFilesChange={setFiles}>
         Select File
@@ -33,3 +44,8 @@ const Story = (props: Partial<FileButtonProps>) => {
 
 export const Default = Story.bind({})
 Default.args = {}
+
+export const WithSpecifiedFileType = Story.bind({})
+WithSpecifiedFileType.args = {
+  fileTypes: ["image/*"],
+}

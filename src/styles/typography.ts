@@ -15,6 +15,7 @@ const THIN = "100"
 const LIGHT = "300"
 const REGULAR = "400"
 const MEDIUM = "500"
+const SEMI_BOLD = "600"
 const BOLD = "700"
 const BLACK = "800"
 
@@ -74,6 +75,7 @@ export const FONT_WEIGHTS = {
   REGULAR,
   MEDIUM,
   BOLD,
+  SEMI_BOLD,
   BLACK,
 } as const
 

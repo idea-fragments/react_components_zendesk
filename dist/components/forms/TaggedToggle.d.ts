@@ -1,7 +1,9 @@
 import { ToggleProps } from "components/forms/Toggle";
-export type TaggedToggleProps = ToggleProps & {
+import { FullSpectrumColors } from "styles/theme/Theme.type";
+export type TaggedToggleProps = Omit<ToggleProps, "color"> & {
     active?: boolean;
     activeText?: string;
+    color?: FullSpectrumColors;
     inactiveText?: string;
     toggleColor?: string;
 };

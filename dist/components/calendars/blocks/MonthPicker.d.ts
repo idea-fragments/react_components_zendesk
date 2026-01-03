@@ -1,7 +1,6 @@
-type Props = {
+export type MonthPickerProps = {
     month: number;
     onMonthSelected: (n: number) => void;
 };
-export declare const MonthPicker: ({ month, onMonthSelected }: Props) => import("react/jsx-runtime").JSX.Element;
-export {};
+export declare const MonthPicker: ({ month, onMonthSelected }: MonthPickerProps) => import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=MonthPicker.d.ts.map

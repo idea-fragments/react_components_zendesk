@@ -135,9 +135,6 @@ var FlexBox = styled__default["default"].div(templateObject_1$2 || (templateObje
 }, function (p) {
   return p._css;
 });
-FlexBox.defaultProps = {
-  withRows: false
-};
 var responsiveStyles = function (_a) {
   var responsivePropsList = _a.responsivePropsList,
     originalProps = __rest(_a, ["responsivePropsList"]);
@@ -4061,7 +4058,9 @@ exports.TranslucentLoader = function (_a) {
     className = _a.className,
     innerAs = _a.innerAs,
     _b = _a.isLoading,
-    isLoading = _b === void 0 ? true : _b;
+    isLoading = _b === void 0 ? true : _b,
+    _c = _a.fullScreenBackdrop,
+    fullScreenBackdrop = _c === void 0 ? false : _c;
   var theme = React.useContext(styled.ThemeContext);
   return jsxRuntime.jsxs(Container, __assign({
     as: innerAs,
@@ -4070,6 +4069,7 @@ exports.TranslucentLoader = function (_a) {
   }, {
     children: [children, isLoading ? jsxRuntime.jsx(SpinnerContainer, __assign({
       alignItems: "center",
+      fullScreen: fullScreenBackdrop,
       justifyContent: "center"
     }, {
       children: jsxRuntime.jsx(Dots, {
@@ -4083,7 +4083,10 @@ var Container = styled__default["default"].div(templateObject_2 || (templateObje
   var _css = _a._css;
   return _css ? _css : "";
 });
-var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"], ["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"])));
+var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: ", ";\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"], ["\n  background: white;\n  opacity: 0.7;\n  top: 0;\n  left: 0;\n  position: ", ";\n  height: 100%;\n  width: 100%;\n  z-index: 100;\n"])), function (_a) {
+  var fullScreen = _a.fullScreen;
+  return fullScreen ? "fixed" : "absolute";
+});
 var templateObject_1, templateObject_2, templateObject_3;
 exports.Dots = Dots;
 //# sourceMappingURL=loaders.js.map

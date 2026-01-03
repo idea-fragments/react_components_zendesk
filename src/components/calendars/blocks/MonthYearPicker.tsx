@@ -2,9 +2,9 @@ import { mdiArrowLeft, mdiArrowRight } from "@mdi/js"
 import { MonthPicker } from "components/calendars/blocks/MonthPicker"
 import { YearPicker } from "components/calendars/blocks/YearPicker"
 import { IconButton } from "components/forms/IconButton"
-import { FlexBlock } from "components/layout/FlexBlock"
-import moment, { Moment } from "moment"
-import React from "react"
+import { FlexBox } from "components/layout/FlexBox"
+import moment from "moment"
+import React, { FC } from "react"
 import styled from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { getNextMonth, getPrevMonth, MONTH_MAP } from "utils/dateTime/calendar"
@@ -12,26 +12,28 @@ import { maxNumberBetween } from "utils/numberHelpers"
 
 export type MonthYearPickerChange = { month: number; year: number }
 
-type Props = {
+type MonthYearPickerProps = {
+  maxYear?: number
+  minDate?: Date
   month: number
-  year: number
-  minDate?: Moment
   pastFutureYearRangeSize: number
+  year: number
   onChange: (c: MonthYearPickerChange) => void
 }
 
-export const MonthYearPicker = ({
-  month,
-  year,
+export const MonthYearPicker: FC<MonthYearPickerProps> = ({
+  maxYear: maxYearProp,
   minDate,
+  month,
   pastFutureYearRangeSize,
+  year,
   onChange,
-}: Props) => {
+}) => {
   const currentYear = moment().year()
-  const maxYear = currentYear + pastFutureYearRangeSize
+  const maxYear = maxYearProp ?? currentYear + pastFutureYearRangeSize
   const minYear = maxNumberBetween(
     currentYear - pastFutureYearRangeSize,
-    minDate ? minDate.year() : Number.NEGATIVE_INFINITY,
+    minDate ? minDate.getUTCFullYear() : Number.NEGATIVE_INFINITY,
   )
 
   const sendPreviousMonth = () => {
@@ -42,7 +44,6 @@ export const MonthYearPicker = ({
 
     if (changes.year < minYear) return
 
-    // @ts-ignore
     onChange(changes)
   }
 
@@ -54,7 +55,6 @@ export const MonthYearPicker = ({
 
     if (changes.year > maxYear) return
 
-    // @ts-ignore
     onChange(changes)
   }
 
@@ -67,13 +67,18 @@ export const MonthYearPicker = ({
   }
 
   return (
-    <Container alignItems={"center"}>
+    <Container
+      alignItems={"center"}
+      gap={SPACINGS.XS}>
       <NavButton
         icon={mdiArrowLeft}
         onClick={sendPreviousMonth}
       />
-      <PickersContainer>
-        {/*@ts-ignore*/}
+      <FlexBox
+        alignItems={"center"}
+        fluid
+        gap={SPACINGS.XS}
+        justifyContent={"center"}>
         <MonthPicker
           month={month}
           onMonthSelected={sendSelectedMonth}
@@ -84,7 +89,7 @@ export const MonthYearPicker = ({
           maxYear={maxYear}
           onYearSelected={sendSelectedYear}
         />
-      </PickersContainer>
+      </FlexBox>
       <NavButton
         icon={mdiArrowRight}
         onClick={sendNextMonth}
@@ -95,17 +100,12 @@ export const MonthYearPicker = ({
 
 const NavButton = styled(IconButton).attrs({
   flat: true,
-})``
-
-const Container = styled(FlexBlock)`
-  margin-bottom: ${SPACINGS.XS};
-  align-items: center;
+  iconSize: "1.2rem",
+})`
+  flex: none;
+  height: unset;
 `
 
-const PickersContainer = styled(FlexBlock).attrs({
-  spacing: SPACINGS.XS,
-})`
-  margin-left: ${SPACINGS.XS};
-  flex: 1;
-  justify-content: center;
+const Container = styled(FlexBox)`
+  margin-bottom: ${SPACINGS.XS};
 `

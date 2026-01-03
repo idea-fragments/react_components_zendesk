@@ -55,6 +55,7 @@ declare const FONT_WEIGHTS: {
     readonly REGULAR: "400";
     readonly MEDIUM: "500";
     readonly BOLD: "700";
+    readonly SEMI_BOLD: "600";
     readonly BLACK: "800";
 };
 type FontSize = ValueOf<typeof FONT_SIZES>;
@@ -81,8 +82,8 @@ type FullSpectrumColors = {
 };
 type PartialSpectrumColors = {
     400: string;
-    M400: string;
     600: string;
+    M400: string;
     M600: string;
 };
 type ContainerStyles = {
@@ -102,6 +103,7 @@ type Styles = {
         color: string;
     };
     buttons: {
+        borderRadius: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -141,17 +143,17 @@ type Styles = {
         yellow: FullSpectrumColors;
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
+        orange: FullSpectrumColors;
+        lemon: FullSpectrumColors;
+        purple: FullSpectrumColors;
         fuschia: PartialSpectrumColors;
         pink: PartialSpectrumColors;
         crimson: PartialSpectrumColors;
-        orange: PartialSpectrumColors;
-        lemon: PartialSpectrumColors;
         lime: PartialSpectrumColors;
         mint: PartialSpectrumColors;
         teal: PartialSpectrumColors;
         azure: PartialSpectrumColors;
         royal: PartialSpectrumColors;
-        purple: PartialSpectrumColors;
     };
     container: {
         horizontalPadding: string;
@@ -210,6 +212,10 @@ type Styles = {
         borderSize: string;
         filterButtonIcon: Nullable<string>;
     };
+    tag: {
+        textColorWeight: keyof FullSpectrumColors;
+        backgroundColor: keyof FullSpectrumColors;
+    };
     textColorDark: string;
     textColorLight: string;
     textColorOverPrimaryBg: string;
@@ -248,13 +254,16 @@ declare const Chip: styled_components.StyledComponent<"div", styled_components.D
 
 declare const Close: styled_components.StyledComponent<react.ForwardRefExoticComponent<react.ButtonHTMLAttributes<HTMLButtonElement> & react.RefAttributes<HTMLButtonElement>>, styled_components.DefaultTheme, {}, never>;
 type TagProps = {
+    backgroundColor?: string;
+    backgroundColorWeight?: keyof FullSpectrumColors;
     children: ReactNode;
     className?: string;
-    color?: string;
+    color?: FullSpectrumColors;
     onClick?: MouseEventHandler<HTMLDivElement>;
     onClose?: () => void;
     size?: "small" | "large";
     success?: boolean;
+    textColor?: string;
 };
 declare let Tag: react.ForwardRefExoticComponent<TagProps & react.RefAttributes<HTMLDivElement>>;
 

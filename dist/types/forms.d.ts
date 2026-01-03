@@ -1,13 +1,12 @@
 /// <reference types="trusted-types" />
-/// <reference types="react" />
-import * as react_jsx_runtime from 'react/jsx-runtime';
-import react, { ReactNode, ChangeEvent, ComponentType, PropsWithChildren, FC, Ref } from 'react';
+import react, { ReactNode, InputHTMLAttributes, ChangeEvent, FC, ComponentType, PropsWithChildren, SVGAttributes, Ref } from 'react';
 import { ValueOf } from 'utils/types';
 import * as styled_components from 'styled-components';
 import { FlattenSimpleInterpolation, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { Moment } from 'moment';
+import * as react_jsx_runtime from 'react/jsx-runtime';
 import { IItemProps } from '@zendeskgarden/react-dropdowns/dist/typings/types';
 import { StateChangeOptions } from 'downshift';
+import { Moment } from 'moment';
 import { Nullable } from 'global';
 
 declare const VALIDATION_STATES: {
@@ -55,30 +54,44 @@ type FormFieldProps = {
     required?: boolean;
     validation?: Validation | undefined;
 } & ContainerProps;
-type TextFieldProps<V = string> = {
-    autoComplete?: string;
+type TextFieldProps<V = string> = Pick<InputHTMLAttributes<HTMLInputElement>, "autoComplete" | "inputMode" | "placeholder" | "step" | "type"> & {
     faux?: boolean;
-    small?: boolean;
-    type?: string;
-    value?: V;
     onChange: (value: V, event: ChangeEvent<HTMLInputElement>) => void;
+    small?: boolean;
+    symbolProp?: string;
+    value?: V;
 } & FormFieldProps;
 
-type Props$7 = {
-    minimumDate?: Moment;
-    disabledDates: Array<Moment>;
-    onChange: (d: Moment) => void;
-} & Omit<TextFieldProps, "onChange">;
-declare const DatePickerSelector: {
-    (props: Props$7): react_jsx_runtime.JSX.Element;
-    COMPONENT_NAME: string;
-    defaultProps: {
-        onChange: (...args: any) => void;
-        emptyState: string;
-        disabledDates: never[];
-        disabled: boolean;
-    };
+type DatePickerSelectorProps = {
+    minimumDate?: Date;
+    disabledDates: Array<Date>;
+    onChange: (d: Date) => void;
+} & Omit<TextFieldProps<Date>, "onChange">;
+declare const DatePickerSelector: FC<DatePickerSelectorProps>;
+
+type DateRange = {
+    startDate: Date;
+    endDate: Date;
 };
+
+type DateRangePickerSelectorProps = {
+    disabledDates?: Array<Date>;
+    maxDate?: Date;
+    minimumDate?: Date;
+    value?: DateRange;
+    onChange: (range: DateRange) => void;
+} & Omit<TextFieldProps, "onChange" | "value">;
+declare const DateRangePickerSelector: FC<DateRangePickerSelectorProps>;
+
+type DateRangeSelectorProps = {
+    disabledDates?: Array<Date>;
+    endDateProps?: Partial<Omit<DatePickerSelectorProps, "onChange" | "value">>;
+    minimumDate?: Date;
+    startDateProps?: Partial<Omit<DatePickerSelectorProps, "onChange" | "value">>;
+    value?: DateRange;
+    onChange: (range: DateRange) => void;
+};
+declare const DateRangeSelector: FC<DateRangeSelectorProps>;
 
 type ItemProps = Omit<IItemProps, "onClick"> & {
     danger?: boolean;
@@ -96,45 +109,40 @@ type SelectorOptionOptionalAttrs = {
     isHeaderItem?: boolean;
     itemProps?: Partial<ItemProps>;
 };
-type SelectorOption = {
-    [key: string]: any;
-} & SelectorOptionOptionalAttrs;
-type OnItemSelectedFunc = ((k: SelectorItemKey) => void) | ((o: SelectorOption | null | undefined) => void);
-type OnItemsSelectedFunc = ((ks: SelectorItemKey[]) => void) | ((o: SelectorOption[] | null | undefined) => void);
-type StateChange = StateChangeOptions<SelectorOption>;
-type Common = FormFieldProps & {
+type SelectorOption<T> = T & SelectorOptionOptionalAttrs;
+type OnItemSelectedFunc<T = any> = ((k: SelectorItemKey) => void) | ((o: SelectorOption<T> | null | undefined) => void);
+type OnItemsSelectedFunc<T> = ((ks: SelectorItemKey[]) => void) | ((o: SelectorOption<T>[] | null | undefined) => void);
+type StateChange<T> = StateChangeOptions<SelectorOption<T>>;
+type Common<T> = FormFieldProps & {
     appendMenuToNode?: HTMLElement;
     clearable?: boolean;
-    options: Array<SelectorOption>;
+    options: SelectorOption<T>[];
     optionsKeyMap?: {
-        [key: string]: SelectorOption;
+        [key: string]: SelectorOption<T>;
     };
-    keyField: string;
-    labelField: string;
-    valueField?: string;
+    keyField: keyof T;
+    labelField: keyof T;
     maxMenuHeight?: string;
     menuPopperModifiers?: Record<string, any>[] | undefined;
     placement?: MenuPlacement;
-    onStateChange?: (s: StateChange) => void;
+    onStateChange?: (s: StateChange<T>) => void;
     invalidOnNoSelection?: boolean;
     flat?: boolean;
     open?: boolean;
     small?: boolean;
 };
-type SelectorProps = {
+type SelectorProps<T> = {
     selectedKey?: SelectorItemKey;
-    onChange?: OnItemSelectedFunc;
-} & Common;
-type MultiSelectorProps = {
-    selectedKeys?: SelectorItemKey[];
-    onChange?: OnItemsSelectedFunc;
-} & Common;
+    onChange?: OnItemSelectedFunc<T>;
+} & Common<T>;
+type MultiSelectorProps<T> = {
+    maxItems?: number;
+    onChange?: OnItemsSelectedFunc<T>;
+    selectedKeys: SelectorItemKey[];
+} & Common<T>;
 
 type MenuPlacement = "start" | "auto" | "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "end" | "end-top" | "end-bottom" | "start-top" | "start-bottom";
-type OptionalSelectorProps = {
-    keyField?: string;
-    labelField?: string;
-};
+type OptionalSelectorProps<T> = Partial<Pick<Common<T>, "keyField" | "labelField">>;
 type CommonProps = {
     _css?: CSS;
     appendMenuToNode?: HTMLElement;
@@ -150,59 +158,98 @@ type CommonProps = {
     trigger?: ReactNode;
     useRawOptions?: boolean;
 };
-type SelectorsProps = (CommonProps & SelectorProps) | (CommonProps & MultiSelectorProps);
-type Props$6 = Omit<SelectorsProps, "keyField" | "labelField"> & OptionalSelectorProps;
-declare let Dropdown: FC<PropsWithChildren<Props$6>>;
+type SelectorsProps<T> = (CommonProps & SelectorProps<T>) | (CommonProps & MultiSelectorProps<T>);
+type DropdownProps<T> = Omit<SelectorsProps<T>, "keyField" | "labelField" | "options"> & OptionalSelectorProps<T> & ({
+    options: SelectorOption<T>[];
+    useRawOptions?: false;
+} | {
+    options: ReactNode[];
+    useRawOptions: true;
+});
+declare const CLEAR_OPTION: {
+    label: string;
+    value: string;
+    isClearingItem: boolean;
+};
+declare let Dropdown: <T>(props: react.PropsWithChildren<DropdownProps<T>>) => react_jsx_runtime.JSX.Element;
 declare const Autocomplete: react.ComponentType<any>;
 declare const Select: react.ComponentType<any>;
 declare const MultiSelect: styled_components.StyledComponent<react.ComponentType<any>, styled_components.DefaultTheme, {}, never>;
 
-declare let Selector: ({ disabled, ...props }: SelectorProps) => react_jsx_runtime.JSX.Element;
+declare let Selector: <T>({ disabled, invalidOnNoSelection, validation, ...props }: SelectorProps<T>) => react_jsx_runtime.JSX.Element;
 
-type Props$5 = {
-    maxItems?: number;
-    selectedKeys: Array<SelectorItemKey>;
-} & MultiSelectorProps;
-declare let MultiSelector: ({ maxItems, ...props }: Props$5) => react_jsx_runtime.JSX.Element;
+declare let MultiSelector: <T>({ emptyState, maxItems, validation, ...props }: MultiSelectorProps<T>) => react_jsx_runtime.JSX.Element;
 
-type Props$4 = {
-    children?: (o: SelectorOption) => void | ReactNode;
-    onSearchTextChange?: (s: string) => void;
-} & SelectorProps;
-declare let SearchableSelector: FC<Props$4>;
+type RadioButtonProps = {
+    checked?: boolean;
+    color?: string;
+    disabled?: boolean;
+    name: string;
+    value: string;
+    onChange: (value: string) => void;
+} & Omit<FormFieldProps, "onChange">;
+declare let RadioButton: FC<RadioButtonProps>;
+
+type RadioButtonOption = {
+    color?: string;
+    disabled?: boolean;
+    hint?: string;
+    label: string;
+    value: string;
+};
+type RadioButtonGroupProps = {
+    checkedOption?: string;
+    color?: string;
+    disabled?: boolean;
+    name: string;
+    options: Array<RadioButtonOption>;
+    onChange: (value: string) => void;
+} & Omit<FormFieldProps, "onChange">;
+declare const RadioButtonGroup: FC<RadioButtonGroupProps>;
+
+type SearchableSelectorProps<T> = {
+    children?: (o: SelectorOption<T>) => void | ReactNode;
+} & SelectorProps<T>;
+declare let SearchableSelector: <T>({ children, disabled, ...props }: SearchableSelectorProps<T>) => react_jsx_runtime.JSX.Element;
 
 type Props$3 = {
     minimumDate?: Moment;
 } & TextFieldProps;
 declare const MonthYearSelector: (props: Props$3) => react_jsx_runtime.JSX.Element;
 
-type SelectorOptionKeyMapParams = Pick<SelectorProps, "keyField" | "options" | "optionsKeyMap">;
+type SelectorOptionKeyMapParams<T> = Pick<SelectorProps<T>, "keyField" | "options" | "optionsKeyMap">;
 declare class SelectorOptionKeyMap {
-    static call({ keyField, options, optionsKeyMap, }: SelectorOptionKeyMapParams): {
-        [key: string]: SelectorOption;
+    static call<T>({ keyField, options, optionsKeyMap, }: SelectorOptionKeyMapParams<T>): {
+        [key: string]: SelectorOption<T>;
     };
 }
 
 declare class ArrayToSelectorOptionsConverter {
-    static call(list: SelectorItemKey[]): SelectorOption[];
+    static call(list: SelectorItemKey[]): SelectorOption<{
+        label: SelectorItemKey;
+        key: SelectorItemKey;
+    }>[];
 }
 
 declare const EmailTextField: (props: TextFieldProps<any>) => react_jsx_runtime.JSX.Element;
 
-declare let NumberTextField: ({ onChange, value: numberValue, ...props }: TextFieldProps<number>) => react_jsx_runtime.JSX.Element;
+type NumberTextFieldChangeValue = {
+    inputValue: string;
+    numberValue: number;
+};
+declare let NumberTextField: ({ onChange, step, value: numberValue, ...props }: TextFieldProps<NumberTextFieldChangeValue>) => react_jsx_runtime.JSX.Element;
 
 type Props$2 = TextFieldProps<any> & {
     newPassword?: boolean;
 };
 declare const PasswordTextField: ({ newPassword, ...props }: Props$2) => react_jsx_runtime.JSX.Element;
 
-declare let TextField: react.ForwardRefExoticComponent<{
-    autoComplete?: string | undefined;
+declare let TextField: react.ForwardRefExoticComponent<Pick<react.InputHTMLAttributes<HTMLInputElement>, "type" | "placeholder" | "inputMode" | "autoComplete" | "step"> & {
     faux?: boolean | undefined;
-    small?: boolean | undefined;
-    type?: string | undefined;
-    value?: string | undefined;
     onChange: (value: string, event: react.ChangeEvent<HTMLInputElement>) => void;
+    small?: boolean | undefined;
+    symbolProp?: string | undefined;
+    value?: string | undefined;
 } & {
     disabled?: boolean | undefined;
     emptyState?: react.ReactNode;
@@ -232,6 +279,8 @@ type Props$1 = PropsWithChildren<{
 }> & FieldProps;
 declare let TextFieldWrapper: react.ForwardRefExoticComponent<Props$1 & react.RefAttributes<unknown>>;
 
+type SVGComponent = ComponentType<SVGAttributes<any>>;
+
 declare const ALIGNMENTS: {
     readonly start: "flex-start";
     readonly center: "center";
@@ -257,7 +306,7 @@ type ButtonBaseProps = PropsWithChildren<{
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: Nullable<string | ComponentType>;
+    icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;
@@ -297,11 +346,13 @@ type FileChangeHandler = {
     onFileChange?: (f: File) => void;
     onFilesChange: (files: File[]) => void;
 };
-type FileButtonProps = Omit<ButtonProps, "onClick"> & FileChangeHandler;
+type FileButtonProps = Omit<ButtonProps, "onClick"> & FileChangeHandler & {
+    fileTypes: Nullable<Array<InputHTMLAttributes<HTMLInputElement>['accept']>>;
+};
 declare const FileButton: FC<FileButtonProps>;
 
 type IconButtonProps = Omit<ButtonProps, "children">;
-declare const IconButton: styled_components.StyledComponent<({ primary, flat, pill, ...props }: IconButtonProps) => JSX.Element, styled_components.DefaultTheme, IconButtonProps, never>;
+declare const IconButton: styled_components.StyledComponent<({ primary, flat, pill, ...props }: IconButtonProps) => react_jsx_runtime.JSX.Element, styled_components.DefaultTheme, IconButtonProps, never>;
 
 type CheckboxProps = FormFieldProps & {
     checked?: boolean;
@@ -352,9 +403,21 @@ type Props = {
 type ToggleProps = Props;
 declare let Toggle: FC<Props>;
 
-type TaggedToggleProps = ToggleProps & {
+type FullSpectrumColors = {
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    500: string;
+    600: string;
+    700: string;
+    800: string;
+};
+
+type TaggedToggleProps = Omit<ToggleProps, "color"> & {
     active?: boolean;
     activeText?: string;
+    color?: FullSpectrumColors;
     inactiveText?: string;
     toggleColor?: string;
 };
@@ -366,4 +429,4 @@ type ValidatedFormProps = {
     };
 };
 
-export { ArrayToSelectorOptionsConverter, Autocomplete, BUTTON_SIZES, Button, ButtonProps, ButtonSize, Checkbox, CheckboxProps, CycleButton, DatePickerSelector, Dropdown, EmailTextField, FileButton, FileButtonProps, Form, FormFieldProps, FormProps, IconButton, IconButtonProps, MenuPlacement, MonthYearSelector, MultiSelect, MultiSelector, MultiSelectorProps, NPSQuestion, NPSQuestionProps, NPSScore, NumberTextField, OnItemSelectedFunc, OnItemsSelectedFunc, PasswordTextField, SearchableSelector, Select, Selector, SelectorItemKey, SelectorOption, SelectorOptionKeyMap, SelectorOptionKeyMapParams, SelectorOptionOptionalAttrs, SelectorProps, StateChange, TaggedToggle, TaggedToggleProps, TextArea, TextAreaProps, TextField, TextFieldProps, TextFieldWrapper, Toggle, ToggleProps, VALIDATION_STATES, ValidatedFormProps, Validation, ValidationState };
+export { ArrayToSelectorOptionsConverter, Autocomplete, BUTTON_SIZES, Button, ButtonProps, ButtonSize, CLEAR_OPTION, Checkbox, CheckboxProps, Common, CycleButton, DatePickerSelector, DatePickerSelectorProps, DateRangePickerSelector, DateRangePickerSelectorProps, DateRangeSelector, DateRangeSelectorProps, Dropdown, DropdownProps, EmailTextField, FileButton, FileButtonProps, Form, FormFieldProps, FormProps, IconButton, IconButtonProps, MenuPlacement, MonthYearSelector, MultiSelect, MultiSelector, MultiSelectorProps, NPSQuestion, NPSQuestionProps, NPSScore, NumberTextField, NumberTextFieldChangeValue, OnItemSelectedFunc, OnItemsSelectedFunc, PasswordTextField, RadioButton, RadioButtonGroup, RadioButtonGroupProps, RadioButtonOption, RadioButtonProps, SearchableSelector, SearchableSelectorProps, Select, Selector, SelectorItemKey, SelectorOption, SelectorOptionKeyMap, SelectorOptionKeyMapParams, SelectorOptionOptionalAttrs, SelectorProps, StateChange, TaggedToggle, TaggedToggleProps, TextArea, TextAreaProps, TextField, TextFieldProps, TextFieldWrapper, Toggle, ToggleProps, VALIDATION_STATES, ValidatedFormProps, Validation, ValidationState };

@@ -1,4 +1,7 @@
-import { Legendable } from "components/calendars/Legendable.type";
+export type Legendable = {
+    color?: string;
+    label: string;
+};
 type Props = {
     legendables: Array<Legendable>;
     defaultColor: string;

@@ -42,7 +42,7 @@ const Story = (args: Partial<FinalizedTableProps>) => {
         onClick: DO_NOTHING,
       },
       {
-        buttonProps: { neutral: true, size: BUTTON_SIZES.SMALL },
+        buttonProps: { neutral: true, pill: true, size: BUTTON_SIZES.SMALL },
         label: "Hello World",
         onClick: DO_NOTHING,
       },

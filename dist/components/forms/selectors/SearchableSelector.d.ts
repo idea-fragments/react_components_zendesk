@@ -1,9 +1,7 @@
 import { SelectorOption, SelectorProps } from "components/forms/selectors/types";
-import { FC, ReactNode } from "react";
-type Props = {
-    children?: (o: SelectorOption) => void | ReactNode;
-    onSearchTextChange?: (s: string) => void;
-} & SelectorProps;
-export declare let SearchableSelector: FC<Props>;
-export {};
+import { ReactNode } from "react";
+export type SearchableSelectorProps<T> = {
+    children?: (o: SelectorOption<T>) => void | ReactNode;
+} & SelectorProps<T>;
+export declare let SearchableSelector: <T>({ children, disabled, ...props }: SearchableSelectorProps<T>) => import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=SearchableSelector.d.ts.map

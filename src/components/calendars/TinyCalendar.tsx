@@ -1,20 +1,30 @@
-import { Legend } from "components/calendars/blocks/Legend"
-import { MonthYearPickerChange } from "components/calendars/blocks/MonthYearPicker"
-import { MonthYearPicker } from "components/calendars/blocks/MonthYearPicker"
-import { Legendable } from "components/calendars/Legendable.type"
-import { PaddedFlexBlock } from "components/layout/FlexBlock"
-import moment, { Moment } from "moment"
-import React, { useEffect, useRef, useState } from "react"
+import { Legend, Legendable } from "components/calendars/blocks/Legend"
+import {
+  MonthYearPicker,
+  MonthYearPickerChange,
+} from "components/calendars/blocks/MonthYearPicker"
+import { FlexBox } from "components/layout/FlexBox"
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { Calendar, Range } from "react-date-range"
 import styled from "styled-components"
 import { fade } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
+import { Styles } from "styles/theme/Theme.type"
 import { useTheme } from "styles/theme/useTheme"
 import { FONT_WEIGHTS } from "styles/typography"
 import { flatten } from "utils/arrayHelpers"
 import { DateRange } from "utils/dateTime/DateRange.type"
-import { maxDateBetween, momentListToDateList } from "utils/dateTimeHelpers"
+import { maxDateBetween } from "utils/dateTimeHelpers"
 import { DO_NOTHING } from "utils/functionHelpers"
+import "react-date-range/dist/styles.css" // main style file
+import "react-date-range/dist/theme/default.css" // theme css file
 
 export type LabeledRangeList = {
   color?: string
@@ -24,102 +34,138 @@ export type LabeledRangeList = {
 
 type ColoredDateRange = DateRange & { color?: string }
 
-type Props = {
-  disabledDates: Array<Moment>
-  displayMode?: "dateRange" | "date"
+export type TinyCalendarProps = {
+  disabledDates: Array<Date>
   fluid?: boolean
-  initialDate?: Moment
+  initialDate?: Date
   labeledRanges?: Array<LabeledRangeList>
-  minDate?: Moment
+  minDate?: Date
   ranges?: Array<ColoredDateRange>
   showLegend?: boolean
   onChange: (d: Date) => void
 }
 
-export let TinyCalendar = ({
+const lowestPossibleDate = new Date()
+lowestPossibleDate.setFullYear(Number.MIN_VALUE)
+
+export let TinyCalendar: FC<TinyCalendarProps> = ({
   disabledDates = [],
-  displayMode,
   fluid = false,
-  initialDate = moment(),
+  initialDate = new Date(),
   labeledRanges,
   minDate,
   ranges,
   showLegend = false,
   onChange = DO_NOTHING,
-}: Props) => {
-  const [date, setDate] = useState<Moment>(minDate || initialDate)
+}) => {
+  const [date, setDate] = useState<Date>(minDate ?? initialDate)
+  const [displayMode] = useState<"dateRange" | "date">(
+    labeledRanges || ranges ? "dateRange" : "date",
+  )
   const theme = useTheme()
   const colors = theme.styles.colors
-  const outOfMinRange = minDate && date.isBefore(minDate)
-  const usableDate: Moment = outOfMinRange ? minDate : date
   const changeShownDate = useRef<(d: Date) => void>()
+  const rangeColors = useMemo(() => {
+    return Object.keys(colors)
+      .filter((key: string) => !["black", "product", "white"].includes(key))
+      .map((key: string) => {
+        const c =
+          colors[
+            key as keyof Omit<Styles["colors"], "black" | "product" | "white">
+          ]
+        return c["600"]
+      })
+      .map((color: string) => fade(color, 0.3))
+  }, [colors])
 
-  useEffect(() => {
-    if (changeShownDate.current != null) {
-      changeShownDate.current(usableDate.toDate())
-    }
-  }, [usableDate])
+  const labeledRangeLegend = useMemo(() => {
+    if (!labeledRanges) return undefined
+    let numUsedColors = 0
+    const labelColors: { [key: string]: Legendable } = {}
 
-  const changeDateState = ({ month, year }: MonthYearPickerChange) => {
-    const newDate = moment(usableDate).month(month).year(year)
-    const newUsableDate = maxDateBetween(
-      newDate,
-      minDate || moment().year(Number.MIN_VALUE),
-    )
-    setDate(newUsableDate)
-  }
-
-  const rangeColors = [
-    colors.purple["600"],
-    colors.green["600"],
-    colors.yellow["600"],
-  ].map((color: string) => fade(color))
-
-  let numUsedColors = 0
-  const labelColors: { [key: string]: Legendable } = {}
-  if (labeledRanges) {
     labeledRanges.forEach((l: LabeledRangeList) => {
       labelColors[l.label] = {
         label: l.label,
-        color: l.color || rangeColors[numUsedColors++],
+        color: l.color ?? rangeColors[numUsedColors++],
       }
     })
 
-    ranges = flatten<ColoredDateRange>(
+    return labelColors
+  }, [labeledRanges, rangeColors])
+
+  const finalizedRanges: ColoredDateRange[] | undefined = useMemo(() => {
+    if (!labeledRanges) return ranges
+
+    return flatten<ColoredDateRange>(
       labeledRanges.map((l: LabeledRangeList) =>
         l.ranges.map((r: DateRange) => ({
           ...r,
-          color: labelColors[l.label].color,
+          key: r.startDate.getTime() + "-" + r.endDate.getTime(),
+          color: labeledRangeLegend![l.label].color,
         })),
       ),
     )
-  }
+  }, [labeledRangeLegend, labeledRanges, ranges])
 
-  displayMode = displayMode || (ranges ? "dateRange" : "date")
+  const outOfMinRange = useMemo(() => {
+    if (!minDate) return false
+
+    return date < minDate
+  }, [date, minDate])
+
+  const usableDate: Date = useMemo(() => {
+    return outOfMinRange ? minDate! : date
+  }, [date, minDate, outOfMinRange])
+
+  const changeDateState = useCallback(
+    ({ month, year }: MonthYearPickerChange) => {
+      const newDate = new Date(usableDate.toISOString())
+      newDate.setMonth(month)
+      newDate.setFullYear(year)
+
+      const newUsableDate = maxDateBetween(
+        newDate,
+        minDate ?? lowestPossibleDate,
+      )
+
+      setDate(newUsableDate)
+    },
+    [minDate, usableDate],
+  )
+
+  useEffect(() => {
+    if (changeShownDate.current != null) {
+      changeShownDate.current(usableDate)
+    }
+  }, [usableDate])
 
   return (
     <Container
       fluid={fluid}
-      withRows
-      spacing={SPACINGS.SM}>
+      withRows>
       <Calendar
+        // focusedRange={undefined}
+        // onRangeFocusChange={() => {
+        //   console.log("onRangeFocusChange")
+        // }}
+        // initialFocusedRange={undefined}
         color={theme.styles.colorPrimary}
-        // date={usableDate.toDate()}
+        // date={usableDate}
         displayMode={displayMode}
-        disabledDates={momentListToDateList(disabledDates)}
+        disabledDates={disabledDates}
         dragSelectionEnabled={false}
-        minDate={minDate ? minDate.toDate() : undefined}
+        minDate={minDate ?? undefined}
         /*
-       navigatorRenderer causes library's month and year pickers to be hidden.
-       showMonthAndYearPickers prop doesnt need to be set to false at the moment
-       but will be done anyway just in case.
-       */
+         navigatorRenderer causes library's month and year pickers to be hidden.
+         showMonthAndYearPickers prop doesnt need to be set to false at the moment
+         but will be done anyway just in case.
+         */
         navigatorRenderer={(_, changeShownDateFunc) => {
           changeShownDate.current = changeShownDateFunc
           return (
             <MonthYearPicker
-              month={usableDate.month()}
-              year={usableDate.year()}
+              month={usableDate.getMonth()}
+              year={usableDate.getFullYear()}
               minDate={minDate}
               pastFutureYearRangeSize={3}
               onChange={({ month, year }: MonthYearPickerChange) => {
@@ -131,32 +177,43 @@ export let TinyCalendar = ({
             />
           )
         }}
-        ranges={ranges as any as Range[]}
+        ranges={
+          finalizedRanges as Pick<
+            Range,
+            "startDate" | "endDate" | "key" | "color"
+          >[]
+        }
         rangeColors={rangeColors}
-        shownDate={usableDate.toDate()}
+        shownDate={usableDate}
         showMonthAndYearPickers={false}
         showMonthArrow={false}
         showPreview={true}
         showDateDisplay={false}
         onChange={onChange}
-        onShownDateChange={DO_NOTHING}
-        onPreviewChange={DO_NOTHING}
+        // onShownDateChange={() => {
+        //   console.log("onShownDateChange")
+        // }}
+        // onPreviewChange={() => {
+        //   console.log("onPreviewChange")
+        // }}
       />
-      {showLegend && labeledRanges ? (
+      {showLegend && labeledRangeLegend ? (
         <Legend
-          legendables={Object.values(labelColors)}
           defaultColor={theme.styles.colorPrimary}
+          legendables={Object.values(labeledRangeLegend)}
         />
       ) : null}
     </Container>
   )
 }
 
-const Container = styled(PaddedFlexBlock)`
+const Container = styled(FlexBox)`
+  padding: ${SPACINGS.SM};
   width: ${({ fluid }) => (fluid ? "100%" : "24.5rem")};
 
   .rdrMonth {
     width: 100%;
+    padding: 0;
   }
 
   .rdrDay.rdrDayToday .rdrDayNumber span:after {

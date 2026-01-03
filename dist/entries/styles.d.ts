@@ -11,6 +11,7 @@ export * from "styles/spacings";
 export * from "styles/typography";
 export * from "styles/types";
 export * from "styles/mixins";
+export * from "components/forms/buttonMixins";
 export * from "styles/mediaQueries";
 export * from "styles/theme/ThemeProvider";
 //# sourceMappingURL=styles.d.ts.map

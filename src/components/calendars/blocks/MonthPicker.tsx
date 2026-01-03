@@ -1,10 +1,15 @@
 import { SearchableSelector } from "components/forms/selectors/SearchableSelector"
+import {
+  SelectorItemKey,
+  SelectorOption,
+} from "components/forms/selectors/types"
 import React from "react"
 import { Month, MONTH_MAP } from "utils/dateTime/calendar"
 
-const parseNumberAndCall = (action: (n: number) => void) => (s: string) => {
-  action(Number(s))
-}
+const parseNumberAndCall =
+  (action: (n: number) => void) => (s: SelectorItemKey) => {
+    action(Number(s))
+  }
 
 const toTitleCase = (s: string) =>
   s
@@ -14,42 +19,50 @@ const toTitleCase = (s: string) =>
     .join(" ")
 
 const keyField = "monthNum"
-const valueField = "monthName"
+const labelField = "monthName"
+
 const [MONTH_OPTIONS, OPTIONS_KEY_MAP] = Object.keys(MONTH_MAP).reduce(
   ([monthOptions, optionsKeyMap], m: string) => {
     const op = {
       [keyField]: MONTH_MAP[m as Month],
-      [valueField]: toTitleCase(m),
+      [labelField]: toTitleCase(m),
     }
-    // @ts-ignore
+
     monthOptions.push(op)
-    // @ts-ignore
     optionsKeyMap[MONTH_MAP[m as Month]] = op
 
     return [monthOptions, optionsKeyMap]
   },
-  [[], {}],
+  [
+    [] as Array<{ monthNum: number; monthName: string }>,
+    {} as { [key: number]: { monthNum: number; monthName: string } },
+  ],
 )
 
-type Props = {
+export type MonthPickerProps = {
   month: number
   onMonthSelected: (n: number) => void
 }
 
-export const MonthPicker = ({ month, onMonthSelected }: Props) => {
+export const MonthPicker = ({ month, onMonthSelected }: MonthPickerProps) => {
   return (
     <SearchableSelector
       compact
-      flat
-      maxMenuHeight={"10rem"}
-      options={MONTH_OPTIONS}
-      optionsKeyMap={OPTIONS_KEY_MAP}
-      keyField={keyField}
-      labelField={valueField}
-      selectedKey={month.toString()}
       emptyState={"Type or Select Month"}
-      // @ts-ignore
+      flat
+      keyField={keyField}
+      labelField={labelField}
+      maxMenuHeight={"10rem"}
       onChange={parseNumberAndCall(onMonthSelected)}
+      options={
+        MONTH_OPTIONS as SelectorOption<{
+          monthNum: number
+          monthName: string
+        }>[]
+      }
+      optionsKeyMap={OPTIONS_KEY_MAP}
+      selectedKey={month.toString()}
+      small
     />
   )
 }

@@ -1,5 +1,5 @@
 import { Validation } from "components/forms/Validation.type";
-import { ChangeEvent, ReactNode } from "react";
+import { ChangeEvent, InputHTMLAttributes, ReactNode } from "react";
 import { ContainerProps } from "styles/types";
 export type FormFieldProps = {
     disabled?: boolean;
@@ -10,12 +10,11 @@ export type FormFieldProps = {
     required?: boolean;
     validation?: Validation | undefined;
 } & ContainerProps;
-export type TextFieldProps<V = string> = {
-    autoComplete?: string;
+export type TextFieldProps<V = string> = Pick<InputHTMLAttributes<HTMLInputElement>, "autoComplete" | "inputMode" | "placeholder" | "step" | "type"> & {
     faux?: boolean;
-    small?: boolean;
-    type?: string;
-    value?: V;
     onChange: (value: V, event: ChangeEvent<HTMLInputElement>) => void;
+    small?: boolean;
+    symbolProp?: string;
+    value?: V;
 } & FormFieldProps;
 //# sourceMappingURL=formField.types.d.ts.map

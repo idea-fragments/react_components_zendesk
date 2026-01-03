@@ -1,5 +1,6 @@
 import { ButtonProps } from "components/forms/Button";
-import { FC } from "react";
+import { Nullable } from "global";
+import { FC, InputHTMLAttributes } from "react";
 type FileChangeHandler = {
     multiple?: false;
     onFileChange: (f: File) => void;
@@ -9,7 +10,9 @@ type FileChangeHandler = {
     onFileChange?: (f: File) => void;
     onFilesChange: (files: File[]) => void;
 };
-export type FileButtonProps = Omit<ButtonProps, "onClick"> & FileChangeHandler;
+export type FileButtonProps = Omit<ButtonProps, "onClick"> & FileChangeHandler & {
+    fileTypes: Nullable<Array<InputHTMLAttributes<HTMLInputElement>['accept']>>;
+};
 export declare const FileButton: FC<FileButtonProps>;
 export {};
 //# sourceMappingURL=FileButton.d.ts.map

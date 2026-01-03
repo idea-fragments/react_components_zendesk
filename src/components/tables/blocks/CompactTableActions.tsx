@@ -11,11 +11,16 @@ export type CompactTableActionsProps = Required<
   Pick<TableActionsProps, "actions">
 >
 
+type OptionsForDropdown = {
+  label: string
+  onClick: () => void
+}
+
 export const CompactTableActions: FC<CompactTableActionsProps> = ({
   actions,
 }) => {
-  const options = useMemo(
-    (): SelectorOption[] =>
+  const options: OptionsForDropdown[] = useMemo(
+    () =>
       actions.map((a) => {
         const {
           buttonProps: _,
@@ -45,7 +50,7 @@ export const CompactTableActions: FC<CompactTableActionsProps> = ({
       keyField={"label"}
       labelField={"label"}
       onChange={triggerAction}
-      options={options}
+      options={options as SelectorOption<OptionsForDropdown>[]}
       trigger={<OverflowButton />}
     />
   )

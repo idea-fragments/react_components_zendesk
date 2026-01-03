@@ -19,8 +19,8 @@ type FullSpectrumColors = {
 };
 type PartialSpectrumColors = {
     400: string;
-    M400: string;
     600: string;
+    M400: string;
     M600: string;
 };
 type ContainerStyles = {
@@ -40,6 +40,7 @@ type Styles = {
         color: string;
     };
     buttons: {
+        borderRadius: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -79,17 +80,17 @@ type Styles = {
         yellow: FullSpectrumColors;
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
+        orange: FullSpectrumColors;
+        lemon: FullSpectrumColors;
+        purple: FullSpectrumColors;
         fuschia: PartialSpectrumColors;
         pink: PartialSpectrumColors;
         crimson: PartialSpectrumColors;
-        orange: PartialSpectrumColors;
-        lemon: PartialSpectrumColors;
         lime: PartialSpectrumColors;
         mint: PartialSpectrumColors;
         teal: PartialSpectrumColors;
         azure: PartialSpectrumColors;
         royal: PartialSpectrumColors;
-        purple: PartialSpectrumColors;
     };
     container: {
         horizontalPadding: string;
@@ -235,6 +236,7 @@ declare const FONT_WEIGHTS: {
     readonly REGULAR: "400";
     readonly MEDIUM: "500";
     readonly BOLD: "700";
+    readonly SEMI_BOLD: "600";
     readonly BLACK: "800";
 };
 type FontSize = ValueOf<typeof FONT_SIZES>;
@@ -282,6 +284,29 @@ declare const textWithColor: styled_components.FlattenInterpolation<styled_compo
     inline?: boolean | undefined;
 }, styled_components.DefaultTheme>>;
 
+declare const getInlineStyling: styled_components.FlattenInterpolation<styled_components.ThemedStyledProps<{
+    inline?: boolean | undefined;
+}, styled_components.DefaultTheme>>;
+declare const inlineWithText: styled_components.FlattenSimpleInterpolation;
+declare const textColorForButton: styled_components.FlattenInterpolation<styled_components.ThemedStyledProps<{
+    color: string;
+    flat?: boolean | undefined;
+    inline?: boolean | undefined;
+    primary?: boolean | undefined;
+}, styled_components.DefaultTheme>>;
+declare const textColorForFlatButton: styled_components.FlattenInterpolation<styled_components.ThemedStyledProps<{
+    color: string;
+    flat?: boolean | undefined;
+    inline?: boolean | undefined;
+    primary?: boolean | undefined;
+}, styled_components.DefaultTheme>>;
+declare const buttonLikeHoverable: styled_components.FlattenInterpolation<styled_components.ThemedStyledProps<{
+    color: string;
+    flat?: boolean | undefined;
+    inline?: boolean | undefined;
+    primary?: boolean | undefined;
+}, styled_components.DefaultTheme>>;
+
 declare const PHONE_SIZE = 560;
 declare const TABLET_SIZE = 840;
 type MediaQuery = (styles: CSS) => CSS;
@@ -310,4 +335,4 @@ declare const THEMES: {
     __ZENDESK_DEFAULT_THEME__: _zendeskgarden_react_theming.IGardenTheme;
 };
 
-export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, MediaQueriesI, MediaQuery, PHONE_SIZE, Props, SPACE_DIRECTIONS, SPACINGS, StyledProps, Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, dark, darker, desaturate, fade, hasGoodContrast, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorPrimary, textWithColor, unit, veryDark, veryLight };
+export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, MediaQueriesI, MediaQuery, PHONE_SIZE, Props, SPACE_DIRECTIONS, SPACINGS, StyledProps, Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, buttonLikeHoverable, dark, darker, desaturate, fade, getInlineStyling, hasGoodContrast, inlineWithText, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorForButton, textColorForFlatButton, textColorPrimary, textWithColor, unit, veryDark, veryLight };

@@ -1,12 +1,13 @@
-// @flow
-
-import { Legendable } from "components/calendars/Legendable.type"
-import { FlexBlock } from "components/layout/FlexBlock"
+import { FlexBox } from "components/layout/FlexBox"
 import { Text } from "components/text/Text"
 import * as React from "react"
 import styled from "styled-components"
-import { SPACINGS } from "styles/spacings"
 import { FONT_SIZES } from "styles/typography"
+
+export type Legendable = {
+  color?: string
+  label: string
+}
 
 type Props = {
   legendables: Array<Legendable>
@@ -17,21 +18,18 @@ export const Legend = ({ legendables, defaultColor }: Props) => {
   const foundLabels = new Set()
 
   return (
-    <LegendContainer
-      withRows
-      spacing={SPACINGS.XS}>
+    <LegendContainer withRows>
       {legendables.map(({ color, label }: Legendable) => {
         if (foundLabels.has(label)) return null
         foundLabels.add(label)
 
         return (
-          <FlexBlock
+          <FlexBox
             key={label}
-            alignItems={"center"}
-            spacing={SPACINGS.SM}>
+            alignItems={"center"}>
             <ColorBlock color={color || defaultColor} />
             <Text>{label}</Text>
-          </FlexBlock>
+          </FlexBox>
         )
       })}
     </LegendContainer>
@@ -40,7 +38,7 @@ export const Legend = ({ legendables, defaultColor }: Props) => {
 
 Legend.COMPONENT_NAME = "Legend"
 
-const LegendContainer = styled(FlexBlock)`
+const LegendContainer = styled(FlexBox)`
   font-size: ${FONT_SIZES.XS};
 `
 
