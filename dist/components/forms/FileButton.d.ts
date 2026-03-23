@@ -11,7 +11,7 @@ type FileChangeHandler = {
     onFilesChange: (files: File[]) => void;
 };
 export type FileButtonProps = Omit<ButtonProps, "onClick"> & FileChangeHandler & {
-    fileTypes: Nullable<Array<InputHTMLAttributes<HTMLInputElement>['accept']>>;
+    fileTypes: Nullable<Array<InputHTMLAttributes<HTMLInputElement>["accept"]>>;
 };
 export declare const FileButton: FC<FileButtonProps>;
 export {};

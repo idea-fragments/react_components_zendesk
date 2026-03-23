@@ -45,8 +45,10 @@ var getColor = styled.css(templateObject_1$4 || (templateObject_1$4 = __makeTemp
 ])), function (_a) {
   var color = _a.color,
     danger = _a.danger,
+    secondary = _a.secondary,
     theme = _a.theme;
   if (danger) return theme.styles.colorDanger;
+  if (secondary) return theme.styles.textColorSecondary;
   if (color) return color;
   return "inherit";
 });
@@ -54,23 +56,29 @@ var getColor = styled.css(templateObject_1$4 || (templateObject_1$4 = __makeTemp
 //   margin-top: 0;
 // `
 var subTextStyling = styled.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
+var Text = styled__default["default"].div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"])), function (_a) {
   var align = _a.align;
   return align;
 }, function (_a) {
   var fluid = _a.fluid;
   return fluid ? "100%" : "unset";
+}, getColor, function (_a) {
+  var compact = _a.compact;
+  return compact ? styled.css(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "], ["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "]))) : "";
 }, function (_a) {
-  var color = _a.color;
-  return color ? getColor : "";
+  var size = _a.size;
+  return size ? "font-size: ".concat(size, ";") : "";
+}, function (_a) {
+  var weight = _a.weight;
+  return weight ? "font-weight: ".concat(weight, ";") : "";
 }, function (_a) {
   var hasSubText = _a.hasSubText;
   return hasSubText ? subTextStyling : "";
-}, getColor, function (_a) {
+}, function (_a) {
   var _css = _a._css;
   return _css;
 });
-var templateObject_1$4, templateObject_2$2, templateObject_3$2;
+var templateObject_1$4, templateObject_2$2, templateObject_3$2, templateObject_4$2;
 var XXS$1 = ".8rem";
 var XS$1 = ".9rem";
 var SM = "1rem";
@@ -190,10 +198,13 @@ var Hint = styled__default["default"](XS).attrs(function (_a) {
   return {
     color: getTextColor()
   };
-})(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n  font-weight: ", ";\n  margin: 0 0 4px;\n"], ["\n  color: ", ";\n  font-weight: ", ";\n  margin: 0 0 4px;\n"])), function (_a) {
+})(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: ", ";\n  font-weight: ", ";\n  margin: 0 0 4px;\n  ", ";\n"], ["\n  color: ", ";\n  font-weight: ", ";\n  margin: 0 0 4px;\n  ", ";\n"])), function (_a) {
   var color = _a.color;
   return color;
-}, FONT_WEIGHTS.MEDIUM);
+}, FONT_WEIGHTS.MEDIUM, function (_a) {
+  var _css = _a._css;
+  return _css;
+});
 var templateObject_1;
 exports.H1 = H1;
 exports.H2 = H2;

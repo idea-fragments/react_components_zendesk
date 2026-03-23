@@ -1,25 +1,18 @@
+import { ButtonProps } from "components/forms/Button";
 import { MenuPlacement } from "components/forms/selectors/Dropdown";
-import React from "react";
+import React, { FC } from "react";
+import { CSSProp } from "styles/types";
 export type OverflowMenuItem = {
-    label: string;
     action: () => void;
+    label: string;
 };
-type Props = {
-    appendToNode?: HTMLElement;
-    placement?: MenuPlacement;
+export type OverflowButtonProps = ButtonProps & CSSProp;
+export declare const OverflowButton: import("styled-components").StyledComponent<React.ForwardRefExoticComponent<import("@zendeskgarden/react-tables/dist/typings/elements/OverflowButton").IOverflowButtonProps & React.RefAttributes<HTMLButtonElement>>, import("styled-components").DefaultTheme, {}, never>;
+export type OverflowMenuProps = {
     actions: Array<OverflowMenuItem>;
+    appendToNode?: HTMLElement;
+    overflowButtonProps?: OverflowButtonProps;
+    placement?: MenuPlacement;
 };
-export declare const OverflowButton: import("styled-components").StyledComponent<React.ForwardRefExoticComponent<import("@zendeskgarden/react-tables/dist/typings/elements/OverflowButton").IOverflowButtonProps & React.RefAttributes<HTMLButtonElement>>, import("styled-components").DefaultTheme, {
-    icon: string;
-    "data-component-name": string;
-    compact: boolean;
-    color: string;
-    "aria-label": "Row actions";
-    size: string;
-    primary: boolean;
-    iconSize: string;
-    as: React.ComponentType<import("components/forms/Button").ButtonProps>;
-}, "color" | "primary" | "size" | "data-component-name" | "aria-label" | "compact" | "icon" | "iconSize" | "as">;
-export declare const OverflowMenu: ({ actions, appendToNode, placement }: Props) => import("react/jsx-runtime").JSX.Element;
-export {};
+export declare const OverflowMenu: FC<OverflowMenuProps>;
 //# sourceMappingURL=OverflowMenu.d.ts.map

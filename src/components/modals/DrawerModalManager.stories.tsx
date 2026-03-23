@@ -3,9 +3,8 @@ import { FlexBox } from "components/layout/FlexBox"
 import { DrawerModalManager } from "components/modals/DrawerModalManager"
 import { DrawerModalStateProvider } from "components/stateProviders/DrawerModalStateProvider"
 import { Paragraph } from "components/text/Paragraph"
-
 import { useDrawerState } from "hooks/useDrawerState"
-import React, { FC } from "react"
+import React from "react"
 
 import { SPACINGS } from "styles/spacings"
 
@@ -201,13 +200,6 @@ const Story = () => {
 //     </FlexBox>
 //   )
 // }
-
-const WithDrawerProvider = (Story: FC) => (
-  <DrawerModalStateProvider>
-    <Story />
-    <DrawerModalManager />
-  </DrawerModalStateProvider>
-)
 
 export const Default = Story.bind({})
 Default.args = {}

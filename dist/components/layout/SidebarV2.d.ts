@@ -7,6 +7,7 @@ export type SidebarV2Props = {
     activeAction?: string;
     logo: ReactNode;
     lowerActions?: Action[];
+    scrollable?: boolean;
 };
 export declare const SidebarV2: FC<SidebarV2Props>;
 export {};

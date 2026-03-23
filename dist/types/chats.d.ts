@@ -21,8 +21,8 @@ type ChatProps = {
 declare const Chat: styled_components.StyledComponent<FC<ChatProps>, styled_components.DefaultTheme, {}, never>;
 
 type OverflowMenuItem = {
-    label: string;
     action: () => void;
+    label: string;
 };
 
 type ChatMessageProps = {

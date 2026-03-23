@@ -5,8 +5,10 @@ import { Alignment } from "styles/alignments";
 import { ColorProps, ContainerProps, CSSProp } from "styles/types";
 import { PromiseFunc } from "utils/function.types";
 export declare const BUTTON_SIZES: {
-    readonly SMALL: "small";
     readonly LARGE: "large";
+    readonly MEDIUM: "medium";
+    readonly SMALL: "small";
+    readonly X_SMALL: "x_small";
 };
 export type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES];
 type AutoLoadable = {
@@ -16,6 +18,7 @@ type AutoLoadable = {
 type ButtonBaseProps = PropsWithChildren<{
     alignItems?: string;
     alignSelf?: Alignment;
+    ariaLabel?: string;
     autoLoadable?: boolean;
     disabled?: boolean;
     flat?: boolean;

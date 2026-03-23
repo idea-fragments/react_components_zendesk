@@ -12,23 +12,26 @@ import { FlexBox } from "components/layout/FlexBox"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
 import { Text } from "components/text/Text"
 import { Nullable } from "global"
-import React, { FC, useCallback, useEffect } from "react"
+import React, { FC, useCallback, useEffect, useMemo } from "react"
 import styled from "styled-components"
 import { dark } from "styles/colors"
 import { textColorForBackground } from "styles/mixins"
 import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
 import { FONT_WEIGHTS } from "styles/typography"
+import { ValueOf } from "utils/types"
 
 const { SM, MD, XS } = SPACINGS
 export const ALERT_TYPES = {
-  INFO: "info",
-  SUCCESS: "success",
+  ACCENT: "accent",
   ERROR: "error",
+  INFO: "info",
+  PRIMARY: "primary",
+  SUCCESS: "success",
   WARNING: "warning",
 } as const
 
-export type AlertType = (typeof ALERT_TYPES)[keyof typeof ALERT_TYPES]
+export type AlertType = ValueOf<typeof ALERT_TYPES>
 
 export type AlertContent = {
   title?: string
@@ -37,89 +40,95 @@ export type AlertContent = {
   type?: AlertType
 }
 
-type Props = {
-  isVisible: boolean
+type AlertProps = {
+  autoDismissSeconds?: number
+  alertContent: AlertContent
   closeAlert: () => void
-  alertContent: Nullable<AlertContent>
+  isVisible: boolean
 } & StyledComponentProps
 
-export let Alert: FC<Props> = ({
-  isVisible,
-  closeAlert,
+export let Alert: FC<AlertProps> = ({
+  autoDismissSeconds,
   alertContent,
   className,
+  closeAlert,
+  isVisible,
 }) => {
   const theme = useTheme()
+  const { title, body, type = ALERT_TYPES.INFO }: AlertContent = alertContent
+  const alertTypeBackgroundColor: Record<AlertType, string> = useMemo(
+    () => ({
+      [ALERT_TYPES.ACCENT]: theme.styles.colorAccent,
+      [ALERT_TYPES.ERROR]: theme.styles.colorDanger,
+      [ALERT_TYPES.INFO]: theme.styles.colors.blue["400"],
+      [ALERT_TYPES.PRIMARY]: theme.styles.colorPrimary,
+      [ALERT_TYPES.SUCCESS]: theme.styles.colorSuccess,
+      [ALERT_TYPES.WARNING]: theme.styles.colorWarning,
+    }),
+    [theme],
+  )
+  const bgColor = useMemo(
+    () => alertTypeBackgroundColor[type],
+    [alertTypeBackgroundColor, type],
+  )
 
   const handleClose = useCallback(() => {
     closeAlert()
-    if (alertContent?.onClose) alertContent.onClose()
+    alertContent.onClose?.()
   }, [alertContent, closeAlert])
 
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || !autoDismissSeconds) return
 
-    setTimeout(handleClose, 8000)
-  }, [isVisible, handleClose])
+    setTimeout(handleClose, autoDismissSeconds * 1000)
+  }, [autoDismissSeconds, handleClose, isVisible])
 
   if (!isVisible) return null
-  if (!alertContent) throw new Error("Alert found null alert content")
-
-  const { title, body, type = ALERT_TYPES.INFO }: AlertContent = alertContent
-
-  const bgColor = {
-    [ALERT_TYPES.ERROR]: theme.styles.colorDanger,
-    [ALERT_TYPES.INFO]: theme.styles.colors.blue["400"],
-    [ALERT_TYPES.SUCCESS]: theme.styles.colorSuccess,
-    [ALERT_TYPES.WARNING]: theme.styles.colorWarning,
-  }[type]
 
   return (
-    <AbsoluteContainer>
-      <AlertWrapper
-        className={className}
-        color={bgColor}>
-        <FlexBox
-          alignItems={"center"}
-          css={`
-            border-right: 1px solid ${dark(bgColor, 0.15)};
-            padding: 0 ${SM} 0 ${SM};
-          `}>
-          <Icon
-            size={"1.2rem"}
-            svg={iconSVG(type)}
-          />
-        </FlexBox>
-        <Content>
-          {title ? (
-            <Text
-              css={`
-                font-weight: ${FONT_WEIGHTS.MEDIUM};
-              `}>
-              {title}
-            </Text>
-          ) : null}
-          <Text>{body}</Text>
-        </Content>
-        <FlexBox
-          alignItems={"center"}
-          css={`
-            padding: 0 ${SM} 0 ${SM};
-          `}>
-          <CloseButton
-            aria-label="Close alert"
-            color={bgColor}
-            flat={false}
-            primary
-            onClick={handleClose}
-          />
-        </FlexBox>
-      </AlertWrapper>
-    </AbsoluteContainer>
+    <AlertWrapper
+      className={className}
+      color={bgColor}>
+      <FlexBox
+        alignItems={"center"}
+        css={`
+          border-right: 1px solid ${dark(bgColor, 0.15)};
+          padding: 0 ${SM} 0 ${SM};
+        `}>
+        <Icon
+          size={"1.2rem"}
+          svg={iconSVG(type)}
+        />
+      </FlexBox>
+      <Content>
+        {title ? (
+          <Text
+            css={`
+              font-weight: ${FONT_WEIGHTS.MEDIUM};
+            `}>
+            {title}
+          </Text>
+        ) : null}
+        <Text>{body}</Text>
+      </Content>
+      <FlexBox
+        alignItems={"center"}
+        css={`
+          padding: 0 ${SM} 0 ${SM};
+        `}>
+        <CloseButton
+          aria-label="Close alert"
+          color={bgColor}
+          flat={false}
+          primary
+          onClick={handleClose}
+        />
+      </FlexBox>
+    </AlertWrapper>
   )
 }
 
-Alert = styled(Alert)``
+Alert = styled(Alert)<AlertProps>``
 
 const AbsoluteContainer = styled(FlexBox).attrs({
   justify: "center",
@@ -178,6 +187,6 @@ const iconSVG = (type: string): string => {
       [ALERT_TYPES.INFO]: mdiInformation,
       [ALERT_TYPES.SUCCESS]: mdiCheckCircle,
       [ALERT_TYPES.WARNING]: mdiAlert,
-    }[type] ?? ""
+    }[type] ?? mdiInformation
   )
 }

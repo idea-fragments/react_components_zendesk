@@ -1,13 +1,14 @@
 import { Autocomplete, Dropdown } from "components/forms/selectors/Dropdown"
 import { SelectorEmptyState } from "components/forms/selectors/SelectorEmptyState"
 import {
+  OnItemSelectedFunc,
   SelectorItemKey,
   SelectorOption,
   SelectorProps,
   StateChange,
 } from "components/forms/selectors/types"
 import { SelectorOptionKeyMap } from "components/forms/utils/SelectorOptionKeyMap"
-import React, { FC, ReactNode, useCallback, useEffect, useState } from "react"
+import React, { ReactNode, useCallback, useEffect, useState } from "react"
 import styled from "styled-components"
 import { FONT_WEIGHTS } from "styles/typography"
 import { Logger } from "utils/logging/Logger"
@@ -25,6 +26,9 @@ const logger = new Logger("SearchableSelector")
  * */
 export type SearchableSelectorProps<T> = {
   children?: (o: SelectorOption<T>) => void | ReactNode
+  dynamicSearching?: boolean
+  onSearchTextChange?: (text: string) => Promise<void>
+  skipResetOnSelection?: boolean
 } & SelectorProps<T>
 
 /*
@@ -33,6 +37,10 @@ export type SearchableSelectorProps<T> = {
 export let SearchableSelector = <T,>({
   children,
   disabled,
+  dynamicSearching,
+  onSearchTextChange,
+  onStateChange,
+  skipResetOnSelection = false,
   ...props
 }: SearchableSelectorProps<T>) => {
   const { emptyState, labelField, onChange, options, selectedKey, small } =
@@ -64,32 +72,48 @@ export let SearchableSelector = <T,>({
     [labelField, options],
   )
 
-  useEffect(() => {
-    filterOptions(searchText)
-  }, [filterOptions, searchText])
-
   const handleStateChange = (state: StateChange<T>) => {
+    onStateChange?.(state)
+
     if (state.hasOwnProperty("inputValue")) {
       setSearchText(state.inputValue!)
+      onSearchTextChange?.(state.inputValue!)
     }
   }
 
-  const handleChange = (k: SelectorItemKey | (SelectorOption<T> | null)) => {
-    setSearchText("")
-    if (onChange) {
+  const handleChange = useCallback(
+    (k: SelectorItemKey | SelectorOption<T> | null | undefined) => {
+      if (!skipResetOnSelection) setSearchText("")
+
       // @ts-ignore
-      onChange(k)
-    }
-  }
+      onChange?.(k)
+    },
+    [onChange, skipResetOnSelection],
+  )
 
-  logger.writeInfo("matchingOptions", matchingOptions)
+  useEffect(() => {
+    if (dynamicSearching) return
+    filterOptions(searchText)
+  }, [dynamicSearching, filterOptions, searchText])
+
+  useEffect(() => {
+    if (dynamicSearching && !onSearchTextChange && !onStateChange)
+      throw new Error(
+        "SearchableSelector with dynamicSearching=true requires onSearchTextChange " +
+          "or onStateChange prop to be passed in for handling search text changes.",
+      )
+  }, [dynamicSearching, onSearchTextChange, onStateChange])
+
+  if (!dynamicSearching) {
+    logger.writeInfo("matchingOptions", matchingOptions)
+  }
 
   return (
     <Dropdown
       {...props}
       onChange={handleChange}
       onStateChange={handleStateChange}
-      options={matchingOptions}>
+      options={dynamicSearching ? options : matchingOptions}>
       <Autocomplete
         disabled={disabled}
         isCompact={small}>

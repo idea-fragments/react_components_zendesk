@@ -1,8 +1,9 @@
 import * as styled_components from 'styled-components';
 import * as prop_types from 'prop-types';
 import * as react from 'react';
-import { PropsWithChildren, ReactNode, ComponentType, SVGAttributes, FC } from 'react';
+import { PropsWithChildren, ReactNode, ComponentProps, ComponentType, SVGAttributes, FC } from 'react';
 import * as _zendeskgarden_react_tooltips from '@zendeskgarden/react-tooltips';
+import { Tooltip as Tooltip$1 } from '@zendeskgarden/react-tooltips';
 
 type Placement = "start" | "end" | "auto" | "top" | "bottom" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom";
 type TooltipProps = PropsWithChildren<{
@@ -11,7 +12,7 @@ type TooltipProps = PropsWithChildren<{
     placement?: Placement;
     content: ReactNode;
     type?: "light";
-}>;
+} & Pick<ComponentProps<typeof Tooltip$1>, "appendToNode">>;
 declare const Tooltip: styled_components.StyledComponent<{
     ({ id, delayMS, isInitialVisible, content, refKey, placement, eventsEnabled, popperModifiers, children, hasArrow, size, type, appendToNode, zIndex, isVisible: externalIsVisible, ...otherProps }: _zendeskgarden_react_tooltips.ITooltipProps): react.JSX.Element;
     displayName: string;
@@ -25,7 +26,7 @@ declare const Tooltip: styled_components.StyledComponent<{
         placement: prop_types.Requireable<"top" | "bottom" | "end" | "start" | "auto" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
         popperModifiers: prop_types.Requireable<any>;
         size: prop_types.Requireable<"small" | "large" | "medium" | "extra-large">;
-        type: prop_types.Requireable<"light" | "dark">;
+        type: prop_types.Requireable<"dark" | "light">;
         zIndex: prop_types.Requireable<NonNullable<string | number | null | undefined>>;
         isInitialVisible: prop_types.Requireable<boolean>;
         refKey: prop_types.Requireable<string>;
@@ -44,7 +45,7 @@ declare const Tooltip: styled_components.StyledComponent<{
     placement?: Placement | undefined;
     content: ReactNode;
     type?: "light" | undefined;
-} & {
+} & Pick<_zendeskgarden_react_tooltips.ITooltipProps, "appendToNode"> & {
     children?: ReactNode;
 }, never>;
 
@@ -52,7 +53,7 @@ type SVGComponent = ComponentType<SVGAttributes<any>>;
 type Props$1 = {
     color?: string;
     size?: number | string;
-    svg: string | Array<string> | SVGComponent;
+    svg: string | Array<string> | SVGComponent | ReactNode;
     title?: string;
     onClick?: () => void;
 };

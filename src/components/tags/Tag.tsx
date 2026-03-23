@@ -6,9 +6,12 @@ import {
   MouseEventHandler,
   ReactNode,
   useCallback,
+  useMemo,
 } from "react"
 import styled, { css } from "styled-components"
 import { FullSpectrumColors } from "styles/theme/Theme.type"
+import { CSSProp } from "styles/types"
+import { isString } from "utils/typeCheckers"
 
 export const Close = styled(ZTag.Close)``
 export type TagProps = {
@@ -19,10 +22,12 @@ export type TagProps = {
   color?: FullSpectrumColors
   onClick?: MouseEventHandler<HTMLDivElement>
   onClose?: () => void
+  rounded?: boolean
   size?: "small" | "large"
   success?: boolean
   textColor?: string
-}
+  wrapText?: boolean
+} & CSSProp
 
 export let Tag = forwardRef(
   (
@@ -35,10 +40,17 @@ export let Tag = forwardRef(
       onClose,
       success,
       textColor,
+      wrapText: ___,
       ...props
     }: TagProps,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
+    const ariaLabel = useMemo(() => {
+      if (!onClose) return undefined
+      const childrenText = isString(children) ? children : "tag"
+      return `remove ${childrenText}`
+    }, [children, onClose])
+
     const onCloseClicked = useCallback(
       (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -54,7 +66,12 @@ export let Tag = forwardRef(
         ref={ref}
         {...props}>
         {children}
-        {onClose ? <Close onClick={onCloseClicked} /> : null}
+        {onClose ? (
+          <Close
+            aria-label={ariaLabel}
+            onClick={onCloseClicked}
+          />
+        ) : null}
       </ZTag>
     )
   },
@@ -107,8 +124,11 @@ Tag = styled(Tag).attrs(
       ...props,
     }
   },
-)`
+)<TagProps>`
   && {
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-width: fit-content;
     ${({ backgroundColor }) => {
       if (backgroundColor) {
         return `background-color: ${backgroundColor};`
@@ -125,6 +145,16 @@ Tag = styled(Tag).attrs(
         `
       }
     }};
+    ${({ rounded }) => (rounded ? `border-radius: 10px;` : "")}
     cursor: ${({ onClick }) => (onClick ? "pointer" : "initial")};
-  }
+    ${({ wrapText }) =>
+      wrapText
+        ? css`
+            white-space: normal;
+            height: unset;
+            padding-top: 4px;
+            padding-bottom: 4px;
+          `
+        : ""}
+    ${({ _css }) => _css}
 `

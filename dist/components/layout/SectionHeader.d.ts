@@ -1,15 +1,18 @@
+import { SectionPaddingSize } from "components/layout/Section";
 import { PropsWithChildren, ReactNode } from "react";
 import { CSSProp } from "styles/types";
 export type SectionHeaderProps = PropsWithChildren<{
     actions?: ReactNode;
     bordered?: boolean;
     caption?: ReactNode;
+    paddingSize?: SectionPaddingSize;
     title?: ReactNode;
 }> & CSSProp;
 export declare const SectionHeader: import("styled-components").StyledComponent<import("react").ForwardRefExoticComponent<{
     actions?: ReactNode;
     bordered?: boolean | undefined;
     caption?: ReactNode;
+    paddingSize?: SectionPaddingSize | undefined;
     title?: ReactNode;
 } & {
     children?: ReactNode;

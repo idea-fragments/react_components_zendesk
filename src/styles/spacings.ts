@@ -1,3 +1,4 @@
+const XXS = ".3rem"
 const XS = ".5rem"
 const SM = "1rem"
 const MD = "1.5rem"
@@ -8,6 +9,7 @@ const XXXL = "4rem"
 const XXXXL = "5rem"
 
 export const SPACINGS = Object.freeze({
+  XXS,
   XS,
   SM,
   MD,

@@ -1,9 +1,22 @@
+import { SectionBody } from "components/layout/SectionBody"
+import { SectionFooter } from "components/layout/SectionFooter"
+import { SectionHeader } from "components/layout/SectionHeader"
 import styled, { css } from "styled-components"
 import { textColorForBackground } from "styles/mixins"
 import { ColorProps, CSSProp } from "styles/types"
+import { ValueOf } from "utils/types"
+
+export const SECTION_PADDING_SIZES = {
+  DEFAULT: "default",
+  MEDIUM: "medium",
+  SMALL: "small",
+} as const
+
+export type SectionPaddingSize = ValueOf<typeof SECTION_PADDING_SIZES>
 
 export type SectionProps = {
   bordered?: boolean
+  compact?: boolean
   rounded?: boolean
   shadowed?: boolean
 } & ColorProps &
@@ -11,6 +24,16 @@ export type SectionProps = {
 
 const boxShadow = css`
   box-shadow: ${(p) => p.theme.styles.section.shadow};
+`
+
+const compactStyling = css`
+  ${SectionHeader} + ${SectionBody} {
+    padding-top: 0;
+  }
+
+  ${SectionBody}:has(+ ${SectionFooter}) {
+    padding-bottom: 0;
+  }
 `
 
 const roundBorder = css`
@@ -29,14 +52,11 @@ export const Section = styled.section<SectionProps>`
   overflow: hidden;
 
   ${({ bordered }) => (bordered ? sectionBorder : "")};
-  ${({ color }) => (color ? textColorForBackground : "")};
+  ${({ color }) =>
+    color && color !== "transparent" ? textColorForBackground : ""};
+  ${({ compact }) => (compact ? compactStyling : "")};
   ${({ rounded }) => (rounded ? roundBorder : "")};
   ${({ shadowed }) => (shadowed ? boxShadow : "")};
-  ${({ _css }: CSSProp) => _css}//& > section {
-          //  padding-bottom: 0;
-          //}
 
-          //& + section {
-          //  padding-top: 0;
-          //}
+  ${({ _css }: CSSProp) => _css}
 `

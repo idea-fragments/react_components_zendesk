@@ -1,32 +1,37 @@
-import React, { ChangeEvent, FC, useCallback, useMemo } from "react"
-import styled, { css } from "styled-components"
-
 import { FormFieldProps } from "components/forms/formField.types"
-import { Hint } from "components/text/Hint"
 import { Message } from "components/forms/Message"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox } from "components/layout/FlexBox"
-import { StyledProps } from "components/StyledProps.type"
-
-import { useTheme } from "styles/theme/useTheme"
+import { Hint } from "components/text/Hint"
+import { Text } from "components/text/Text"
+import React, { ChangeEvent, FC, useCallback, useMemo } from "react"
+import styled, { css } from "styled-components"
 
 import { dark, fade } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
-import { ContainerProps } from "styles/types"
+import { FullSpectrumColors } from "styles/theme/Theme.type"
 
+import { useTheme } from "styles/theme/useTheme"
+import { ContainerProps } from "styles/types"
+import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
+
+export type RadioStyle = "default" | "checkmark"
 export type RadioButtonProps = {
   checked?: boolean
-  color?: string
+  color?: FullSpectrumColors
+  darkColorIndex?: keyof FullSpectrumColors
   disabled?: boolean
   name: string
+  radioStyle?: RadioStyle
   value: string
   onChange: (value: string) => void
-} & Omit<FormFieldProps, "onChange">
+} & Omit<FormFieldProps, "color" | "onChange">
 
 export let RadioButton: FC<RadioButtonProps> = ({
   checked = false,
-  color,
+  color: colorProp,
   compact,
+  darkColorIndex = 500,
   disabled = false,
   emptyState,
   fluid,
@@ -34,15 +39,18 @@ export let RadioButton: FC<RadioButtonProps> = ({
   label,
   message,
   name,
+  onChange,
+  radioStyle = "default",
   validation = { validation: VALIDATION_STATES.NONE },
   value,
-  onChange,
 }) => {
   const theme = useTheme()
-  const finalizedColor = useMemo(
-    () => color || theme.styles.colorPrimary,
-    [color, theme.styles.colorPrimary],
+  const color = useMemo(
+    () => colorProp ?? theme.styles.colors.blue,
+    [colorProp, theme.styles.colors.blue],
   )
+  const darkColor = color[darkColorIndex]
+  const selectedBackgroundColor = color["100"]
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,31 +63,60 @@ export let RadioButton: FC<RadioButtonProps> = ({
 
   return (
     <Container
+      as={"label"}
+      $darkColor={darkColor}
+      $disabled={disabled}
       fluid={fluid}
       gap={SPACINGS.XS}
-      withRows>
-      <RadioContainer disabled={disabled}>
-        <HiddenInput
-          checked={checked}
-          disabled={disabled}
-          name={name}
-          type={"radio"}
-          value={value}
-          onChange={handleChange}
-        />
-        <StyledRadio
-          checked={checked}
-          color={finalizedColor}
-          disabled={disabled}>
-          <RadioInner
-            checked={checked}
-            color={finalizedColor}
-            disabled={disabled}
-          />
-        </StyledRadio>
-        {label ? <Label disabled={disabled}>{label}</Label> : null}
-      </RadioContainer>
-      {hint ? <Hint>{hint}</Hint> : null}
+      $selected={checked}
+      $selectedBackgroundColor={selectedBackgroundColor}>
+      <HiddenInput
+        checked={checked}
+        disabled={disabled}
+        name={name}
+        type={"radio"}
+        value={value}
+        onChange={handleChange}
+      />
+      <StyledRadio
+        checked={checked}
+        $darkColor={darkColor}
+        disabled={disabled}
+        filled={radioStyle === "checkmark" && checked}
+        $radius={radioStyle === "checkmark" ? "20px" : "1em"}>
+        {radioStyle === "checkmark" ? (
+          <>{checked ? <CheckMark /> : null}</>
+        ) : (
+          <>
+            <RadioInner
+              checked={checked}
+              $darkColor={darkColor}
+              disabled={disabled}
+            />
+          </>
+        )}
+      </StyledRadio>
+      <FlexBox
+        gap={SPACINGS.XXS}
+        withRows>
+        {label ? (
+          <Label
+            $darkColor={darkColor}
+            $disabled={disabled}
+            $selected={checked}>
+            {label}
+          </Label>
+        ) : null}
+
+        {hint ? (
+          <Hint
+            _css={css`
+              margin: 0;
+            `}>
+            {hint}
+          </Hint>
+        ) : null}
+      </FlexBox>
       {message ? (
         <Message validation={validation?.validation}>{message}</Message>
       ) : null}
@@ -87,11 +124,47 @@ export let RadioButton: FC<RadioButtonProps> = ({
   )
 }
 
-const Container = styled(FlexBox)`
+const Container = styled(FlexBox)<{
+  $darkColor: string
+  $disabled?: boolean
+  $selected: boolean
+  $selectedBackgroundColor: string
+}>`
   ${({ fluid }: ContainerProps) => (fluid ? "width: 100%;" : "")}
+  border-radius: 12px;
+  border: 2px solid
+    ${({ $darkColor, $selected, theme }) =>
+      $selected ? $darkColor : theme.styles.border.color};
+  background: ${({ $selected, $selectedBackgroundColor }) =>
+    $selected ? $selectedBackgroundColor : "transparent"};
+  cursor: ${({ $disabled }) => ($disabled ? "not-allowed" : "pointer")};
+  padding: ${SPACINGS.SM};
+  position: relative;
+  transition: all 0.2s ease;
+  user-select: none;
+  line-height: 1;
+
+  &:hover {
+    border-color: ${({ $darkColor, $disabled, $selected, theme }) =>
+      $disabled
+        ? theme.styles.border.color
+        : $selected
+        ? $darkColor
+        : theme.styles.colors.grey["300"]};
+  }
+
   && * {
     font-size: inherit;
   }
+`
+
+const CheckMark = styled.div`
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-top: -2px;
 `
 
 const HiddenInput = styled.input`
@@ -101,40 +174,31 @@ const HiddenInput = styled.input`
   width: 0;
 `
 
-const Label = styled.span<{ disabled?: boolean }>`
-  color: ${({ disabled, theme }: StyledProps<{ disabled?: boolean }>) =>
-    disabled ? theme.styles.colors.grey["500"] : theme.styles.textColorPrimary};
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-`
-
-const RadioContainer = styled.label<{ disabled?: boolean }>`
-  align-items: center;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  display: flex;
-  gap: ${SPACINGS.XS};
-  position: relative;
-  user-select: none;
+const Label = styled(Text)<{
+  $darkColor: string
+  $disabled: boolean
+  $selected: boolean
+}>`
+  font-size: ${FONT_SIZES.SM};
+  font-weight: ${FONT_WEIGHTS.MEDIUM};
+  color: ${({ $darkColor, $disabled, $selected, theme }) =>
+    $disabled
+      ? theme.styles.colors.grey["500"]
+      : $selected
+      ? $darkColor
+      : theme.styles.textColorPrimary};
 `
 
 const RadioInner = styled.span<{
   checked: boolean
-  color: string
+  $darkColor: string
   disabled?: boolean
 }>`
-  background: ${({
-    checked,
-    color,
-    disabled,
-    theme,
-  }: StyledProps<{
-    checked: boolean
-    color?: string
-    disabled?: boolean
-  }>) => {
+  background: ${({ checked, $darkColor, disabled, theme }) => {
     if (disabled) {
       return checked ? theme.styles.colors.grey["400"] : "transparent"
     }
-    return checked ? color : "transparent"
+    return checked ? $darkColor : "transparent"
   }};
   border-radius: 50%;
   height: 0.6em;
@@ -142,29 +206,35 @@ const RadioInner = styled.span<{
   width: 0.6em;
 `
 
-const StyledRadio = styled.span<{
+const StyledRadio = styled(FlexBox)<{
   checked: boolean
-  color: string
+  $darkColor: string
   disabled?: boolean
+  filled?: boolean
+  $radius: string
 }>`
   align-items: center;
-  background: ${({ theme }: StyledProps) => theme.styles.colors.white};
+  background: ${({ $darkColor, filled, theme }) =>
+    filled ? $darkColor : theme.styles.colors.white};
   border-width: 2px;
   border-style: solid;
-  border-color: ${({ checked, color, disabled, theme }) =>
-    disabled || !checked ? theme.styles.colors.grey["400"] : color};
+  border-color: ${({ checked, $darkColor, disabled, theme }) =>
+    disabled || !checked ? theme.styles.colors.grey["400"] : $darkColor};
 
-  font-size: 1.1em !important;
+  && {
+    font-size: 1.1em;
+  }
+
   border-radius: 50%;
   display: flex;
   flex-shrink: 0;
-  height: 1em;
   justify-content: center;
   transition: all 0.2s ease;
-  width: 1em;
+  height: ${({ $radius }) => $radius};
+  width: ${({ $radius }) => $radius};
 
-  ${RadioContainer}:hover & {
-    border-color: ${({ color, theme }) => color};
+  ${Container}:hover & {
+    border-color: ${({ $darkColor }) => $darkColor};
   }
 
   ${({ disabled, theme }) => {
@@ -174,16 +244,12 @@ const StyledRadio = styled.span<{
       `
     }
   }}
-
   ${HiddenInput}:focus + & {
-    ${({
-      color,
-      disabled,
-    }: StyledProps<{ color: string; disabled?: boolean }>) =>
+    ${({ $darkColor, disabled }) =>
       !disabled &&
       css`
-        border-color: ${dark(color)};
-        box-shadow: 0 0 0 3px ${fade(color)};
+        border-color: ${dark($darkColor)};
+        box-shadow: 0 0 0 3px ${fade($darkColor)};
       `}
   }
 `

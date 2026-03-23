@@ -38,17 +38,3 @@ export let Selector = <T,>({
     </Dropdown>
   )
 }
-
-const Test = () => {
-  const options = [
-    { hello: "world", id: 1 },
-    { hello: "world2", id: 2 },
-  ]
-  return (
-    <Selector
-      options={options}
-      labelField={"hello"}
-      keyField={"id"}
-    />
-  )
-}

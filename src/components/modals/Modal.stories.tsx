@@ -1,6 +1,6 @@
 import { Button } from "components/forms/Button"
 import { Modal, ModalProps } from "components/modals/Modal"
-import { useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 export default {
   title: "Modal",
@@ -8,25 +8,32 @@ export default {
   argTypes: {},
 }
 
-const Story = ({ closeModal, modalContent, ...args }: ModalProps) => {
+const Story = ({ modalContent, ...args }: ModalProps) => {
   const [isModalOpen, setIsModalOpenTo] = useState(false)
 
-  modalContent = {
-    body:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam\n" +
-      " aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl quis nunc. Sed euismod, nisl\n" +
-      " nec aliquam aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl quis nunc. Sed\n" +
-      " euismod, nisl nec aliquam aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl\n" +
-      " quis",
-    title: "Modal Title",
-    ...modalContent,
-  }
+  modalContent = useMemo(() => {
+    return {
+      body:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam\n" +
+        " aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl quis nunc. Sed euismod, nisl\n" +
+        " nec aliquam aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl quis nunc. Sed\n" +
+        " euismod, nisl nec aliquam aliquam, nunc nisl aliquet nisl, eget consectetur nunc nisl\n" +
+        " quis",
+      title: "Modal Title",
+      ...modalContent,
+    }
+  }, [modalContent])
 
-  closeModal = closeModal || (() => setIsModalOpenTo(false))
+  const closeModal = useCallback(() => {
+    setIsModalOpenTo(false)
+  }, [])
+  const openModal = useCallback(() => {
+    setIsModalOpenTo(true)
+  }, [])
 
   return (
     <>
-      <Button onClick={() => setIsModalOpenTo(true)}>Open Modal</Button>
+      <Button onClick={openModal}>Open Modal</Button>
       <Modal
         {...args}
         closeModal={closeModal}
@@ -41,3 +48,11 @@ const Story = ({ closeModal, modalContent, ...args }: ModalProps) => {
 export const Default = Story.bind({})
 // @ts-ignore
 Default.args = {}
+
+export const IsNotDismissible = Story.bind({})
+// @ts-ignore
+IsNotDismissible.args = {
+  modalContent: {
+    isNotDismissible: true,
+  },
+}

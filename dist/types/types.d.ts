@@ -1,5 +1,6 @@
 import { ThemedStyledProps } from 'styled-components';
 import { Nullable } from 'global';
+import { ReactNode } from 'react';
 
 type StyledComponentProps = {
     className?: string;
@@ -15,12 +16,6 @@ type FullSpectrumColors = {
     700: string;
     800: string;
 };
-type PartialSpectrumColors = {
-    400: string;
-    M400: string;
-    600: string;
-    M600: string;
-};
 type ContainerStyles = {
     background?: string;
     borderRadius?: string;
@@ -33,11 +28,15 @@ type ContainerStyles = {
 type Styles = {
     appBar: Required<Pick<ContainerStyles, "background" | "height" | "shadow" | "zIndex">> & {
         screenPosition: "top" | "bottom";
+        scrollBar: {
+            height: string;
+        };
     };
     border: {
         color: string;
     };
     buttons: {
+        borderRadius: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -68,6 +67,7 @@ type Styles = {
     colorTertiary: string;
     colorWarning: string;
     colors: {
+        accent: FullSpectrumColors;
         black: string;
         white: string;
         product: {};
@@ -77,22 +77,27 @@ type Styles = {
         yellow: FullSpectrumColors;
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
-        fuschia: PartialSpectrumColors;
-        pink: PartialSpectrumColors;
-        crimson: PartialSpectrumColors;
-        orange: PartialSpectrumColors;
-        lemon: PartialSpectrumColors;
-        lime: PartialSpectrumColors;
-        mint: PartialSpectrumColors;
-        teal: PartialSpectrumColors;
-        azure: PartialSpectrumColors;
-        royal: PartialSpectrumColors;
-        purple: PartialSpectrumColors;
+        orange: FullSpectrumColors;
+        amber: FullSpectrumColors;
+        lemon: FullSpectrumColors;
+        purple: FullSpectrumColors;
+        magenta: FullSpectrumColors;
+        pink: FullSpectrumColors;
+        primary: FullSpectrumColors;
+        crimson: FullSpectrumColors;
+        lime: FullSpectrumColors;
+        mint: FullSpectrumColors;
+        teal: FullSpectrumColors;
+        azure: FullSpectrumColors;
+        denim: FullSpectrumColors;
+        royal: FullSpectrumColors;
+        sage: FullSpectrumColors;
     };
     container: {
         horizontalPadding: string;
     };
     drawer: {
+        icon: ReactNode;
         width: string;
     };
     font: {
@@ -108,6 +113,7 @@ type Styles = {
         backdrop: {
             background: string;
         };
+        borderRadius: string;
     };
     nav: {
         linkColor: string;
@@ -145,6 +151,10 @@ type Styles = {
         borderColor: string;
         borderSize: string;
         filterButtonIcon: Nullable<string>;
+    };
+    tag: {
+        textColorWeight: keyof FullSpectrumColors;
+        backgroundColor: keyof FullSpectrumColors;
     };
     textColorDark: string;
     textColorLight: string;

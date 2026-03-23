@@ -4,6 +4,33 @@ import * as styled_components from 'styled-components';
 import * as prop_types from 'prop-types';
 import * as _zendeskgarden_react_notifications from '@zendeskgarden/react-notifications';
 
+type StyledComponentProps = {
+    className?: string;
+};
+
+declare const ALERT_TYPES: {
+    readonly ACCENT: "accent";
+    readonly ERROR: "error";
+    readonly INFO: "info";
+    readonly PRIMARY: "primary";
+    readonly SUCCESS: "success";
+    readonly WARNING: "warning";
+};
+type AlertType = ValueOf<typeof ALERT_TYPES>;
+type AlertContent = {
+    title?: string;
+    body: any;
+    onClose?: () => void;
+    type?: AlertType;
+};
+type AlertProps = {
+    autoDismissSeconds?: number;
+    alertContent: AlertContent;
+    closeAlert: () => void;
+    isVisible: boolean;
+} & StyledComponentProps;
+declare let Alert: FC<AlertProps>;
+
 declare const INFO_PANEL_TYPES: {
     readonly INFO: 0;
     readonly SUCCESS: 1;
@@ -70,4 +97,4 @@ type Props = {
 type GlobalAlertProps = Props;
 declare const GlobalAlert: FC<Props>;
 
-export { GlobalAlert, GlobalAlertProps, INFO_PANEL_TYPES, InfoPanel, Notification, NotificationProps$1 as NotificationProps, ToastProvider, useToastNotifier };
+export { ALERT_TYPES, Alert, AlertContent, AlertType, GlobalAlert, GlobalAlertProps, INFO_PANEL_TYPES, InfoPanel, Notification, NotificationProps$1 as NotificationProps, ToastProvider, useToastNotifier };

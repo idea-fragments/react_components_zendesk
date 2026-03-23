@@ -2,7 +2,7 @@ import { Field as ZField } from "@zendeskgarden/react-forms"
 import { TextFieldProps } from "components/forms/formField.types"
 import { Hint } from "components/text/Hint"
 import { Message } from "components/forms/Message"
-import { TextArea, TextAreaProps } from "components/forms/textfields/TextArea"
+import { TextAreaProps } from "components/forms/textfields/TextArea"
 import { VALIDATION_STATES } from "components/forms/validationStates"
 import { FlexBox } from "components/layout/FlexBox"
 import { Label } from "components/text/Label"
@@ -110,7 +110,7 @@ export let TextFieldWrapper = forwardRef(
           <InputWrapper symbolProp={symbolProp}>
             <WrappedComponent
               disabled={disabled}
-              placeholder={emptyState}
+              placeholder={emptyState as string | undefined}
               // @ts-ignore
               ref={ref}
               validation={validation?.validation}

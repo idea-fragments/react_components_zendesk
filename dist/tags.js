@@ -86,8 +86,10 @@ var getColor$1 = styled.css(templateObject_1$3 || (templateObject_1$3 = __makeTe
 ])), function (_a) {
   var color = _a.color,
     danger = _a.danger,
+    secondary = _a.secondary,
     theme = _a.theme;
   if (danger) return theme.styles.colorDanger;
+  if (secondary) return theme.styles.textColorSecondary;
   if (color) return color;
   return "inherit";
 });
@@ -95,23 +97,29 @@ var getColor$1 = styled.css(templateObject_1$3 || (templateObject_1$3 = __makeTe
 //   margin-top: 0;
 // `
 var subTextStyling = styled.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
+var Text = styled__default["default"].div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"])), function (_a) {
   var align = _a.align;
   return align;
 }, function (_a) {
   var fluid = _a.fluid;
   return fluid ? "100%" : "unset";
+}, getColor$1, function (_a) {
+  var compact = _a.compact;
+  return compact ? styled.css(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "], ["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "]))) : "";
 }, function (_a) {
-  var color = _a.color;
-  return color ? getColor$1 : "";
+  var size = _a.size;
+  return size ? "font-size: ".concat(size, ";") : "";
+}, function (_a) {
+  var weight = _a.weight;
+  return weight ? "font-weight: ".concat(weight, ";") : "";
 }, function (_a) {
   var hasSubText = _a.hasSubText;
   return hasSubText ? subTextStyling : "";
-}, getColor$1, function (_a) {
+}, function (_a) {
   var _css = _a._css;
   return _css;
 });
-var templateObject_1$3, templateObject_2$2, templateObject_3$2;
+var templateObject_1$3, templateObject_2$2, templateObject_3$2, templateObject_4$2;
 var XXS$1 = ".8rem";
 var XS = ".9rem";
 var SM = "1rem";
@@ -189,10 +197,10 @@ var Paragraph = styled__default["default"](Text).attrs({
 })(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  font-weight: ", ";\n"], ["\n  font-weight: ", ";\n"])), FONT_WEIGHTS.REGULAR);
 var XXS = styled__default["default"](Paragraph)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XXS);
 styled__default["default"](Paragraph)(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XS);
-styled__default["default"](Paragraph)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.MD);
+styled__default["default"](Paragraph)(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.MD);
 styled__default["default"](Paragraph)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.LG);
 styled__default["default"](Paragraph)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  &&& {\n    font-size: ", ";\n  }\n"], ["\n  &&& {\n    font-size: ", ";\n  }\n"])), FONT_SIZES.XL);
-var templateObject_1$2, templateObject_2$1, templateObject_3$1, templateObject_4, templateObject_5, templateObject_6;
+var templateObject_1$2, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5, templateObject_6;
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 var colorString$1 = {
   exports: {}
@@ -5879,6 +5887,11 @@ TagComponent.defaultProps = {
 const Tag = TagComponent;
 Tag.Avatar = Avatar;
 Tag.Close = Close$1;
+
+// @flow
+var isString = function (o) {
+  return typeof o === "string";
+};
 var Close = styled__default["default"](Tag.Close)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 exports.Tag = React.forwardRef(function (_a, ref) {
   _a.backgroundColor;
@@ -5889,7 +5902,13 @@ exports.Tag = React.forwardRef(function (_a, ref) {
   var onClose = _a.onClose;
   _a.success;
   _a.textColor;
-  var props = __rest(_a, ["backgroundColor", "backgroundColorWeight", "children", "className", "color", "onClose", "success", "textColor"]);
+  _a.wrapText;
+  var props = __rest(_a, ["backgroundColor", "backgroundColorWeight", "children", "className", "color", "onClose", "success", "textColor", "wrapText"]);
+  var ariaLabel = React.useMemo(function () {
+    if (!onClose) return undefined;
+    var childrenText = isString(children) ? children : "tag";
+    return "remove ".concat(childrenText);
+  }, [children, onClose]);
   var onCloseClicked = React.useCallback(function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -5900,6 +5919,7 @@ exports.Tag = React.forwardRef(function (_a, ref) {
     ref: ref
   }, props, {
     children: [children, onClose ? jsxRuntime.jsx(Close, {
+      "aria-label": ariaLabel,
       onClick: onCloseClicked
     }) : null]
   }));
@@ -5940,7 +5960,7 @@ exports.Tag = styled__default["default"](exports.Tag).attrs(function (_a) {
     textColor: textColor,
     backgroundColor: backgroundColor
   }, props);
-})(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  && {\n    ", ";\n    ", ";\n    cursor: ", ";\n\n  }\n"], ["\n  && {\n    ", ";\n    ", ";\n    cursor: ", ";\n\n  }\n"])), function (_a) {
+})(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  && {\n    flex-shrink: 0;\n    flex-grow: 0;\n    max-width: fit-content;\n    ", ";\n    ", ";\n    ", "\n    cursor: ", ";\n    ", "\n    ", "\n"], ["\n  && {\n    flex-shrink: 0;\n    flex-grow: 0;\n    max-width: fit-content;\n    ", ";\n    ", ";\n    ", "\n    cursor: ", ";\n    ", "\n    ", "\n"])), function (_a) {
   var backgroundColor = _a.backgroundColor;
   if (backgroundColor) {
     return "background-color: ".concat(backgroundColor, ";");
@@ -5948,13 +5968,22 @@ exports.Tag = styled__default["default"](exports.Tag).attrs(function (_a) {
 }, function (_a) {
   var textColor = _a.textColor;
   if (textColor) {
-    return styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          color: ", ";\n          \n          & ", " {\n            color: ", ";\n          }\n        "], ["\n          color: ", ";\n          \n          & ", " {\n            color: ", ";\n          }\n        "])), textColor, Close, textColor);
+    return styled.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          color: ", ";\n\n          & ", " {\n            color: ", ";\n          }\n        "], ["\n          color: ", ";\n\n          & ", " {\n            color: ", ";\n          }\n        "])), textColor, Close, textColor);
   }
+}, function (_a) {
+  var rounded = _a.rounded;
+  return rounded ? "border-radius: 10px;" : "";
 }, function (_a) {
   var onClick = _a.onClick;
   return onClick ? "pointer" : "initial";
+}, function (_a) {
+  var wrapText = _a.wrapText;
+  return wrapText ? styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n              white-space: normal;\n              height: unset;\n              padding-top: 4px;\n              padding-bottom: 4px;\n            "], ["\n              white-space: normal;\n              height: unset;\n              padding-top: 4px;\n              padding-bottom: 4px;\n            "]))) : "";
+}, function (_a) {
+  var _css = _a._css;
+  return _css;
 });
-var templateObject_1, templateObject_2, templateObject_3;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4;
 exports.Chip = Chip;
 exports.Close = Close;
 //# sourceMappingURL=tags.js.map

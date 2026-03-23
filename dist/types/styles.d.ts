@@ -2,8 +2,8 @@ import * as _zendeskgarden_react_theming from '@zendeskgarden/react-theming';
 import * as styled_components from 'styled-components';
 import { ThemedStyledProps, FlattenSimpleInterpolation } from 'styled-components';
 import { Nullable } from 'global';
+import { ReactNode, PropsWithChildren, FC } from 'react';
 import { ValueOf } from 'utils/types';
-import { PropsWithChildren, FC } from 'react';
 
 type StyledProps<Props = {}> = ThemedStyledProps<Props, Theme>;
 
@@ -35,6 +35,9 @@ type ContainerStyles = {
 type Styles = {
     appBar: Required<Pick<ContainerStyles, "background" | "height" | "shadow" | "zIndex">> & {
         screenPosition: "top" | "bottom";
+        scrollBar: {
+            height: string;
+        };
     };
     border: {
         color: string;
@@ -71,6 +74,7 @@ type Styles = {
     colorTertiary: string;
     colorWarning: string;
     colors: {
+        accent: FullSpectrumColors;
         black: string;
         white: string;
         product: {};
@@ -81,21 +85,26 @@ type Styles = {
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
         orange: FullSpectrumColors;
+        amber: FullSpectrumColors;
         lemon: FullSpectrumColors;
         purple: FullSpectrumColors;
-        fuschia: PartialSpectrumColors;
-        pink: PartialSpectrumColors;
-        crimson: PartialSpectrumColors;
-        lime: PartialSpectrumColors;
-        mint: PartialSpectrumColors;
-        teal: PartialSpectrumColors;
-        azure: PartialSpectrumColors;
-        royal: PartialSpectrumColors;
+        magenta: FullSpectrumColors;
+        pink: FullSpectrumColors;
+        primary: FullSpectrumColors;
+        crimson: FullSpectrumColors;
+        lime: FullSpectrumColors;
+        mint: FullSpectrumColors;
+        teal: FullSpectrumColors;
+        azure: FullSpectrumColors;
+        denim: FullSpectrumColors;
+        royal: FullSpectrumColors;
+        sage: FullSpectrumColors;
     };
     container: {
         horizontalPadding: string;
     };
     drawer: {
+        icon: ReactNode;
         width: string;
     };
     font: {
@@ -111,6 +120,7 @@ type Styles = {
         backdrop: {
             background: string;
         };
+        borderRadius: string;
     };
     nav: {
         linkColor: string;
@@ -149,6 +159,10 @@ type Styles = {
         borderSize: string;
         filterButtonIcon: Nullable<string>;
     };
+    tag: {
+        textColorWeight: keyof FullSpectrumColors;
+        backgroundColor: keyof FullSpectrumColors;
+    };
     textColorDark: string;
     textColorLight: string;
     textColorOverPrimaryBg: string;
@@ -180,6 +194,7 @@ declare const desaturate: (c: string) => string;
 declare const saturate: (c: string) => string;
 
 declare const SPACINGS: Readonly<{
+    XXS: ".3rem";
     XS: ".5rem";
     SM: "1rem";
     MD: "1.5rem";
@@ -335,4 +350,4 @@ declare const THEMES: {
     __ZENDESK_DEFAULT_THEME__: _zendeskgarden_react_theming.IGardenTheme;
 };
 
-export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, MediaQueriesI, MediaQuery, PHONE_SIZE, Props, SPACE_DIRECTIONS, SPACINGS, StyledProps, Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, buttonLikeHoverable, dark, darker, desaturate, fade, getInlineStyling, hasGoodContrast, inlineWithText, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorForButton, textColorForFlatButton, textColorPrimary, textWithColor, unit, veryDark, veryLight };
+export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, FullSpectrumColors, MediaQueriesI, MediaQuery, PHONE_SIZE, PartialSpectrumColors, Props, SPACE_DIRECTIONS, SPACINGS, StyledProps, Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, buttonLikeHoverable, dark, darker, desaturate, fade, getInlineStyling, hasGoodContrast, inlineWithText, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorForButton, textColorForFlatButton, textColorPrimary, textWithColor, unit, veryDark, veryLight };

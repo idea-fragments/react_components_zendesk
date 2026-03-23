@@ -1,3 +1,4 @@
+import { Logger } from "@idea-fragments/logger-js"
 import { TinyCalendar } from "components/calendars/TinyCalendar"
 import { TextFieldProps } from "components/forms/formField.types"
 import { Dropdown, Select } from "components/forms/selectors/Dropdown"
@@ -6,7 +7,6 @@ import Downshift, { StateChangeTypes } from "downshift"
 import React, { FC, useCallback, useState } from "react"
 import { formatDate } from "utils/dateTimeHelpers"
 import { DO_NOTHING } from "utils/functionHelpers"
-import { Logger } from "utils/logging/Logger"
 
 export type DatePickerSelectorProps = {
   minimumDate?: Date

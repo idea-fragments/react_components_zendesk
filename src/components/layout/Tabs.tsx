@@ -4,6 +4,7 @@ import { SectionBody } from "components/layout/SectionBody"
 import React, { FC, ReactNode } from "react"
 import styled, { css } from "styled-components"
 import { light } from "styles/colors"
+import { CSSProp } from "styles/types"
 
 import { FONT_WEIGHTS } from "styles/typography"
 import { SPACINGS } from "styles/spacings"
@@ -26,7 +27,7 @@ export type TabPanelProps = {
   children: ReactNode
   item: string
   visibleTab: string
-}
+} & CSSProp
 
 export const Tabs: FC<TabsProps> = ({
   bordered,
@@ -88,18 +89,30 @@ export const Tab: FC<TabProps> = ({
   )
 }
 
-export const TabPanel: FC<TabPanelProps> = ({ children, item, visibleTab }) => {
-  const isVisible = item === visibleTab
+export const TabPanel = styled(
+  ({ children, className, item, visibleTab }: TabPanelProps) => {
+    const isVisible = item === visibleTab
 
-  return isVisible ? (
-    <StyledTabPanel role={"tabpanel"}>{children}</StyledTabPanel>
-  ) : null
-}
+    return isVisible ? (
+      <StyledTabPanel
+        className={className}
+        role={"tabpanel"}>
+        {children}
+      </StyledTabPanel>
+    ) : null
+  },
+)`
+  ${({ _css }) => _css}
+`
 
 export const TabList = styled(FlexBox)`
   gap: unset;
   overflow-x: auto;
-  width: 100%;
+  width: auto;
+  margin-left: -${SPACINGS.MD};
+  margin-right: -${SPACINGS.MD};
+  padding-left: ${SPACINGS.MD};
+  padding-right: ${SPACINGS.MD};
 `
 
 const StyledTab = styled.button<{ disabled?: boolean }>`

@@ -15,6 +15,7 @@ import { DateRangePicker, RangeKeyDict } from "react-date-range"
 import styled from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { useTheme } from "styles/theme/useTheme"
+import { CSSProp } from "styles/types"
 import { FONT_WEIGHTS } from "styles/typography"
 import { DateRange } from "utils/dateTime/DateRange.type"
 import { maxDateBetween } from "utils/dateTimeHelpers"
@@ -29,12 +30,15 @@ export type TinyDateRangePickerProps = {
   maxDate?: Date
   minDate?: Date
   onChange: (range: DateRange) => void
-}
+} & CSSProp
 
 const lowestPossibleDate = new Date()
 lowestPossibleDate.setFullYear(Number.MIN_VALUE)
 
-export const TinyDateRangePicker: FC<TinyDateRangePickerProps> = ({
+let _TinyDateRangePicker: FC<
+  TinyDateRangePickerProps & { className?: string }
+> = ({
+  className,
   disabledDates = [],
   fluid = false,
   initialRange,
@@ -108,6 +112,7 @@ export const TinyDateRangePicker: FC<TinyDateRangePickerProps> = ({
 
   return (
     <Container
+      className={className}
       fluid={fluid}
       withRows>
       <DateRangePicker
@@ -142,6 +147,12 @@ export const TinyDateRangePicker: FC<TinyDateRangePickerProps> = ({
     </Container>
   )
 }
+
+export const TinyDateRangePicker = styled(
+  _TinyDateRangePicker,
+)<TinyDateRangePickerProps>`
+  ${({ _css }) => _css}
+`
 
 const Container = styled(FlexBox)`
   padding: ${SPACINGS.SM};

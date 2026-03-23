@@ -28,10 +28,50 @@ import { ColorProps, ContainerProps, CSSProp } from "styles/types"
 import { FONT_SIZES } from "styles/typography"
 import { PromiseFunc } from "utils/function.types"
 
+const getFontSize = (size?: ButtonSize) => {
+  switch (size) {
+    case BUTTON_SIZES.X_SMALL:
+      return FONT_SIZES.XS
+    default:
+      return "inherit"
+  }
+}
+const getHeight = (size?: ButtonSize) => {
+  switch (size) {
+    case BUTTON_SIZES.LARGE:
+      return "48px"
+    case BUTTON_SIZES.SMALL:
+      return "32px"
+    case BUTTON_SIZES.X_SMALL:
+      return "24px"
+    default:
+      return "40px"
+  }
+}
+
+const getPaddingSize = (size?: ButtonSize) => {
+  switch (size) {
+    case BUTTON_SIZES.SMALL:
+      return ".5em"
+    case BUTTON_SIZES.X_SMALL:
+      return ".25em"
+    default:
+      return "1em"
+  }
+}
 const fitContent = css`
   width: fit-content;
-  ${({ compact }: ButtonProps) =>
-    compact ? "min-width: fit-content; padding: 0 1em;" : ""}
+  ${({ children, compact, size }: ButtonProps) => {
+    const paddingSize = getPaddingSize(size)
+    const topPadding = !children ? paddingSize : "0"
+    return compact
+      ? css`
+          min-width: fit-content;
+          padding: ${topPadding} ${paddingSize};
+          ${!children ? `height: unset;` : ""}
+        `
+      : ""
+  }}
 `
 const fitContainer = css`
   width: 100%;
@@ -92,7 +132,12 @@ const inlineWrapping = css`
   height: auto;
 `
 
-export const BUTTON_SIZES = { SMALL: "small", LARGE: "large" } as const
+export const BUTTON_SIZES = {
+  LARGE: "large",
+  MEDIUM: "medium",
+  SMALL: "small",
+  X_SMALL: "x_small",
+} as const
 export type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES]
 
 type AutoLoadable = {
@@ -103,6 +148,7 @@ type AutoLoadable = {
 type ButtonBaseProps = PropsWithChildren<{
   alignItems?: string
   alignSelf?: Alignment
+  ariaLabel?: string
   autoLoadable?: boolean
   disabled?: boolean
   flat?: boolean
@@ -147,6 +193,7 @@ const ButtonBase = styled(
     loading,
     onClick,
     pill,
+    size,
     ...props
   }: ButtonBaseProps) => {
     return (
@@ -199,8 +246,9 @@ const ButtonBase = styled(
   primary: props.flat ? false : props.primary,
 }))`
   &&&& {
-    font-size: inherit;
+    font-size: ${({ size }) => getFontSize(size)};
     font-weight: bold;
+    height: ${({ size }) => getHeight(size)};
     ${({ wrapInlineText }) => (wrapInlineText ? inlineWrapping : "")}
     ${({ fluid }) => (!fluid ? fitContent : fitContainer)}
     border-radius: ${({ pill, theme }) => {

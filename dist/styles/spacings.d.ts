@@ -1,4 +1,5 @@
 export declare const SPACINGS: Readonly<{
+    XXS: ".3rem";
     XS: ".5rem";
     SM: "1rem";
     MD: "1.5rem";

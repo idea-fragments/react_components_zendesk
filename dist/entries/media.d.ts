@@ -1,6 +1,14 @@
 export * from "components/media/CroppedVideoPlayer";
 export * from "components/media/ImageUploader";
 export * from "components/media/PhotoBooth";
-export * from "components/media/VideoUploader";
 export * from "components/media/VideoPlayer";
+export * from "components/media/VideoUploader";
+export * from "hooks/useDocumentEdgeDetection";
+export * from "hooks/useExposureAnalysis";
+export * from "hooks/useGlareDetection";
+export * from "hooks/useLightLevelDetection";
+export * from "hooks/useMotionBlurDetection";
+export * from "hooks/useNoiseDetection";
+export * from "hooks/usePerspectiveDetection";
+export * from "hooks/useTextQualityDetection";
 //# sourceMappingURL=media.d.ts.map

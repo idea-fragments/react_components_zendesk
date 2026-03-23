@@ -1,5 +1,6 @@
 import resolve from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
+import json from "@rollup/plugin-json"
 import typescript from "@rollup/plugin-typescript"
 import peerDepsExternal from "rollup-plugin-peer-deps-external"
 import { getBabelOutputPlugin } from "@rollup/plugin-babel"
@@ -12,16 +13,20 @@ let modules = fs
   .readdirSync(modulesDir)
   .map((nameWithExtension) => nameWithExtension.split(".")[0])
 
-modules = [
-  // "forms",
-  // "hooks",
-  "layouts",
-  // "media",
-  // "styles",
-  // "tables",
-  // "tags",
-  // "text",
-]
+// modules = [
+//   // "forms",
+//   "hooks",
+//   // "layouts",
+//   // "media",
+//   // "modals",
+//   // "notifications",
+//   // "styles",
+//   // "tables",
+//   // "tags",
+//   // "text",
+//   // "tooltips",
+//   // "utilities",
+// ]
 
 const config = [
   ...modules.map((module) => {
@@ -34,9 +39,30 @@ const config = [
         sourcemap: true,
         strict: false,
       },
+      external: [
+        // Node.js built-in modules that should not be bundled
+        "worker_threads",
+        "path",
+        "fs",
+        "util",
+        "stream",
+        "http",
+        "https",
+        "url",
+        "zlib",
+        "punycode",
+        "crypto",
+        "os",
+        "events",
+        "buffer",
+      ],
       plugins: [
         peerDepsExternal(),
-        resolve(),
+        resolve({
+          browser: true,
+          preferBuiltins: false,
+        }),
+        json(),
         commonjs(),
         postcss({
           extract: false,

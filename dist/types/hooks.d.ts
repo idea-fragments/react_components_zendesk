@@ -31,12 +31,6 @@ type FullSpectrumColors = {
     700: string;
     800: string;
 };
-type PartialSpectrumColors = {
-    400: string;
-    600: string;
-    M400: string;
-    M600: string;
-};
 type ContainerStyles = {
     background?: string;
     borderRadius?: string;
@@ -49,6 +43,9 @@ type ContainerStyles = {
 type Styles = {
     appBar: Required<Pick<ContainerStyles, "background" | "height" | "shadow" | "zIndex">> & {
         screenPosition: "top" | "bottom";
+        scrollBar: {
+            height: string;
+        };
     };
     border: {
         color: string;
@@ -85,6 +82,7 @@ type Styles = {
     colorTertiary: string;
     colorWarning: string;
     colors: {
+        accent: FullSpectrumColors;
         black: string;
         white: string;
         product: {};
@@ -95,16 +93,20 @@ type Styles = {
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
         orange: FullSpectrumColors;
+        amber: FullSpectrumColors;
         lemon: FullSpectrumColors;
         purple: FullSpectrumColors;
-        fuschia: PartialSpectrumColors;
-        pink: PartialSpectrumColors;
-        crimson: PartialSpectrumColors;
-        lime: PartialSpectrumColors;
-        mint: PartialSpectrumColors;
-        teal: PartialSpectrumColors;
-        azure: PartialSpectrumColors;
-        royal: PartialSpectrumColors;
+        magenta: FullSpectrumColors;
+        pink: FullSpectrumColors;
+        primary: FullSpectrumColors;
+        crimson: FullSpectrumColors;
+        lime: FullSpectrumColors;
+        mint: FullSpectrumColors;
+        teal: FullSpectrumColors;
+        azure: FullSpectrumColors;
+        denim: FullSpectrumColors;
+        royal: FullSpectrumColors;
+        sage: FullSpectrumColors;
     };
     container: {
         horizontalPadding: string;
@@ -126,6 +128,7 @@ type Styles = {
         backdrop: {
             background: string;
         };
+        borderRadius: string;
     };
     nav: {
         linkColor: string;

@@ -11,6 +11,7 @@ export type FlexBoxProps = {
     inline?: boolean;
     justifyContent?: string;
     responsivePropsList?: ResponsiveProps<FlexBoxProps>[];
+    reversed?: boolean;
     withRows?: boolean;
     wrapped?: boolean;
 } & CSSProp;
@@ -21,6 +22,7 @@ export declare const FlexBox: import("styled-components").StyledComponent<"div",
     inline?: boolean | undefined;
     justifyContent?: string | undefined;
     responsivePropsList?: ResponsiveProps<FlexBoxProps>[] | undefined;
+    reversed?: boolean | undefined;
     withRows?: boolean | undefined;
     wrapped?: boolean | undefined;
 } & CSSProp<any>, never>;

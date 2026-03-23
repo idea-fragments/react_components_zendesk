@@ -196,6 +196,7 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
   var e = new Error(message);
   return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
+var XXS$1 = ".3rem";
 var XS$1 = ".5rem";
 var SM$1 = "1rem";
 var MD$1 = "1.5rem";
@@ -205,6 +206,7 @@ var XXL$1 = "3rem";
 var XXXL$1 = "4rem";
 var XXXXL$1 = "5rem";
 var SPACINGS = Object.freeze({
+  XXS: XXS$1,
   XS: XS$1,
   SM: SM$1,
   MD: MD$1,
@@ -219,23 +221,24 @@ Object.freeze({
   RIGHT: "right"
 });
 var getFlexDirection = function (_a) {
-  var withRows = _a.withRows;
-  return withRows ? "column" : "row";
+  var reversed = _a.reversed,
+    withRows = _a.withRows;
+  var base = withRows ? "column" : "row";
+  return reversed ? "".concat(base, "-reverse") : base;
 };
-var FlexBox = styled__default["default"].div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  align-items: ", ";\n  display: ", ";\n  flex: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n\n  ", "\n  ", "\n"], ["\n  align-items: ", ";\n  display: ", ";\n  flex: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n\n  ", "\n  ", "\n"])), function (_a) {
+var FlexBox = styled__default["default"].div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  align-items: ", ";\n  display: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  align-items: ", ";\n  display: ", ";\n  flex-direction: ", ";\n  gap: ", ";\n  justify-content: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
   var alignItems = _a.alignItems;
   return alignItems ? alignItems : "initial";
 }, function (p) {
   return p.inline ? "inline-flex" : "flex";
-}, function (_a) {
-  var fluid = _a.fluid;
-  return fluid ? 1 : "unset";
 }, getFlexDirection, function (p) {
   return p.gap ? p.gap : SPACINGS.SM;
 }, function (p) {
   return p.justifyContent || "initial";
 }, function (p) {
   return p.wrapped ? wrappedStyling : "";
+}, function (p) {
+  return p.fluid ? "flex: 1;" : "";
 }, function (p) {
   return p.responsivePropsList ? responsiveStyles(p) : "";
 }, function (p) {
@@ -254,7 +257,7 @@ var responsiveStyles = function (_a) {
       justifyContent = props.justifyContent,
       fluid = props.fluid,
       wrapped = props.wrapped;
-    return mediaQueryFunc(styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n      align-items: ", ";\n      display: ", ";\n      flex: ", ";\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "], ["\n      align-items: ", ";\n      display: ", ";\n      flex: ", ";\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "])), alignItems ? alignItems : "initial", inline ? "inline-flex" : "flex", fluid ? 1 : "unset", getFlexDirection(props), gap ? gap : SPACINGS.SM, justifyContent || "initial", wrapped ? wrappedStyling : "")).join("");
+    return mediaQueryFunc(styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n      align-items: ", ";\n      display: ", ";\n      ", "\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "], ["\n      align-items: ", ";\n      display: ", ";\n      ", "\n      flex-direction: ", ";\n      gap: ", ";\n      justify-content: ", ";\n      ", "\n    "])), alignItems ? alignItems : "initial", inline ? "inline-flex" : "flex", fluid ? "flex: 1;" : "", getFlexDirection(props), gap ? gap : SPACINGS.SM, justifyContent || "initial", wrapped ? wrappedStyling : "")).join("");
   });
 };
 var wrappedStyling = styled.css(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  flex-wrap: wrap;\n"], ["\n  flex-wrap: wrap;\n"])));

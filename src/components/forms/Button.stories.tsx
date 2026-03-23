@@ -1,63 +1,107 @@
 import { mdiInformation } from "@mdi/js"
-import { Button, ButtonProps } from "components/forms/Button"
+import { Button, ButtonProps, BUTTON_SIZES } from "components/forms/Button"
 import React from "react"
 import { DO_NOTHING } from "utils/functionHelpers"
 
 export default {
-  title: "forms/Button",
-  component: Button,
   argTypes: {
-    color: {},
+    alignSelf: {
+      control: { type: "select" },
+      options: [
+        "auto",
+        "flex-start",
+        "flex-end",
+        "center",
+        "baseline",
+        "stretch",
+      ],
+    },
+    autoLoadable: {
+      control: { type: "boolean" },
+    },
+    children: {
+      control: { type: "text" },
+    },
+    compact: {
+      control: { type: "boolean" },
+    },
+    danger: {
+      control: { type: "boolean" },
+    },
+    disabled: {
+      control: { type: "boolean" },
+    },
+    flat: {
+      control: { type: "boolean" },
+    },
+    fluid: {
+      control: { type: "boolean" },
+    },
+    icon: {
+      control: { type: "text" },
+      description: "Icon path or component",
+    },
+    iconPosition: {
+      control: { type: "select" },
+      options: ["left", "right"],
+    },
+    iconSize: {
+      control: { type: "text" },
+    },
+    inline: {
+      control: { type: "boolean" },
+    },
+    loading: {
+      control: { type: "boolean" },
+    },
+    neutral: {
+      control: { type: "boolean" },
+    },
+    pill: {
+      control: { type: "boolean" },
+    },
+    primary: {
+      control: { type: "boolean" },
+    },
+    size: {
+      control: { type: "select" },
+      options: Object.values(BUTTON_SIZES),
+    },
+    success: {
+      control: { type: "boolean" },
+    },
+    warning: {
+      control: { type: "boolean" },
+    },
+    wrapInlineText: {
+      control: { type: "boolean" },
+    },
   },
+  component: Button,
+  title: "forms/Button",
 }
 
 const Story = (props: Partial<ButtonProps>) => {
   return (
     <Button
-      {...props}
-      innerAs={"a"}
-      onClick={DO_NOTHING}>
-      {props.children ?? "Click Me"}
+      onClick={DO_NOTHING}
+      {...props}>
+      {props.children || "Button"}
     </Button>
   )
 }
 
 export const Default = Story.bind({})
 Default.args = {
-  color: "green",
-  compact: false,
-  disabled: false,
-  flat: false,
-  fluid: false,
-  inline: false,
-  pill: false,
-  primary: false,
-  neutral: false,
-}
-
-export const Neutral = Story.bind({})
-Neutral.args = {
-  compact: false,
-  disabled: false,
-  flat: false,
-  fluid: false,
-  inline: false,
-  pill: false,
+  children: "Default Button",
   primary: true,
-  neutral: true,
 }
 
 export const WithIcon = Story.bind({})
 WithIcon.args = {
-  compact: false,
-  disabled: false,
-  flat: false,
-  fluid: false,
+  children: "Button with Icon",
   icon: mdiInformation,
-  inline: false,
-  pill: false,
   primary: false,
-  neutral: false,
 }
 
 export const WithIconAndLongText = Story.bind({})
@@ -65,15 +109,8 @@ WithIconAndLongText.args = {
   alignItems: "flex-start",
   children:
     "Learn more about what notifications you'll receive from IdentiShare",
-  compact: false,
-  disabled: false,
-  flat: false,
-  fluid: false,
   icon: mdiInformation,
-  iconSize: 1,
-  inline: false,
-  wrapInlineText: true,
-  pill: false,
+  iconSize: "1rem",
   primary: false,
-  neutral: false,
+  wrapInlineText: true,
 }

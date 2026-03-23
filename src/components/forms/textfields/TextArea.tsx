@@ -2,19 +2,21 @@ import { Textarea } from "@zendeskgarden/react-forms"
 import { FormFieldProps } from "components/forms/formField.types"
 import { TextFieldWrapper } from "components/forms/textfields/TextFieldWrapper"
 import { VALIDATION_STATES } from "components/forms/validationStates"
-import React, { ChangeEvent, FC } from "react"
+import React, { ChangeEvent, FC, TextareaHTMLAttributes } from "react"
 
 export type TextAreaProps = FormFieldProps & {
   autoExpand?: boolean
   characterLimit?: number
+  minRows?: number
   resizable?: boolean
   value?: string
   onChange: (text: string, e: ChangeEvent<HTMLTextAreaElement>) => void
-}
+} & Pick<TextareaHTMLAttributes<HTMLTextAreaElement>, "placeholder">
 
 export const TextArea: FC<TextAreaProps> = ({
   autoExpand = false,
   characterLimit,
+  minRows,
   onChange,
   resizable,
   ...props
@@ -43,7 +45,7 @@ export const TextArea: FC<TextAreaProps> = ({
       validation={validation()}
       // @ts-ignore
       isResizable={resizable}
-      minRows={autoExpand ? 2 : undefined}
+      minRows={minRows ?? (autoExpand ? 2 : undefined)}
       maxRows={autoExpand ? 20 : undefined}
       onChange={onChange}
       // @ts-ignore

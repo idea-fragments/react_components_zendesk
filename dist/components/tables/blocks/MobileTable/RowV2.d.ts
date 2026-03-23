@@ -1,5 +1,12 @@
 import { ColumnConfig, Item, ItemKey } from "components/tables/Table";
 import { FC, ReactNode } from "react";
+export type ListviewNodeRenderFunction = (params: ListviewNodeRenderParams) => ReactNode;
+export type ListviewNodeRenderParams = {
+    checkbox: ReactNode;
+    isLastRow: boolean;
+    onClick: () => void;
+    overflowMenu: ReactNode;
+};
 type Props = {
     checkable?: boolean;
     checked?: boolean;
@@ -8,7 +15,7 @@ type Props = {
     isLastRow?: boolean;
     item: Item;
     listviewMode?: boolean;
-    listviewNode?: ReactNode;
+    listviewNode?: ListviewNodeRenderFunction;
     onCheck?: (row: ItemKey, checked: boolean) => void;
     onClick?: (row: ItemKey) => void;
 };
