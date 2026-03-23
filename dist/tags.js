@@ -97,7 +97,7 @@ var getColor$1 = styled.css(templateObject_1$3 || (templateObject_1$3 = __makeTe
 //   margin-top: 0;
 // `
 var subTextStyling = styled.css(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"])), function (_a) {
+var Text = styled__default["default"].div(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n"])), function (_a) {
   var align = _a.align;
   return align;
 }, function (_a) {
@@ -105,7 +105,7 @@ var Text = styled__default["default"].div(templateObject_4$2 || (templateObject_
   return fluid ? "100%" : "unset";
 }, getColor$1, function (_a) {
   var compact = _a.compact;
-  return compact ? styled.css(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "], ["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "]))) : "";
+  return compact ? styled.css(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n            margin-top: 0;\n            margin-bottom: 0;\n            padding-top: 0;\n            padding-bottom: 0;\n          "], ["\n            margin-top: 0;\n            margin-bottom: 0;\n            padding-top: 0;\n            padding-bottom: 0;\n          "]))) : "";
 }, function (_a) {
   var size = _a.size;
   return size ? "font-size: ".concat(size, ";") : "";
@@ -5978,7 +5978,7 @@ exports.Tag = styled__default["default"](exports.Tag).attrs(function (_a) {
   return onClick ? "pointer" : "initial";
 }, function (_a) {
   var wrapText = _a.wrapText;
-  return wrapText ? styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n              white-space: normal;\n              height: unset;\n              padding-top: 4px;\n              padding-bottom: 4px;\n            "], ["\n              white-space: normal;\n              height: unset;\n              padding-top: 4px;\n              padding-bottom: 4px;\n            "]))) : "";
+  return wrapText ? styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n            white-space: normal;\n            height: unset;\n            padding-top: 4px;\n            padding-bottom: 4px;\n          "], ["\n            white-space: normal;\n            height: unset;\n            padding-top: 4px;\n            padding-bottom: 4px;\n          "]))) : "";
 }, function (_a) {
   var _css = _a._css;
   return _css;

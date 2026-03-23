@@ -4036,7 +4036,7 @@ var Logger = /** @class */function () {
 if (typeof window !== "undefined") window.Logger = Logger;
 var Logger_1 = dist.Logger = Logger;
 var name = "@idea-fragments/react-components-zendesk";
-var version = "0.1.75";
+var version = "0.1.77";
 var files = ["dist/*.js", "dist/*.js.map", "dist/types"];
 var exports$1 = {
   "./*": {
@@ -4048,7 +4048,7 @@ var dependencies = {
   "@idea-fragments/logger-js": "^0.0.1",
   color: "^4.2.3",
   "jslib-html5-camera-photo": "^3.3.4",
-  lodash: "^4.17.21",
+  lodash: "^4.17.23",
   moment: "^2.29.3",
   "react-date-range": "^1.4.0",
   "react-list": "^0.8.18",
@@ -4060,8 +4060,8 @@ var peerDependencies = {
   "@mdi/react": ">=1.6.0",
   "babel-loader": ">=8.2.5",
   "babel-plugin-styled-components": ">=2.0.7",
-  react: ">=18.1.0",
-  "react-dom": ">=18.1.0",
+  react: ">=18.2.0",
+  "react-dom": ">=18.2.0",
   "styled-components": ">=5.3.5"
 };
 var devDependencies = {
@@ -4116,8 +4116,8 @@ var devDependencies = {
   "patch-package": "^8.0.1",
   "pre-commit": "^1.2.2",
   prettier: "^2.8.6",
-  react: "^18.1.0",
-  "react-dom": "^18.1.0",
+  react: "18.2.0",
+  "react-dom": "18.2.0",
   "react-easy-crop": "^4.7.4",
   "react-images-uploading": "^3.1.7",
   "react-player": "^2.12.0",
@@ -4136,10 +4136,10 @@ var devDependencies = {
 };
 var overrides = {
   "@mdx-js/react": {
-    react: "$react"
+    react: "18.2.0"
   },
-  react: "^18.1.0",
-  "react-dom": "^18.1.0"
+  react: "18.2.0",
+  "react-dom": "18.2.0"
 };
 var resolutions = {
   "source-map": "^0.8.0-beta.0"
