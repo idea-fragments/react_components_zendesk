@@ -1,7 +1,12 @@
+import { Logger } from "@idea-fragments/logger-js"
 import { TinyDateRangePicker } from "components/calendars/TinyDateRangePicker"
 import { Button, BUTTON_SIZES } from "components/forms/Button"
 import { TextFieldProps } from "components/forms/formField.types"
-import { Dropdown, Select } from "components/forms/selectors/Dropdown"
+import {
+  Dropdown,
+  DropdownProps,
+  Select,
+} from "components/forms/selectors/Dropdown"
 import { StateChange } from "components/forms/selectors/types"
 import { FlexBox } from "components/layout/FlexBox"
 import Downshift, { StateChangeTypes } from "downshift"
@@ -10,7 +15,6 @@ import { css } from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { formatDate } from "utils/dateTimeHelpers"
 import { DO_NOTHING } from "utils/functionHelpers"
-import { Logger } from "utils/logging/Logger"
 import { DateRange } from "utils/dateTime/DateRange.type"
 
 export type DateRangePickerSelectorProps = {
@@ -19,7 +23,11 @@ export type DateRangePickerSelectorProps = {
   minimumDate?: Date
   value?: DateRange
   onChange: (range: DateRange) => void
-} & Omit<TextFieldProps, "onChange" | "value">
+} & Omit<TextFieldProps, "onChange" | "value"> &
+  Omit<
+    DropdownProps<DateRange>,
+    "isOpen" | "onChange" | "onStateChange" | "options" | "useRawOptions"
+  >
 
 type State = {
   isOpen: boolean
@@ -88,7 +96,13 @@ export const DateRangePickerSelector: FC<DateRangePickerSelectorProps> = (
     <Dropdown
       {...props}
       isOpen={state.isOpen}
-      menuCSS={`&& { width: auto !important; font-size: 12px; }`}
+      menuCSS={css`
+        && {
+          width: auto !important;
+          font-size: 12px;
+          ${props.menuCSS}
+        }
+      `}
       options={[
         <TinyDateRangePicker
           disabledDates={disabledDates}

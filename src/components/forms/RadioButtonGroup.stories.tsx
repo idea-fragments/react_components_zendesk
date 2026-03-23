@@ -1,5 +1,6 @@
 import { RadioButtonGroup } from "components/forms/RadioButtonGroup"
 import React, { useState } from "react"
+import { useTheme } from "styles/theme/useTheme"
 
 export default {
   component: RadioButtonGroup,
@@ -235,12 +236,13 @@ const StoryWithColors = () => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>(
     undefined,
   )
+  const { styles } = useTheme()
 
   const options = [
-    { color: "#e35b66", label: "Red", value: "red" },
-    { color: "#038153", label: "Green", value: "green" },
-    { color: "#b552e2", label: "Purple", value: "purple" },
-    { color: "#de701d", label: "Orange", value: "orange" },
+    { color: styles.colors.red, label: "Red", value: "red" },
+    { color: styles.colors.green, label: "Green", value: "green" },
+    { color: styles.colors.purple, label: "Purple", value: "purple" },
+    { color: styles.colors.orange, label: "Orange", value: "orange" },
   ]
 
   return (
@@ -264,6 +266,7 @@ const StoryWithGroupColor = () => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>(
     undefined,
   )
+  const { styles } = useTheme()
 
   const options = [
     { label: "Bronze", value: "bronze" },
@@ -276,7 +279,7 @@ const StoryWithGroupColor = () => {
       <h3>Radio Button Group - With Group Color</h3>
       <p>Selected: {selectedValue || "None"}</p>
       <RadioButtonGroup
-        color={"#de701d"}
+        color={styles.colors.orange}
         label={"Membership Tier"}
         name={"radio-group-group-color"}
         options={options}
@@ -322,6 +325,7 @@ const StoryComplex = () => {
   const [selectedValue, setSelectedValue] = useState<string | undefined>(
     undefined,
   )
+  const { styles } = useTheme()
 
   const options = [
     {
@@ -330,19 +334,19 @@ const StoryComplex = () => {
       value: "free",
     },
     {
-      color: "#5293c7",
+      color: styles.colors.blue,
       hint: "$9/month - 10GB storage",
       label: "Basic",
       value: "basic",
     },
     {
-      color: "#b552e2",
+      color: styles.colors.purple,
       hint: "$29/month - 100GB storage",
       label: "Pro",
       value: "pro",
     },
     {
-      color: "#de701d",
+      color: styles.colors.orange,
       hint: "$99/month - Unlimited storage",
       label: "Enterprise",
       value: "enterprise",
@@ -366,3 +370,64 @@ const StoryComplex = () => {
 }
 
 export const Complex = StoryComplex.bind({})
+
+const StoryWithRenderAdditional = () => {
+  const [selectedValue, setSelectedValue] = useState<string | undefined>(
+    undefined,
+  )
+
+  const options = [
+    {
+      label: "Standard",
+      renderAdditional: ({ renderedRadioButton }) => (
+        <div>
+          {renderedRadioButton}
+          <p style={{ fontSize: "0.75rem", margin: "0.25rem 0 0 0" }}>
+            Ships in 5–7 business days
+          </p>
+        </div>
+      ),
+      value: "standard",
+    },
+    {
+      label: "Express",
+      renderAdditional: ({ renderedRadioButton }) => (
+        <div>
+          {renderedRadioButton}
+          <p style={{ fontSize: "0.75rem", margin: "0.25rem 0 0 0" }}>
+            Ships in 1–2 business days
+          </p>
+        </div>
+      ),
+      value: "express",
+    },
+    {
+      label: "Overnight",
+      renderAdditional: ({ renderedRadioButton }) => (
+        <div>
+          {renderedRadioButton}
+          <p style={{ fontSize: "0.75rem", margin: "0.25rem 0 0 0" }}>
+            Delivered next business day
+          </p>
+        </div>
+      ),
+      value: "overnight",
+    },
+  ]
+
+  return (
+    <div style={{ padding: "2rem" }}>
+      <h3>Radio Button Group - With Render Additional</h3>
+      <p>Selected: {selectedValue || "None"}</p>
+      <RadioButtonGroup
+        label={"Shipping method"}
+        name={"radio-group-render-additional"}
+        options={options}
+        checkedOption={selectedValue}
+        onChange={setSelectedValue}
+      />
+    </div>
+  )
+}
+
+export const WithRenderAdditional = StoryWithRenderAdditional.bind({})

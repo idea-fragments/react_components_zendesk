@@ -11,20 +11,22 @@ import { useTheme } from "styles/theme/useTheme"
 
 export type IconAppBarProps = {
   actions: NavigationAction[]
-  actionIconSize?: string
   activeAction?: string
-  fallbackToText?: boolean
+  actionIconSize?: string
   bordered?: boolean
+  fallbackToText?: boolean
+  scrollable?: boolean
 }
 
 export let IconAppBar: FC<IconAppBarProps> = forwardRef(
   (
     {
       actions = [],
-      actionIconSize,
       activeAction,
-      fallbackToText = false,
+      actionIconSize,
       bordered = false,
+      fallbackToText = false,
+      scrollable = false,
     },
     ref: ForwardedRef<HTMLElement>,
   ) => {
@@ -74,6 +76,7 @@ export let IconAppBar: FC<IconAppBarProps> = forwardRef(
         <FixedPlaceHolder height={`${appBarHeight}`} />
         <BarWrapper
           bordered={bordered}
+          $scrollable={scrollable}
           ref={ref}>
           <Content height={appBarHeight}>
             <FlexBox
@@ -119,7 +122,9 @@ const barBorder = css`
   border-top: 1px solid ${({ theme }) => theme.styles.border.color};
 `
 
-const BarWrapper = styled.header<StyledProps<{ bordered: boolean }>>`
+const BarWrapper = styled.header<
+  StyledProps<{ bordered: boolean; $scrollable?: boolean }>
+>`
   background: ${({ theme }) => theme.styles.appBar.background};
   box-shadow: ${({ theme }) => theme.styles.appBar.shadow};
   position: fixed;
@@ -130,6 +135,7 @@ const BarWrapper = styled.header<StyledProps<{ bordered: boolean }>>`
   z-index: ${({ theme }) => theme.styles.appBar.zIndex};
 
   ${({ bordered }) => (bordered ? barBorder : "")};
+  ${({ $scrollable }) => ($scrollable ? "overflow-x: scroll;" : "")};
 `
 
 const Content = styled(FlexBox).attrs({ alignItems: "center", as: "nav" })`

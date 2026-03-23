@@ -12,6 +12,16 @@ import { SPACINGS } from "styles/spacings"
 import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 import { isNotEmpty } from "utils/arrayHelpers"
 
+export type ListviewNodeRenderFunction = (
+  params: ListviewNodeRenderParams,
+) => ReactNode
+export type ListviewNodeRenderParams = {
+  checkbox: ReactNode
+  isLastRow: boolean
+  onClick: () => void
+  overflowMenu: ReactNode
+}
+
 type Props = {
   checkable?: boolean
   checked?: boolean
@@ -20,7 +30,7 @@ type Props = {
   isLastRow?: boolean
   item: Item
   listviewMode?: boolean
-  listviewNode?: ReactNode
+  listviewNode?: ListviewNodeRenderFunction
   onCheck?: (row: ItemKey, checked: boolean) => void
   onClick?: (row: ItemKey) => void
 }
@@ -42,6 +52,44 @@ export const Row: FC<Props> = ({
   const firstColumn = columnConfigs[0]
   const firstColumnValue = firstColumn ? item[firstColumn.name] : null
 
+  const handleCheckChange = (isChecked: boolean) => {
+    onCheck?.(key, isChecked)
+  }
+
+  const handleClick = () => {
+    onClick?.(key)
+  }
+
+  const checkboxNode = checkable ? (
+    <Checkbox
+      checked={!checkDisabled && checked}
+      disabled={checkDisabled}
+      onChange={handleCheckChange}
+    />
+  ) : null
+
+  const overflowMenuNode = actions ? (
+    <OverflowMenu
+      actions={actions}
+      placement={"bottom-end"}
+    />
+  ) : null
+
+  // If listview mode is enabled, return only the render function result
+  if (listviewMode && listviewNode) {
+    return (
+      <>
+        {listviewNode({
+          checkbox: checkboxNode,
+          isLastRow: isLastRow || false,
+          onClick: handleClick,
+          overflowMenu: overflowMenuNode,
+        })}
+      </>
+    )
+  }
+
+  // Standard table mode
   const createFieldRow = (
     { name, collapsible }: ColumnConfig,
     isFirst: boolean,
@@ -65,8 +113,8 @@ export const Row: FC<Props> = ({
 
         <FieldValue>
           <FlexBox
-            justifyContent={"flex-end"}
-            alignItems={"center"}>
+            alignItems={"center"}
+            justifyContent={"flex-end"}>
             <Text
               _css={css`
                 font-weight: ${FONT_WEIGHTS.REGULAR};
@@ -88,10 +136,6 @@ export const Row: FC<Props> = ({
     [[] as ColumnConfig[], [] as ColumnConfig[]],
   )
 
-  const handleCheckChange = (isChecked: boolean) => {
-    onCheck?.(key, isChecked)
-  }
-
   const toggleCollapse = () => {
     setCollapsedState(!isCollapsed)
   }
@@ -101,23 +145,17 @@ export const Row: FC<Props> = ({
       _css={containerStyles || ""}
       gap={SPACINGS.SM}
       isLastRow={isLastRow}
-      onClick={() => onClick?.(key)}
+      onClick={handleClick}
       withRows>
       {/* Row Header with first column data and actions */}
       <FlexBox
-        withRows
-        gap={SPACINGS.XS}>
+        gap={SPACINGS.XS}
+        withRows>
         <FlexBox
           alignItems={"center"}
-          gap={SPACINGS.SM}
-          fluid>
-          {checkable ? (
-            <Checkbox
-              checked={!checkDisabled && checked}
-              disabled={checkDisabled}
-              onChange={handleCheckChange}
-            />
-          ) : null}
+          fluid
+          gap={SPACINGS.SM}>
+          {checkboxNode}
 
           <HeaderTitle fluid>
             <Text
@@ -129,41 +167,29 @@ export const Row: FC<Props> = ({
             </Text>
           </HeaderTitle>
 
-          {actions ? (
-            <OverflowMenu
-              actions={actions}
-              placement={"bottom-end"}
-            />
-          ) : null}
+          {overflowMenuNode}
         </FlexBox>
 
         <HeaderDivider />
       </FlexBox>
 
       {/* Row Content */}
-      {listviewMode ? (
-        listviewNode
-      ) : (
-        <FieldsGrid>
-          {nonCollapsibleColumns.map((col, idx) =>
-            createFieldRow(col, idx === 0),
-          )}
-          {collapsibleColumns.map((col, idx) =>
-            createFieldRow(
-              col,
-              idx === 0 && nonCollapsibleColumns.length === 0,
-            ),
-          )}
-        </FieldsGrid>
-      )}
+      <FieldsGrid>
+        {nonCollapsibleColumns.map((col, idx) =>
+          createFieldRow(col, idx === 0),
+        )}
+        {collapsibleColumns.map((col, idx) =>
+          createFieldRow(col, idx === 0 && nonCollapsibleColumns.length === 0),
+        )}
+      </FieldsGrid>
 
-      {isNotEmpty(collapsibleColumns) && !listviewMode ? (
+      {isNotEmpty(collapsibleColumns) ? (
         <Button
           fluid
           icon={isCollapsed ? mdiChevronDown : mdiChevronUp}
+          onClick={toggleCollapse}
           primary={false}
-          size={"small"}
-          onClick={toggleCollapse}>
+          size={"small"}>
           Show {isCollapsed ? "More" : "Less"}
         </Button>
       ) : null}

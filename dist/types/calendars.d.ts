@@ -1,4 +1,6 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
+import * as styled_components from 'styled-components';
+import { FlattenSimpleInterpolation } from 'styled-components';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
 type DateRange = {
@@ -26,6 +28,12 @@ type TinyCalendarProps = {
 };
 declare let TinyCalendar: FC<TinyCalendarProps>;
 
+type CSS<T = any> = FlattenSimpleInterpolation | string | T;
+type CSSProp<T = any> = {
+    _css?: CSS<T>;
+    className?: string;
+};
+
 type TinyDateRangePickerProps = {
     disabledDates?: Array<Date>;
     fluid?: boolean;
@@ -33,8 +41,24 @@ type TinyDateRangePickerProps = {
     maxDate?: Date;
     minDate?: Date;
     onChange: (range: DateRange) => void;
-};
-declare const TinyDateRangePicker: FC<TinyDateRangePickerProps>;
+} & CSSProp;
+declare const TinyDateRangePicker: styled_components.StyledComponent<React.FC<{
+    disabledDates?: Date[] | undefined;
+    fluid?: boolean | undefined;
+    initialRange?: DateRange | undefined;
+    maxDate?: Date | undefined;
+    minDate?: Date | undefined;
+    onChange: (range: DateRange) => void;
+} & CSSProp<any> & {
+    className?: string | undefined;
+}>, styled_components.DefaultTheme, {
+    disabledDates?: Date[] | undefined;
+    fluid?: boolean | undefined;
+    initialRange?: DateRange | undefined;
+    maxDate?: Date | undefined;
+    minDate?: Date | undefined;
+    onChange: (range: DateRange) => void;
+} & CSSProp<any>, never>;
 
 type Legendable = {
     color?: string;

@@ -14,12 +14,13 @@ export const AppBarLayoutV2: FC<AppBarLayoutV2Props> = ({
 }) => {
   const theme = useTheme()
   const appBarHeight = theme.styles.appBar.height
+  const scrollBarHeight = theme.styles.appBar.scrollBar.height
 
   return (
     <Container>
       <FlexBox
         _css={css`
-          min-height: calc(100% - ${appBarHeight});
+          min-height: calc(100% - ${appBarHeight} - ${scrollBarHeight});
         `}
         gap={"unset"}
         withRows>

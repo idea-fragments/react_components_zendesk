@@ -1,12 +1,15 @@
 import { FlexBox } from "components/layout/FlexBox"
-import { PropsWithChildren, ReactNode, forwardRef, ForwardedRef } from "react"
+import { SectionPaddingSize } from "components/layout/Section"
+import { ForwardedRef, PropsWithChildren, ReactNode, forwardRef } from "react"
 import styled, { css } from "styled-components"
+import { SPACINGS } from "styles/spacings"
 import { CSSProp } from "styles/types"
 
 export type SectionHeaderProps = PropsWithChildren<{
   actions?: ReactNode
   bordered?: boolean
   caption?: ReactNode
+  paddingSize?: SectionPaddingSize
   title?: ReactNode
 }> &
   CSSProp
@@ -20,6 +23,7 @@ export const SectionHeader = styled(
         caption,
         children,
         className,
+        paddingSize = "default",
         title = children,
       }: SectionHeaderProps,
       ref: ForwardedRef<HTMLDivElement>,
@@ -28,6 +32,7 @@ export const SectionHeader = styled(
         <Container
           bordered={bordered}
           className={className}
+          paddingSize={paddingSize}
           ref={ref}
           withRows>
           <FlexBox
@@ -49,9 +54,24 @@ const sectionBorder = css`
   border-bottom: 1px solid ${({ theme }) => theme.styles.border.color};
 `
 
-const Container = styled(FlexBox)<{ bordered: boolean }>`
+const Container = styled(FlexBox)<{
+  bordered: boolean
+  paddingSize: SectionPaddingSize
+}>`
   width: 100%;
-  padding: ${({ theme }) => theme.styles.section.header.padding};
+  ${({ paddingSize, theme }) => {
+    if (paddingSize === "small")
+      return css`
+        padding: ${SPACINGS.SM};
+      `
+    if (paddingSize === "medium")
+      return css`
+        padding: ${SPACINGS.MD} ${SPACINGS.MD} ${SPACINGS.SM};
+      `
+    return css`
+      padding: ${theme.styles.section.header.padding};
+    `
+  }}
   ${({ bordered }) => (bordered ? sectionBorder : "")};
 `
 

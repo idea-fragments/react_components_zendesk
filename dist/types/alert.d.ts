@@ -1,28 +1,31 @@
-import { Nullable } from 'global';
 import { FC } from 'react';
+import { ValueOf } from 'utils/types';
 
 type StyledComponentProps = {
     className?: string;
 };
 
 declare const ALERT_TYPES: {
-    readonly INFO: "info";
-    readonly SUCCESS: "success";
+    readonly ACCENT: "accent";
     readonly ERROR: "error";
+    readonly INFO: "info";
+    readonly PRIMARY: "primary";
+    readonly SUCCESS: "success";
     readonly WARNING: "warning";
 };
-type AlertType = (typeof ALERT_TYPES)[keyof typeof ALERT_TYPES];
+type AlertType = ValueOf<typeof ALERT_TYPES>;
 type AlertContent = {
     title?: string;
     body: any;
     onClose?: () => void;
     type?: AlertType;
 };
-type Props = {
-    isVisible: boolean;
+type AlertProps = {
+    autoDismissSeconds?: number;
+    alertContent: AlertContent;
     closeAlert: () => void;
-    alertContent: Nullable<AlertContent>;
+    isVisible: boolean;
 } & StyledComponentProps;
-declare let Alert: FC<Props>;
+declare let Alert: FC<AlertProps>;
 
 export { ALERT_TYPES, Alert, AlertContent, AlertType };

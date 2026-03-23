@@ -3,7 +3,6 @@ import { Nullable } from "global"
 import {
   ChangeEvent,
   FC,
-  HTMLAttributes,
   InputHTMLAttributes,
   useCallback,
   useEffect,

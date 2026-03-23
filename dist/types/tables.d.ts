@@ -41,8 +41,10 @@ type CSSProp<T = any> = {
 type PromiseFunc<T = any, Rtn = any> = (...o: T[]) => Promise<Rtn>;
 
 declare const BUTTON_SIZES: {
-    readonly SMALL: "small";
     readonly LARGE: "large";
+    readonly MEDIUM: "medium";
+    readonly SMALL: "small";
+    readonly X_SMALL: "x_small";
 };
 type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES];
 type AutoLoadable = {
@@ -52,6 +54,7 @@ type AutoLoadable = {
 type ButtonBaseProps = PropsWithChildren<{
     alignItems?: string;
     alignSelf?: Alignment;
+    ariaLabel?: string;
     autoLoadable?: boolean;
     disabled?: boolean;
     flat?: boolean;
@@ -79,6 +82,14 @@ type ItemProps = Omit<IItemProps, "onClick"> & {
     danger?: boolean;
     disabled?: boolean;
 } & CSSProp;
+
+type ListviewNodeRenderFunction = (params: ListviewNodeRenderParams) => ReactNode;
+type ListviewNodeRenderParams = {
+    checkbox: ReactNode;
+    isLastRow: boolean;
+    onClick: () => void;
+    overflowMenu: ReactNode;
+};
 
 type TableAction = {
     buttonProps?: Partial<ButtonProps>;
@@ -155,7 +166,7 @@ type TableProps = {
     items: Array<Item>;
     maxHeight?: string;
     mobileListview?: boolean;
-    mobileListviewNodes?: ReactNode[];
+    mobileListviewNodes?: ListviewNodeRenderFunction[];
     onColumnSort?: (s: SortState) => void;
     onFiltersChange?: (changes: FilterState) => void;
     onItemChecked?: (key: ItemKey, isChecked: boolean) => void;
@@ -177,4 +188,4 @@ type Props = TableProps & {
 type FinalizedTableProps = Props;
 declare let Table: ({ actions, className, desktopTableProps, onItemsChecked, onPageChange, onPageSizeChange, pagination, useLegacyDesktopTable, useLegacyMobileTable, ...props }: Props) => react_jsx_runtime.JSX.Element;
 
-export { ColumnConfig, DesktopTableV2Props, FilterState, FinalizedTableProps, Item, ItemAction, ItemContainerStyles, ItemFilterOptions, ItemKey, PaginationData, SortConfig, SortDirection, SortState, Table, TableAction, TableProps };
+export { ColumnConfig, DesktopTableV2Props, FilterState, FinalizedTableProps, Item, ItemAction, ItemContainerStyles, ItemFilterOptions, ItemKey, ListviewNodeRenderFunction, ListviewNodeRenderParams, PaginationData, SortConfig, SortDirection, SortState, Table, TableAction, TableProps };

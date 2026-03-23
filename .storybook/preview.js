@@ -1,21 +1,28 @@
-import React             from "react"
-import { light }         from "styles/theme/light"
+import React from "react"
+import { enableLogging } from "utils/logging/Logger"
+import { light } from "styles/theme/light"
 import { ThemeProvider } from "styles/theme/ThemeProvider"
 
+enableLogging()
+
 export const decorators = [
-  (Story) => <ThemeProvider theme={light}>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;400;500;600;700&display=swap"
-          rel="stylesheet" />
-    <Story />
-  </ThemeProvider>,
+  (Story) => (
+    <ThemeProvider theme={light}>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Karla:wght@200;400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <Story />
+    </ThemeProvider>
+  ),
 ]
 
 export const parameters = {
-  actions:  { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
       color: /(background|color)$/i,
-      date:  /Date$/,
+      date: /Date$/,
     },
   },
 }

@@ -1,5 +1,5 @@
 import { Tooltip as ZTooltip } from "@zendeskgarden/react-tooltips"
-import { PropsWithChildren, ReactNode } from "react"
+import { ComponentProps, PropsWithChildren, ReactNode } from "react"
 import styled, { css } from "styled-components"
 
 const darkMode = css`
@@ -21,21 +21,31 @@ type Placement =
   | "start-top"
   | "start-bottom"
 
-export type TooltipProps = PropsWithChildren<{
-  arrow?: boolean
-  maxWidth?: string
-  placement?: Placement
-  content: ReactNode
-  type?: "light"
-}>
+export type TooltipProps = PropsWithChildren<
+  {
+    arrow?: boolean
+    maxWidth?: string
+    placement?: Placement
+    content: ReactNode
+    type?: "light"
+  } & Pick<ComponentProps<typeof ZTooltip>, "appendToNode">
+>
 
 export const Tooltip = styled(ZTooltip).attrs<TooltipProps>(
-  ({ arrow = false, maxWidth = "300px", placement = "auto" }) => ({
+  ({
+    appendToNode,
+    arrow = false,
+    maxWidth = "300px",
+    placement = "auto",
+    ...props
+  }) => ({
+    appendToNode: appendToNode ?? document.body,
     delayMS: 0,
     hasArrow: arrow,
     maxWidth,
     placement,
     zIndex: 999,
+    ...props,
   }),
 )<TooltipProps>`
   && {

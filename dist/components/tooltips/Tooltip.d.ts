@@ -1,4 +1,5 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { Tooltip as ZTooltip } from "@zendeskgarden/react-tooltips";
+import { ComponentProps, PropsWithChildren, ReactNode } from "react";
 type Placement = "start" | "end" | "auto" | "top" | "bottom" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom";
 export type TooltipProps = PropsWithChildren<{
     arrow?: boolean;
@@ -6,7 +7,7 @@ export type TooltipProps = PropsWithChildren<{
     placement?: Placement;
     content: ReactNode;
     type?: "light";
-}>;
+} & Pick<ComponentProps<typeof ZTooltip>, "appendToNode">>;
 export declare const Tooltip: import("styled-components").StyledComponent<{
     ({ id, delayMS, isInitialVisible, content, refKey, placement, eventsEnabled, popperModifiers, children, hasArrow, size, type, appendToNode, zIndex, isVisible: externalIsVisible, ...otherProps }: import("@zendeskgarden/react-tooltips").ITooltipProps): import("react").JSX.Element;
     displayName: string;
@@ -20,7 +21,7 @@ export declare const Tooltip: import("styled-components").StyledComponent<{
         placement: import("prop-types").Requireable<"top" | "bottom" | "end" | "start" | "auto" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "end-top" | "end-bottom" | "start-top" | "start-bottom">;
         popperModifiers: import("prop-types").Requireable<any>;
         size: import("prop-types").Requireable<"small" | "large" | "medium" | "extra-large">;
-        type: import("prop-types").Requireable<"light" | "dark">;
+        type: import("prop-types").Requireable<"dark" | "light">;
         zIndex: import("prop-types").Requireable<NonNullable<string | number | null | undefined>>;
         isInitialVisible: import("prop-types").Requireable<boolean>;
         refKey: import("prop-types").Requireable<string>;
@@ -39,7 +40,7 @@ export declare const Tooltip: import("styled-components").StyledComponent<{
     placement?: Placement | undefined;
     content: ReactNode;
     type?: "light" | undefined;
-} & {
+} & Pick<import("@zendeskgarden/react-tooltips").ITooltipProps, "appendToNode"> & {
     children?: ReactNode;
 }, never>;
 export {};

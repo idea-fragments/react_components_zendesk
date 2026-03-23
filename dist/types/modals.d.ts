@@ -1,10 +1,12 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
-import { Nullable } from 'global';
 import * as react from 'react';
-import { PropsWithChildren, ComponentType, Ref, ReactElement, FC, Dispatch, SetStateAction, ReactNode } from 'react';
+import { ComponentType, SVGAttributes, PropsWithChildren, ReactNode, Ref, ReactElement, FC, Dispatch, SetStateAction } from 'react';
+import { Nullable } from 'global';
 import { ValueOf } from 'utils/types';
 import * as styled_components from 'styled-components';
 import { FlattenSimpleInterpolation } from 'styled-components';
+
+type SVGComponent = ComponentType<SVGAttributes<any>>;
 
 declare const ALIGNMENTS: {
     readonly start: "flex-start";
@@ -39,8 +41,10 @@ type CSSProp<T = any> = {
 type PromiseFunc<T = any, Rtn = any> = (...o: T[]) => Promise<Rtn>;
 
 declare const BUTTON_SIZES: {
-    readonly SMALL: "small";
     readonly LARGE: "large";
+    readonly MEDIUM: "medium";
+    readonly SMALL: "small";
+    readonly X_SMALL: "x_small";
 };
 type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES];
 type AutoLoadable = {
@@ -50,11 +54,12 @@ type AutoLoadable = {
 type ButtonBaseProps = PropsWithChildren<{
     alignItems?: string;
     alignSelf?: Alignment;
+    ariaLabel?: string;
     autoLoadable?: boolean;
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: Nullable<string | ComponentType>;
+    icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;
@@ -102,14 +107,16 @@ type ModalContent = {
     onClose?: () => void;
 } & UserFeedbackProps;
 type ModalProps = {
+    blurBackdrop?: boolean;
     isVisible: boolean;
     closeModal: () => void;
     disableActions: boolean;
     modalContent: ModalContent | null | undefined;
 } & StyledComponentProps & CSSProp;
-declare let Modal: ({ isVisible, closeModal, disableActions, modalContent, className, }: ModalProps) => react_jsx_runtime.JSX.Element | null;
+declare let Modal: ({ blurBackdrop, isVisible, closeModal, disableActions, modalContent, className, }: ModalProps) => react_jsx_runtime.JSX.Element | null;
 
-declare const ModalManager: FC;
+type ModalManagerProps = Pick<ModalProps, "blurBackdrop" | "_css">;
+declare const ModalManager: FC<ModalManagerProps>;
 
 declare const ModalStateProvider: FC<PropsWithChildren<{}>>;
 
@@ -146,4 +153,4 @@ type DrawerModalProps = {
 } & CSSProp;
 declare const DrawerModal: styled_components.StyledComponent<FC<DrawerModalProps>, styled_components.DefaultTheme, {}, never>;
 
-export { DrawerModal, DrawerModalProps, Modal, ModalContent, ModalContentState, ModalHelperFunctions, ModalManager, ModalState, ModalStateContext, ModalStateProvider, ModalStateWithDispatch, defaultUiState, useModalState };
+export { DrawerModal, DrawerModalProps, Modal, ModalContent, ModalContentState, ModalHelperFunctions, ModalManager, ModalManagerProps, ModalProps, ModalState, ModalStateContext, ModalStateProvider, ModalStateWithDispatch, defaultUiState, useModalState };

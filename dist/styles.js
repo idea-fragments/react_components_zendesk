@@ -1929,6 +1929,7 @@ var desaturate = function (c) {
 var saturate = function (c) {
   return color(c).saturate(0.25).hex();
 };
+var XXS$1 = ".3rem";
 var XS$1 = ".5rem";
 var SM$1 = "1rem";
 var MD$1 = "1.5rem";
@@ -1938,6 +1939,7 @@ var XXL$1 = "3rem";
 var XXXL$1 = "4rem";
 var XXXXL$1 = "5rem";
 var SPACINGS = Object.freeze({
+  XXS: XXS$1,
   XS: XS$1,
   SM: SM$1,
   MD: MD$1,
@@ -1957,6 +1959,9 @@ var base = {
     background: "#fff",
     height: "92px",
     screenPosition: "bottom",
+    scrollBar: {
+      height: "0px"
+    },
     shadow: "unset",
     zIndex: 399
   },
@@ -2015,139 +2020,222 @@ var base = {
       700: "#49545c",
       800: "#2f3941"
     },
-    blue: {
-      100: "#edf7ff",
-      200: "#cee2f2",
-      300: "#adcce4",
-      400: "#5293c7",
-      500: "#337fbd",
-      600: "#1f73b7",
-      700: "#144a75",
-      800: "#0f3554"
-    },
-    red: {
-      100: "#fff0f1",
-      200: "#f5d5d8",
-      300: "#f5b5ba",
-      400: "#e35b66",
-      500: "#d93f4c",
-      600: "#cc3340",
-      700: "#8c232c",
-      800: "#681219"
-    },
-    yellow: {
-      100: "#fff7ed",
-      200: "#ffeedb",
-      300: "#fed6a8",
-      400: "#ffb057",
-      500: "#f79a3e",
-      600: "#ed8f1c",
-      700: "#ad5918",
-      800: "#703815"
-    },
-    green: {
-      100: "#edf8f4",
-      200: "#d1e8df",
-      300: "#aecfc2",
-      400: "#5eae91",
-      500: "#228f67",
-      600: "#038153",
-      700: "#186146",
-      800: "#0b3b29"
-    },
-    kale: {
-      100: "#f5fcfc",
-      200: "#daeded",
-      300: "#bdd9d7",
-      400: "#90bbbb",
-      500: "#498283",
-      600: "#17494d",
-      700: "#03363d",
-      800: "#012b30"
-    },
     purple: {
-      100: "#f5eeff",
-      200: "#e4d4f4",
-      300: "#d4b8f0",
-      400: "#b552e2",
-      500: "#9333d4",
-      600: "#6a27b8",
-      700: "#4a1c80",
-      800: "#2f1154"
+      100: "#f3eef9",
+      200: "#e1d3f3",
+      300: "#cab0ea",
+      400: "#a576db",
+      500: "#8240c8",
+      600: "#6331a1",
+      700: "#45217a",
+      800: "#2f1550"
     },
-    fuschia: {
-      400: "#d653c2",
-      600: "#a81897",
-      M400: "#cf62a8",
-      M600: "#a8458c"
+    magenta: {
+      100: "#f9eef8",
+      200: "#f0d4ed",
+      300: "#e3b1de",
+      400: "#cd6fc6",
+      500: "#b841ad",
+      600: "#93348b",
+      700: "#6a2465",
+      800: "#461743"
     },
     pink: {
+      100: "#fceef1",
+      200: "#f7d4dc",
+      300: "#f2b3c1",
       400: "#ec4d63",
+      500: "#e0355a",
       600: "#d42054",
-      M400: "#d57287",
-      M600: "#b23a5d"
+      700: "#9c1840",
+      800: "#68102b"
+    },
+    red: {
+      100: "#fdefef",
+      200: "#f9d4d8",
+      300: "#f5b4bc",
+      400: "#eb6573",
+      500: "#de3d4d",
+      600: "#c92a38",
+      700: "#941f29",
+      800: "#63141c"
     },
     crimson: {
+      100: "#fdeeed",
+      200: "#f9d4cf",
+      300: "#f3b1a3",
       400: "#e34f32",
+      500: "#d63820",
       600: "#c72a1c",
-      M400: "#cc6c5b",
-      M600: "#b24a3c"
+      700: "#921f15",
+      800: "#61150e"
     },
     orange: {
-      100: "#fff4ed",
-      200: "#ffe4cc",
-      300: "#ffcfa3",
-      400: "#de701d",
-      500: "#cc5f0d",
-      600: "#bf5000",
-      700: "#8a3c00",
-      800: "#5c2800"
+      100: "#fff3ed",
+      200: "#ffe3cc",
+      300: "#ffcba0",
+      400: "#ff9a4d",
+      500: "#f27825",
+      600: "#d45a0e",
+      700: "#9d4109",
+      800: "#6b2c06"
+    },
+    amber: {
+      100: "#fff8ed",
+      200: "#ffedce",
+      300: "#ffdba3",
+      400: "#ffbb5a",
+      500: "#f59d2f",
+      600: "#d6810f",
+      700: "#9e5f0a",
+      800: "#6b4007"
+    },
+    yellow: {
+      100: "#fffef2",
+      200: "#fff9d4",
+      300: "#ffefab",
+      400: "#ffda50",
+      500: "#f5ba21",
+      600: "#d49a0f",
+      700: "#9e7009",
+      800: "#6b4a06"
     },
     lemon: {
-      100: "#fffced",
-      200: "#fff7cc",
-      300: "#ffeda3",
-      400: "#ffd424",
-      500: "#ffc61a",
-      600: "#ffbb10",
-      700: "#c38f00",
-      800: "#806000"
+      100: "#fffef5",
+      200: "#fffbdb",
+      300: "#fff5b8",
+      400: "#ffe975",
+      500: "#edd141",
+      600: "#c9b120",
+      700: "#8f7d14",
+      800: "#5e520d"
+    },
+    sage: {
+      100: "#f5f6e8",
+      200: "#e7e8cc",
+      300: "#dee0b3",
+      400: "#d0d2a6",
+      500: "#b3b674",
+      600: "#8c8f4c",
+      700: "#5e6030",
+      800: "#3b3c1c"
     },
     lime: {
+      100: "#f0f9eb",
+      200: "#d9f0cc",
+      300: "#bbe5a3",
       400: "#43b324",
+      500: "#38991d",
       600: "#2e8200",
-      M400: "#519e2d",
-      M600: "#47782c"
+      700: "#236000",
+      800: "#184000"
     },
     mint: {
+      100: "#ebf9f2",
+      200: "#cef0de",
+      300: "#a8e6c5",
       400: "#00a656",
+      500: "#048f4a",
       600: "#058541",
-      M400: "#299c66",
-      M600: "#2e8057"
+      700: "#046334",
+      800: "#034224"
+    },
+    green: {
+      100: "#eef9f5",
+      200: "#d1ede3",
+      300: "#aedfc9",
+      400: "#41b989",
+      500: "#1b9466",
+      600: "#147654",
+      700: "#125640",
+      800: "#0d3a2a"
     },
     teal: {
+      100: "#ebf9f7",
+      200: "#cef0eb",
+      300: "#a7e5dc",
       400: "#02a191",
+      500: "#028a7d",
       600: "#028079",
-      M400: "#2d9e8f",
-      M600: "#3c7873"
+      700: "#025e5a",
+      800: "#013f3c"
+    },
+    kale: {
+      100: "#eaf7f6",
+      200: "#c5e7e5",
+      300: "#9ed3d0",
+      400: "#6ab7b3",
+      500: "#3d9692",
+      600: "#266e6b",
+      700: "#164e4c",
+      800: "#0c302f"
+    },
+    blue: {
+      100: "#eff6fc",
+      200: "#d4e7f7",
+      300: "#b0d4f0",
+      400: "#5fa8db",
+      500: "#3584c4",
+      600: "#1e67a6",
+      700: "#144a7a",
+      800: "#0d3152"
     },
     azure: {
+      100: "#eef5fd",
+      200: "#d4e7fa",
+      300: "#b0d5f5",
       400: "#3091ec",
+      500: "#1f7edb",
       600: "#1371d6",
-      M400: "#5f8dcf",
-      M600: "#3a70b2"
+      700: "#0e54a0",
+      800: "#09386b"
+    },
+    denim: {
+      100: "#e7ebf3",
+      200: "#c6d0e7",
+      300: "#9aadda",
+      400: "#5c7ecc",
+      500: "#3b5eb0",
+      600: "#2a4993",
+      700: "#1b3674",
+      800: "#0f214d"
     },
     royal: {
+      100: "#f0f2fd",
+      200: "#dbe1fa",
+      300: "#bdc8f5",
       400: "#5d7df5",
+      500: "#4561e8",
       600: "#3353e2",
-      M400: "#7986d8",
-      M600: "#4b61c3"
+      700: "#263da8",
+      800: "#1a2970"
+    },
+    accent: {
+      100: "transparent",
+      200: "transparent",
+      300: "transparent",
+      400: "transparent",
+      500: "transparent",
+      600: "transparent",
+      700: "transparent",
+      800: "transparent"
+    },
+    primary: {
+      100: "transparent",
+      200: "transparent",
+      300: "transparent",
+      400: "transparent",
+      500: "transparent",
+      600: "transparent",
+      700: "transparent",
+      800: "transparent"
     }
   },
   container: {
     horizontalPadding: "1rem"
   },
   drawer: {
+    icon: js.mdiClose,
     width: "380px"
   },
   font: {
@@ -2156,7 +2244,8 @@ var base = {
   modal: {
     backdrop: {
       background: "rgba(47, 57, 65, 0.85)"
-    }
+    },
+    borderRadius: "4px"
   },
   notifications: {
     zIndex: 401
@@ -2177,7 +2266,7 @@ var base = {
       borderRadius: "8px",
       color: "white"
     },
-    background: "#f8f9fd",
+    background: "#fff",
     boxShadow: "none",
     padding: "".concat(SPACINGS.LG),
     width: "250px",
@@ -2188,12 +2277,17 @@ var base = {
     borderSize: "1px",
     filterButtonIcon: js.mdiFilterOutline
   },
+  tag: {
+    textColorWeight: 600,
+    backgroundColor: 100
+  },
   tooltip: {
     darkBackground: "#747183"
   },
   getTextColorForBackground: function (_a) {
     var color = _a.color,
       theme = _a.theme;
+    if (color === "transparent") return theme.styles.textColorPrimary;
     if (hasGoodContrast(color, theme.styles.textColorLight)) {
       return theme.styles.textColorLight;
     }
@@ -2205,6 +2299,8 @@ base.colorDanger = base.colors.red["600"];
 base.colorSuccess = base.colors.green["600"];
 base.colorWarning = base.colors.yellow["700"];
 base.colorPrimary = base.colors.blue["600"];
+base.colors.primary = base.colors.blue;
+base.colors.accent = base.colors.orange;
 base.table.borderColor = base.colors.grey["200"];
 base.chat.message.currentUser.icon.background = base.colorPrimary;
 base.chat.message.currentUser.text.background = base.colors.grey["200"];
@@ -8001,7 +8097,7 @@ var textColorForFlatButton = styledComponents.css(templateObject_4$1 || (templat
   var inline = _a.inline;
   return inline ? inlineButtonStates : flatButtonStates;
 });
-var buttonLikeHoverable = styledComponents.css(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  cursor: pointer;\n  background: ", ";\n\n  @media (hover: hover) {\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  :active {\n    background: ", ";\n  }\n\n  transition: border-color 0.25s \n  ease-in-out, box-shadow 0.1s\n  ease-in-out, background-color 0.25s\n  ease-in-out, color 0.25s\n  ease-in-out, outline-color 0.1s\n  ease-in-out, z-index 0.25s\n  ease-in-out;\n  \n  ", "\n"], ["\n  cursor: pointer;\n  background: ", ";\n\n  @media (hover: hover) {\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  :active {\n    background: ", ";\n  }\n\n  transition: border-color 0.25s \n  ease-in-out, box-shadow 0.1s\n  ease-in-out, background-color 0.25s\n  ease-in-out, color 0.25s\n  ease-in-out, outline-color 0.1s\n  ease-in-out, z-index 0.25s\n  ease-in-out;\n  \n  ", "\n"])), function (_a) {
+var buttonLikeHoverable = styledComponents.css(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  cursor: pointer;\n  background: ", ";\n\n  @media (hover: hover) {\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  :active {\n    background: ", ";\n  }\n\n  transition: border-color 0.25s ease-in-out, box-shadow 0.1s ease-in-out,\n    background-color 0.25s ease-in-out, color 0.25s ease-in-out,\n    outline-color 0.1s ease-in-out, z-index 0.25s ease-in-out;\n\n  ", "\n"], ["\n  cursor: pointer;\n  background: ", ";\n\n  @media (hover: hover) {\n    &:hover {\n      background: ", ";\n    }\n  }\n\n  :active {\n    background: ", ";\n  }\n\n  transition: border-color 0.25s ease-in-out, box-shadow 0.1s ease-in-out,\n    background-color 0.25s ease-in-out, color 0.25s ease-in-out,\n    outline-color 0.1s ease-in-out, z-index 0.25s ease-in-out;\n\n  ", "\n"])), function (_a) {
   var flat = _a.flat,
     primary = _a.primary,
     inline = _a.inline,

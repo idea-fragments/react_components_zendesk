@@ -10,8 +10,9 @@ export type TextProps = CommonTextProps &
   }
 
 const getColor = css`
-  color: ${({ color, danger, theme }: StyledProps<ColorProps>) => {
+  color: ${({ color, danger, secondary, theme }: StyledProps<ColorProps>) => {
     if (danger) return theme.styles.colorDanger
+    if (secondary) return theme.styles.textColorSecondary
     if (color) return color
 
     return "inherit"
@@ -29,11 +30,24 @@ const subTextStyling = css`
   }
 `
 
-export const Text = styled.div`
+export const Text = styled.div<TextProps>`
   text-align: ${({ align }: TextProps) => align};
   width: ${({ fluid }) => (fluid ? "100%" : "unset")};
-  ${({ color }) => (color ? getColor : "")}
-  ${({ hasSubText }) => (hasSubText ? subTextStyling : "")}
   ${getColor}
-  ${({ _css }: CSSProp) => _css}
+
+  &&& {
+    ${({ compact }) =>
+      compact
+        ? css`
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+          `
+        : ""}
+    ${({ size }) => (size ? `font-size: ${size};` : "")}
+    ${({ weight }) => (weight ? `font-weight: ${weight};` : "")}
+    ${({ hasSubText }) => (hasSubText ? subTextStyling : "")}
+    ${({ _css }: CSSProp) => _css}
+  }
 `

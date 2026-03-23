@@ -13,7 +13,7 @@ export default {
 }
 
 const DefaultStory = (args: Partial<TagProps>) => {
-  return <Tag {...args}>Default Tag</Tag>
+  return <Tag {...args}>{args.children ?? "Default Tag"}</Tag>
 }
 
 const ColorStory = (args: Partial<TagProps>) => {
@@ -180,3 +180,9 @@ SmallSize.args = {}
 export const LargeSize = LargeSizeStory.bind({})
 // @ts-ignore
 LargeSize.args = {}
+
+export const LongText = DefaultStory.bind({})
+// @ts-ignore
+LongText.args = {
+  children: "This is a really long tag that should wrap to the next line",
+}

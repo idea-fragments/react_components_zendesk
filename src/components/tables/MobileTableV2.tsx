@@ -1,12 +1,14 @@
 import { Checkbox } from "components/forms/Checkbox"
+import { Card } from "components/layout/Card"
 import { FlexBox } from "components/layout/FlexBox"
 import { Row } from "components/tables/blocks/MobileTable/RowV2"
 import { Item, TableProps } from "components/tables/Table"
-import React from "react"
-import styled from "styled-components"
+import { Text } from "components/text/Text"
+import React, { useCallback } from "react"
+import styled, { css } from "styled-components"
 import { SPACINGS } from "styles/spacings"
 import { FONT_SIZES } from "styles/typography"
-import { isLastItem } from "utils/arrayHelpers"
+import { isLastItem, isNotEmpty } from "utils/arrayHelpers"
 
 type Props = TableProps & {
   hasRowActions: boolean
@@ -30,22 +32,51 @@ export const MobileTableV2 = ({
   const allSelected = checkedItems?.size === items.length
   const someSelected = !!checkedItems?.size && !allSelected
 
-  const handleSelectAll = (checked: boolean) => {
-    onSelectAllToggle?.(checked)
-  }
+  const handleSelectAll = useCallback(
+    (checked: boolean) => {
+      onSelectAllToggle?.(checked)
+    },
+    [onSelectAllToggle],
+  )
+
+  const selectAllCheckbox = useCallback(() => {
+    return (
+      <Checkbox
+        checked={allSelected}
+        indeterminate={someSelected}
+        onChange={handleSelectAll}
+      />
+    )
+  }, [allSelected, handleSelectAll, someSelected])
 
   return (
     <Container
-      gap={"1px"}
+      $listviewMode={!!mobileListview}
+      gap={mobileListview ? SPACINGS.SM : "1px"}
       withRows>
       {checkable ? (
-        <Header>
-          <Checkbox
-            checked={allSelected}
-            indeterminate={someSelected}
-            onChange={handleSelectAll}
-          />
-        </Header>
+        mobileListview ? (
+          <Card
+            compact
+            shadowed>
+            <FlexBox
+              alignItems={"center"}
+              gap={SPACINGS.XS}>
+              {selectAllCheckbox()}
+              <Text
+                _css={css`
+                  flex: 1;
+                `}>
+                Select all
+              </Text>
+              {isNotEmpty([...(checkedItems ?? [])]) ? (
+                <Text>{`${checkedItems?.size} selected`}</Text>
+              ) : null}
+            </FlexBox>
+          </Card>
+        ) : (
+          <Header>{selectAllCheckbox()}</Header>
+        )
       ) : null}
 
       {items.map((item: Item, index: number) => (
@@ -66,11 +97,17 @@ export const MobileTableV2 = ({
   )
 }
 
-const Container = styled(FlexBox)`
-  border-color: ${({ theme }) => theme.styles.table.borderColor};
-  border-style: solid;
-  border-width: ${({ theme }) => theme.styles.table.borderSize};
-  border-radius: ${FONT_SIZES.SM};
+const Container = styled(FlexBox)<{ $listviewMode: boolean }>`
+  ${({ $listviewMode }) =>
+    !$listviewMode
+      ? css`
+          border-color: ${({ theme }) => theme.styles.table.borderColor};
+          border-style: solid;
+          border-width: ${({ theme }) => theme.styles.table.borderSize};
+          border-radius: ${FONT_SIZES.SM};
+        `
+      : ""}
+
   overflow: hidden;
 `
 

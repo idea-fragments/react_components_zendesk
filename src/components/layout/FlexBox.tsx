@@ -15,22 +15,24 @@ export type FlexBoxProps = {
   inline?: boolean
   justifyContent?: string
   responsivePropsList?: ResponsiveProps<FlexBoxProps>[]
+  reversed?: boolean
   withRows?: boolean
   wrapped?: boolean
 } & CSSProp
 
-const getFlexDirection = ({ withRows }: FlexBoxProps) =>
-  withRows ? "column" : "row"
+const getFlexDirection = ({ reversed, withRows }: FlexBoxProps) => {
+  const base = withRows ? "column" : "row"
+  return reversed ? `${base}-reverse` : base
+}
 
 export const FlexBox = styled.div<FlexBoxProps>`
   align-items: ${({ alignItems }) => (alignItems ? alignItems : "initial")};
   display: ${(p) => (p.inline ? "inline-flex" : "flex")};
-  flex: ${({ fluid }: FlexBoxProps) => (fluid ? 1 : "unset")};
   flex-direction: ${getFlexDirection};
   gap: ${(p) => (p.gap ? p.gap : SPACINGS.SM)};
   justify-content: ${(p) => p.justifyContent || "initial"};
   ${(p: FlexBoxProps) => (p.wrapped ? wrappedStyling : "")}
-
+  ${(p: FlexBoxProps) => (p.fluid ? "flex: 1;" : "")}
   ${(p: FlexBoxProps) => (p.responsivePropsList ? responsiveStyles(p) : "")}
   ${(p: FlexBoxProps) => p._css}
 `
@@ -46,7 +48,7 @@ const responsiveStyles = ({
     return mediaQueryFunc(css`
       align-items: ${alignItems ? alignItems : "initial"};
       display: ${inline ? "inline-flex" : "flex"};
-      flex: ${fluid ? 1 : "unset"};
+      ${fluid ? "flex: 1;" : ""}
       flex-direction: ${getFlexDirection(props)};
       gap: ${gap ? gap : SPACINGS.SM};
       justify-content: ${justifyContent || "initial"};

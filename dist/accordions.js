@@ -4635,8 +4635,10 @@ var getColor = styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemp
 ])), function (_a) {
   var color = _a.color,
     danger = _a.danger,
+    secondary = _a.secondary,
     theme = _a.theme;
   if (danger) return theme.styles.colorDanger;
+  if (secondary) return theme.styles.textColorSecondary;
   if (color) return color;
   return "inherit";
 });
@@ -4644,23 +4646,29 @@ var getColor = styled.css(templateObject_1$1 || (templateObject_1$1 = __makeTemp
 //   margin-top: 0;
 // `
 var subTextStyling = styled.css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"], ["\n  margin-bottom: 0;\n\n  & + * {\n    margin-top: 0;\n  }\n"])));
-var Text = styled__default["default"].div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
+var Text = styled__default["default"].div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"], ["\n  text-align: ", ";\n  width: ", ";\n  ", "\n\n  &&& {\n    ", "\n    ", "\n    ", "\n    ", "\n    ", "\n  }\n\n"])), function (_a) {
   var align = _a.align;
   return align;
 }, function (_a) {
   var fluid = _a.fluid;
   return fluid ? "100%" : "unset";
+}, getColor, function (_a) {
+  var compact = _a.compact;
+  return compact ? styled.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "], ["\n              margin-top: 0;\n              margin-bottom: 0;\n              padding-top: 0;\n              padding-bottom: 0;\n            "]))) : "";
 }, function (_a) {
-  var color = _a.color;
-  return color ? getColor : "";
+  var size = _a.size;
+  return size ? "font-size: ".concat(size, ";") : "";
+}, function (_a) {
+  var weight = _a.weight;
+  return weight ? "font-weight: ".concat(weight, ";") : "";
 }, function (_a) {
   var hasSubText = _a.hasSubText;
   return hasSubText ? subTextStyling : "";
-}, getColor, function (_a) {
+}, function (_a) {
   var _css = _a._css;
   return _css;
 });
-var templateObject_1$1, templateObject_2$1, templateObject_3;
+var templateObject_1$1, templateObject_2$1, templateObject_3, templateObject_4;
 var useTheme = function () {
   return React__default.useContext(styled.ThemeContext);
 };

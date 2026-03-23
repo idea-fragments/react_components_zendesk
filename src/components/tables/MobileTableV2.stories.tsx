@@ -1,3 +1,4 @@
+import { FlexBox } from "components/layout/FlexBox"
 import { MobileTableV2 } from "components/tables/MobileTableV2"
 import {
   ColumnConfig,
@@ -5,7 +6,12 @@ import {
   ItemAction,
   ItemKey,
 } from "components/tables/Table"
+import { Text } from "components/text/Text"
 import React, { useState } from "react"
+import { Card } from "components/layout/Card"
+import styled, { css } from "styled-components"
+import { SPACINGS } from "styles/spacings"
+import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 import { DO_NOTHING } from "utils/functionHelpers"
 
 export default {
@@ -53,6 +59,119 @@ const Story = () => {
 }
 
 export const Default = Story.bind({})
+
+const ListViewStory = () => {
+  const [checkedItems, setCheckedItems] = useState<Set<ItemKey>>(new Set())
+
+  const handleItemChecked = (key: ItemKey, isChecked: boolean) => {
+    setCheckedItems((prev) => {
+      const newSet = new Set(prev)
+      if (isChecked) {
+        newSet.add(key)
+      } else {
+        newSet.delete(key)
+      }
+      return newSet
+    })
+  }
+
+  const handleSelectAllToggle = (isChecked: boolean) => {
+    if (isChecked) {
+      setCheckedItems(new Set(items.map((item) => item.key)))
+    } else {
+      setCheckedItems(new Set())
+    }
+  }
+
+  const listviewNodes = items.map(
+    (item) =>
+      ({ checkbox, onClick, overflowMenu }) =>
+        (
+          <Card onClick={onClick}>
+            <FlexBox
+              gap={SPACINGS.SM}
+              withRows>
+              <FlexBox
+                alignItems={"center"}
+                fluid
+                gap={SPACINGS.SM}>
+                {checkbox}
+                <HeaderTitle fluid>
+                  <Text
+                    _css={css`
+                      font-weight: ${FONT_WEIGHTS.BOLD};
+                      font-size: ${FONT_SIZES.SM};
+                    `}>
+                    {item.Product}
+                  </Text>
+                </HeaderTitle>
+                {overflowMenu}
+              </FlexBox>
+
+              <ListViewContent
+                gap={SPACINGS.SM}
+                withRows>
+                <FlexBox
+                  gap={SPACINGS.XS}
+                  withRows>
+                  <Text
+                    _css={css`
+                      font-size: ${FONT_SIZES.SM};
+                      color: ${({ theme }) => theme.styles.colors.grey["600"]};
+                    `}>
+                    {item.Description}
+                  </Text>
+                  <FlexBox gap={SPACINGS.XS}>
+                    <StatusBadge status={item.Status as string}>
+                      {item.Status}
+                    </StatusBadge>
+                    <PriorityBadge priority={item.Priority as string}>
+                      {item.Priority}
+                    </PriorityBadge>
+                  </FlexBox>
+                </FlexBox>
+                <FlexBox
+                  gap={SPACINGS.XS}
+                  justifyContent={"space-between"}>
+                  <Text
+                    _css={css`
+                      font-size: ${FONT_SIZES.XS};
+                      color: ${({ theme }) => theme.styles.colors.grey["500"]};
+                    `}>
+                    {item.Department}
+                  </Text>
+                  <Text
+                    _css={css`
+                      font-size: ${FONT_SIZES.XS};
+                      color: ${({ theme }) => theme.styles.colors.grey["500"]};
+                    `}>
+                    {item.Date}
+                  </Text>
+                </FlexBox>
+              </ListViewContent>
+            </FlexBox>
+          </Card>
+        ),
+  )
+
+  return (
+    <div style={{ maxWidth: "600px", padding: "1rem" }}>
+      <MobileTableV2
+        checkable
+        checkedItems={checkedItems}
+        columnConfigs={columnConfigs}
+        hasRowActions
+        items={items}
+        mobileListview
+        mobileListviewNodes={listviewNodes}
+        onItemChecked={handleItemChecked}
+        onSelectAllToggle={handleSelectAllToggle}
+      />
+    </div>
+  )
+}
+
+export const ListView = ListViewStory.bind({})
 
 const items: Item[] = [
   {
@@ -131,3 +250,45 @@ const columnConfigs: ColumnConfig[] = [
     collapsible: true,
   },
 ]
+
+const HeaderTitle = styled(FlexBox)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const ListViewContent = styled(FlexBox)``
+
+const StatusBadge = styled.div<{ status: string }>`
+  background: ${({ status, theme }) => {
+    if (status === "completed") return theme.styles.colors.green["100"]
+    if (status === "in-progress") return theme.styles.colors.blue["100"]
+    return theme.styles.colors.grey["200"]
+  }};
+  border-radius: 4px;
+  color: ${({ status, theme }) => {
+    if (status === "completed") return theme.styles.colors.green["700"]
+    if (status === "in-progress") return theme.styles.colors.blue["700"]
+    return theme.styles.colors.grey["700"]
+  }};
+  font-size: ${FONT_SIZES.XS};
+  font-weight: ${FONT_WEIGHTS.MEDIUM};
+  padding: ${SPACINGS.XS} ${SPACINGS.SM};
+  text-transform: capitalize;
+`
+
+const PriorityBadge = styled.div<{ priority: string }>`
+  background: ${({ priority, theme }) => {
+    if (priority === "High") return theme.styles.colors.red["100"]
+    if (priority === "Medium") return theme.styles.colors.yellow["100"]
+    return theme.styles.colors.grey["200"]
+  }};
+  border-radius: 4px;
+  color: ${({ priority, theme }) => {
+    if (priority === "High") return theme.styles.colors.red["700"]
+    if (priority === "Medium") return theme.styles.colors.yellow["700"]
+    return theme.styles.colors.grey["700"]
+  }};
+  font-size: ${FONT_SIZES.XS};
+  font-weight: ${FONT_WEIGHTS.MEDIUM};
+  padding: ${SPACINGS.XS} ${SPACINGS.SM};
+`

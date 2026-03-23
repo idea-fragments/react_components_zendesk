@@ -152,6 +152,6 @@ declare const Hint: styled_components.StyledComponent<"div", styled_components.D
     children: react.ReactNode;
 } & {
     as: "p";
-}, "as">;
+} & CSSProp<any>, "as">;
 
 export { H1, H2, H3, H4, H5, H6, Hint, LG, Label, MD, Paragraph, Text, TextProps, XL, XS, XXS };

@@ -8,7 +8,7 @@ import {
 } from "@zendeskgarden/react-modals"
 import { Button, ButtonProps } from "components/forms/Button"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
-import React, { MouseEvent, ReactElement, useState } from "react"
+import React, { ReactElement, useState } from "react"
 import styled, { css } from "styled-components"
 import { mediaQueries } from "styles/mediaQueries"
 import { textWithColor } from "styles/mixins"
@@ -69,7 +69,8 @@ const createButtons = (
     )
   })
 
-type ModalProps = {
+export type ModalProps = {
+  blurBackdrop?: boolean
   isVisible: boolean
   closeModal: () => void
   disableActions: boolean
@@ -78,6 +79,7 @@ type ModalProps = {
   CSSProp
 
 export let Modal = ({
+  blurBackdrop,
   isVisible,
   closeModal,
   disableActions,
@@ -94,6 +96,7 @@ export let Modal = ({
     buttons,
     danger,
     isLarge,
+    isNotDismissible,
     success,
     title,
     warning,
@@ -135,17 +138,15 @@ export let Modal = ({
 
   return (
     <ZenModal
-      onClose={handleClose}
+      onClose={isNotDismissible ? () => {} : handleClose}
       className={className}
       isAnimated
       isLarge={isLarge}
       backdropProps={{
-        onClick: (e: MouseEvent<HTMLElement>) => {
-          if ((e.target as HTMLElement).tagName.toLowerCase() === "input")
-            return
-          e.preventDefault()
+        style: {
+          backdropFilter: blurBackdrop ? "blur(4px)" : undefined,
+          fontFamily: "inherit",
         },
-        style: { fontFamily: "inherit" },
       }}>
       {title ? (
         <Header
@@ -197,6 +198,7 @@ Modal = styled(Modal)<ModalProps>`
     margin-left: ${SPACINGS.SM};
     margin-right: ${SPACINGS.SM};
     color: ${({ theme }) => theme.styles.textColorPrimary};
+    border-radius: ${({ theme }) => theme.styles.modal.borderRadius};
 
     ${({ modalContent }) =>
       modalContent?.isNotDismissible ? hideCloseButton : ""}

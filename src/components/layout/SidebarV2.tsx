@@ -16,6 +16,7 @@ export type SidebarV2Props = {
   activeAction?: string
   logo: ReactNode
   lowerActions?: Action[]
+  scrollable?: boolean
 }
 
 export const SidebarV2: FC<SidebarV2Props> = ({
@@ -24,6 +25,7 @@ export const SidebarV2: FC<SidebarV2Props> = ({
   activeAction,
   logo,
   lowerActions,
+  scrollable = false,
 }) => {
   const createActionButtons = (actions: Action[]) =>
     actions.map((a: Action) => {
@@ -67,6 +69,7 @@ export const SidebarV2: FC<SidebarV2Props> = ({
   return (
     <Container
       gap={SPACINGS.XXXL}
+      $scrollable={scrollable}
       withRows>
       {logo}
       <FlexBox
@@ -103,10 +106,17 @@ const actionButtonStyles = css<{ active: boolean }>`
   }
 `
 
-const Container = styled(FlexBox)<StyledProps>`
+const Container = styled(FlexBox)<StyledProps & { $scrollable?: boolean }>`
   background: ${({ theme }) => theme.styles.sidebar.background};
   height: 100%;
   padding: ${({ theme }) => theme.styles.sidebar.padding};
   width: ${({ theme }) => theme.styles.sidebar.width};
   flex-shrink: 0;
+  ${({ $scrollable }) =>
+    $scrollable
+      ? css`
+          overflow-y: auto;
+          overflow-x: hidden;
+        `
+      : ""};
 `

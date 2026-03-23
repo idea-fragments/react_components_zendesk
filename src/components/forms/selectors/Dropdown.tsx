@@ -176,7 +176,7 @@ export let Dropdown = <T,>(props: PropsWithChildren<DropdownProps<T>>) => {
     if (!shouldFilterOptions) return
     filterMatchingOptionsRef.current = debounce(filterFunc, 300)
     setFilteredOptions(options as SelectorOption<T>[])
-    setSearchFilter("")
+    // Don't clear search filter when options change - preserve user input
   }, [filterFunc, shouldFilterOptions, options])
 
   useEffect(() => {
@@ -274,7 +274,8 @@ export let Dropdown = <T,>(props: PropsWithChildren<DropdownProps<T>>) => {
 
     onStateChange!({
       ...changes,
-      inputValue: searchFilter,
+      inputValue:
+        changes.inputValue !== undefined ? changes.inputValue : searchFilter,
       selectedItem: item.isClearingItem ? null : item,
     })
 

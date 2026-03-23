@@ -29,6 +29,9 @@ export type ContainerStyles = {
 export type Styles = {
     appBar: Required<Pick<ContainerStyles, "background" | "height" | "shadow" | "zIndex">> & {
         screenPosition: "top" | "bottom";
+        scrollBar: {
+            height: string;
+        };
     };
     border: {
         color: string;
@@ -65,6 +68,7 @@ export type Styles = {
     colorTertiary: string;
     colorWarning: string;
     colors: {
+        accent: FullSpectrumColors;
         black: string;
         white: string;
         product: {};
@@ -75,16 +79,20 @@ export type Styles = {
         green: FullSpectrumColors;
         kale: FullSpectrumColors;
         orange: FullSpectrumColors;
+        amber: FullSpectrumColors;
         lemon: FullSpectrumColors;
         purple: FullSpectrumColors;
-        fuschia: PartialSpectrumColors;
-        pink: PartialSpectrumColors;
-        crimson: PartialSpectrumColors;
-        lime: PartialSpectrumColors;
-        mint: PartialSpectrumColors;
-        teal: PartialSpectrumColors;
-        azure: PartialSpectrumColors;
-        royal: PartialSpectrumColors;
+        magenta: FullSpectrumColors;
+        pink: FullSpectrumColors;
+        primary: FullSpectrumColors;
+        crimson: FullSpectrumColors;
+        lime: FullSpectrumColors;
+        mint: FullSpectrumColors;
+        teal: FullSpectrumColors;
+        azure: FullSpectrumColors;
+        denim: FullSpectrumColors;
+        royal: FullSpectrumColors;
+        sage: FullSpectrumColors;
     };
     container: {
         horizontalPadding: string;
@@ -106,6 +114,7 @@ export type Styles = {
         backdrop: {
             background: string;
         };
+        borderRadius: string;
     };
     nav: {
         linkColor: string;

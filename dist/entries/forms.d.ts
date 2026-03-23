@@ -2,6 +2,7 @@ export * from "components/forms/selectors/DatePickerSelector";
 export * from "components/forms/selectors/DateRangePickerSelector";
 export * from "components/forms/selectors/DateRangeSelectors";
 export * from "components/forms/selectors/Dropdown";
+export * from "components/forms/selectors/Dropdown/Item";
 export * from "components/forms/selectors/Selector";
 export * from "components/forms/selectors/MultiSelector";
 export * from "components/forms/RadioButton";

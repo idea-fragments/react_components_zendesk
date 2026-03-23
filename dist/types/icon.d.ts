@@ -1,11 +1,11 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
-import { ComponentType, SVGAttributes } from 'react';
+import { ComponentType, SVGAttributes, ReactNode } from 'react';
 
 type SVGComponent = ComponentType<SVGAttributes<any>>;
 type Props = {
     color?: string;
     size?: number | string;
-    svg: string | Array<string> | SVGComponent;
+    svg: string | Array<string> | SVGComponent | ReactNode;
     title?: string;
     onClick?: () => void;
 };
@@ -15,4 +15,4 @@ declare const Icon: {
     COMPONENT_NAME: string;
 };
 
-export { Icon, IconProps };
+export { Icon, IconProps, SVGComponent };

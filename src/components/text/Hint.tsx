@@ -1,6 +1,6 @@
 import { XS } from "components/text/Paragraph"
 import styled from "styled-components"
-import { ColorProps } from "styles/types"
+import { ColorProps, CSSProp } from "styles/types"
 import { FONT_WEIGHTS } from "styles/typography"
 
 export const Hint = styled(XS).attrs<ColorProps>(({ color, danger, theme }) => {
@@ -13,8 +13,9 @@ export const Hint = styled(XS).attrs<ColorProps>(({ color, danger, theme }) => {
   return {
     color: getTextColor(),
   }
-})`
+})<CSSProp>`
   color: ${({ color }) => color};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
   margin: 0 0 4px;
+  ${({ _css }) => _css};
 `

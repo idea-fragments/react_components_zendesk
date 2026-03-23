@@ -1,5 +1,6 @@
 import { ButtonProps } from "components/forms/Button";
 import { ItemProps } from "components/forms/selectors/Dropdown/Item";
+import { ListviewNodeRenderFunction, ListviewNodeRenderParams } from "components/tables/blocks/MobileTable/RowV2";
 import { ComponentType, PropsWithChildren, ReactNode } from "react";
 import { CSS } from "styles/types";
 export type TableAction = {
@@ -77,7 +78,7 @@ export type TableProps = {
     items: Array<Item>;
     maxHeight?: string;
     mobileListview?: boolean;
-    mobileListviewNodes?: ReactNode[];
+    mobileListviewNodes?: ListviewNodeRenderFunction[];
     onColumnSort?: (s: SortState) => void;
     onFiltersChange?: (changes: FilterState) => void;
     onItemChecked?: (key: ItemKey, isChecked: boolean) => void;
@@ -98,5 +99,5 @@ type Props = TableProps & {
 };
 export type FinalizedTableProps = Props;
 export declare let Table: ({ actions, className, desktopTableProps, onItemsChecked, onPageChange, onPageSizeChange, pagination, useLegacyDesktopTable, useLegacyMobileTable, ...props }: Props) => import("react/jsx-runtime").JSX.Element;
-export {};
+export type { ListviewNodeRenderFunction, ListviewNodeRenderParams };
 //# sourceMappingURL=Table.d.ts.map

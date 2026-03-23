@@ -1,8 +1,11 @@
+import { SectionPaddingSize } from "components/layout/Section"
 import styled, { css } from "styled-components"
+import { SPACINGS } from "styles/spacings"
 import { CSSProp } from "styles/types"
 
-type SectionBodyProps = {
+export type SectionBodyProps = {
   noHorizontalPadding?: boolean
+  paddingSize?: SectionPaddingSize
   scrollable?: boolean
 } & CSSProp
 
@@ -15,7 +18,19 @@ export const SectionBody = styled.div<SectionBodyProps>`
   width: 100%;
   flex: 1;
   overflow-y: ${({ scrollable }) => (scrollable ? "scroll" : "unset")};
-  padding: ${({ theme }) => theme.styles.section.body.padding};
+  ${({ paddingSize, theme }) => {
+    if (paddingSize === "small")
+      return css`
+        padding: ${SPACINGS.SM};
+      `
+    if (paddingSize === "medium")
+      return css`
+        padding: ${SPACINGS.MD};
+      `
+    return css`
+      padding: ${theme.styles.section.body.padding};
+    `
+  }}
   ${({ noHorizontalPadding }) =>
     noHorizontalPadding ? removeHorizontalPadding : ""};
   ${({ _css }: CSSProp) => _css}

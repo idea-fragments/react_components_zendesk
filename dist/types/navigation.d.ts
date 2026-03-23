@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ComponentType, Ref } from 'react';
+import React, { FC, PropsWithChildren, ComponentType, SVGAttributes, ReactNode, Ref } from 'react';
 import { Nullable } from 'global';
 import { ValueOf } from 'utils/types';
 import * as styled_components from 'styled-components';
@@ -8,6 +8,8 @@ import * as react_jsx_runtime from 'react/jsx-runtime';
 declare const Breadcrumbs: FC<PropsWithChildren<{}>>;
 
 type PromiseFunc<T = any, Rtn = any> = (...o: T[]) => Promise<Rtn>;
+
+type SVGComponent = ComponentType<SVGAttributes<any>>;
 
 declare const ALIGNMENTS: {
     readonly start: "flex-start";
@@ -40,8 +42,10 @@ type CSSProp<T = any> = {
 };
 
 declare const BUTTON_SIZES: {
-    readonly SMALL: "small";
     readonly LARGE: "large";
+    readonly MEDIUM: "medium";
+    readonly SMALL: "small";
+    readonly X_SMALL: "x_small";
 };
 type ButtonSize = (typeof BUTTON_SIZES)[keyof typeof BUTTON_SIZES];
 type AutoLoadable = {
@@ -51,11 +55,12 @@ type AutoLoadable = {
 type ButtonBaseProps = PropsWithChildren<{
     alignItems?: string;
     alignSelf?: Alignment;
+    ariaLabel?: string;
     autoLoadable?: boolean;
     disabled?: boolean;
     flat?: boolean;
     groupKey?: string;
-    icon?: Nullable<string | ComponentType>;
+    icon?: Nullable<string | SVGComponent | ComponentType | ReactNode>;
     iconPosition?: "left" | "right";
     iconSize?: string;
     inline?: boolean;

@@ -2,10 +2,11 @@ import { NavigationAction } from "components/layout/NavigationAction";
 import { FC } from "react";
 export type IconAppBarProps = {
     actions: NavigationAction[];
-    actionIconSize?: string;
     activeAction?: string;
-    fallbackToText?: boolean;
+    actionIconSize?: string;
     bordered?: boolean;
+    fallbackToText?: boolean;
+    scrollable?: boolean;
 };
 export declare let IconAppBar: FC<IconAppBarProps>;
 //# sourceMappingURL=IconAppBar.d.ts.map

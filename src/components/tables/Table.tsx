@@ -3,10 +3,14 @@ import { ItemProps } from "components/forms/selectors/Dropdown/Item"
 import { FlexBox } from "components/layout/FlexBox"
 import { ModalManager } from "components/modals/ModalManager"
 import { ModalStateProvider } from "components/stateProviders/ModalStateProvider"
-import { Pagination } from "components/tables/blocks/Pagination"
-import { Title } from "components/tables/blocks/Title"
 import { HelpText } from "components/tables/blocks/HelpText"
+import {
+  ListviewNodeRenderFunction,
+  ListviewNodeRenderParams,
+} from "components/tables/blocks/MobileTable/RowV2"
+import { Pagination } from "components/tables/blocks/Pagination"
 import { TableHeader } from "components/tables/blocks/TableHeader"
+import { Title } from "components/tables/blocks/Title"
 import { DesktopTable } from "components/tables/DesktopTable"
 import { DesktopTableV2 } from "components/tables/DesktopTableV2"
 import { MobileTable } from "components/tables/MobileTable"
@@ -14,8 +18,8 @@ import { MobileTableV2 } from "components/tables/MobileTableV2"
 import { useDeviceSizeWatcher } from "hooks/useDeviceSizeWatcher"
 import React, { ComponentType, PropsWithChildren, ReactNode } from "react"
 import styled, { css } from "styled-components"
-import { CSS } from "styles/types"
 import { SPACINGS } from "styles/spacings"
+import { CSS } from "styles/types"
 import { isNotEmpty } from "utils/arrayHelpers"
 
 export type TableAction = {
@@ -97,7 +101,7 @@ export type TableProps = {
   items: Array<Item>
   maxHeight?: string
   mobileListview?: boolean
-  mobileListviewNodes?: ReactNode[]
+  mobileListviewNodes?: ListviewNodeRenderFunction[]
   onColumnSort?: (s: SortState) => void
   onFiltersChange?: (changes: FilterState) => void
   onItemChecked?: (key: ItemKey, isChecked: boolean) => void
@@ -215,3 +219,6 @@ export let Table = ({
 }
 
 Table = styled(Table)``
+
+// Re-export types for listview mode
+export type { ListviewNodeRenderFunction, ListviewNodeRenderParams }

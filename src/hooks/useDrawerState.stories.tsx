@@ -1,15 +1,10 @@
 import { Button } from "components/forms/Button"
 import { FlexBox } from "components/layout/FlexBox"
-import { useDrawerState } from "hooks/useDrawerState"
+import { DrawerModalManager } from "components/modals/DrawerModalManager"
 import { DrawerModalStateProvider } from "components/stateProviders/DrawerModalStateProvider"
 import { Paragraph } from "components/text/Paragraph"
-import React, { FC, useContext, useEffect, useState } from "react"
-import { DrawerModalManager } from "components/modals/DrawerModalManager"
-import {
-  DrawerState,
-  DrawerStateContext,
-  DrawerStateWithDispatch,
-} from "states/DrawerState"
+import { useDrawerState } from "hooks/useDrawerState"
+import React from "react"
 import { SPACINGS } from "styles/spacings"
 
 export default {
