@@ -27,4 +27,4 @@ RUN npm install -g serve
 COPY --from=builder /app/storybook-static ./storybook-static
 
 # Serve the static Storybook files on port 6006 (exposed via docker run -p)
-CMD ["serve", "-s", "storybook-static", "-l", "6006"]
+CMD ["serve", "storybook-static", "-l", "6006"]
