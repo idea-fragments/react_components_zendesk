@@ -25,6 +25,18 @@ export default {
 const Story = (args: Partial<PhotoBoothProps>) => {
   const onSubmit = async ({ file, dataUri }: PhotoData) => {
     console.log("onSubmit", file, dataUri)
+
+    // Save the photo to the device
+    const link = document.createElement("a")
+    link.href = dataUri
+    link.download = `photo_${new Date()
+      .toISOString()
+      .replace(/[:.]/g, "-")}.png`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+
+    console.log("Photo saved to device as:", link.download)
   }
 
   const onCameraCapabilitiesDetected = (data: CameraCapabilitiesData) => {
@@ -135,6 +147,7 @@ export const Default = Story.bind({})
 // @ts-ignore
 Default.args = {
   documentMode: false,
+  highQualityViewfinder: false,
   skipOcrDetection: false,
 }
 
@@ -142,5 +155,14 @@ export const DocumentMode = Story.bind({})
 // @ts-ignore
 DocumentMode.args = {
   documentMode: true,
+  highQualityViewfinder: false,
+  skipOcrDetection: false,
+}
+
+export const HighQualityViewfinder = Story.bind({})
+// @ts-ignore
+HighQualityViewfinder.args = {
+  documentMode: false,
+  highQualityViewfinder: true,
   skipOcrDetection: false,
 }

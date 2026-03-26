@@ -212,6 +212,7 @@ export type CameraCapabilitiesData = {
 
 export type PhotoBoothProps = {
   documentMode?: boolean
+  highQualityViewfinder?: boolean
   onCameraCapabilitiesDetected?: (data: CameraCapabilitiesData) => void
   onDocumentEdgeDetected?: (data: DocumentEdgeData) => void
   onExposureDetected?: (data: ExposureData) => void
@@ -234,6 +235,7 @@ const logger = new Logger("PhotoBooth")
 
 export const PhotoBooth: FC<PhotoBoothProps> = ({
   documentMode = false,
+  highQualityViewfinder = false,
   onCameraCapabilitiesDetected,
   onDocumentEdgeDetected,
   onExposureDetected,
@@ -489,8 +491,34 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
   const startCamera = useCallback(async () => {
     const cameraId = cameraIds[currentCameraIdIndex]
     try {
-      // @ts-ignore
-      await withLoading(cameraPhoto.current!.startCamera(cameraId))
+      // If highQualityViewfinder is enabled, use custom constraints
+      if (highQualityViewfinder) {
+        const constraints: MediaStreamConstraints = {
+          video: {
+            deviceId: cameraId,
+            width: { ideal: 4000 },
+            height: { ideal: 3000 },
+            facingMode: cameraId.includes("user") ? "user" : "environment",
+          },
+          audio: false,
+        }
+
+        logger.writeInfo("Starting high quality camera", constraints)
+
+        // Get the stream with high quality constraints
+        const stream = await navigator.mediaDevices.getUserMedia(constraints)
+
+        // Set the stream to the video element
+        if (viewFinderRef.current) {
+          viewFinderRef.current.srcObject = stream
+          cameraPhoto.current!.stream = stream
+        }
+      } else {
+        // Use default CameraPhoto library settings (lower quality for performance)
+        // @ts-ignore
+        await cameraPhoto.current!.startCamera(cameraId)
+      }
+
       // Wait for video to render first frame before logging capabilities
       setTimeout(() => {
         logCameraCapabilities()
@@ -506,6 +534,7 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
   }, [
     cameraIds,
     currentCameraIdIndex,
+    highQualityViewfinder,
     logCameraCapabilities,
     onSilentError,
     removeCameraId,
