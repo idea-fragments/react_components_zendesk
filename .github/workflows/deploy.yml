@@ -19,7 +19,7 @@ jobs:
         id: check
         run: |
           # Check if the actor is a member of the idea-fragments organization
-          MEMBERSHIP=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          MEMBERSHIP=$(curl -s -H "Authorization: token ${{ secrets.PUBLIC_PA_TOKEN }}" \
             https://api.github.com/orgs/idea-fragments/members/${{ github.actor }} \
             -w "%{http_code}" -o /dev/null)
 
