@@ -1,0 +1,48 @@
+name: Auto Tag
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SAM_PA_TOKEN }}
+
+      - name: Get version from package.json
+        id: version
+        run: |
+          PACKAGE_VERSION=$(cat package.json | grep '"version"' | head -1 | awk -F: '{ print $2 }' | sed 's/[", ]//g')
+          NEW_TAG="v${PACKAGE_VERSION}"
+          echo "tag=$NEW_TAG" >> $GITHUB_OUTPUT
+          echo "Package version: $PACKAGE_VERSION"
+          echo "New tag: $NEW_TAG"
+
+      - name: Check if tag already exists
+        id: check
+        run: |
+          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.version.outputs.tag }} already exists"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tag ${{ steps.version.outputs.tag }} does not exist"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create and push tag
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          git tag ${{ steps.version.outputs.tag }}
+          git push origin ${{ steps.version.outputs.tag }}
+          echo "Created and pushed tag ${{ steps.version.outputs.tag }}"
+
+      - name: Skip tagging
+        if: steps.check.outputs.exists == 'true'
+        run: |
+          echo "Skipping tag creation - tag ${{ steps.version.outputs.tag }} already exists"

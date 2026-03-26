@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Whitelist app code
+!.storybook
+!patches
+!src/
+!package.json
+!package-lock.json
+!tsconfig.json
+

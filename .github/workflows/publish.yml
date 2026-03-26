@@ -1,10 +1,11 @@
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "v*"
+  workflow_dispatch:
 name: NPM Publish
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write # Required for OIDC
   contents: write
 jobs:
   publish:
@@ -15,30 +16,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
           # node-version-file: ".node-version"
       - name: Publish to NPM Registry
         timeout-minutes: 10
 
         run: |
-          echo "Creating git tag"
-          PACKAGE_VERSION=$(cat package.json|grep version|head -1|awk -F: '{ print $2 }'|sed 's/[", ]//g')
-
-          git remote set-url --push origin https://${GITHUB_ACTOR}:${ACTION_TOKEN}@github.com/${GITHUB_REPOSITORY}
-          
-          # Fetch tags from remote to check if version tag already exists
-          git fetch --tags
-
-          # Only create tag if it doesn't exist
-          if ! git rev-parse ${PACKAGE_VERSION} >/dev/null 2>&1; then
-            echo "Creating git tag ${PACKAGE_VERSION}"
-            git tag ${PACKAGE_VERSION}
-            git push --tags
-          else
-            echo "Tag ${PACKAGE_VERSION} already exists, skipping"
-          fi
-          
-          echo "Publishing Tag to NPM Registry"
+          echo "Publishing to NPM Registry"
           npm ci
           npm publish --access public

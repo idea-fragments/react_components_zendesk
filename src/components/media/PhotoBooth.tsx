@@ -5,6 +5,7 @@ import {
   mdiCameraRetakeOutline,
   mdiCheck,
   mdiCircleSlice8,
+  mdiMagnify,
 } from "@mdi/js"
 import { IconButton } from "components/forms/IconButton"
 import { FlexBox } from "components/layout/FlexBox"
@@ -257,8 +258,12 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
 
   const theme = useTheme()
   const [cameraIds, setCameraIds] = useState<string[]>([])
+  const [cameraZoomCapability, setCameraZoomCapability] =
+    useState<CameraCapabilityRange | null>(null)
   const [currentCameraIdIndex, setCurrentCameraIdIndex] = useState<number>(0)
+  const [currentCameraZoom, setCurrentCameraZoom] = useState<number>(1)
   const [_isCameraVisible, setIsCameraVisibleTo] = useState(false)
+  const [isZoomModeActive, setIsZoomModeActive] = useState(false)
   const [panPosition, setPanPosition] = useState({ x: 0, y: 0 })
   const [previewSrc, setPreviewSrc] = useState<string>()
   const [zoomScale, setZoomScale] = useState(1)
@@ -294,6 +299,7 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
     setPreviewSrc(undefined)
     setZoomScale(1)
     setPanPosition({ x: 0, y: 0 })
+    setIsZoomModeActive(false)
   }, [])
 
   const getDeviceCameraIds = useCallback(async () => {
@@ -316,6 +322,34 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
     setCameraIds((prevState) => takeOutItem(prevState, currentCameraIdIndex))
   }, [currentCameraIdIndex])
 
+  const applyZoom = useCallback(async (zoomLevel: number) => {
+    const stream = cameraPhoto.current?.stream
+    if (!stream) return
+
+    const videoTrack = stream.getVideoTracks()[0]
+    if (!videoTrack) return
+
+    const capabilities = videoTrack.getCapabilities() as any
+
+    // Check if zoom is supported
+    if (capabilities.zoom) {
+      const { min = 1, max = 1 } = capabilities.zoom
+      const boundedZoom = Math.max(min, Math.min(max, zoomLevel))
+
+      try {
+        // Apply the zoom constraint
+        // Use type assertion for zoom property not in TypeScript 4.6 definitions
+        await videoTrack.applyConstraints({
+          advanced: [{ zoom: boundedZoom } as any],
+        })
+        setCurrentCameraZoom(boundedZoom)
+        logger.writeInfo("Applied zoom", { zoomLevel: boundedZoom })
+      } catch (error) {
+        logger.writeError("Failed to apply zoom", error)
+      }
+    }
+  }, [])
+
   // Use detection hooks
   const { analyzeDocumentEdges } = useDocumentEdgeDetection()
   const { analyzeExposure } = useExposureAnalysis()
@@ -337,6 +371,17 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
 
     const capabilities = videoTrack.getCapabilities()
     const settings = videoTrack.getSettings()
+
+    // Store zoom capabilities
+    const capabilitiesAny = capabilities as any
+    const settingsAny = settings as any
+    if (capabilitiesAny.zoom) {
+      setCameraZoomCapability(capabilitiesAny.zoom)
+      setCurrentCameraZoom(settingsAny.zoom || 1)
+    } else {
+      setCameraZoomCapability(null)
+      setCurrentCameraZoom(1)
+    }
 
     // Calculate megapixels
     const currentWidth = settings.width || 0
@@ -370,8 +415,6 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
 
     // Prepare camera capabilities data
     // Use type assertions for newer properties not in TypeScript's built-in definitions
-    const capabilitiesAny = capabilities as any
-    const settingsAny = settings as any
 
     const cameraCapabilitiesData: CameraCapabilitiesData = {
       capabilities: {
@@ -499,6 +542,9 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
   const switchCamera = useCallback(async () => {
     const nextIdIndex = nextItemIndex(cameraIds, currentCameraIdIndex)
     setCurrentCameraIdIndex(nextIdIndex)
+    // Reset zoom when switching cameras
+    setCurrentCameraZoom(1)
+    setIsZoomModeActive(false)
   }, [cameraIds, currentCameraIdIndex])
 
   const takePhoto = useCallback(() => {
@@ -889,6 +935,64 @@ export const PhotoBooth: FC<PhotoBoothProps> = ({
             />
             {documentMode && previewSrc && <AlignmentGuide />}
           </PreviewContainer>
+          {/* Zoom Controls */}
+          {!previewSrc &&
+            cameraZoomCapability &&
+            cameraZoomCapability.max &&
+            cameraZoomCapability.max > 1 && (
+              <>
+                {/* Zoom Mode Button */}
+                <ZoomButtonContainer>
+                  <ZoomButton
+                    active={isZoomModeActive}
+                    color={theme.styles.colors.white}
+                    icon={mdiMagnify}
+                    iconSize={"1.2rem"}
+                    onClick={() => setIsZoomModeActive(!isZoomModeActive)}
+                  />
+                </ZoomButtonContainer>
+
+                {/* Zoom Preset Buttons */}
+                {isZoomModeActive && (
+                  <ZoomPresetsContainer>
+                    <ZoomPresetButton
+                      active={currentCameraZoom === 1}
+                      onClick={() => applyZoom(1)}>
+                      1x
+                    </ZoomPresetButton>
+                    {cameraZoomCapability.max >= 2 && (
+                      <ZoomPresetButton
+                        active={currentCameraZoom === 2}
+                        onClick={() => applyZoom(2)}>
+                        2x
+                      </ZoomPresetButton>
+                    )}
+                    {cameraZoomCapability.max >= 3 && (
+                      <ZoomPresetButton
+                        active={currentCameraZoom === 3}
+                        onClick={() => applyZoom(3)}>
+                        3x
+                      </ZoomPresetButton>
+                    )}
+                    {cameraZoomCapability.max >= 6 && (
+                      <ZoomPresetButton
+                        active={currentCameraZoom === 6}
+                        onClick={() => applyZoom(6)}>
+                        6x
+                      </ZoomPresetButton>
+                    )}
+                    {cameraZoomCapability.max >= 10 && (
+                      <ZoomPresetButton
+                        active={currentCameraZoom === 10}
+                        onClick={() => applyZoom(10)}>
+                        10x
+                      </ZoomPresetButton>
+                    )}
+                  </ZoomPresetsContainer>
+                )}
+              </>
+            )}
+
           <ButtonContainer gap={SPACINGS.LG}>
             {previewSrc ? (
               <>
@@ -1030,6 +1134,62 @@ const ViewFinderContainer = styled.div<{ hidden: boolean }>`
 const ViewFinder = styled.video`
   max-height: 100%;
   width: 100%;
+`
+
+const ZoomButtonContainer = styled.div`
+  position: absolute;
+  right: ${SPACINGS.MD};
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+`
+
+const ZoomButton = styled(IconButton)<{ active: boolean }>`
+  &&&& {
+    background: ${({ active }) =>
+      active ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.5)"};
+    border: 2px solid
+      ${({ active, theme }) =>
+        active ? theme.styles.colors.white : "transparent"};
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+  }
+`
+
+const ZoomPresetsContainer = styled(FlexBox)`
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 24px;
+  gap: ${SPACINGS.XS};
+  left: 50%;
+  padding: ${SPACINGS.XS};
+  position: absolute;
+  top: ${SPACINGS.LG};
+  transform: translateX(-50%);
+  z-index: 10;
+`
+
+const ZoomPresetButton = styled.button<{ active: boolean }>`
+  background: ${({ active }) =>
+    active ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.2)"};
+  border: 1px solid
+    ${({ active }) =>
+      active ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.4)"};
+  border-radius: 16px;
+  color: ${({ active }) => (active ? "#000" : "#fff")};
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: ${({ active }) => (active ? "bold" : "normal")};
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 `
 
 const AlignmentGuide = styled.div`

@@ -1,0 +1,74 @@
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+name: Docker Build and Deploy CI
+
+env:
+  CONTAINER_NAME: "react-components-zendesk"
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  REGISTRY: "ghcr.io"
+
+jobs:
+  build:
+    permissions:
+      packages: write
+    env:
+      APP_GIT_SHA: ${{ github.sha }}
+      APP_VERSION: ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SAM_PA_TOKEN }}
+      - name: Building Docker Image
+        timeout-minutes: 10
+        run: |
+          IMAGE_NAME=${REGISTRY}/${GITHUB_REPOSITORY}/${CONTAINER_NAME}:latest
+          APP_VERSION_CLEAN=${APP_VERSION#v}
+
+          docker login ${REGISTRY} --username ${GITHUB_ACTOR} -p ${GITHUB_TOKEN}
+          docker build -t ${CONTAINER_NAME} -t ${IMAGE_NAME} .
+
+          echo "Pushing latest image to Docker Hub"
+          docker push ${IMAGE_NAME}
+  deploy:
+    needs: build
+    env:
+      APP_GIT_SHA: ${{ github.sha }}
+      APP_VERSION: ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: appleboy/ssh-action@master
+        timeout-minutes: 10
+        with:
+          host: ${{ secrets.DO_SSH_HOST }}
+          username: ${{ secrets.DO_SSH_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          envs: APP_GIT_SHA, APP_VERSION, CONTAINER_NAME, GITHUB_ACTOR, GITHUB_REPOSITORY, GITHUB_TOKEN, REGISTRY
+          script: |
+            # Source the environment file for Storybook configuration
+            if [ -f ~/storybook/env ]; then
+              source ~/storybook/env
+            else
+              echo "Warning: ~/storybook/env not found, using default PORT=6006"
+              PORT=6006
+            fi
+
+            APP_VERSION_CLEAN=${APP_VERSION#v}
+            IMAGE_NAME=${REGISTRY}/${GITHUB_REPOSITORY}/${CONTAINER_NAME}:latest
+
+            docker login ${REGISTRY} --username ${GITHUB_ACTOR} -p ${GITHUB_TOKEN}
+            docker pull ${IMAGE_NAME}
+
+            docker stop -t 60 $CONTAINER_NAME;
+            docker rm -f $CONTAINER_NAME;
+            docker run -dit --restart unless-stopped --name $CONTAINER_NAME \
+              --log-driver json-file \
+              --log-opt max-size=10m \
+              --log-opt max-file=5 \
+              -p ${PORT}:6006 \
+              $IMAGE_NAME;
+
+            docker image prune -f
