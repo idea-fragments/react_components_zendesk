@@ -10,7 +10,31 @@ env:
   REGISTRY: "ghcr.io"
 
 jobs:
+  check-org-membership:
+    runs-on: ubuntu-latest
+    outputs:
+      is-member: ${{ steps.check.outputs.is-member }}
+    steps:
+      - name: Check organization membership
+        id: check
+        run: |
+          # Check if the actor is a member of the idea-fragments organization
+          MEMBERSHIP=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/orgs/idea-fragments/members/${{ github.actor }} \
+            -w "%{http_code}" -o /dev/null)
+
+          if [ "$MEMBERSHIP" = "204" ]; then
+            echo "✅ User ${{ github.actor }} is a member of idea-fragments"
+            echo "is-member=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ User ${{ github.actor }} is NOT a member of idea-fragments"
+            echo "is-member=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
   build:
+    needs: check-org-membership
+    if: needs.check-org-membership.outputs.is-member == 'true'
     permissions:
       packages: write
     env:
@@ -19,8 +43,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.SAM_PA_TOKEN }}
       - name: Building Docker Image
         timeout-minutes: 10
         run: |
@@ -33,7 +55,8 @@ jobs:
           echo "Pushing latest image to Docker Hub"
           docker push ${IMAGE_NAME}
   deploy:
-    needs: build
+    needs: [check-org-membership, build]
+    if: needs.check-org-membership.outputs.is-member == 'true'
     env:
       APP_GIT_SHA: ${{ github.sha }}
       APP_VERSION: ${{ github.ref_name }}
