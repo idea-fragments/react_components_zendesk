@@ -6,6 +6,6 @@ type Props = TableProps & {
 /**
  * MobileTableV2 - Same as original MobileTable but uses CSS Grid instead of Grid component
  */
-export declare const MobileTableV2: ({ checkable, checkedItems, columnConfigs, items, mobileListview, mobileListviewNodes, onItemChecked, onItemClick, onSelectAllToggle, }: Props) => import("react/jsx-runtime").JSX.Element;
+export declare const MobileTableV2: ({ checkable, checkedItems, columnConfigs, emptyState, items, mobileListview, mobileListviewNodes, onItemChecked, onItemClick, onSelectAllToggle, }: Props) => import("react/jsx-runtime").JSX.Element;
 export {};
 //# sourceMappingURL=MobileTableV2.d.ts.map

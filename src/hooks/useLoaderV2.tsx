@@ -9,6 +9,8 @@ import React, {
 } from "react"
 import { CSSProp } from "styles/types"
 
+const LOADING_DELAY_MS = 100
+
 type LoadingFunc = <T>(p: Promise<T>) => Promise<T>
 type LoaderProps = PropsWithChildren<{ as?: ComponentType }> & CSSProp
 type Return = {
@@ -25,13 +27,18 @@ export const useLoaderV2 = (): Return => {
   const withLoading = useMemo(
     () =>
       async <T,>(p: Promise<T>): Promise<T> => {
-        setLoadingCount((c) => c + 1)
+        let shown = false
+        const timer = setTimeout(() => {
+          shown = true
+          setLoadingCount((c) => c + 1)
+        }, LOADING_DELAY_MS)
         let val
 
         try {
           val = await p
         } finally {
-          setLoadingCount((c) => c - 1)
+          clearTimeout(timer)
+          if (shown) setLoadingCount((c) => c - 1)
         }
 
         return val

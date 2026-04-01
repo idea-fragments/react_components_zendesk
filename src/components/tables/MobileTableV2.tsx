@@ -22,6 +22,7 @@ export const MobileTableV2 = ({
   checkable,
   checkedItems,
   columnConfigs,
+  emptyState,
   items,
   mobileListview,
   mobileListviewNodes,
@@ -79,20 +80,22 @@ export const MobileTableV2 = ({
         )
       ) : null}
 
-      {items.map((item: Item, index: number) => (
-        <Row
-          checkable={checkable}
-          checked={checkedItems?.has(item.key)}
-          columnConfigs={columnConfigs}
-          isLastRow={isLastItem(items, item)}
-          item={item}
-          key={item.key}
-          listviewMode={mobileListview}
-          listviewNode={mobileListviewNodes?.[index]}
-          onCheck={onItemChecked}
-          onClick={onItemClick}
-        />
-      ))}
+      {isNotEmpty(items)
+        ? items.map((item: Item, index: number) => (
+            <Row
+              checkable={checkable}
+              checked={checkedItems?.has(item.key)}
+              columnConfigs={columnConfigs}
+              isLastRow={isLastItem(items, item)}
+              item={item}
+              key={item.key}
+              listviewMode={mobileListview}
+              listviewNode={mobileListviewNodes?.[index]}
+              onCheck={onItemChecked}
+              onClick={onItemClick}
+            />
+          ))
+        : emptyState && <EmptyStateWrapper>{emptyState}</EmptyStateWrapper>}
     </Container>
   )
 }
@@ -109,6 +112,11 @@ const Container = styled(FlexBox)<{ $listviewMode: boolean }>`
       : ""}
 
   overflow: hidden;
+`
+
+const EmptyStateWrapper = styled.div`
+  padding: 2rem;
+  text-align: center;
 `
 
 const Header = styled(FlexBox)`
