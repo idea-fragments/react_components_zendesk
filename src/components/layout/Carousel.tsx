@@ -4,6 +4,7 @@ import {
   mdiChevronLeft,
   mdiChevronRight,
 } from "@mdi/js"
+import { Button, BUTTON_SIZES } from "components/forms/Button"
 import { IconButton } from "components/forms/IconButton"
 import { FlexBox } from "components/layout/FlexBox"
 import React, { ReactNode } from "react"
@@ -87,8 +88,7 @@ Carousel = styled(Carousel)`
   ${({ _css }: CSSProp) => _css}
 `
 
-const NavButton = styled(IconButton).attrs({
-  flat: false,
-})`
-  height: auto;
-`
+const NavButton = styled(Button).attrs({
+  compact: true,
+  size: BUTTON_SIZES.X_SMALL,
+})``

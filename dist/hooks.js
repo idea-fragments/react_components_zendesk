@@ -4095,6 +4095,7 @@ var SpinnerContainer = styled__default["default"](FlexBox)(templateObject_3 || (
   return fullScreen ? "fixed" : "absolute";
 });
 var templateObject_1, templateObject_2, templateObject_3;
+var LOADING_DELAY_MS = 100;
 var useLoaderV2 = function () {
   var _a = __read(React.useState(0), 2),
     loadingCount = _a[0],
@@ -4104,13 +4105,17 @@ var useLoaderV2 = function () {
   var withLoading = React.useMemo(function () {
     return function (p) {
       return __awaiter(void 0, void 0, void 0, function () {
-        var val;
+        var shown, timer, val;
         return __generator(this, function (_a) {
           switch (_a.label) {
             case 0:
-              setLoadingCount(function (c) {
-                return c + 1;
-              });
+              shown = false;
+              timer = setTimeout(function () {
+                shown = true;
+                setLoadingCount(function (c) {
+                  return c + 1;
+                });
+              }, LOADING_DELAY_MS);
               _a.label = 1;
             case 1:
               _a.trys.push([1,, 3, 4]);
@@ -4119,7 +4124,8 @@ var useLoaderV2 = function () {
               val = _a.sent();
               return [3 /*break*/, 4];
             case 3:
-              setLoadingCount(function (c) {
+              clearTimeout(timer);
+              if (shown) setLoadingCount(function (c) {
                 return c - 1;
               });
               return [7 /*endfinally*/];

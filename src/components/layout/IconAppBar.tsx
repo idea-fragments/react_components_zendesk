@@ -135,13 +135,13 @@ const BarWrapper = styled.header<
   z-index: ${({ theme }) => theme.styles.appBar.zIndex};
 
   ${({ bordered }) => (bordered ? barBorder : "")};
-  ${({ $scrollable }) => ($scrollable ? "overflow-x: scroll;" : "")};
+  ${({ $scrollable }) => ($scrollable ? "overflow-x: auto;" : "")};
 `
 
 const Content = styled(FlexBox).attrs({ alignItems: "center", as: "nav" })`
   height: ${({ height }: { height?: string }) =>
     height ? height : "fit-content"};
-  padding: 0 ${SPACINGS.LG};
+  padding: 0 ${SPACINGS.XS};
 `
 
 const FixedPlaceHolder = styled.div<{ height: string }>`

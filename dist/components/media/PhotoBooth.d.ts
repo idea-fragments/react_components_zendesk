@@ -85,6 +85,7 @@ export type CameraCapabilitiesData = {
 };
 export type PhotoBoothProps = {
     documentMode?: boolean;
+    highQualityViewfinder?: boolean;
     onCameraCapabilitiesDetected?: (data: CameraCapabilitiesData) => void;
     onDocumentEdgeDetected?: (data: DocumentEdgeData) => void;
     onExposureDetected?: (data: ExposureData) => void;

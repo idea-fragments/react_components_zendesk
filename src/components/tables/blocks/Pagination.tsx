@@ -94,7 +94,6 @@ export const Pagination = ({
           flat={num !== page}
           key={num}
           onClick={num === page ? DO_NOTHING : movePage(num - page)}
-          pill
           primary={num === page}>
           {num}
         </Button>
