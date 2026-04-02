@@ -81,7 +81,7 @@ var Logger = /** @class */function () {
 if (typeof window !== "undefined") window.Logger = Logger;
 var Logger_1 = dist.Logger = Logger;
 var name = "@idea-fragments/react-components-zendesk";
-var version = "0.1.79";
+var version = "0.1.80";
 var files = ["dist/*.js", "dist/*.js.map", "dist/types"];
 var exports$1 = {
   "./*": {

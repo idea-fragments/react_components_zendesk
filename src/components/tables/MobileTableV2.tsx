@@ -50,12 +50,18 @@ export const MobileTableV2 = ({
     )
   }, [allSelected, handleSelectAll, someSelected])
 
+  console.log("!isNotEmpty(items)", !isNotEmpty(items))
+  console.log(
+    "!isNotEmpty(mobileListviewNodes)",
+    !isNotEmpty(mobileListviewNodes),
+  )
+
   return (
     <Container
       $listviewMode={!!mobileListview}
       gap={mobileListview ? SPACINGS.SM : "1px"}
       withRows>
-      {checkable && (!isNotEmpty(items) || !isNotEmpty(mobileListviewNodes)) ? (
+      {checkable && (isNotEmpty(items) || isNotEmpty(mobileListviewNodes)) ? (
         mobileListview ? (
           <Card
             compact

@@ -206,7 +206,7 @@ export let Table = ({
             {...props}
           />
         )}
-        {pagination?.totalCount > 0 ? (
+        {pagination && pagination.totalCount > 0 ? (
           <Pagination
             {...pagination}
             onPageChange={onPageChange!!}
