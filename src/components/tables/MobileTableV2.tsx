@@ -55,7 +55,7 @@ export const MobileTableV2 = ({
       $listviewMode={!!mobileListview}
       gap={mobileListview ? SPACINGS.SM : "1px"}
       withRows>
-      {checkable ? (
+      {checkable && (!isNotEmpty(items) || !isNotEmpty(mobileListviewNodes)) ? (
         mobileListview ? (
           <Card
             compact
