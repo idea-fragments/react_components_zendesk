@@ -1,9 +1,9 @@
 import {
-  AddItem,
-  HeaderItem,
+  AddItem as ZAddItem,
+  HeaderItem as ZHeaderItem,
   Item as ZItem,
-  NextItem,
-  PreviousItem,
+  NextItem as ZNextItem,
+  PreviousItem as ZPreviousItem,
 } from "@zendeskgarden/react-dropdowns"
 import { IItemProps } from "@zendeskgarden/react-dropdowns/dist/typings/types"
 import {
@@ -16,7 +16,7 @@ import styled, { css, StyledProps } from "styled-components"
 import { fade } from "styles/colors"
 import { SPACINGS } from "styles/spacings"
 import { CSSProp } from "styles/types"
-import { FONT_SIZES } from "styles/typography"
+import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 
 export type ItemProps = Omit<IItemProps, "onClick"> & {
   danger?: boolean
@@ -71,6 +71,34 @@ export const Item = styled(ZItem).attrs(
     ${({ _css }: CSSProp) => {
       return _css
     }}
+  }
+`
+
+const NextItem = styled(ZNextItem)`
+  &&&& {
+    font-size: ${FONT_SIZES.SM};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+  }
+`
+
+const PreviousItem = styled(ZPreviousItem)`
+  &&&& {
+    font-size: ${FONT_SIZES.SM};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+  }
+`
+
+const AddItem = styled(ZAddItem)`
+  &&&& {
+    font-size: ${FONT_SIZES.SM};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+  }
+`
+
+const HeaderItem = styled(ZHeaderItem)`
+  &&&& {
+    font-size: ${FONT_SIZES.SM};
+    font-weight: ${FONT_WEIGHTS.BOLD};
   }
 `
 
