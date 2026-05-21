@@ -4063,18 +4063,20 @@ var TranslucentLoader = function (_a) {
   var _css = _a._css,
     children = _a.children,
     className = _a.className,
+    delayMs = _a.delayMs,
     innerAs = _a.innerAs,
     _b = _a.isLoading,
     isLoading = _b === void 0 ? true : _b,
     _c = _a.fullScreenBackdrop,
     fullScreenBackdrop = _c === void 0 ? false : _c;
   var theme = React.useContext(styled.ThemeContext);
+  var showSpinner = useDelayedLoading(isLoading, delayMs);
   return jsxRuntime.jsxs(Container, __assign({
     as: innerAs,
     className: className,
     _css: _css
   }, {
-    children: [children, isLoading ? jsxRuntime.jsx(SpinnerContainer, __assign({
+    children: [children, showSpinner ? jsxRuntime.jsx(SpinnerContainer, __assign({
       alignItems: "center",
       fullScreen: fullScreenBackdrop,
       justifyContent: "center"
@@ -4084,6 +4086,28 @@ var TranslucentLoader = function (_a) {
       })
     })) : null]
   }));
+};
+var useDelayedLoading = function (isLoading, delayMs) {
+  var _a = __read(React.useState(!delayMs && isLoading), 2),
+    visible = _a[0],
+    setVisible = _a[1];
+  React.useEffect(function () {
+    if (!isLoading) {
+      setVisible(false);
+      return;
+    }
+    if (!delayMs) {
+      setVisible(true);
+      return;
+    }
+    var timer = setTimeout(function () {
+      return setVisible(true);
+    }, delayMs);
+    return function () {
+      return clearTimeout(timer);
+    };
+  }, [isLoading, delayMs]);
+  return visible;
 };
 TranslucentLoader = styled__default["default"](TranslucentLoader)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 var Container = styled__default["default"].div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  ", "\n"], ["\n  position: relative;\n  ", "\n"])), function (_a) {
@@ -4105,17 +4129,13 @@ var useLoaderV2 = function () {
   var withLoading = React.useMemo(function () {
     return function (p) {
       return __awaiter(void 0, void 0, void 0, function () {
-        var shown, timer, val;
+        var val;
         return __generator(this, function (_a) {
           switch (_a.label) {
             case 0:
-              shown = false;
-              timer = setTimeout(function () {
-                shown = true;
-                setLoadingCount(function (c) {
-                  return c + 1;
-                });
-              }, LOADING_DELAY_MS);
+              setLoadingCount(function (c) {
+                return c + 1;
+              });
               _a.label = 1;
             case 1:
               _a.trys.push([1,, 3, 4]);
@@ -4124,8 +4144,7 @@ var useLoaderV2 = function () {
               val = _a.sent();
               return [3 /*break*/, 4];
             case 3:
-              clearTimeout(timer);
-              if (shown) setLoadingCount(function (c) {
+              setLoadingCount(function (c) {
                 return c - 1;
               });
               return [7 /*endfinally*/];
@@ -4141,6 +4160,7 @@ var useLoaderV2 = function () {
       var as = _a.as,
         props = __rest(_a, ["as"]);
       return jsxRuntime.jsx(TranslucentLoader, __assign({}, props, {
+        delayMs: LOADING_DELAY_MS,
         innerAs: as,
         isLoading: loadingRef.current
       }));

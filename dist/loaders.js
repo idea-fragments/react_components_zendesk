@@ -4036,7 +4036,7 @@ var Logger = /** @class */function () {
 if (typeof window !== "undefined") window.Logger = Logger;
 var Logger_1 = dist.Logger = Logger;
 var name = "@idea-fragments/react-components-zendesk";
-var version = "0.1.81";
+var version = "0.1.82";
 var files = ["dist/*.js", "dist/*.js.map", "dist/types"];
 var exports$1 = {
   "./*": {
@@ -4286,18 +4286,20 @@ exports.TranslucentLoader = function (_a) {
   var _css = _a._css,
     children = _a.children,
     className = _a.className,
+    delayMs = _a.delayMs,
     innerAs = _a.innerAs,
     _b = _a.isLoading,
     isLoading = _b === void 0 ? true : _b,
     _c = _a.fullScreenBackdrop,
     fullScreenBackdrop = _c === void 0 ? false : _c;
   var theme = React.useContext(styled.ThemeContext);
+  var showSpinner = useDelayedLoading(isLoading, delayMs);
   return jsxRuntime.jsxs(Container, __assign({
     as: innerAs,
     className: className,
     _css: _css
   }, {
-    children: [children, isLoading ? jsxRuntime.jsx(SpinnerContainer, __assign({
+    children: [children, showSpinner ? jsxRuntime.jsx(SpinnerContainer, __assign({
       alignItems: "center",
       fullScreen: fullScreenBackdrop,
       justifyContent: "center"
@@ -4307,6 +4309,28 @@ exports.TranslucentLoader = function (_a) {
       })
     })) : null]
   }));
+};
+var useDelayedLoading = function (isLoading, delayMs) {
+  var _a = __read$1(React.useState(!delayMs && isLoading), 2),
+    visible = _a[0],
+    setVisible = _a[1];
+  React.useEffect(function () {
+    if (!isLoading) {
+      setVisible(false);
+      return;
+    }
+    if (!delayMs) {
+      setVisible(true);
+      return;
+    }
+    var timer = setTimeout(function () {
+      return setVisible(true);
+    }, delayMs);
+    return function () {
+      return clearTimeout(timer);
+    };
+  }, [isLoading, delayMs]);
+  return visible;
 };
 exports.TranslucentLoader = styled__default["default"](exports.TranslucentLoader)(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 var Container = styled__default["default"].div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  ", "\n"], ["\n  position: relative;\n  ", "\n"])), function (_a) {

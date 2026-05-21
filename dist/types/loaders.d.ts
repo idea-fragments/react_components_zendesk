@@ -39,10 +39,11 @@ type CSSProp<T = any> = {
 
 type Props = {
     className?: string;
+    delayMs?: number;
     innerAs?: ComponentType<any>;
     isLoading: boolean;
     fullScreenBackdrop?: boolean;
 } & CSSProp;
-declare let TranslucentLoader: ({ _css, children, className, innerAs, isLoading, fullScreenBackdrop, }: PropsWithChildren<Props>) => react_jsx_runtime.JSX.Element;
+declare let TranslucentLoader: ({ _css, children, className, delayMs, innerAs, isLoading, fullScreenBackdrop, }: PropsWithChildren<Props>) => react_jsx_runtime.JSX.Element;
 
 export { Dots, Loadable, TranslucentLoader };

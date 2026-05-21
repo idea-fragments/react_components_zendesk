@@ -27,18 +27,13 @@ export const useLoaderV2 = (): Return => {
   const withLoading = useMemo(
     () =>
       async <T,>(p: Promise<T>): Promise<T> => {
-        let shown = false
-        const timer = setTimeout(() => {
-          shown = true
-          setLoadingCount((c) => c + 1)
-        }, LOADING_DELAY_MS)
+        setLoadingCount((c) => c + 1)
         let val
 
         try {
           val = await p
         } finally {
-          clearTimeout(timer)
-          if (shown) setLoadingCount((c) => c - 1)
+          setLoadingCount((c) => c - 1)
         }
 
         return val
@@ -50,6 +45,7 @@ export const useLoaderV2 = (): Return => {
     return ({ as, ...props }: LoaderProps) => (
       <TranslucentLoader
         {...props}
+        delayMs={LOADING_DELAY_MS}
         innerAs={as}
         isLoading={loadingRef.current}
       />

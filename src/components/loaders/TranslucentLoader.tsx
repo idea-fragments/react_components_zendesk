@@ -1,12 +1,19 @@
 import { FlexBox } from "components/layout/FlexBox"
 import { Dots } from "components/loaders/Dots"
-import React, { ComponentType, PropsWithChildren, useContext } from "react"
+import React, {
+  ComponentType,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
 import styled, { ThemeContext } from "styled-components"
 import { Theme } from "styles/theme/Theme.type"
 import { CSSProp } from "styles/types"
 
 type Props = {
   className?: string
+  delayMs?: number
   innerAs?: ComponentType<any>
   isLoading: boolean
   fullScreenBackdrop?: boolean
@@ -16,11 +23,13 @@ export let TranslucentLoader = ({
   _css,
   children,
   className,
+  delayMs,
   innerAs,
   isLoading = true,
   fullScreenBackdrop = false,
 }: PropsWithChildren<Props>) => {
   const theme = useContext<Theme>(ThemeContext)
+  const showSpinner = useDelayedLoading(isLoading, delayMs)
 
   return (
     <Container
@@ -28,7 +37,7 @@ export let TranslucentLoader = ({
       className={className}
       _css={_css}>
       {children}
-      {isLoading ? (
+      {showSpinner ? (
         <SpinnerContainer
           alignItems={"center"}
           fullScreen={fullScreenBackdrop}
@@ -38,6 +47,27 @@ export let TranslucentLoader = ({
       ) : null}
     </Container>
   )
+}
+
+const useDelayedLoading = (isLoading: boolean, delayMs?: number): boolean => {
+  const [visible, setVisible] = useState(!delayMs && isLoading)
+
+  useEffect(() => {
+    if (!isLoading) {
+      setVisible(false)
+      return
+    }
+
+    if (!delayMs) {
+      setVisible(true)
+      return
+    }
+
+    const timer = setTimeout(() => setVisible(true), delayMs)
+    return () => clearTimeout(timer)
+  }, [isLoading, delayMs])
+
+  return visible
 }
 
 TranslucentLoader = styled(TranslucentLoader)<Props>``
