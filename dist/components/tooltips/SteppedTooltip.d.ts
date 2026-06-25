@@ -1,5 +1,5 @@
-import { FC, ReactElement, ReactNode } from "react";
 import { TooltipProps } from "components/tooltips/Tooltip";
+import { FC, ReactElement, ReactNode } from "react";
 export type SteppedTooltipStep = {
     label?: string;
     isAction?: boolean;
@@ -18,6 +18,7 @@ export type SteppedTooltipProps = {
     onNext?: () => void;
     isFinish?: boolean;
     onExit?: () => void;
+    offset?: number;
 };
 export declare const SteppedTooltip: FC<SteppedTooltipProps>;
 //# sourceMappingURL=SteppedTooltip.d.ts.map

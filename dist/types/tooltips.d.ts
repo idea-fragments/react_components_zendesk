@@ -13,7 +13,7 @@ type TooltipProps = PropsWithChildren<{
     content: ReactNode;
     type?: "light";
     isVisible?: boolean;
-} & Pick<ComponentProps<typeof Tooltip$1>, "appendToNode">>;
+} & Pick<ComponentProps<typeof Tooltip$1>, "appendToNode" | "popperModifiers">>;
 declare const Tooltip: styled_components.StyledComponent<{
     ({ id, delayMS, isInitialVisible, content, refKey, placement, eventsEnabled, popperModifiers, children, hasArrow, size, type, appendToNode, zIndex, isVisible: externalIsVisible, ...otherProps }: _zendeskgarden_react_tooltips.ITooltipProps): react.JSX.Element;
     displayName: string;
@@ -47,7 +47,7 @@ declare const Tooltip: styled_components.StyledComponent<{
     content: ReactNode;
     type?: "light" | undefined;
     isVisible?: boolean | undefined;
-} & Pick<_zendeskgarden_react_tooltips.ITooltipProps, "appendToNode"> & {
+} & Pick<_zendeskgarden_react_tooltips.ITooltipProps, "popperModifiers" | "appendToNode"> & {
     children?: ReactNode;
 }, never>;
 
@@ -85,7 +85,18 @@ type SteppedTooltipProps = {
     onNext?: () => void;
     isFinish?: boolean;
     onExit?: () => void;
+    offset?: number;
 };
 declare const SteppedTooltip: FC<SteppedTooltipProps>;
 
-export { IconTooltip, SteppedTooltip, SteppedTooltipProps, SteppedTooltipStep, Tooltip, TooltipProps };
+type FocusedHelperProps = {
+    children: ReactElement;
+    active: boolean;
+    zIndex?: number;
+    ringPadding?: number;
+    ringBorderRadius?: number | string;
+    renderTooltip?: (child: ReactElement) => ReactNode;
+};
+declare const FocusedHelper: FC<FocusedHelperProps>;
+
+export { FocusedHelper, FocusedHelperProps, IconTooltip, SteppedTooltip, SteppedTooltipProps, SteppedTooltipStep, Tooltip, TooltipProps };
