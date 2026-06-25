@@ -25,6 +25,7 @@ export type SteppedTooltipProps = {
   onNext?: () => void
   isFinish?: boolean
   onExit?: () => void
+  offset?: number
 }
 
 const CardTooltip = styled(Tooltip)`
@@ -199,6 +200,7 @@ export const SteppedTooltip: FC<SteppedTooltipProps> = ({
   onNext,
   isFinish,
   onExit,
+  offset,
 }) => {
   if (!step) return children
 
@@ -232,6 +234,9 @@ export const SteppedTooltip: FC<SteppedTooltipProps> = ({
       isVisible
       maxWidth={`${width}px`}
       placement={placement}
+      popperModifiers={
+        offset != null ? { offset: { offset: `0, ${offset}` } } : undefined
+      }
       type={"light"}>
       {children}
     </CardTooltip>

@@ -29,7 +29,7 @@ export type TooltipProps = PropsWithChildren<
     content: ReactNode
     type?: "light"
     isVisible?: boolean
-  } & Pick<ComponentProps<typeof ZTooltip>, "appendToNode">
+  } & Pick<ComponentProps<typeof ZTooltip>, "appendToNode" | "popperModifiers">
 >
 
 export const Tooltip = styled(ZTooltip).attrs<TooltipProps>(
