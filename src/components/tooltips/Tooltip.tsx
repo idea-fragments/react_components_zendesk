@@ -28,6 +28,7 @@ export type TooltipProps = PropsWithChildren<
     placement?: Placement
     content: ReactNode
     type?: "light"
+    isVisible?: boolean
   } & Pick<ComponentProps<typeof ZTooltip>, "appendToNode">
 >
 
