@@ -1,7 +1,7 @@
 import * as styled_components from 'styled-components';
 import * as prop_types from 'prop-types';
 import * as react from 'react';
-import { PropsWithChildren, ReactNode, ComponentProps, ComponentType, SVGAttributes, FC } from 'react';
+import { PropsWithChildren, ReactNode, ComponentProps, ComponentType, SVGAttributes, FC, ReactElement } from 'react';
 import * as _zendeskgarden_react_tooltips from '@zendeskgarden/react-tooltips';
 import { Tooltip as Tooltip$1 } from '@zendeskgarden/react-tooltips';
 
@@ -12,7 +12,8 @@ type TooltipProps = PropsWithChildren<{
     placement?: Placement;
     content: ReactNode;
     type?: "light";
-} & Pick<ComponentProps<typeof Tooltip$1>, "appendToNode">>;
+    isVisible?: boolean;
+} & Pick<ComponentProps<typeof Tooltip$1>, "appendToNode" | "popperModifiers">>;
 declare const Tooltip: styled_components.StyledComponent<{
     ({ id, delayMS, isInitialVisible, content, refKey, placement, eventsEnabled, popperModifiers, children, hasArrow, size, type, appendToNode, zIndex, isVisible: externalIsVisible, ...otherProps }: _zendeskgarden_react_tooltips.ITooltipProps): react.JSX.Element;
     displayName: string;
@@ -45,7 +46,8 @@ declare const Tooltip: styled_components.StyledComponent<{
     placement?: Placement | undefined;
     content: ReactNode;
     type?: "light" | undefined;
-} & Pick<_zendeskgarden_react_tooltips.ITooltipProps, "appendToNode"> & {
+    isVisible?: boolean | undefined;
+} & Pick<_zendeskgarden_react_tooltips.ITooltipProps, "popperModifiers" | "appendToNode"> & {
     children?: ReactNode;
 }, never>;
 
@@ -65,4 +67,36 @@ type Props = Omit<TooltipProps, "content"> & {
 };
 declare let IconTooltip: FC<PropsWithChildren<Props>>;
 
-export { IconTooltip, Tooltip, TooltipProps };
+type SteppedTooltipStep = {
+    label?: string;
+    isAction?: boolean;
+    title: ReactNode;
+    body: ReactNode;
+    actionHint?: ReactNode;
+};
+type SteppedTooltipProps = {
+    children: ReactElement;
+    step?: SteppedTooltipStep | null;
+    placement?: TooltipProps["placement"];
+    width?: number;
+    dotCount?: number;
+    activeDotIndex?: number;
+    onBack?: () => void;
+    onNext?: () => void;
+    isFinish?: boolean;
+    onExit?: () => void;
+    offset?: number;
+};
+declare const SteppedTooltip: FC<SteppedTooltipProps>;
+
+type FocusedHelperProps = {
+    children: ReactElement;
+    active: boolean;
+    zIndex?: number;
+    ringPadding?: number;
+    ringBorderRadius?: number | string;
+    renderTooltip?: (child: ReactElement) => ReactNode;
+};
+declare const FocusedHelper: FC<FocusedHelperProps>;
+
+export { FocusedHelper, FocusedHelperProps, IconTooltip, SteppedTooltip, SteppedTooltipProps, SteppedTooltipStep, Tooltip, TooltipProps };
