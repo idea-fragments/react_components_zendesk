@@ -1,1 +1,1 @@
-{"version":3,"file":"tooltips.d.ts","sourceRoot":"","sources":["../../src/entries/tooltips.ts"],"names":[],"mappings":"AAAA,cAAc,6BAA6B,CAAA;AAC3C,cAAc,iCAAiC,CAAA"}
+{"version":3,"file":"tooltips.d.ts","sourceRoot":"","sources":["../../src/entries/tooltips.ts"],"names":[],"mappings":"AAAA,cAAc,6BAA6B,CAAA;AAC3C,cAAc,iCAAiC,CAAA;AAC/C,cAAc,oCAAoC,CAAA"}

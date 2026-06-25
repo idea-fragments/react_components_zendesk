@@ -7,6 +7,7 @@ export type TooltipProps = PropsWithChildren<{
     placement?: Placement;
     content: ReactNode;
     type?: "light";
+    isVisible?: boolean;
 } & Pick<ComponentProps<typeof ZTooltip>, "appendToNode">>;
 export declare const Tooltip: import("styled-components").StyledComponent<{
     ({ id, delayMS, isInitialVisible, content, refKey, placement, eventsEnabled, popperModifiers, children, hasArrow, size, type, appendToNode, zIndex, isVisible: externalIsVisible, ...otherProps }: import("@zendeskgarden/react-tooltips").ITooltipProps): import("react").JSX.Element;
@@ -40,6 +41,7 @@ export declare const Tooltip: import("styled-components").StyledComponent<{
     placement?: Placement | undefined;
     content: ReactNode;
     type?: "light" | undefined;
+    isVisible?: boolean | undefined;
 } & Pick<import("@zendeskgarden/react-tooltips").ITooltipProps, "appendToNode"> & {
     children?: ReactNode;
 }, never>;
