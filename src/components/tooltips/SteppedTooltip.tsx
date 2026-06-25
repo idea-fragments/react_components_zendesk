@@ -1,6 +1,10 @@
+import { mdiClose } from "@mdi/js"
+import { Button, BUTTON_SIZES } from "components/forms/Button"
+import { Tooltip, TooltipProps } from "components/tooltips/Tooltip"
 import React, { FC, ReactElement, ReactNode } from "react"
 import styled from "styled-components"
-import { Tooltip, TooltipProps } from "components/tooltips/Tooltip"
+import { SPACINGS } from "styles/spacings"
+import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 
 export type SteppedTooltipStep = {
   label?: string
@@ -25,98 +29,90 @@ export type SteppedTooltipProps = {
 
 const CardTooltip = styled(Tooltip)`
   && {
-    background: #fff;
+    background: ${({ theme }) => theme.styles.colors.white};
     border: none;
     border-radius: 16px;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
-    padding: 16px 17px;
+    padding: ${SPACINGS.SM};
   }
 `
 
 const ExitBtnWrap = styled.div`
-  cursor: pointer;
-  line-height: 0;
   position: absolute;
-  right: 12px;
-  top: 11px;
+  right: ${SPACINGS.SM};
+  top: ${SPACINGS.SM};
 `
 
 const HeaderRow = styled.div`
   align-items: center;
   display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: ${SPACINGS.XS};
+  margin-bottom: ${SPACINGS.XS};
 `
 
 const StepLabel = styled.div`
-  color: #1c6b48;
-  font-size: 11px;
-  font-weight: 700;
+  color: ${({ theme }) => theme.styles.colors.primary[700]};
+  font-size: ${FONT_SIZES.XXS};
+  font-weight: ${FONT_WEIGHTS.BOLD};
   letter-spacing: 0.08em;
   text-transform: uppercase;
 `
 
 const ActionBadge = styled.div`
-  background: #f6efcf;
+  background: ${({ theme }) => theme.styles.colors.amber[100]};
   border-radius: 20px;
-  color: #7a5f12;
+  color: ${({ theme }) => theme.styles.colors.amber[800]};
   flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 9px;
+  font-size: ${FONT_SIZES.XXS};
+  font-weight: ${FONT_WEIGHTS.BOLD};
+  padding: ${SPACINGS.XXS} ${SPACINGS.XS};
 `
 
 const Title = styled.div`
-  color: #1b2620;
-  font-size: 15.5px;
-  font-weight: 800;
-  margin-bottom: 5px;
+  color: ${({ theme }) => theme.styles.textColorDark};
+  font-size: ${FONT_SIZES.SM};
+  font-weight: ${FONT_WEIGHTS.BLACK};
+  margin-bottom: ${SPACINGS.XXS};
 `
 
 const Body = styled.div`
-  color: #5f6d64;
-  font-size: 13.5px;
+  color: ${({ theme }) => theme.styles.textColorPrimary};
+  font-size: ${FONT_SIZES.SM};
   line-height: 1.52;
 `
 
 const ActionHint = styled.div`
-  background: #eef6f1;
+  background: ${({ theme }) => theme.styles.colors.primary[100]};
   border-radius: 10px;
-  color: #134e36;
-  font-size: 12.5px;
-  font-weight: 700;
-  margin-top: 13px;
-  padding: 9px 11px;
+  color: ${({ theme }) => theme.styles.colors.primary[800]};
+  font-size: ${FONT_SIZES.XS};
+  font-weight: ${FONT_WEIGHTS.BOLD};
+  margin-top: ${SPACINGS.SM};
+  padding: ${SPACINGS.XS};
 `
 
 const FooterRow = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-top: 14px;
-`
-
-const BackBtn = styled.span`
-  color: #7c8a80;
-  cursor: pointer;
-  font-size: 13.5px;
-  font-weight: 700;
+  margin-top: ${SPACINGS.SM};
 `
 
 const FooterRight = styled.div`
   align-items: center;
   display: flex;
-  gap: 8px;
+  gap: ${SPACINGS.SM};
 `
 
 const DotsRow = styled.div`
   align-items: center;
   display: flex;
-  gap: 5px;
+  gap: ${SPACINGS.XXS};
 `
 
 const Dot = styled.span<{ $active: boolean }>`
-  background: ${({ $active }) => ($active ? "#134e36" : "#d6ddd7")};
+  background: ${({ $active, theme }) =>
+    $active ? theme.styles.colorPrimary : theme.styles.colors.grey[300]};
   border-radius: 4px;
   display: inline-block;
   flex-shrink: 0;
@@ -124,28 +120,16 @@ const Dot = styled.span<{ $active: boolean }>`
   width: 7px;
 `
 
-const NavButton = styled.div`
-  background: #134e36;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 13.5px;
-  font-weight: 700;
-  padding: 8px 18px;
-`
-
 const ExitBtn: FC<{ onClick?: () => void }> = ({ onClick }) => (
-  <ExitBtnWrap onClick={onClick}>
-    <svg
-      fill="none"
-      height={15}
-      stroke="#b3bcb4"
-      strokeLinecap="round"
-      strokeWidth="2.5"
-      viewBox="0 0 24 24"
-      width={15}>
-      <path d="M6 6l12 12M18 6 6 18" />
-    </svg>
+  <ExitBtnWrap>
+    <Button
+      compact
+      flat
+      icon={mdiClose}
+      iconSize={FONT_SIZES.SM}
+      onClick={onClick!}
+      size={BUTTON_SIZES.X_SMALL}
+    />
   </ExitBtnWrap>
 )
 
@@ -171,7 +155,16 @@ const CardFooter: FC<CardFooterProps> = ({
 
   return (
     <FooterRow>
-      {onBack ? <BackBtn onClick={onBack}>Back</BackBtn> : <span />}
+      {onBack ? (
+        <Button
+          inline
+          onClick={onBack!}
+          size={BUTTON_SIZES.SMALL}>
+          Back
+        </Button>
+      ) : (
+        <span />
+      )}
       <FooterRight>
         {dotCount > 0 ? (
           <DotsRow>
@@ -184,7 +177,11 @@ const CardFooter: FC<CardFooterProps> = ({
           </DotsRow>
         ) : null}
         {showNext ? (
-          <NavButton onClick={onNext}>{isFinish ? "Finish" : "Next"}</NavButton>
+          <Button
+            onClick={onNext!}
+            size={BUTTON_SIZES.SMALL}>
+            {isFinish ? "Finish" : "Next"}
+          </Button>
         ) : null}
       </FooterRight>
     </FooterRow>
