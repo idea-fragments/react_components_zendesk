@@ -26,6 +26,7 @@ export type SteppedTooltipProps = {
   isFinish?: boolean
   onExit?: () => void
   offset?: number
+  arrow?: boolean
 }
 
 const CardTooltip = styled(Tooltip)`
@@ -201,6 +202,7 @@ export const SteppedTooltip: FC<SteppedTooltipProps> = ({
   isFinish,
   onExit,
   offset,
+  arrow = true,
 }) => {
   if (!step) return children
 
@@ -229,7 +231,7 @@ export const SteppedTooltip: FC<SteppedTooltipProps> = ({
 
   return (
     <CardTooltip
-      arrow
+      arrow={arrow}
       content={content}
       isVisible
       maxWidth={`${width}px`}

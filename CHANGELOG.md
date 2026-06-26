@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.85] - 2026-06-26
+
+### Added
+
+- `arrow` prop on `SteppedTooltip` (default `true`) — set `arrow={false}` to drop the pointer arrow, e.g. for tooltips pinned to a fixed screen position rather than a specific element.
+
 ## [0.1.84] - 2026-06-26
 
 ### Added
