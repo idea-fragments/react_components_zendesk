@@ -2238,6 +2238,12 @@ var base = {
     icon: js.mdiClose,
     width: "380px"
   },
+  dropdowns: {
+    borderRadius: "4px",
+    menu: {
+      borderRadius: "4px"
+    }
+  },
   font: {
     size: "14px"
   },

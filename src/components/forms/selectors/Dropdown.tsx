@@ -357,6 +357,11 @@ export let Dropdown = <T,>(props: PropsWithChildren<DropdownProps<T>>) => {
 
 // @ts-ignore
 Dropdown = styled(Dropdown)`
+  && > div {
+    border-radius: ${({ theme }) => {
+      return theme.styles.dropdowns.borderRadius
+    }};
+  }
   &&,
   && * {
     font-size: inherit;
@@ -377,6 +382,9 @@ const Message = styled(ZenMessage)`
 
 const StyledMenu = styled(Menu)`
   && {
+    border-radius: ${({ theme }) => {
+      return theme.styles.dropdowns.menu.borderRadius
+    }};
     width: 100%;
   }
 

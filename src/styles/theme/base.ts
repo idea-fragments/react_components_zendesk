@@ -270,6 +270,7 @@ export const base: Partial<Styles> = {
   },
   container: { horizontalPadding: "1rem" },
   drawer: { icon: mdiClose, width: "380px" },
+  dropdowns: { borderRadius: "4px", menu: { borderRadius: "4px" } },
   font: { size: "14px" },
   modal: {
     backdrop: {

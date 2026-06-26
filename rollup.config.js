@@ -24,8 +24,8 @@ let modules = fs
 //   // "tables",
 //   // "tags",
 //   // "text",
-//   // "tooltips",
-//   // "utilities",
+//    "tooltips",
+//    "utilities",
 // ]
 
 const config = [

@@ -26,6 +26,10 @@ export type SteppedTooltipProps = {
   isFinish?: boolean
   onExit?: () => void
   offset?: number
+  arrow?: boolean
+  // Render the card on its own (no Tippy/anchor), so the consumer can position
+  // it — e.g. pin it to a fixed, centered spot. `children`/`placement` are ignored.
+  detached?: boolean
 }
 
 const CardTooltip = styled(Tooltip)`
@@ -36,6 +40,15 @@ const CardTooltip = styled(Tooltip)`
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
     padding: ${SPACINGS.SM};
   }
+`
+
+// Same card visuals as CardTooltip, but a plain element the consumer positions.
+const DetachedCard = styled.div`
+  background: ${({ theme }) => theme.styles.colors.white};
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  padding: ${SPACINGS.SM};
+  position: relative;
 `
 
 const ExitBtnWrap = styled.div`
@@ -201,6 +214,8 @@ export const SteppedTooltip: FC<SteppedTooltipProps> = ({
   isFinish,
   onExit,
   offset,
+  arrow = true,
+  detached = false,
 }) => {
   if (!step) return children
 
@@ -227,9 +242,17 @@ export const SteppedTooltip: FC<SteppedTooltipProps> = ({
     </>
   )
 
+  if (detached) {
+    return (
+      <DetachedCard style={{ width: `min(${width}px, calc(100vw - 32px))` }}>
+        {content}
+      </DetachedCard>
+    )
+  }
+
   return (
     <CardTooltip
-      arrow
+      arrow={arrow}
       content={content}
       isVisible
       maxWidth={`${width}px`}

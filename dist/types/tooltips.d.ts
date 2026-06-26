@@ -86,6 +86,8 @@ type SteppedTooltipProps = {
     isFinish?: boolean;
     onExit?: () => void;
     offset?: number;
+    arrow?: boolean;
+    detached?: boolean;
 };
 declare const SteppedTooltip: FC<SteppedTooltipProps>;
 
