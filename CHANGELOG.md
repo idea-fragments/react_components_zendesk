@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.86] - 2026-06-26
+
+### Added
+
+- `detached` prop on `SteppedTooltip` (default `false`) — renders the card on its own (no Tippy/anchor, no portal) so the consumer can position it directly, e.g. pin it to a fixed, horizontally-centered spot. `children`/`placement` are ignored in this mode.
+- Themeable dropdown corners — `Dropdown` and its menu now read `borderRadius` from a new `styles.dropdowns` theme token (`dropdowns.borderRadius` and `dropdowns.menu.borderRadius`, default `4px`).
+
 ## [0.1.85] - 2026-06-26
 
 ### Added

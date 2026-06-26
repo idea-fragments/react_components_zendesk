@@ -94,6 +94,12 @@ export type Styles = {
   }
   container: { horizontalPadding: string }
   drawer: { icon: ReactNode; width: string }
+  dropdowns: {
+    borderRadius: string
+    menu: {
+      borderRadius: string
+    }
+  }
   font: { size: string }
   footer: {
     background: string
