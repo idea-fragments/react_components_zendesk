@@ -1,7 +1,7 @@
 import * as styled_components from 'styled-components';
 import * as prop_types from 'prop-types';
 import * as react from 'react';
-import { PropsWithChildren, ReactNode, ComponentProps, ComponentType, SVGAttributes, FC, ReactElement } from 'react';
+import { PropsWithChildren, ReactNode, ComponentProps, ComponentType, SVGAttributes, FC, ReactElement, RefObject } from 'react';
 import * as _zendeskgarden_react_tooltips from '@zendeskgarden/react-tooltips';
 import { Tooltip as Tooltip$1 } from '@zendeskgarden/react-tooltips';
 
@@ -90,12 +90,15 @@ type SteppedTooltipProps = {
 declare const SteppedTooltip: FC<SteppedTooltipProps>;
 
 type FocusedHelperProps = {
-    children: ReactElement;
     active: boolean;
+    children?: ReactElement;
+    resolveTarget?: () => Element | null;
+    targetRef?: RefObject<Element>;
+    renderTooltip?: (anchor: ReactElement) => ReactNode;
     zIndex?: number;
     ringPadding?: number;
     ringBorderRadius?: number | string;
-    renderTooltip?: (child: ReactElement) => ReactNode;
+    recomputeKey?: unknown;
 };
 declare const FocusedHelper: FC<FocusedHelperProps>;
 
