@@ -1,7 +1,10 @@
 import React, {
+  CSSProperties,
   FC,
   ReactElement,
   ReactNode,
+  RefObject,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -9,12 +12,31 @@ import React, {
 import styled from "styled-components"
 
 export type FocusedHelperProps = {
-  children: ReactElement
   active: boolean
+
+  // ── Wrap mode (default) ────────────────────────────────────────────────────
+  // Wrap this element and measure it. Best for buttons / inline triggers.
+  children?: ReactElement
+
+  // ── Target mode ────────────────────────────────────────────────────────────
+  // Spotlight an element this helper does NOT wrap. Passing either prop switches
+  // modes; `children` is then ignored (the consumer renders its own content).
+  // `resolveTarget` is the general seam — querySelector + climb logic lives in
+  // the consumer; `targetRef` is sugar for the "I already have a ref" case.
+  resolveTarget?: () => Element | null
+  targetRef?: RefObject<Element>
+
+  // Tooltip seam (both modes): receives the anchor element to wrap & return. In
+  // target mode the anchor is a synthesized virtual element over the target.
+  renderTooltip?: (anchor: ReactElement) => ReactNode
+
+  // Ring appearance
   zIndex?: number
   ringPadding?: number
   ringBorderRadius?: number | string
-  renderTooltip?: (child: ReactElement) => ReactNode
+
+  // Bump to force a re-resolve + re-measure (e.g. the active step / data changed).
+  recomputeKey?: unknown
 }
 
 const PaddedAnchor = styled.div<{ $padding: number; $active: boolean }>`
@@ -49,19 +71,30 @@ const Ring = styled.div<{
 `
 
 export const FocusedHelper: FC<FocusedHelperProps> = ({
-  children,
   active,
+  children,
+  resolveTarget,
+  targetRef,
+  renderTooltip,
   zIndex = 400,
   ringPadding = 8,
   ringBorderRadius = 8,
-  renderTooltip,
+  recomputeKey,
 }) => {
+  const targetMode = Boolean(resolveTarget || targetRef)
   const anchorRef = useRef<HTMLDivElement>(null)
   const [rect, setRect] = useState<DOMRect | null>(null)
 
-  const updateRect = () => {
-    setRect(anchorRef.current?.getBoundingClientRect() ?? null)
-  }
+  // Hold the latest resolver in a ref so the sync effect doesn't resubscribe on
+  // every render (consumers typically pass an inline closure).
+  const resolveRef = useRef(resolveTarget)
+  resolveRef.current = resolveTarget
+
+  const getTarget = useCallback((): Element | null => {
+    if (resolveRef.current) return resolveRef.current()
+    if (targetRef) return targetRef.current
+    return anchorRef.current
+  }, [targetRef])
 
   useEffect(() => {
     if (!active) {
@@ -69,45 +102,108 @@ export const FocusedHelper: FC<FocusedHelperProps> = ({
       return
     }
 
-    updateRect()
-    window.addEventListener("resize", updateRect)
-    window.addEventListener("scroll", updateRect, true)
+    let raf = 0
+    let observer: ResizeObserver | null = null
+
+    const update = (): Element | null => {
+      const el = getTarget()
+      setRect(el ? el.getBoundingClientRect() : null)
+      return el
+    }
+
+    const start = () => {
+      const el = update()
+      if (el) {
+        observer = new ResizeObserver(() => update())
+        observer.observe(el)
+      } else if (targetMode) {
+        // The target may mount a frame late (e.g. a data swap) — keep trying.
+        raf = requestAnimationFrame(start)
+      }
+    }
+
+    start()
+    window.addEventListener("resize", update)
+    window.addEventListener("scroll", update, true)
 
     return () => {
-      window.removeEventListener("resize", updateRect)
-      window.removeEventListener("scroll", updateRect, true)
+      cancelAnimationFrame(raf)
+      observer?.disconnect()
+      window.removeEventListener("resize", update)
+      window.removeEventListener("scroll", update, true)
     }
-  }, [active])
+  }, [active, targetMode, recomputeKey, getTarget])
 
   const borderRadius =
     typeof ringBorderRadius === "number"
       ? `${ringBorderRadius}px`
       : ringBorderRadius
 
-  const anchor = (
-    <PaddedAnchor
-      ref={anchorRef}
-      $active={active}
-      $padding={ringPadding}>
-      {children}
-    </PaddedAnchor>
-  ) as ReactElement
+  // ── Wrap mode ───────────────────────────────────────────────────────────────
+  // The padding lives on PaddedAnchor, so the measured rect already includes it.
+  if (!targetMode) {
+    const anchor = (
+      <PaddedAnchor
+        ref={anchorRef}
+        $active={active}
+        $padding={ringPadding}>
+        {children}
+      </PaddedAnchor>
+    ) as ReactElement
 
-  const rendered = renderTooltip ? renderTooltip(anchor) : anchor
+    const rendered = renderTooltip ? renderTooltip(anchor) : anchor
+
+    return (
+      <>
+        {rendered}
+        {active && rect ? (
+          <Ring
+            $borderRadius={borderRadius}
+            $height={rect.height}
+            $left={rect.left}
+            $top={rect.top}
+            $width={rect.width}
+            $zIndex={zIndex}
+          />
+        ) : null}
+      </>
+    )
+  }
+
+  // ── Target mode ─────────────────────────────────────────────────────────────
+  // No wrapper is rendered (zero layout impact). The bare element is measured, so
+  // padding is applied here to both the ring and the virtual tooltip anchor.
+  if (!active || !rect) return null
+
+  const padded = {
+    height: rect.height + ringPadding * 2,
+    left: rect.left - ringPadding,
+    top: rect.top - ringPadding,
+    width: rect.width + ringPadding * 2,
+  }
+
+  const virtualAnchorStyle: CSSProperties = {
+    height: padded.height,
+    left: padded.left,
+    pointerEvents: "none",
+    position: "fixed",
+    top: padded.top,
+    width: padded.width,
+  }
+
+  const virtualAnchor = (<div style={virtualAnchorStyle} />) as ReactElement
 
   return (
     <>
-      {rendered}
-      {active && rect ? (
-        <Ring
-          $borderRadius={borderRadius}
-          $height={rect.height}
-          $left={rect.left}
-          $top={rect.top}
-          $width={rect.width}
-          $zIndex={zIndex}
-        />
-      ) : null}
+      <Ring
+        $borderRadius={borderRadius}
+        $height={padded.height}
+        $left={padded.left}
+        $top={padded.top}
+        $width={padded.width}
+        $zIndex={zIndex}
+      />
+      {renderTooltip ? renderTooltip(virtualAnchor) : null}
     </>
   )
 }
