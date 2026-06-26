@@ -107,6 +107,12 @@ type Styles = {
         icon: ReactNode;
         width: string;
     };
+    dropdowns: {
+        borderRadius: string;
+        menu: {
+            borderRadius: string;
+        };
+    };
     font: {
         size: string;
     };
