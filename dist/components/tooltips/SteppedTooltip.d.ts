@@ -19,6 +19,7 @@ export type SteppedTooltipProps = {
     isFinish?: boolean;
     onExit?: () => void;
     offset?: number;
+    arrow?: boolean;
 };
 export declare const SteppedTooltip: FC<SteppedTooltipProps>;
 //# sourceMappingURL=SteppedTooltip.d.ts.map
