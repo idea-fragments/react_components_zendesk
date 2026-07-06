@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.87] - 2026-07-06
+
+### Fixed
+
+- `useDeviceSizeWatcher` no longer touches `window` during render, so it no longer throws `ReferenceError: window is not defined` on the server. The media query lists are built only when `window` exists; during SSR the hook returns all-`false` measurements (matching the first client render, since the real size is set in a client-only effect). This unblocks server-side rendering for any page or component that uses the hook.
+
 ## [0.1.86] - 2026-06-26
 
 ### Added

@@ -4252,6 +4252,9 @@ var useDeviceSizeWatcher = function () {
   }, []);
   var deviceListeners = React.useRef({});
   var deviceMediaQueryLists = React.useMemo(function () {
+    if (typeof window === "undefined") {
+      return {};
+    }
     return Object.values(DEVICES).reduce(function (map, size) {
       var _a;
       return __assign(__assign({}, map), (_a = {}, _a[size] = window.matchMedia(queries[size]), _a));

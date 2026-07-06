@@ -24,6 +24,9 @@ export const useDeviceSizeWatcher = (): Measurements => {
 
   const deviceMediaQueryLists: Record<DeviceSize, MediaQueryList> =
     useMemo(() => {
+      if (typeof window === "undefined") {
+        return {} as Record<DeviceSize, MediaQueryList>
+      }
       return Object.values(DEVICES).reduce((map, size) => {
         return { ...map, [size]: window.matchMedia(queries[size]) }
       }, {})
