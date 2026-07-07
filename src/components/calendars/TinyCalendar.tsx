@@ -71,7 +71,10 @@ export let TinyCalendar: FC<TinyCalendarProps> = ({
       .map((key: string) => {
         const c =
           colors[
-            key as keyof Omit<Styles["colors"], "black" | "product" | "white">
+            key as keyof Omit<
+              Styles["colors"],
+              "black" | "earthy" | "product" | "white"
+            >
           ]
         return c["600"]
       })

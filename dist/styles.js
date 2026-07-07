@@ -2020,6 +2020,16 @@ var base = {
       700: "#49545c",
       800: "#2f3941"
     },
+    dirtyGrey: {
+      100: "#f8f5f1",
+      200: "#eae4dc",
+      300: "#d5cabb",
+      400: "#beac95",
+      500: "#9b8a76",
+      600: "#7a6a5a",
+      700: "#574d40",
+      800: "#37302a"
+    },
     purple: {
       100: "#f3eef9",
       200: "#e1d3f3",
@@ -2070,6 +2080,16 @@ var base = {
       700: "#921f15",
       800: "#61150e"
     },
+    terra: {
+      100: "#fbf1e9",
+      200: "#f5e8e0",
+      300: "#ecd0be",
+      400: "#ddab8a",
+      500: "#c0714a",
+      600: "#995035",
+      700: "#6d3823",
+      800: "#452216"
+    },
     orange: {
       100: "#fff3ed",
       200: "#ffe3cc",
@@ -2089,6 +2109,36 @@ var base = {
       600: "#d6810f",
       700: "#9e5f0a",
       800: "#6b4007"
+    },
+    bark: {
+      100: "#faf5f0",
+      200: "#f0e4d6",
+      300: "#e4cfba",
+      400: "#d0b393",
+      500: "#a88062",
+      600: "#82624a",
+      700: "#5c4033",
+      800: "#2c1f14"
+    },
+    cream: {
+      100: "#f7f3ec",
+      200: "#ede8de",
+      300: "#dcd0bd",
+      400: "#ccb896",
+      500: "#b3925f",
+      600: "#8f7040",
+      700: "#63502e",
+      800: "#40331c"
+    },
+    gold: {
+      100: "#fbf6e6",
+      200: "#f5edda",
+      300: "#eddcae",
+      400: "#dcbf78",
+      500: "#c89b4a",
+      600: "#997432",
+      700: "#6d521f",
+      800: "#453314"
     },
     yellow: {
       100: "#fffef2",
@@ -2119,6 +2169,16 @@ var base = {
       600: "#8c8f4c",
       700: "#5e6030",
       800: "#3b3c1c"
+    },
+    moss: {
+      100: "#f2f7f0",
+      200: "#e8f0e5",
+      300: "#d4e2ca",
+      400: "#b5c9a8",
+      500: "#7a9c6e",
+      600: "#5f7f56",
+      700: "#4a6741",
+      800: "#263820"
     },
     lime: {
       100: "#f0f9eb",
@@ -2229,7 +2289,8 @@ var base = {
       600: "transparent",
       700: "transparent",
       800: "transparent"
-    }
+    },
+    earthy: {}
   },
   container: {
     horizontalPadding: "1rem"
@@ -2307,6 +2368,14 @@ base.colorWarning = base.colors.yellow["700"];
 base.colorPrimary = base.colors.blue["600"];
 base.colors.primary = base.colors.blue;
 base.colors.accent = base.colors.orange;
+base.colors.earthy = {
+  bark: base.colors.bark,
+  cream: base.colors.cream,
+  dirtyGrey: base.colors.dirtyGrey,
+  gold: base.colors.gold,
+  moss: base.colors.moss,
+  terra: base.colors.terra
+};
 base.table.borderColor = base.colors.grey["200"];
 base.chat.message.currentUser.icon.background = base.colorPrimary;
 base.chat.message.currentUser.text.background = base.colors.grey["200"];
