@@ -8,5 +8,5 @@ export type SectionFooterProps = PropsWithChildren<{
     paddingSize?: SectionPaddingSize;
     title?: ReactNode;
 }> & CSSProp;
-export declare const SectionFooter: import("styled-components").StyledComponent<({ actions, bordered, className, paddingSize, }: SectionFooterProps) => JSX.Element, import("styled-components").DefaultTheme, {}, never>;
+export declare const SectionFooter: import("styled-components").StyledComponent<({ actions, bordered, className, paddingSize, }: SectionFooterProps) => import("react/jsx-runtime").JSX.Element, import("styled-components").DefaultTheme, {}, never>;
 //# sourceMappingURL=SectionFooter.d.ts.map

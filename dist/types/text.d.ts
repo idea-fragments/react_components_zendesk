@@ -67,6 +67,7 @@ type FontTag = ValueOf<typeof FONT_TAGS>;
 type TextAlignment = "center" | "left" | "right";
 type CommonTextProps = {
     align?: TextAlignment;
+    allCaps?: boolean;
     as?: FontTag;
     hasSubText?: boolean;
     size?: FontSize;

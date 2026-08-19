@@ -68,11 +68,11 @@ type Props = Omit<TooltipProps, "content"> & {
 declare let IconTooltip: FC<PropsWithChildren<Props>>;
 
 type SteppedTooltipStep = {
-    label?: string;
-    isAction?: boolean;
-    title: ReactNode;
-    body: ReactNode;
     actionHint?: ReactNode;
+    body: ReactNode;
+    isAction?: boolean;
+    label?: string;
+    title: ReactNode;
 };
 type SteppedTooltipProps = {
     children: ReactElement;

@@ -1,11 +1,11 @@
 import { TooltipProps } from "components/tooltips/Tooltip";
 import { FC, ReactElement, ReactNode } from "react";
 export type SteppedTooltipStep = {
-    label?: string;
-    isAction?: boolean;
-    title: ReactNode;
-    body: ReactNode;
     actionHint?: ReactNode;
+    body: ReactNode;
+    isAction?: boolean;
+    label?: string;
+    title: ReactNode;
 };
 export type SteppedTooltipProps = {
     children: ReactElement;

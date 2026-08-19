@@ -6,6 +6,11 @@ export declare const SECTION_PADDING_SIZES: {
     readonly SMALL: "small";
 };
 export type SectionPaddingSize = ValueOf<typeof SECTION_PADDING_SIZES>;
+export type SectionPart = "body" | "footer" | "header";
+export declare const sectionPartPadding: ({ paddingSize, part, }: {
+    paddingSize?: SectionPaddingSize | undefined;
+    part: SectionPart;
+}) => import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<import("styled-components").DefaultTheme>>;
 export type SectionProps = {
     bordered?: boolean;
     compact?: boolean;

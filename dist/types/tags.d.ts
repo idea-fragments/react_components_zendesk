@@ -68,6 +68,7 @@ type FontTag = ValueOf<typeof FONT_TAGS>;
 type TextAlignment = "center" | "left" | "right";
 type CommonTextProps = {
     align?: TextAlignment;
+    allCaps?: boolean;
     as?: FontTag;
     hasSubText?: boolean;
     size?: FontSize;
@@ -83,6 +84,14 @@ type FullSpectrumColors = {
     600: string;
     700: string;
     800: string;
+};
+type SectionPartPadding = {
+    mobile?: {
+        paddingX: string;
+        paddingY: string;
+    };
+    paddingX: string;
+    paddingY: string;
 };
 type ContainerStyles = {
     background?: string;
@@ -105,6 +114,7 @@ type Styles = {
     };
     buttons: {
         borderRadius: string;
+        borderWidth: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -202,6 +212,13 @@ type Styles = {
             background: string;
         };
         borderRadius: string;
+        sizes: {
+            FULL_SCREEN: string;
+            LG: string;
+            SM: string;
+            XL: string;
+        };
+        zIndex: number;
     };
     nav: {
         linkColor: string;
@@ -217,12 +234,9 @@ type Styles = {
     };
     scrollbarColor: string;
     section: ContainerStyles & {
-        body: {
-            padding: string;
-        };
-        header: {
-            padding: string;
-        };
+        body: SectionPartPadding;
+        footer: SectionPartPadding;
+        header: SectionPartPadding;
     };
     sidebar: {
         actionButton: {
@@ -238,7 +252,7 @@ type Styles = {
     table: {
         borderColor: string;
         borderSize: string;
-        filterButtonIcon: Nullable<string>;
+        filterButtonIcon: Nullable<ReactNode>;
     };
     tag: {
         textColorWeight: keyof FullSpectrumColors;
