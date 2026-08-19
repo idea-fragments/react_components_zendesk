@@ -94,14 +94,21 @@ type ButtonType = ReactElement & {
         disableable: boolean;
     } & ButtonProps;
 };
+declare const MODAL_SIZES: {
+    readonly FULL_SCREEN: "FULL_SCREEN";
+    readonly LG: "LG";
+    readonly SM: "SM";
+    readonly XL: "XL";
+};
+type ModalSize = (typeof MODAL_SIZES)[keyof typeof MODAL_SIZES];
 type ModalContent = {
     autoClose?: boolean;
     blocking?: boolean;
     body: any;
     buttons?: ButtonType[];
-    isLarge?: boolean;
     isNotDismissible?: boolean;
-    title?: string;
+    size?: ModalSize;
+    title?: ReactNode;
     withCancelButton?: boolean;
     withNoActions?: boolean;
     onClose?: () => void;
@@ -153,4 +160,4 @@ type DrawerModalProps = {
 } & CSSProp;
 declare const DrawerModal: styled_components.StyledComponent<FC<DrawerModalProps>, styled_components.DefaultTheme, {}, never>;
 
-export { DrawerModal, DrawerModalProps, Modal, ModalContent, ModalContentState, ModalHelperFunctions, ModalManager, ModalManagerProps, ModalProps, ModalState, ModalStateContext, ModalStateProvider, ModalStateWithDispatch, defaultUiState, useModalState };
+export { DrawerModal, DrawerModalProps, MODAL_SIZES, Modal, ModalContent, ModalContentState, ModalHelperFunctions, ModalManager, ModalManagerProps, ModalProps, ModalSize, ModalState, ModalStateContext, ModalStateProvider, ModalStateWithDispatch, defaultUiState, useModalState };

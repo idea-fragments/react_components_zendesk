@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as react from 'react';
-import react__default, { FC, ReactNode, ElementType, PropsWithChildren, Dispatch, SetStateAction, ComponentType, SVGAttributes, Ref } from 'react';
+import react__default, { FC, ReactNode, ElementType, PropsWithChildren, Dispatch, SetStateAction, ComponentType, SVGAttributes, Ref, ReactElement } from 'react';
 import * as styled_components from 'styled-components';
 import { FlattenSimpleInterpolation } from 'styled-components';
 import { ValueOf } from 'utils/types';
@@ -49,6 +49,11 @@ declare const SECTION_PADDING_SIZES: {
     readonly SMALL: "small";
 };
 type SectionPaddingSize = ValueOf<typeof SECTION_PADDING_SIZES>;
+type SectionPart = "body" | "footer" | "header";
+declare const sectionPartPadding: ({ paddingSize, part, }: {
+    paddingSize?: SectionPaddingSize | undefined;
+    part: SectionPart;
+}) => styled_components.FlattenInterpolation<styled_components.ThemeProps<styled_components.DefaultTheme>>;
 type SectionProps = {
     bordered?: boolean;
     compact?: boolean;
@@ -320,7 +325,7 @@ type SectionFooterProps = PropsWithChildren<{
     paddingSize?: SectionPaddingSize;
     title?: ReactNode;
 }> & CSSProp;
-declare const SectionFooter: styled_components.StyledComponent<({ actions, bordered, className, paddingSize, }: SectionFooterProps) => JSX.Element, styled_components.DefaultTheme, {}, never>;
+declare const SectionFooter: styled_components.StyledComponent<({ actions, bordered, className, paddingSize, }: SectionFooterProps) => react_jsx_runtime.JSX.Element, styled_components.DefaultTheme, {}, never>;
 
 type SectionHeaderProps = PropsWithChildren<{
     actions?: ReactNode;
@@ -387,6 +392,34 @@ type SidebarLayoutProps = {
 };
 declare const SidebarLayout: FC<SidebarLayoutProps>;
 
+type FullSpectrumColors = {
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    500: string;
+    600: string;
+    700: string;
+    800: string;
+};
+
+type StepperRenderProps = {
+    currentStep: number;
+    dots: ReactNode;
+    stepCount: number;
+    title: string;
+};
+type StepperProps = {
+    children: (props: StepperRenderProps) => ReactElement;
+    color?: FullSpectrumColors;
+    completedColor?: string;
+    currentColor?: string;
+    currentStep: number;
+    incompleteColor?: string;
+    stepCount: number;
+};
+declare const Stepper: FC<StepperProps>;
+
 declare const TabletsOnly: FC<PropsWithChildren>;
 
 type TabsProps = {
@@ -421,4 +454,4 @@ declare const TabList: styled_components.StyledComponent<"div", styled_component
     wrapped?: boolean | undefined;
 } & CSSProp<any>, never>;
 
-export { AppBar, AppBarLayoutV2, AppBarLayoutV2Props, Card, CardProps, Carousel, Col, ComputersOnly, Container, DRAWER_SIZES, Drawer, DrawerContent, DrawerContentState, DrawerHelperFunctions, DrawerModalManager, DrawerModalStateProvider, DrawerProps, DrawerState, DrawerStateContext, DrawerStateWithDispatch, FlexBox, FlexBoxProps, FullScreen, FullScreenProps, Grid, IconAppBar, IconAppBarProps, Line, NavigationAction, OpacityTransition, OverflowButton, OverflowButtonProps, OverflowMenu, OverflowMenuItem, OverflowMenuProps, PhonesAndTabletsOnly, PhonesOnly, ResponsiveProps, Row, SECTION_PADDING_SIZES, SEPARATOR_ORIENTATIONS, Section, SectionBody, SectionBodyProps, SectionFooter, SectionFooterProps, SectionHeader, SectionHeaderProps, SectionPaddingSize, SectionProps, Separator, SeparatorProps, Sidebar, SidebarLayout, SidebarLayoutProps, SidebarProps, SidebarV2, SidebarV2Props, Tab, TabList, TabPanel, TabPanelProps, TabProps, TabletsOnly, Tabs, TabsProps, defaultUiState, useDrawerState };
+export { AppBar, AppBarLayoutV2, AppBarLayoutV2Props, Card, CardProps, Carousel, Col, ComputersOnly, Container, DRAWER_SIZES, Drawer, DrawerContent, DrawerContentState, DrawerHelperFunctions, DrawerModalManager, DrawerModalStateProvider, DrawerProps, DrawerState, DrawerStateContext, DrawerStateWithDispatch, FlexBox, FlexBoxProps, FullScreen, FullScreenProps, Grid, IconAppBar, IconAppBarProps, Line, NavigationAction, OpacityTransition, OverflowButton, OverflowButtonProps, OverflowMenu, OverflowMenuItem, OverflowMenuProps, PhonesAndTabletsOnly, PhonesOnly, ResponsiveProps, Row, SECTION_PADDING_SIZES, SEPARATOR_ORIENTATIONS, Section, SectionBody, SectionBodyProps, SectionFooter, SectionFooterProps, SectionHeader, SectionHeaderProps, SectionPaddingSize, SectionPart, SectionProps, Separator, SeparatorProps, Sidebar, SidebarLayout, SidebarLayoutProps, SidebarProps, SidebarV2, SidebarV2Props, Stepper, StepperProps, StepperRenderProps, Tab, TabList, TabPanel, TabPanelProps, TabProps, TabletsOnly, Tabs, TabsProps, defaultUiState, sectionPartPadding, useDrawerState };

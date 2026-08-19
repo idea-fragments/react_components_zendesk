@@ -86,6 +86,7 @@ export type TextAlignment = "center" | "left" | "right"
 
 export type CommonTextProps = {
   align?: TextAlignment
+  allCaps?: boolean
   as?: FontTag
   hasSubText?: boolean
   size?: FontSize

@@ -1,5 +1,7 @@
 import { mdiClose } from "@mdi/js"
 import { Button, BUTTON_SIZES } from "components/forms/Button"
+import { Stepper } from "components/layout/Stepper"
+import { XXS } from "components/text/Paragraph"
 import { Tooltip, TooltipProps } from "components/tooltips/Tooltip"
 import React, { FC, ReactElement, ReactNode } from "react"
 import styled from "styled-components"
@@ -7,11 +9,11 @@ import { SPACINGS } from "styles/spacings"
 import { FONT_SIZES, FONT_WEIGHTS } from "styles/typography"
 
 export type SteppedTooltipStep = {
-  label?: string
-  isAction?: boolean
-  title: ReactNode
-  body: ReactNode
   actionHint?: ReactNode
+  body: ReactNode
+  isAction?: boolean
+  label?: string
+  title: ReactNode
 }
 
 export type SteppedTooltipProps = {
@@ -64,12 +66,12 @@ const HeaderRow = styled.div`
   margin-bottom: ${SPACINGS.XS};
 `
 
-const StepLabel = styled.div`
+const StepLabel = styled(XXS).attrs({
+  allCaps: true,
+  compact: true,
+})`
   color: ${({ theme }) => theme.styles.colors.primary[700]};
-  font-size: ${FONT_SIZES.XXS};
   font-weight: ${FONT_WEIGHTS.BOLD};
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 `
 
 const ActionBadge = styled.div`
@@ -118,22 +120,6 @@ const FooterRight = styled.div`
   gap: ${SPACINGS.SM};
 `
 
-const DotsRow = styled.div`
-  align-items: center;
-  display: flex;
-  gap: ${SPACINGS.XXS};
-`
-
-const Dot = styled.span<{ $active: boolean }>`
-  background: ${({ $active, theme }) =>
-    $active ? theme.styles.colorPrimary : theme.styles.colors.grey[300]};
-  border-radius: 4px;
-  display: inline-block;
-  flex-shrink: 0;
-  height: 7px;
-  width: 7px;
-`
-
 const ExitBtn: FC<{ onClick?: () => void }> = ({ onClick }) => (
   <ExitBtnWrap>
     <Button
@@ -148,8 +134,7 @@ const ExitBtn: FC<{ onClick?: () => void }> = ({ onClick }) => (
 )
 
 type CardFooterProps = {
-  dotCount: number
-  activeDotIndex: number
+  dots: ReactNode
   isAction?: boolean
   isFinish?: boolean
   onBack?: () => void
@@ -157,15 +142,14 @@ type CardFooterProps = {
 }
 
 const CardFooter: FC<CardFooterProps> = ({
-  dotCount,
-  activeDotIndex,
+  dots,
   isAction,
   isFinish,
   onBack,
   onNext,
 }) => {
   const showNext = Boolean(onNext) && !isAction
-  if (!onBack && dotCount === 0 && !showNext) return null
+  if (!onBack && !dots && !showNext) return null
 
   return (
     <FooterRow>
@@ -180,16 +164,7 @@ const CardFooter: FC<CardFooterProps> = ({
         <span />
       )}
       <FooterRight>
-        {dotCount > 0 ? (
-          <DotsRow>
-            {Array.from({ length: dotCount }, (_, i) => (
-              <Dot
-                key={i}
-                $active={i === activeDotIndex}
-              />
-            ))}
-          </DotsRow>
-        ) : null}
+        {dots}
         {showNext ? (
           <Button
             onClick={onNext!}
@@ -219,28 +194,42 @@ export const SteppedTooltip: FC<SteppedTooltipProps> = ({
 }) => {
   if (!step) return children
 
-  const content = (
-    <>
-      {onExit ? <ExitBtn onClick={onExit} /> : null}
-      {step.label || step.isAction ? (
-        <HeaderRow>
-          {step.label ? <StepLabel>{step.label}</StepLabel> : null}
-          {step.isAction ? <ActionBadge>Action</ActionBadge> : null}
-        </HeaderRow>
-      ) : null}
-      <Title>{step.title}</Title>
-      <Body>{step.body}</Body>
-      {step.actionHint ? <ActionHint>{step.actionHint}</ActionHint> : null}
-      <CardFooter
-        activeDotIndex={activeDotIndex}
-        dotCount={dotCount}
-        isAction={step.isAction}
-        isFinish={isFinish}
-        onBack={onBack}
-        onNext={onNext}
-      />
-    </>
-  )
+  const renderContent = (title: string | null, dots: ReactNode) => {
+    const resolvedLabel = step.label ?? title
+
+    return (
+      <>
+        {onExit ? <ExitBtn onClick={onExit} /> : null}
+        {resolvedLabel || step.isAction ? (
+          <HeaderRow>
+            {resolvedLabel ? <StepLabel>{resolvedLabel}</StepLabel> : null}
+            {step.isAction ? <ActionBadge>Action</ActionBadge> : null}
+          </HeaderRow>
+        ) : null}
+        <Title>{step.title}</Title>
+        <Body>{step.body}</Body>
+        {step.actionHint ? <ActionHint>{step.actionHint}</ActionHint> : null}
+        <CardFooter
+          dots={dots}
+          isAction={step.isAction}
+          isFinish={isFinish}
+          onBack={onBack}
+          onNext={onNext}
+        />
+      </>
+    )
+  }
+
+  const content =
+    dotCount > 0 ? (
+      <Stepper
+        currentStep={activeDotIndex + 1}
+        stepCount={dotCount}>
+        {({ dots, title }) => renderContent(title, dots)}
+      </Stepper>
+    ) : (
+      renderContent(null, null)
+    )
 
   if (detached) {
     return (

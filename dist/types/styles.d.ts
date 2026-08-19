@@ -23,6 +23,14 @@ type PartialSpectrumColors = {
     M400: string;
     M600: string;
 };
+type SectionPartPadding = {
+    mobile?: {
+        paddingX: string;
+        paddingY: string;
+    };
+    paddingX: string;
+    paddingY: string;
+};
 type ContainerStyles = {
     background?: string;
     borderRadius?: string;
@@ -44,6 +52,7 @@ type Styles = {
     };
     buttons: {
         borderRadius: string;
+        borderWidth: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -141,6 +150,13 @@ type Styles = {
             background: string;
         };
         borderRadius: string;
+        sizes: {
+            FULL_SCREEN: string;
+            LG: string;
+            SM: string;
+            XL: string;
+        };
+        zIndex: number;
     };
     nav: {
         linkColor: string;
@@ -156,12 +172,9 @@ type Styles = {
     };
     scrollbarColor: string;
     section: ContainerStyles & {
-        body: {
-            padding: string;
-        };
-        header: {
-            padding: string;
-        };
+        body: SectionPartPadding;
+        footer: SectionPartPadding;
+        header: SectionPartPadding;
     };
     sidebar: {
         actionButton: {
@@ -177,7 +190,7 @@ type Styles = {
     table: {
         borderColor: string;
         borderSize: string;
-        filterButtonIcon: Nullable<string>;
+        filterButtonIcon: Nullable<ReactNode>;
     };
     tag: {
         textColorWeight: keyof FullSpectrumColors;
@@ -280,6 +293,7 @@ type FontTag = ValueOf<typeof FONT_TAGS>;
 type TextAlignment = "center" | "left" | "right";
 type CommonTextProps = {
     align?: TextAlignment;
+    allCaps?: boolean;
     as?: FontTag;
     hasSubText?: boolean;
     size?: FontSize;
@@ -370,4 +384,4 @@ declare const THEMES: {
     __ZENDESK_DEFAULT_THEME__: _zendeskgarden_react_theming.IGardenTheme;
 };
 
-export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, FullSpectrumColors, MediaQueriesI, MediaQuery, PHONE_SIZE, PartialSpectrumColors, Props, SPACE_DIRECTIONS, SPACINGS, StyledProps, Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, buttonLikeHoverable, dark, darker, desaturate, fade, getInlineStyling, hasGoodContrast, inlineWithText, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorForButton, textColorForFlatButton, textColorPrimary, textWithColor, unit, veryDark, veryLight };
+export { CSS, CSSProp, ColorProps, CommonTextProps, ContainerProps, ContainerStyles, FONT_SIZES, FONT_SIZES_EM, FONT_TAGS, FONT_WEIGHTS, FontSize, FontTag, FontWeight, FullSpectrumColors, MediaQueriesI, MediaQuery, PHONE_SIZE, PartialSpectrumColors, Props, SPACE_DIRECTIONS, SPACINGS, SectionPartPadding, StyledProps, Styles, TABLET_SIZE, THEMES, TextAlignment, Theme, ThemeProvider, backgroundPrimaryWithText, buttonLikeHoverable, dark, darker, desaturate, fade, getInlineStyling, hasGoodContrast, inlineWithText, light, lighter, lightness, lightnessDelta, mediaQueries, rem, remSize, saturate, textColorForBackground, textColorForButton, textColorForFlatButton, textColorPrimary, textWithColor, unit, veryDark, veryLight };

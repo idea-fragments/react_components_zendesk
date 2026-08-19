@@ -33,9 +33,16 @@ const subTextStyling = css`
 export const Text = styled.div<TextProps>`
   text-align: ${({ align }: TextProps) => align};
   width: ${({ fluid }) => (fluid ? "100%" : "unset")};
-  ${getColor}
 
+  ${getColor}
   &&& {
+    ${({ allCaps }) =>
+      allCaps
+        ? css`
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+          `
+        : ""}
     ${({ compact }) =>
       compact
         ? css`

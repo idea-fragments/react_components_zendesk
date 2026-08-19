@@ -16,7 +16,7 @@ export const base: Partial<Styles> = {
   border: {
     color: "rgb(233, 235, 237)",
   },
-  buttons: { borderRadius: "4px", textTransform: null },
+  buttons: { borderRadius: "4px", borderWidth: "1px", textTransform: null },
   chat: {
     message: {
       currentUser: {
@@ -339,6 +339,13 @@ export const base: Partial<Styles> = {
       background: "rgba(47, 57, 65, 0.85)",
     },
     borderRadius: "4px",
+    sizes: {
+      FULL_SCREEN: "100vw",
+      LG: "768px",
+      SM: "576px",
+      XL: "1024px",
+    },
+    zIndex: 400,
   },
   notifications: {
     zIndex: 401,
@@ -346,11 +353,17 @@ export const base: Partial<Styles> = {
   section: {
     background: "transparent",
     body: {
-      padding: `${SPACINGS.LG} ${SPACINGS.MD}`,
+      paddingX: SPACINGS.MD,
+      paddingY: SPACINGS.LG,
     },
     borderRadius: `${SPACINGS.XS}`,
+    footer: {
+      paddingX: SPACINGS.MD,
+      paddingY: SPACINGS.LG,
+    },
     header: {
-      padding: `${SPACINGS.LG} ${SPACINGS.MD}`,
+      paddingX: SPACINGS.MD,
+      paddingY: SPACINGS.LG,
     },
     shadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
   },

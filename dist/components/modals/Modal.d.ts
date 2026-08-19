@@ -1,6 +1,6 @@
 import { ButtonProps } from "components/forms/Button";
 import { StyledComponentProps } from "components/StyledComponentProps.type";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import { CSSProp } from "styles/types";
 import { UserFeedbackProps } from "styles/UserFeedbackProps";
 type ButtonType = ReactElement & {
@@ -8,14 +8,21 @@ type ButtonType = ReactElement & {
         disableable: boolean;
     } & ButtonProps;
 };
+export declare const MODAL_SIZES: {
+    readonly FULL_SCREEN: "FULL_SCREEN";
+    readonly LG: "LG";
+    readonly SM: "SM";
+    readonly XL: "XL";
+};
+export type ModalSize = (typeof MODAL_SIZES)[keyof typeof MODAL_SIZES];
 export type ModalContent = {
     autoClose?: boolean;
     blocking?: boolean;
     body: any;
     buttons?: ButtonType[];
-    isLarge?: boolean;
     isNotDismissible?: boolean;
-    title?: string;
+    size?: ModalSize;
+    title?: ReactNode;
     withCancelButton?: boolean;
     withNoActions?: boolean;
     onClose?: () => void;

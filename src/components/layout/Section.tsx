@@ -2,7 +2,10 @@ import { SectionBody } from "components/layout/SectionBody"
 import { SectionFooter } from "components/layout/SectionFooter"
 import { SectionHeader } from "components/layout/SectionHeader"
 import styled, { css } from "styled-components"
+import { mediaQueries } from "styles/mediaQueries"
 import { textColorForBackground } from "styles/mixins"
+import { SPACINGS } from "styles/spacings"
+import { SectionPartPadding } from "styles/theme/Theme.type"
 import { ColorProps, CSSProp } from "styles/types"
 import { ValueOf } from "utils/types"
 
@@ -13,6 +16,55 @@ export const SECTION_PADDING_SIZES = {
 } as const
 
 export type SectionPaddingSize = ValueOf<typeof SECTION_PADDING_SIZES>
+
+export type SectionPart = "body" | "footer" | "header"
+
+const PADDING_OVERRIDES: Record<
+  SectionPart,
+  Record<SectionPaddingSize, string | null>
+> = {
+  body: {
+    [SECTION_PADDING_SIZES.DEFAULT]: null,
+    [SECTION_PADDING_SIZES.MEDIUM]: SPACINGS.MD,
+    [SECTION_PADDING_SIZES.SMALL]: SPACINGS.SM,
+  },
+  footer: {
+    [SECTION_PADDING_SIZES.DEFAULT]: null,
+    [SECTION_PADDING_SIZES.MEDIUM]: `${SPACINGS.SM} ${SPACINGS.MD} ${SPACINGS.MD}`,
+    [SECTION_PADDING_SIZES.SMALL]: SPACINGS.SM,
+  },
+  header: {
+    [SECTION_PADDING_SIZES.DEFAULT]: null,
+    [SECTION_PADDING_SIZES.MEDIUM]: `${SPACINGS.MD} ${SPACINGS.MD} ${SPACINGS.SM}`,
+    [SECTION_PADDING_SIZES.SMALL]: SPACINGS.SM,
+  },
+}
+
+export const sectionPartPadding = ({
+  paddingSize = SECTION_PADDING_SIZES.DEFAULT,
+  part,
+}: {
+  paddingSize?: SectionPaddingSize
+  part: SectionPart
+}) => css`
+  ${({ theme }) => {
+    const override = PADDING_OVERRIDES[part][paddingSize]
+    if (override)
+      return css`
+        padding: ${override};
+      `
+
+    const p: SectionPartPadding = theme.styles.section[part]
+    return css`
+      padding: ${p.paddingY} ${p.paddingX};
+      ${p.mobile
+        ? mediaQueries().forPhones(css`
+            padding: ${p.mobile.paddingY} ${p.mobile.paddingX};
+          `)
+        : ""}
+    `
+  }}
+`
 
 export type SectionProps = {
   bordered?: boolean

@@ -16,6 +16,14 @@ type FullSpectrumColors = {
     700: string;
     800: string;
 };
+type SectionPartPadding = {
+    mobile?: {
+        paddingX: string;
+        paddingY: string;
+    };
+    paddingX: string;
+    paddingY: string;
+};
 type ContainerStyles = {
     background?: string;
     borderRadius?: string;
@@ -37,6 +45,7 @@ type Styles = {
     };
     buttons: {
         borderRadius: string;
+        borderWidth: string;
         textTransform: Nullable<string>;
     };
     chat: {
@@ -134,6 +143,13 @@ type Styles = {
             background: string;
         };
         borderRadius: string;
+        sizes: {
+            FULL_SCREEN: string;
+            LG: string;
+            SM: string;
+            XL: string;
+        };
+        zIndex: number;
     };
     nav: {
         linkColor: string;
@@ -149,12 +165,9 @@ type Styles = {
     };
     scrollbarColor: string;
     section: ContainerStyles & {
-        body: {
-            padding: string;
-        };
-        header: {
-            padding: string;
-        };
+        body: SectionPartPadding;
+        footer: SectionPartPadding;
+        header: SectionPartPadding;
     };
     sidebar: {
         actionButton: {
@@ -170,7 +183,7 @@ type Styles = {
     table: {
         borderColor: string;
         borderSize: string;
-        filterButtonIcon: Nullable<string>;
+        filterButtonIcon: Nullable<ReactNode>;
     };
     tag: {
         textColorWeight: keyof FullSpectrumColors;

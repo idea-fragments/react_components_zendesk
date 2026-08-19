@@ -27,6 +27,7 @@ export * from "components/layout/Separator";
 export * from "components/layout/Sidebar";
 export * from "components/layout/SidebarV2";
 export * from "components/layout/SidebarLayout";
+export * from "components/layout/Stepper";
 export * from "components/layout/TabletsOnly";
 export * from "components/layout/Tabs";
 //# sourceMappingURL=layouts.d.ts.map

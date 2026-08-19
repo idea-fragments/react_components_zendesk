@@ -1970,6 +1970,7 @@ var base = {
   },
   buttons: {
     borderRadius: "4px",
+    borderWidth: "1px",
     textTransform: null
   },
   chat: {
@@ -2312,7 +2313,14 @@ var base = {
     backdrop: {
       background: "rgba(47, 57, 65, 0.85)"
     },
-    borderRadius: "4px"
+    borderRadius: "4px",
+    sizes: {
+      FULL_SCREEN: "100vw",
+      LG: "768px",
+      SM: "576px",
+      XL: "1024px"
+    },
+    zIndex: 400
   },
   notifications: {
     zIndex: 401
@@ -2320,11 +2328,17 @@ var base = {
   section: {
     background: "transparent",
     body: {
-      padding: "".concat(SPACINGS.LG, " ").concat(SPACINGS.MD)
+      paddingX: SPACINGS.MD,
+      paddingY: SPACINGS.LG
     },
     borderRadius: "".concat(SPACINGS.XS),
+    footer: {
+      paddingX: SPACINGS.MD,
+      paddingY: SPACINGS.LG
+    },
     header: {
-      padding: "".concat(SPACINGS.LG, " ").concat(SPACINGS.MD)
+      paddingX: SPACINGS.MD,
+      paddingY: SPACINGS.LG
     },
     shadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
   },

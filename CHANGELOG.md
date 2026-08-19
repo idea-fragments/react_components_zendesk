@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.1.89] - 2026-08-18
+
+### Added
+
+- `Stepper` layout component (render prop) — provides a `title` ("Step X of Y") and a `dots` node so callers control placement. Accepts a `color` palette (defaults to `theme.styles.colors.primary`, using `[300]` for completed and `[600]` for current) plus `completedColor` / `currentColor` / `incompleteColor` overrides.
+- `MODAL_SIZES` const (`SM`/`LG`/`XL`/`FULL_SCREEN`) + `ModalContent.size` — the modal now owns its width via `theme.styles.modal.sizes`. `FULL_SCREEN` pins to the viewport with a `SPACINGS.SM` margin on all sides. `theme.styles.modal.zIndex` (default `400`) applied to the modal container and backdrop.
+- `theme.styles.section.footer` with a `SectionPartPadding` shape (`paddingX`/`paddingY` required, optional `mobile: { paddingX, paddingY }`) — shared by `body`, `header`, and `footer`. Mobile overrides kick in through a `forPhones` media query. A shared `sectionPartPadding({ part, paddingSize })` helper drives the padding for all three Section parts.
+- `theme.styles.buttons.borderWidth` (required) — applied via `border-width` in `Button`.
+- Optional `label` on `SteppedTooltipStep` — overrides Stepper's auto-generated title.
+- `CommonTextProps.allCaps` on `Text`.
+
+### Changed
+
+- `SteppedTooltip` renders its progress dots via `Stepper`.
+- `Modal` renders its own close button (mdiClose, X_SMALL flat) instead of Zendesk's `<Close>`. The close button color follows the modal's `danger`/`success`/`warning` variant.
+- `SectionFooter` now reads `theme.styles.section.footer` (previously read `section.header` by mistake).
+- `theme.styles.table.filterButtonIcon` widened from `string` to `ReactNode`.
+
+### Removed
+
+- `ModalContent.isLarge` — replaced by `size: MODAL_SIZES.LG` (or another size). Zendesk's `isLarge` prop is no longer forwarded.
+- `theme.styles.section.body.padding` / `section.header.padding` — replaced by `paddingX` + `paddingY` on each section part.
+
 ## [0.1.87] - 2026-07-06
 
 ### Fixed

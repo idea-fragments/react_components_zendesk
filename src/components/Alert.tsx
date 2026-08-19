@@ -91,7 +91,7 @@ export let Alert: FC<AlertProps> = ({
       color={bgColor}>
       <FlexBox
         alignItems={"center"}
-        css={`
+        _css={`
           border-right: 1px solid ${dark(bgColor, 0.15)};
           padding: 0 ${SM} 0 ${SM};
         `}>
@@ -113,7 +113,7 @@ export let Alert: FC<AlertProps> = ({
       </Content>
       <FlexBox
         alignItems={"center"}
-        css={`
+        _css={`
           padding: 0 ${SM} 0 ${SM};
         `}>
         <CloseButton
@@ -129,19 +129,6 @@ export let Alert: FC<AlertProps> = ({
 }
 
 Alert = styled(Alert)<AlertProps>``
-
-const AbsoluteContainer = styled(FlexBox).attrs({
-  justify: "center",
-  alignItems: "center",
-})`
-  position: fixed;
-  //left: 50%;
-  right: 0;
-  top: ${SPACINGS.LG};
-  width: 480px;
-  max-width: 94%;
-  z-index: ${(p) => p.theme.styles.notifications.zIndex};
-`
 
 const AlertWrapper = styled(FlexBox).attrs(() => ({
   alignItems: "stretch",

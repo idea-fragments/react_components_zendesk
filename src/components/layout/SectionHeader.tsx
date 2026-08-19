@@ -1,8 +1,10 @@
 import { FlexBox } from "components/layout/FlexBox"
-import { SectionPaddingSize } from "components/layout/Section"
+import {
+  SectionPaddingSize,
+  sectionPartPadding,
+} from "components/layout/Section"
 import { ForwardedRef, PropsWithChildren, ReactNode, forwardRef } from "react"
 import styled, { css } from "styled-components"
-import { SPACINGS } from "styles/spacings"
 import { CSSProp } from "styles/types"
 
 export type SectionHeaderProps = PropsWithChildren<{
@@ -27,7 +29,7 @@ export const SectionHeader = styled(
         title = children,
       }: SectionHeaderProps,
       ref: ForwardedRef<HTMLDivElement>,
-    ): JSX.Element => {
+    ) => {
       return (
         <Container
           bordered={bordered}
@@ -59,19 +61,7 @@ const Container = styled(FlexBox)<{
   paddingSize: SectionPaddingSize
 }>`
   width: 100%;
-  ${({ paddingSize, theme }) => {
-    if (paddingSize === "small")
-      return css`
-        padding: ${SPACINGS.SM};
-      `
-    if (paddingSize === "medium")
-      return css`
-        padding: ${SPACINGS.MD} ${SPACINGS.MD} ${SPACINGS.SM};
-      `
-    return css`
-      padding: ${theme.styles.section.header.padding};
-    `
-  }}
+  ${({ paddingSize }) => sectionPartPadding({ paddingSize, part: "header" })}
   ${({ bordered }) => (bordered ? sectionBorder : "")};
 `
 
