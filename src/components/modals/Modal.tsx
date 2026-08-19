@@ -1,33 +1,43 @@
+import { mdiClose } from "@mdi/js"
 import {
   Body as ZBody,
-  Close,
   Footer,
   FooterItem,
   Header as ZenHeader,
   Modal as ZenModal,
 } from "@zendeskgarden/react-modals"
-import { Button, ButtonProps } from "components/forms/Button"
+import { Button, BUTTON_SIZES, ButtonProps } from "components/forms/Button"
 import { StyledComponentProps } from "components/StyledComponentProps.type"
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement, ReactNode, useState } from "react"
 import styled, { css } from "styled-components"
 import { mediaQueries } from "styles/mediaQueries"
 import { textWithColor } from "styles/mixins"
 import { SPACINGS } from "styles/spacings"
 import { CSSProp } from "styles/types"
+import { FONT_SIZES } from "styles/typography"
+import { useTheme } from "styles/theme/useTheme"
 import { UserFeedbackProps } from "styles/UserFeedbackProps"
 
 type ButtonType = ReactElement & {
   props: { disableable: boolean } & ButtonProps
 }
 
+export const MODAL_SIZES = {
+  FULL_SCREEN: "FULL_SCREEN",
+  LG: "LG",
+  SM: "SM",
+  XL: "XL",
+} as const
+export type ModalSize = (typeof MODAL_SIZES)[keyof typeof MODAL_SIZES]
+
 export type ModalContent = {
   autoClose?: boolean
   blocking?: boolean
   body: any
   buttons?: ButtonType[]
-  isLarge?: boolean
   isNotDismissible?: boolean
-  title?: string
+  size?: ModalSize
+  title?: ReactNode
   withCancelButton?: boolean
   withNoActions?: boolean
   onClose?: () => void
@@ -87,6 +97,7 @@ export let Modal = ({
   className,
 }: ModalProps) => {
   const [isProcessing, setIsProcessingTo] = useState(false)
+  const theme = useTheme()
   if (!isVisible) return null
   if (!modalContent) throw new Error("Modal found null modal content")
 
@@ -95,7 +106,6 @@ export let Modal = ({
     body,
     buttons,
     danger,
-    isLarge,
     isNotDismissible,
     success,
     title,
@@ -141,11 +151,11 @@ export let Modal = ({
       onClose={isNotDismissible ? () => {} : handleClose}
       className={className}
       isAnimated
-      isLarge={isLarge}
       backdropProps={{
         style: {
           backdropFilter: blurBackdrop ? "blur(4px)" : undefined,
           fontFamily: "inherit",
+          zIndex: theme.styles.modal.zIndex,
         },
       }}>
       {title ? (
@@ -178,19 +188,35 @@ export let Modal = ({
           {footerItems()}
         </Footer>
       )}
-      <Close aria-label="Close modal" />
+      {isNotDismissible ? null : (
+        <CloseButtonWrap>
+          <Button
+            aria-label={"Close modal"}
+            compact
+            danger={danger}
+            flat
+            icon={mdiClose}
+            iconSize={FONT_SIZES.MD}
+            onClick={handleClose}
+            primary={false}
+            size={BUTTON_SIZES.X_SMALL}
+            success={success}
+            warning={warning}
+          />
+        </CloseButtonWrap>
+      )}
     </ZenModal>
   )
 }
 
-const hideCloseButton = css`
-  button[data-garden-id="modals.close"] {
-    display: none;
-  }
-`
-
 const Body = styled(ZBody)`
   font-size: inherit;
+`
+
+const CloseButtonWrap = styled.div`
+  position: absolute;
+  right: 2.3rem;
+  top: 1.3rem;
 `
 
 Modal = styled(Modal)<ModalProps>`
@@ -199,13 +225,22 @@ Modal = styled(Modal)<ModalProps>`
     margin-right: ${SPACINGS.SM};
     color: ${({ theme }) => theme.styles.textColorPrimary};
     border-radius: ${({ theme }) => theme.styles.modal.borderRadius};
+    max-width: calc(100vw - ${SPACINGS.SM} * 2);
+    width: ${({ modalContent, theme }) =>
+      theme.styles.modal.sizes[modalContent?.size ?? MODAL_SIZES.SM]};
+    z-index: ${({ theme }) => theme.styles.modal.zIndex};
 
     ${({ modalContent }) =>
-      modalContent?.isNotDismissible ? hideCloseButton : ""}
-
-    ${mediaQueries().forPhones(css`
-      width: calc(100% - (${SPACINGS.SM} * 2));
-    `)}
+      modalContent?.size === MODAL_SIZES.FULL_SCREEN
+        ? css`
+            height: calc(100vh - (${SPACINGS.SM} * 2));
+            max-height: calc(100vh - (${SPACINGS.SM} * 2));
+            margin: ${SPACINGS.SM};
+            width: calc(100vw - (${SPACINGS.SM} * 2));
+          `
+        : mediaQueries().forPhones(css`
+            width: calc(100% - (${SPACINGS.SM} * 2));
+          `)}
 
     ${({ _css }) => _css}
   }

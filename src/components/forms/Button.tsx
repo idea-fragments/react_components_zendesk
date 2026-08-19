@@ -255,6 +255,7 @@ const ButtonBase = styled(
       if (pill) return "500px"
       return theme.styles.buttons.borderRadius
     }};
+    border-width: ${({ theme }) => theme.styles.buttons.borderWidth};
     ${alignment}
     ${casing}
     ${({ disabled }) => (!disabled ? colors : "")}

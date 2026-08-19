@@ -1,5 +1,5 @@
 import { Button } from "components/forms/Button"
-import { Modal, ModalProps } from "components/modals/Modal"
+import { MODAL_SIZES, Modal, ModalProps } from "components/modals/Modal"
 import { useCallback, useMemo, useState } from "react"
 
 export default {
@@ -54,5 +54,68 @@ export const IsNotDismissible = Story.bind({})
 IsNotDismissible.args = {
   modalContent: {
     isNotDismissible: true,
+  },
+}
+
+export const SmallSize = Story.bind({})
+// @ts-ignore
+SmallSize.args = {
+  modalContent: {
+    size: MODAL_SIZES.SM,
+    title: "Small modal (576px)",
+  },
+}
+
+export const LargeSize = Story.bind({})
+// @ts-ignore
+LargeSize.args = {
+  modalContent: {
+    size: MODAL_SIZES.LG,
+    title: "Large modal (768px)",
+  },
+}
+
+export const ExtraLargeSize = Story.bind({})
+// @ts-ignore
+ExtraLargeSize.args = {
+  modalContent: {
+    size: MODAL_SIZES.XL,
+    title: "Extra large modal (1024px)",
+  },
+}
+
+export const FullScreenSize = Story.bind({})
+// @ts-ignore
+FullScreenSize.args = {
+  modalContent: {
+    size: MODAL_SIZES.FULL_SCREEN,
+    title: "Full screen modal",
+  },
+}
+
+export const DangerVariant = Story.bind({})
+// @ts-ignore
+DangerVariant.args = {
+  modalContent: {
+    danger: true,
+    title: "Delete this item?",
+  },
+}
+
+export const WarningVariant = Story.bind({})
+// @ts-ignore
+WarningVariant.args = {
+  modalContent: {
+    title: "Heads up",
+    warning: true,
+  },
+}
+
+export const SuccessVariant = Story.bind({})
+// @ts-ignore
+SuccessVariant.args = {
+  modalContent: {
+    success: true,
+    title: "All done",
   },
 }

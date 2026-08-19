@@ -17,7 +17,6 @@ const STEPS: SteppedTooltipStep[] = [
     actionHint: "Tap the camera button to continue",
     body: "Tap the camera button to open the scanner — we'll read the items and totals for you.",
     isAction: true,
-    label: "Step 1 of 5",
     title: "Scan your first receipt",
   },
   {
@@ -169,6 +168,35 @@ const InteractiveStory = () => {
   )
 }
 
+const CustomLabelStory = () => {
+  const [visible, setVisible] = useState(true)
+
+  return (
+    <FlexBox
+      _css={`padding: 160px 60px;`}
+      justifyContent={"center"}>
+      <SteppedTooltip
+        activeDotIndex={1}
+        dotCount={5}
+        onBack={() => {}}
+        onExit={() => setVisible(false)}
+        onNext={() => setVisible(false)}
+        placement={"bottom"}
+        step={
+          visible
+            ? {
+                body: "This step overrides the Stepper's auto-generated title with its own label.",
+                label: "Getting started",
+                title: "Custom label wins",
+              }
+            : null
+        }>
+        <Button onClick={() => setVisible(true)}>Anchor</Button>
+      </SteppedTooltip>
+    </FlexBox>
+  )
+}
+
 export const ActionStep = ActionStepStory.bind({})
 // @ts-ignore
 ActionStep.args = {}
@@ -184,3 +212,7 @@ FinishStep.args = {}
 export const Interactive = InteractiveStory.bind({})
 // @ts-ignore
 Interactive.args = {}
+
+export const CustomLabel = CustomLabelStory.bind({})
+// @ts-ignore
+CustomLabel.args = {}
